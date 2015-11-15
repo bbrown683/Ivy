@@ -25,7 +25,7 @@ SOFTWARE.
 #pragma once
 
 #include "IRenderer.h"
-#include "DXContext.h"
+#include "Graphics/Context/IContext.h"
 
 namespace Jade
 {

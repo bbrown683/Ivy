@@ -28,3 +28,7 @@ struct IRenderer
 {
 	virtual void Draw() = 0;
 };
+
+// Import after definition of interface.
+#include "GLRenderer.h"
+#include "DXRenderer.h"

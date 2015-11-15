@@ -23,7 +23,6 @@ SOFTWARE.
 */
 
 #include "Win32Window.h"
-#include "..\Context/GLContext.h"
 
 static HWND hWnd;
 static HINSTANCE hInstance = GetModuleHandle(NULL);
@@ -34,18 +33,18 @@ bool Jade::Graphics::Win32Window::InitWindow()
 {
 	WNDCLASSEX wcex;
 
-	wcex.cbSize = sizeof(WNDCLASSEX);
-	wcex.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
-	wcex.lpfnWndProc = WndProc;
-	wcex.cbClsExtra = 0;
-	wcex.cbWndExtra = 0;
-	wcex.hInstance = hInstance;
-	wcex.hIcon = LoadIcon(hInstance, IDI_APPLICATION);
-	wcex.hCursor = LoadCursor(hInstance, IDC_ARROW);
-	wcex.hbrBackground = (HBRUSH)GetStockObject(BLACK_BRUSH);
-	wcex.lpszMenuName = nullptr;
-	wcex.lpszClassName = "Jade";
-	wcex.hIconSm = LoadIcon(hInstance, IDI_APPLICATION);
+	wcex.cbSize			= sizeof(WNDCLASSEX);
+	wcex.style			= CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
+	wcex.lpfnWndProc	= WndProc;
+	wcex.cbClsExtra		= 0;
+	wcex.cbWndExtra		= 0;
+	wcex.hInstance		= hInstance;
+	wcex.hIcon			= LoadIcon(hInstance, IDI_APPLICATION);
+	wcex.hCursor		= LoadCursor(hInstance, IDC_ARROW);
+	wcex.hbrBackground	= (HBRUSH)GetStockObject(BLACK_BRUSH);
+	wcex.lpszMenuName	= nullptr;
+	wcex.lpszClassName	= "Jade";
+	wcex.hIconSm		= LoadIcon(hInstance, IDI_APPLICATION);
 
 	if (RegisterClassEx(&wcex))
 	{
@@ -82,19 +81,22 @@ bool Jade::Graphics::Win32Window::WindowEvent(Event* e)
 		DispatchMessage(&msg);
 	}
 
-	if (events.size() != 0)
+	if (!events.empty())
 	{
+		// Pop events off the queue.
 		&events.front();
 		events.pop();
+		
+		// Delete or there will be a nasty memory leak 
+		// each time we check for events.
+		delete e;
 
 		return true;
 	}
 
-	// Delete or there will be a nasty memory leak 
-	// each time we check for events.
 	delete e;
 
-	return true;
+	return false;
 }
 
 bool Jade::Graphics::Win32Window::IsOpen()

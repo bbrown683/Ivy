@@ -24,13 +24,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-struct IContext
+namespace Jade
 {
-	virtual void CreateContext() = 0;
+	namespace Math
+	{
+		class Point
+		{
 
-	virtual void ReleaseContext() = 0;
-};
-
-// Import after definition of interface.
-#include "GLContext.h"
-#include "DXContext.h"
+		};
+	}
+}

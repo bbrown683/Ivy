@@ -24,15 +24,16 @@ SOFTWARE.
 
 #pragma once
 
-#include "..\..\Utility.h"
-#include "IWindow.h"
-#include "..\Context/IContext.h"
-#include "Event.h"
-
 // We only need specific headers from this.
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
 #include <queue>
+
+#include "IWindow.h"
+#include "Event.h"
+
+#include "Core/Utility.h"
+#include "Graphics/Context/IContext.h"
 
 namespace Jade
 {

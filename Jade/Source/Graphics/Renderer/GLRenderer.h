@@ -25,7 +25,7 @@ SOFTWARE.
 */
 
 #include "IRenderer.h"
-#include "GLContext.h"
+#include "Graphics/Context/IContext.h"
 
 namespace Jade
 {

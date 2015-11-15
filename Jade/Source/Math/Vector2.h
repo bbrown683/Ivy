@@ -24,6 +24,8 @@ SOFTWARE.
 
 #pragma once
 
+#include "Math.h"
+
 namespace Jade
 {
 	namespace Math
@@ -38,11 +40,57 @@ namespace Jade
 
 		public:
 
+			// Vector2 operator overloads.
+
+			inline bool operator==(const Vector2 vector)
+			{
+				return (this->x - vector.x < Math::Epsilon) && (this->y - vector.y < Math::Epsilon) ? true : false;
+			}
+
+			inline bool operator!=(const Vector2 vector)
+			{
+				return !(this == &vector);
+			}
+
+			inline Vector2 operator+(const Vector2 vector)
+			{
+				return Vector2(this->x + vector.x, this->y + vector.y);
+			}
+
+			inline Vector2 operator-(const Vector2 vector)
+			{
+				return Vector2(this->x - vector.x, this->y - vector.y);
+			}
+
+			inline Vector2 operator*(const float scalar)
+			{
+				return Vector2(this->x * scalar, this->y * scalar);
+			}
+
+			inline Vector2 operator/(const float scalar)
+			{
+				return Vector2(this->x / scalar, this->y - scalar);
+			}
+
 			Vector2(float x, float y)
 			{
 				this->x = x;
 				this->y = y;
+
+				magnitude = Math::Sqrt(x * x + y * y);
 			}
+
+			float Distance(Vector2 target);
+
+			void Normalize();
+
+			void SetX(float value);
+			float GetX();
+
+			void SetY(float value);
+			float GetY();
+			
+			float GetMagnitude();
 		};
 	}
 }

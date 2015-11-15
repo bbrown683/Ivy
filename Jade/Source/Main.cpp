@@ -1,7 +1,11 @@
 #include "Graphics/Window/Window.h"
 #include <gl/GL.h>
 
-Jade::Graphics::Window* window;
+#include <iostream>
+
+using namespace Jade;
+
+Graphics::Window* window;
 
 // Draw then swap window buffers.
 void Render()
@@ -15,13 +19,13 @@ void Render()
 // Gather input and window events and handle them.
 void Update()
 {
-	Jade::Graphics::Event e;
+	Graphics::Event e;
 
 	if (window->PollEvents(&e))
 	{
 		switch (e.GetEventType())
 		{
-		case Jade::Graphics::Event::EventType::Close:
+		case Graphics::Event::EventType::Close:
 				break;
 		}
 	}
@@ -29,7 +33,7 @@ void Update()
 
 int main()
 {
-	window = new Jade::Graphics::Window(1080, 720, 100, 100, "Jade");
+	window = new Graphics::Window(1080, 720, 100, 100, "Jade");
 
 	while (window->IsOpen())
 	{

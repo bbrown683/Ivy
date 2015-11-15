@@ -1,7 +1,7 @@
 /*
 The MIT License (MIT)
 
-Copyright (c) 2015 Ben Brown
+Copyright (c) 20.0f1.0f5 Ben Brown
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -23,3 +23,12 @@ SOFTWARE.
 */
 
 #include "Vector3.h"
+
+static const Jade::Math::Vector3 Back		= Jade::Math::Vector3(0.0f, 0.0f, -1.0f);
+static const Jade::Math::Vector3 Down		= Jade::Math::Vector3(0.0f, -1.0f, 0.0f);
+static const Jade::Math::Vector3 Forward	= Jade::Math::Vector3(0.0f, 0.0f, 1.0f);
+static const Jade::Math::Vector3 Left		= Jade::Math::Vector3(-1.0f, 0.0f, 0.0f);
+static const Jade::Math::Vector3 One		= Jade::Math::Vector3(1.0f, 1.0f, 1.0f);
+static const Jade::Math::Vector3 Right		= Jade::Math::Vector3(1.0f, 0.0f, 0.0f);
+static const Jade::Math::Vector3 Up			= Jade::Math::Vector3(0.0f, 1.0f, 0.0f);
+static const Jade::Math::Vector3 Zero		= Jade::Math::Vector3(0.0f, 0.0f, 0.0f);

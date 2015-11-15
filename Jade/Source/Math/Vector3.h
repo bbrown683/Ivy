@@ -24,6 +24,8 @@ SOFTWARE.
 
 #pragma once
 
+#include "Math.h"
+
 namespace Jade
 {
 	namespace Math
@@ -39,12 +41,67 @@ namespace Jade
 
 		public:
 
+			// Vector3 operator overloads.
+
+			inline bool operator==(const Vector3 vector)
+			{
+				return (this->x - vector.x < Math::Epsilon) && (this->y - vector.y < Math::Epsilon) && (this->z - vector.z < Math::Epsilon) ? true : false;
+			}
+
+			inline bool operator!=(const Vector3 vector)
+			{
+				return !(this == &vector);
+			}
+
+			inline Vector3 operator+(const Vector3 vector)
+			{
+				return Vector3(this->x + vector.x, this->y + vector.y, this->z + vector.z);
+			}
+
+			inline Vector3 operator-(const Vector3 vector)
+			{
+				return Vector3(this->x - vector.x, this->y - vector.y, this->z - vector.z);
+			}
+
+			inline Vector3 operator*(const float scalar)
+			{
+				return Vector3(this->x * scalar, this->y * scalar, this->z * scalar);
+			}
+
+			inline Vector3 operator/(const float scalar)
+			{
+				return Vector3(this->x / scalar, this->y - scalar, this->z / scalar);
+			}
+
 			Vector3(float x, float y, float z)
 			{
 				this->x = x;
 				this->y = y;
 				this->z = z;
+
+				magnitude = Math::Sqrt(x * x + y * y + z * z);
 			}
+
+			Vector3 Cross(Vector3 vector);
+
+			Vector3 Dot(Vector3 vector);
+
+			float Distance(Vector3 target);
+
+			Vector3 Lerp(Vector3 start, Vector3 end, float delta);
+
+			void Normalize();
+
+			void SetX(float value);
+			float GetX();
+
+			void SetY(float value);
+			float GetY();
+
+			void SetZ(float value);
+			float GetZ();
+
+			float GetMagnitude();
 		};
 	}
 }

@@ -1,7 +1,7 @@
 /*
 The MIT License (MIT)
 
-Copyright (c) 2015 Ben Brown
+Copyright (c) 20.0f1.0f5 Ben Brown
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -23,3 +23,42 @@ SOFTWARE.
 */
 
 #include "Vector2.h"
+
+static const Jade::Math::Vector2 Down		= Jade::Math::Vector2(0.0f, -1.0f);
+static const Jade::Math::Vector2 Left		= Jade::Math::Vector2(-1.0f, 0.0f);
+static const Jade::Math::Vector2 One		= Jade::Math::Vector2(1.0f, 1.0f);
+static const Jade::Math::Vector2 Right		= Jade::Math::Vector2(1.0f, 0.0f);
+static const Jade::Math::Vector2 Up			= Jade::Math::Vector2(0.0f, 1.0f);
+static const Jade::Math::Vector2 Zero		= Jade::Math::Vector2(0.0f, 0.0f);
+
+float Jade::Math::Vector2::Distance(Vector2 target)
+{
+	return 0.0f;
+}
+
+void Jade::Math::Vector2::Normalize()
+{
+}
+
+void Jade::Math::Vector2::SetX(float value)
+{
+}
+
+float Jade::Math::Vector2::GetX()
+{
+	return 0.0f;
+}
+
+void Jade::Math::Vector2::SetY(float value)
+{
+}
+
+float Jade::Math::Vector2::GetY()
+{
+	return 0.0f;
+}
+
+float Jade::Math::Vector2::GetMagnitude()
+{
+	return 0.0f;
+}

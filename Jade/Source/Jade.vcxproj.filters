@@ -29,9 +29,15 @@
     <ClCompile Include="Graphics\Window\Event.cpp">
       <Filter>Graphics\Window</Filter>
     </ClCompile>
+    <ClCompile Include="Math\Matrix2.cpp" />
+    <ClCompile Include="Math\Matrix3.cpp" />
+    <ClCompile Include="Math\Matrix4.cpp" />
+    <ClCompile Include="Math\Rectangle.cpp" />
+    <ClCompile Include="Math\Ray.cpp" />
+    <ClCompile Include="Math\Point.cpp" />
+    <ClCompile Include="Math\Math.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Utility.h" />
     <ClInclude Include="Math\Vector4.h">
       <Filter>Math</Filter>
     </ClInclude>
@@ -80,6 +86,15 @@
     <ClInclude Include="System\Platform.h">
       <Filter>System</Filter>
     </ClInclude>
+    <ClInclude Include="Core\Utility.h" />
+    <ClInclude Include="Math\Matrix2.h" />
+    <ClInclude Include="Math\Matrix3.h" />
+    <ClInclude Include="Math\Matrix4.h" />
+    <ClInclude Include="Math\Rectangle.h" />
+    <ClInclude Include="Math\Ray.h" />
+    <ClInclude Include="Math\Point.h" />
+    <ClInclude Include="Math\Math.h" />
+    <ClInclude Include="Math\Helper.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">

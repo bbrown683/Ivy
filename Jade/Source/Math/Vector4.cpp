@@ -23,3 +23,6 @@ SOFTWARE.
 */
 
 #include "Vector4.h"
+
+static const Jade::Math::Vector4 One		= Jade::Math::Vector4(1.0f, 1.0f, 1.0f, 1.0f);
+static const Jade::Math::Vector4 Zero		= Jade::Math::Vector4(0.0f, 0.0f, 0.0f, 0.0f);

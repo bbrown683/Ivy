@@ -1,5 +1,3 @@
-#pragma once
-
 /*
 The MIT License (MIT)
 
@@ -24,13 +22,4 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-struct IContext
-{
-	virtual void CreateContext() = 0;
-
-	virtual void ReleaseContext() = 0;
-};
-
-// Import after definition of interface.
-#include "GLContext.h"
-#include "DXContext.h"
+#include "Point.h"
