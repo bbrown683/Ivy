@@ -134,10 +134,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Graphics\Color.cpp" />
+    <ClCompile Include="Math\Color.cpp" />
     <ClCompile Include="Graphics\Context\Context.cpp" />
     <ClCompile Include="Graphics\Context\DXContext.cpp" />
     <ClCompile Include="Graphics\Renderer\GLRenderer.cpp" />
+    <ClCompile Include="Graphics\Renderer\Renderer.cpp" />
     <ClCompile Include="Graphics\Window\Event.cpp" />
     <ClCompile Include="Graphics\Context\GLContext.cpp" />
     <ClCompile Include="Graphics\Window\X11Window.cpp" />
@@ -158,16 +159,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Factory.h" />
-    <ClInclude Include="Graphics\Color.h" />
+    <ClInclude Include="Math\Color.h" />
     <ClInclude Include="Graphics\Context\Context.h" />
-    <ClInclude Include="Graphics\DeviceManager.h" />
-    <ClInclude Include="Graphics\Extensions.h" />
+    <ClInclude Include="Graphics\Context\GLExtensions.h" />
     <ClInclude Include="Graphics\Renderer\DXRenderer.h" />
     <ClInclude Include="Graphics\Context\GLContext.h" />
     <ClInclude Include="Graphics\Context\DXContext.h" />
+    <ClInclude Include="Graphics\Renderer\Renderer.h" />
     <ClInclude Include="Graphics\Shader\Shader.h" />
     <ClInclude Include="Graphics\ShaderProgram\ShaderProgram.h" />
-    <ClInclude Include="Graphics\Texture.h" />
+    <ClInclude Include="Graphics\Texture\Texture.h" />
     <ClInclude Include="Graphics\Window\Event.h" />
     <ClInclude Include="Graphics\Renderer\GLRenderer.h" />
     <ClInclude Include="Graphics\Renderer\IRenderer.h" />

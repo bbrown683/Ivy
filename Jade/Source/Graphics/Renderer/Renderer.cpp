@@ -22,32 +22,4 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#pragma once
-
-namespace Jade
-{
-	namespace Graphics
-	{
-		struct Color
-		{
-		private:
-
-			float red;
-			float green;
-			float blue;
-			float alpha;
-
-		public:
-
-			// OpenGL accepts only values ranging from 0-1 as a float for colors.
-			Color(float red, float green, float blue, float alpha)
-			{
-				
-				this->red		= red;
-				this->green		= green;
-				this->blue		= blue;
-				this->alpha		= alpha;
-			}
-		};
-	}
-}
+#include "Renderer.h"

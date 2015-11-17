@@ -14,9 +14,6 @@
     <ClCompile Include="Math\Quaternion.cpp">
       <Filter>Math</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Color.cpp">
-      <Filter>Graphics</Filter>
-    </ClCompile>
     <ClCompile Include="Graphics\Context\DXContext.cpp">
       <Filter>Graphics\Device</Filter>
     </ClCompile>
@@ -40,6 +37,10 @@
     <ClCompile Include="Math\Point.cpp" />
     <ClCompile Include="Math\Helper.cpp" />
     <ClCompile Include="Graphics\Context\Context.cpp" />
+    <ClCompile Include="Graphics\Renderer\Renderer.cpp" />
+    <ClCompile Include="Math\Color.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\Vector4.h">
@@ -53,9 +54,6 @@
     </ClInclude>
     <ClInclude Include="Math\Quaternion.h">
       <Filter>Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Color.h">
-      <Filter>Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\Context\DXContext.h">
       <Filter>Graphics\Device</Filter>
@@ -95,18 +93,21 @@
     <ClInclude Include="Math\Ray.h" />
     <ClInclude Include="Math\Math.h" />
     <ClInclude Include="Math\Helper.h" />
-    <ClInclude Include="Graphics\Texture.h" />
     <ClInclude Include="Graphics\ShaderProgram\ShaderProgram.h" />
     <ClInclude Include="Graphics\Shader\Shader.h" />
     <ClInclude Include="Core\Factory.h" />
-    <ClInclude Include="Graphics\DeviceManager.h" />
     <ClInclude Include="Graphics\Context\GLContext.h">
       <Filter>Graphics\Device</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Extensions.h" />
     <ClInclude Include="Graphics\Window\X11Window.h" />
     <ClInclude Include="Math\Point.h" />
     <ClInclude Include="Graphics\Context\Context.h" />
+    <ClInclude Include="Graphics\Renderer\Renderer.h" />
+    <ClInclude Include="Graphics\Texture\Texture.h" />
+    <ClInclude Include="Math\Color.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Context\GLExtensions.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">
