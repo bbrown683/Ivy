@@ -43,6 +43,8 @@ namespace Jade
 			{
 				this->context = context;
 			}
+
+			void Draw() override;
 		};
 	}
 }

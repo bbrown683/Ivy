@@ -34,8 +34,12 @@
     <ClCompile Include="Math\Matrix4.cpp" />
     <ClCompile Include="Math\Rectangle.cpp" />
     <ClCompile Include="Math\Ray.cpp" />
-    <ClCompile Include="Math\Point.cpp" />
     <ClCompile Include="Math\Math.cpp" />
+    <ClCompile Include="Graphics\Renderer\GLRenderer.cpp" />
+    <ClCompile Include="Graphics\Window\X11Window.cpp" />
+    <ClCompile Include="Math\Point.cpp" />
+    <ClCompile Include="Math\Helper.cpp" />
+    <ClCompile Include="Graphics\Context\Context.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\Vector4.h">
@@ -54,9 +58,6 @@
       <Filter>Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\Context\DXContext.h">
-      <Filter>Graphics\Device</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Context\GLContext.h">
       <Filter>Graphics\Device</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\Context\IContext.h">
@@ -92,9 +93,20 @@
     <ClInclude Include="Math\Matrix4.h" />
     <ClInclude Include="Math\Rectangle.h" />
     <ClInclude Include="Math\Ray.h" />
-    <ClInclude Include="Math\Point.h" />
     <ClInclude Include="Math\Math.h" />
     <ClInclude Include="Math\Helper.h" />
+    <ClInclude Include="Graphics\Texture.h" />
+    <ClInclude Include="Graphics\ShaderProgram\ShaderProgram.h" />
+    <ClInclude Include="Graphics\Shader\Shader.h" />
+    <ClInclude Include="Core\Factory.h" />
+    <ClInclude Include="Graphics\DeviceManager.h" />
+    <ClInclude Include="Graphics\Context\GLContext.h">
+      <Filter>Graphics\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Extensions.h" />
+    <ClInclude Include="Graphics\Window\X11Window.h" />
+    <ClInclude Include="Math\Point.h" />
+    <ClInclude Include="Graphics\Context\Context.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">

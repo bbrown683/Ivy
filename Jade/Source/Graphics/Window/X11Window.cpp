@@ -1,5 +1,3 @@
-#pragma once
-
 /*
 The MIT License (MIT)
 
@@ -24,24 +22,34 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-namespace Jade
+#include "X11Window.h"
+
+bool Jade::Graphics::X11Window::IsOpen()
 {
-	namespace Math
-	{
-		class Point
-		{
-		private:
+	return false;
+}
 
-			float x;
-			float y;
+bool Jade::Graphics::X11Window::SwapWindowBuffers()
+{
+	return false;
+}
 
-		public:
+void Jade::Graphics::X11Window::Close()
+{
 
-			Point(float x, float y)
-			{
-				this->x = x;
-				this->y = y;
-			}
-		};
-	}
+}
+
+void * Jade::Graphics::X11Window::Handle()
+{
+	return nullptr;
+}
+
+bool Jade::Graphics::X11Window::InitWindow()
+{
+	return false;
+}
+
+bool Jade::Graphics::X11Window::WindowEvent(Event * e)
+{
+	return false;
 }

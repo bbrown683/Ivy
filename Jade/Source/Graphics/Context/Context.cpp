@@ -1,5 +1,3 @@
-#pragma once
-
 /*
 The MIT License (MIT)
 
@@ -24,24 +22,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-namespace Jade
+#include "Context.h"
+
+bool Jade::Graphics::Context::ChooseContext(IContext * context)
 {
-	namespace Math
-	{
-		class Point
-		{
-		private:
+	// testing.
+	context = new GLContext(window);
+	if (context)
+		return true;
 
-			float x;
-			float y;
-
-		public:
-
-			Point(float x, float y)
-			{
-				this->x = x;
-				this->y = y;
-			}
-		};
-	}
+	return false;
 }

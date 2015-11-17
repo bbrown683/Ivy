@@ -25,6 +25,7 @@ SOFTWARE.
 */
 
 #include "IContext.h"
+#include "Graphics/Window/IWindow.h"
 
 #include <Windows.h>
 #include <gl/GL.h>
@@ -37,23 +38,31 @@ namespace Jade
 		{
 		private:
 
-			HWND hWnd;				// Handle to our window.
+			// Window object contains some data on our window such as size, 
+			// and the handle of it in memory which we need to create a context.
+			IWindow* window;
+
 			HGLRC renderingContext;	// Handle to our OpenGL rendering context.
 			HDC hdc;			    // Handle to our device context.
 
 		public:
 
 			// Empty Device.
-			GLContext() : hWnd(NULL) { }
+			GLContext() : window(nullptr) { }
 
-			GLContext(HWND hWnd)
+			GLContext(IWindow* window)
 			{
-				this->hWnd = hWnd;
+				this->window = window;
 			}
 
-			void CreateContext() override;
+			~GLContext()
+			{
+				delete window;
+			}
 
-			void ReleaseContext() override;
+			bool CreateContext() override;
+
+			bool ReleaseContext() override;
 		};
 	}
 }

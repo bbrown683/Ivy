@@ -26,9 +26,9 @@ SOFTWARE.
 
 struct IContext
 {
-	virtual void CreateContext() = 0;
+	virtual bool CreateContext() = 0;
 
-	virtual void ReleaseContext() = 0;
+	virtual bool ReleaseContext() = 0;
 };
 
 // Import after definition of interface.

@@ -32,3 +32,38 @@ static const Jade::Math::Vector3 One		= Jade::Math::Vector3(1.0f, 1.0f, 1.0f);
 static const Jade::Math::Vector3 Right		= Jade::Math::Vector3(1.0f, 0.0f, 0.0f);
 static const Jade::Math::Vector3 Up			= Jade::Math::Vector3(0.0f, 1.0f, 0.0f);
 static const Jade::Math::Vector3 Zero		= Jade::Math::Vector3(0.0f, 0.0f, 0.0f);
+
+void Jade::Math::Vector3::SetX(float value)
+{
+	this->x = value;
+}
+
+float Jade::Math::Vector3::GetX() const
+{
+	return this->x;
+}
+
+void Jade::Math::Vector3::SetY(float value)
+{
+	this->y = value;
+}
+
+float Jade::Math::Vector3::GetY() const
+{
+	return this->y;
+}
+
+void Jade::Math::Vector3::SetZ(float value)
+{
+	this->z = value;
+}
+
+float Jade::Math::Vector3::GetZ() const
+{
+	return this->z;
+}
+
+float Jade::Math::Vector3::GetMagnitude() const
+{
+	return this->magnitude;
+}

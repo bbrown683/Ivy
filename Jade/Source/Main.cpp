@@ -33,7 +33,7 @@ void Update()
 
 int main()
 {
-	window = new Graphics::Window(1080, 720, 100, 100, "Jade");
+	window = new Graphics::Window(1080, 720, 100, 100, "Jade", false);
 
 	while (window->IsOpen())
 	{

@@ -24,13 +24,66 @@ SOFTWARE.
 
 #include "DXContext.h"
 
-void Jade::Graphics::DXContext::CreateContext()
+bool Jade::Graphics::DXContext::CreateContext()
 {
+	UINT createDeviceFlags = 0;
 
+#ifdef _DEBUG
+	// Add the debug device flag along with any other defined flags.
+	createDeviceFlags |= D3D11_CREATE_DEVICE_DEBUG;
+#endif
+
+	D3D_DRIVER_TYPE driverTypes[] =
+	{
+		D3D_DRIVER_TYPE_HARDWARE,
+		D3D_DRIVER_TYPE_WARP,
+		D3D_DRIVER_TYPE_REFERENCE,
+	};
+
+	UINT numDriverTypes = ARRAYSIZE(driverTypes);
+
+	D3D_FEATURE_LEVEL featureLevels[] =
+	{
+		D3D_FEATURE_LEVEL_11_1,
+		D3D_FEATURE_LEVEL_11_0,
+		D3D_FEATURE_LEVEL_10_1,
+		D3D_FEATURE_LEVEL_10_0,
+		D3D_FEATURE_LEVEL_9_3,
+	};
+
+	UINT numFeatureLevels = ARRAYSIZE(featureLevels);
+
+	DXGI_SWAP_CHAIN_DESC sd;
+	ZeroMemory(&sd, sizeof(DXGI_SWAP_CHAIN_DESC));
+	sd.BufferCount = 1;
+	sd.BufferDesc.Width = window->GetWidth();
+	sd.BufferDesc.Height = window->GetHeight();
+	sd.BufferDesc.Format = DXGI_FORMAT_B8G8R8A8_UNORM;
+	sd.BufferDesc.RefreshRate.Numerator = 60;
+	sd.BufferDesc.RefreshRate.Denominator = 1;
+	sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
+	sd.OutputWindow = (HWND)window->Handle();
+	sd.Windowed = true;
+	sd.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
+	sd.SampleDesc.Count = 1;
+	sd.SampleDesc.Quality = 0;
+	sd.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
+
+	
+	D3D11_VIEWPORT vp;
+	vp.Width = (FLOAT)window->GetWidth();
+	vp.Height = (FLOAT)window->GetHeight();
+	vp.MinDepth = 0.0f;
+	vp.MaxDepth = 1.0f;
+	vp.TopLeftX = 0;
+	vp.TopLeftY = 0;
+	m_pImmediateContext->RSSetViewports(1, &vp);
+
+	return true; // Successful.
 }
 
-void Jade::Graphics::DXContext::ReleaseContext()
+bool Jade::Graphics::DXContext::ReleaseContext()
 {
 	// Remove any loose pointers.
-
+	return false;
 }

@@ -24,11 +24,13 @@ SOFTWARE.
 
 #include "Win32Window.h"
 
+// Must be static as these will be used within our WndProc function.
 static HWND hWnd;
 static HINSTANCE hInstance = GetModuleHandle(NULL);
 static bool open;
 static std::queue<Jade::Graphics::Event> events;
 
+// Creates the window.
 bool Jade::Graphics::Win32Window::InitWindow()
 {
 	WNDCLASSEX wcex;
@@ -57,7 +59,7 @@ bool Jade::Graphics::Win32Window::InitWindow()
 			return false;
 		}
 		
-		context = new GLContext(hWnd);
+		context = new GLContext(this);
 		context->CreateContext();
 
 		ShowWindow(hWnd, SW_SHOW);
@@ -69,6 +71,7 @@ bool Jade::Graphics::Win32Window::InitWindow()
 	return false;
 }
 
+// Windows 32 message loop which adds each event to a queue that is maintained by the message procedure.
 bool Jade::Graphics::Win32Window::WindowEvent(Event* e)
 {
 	MSG msg;
@@ -99,11 +102,13 @@ bool Jade::Graphics::Win32Window::WindowEvent(Event* e)
 	return false;
 }
 
+// Returns a boolean determining if the window is currently open.
 bool Jade::Graphics::Win32Window::IsOpen()
 {
 	return open;
 }
 
+// Swaps buffers on the window.
 bool Jade::Graphics::Win32Window::SwapWindowBuffers()
 {
 	if (SwapBuffers(hdc))
@@ -112,6 +117,7 @@ bool Jade::Graphics::Win32Window::SwapWindowBuffers()
 	return false;
 }
 
+// Forcefully closes the window and cleans up.
 void Jade::Graphics::Win32Window::Close()
 {
 	CloseWindow(hWnd);
@@ -120,9 +126,16 @@ void Jade::Graphics::Win32Window::Close()
 	open = false;
 }
 
+// Returns the pointer of our window object which is used to create a rendering context.
+void * Jade::Graphics::Win32Window::Handle()
+{
+	return hWnd;
+}
+
+// This function subscribes to specific events and performs various tasks on them.
 LRESULT Jade::Graphics::Win32Window::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-	Win32Window window(0, 0, 0, 0, "");
+	Win32Window window(0, 0, 0, 0, "", false);
 
 	Event event;
 	event.SetEventType(Event::EventType::Unknown);

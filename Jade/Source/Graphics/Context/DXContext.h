@@ -25,6 +25,7 @@ SOFTWARE.
 */
 
 #include "IContext.h"
+#include "Graphics/Window/IWindow.h"
 
 #include <d3d11.h>
 
@@ -36,7 +37,9 @@ namespace Jade
 		{
 		private:
 
-			HWND hWnd;
+			IWindow* window;
+
+			// Necessary to initialize a D3D context.
 
 			ID3D11Device*				m_pDevice;				
 			ID3D11DeviceContext*		m_pImmediateContext;	
@@ -48,17 +51,22 @@ namespace Jade
 
 		public:
 
-			DXContext() : hWnd(NULL) { }
+			DXContext() : window(nullptr) { }
 
-			DXContext(HWND hWnd)
+			// We have a window handle.
+			DXContext(IWindow* window)
 			{
-				this->hWnd = hWnd;
+				this->window = window;
 			}
 
-			void CreateContext() override;
+			~DXContext()
+			{
+				delete window;
+			}
 
-			void ReleaseContext() override;
+			bool CreateContext() override;
 
+			bool ReleaseContext() override;
 		};
 	}
 }

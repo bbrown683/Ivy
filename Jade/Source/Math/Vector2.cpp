@@ -38,10 +38,12 @@ float Jade::Math::Vector2::Distance(Vector2 target)
 
 void Jade::Math::Vector2::Normalize()
 {
+
 }
 
 void Jade::Math::Vector2::SetX(float value)
 {
+
 }
 
 float Jade::Math::Vector2::GetX()

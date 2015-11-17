@@ -24,9 +24,10 @@ SOFTWARE.
 
 #include "GLContext.h"
 
-void Jade::Graphics::GLContext::CreateContext()
+bool Jade::Graphics::GLContext::CreateContext()
 {
-	// Test context creation.
+	// Create dummy context.
+	
 
 	PIXELFORMATDESCRIPTOR pfd =
 	{
@@ -48,7 +49,7 @@ void Jade::Graphics::GLContext::CreateContext()
 		0, 0, 0
 	};
 
-	hdc = GetDC(hWnd);
+	hdc = GetDC((HWND)window->Handle());
 
 	int iPixelFormat = ChoosePixelFormat(hdc, &pfd);
 	SetPixelFormat(hdc, iPixelFormat, &pfd);
@@ -56,10 +57,11 @@ void Jade::Graphics::GLContext::CreateContext()
 	renderingContext = wglCreateContext(hdc);
 	wglMakeCurrent(hdc, renderingContext);
 
-	
+	return true;
 }
 
-void Jade::Graphics::GLContext::ReleaseContext()
+bool Jade::Graphics::GLContext::ReleaseContext()
 {
 	wglDeleteContext(renderingContext);
+	return true;
 }

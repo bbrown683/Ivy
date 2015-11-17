@@ -43,32 +43,32 @@ namespace Jade
 
 			// Vector3 operator overloads.
 
-			inline bool operator==(const Vector3 vector)
+			inline bool operator==(Vector3 vector) const
 			{
 				return (this->x - vector.x < Math::Epsilon) && (this->y - vector.y < Math::Epsilon) && (this->z - vector.z < Math::Epsilon) ? true : false;
 			}
 
-			inline bool operator!=(const Vector3 vector)
+			inline bool operator!=(Vector3 vector) const
 			{
 				return !(this == &vector);
 			}
 
-			inline Vector3 operator+(const Vector3 vector)
+			inline Vector3 operator+(Vector3 vector) const
 			{
 				return Vector3(this->x + vector.x, this->y + vector.y, this->z + vector.z);
 			}
 
-			inline Vector3 operator-(const Vector3 vector)
+			inline Vector3 operator-(Vector3 vector) const
 			{
 				return Vector3(this->x - vector.x, this->y - vector.y, this->z - vector.z);
 			}
 
-			inline Vector3 operator*(const float scalar)
+			inline Vector3 operator*(float scalar) const
 			{
 				return Vector3(this->x * scalar, this->y * scalar, this->z * scalar);
 			}
 
-			inline Vector3 operator/(const float scalar)
+			inline Vector3 operator/(float scalar) const
 			{
 				return Vector3(this->x / scalar, this->y - scalar, this->z / scalar);
 			}
@@ -82,26 +82,26 @@ namespace Jade
 				magnitude = Math::Sqrt(x * x + y * y + z * z);
 			}
 
-			Vector3 Cross(Vector3 vector);
+			Vector3 Cross(Vector3 vector) const;
 
-			Vector3 Dot(Vector3 vector);
+			Vector3 Dot(Vector3 vector) const;
 
-			float Distance(Vector3 target);
+			float Distance(Vector3 target) const;
 
-			Vector3 Lerp(Vector3 start, Vector3 end, float delta);
+			Vector3 Lerp(Vector3 start, Vector3 end, float delta) const;
 
 			void Normalize();
 
 			void SetX(float value);
-			float GetX();
+			float GetX() const;
 
 			void SetY(float value);
-			float GetY();
+			float GetY() const;
 
 			void SetZ(float value);
-			float GetZ();
+			float GetZ() const;
 
-			float GetMagnitude();
+			float GetMagnitude() const;
 		};
 	}
 }

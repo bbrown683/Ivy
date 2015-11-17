@@ -1,3 +1,5 @@
+#pragma once
+
 /*
 The MIT License (MIT)
 
@@ -22,12 +24,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#pragma once
-
-// We only need specific headers from this.
-#define WIN32_LEAN_AND_MEAN
-#include <Windows.h>
-#include <queue>
 
 #include "IWindow.h"
 #include "Event.h"
@@ -35,13 +31,11 @@ SOFTWARE.
 #include "Core/Utility.h"
 #include "Graphics/Context/IContext.h"
 
-#include "Math/Point.h"
-
 namespace Jade
 {
 	namespace Graphics
 	{
-		class Win32Window : public IWindow
+		class X11Window : public IWindow
 		{
 		private:
 
@@ -52,13 +46,9 @@ namespace Jade
 			string title;
 			bool fullscreen;
 
-			HDC hdc;
-
 			IContext* context;
 
 		public:
-
-			// All set methods are currently placeholders.
 
 			int GetWidth() override
 			{
@@ -75,9 +65,9 @@ namespace Jade
 				return height;
 			}
 
-			void SetHeight(int height) override
+			void SetHeight(int width) override
 			{
-				this->height = height;
+				this->width = width;
 			}
 
 			int GetX() override
@@ -116,13 +106,14 @@ namespace Jade
 				return fullscreen;
 			}
 
-			Win32Window(int width, int height, int x, int y, string title, bool fullscreen)
+			X11Window(int width, int height, int x, int y, string title, bool fullscreen)
 			{
 				this->width = width;
 				this->height = height;
 				this->x = x;
 				this->y = y;
 				this->title = title;
+				this->fullscreen = fullscreen;
 			}
 
 			bool IsOpen() override;
@@ -134,7 +125,6 @@ namespace Jade
 
 			bool InitWindow() override;
 			bool WindowEvent(Event* e) override;
-			static LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 		};
 	}
 }
