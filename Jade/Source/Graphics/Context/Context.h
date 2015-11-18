@@ -24,6 +24,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include "Core/Utility.h"
+
 #include "Graphics/Window/IWindow.h"
 #include "Graphics/Context/IContext.h"
 
@@ -35,37 +37,34 @@ namespace Jade
 		{
 		private:
 
-			IContext* context;	// Do not allow to be set, but can be retrieved.
-			IWindow* window;	// Do not allow to be set or retrieved.
-
-			// Enumerates through the available devices and chooses the best one for rendering.
-			bool ChooseContext(IContext* context);
+			std::shared_ptr<IContext> context;	// Do not allow to be set, but can be retrieved.
+			std::shared_ptr<IWindow> window;	// Do not allow to be set or retrieved.
 
 		public:
 
 			// Default values.
-			int backBufferWidth = window->GetWidth();		// back buffer width.
-			int backBufferHeight = window->GetHeight();		// back buffer height.
-			int stencilBits = 8;							// amount of stencil bits.
-			int depthBits = 24;								// amount of depth bits.
-			int colorBits = 32;								// amount of color bits.
-			bool sampling = false;							// using sampling?
-			int samplesCount = 0;							// how many samples if using sampling?
+			//int backBufferWidth = window->GetWidth();		// back buffer width.
+			//int backBufferHeight = window->GetHeight();		// back buffer height.
+			//int stencilBits = 8;							// amount of stencil bits.
+			//int depthBits = 24;								// amount of depth bits.
+			//int colorBits = 32;								// amount of color bits.
+			//bool sampling = false;							// using sampling?
+			//int samplesCount = 0;							// how many samples if using sampling?
 
 			Context() : window(nullptr), context(nullptr) { }
 
 			Context(IWindow* window)
 			{
-				this->window = window;
-
-				// Will modify the reference of our context object.
-				ChooseContext(context);
+				this->window = std::shared_ptr<IWindow>(window);
 			}
 
-			IContext* RetrieveContextHandle()
+			std::shared_ptr<IContext> RetrieveContext()
 			{
 				return context;
 			}
+
+			// Enumerates through the available devices and chooses the best one for rendering.
+			bool ChooseContext();
 		};
 	}
 }

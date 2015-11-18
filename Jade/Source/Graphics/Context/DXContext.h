@@ -24,6 +24,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include "Core/Utility.h"
+
 #include "IContext.h"
 #include "Graphics/Window/IWindow.h"
 
@@ -37,31 +39,26 @@ namespace Jade
 		{
 		private:
 
-			IWindow* window;
+			std::shared_ptr<IWindow> window;
 
 			// Necessary to initialize a D3D context.
 
-			ID3D11Device*				m_pDevice;				
-			ID3D11DeviceContext*		m_pImmediateContext;	
-			IDXGISwapChain*				m_pSwapChain;			
-			ID3D11RenderTargetView*		m_pRenderTargetView;
-			D3D_DRIVER_TYPE				m_DriverType;
-			D3D_FEATURE_LEVEL			m_FeatureLevel;
-			D3D11_VIEWPORT				m_Viewport;
+			std::shared_ptr<ID3D11Device>				m_pDevice;				
+			std::shared_ptr<ID3D11DeviceContext>		m_pImmediateContext;
+			std::shared_ptr<IDXGISwapChain>				m_pSwapChain;
+			std::shared_ptr<ID3D11RenderTargetView>		m_pRenderTargetView;
+			D3D_DRIVER_TYPE								m_DriverType;
+			D3D_FEATURE_LEVEL							m_FeatureLevel;
+			D3D11_VIEWPORT								m_Viewport;
 
 		public:
 
 			DXContext() : window(nullptr) { }
 
 			// We have a window handle.
-			DXContext(IWindow* window)
+			DXContext(std::shared_ptr<IWindow> window)
 			{
 				this->window = window;
-			}
-
-			~DXContext()
-			{
-				delete window;
 			}
 
 			bool CreateContext() override;

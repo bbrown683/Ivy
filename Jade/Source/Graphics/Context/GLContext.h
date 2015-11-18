@@ -24,6 +24,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include "Core/Utility.h"
+
 #include "IContext.h"
 #include "Graphics/Window/IWindow.h"
 
@@ -40,7 +42,7 @@ namespace Jade
 
 			// Window object contains some data on our window such as size, 
 			// and the handle of it in memory which we need to create a context.
-			IWindow* window;
+			std::shared_ptr<IWindow> window;
 
 			HGLRC renderingContext;	// Handle to our OpenGL rendering context.
 			HDC hdc;			    // Handle to our device context.
@@ -50,14 +52,9 @@ namespace Jade
 			// Empty Device.
 			GLContext() : window(nullptr) { }
 
-			GLContext(IWindow* window)
+			GLContext(std::shared_ptr<IWindow> window)
 			{
 				this->window = window;
-			}
-
-			~GLContext()
-			{
-				delete window;
 			}
 
 			bool CreateContext() override;

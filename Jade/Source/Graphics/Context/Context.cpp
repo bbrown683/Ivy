@@ -24,10 +24,12 @@ SOFTWARE.
 
 #include "Context.h"
 
-bool Jade::Graphics::Context::ChooseContext(IContext * context)
+bool Jade::Graphics::Context::ChooseContext()
 {
 	// testing.
-	context = new GLContext(window);
+	context = std::make_shared<GLContext>(window);
+	context->CreateContext();
+
 	if (context)
 		return true;
 

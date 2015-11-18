@@ -35,8 +35,8 @@ namespace Jade
 		{
 		private:
 
-			Context context;			// We need the context of our window to verify it exists.
-			IRenderer* renderer;		// Pointer to our render object.
+			Context context;							// We need the context of our window to verify it exists.
+			std::shared_ptr<IRenderer> renderer;		// Pointer to our render object.
 
 		public:
 

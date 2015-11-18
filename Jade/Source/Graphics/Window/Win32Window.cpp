@@ -59,8 +59,9 @@ bool Jade::Graphics::Win32Window::InitWindow()
 			return false;
 		}
 		
-		context = new GLContext(this);
-		context->CreateContext();
+		// Create our context.
+		context = std::make_shared<Context>(this);
+		context->ChooseContext();
 
 		ShowWindow(hWnd, SW_SHOW);
 		UpdateWindow(hWnd);
@@ -144,7 +145,7 @@ LRESULT Jade::Graphics::Win32Window::WndProc(HWND hWnd, UINT message, WPARAM wPa
 	{
 		case WM_CREATE:
 			break;
-		case WM_CLOSE:		
+		case WM_CLOSE:
 			CloseWindow(hWnd);
 			DestroyWindow(hWnd);
 			UnregisterClass("Jade", hInstance);

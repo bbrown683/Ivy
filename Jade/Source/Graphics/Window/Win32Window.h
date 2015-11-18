@@ -33,7 +33,7 @@ SOFTWARE.
 #include "Event.h"
 
 #include "Core/Utility.h"
-#include "Graphics/Context/IContext.h"
+#include "Graphics/Context/Context.h"
 
 #include "Math/Point.h"
 
@@ -54,7 +54,7 @@ namespace Jade
 
 			HDC hdc;
 
-			IContext* context;
+			std::shared_ptr<Context> context;
 
 		public:
 
@@ -129,6 +129,11 @@ namespace Jade
 			bool SwapWindowBuffers() override;
 			void Close() override;
 			void* Handle() override;
+
+			~Win32Window()
+			{
+				
+			}
 
 		private:
 
