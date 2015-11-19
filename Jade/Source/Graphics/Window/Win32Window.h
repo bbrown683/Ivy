@@ -33,7 +33,7 @@ SOFTWARE.
 #include "Event.h"
 
 #include "Core/Utility.h"
-#include "Graphics/Context/Context.h"
+#include "Graphics/Device/GraphicsDeviceManager.h"
 
 #include "Math/Point.h"
 
@@ -54,7 +54,7 @@ namespace Jade
 
 			HDC hdc;
 
-			std::shared_ptr<Context> context;
+			std::shared_ptr<GraphicsDeviceManager> graphicsDevice;
 
 		public:
 
@@ -100,9 +100,9 @@ namespace Jade
 				this->y = y;
 			}
 
-			Jade::Math::Point GetPosition() override
+			Math::Point GetPosition() override
 			{
-				return Jade::Math::Point(0, 0);
+				return Math::Point(0, 0);
 			}
 
 			void SetPosition(int x, int y) override
@@ -130,15 +130,10 @@ namespace Jade
 			void Close() override;
 			void* Handle() override;
 
-			~Win32Window()
-			{
-				
-			}
-
 		private:
 
 			bool InitWindow() override;
-			bool WindowEvent(Event* e) override;
+			bool WindowEvent(std::shared_ptr<Event> e) override;
 			static LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 		};
 	}

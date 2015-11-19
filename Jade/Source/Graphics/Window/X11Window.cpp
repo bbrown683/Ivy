@@ -49,7 +49,7 @@ bool Jade::Graphics::X11Window::InitWindow()
 	return false;
 }
 
-bool Jade::Graphics::X11Window::WindowEvent(Event * e)
+bool Jade::Graphics::X11Window::WindowEvent(std::shared_ptr<Event> e)
 {
 	return false;
 }

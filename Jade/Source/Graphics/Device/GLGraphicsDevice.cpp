@@ -22,16 +22,57 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "Context.h"
+#include "GLGraphicsDevice.h"
 
-bool Jade::Graphics::Context::ChooseContext()
+bool Jade::Graphics::GLGraphicsDevice::CreateDevice()
 {
-	// testing.
-	context = std::make_shared<GLContext>(window);
-	context->CreateContext();
+	// Create dummy graphicsDevice.
+	
 
-	if (context)
-		return true;
+	PIXELFORMATDESCRIPTOR pfd =
+	{
+		sizeof(PIXELFORMATDESCRIPTOR),
+		1,
+		PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER,
+		PFD_TYPE_RGBA,
+		32,
+		0, 0, 0, 0, 0, 0,
+		0,
+		0,
+		0,
+		0, 0, 0, 0,
+		24,
+		8,
+		0,
+		PFD_MAIN_PLANE,
+		0,
+		0, 0, 0
+	};
 
-	return false;
+	hdc = GetDC(static_cast<HWND>(window->Handle()));
+
+	int iPixelFormat = ChoosePixelFormat(hdc, &pfd);
+	SetPixelFormat(hdc, iPixelFormat, &pfd);
+
+	renderingContext = wglCreateContext(hdc);
+	wglMakeCurrent(hdc, renderingContext);
+
+	return true;
+}
+
+bool Jade::Graphics::GLGraphicsDevice::ReleaseDevice()
+{
+	wglDeleteContext(renderingContext);
+	return true;
+}
+
+void Jade::Graphics::GLGraphicsDevice::Clear(Math::Color color)
+{
+	glClear(GL_COLOR_BUFFER_BIT);
+	glClearColor(color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha());
+}
+
+void Jade::Graphics::GLGraphicsDevice::Present()
+{
+	
 }

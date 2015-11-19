@@ -26,7 +26,8 @@ void Update()
 		switch (e.GetEventType())
 		{
 		case Graphics::Event::EventType::Close:
-				break;
+			std::cout << "Closed" << std::endl;
+			break;
 		}
 	}
 }

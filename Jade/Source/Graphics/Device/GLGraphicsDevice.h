@@ -25,45 +25,49 @@ SOFTWARE.
 */
 
 #include "Core/Utility.h"
+#include "Math/Color.h"
 
-#include "IContext.h"
+#include "IGraphicsDevice.h"
 #include "Graphics/Window/IWindow.h"
 
-#include <d3d11.h>
+#include <Windows.h>
+#include <gl/GL.h>
+
 
 namespace Jade
 {
 	namespace Graphics
 	{
-		class DXContext : public IContext
+		class GLGraphicsDevice : public IGraphicsDevice
 		{
 		private:
 
+			// Window object contains some data on our window such as size, 
+			// and the handle of it in memory which we need to create a graphicsDevice.
 			std::shared_ptr<IWindow> window;
 
-			// Necessary to initialize a D3D context.
+			HGLRC renderingContext	= nullptr;	// Handle to our OpenGL rendering graphicsDevice.
+			HDC hdc					= nullptr;	// Handle to our device graphicsDevice.
 
-			std::shared_ptr<ID3D11Device>				m_pDevice;				
-			std::shared_ptr<ID3D11DeviceContext>		m_pImmediateContext;
-			std::shared_ptr<IDXGISwapChain>				m_pSwapChain;
-			std::shared_ptr<ID3D11RenderTargetView>		m_pRenderTargetView;
-			D3D_DRIVER_TYPE								m_DriverType;
-			D3D_FEATURE_LEVEL							m_FeatureLevel;
-			D3D11_VIEWPORT								m_Viewport;
+			bool CreateDevice() override;
+
+			bool ReleaseDevice() override;
 
 		public:
 
-			DXContext() : window(nullptr) { }
+			// Empty Device.
+			GLGraphicsDevice() : window(nullptr) { }
 
-			// We have a window handle.
-			DXContext(std::shared_ptr<IWindow> window)
+			GLGraphicsDevice(std::shared_ptr<IWindow> window)
 			{
 				this->window = window;
+
+				// Create our device.
+				CreateDevice();
 			}
 
-			bool CreateContext() override;
-
-			bool ReleaseContext() override;
+			void Clear(Math::Color color) override;
+			void Present() override;
 		};
 	}
 }

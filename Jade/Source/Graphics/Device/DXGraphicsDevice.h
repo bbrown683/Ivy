@@ -1,3 +1,5 @@
+#pragma once
+
 /*
 The MIT License (MIT)
 
@@ -22,29 +24,49 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#pragma once
+#include "Core/Utility.h"
 
-#include "IRenderer.h"
-#include "Graphics/Context/IContext.h"
+#include "IGraphicsDevice.h"
+#include "Graphics/Window/IWindow.h"
+
+#include <d3d11.h>
 
 namespace Jade
 {
 	namespace Graphics
 	{
-		class DXRenderer : public IRenderer
+		class DXGraphicsDevice : public IGraphicsDevice
 		{
 		private:
 
-			// Represents the context we need to exist 
-			// before we do any rendering to the screen.
-			DXContext context;
+			std::shared_ptr<IWindow> window;
+
+			// Necessary to initialize a D3D graphicsDevice.
+
+			std::shared_ptr<ID3D11Device>				m_pDevice;				
+			std::shared_ptr<ID3D11DeviceContext>		m_pImmediateContext;
+			std::shared_ptr<IDXGISwapChain>				m_pSwapChain;
+			std::shared_ptr<ID3D11RenderTargetView>		m_pRenderTargetView;
+			D3D_DRIVER_TYPE								m_DriverType;
+			D3D_FEATURE_LEVEL							m_FeatureLevel;
+			D3D11_VIEWPORT								m_Viewport;
+
+			bool CreateDevice() override;
+
+			bool ReleaseDevice() override;
 
 		public:
 
-			DXRenderer(DXContext context)
+			DXGraphicsDevice() : window(nullptr) { }
+
+			// We have a window handle.
+			DXGraphicsDevice(std::shared_ptr<IWindow> window)
 			{
-				this->context = context;
+				this->window = window;
 			}
+
+			void Clear(Math::Color color) override;
+			void Present() override;
 		};
 	}
 }

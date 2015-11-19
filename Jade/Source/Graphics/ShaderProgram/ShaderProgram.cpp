@@ -1,5 +1,3 @@
-#pragma once
-
 /*
 The MIT License (MIT)
 
@@ -24,26 +22,5 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "IRenderer.h"
-#include "Graphics/Context/Context.h"
+#include "ShaderProgram.h"
 
-namespace Jade
-{
-	namespace Graphics
-	{
-		class Renderer
-		{
-		private:
-
-			Context context;							// We need the context of our window to verify it exists.
-			std::shared_ptr<IRenderer> renderer;		// Pointer to our render object.
-
-		public:
-
-			Renderer(Context context)
-			{
-				this->context = context;
-			}
-		};
-	}
-}

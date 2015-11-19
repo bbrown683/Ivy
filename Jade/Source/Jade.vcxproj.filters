@@ -14,12 +14,6 @@
     <ClCompile Include="Math\Quaternion.cpp">
       <Filter>Math</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Context\DXContext.cpp">
-      <Filter>Graphics\Device</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Context\GLContext.cpp">
-      <Filter>Graphics\Device</Filter>
-    </ClCompile>
     <ClCompile Include="Graphics\Window\Win32Window.cpp">
       <Filter>Graphics\Window</Filter>
     </ClCompile>
@@ -32,14 +26,18 @@
     <ClCompile Include="Math\Rectangle.cpp" />
     <ClCompile Include="Math\Ray.cpp" />
     <ClCompile Include="Math\Math.cpp" />
-    <ClCompile Include="Graphics\Renderer\GLRenderer.cpp" />
     <ClCompile Include="Graphics\Window\X11Window.cpp" />
     <ClCompile Include="Math\Point.cpp" />
     <ClCompile Include="Math\Helper.cpp" />
-    <ClCompile Include="Graphics\Context\Context.cpp" />
-    <ClCompile Include="Graphics\Renderer\Renderer.cpp" />
     <ClCompile Include="Math\Color.cpp">
       <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Device\GraphicsDeviceManager.cpp" />
+    <ClCompile Include="Graphics\Device\DXGraphicsDevice.cpp">
+      <Filter>Graphics\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Device\GLGraphicsDevice.cpp">
+      <Filter>Graphics\Device</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -54,21 +52,6 @@
     </ClInclude>
     <ClInclude Include="Math\Quaternion.h">
       <Filter>Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Context\DXContext.h">
-      <Filter>Graphics\Device</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Context\IContext.h">
-      <Filter>Graphics\Device</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Renderer\DXRenderer.h">
-      <Filter>Graphics\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Renderer\GLRenderer.h">
-      <Filter>Graphics\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Renderer\IRenderer.h">
-      <Filter>Graphics\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\Window\Window.h">
       <Filter>Graphics\Window</Filter>
@@ -96,18 +79,23 @@
     <ClInclude Include="Graphics\ShaderProgram\ShaderProgram.h" />
     <ClInclude Include="Graphics\Shader\Shader.h" />
     <ClInclude Include="Core\Factory.h" />
-    <ClInclude Include="Graphics\Context\GLContext.h">
-      <Filter>Graphics\Device</Filter>
-    </ClInclude>
     <ClInclude Include="Graphics\Window\X11Window.h" />
     <ClInclude Include="Math\Point.h" />
-    <ClInclude Include="Graphics\Context\Context.h" />
-    <ClInclude Include="Graphics\Renderer\Renderer.h" />
     <ClInclude Include="Graphics\Texture\Texture.h" />
     <ClInclude Include="Math\Color.h">
       <Filter>Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Context\GLExtensions.h" />
+    <ClInclude Include="Graphics\Device\GraphicsDeviceManager.h" />
+    <ClInclude Include="Graphics\Device\IGraphicsDevice.h">
+      <Filter>Graphics\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Device\DXGraphicsDevice.h">
+      <Filter>Graphics\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Device\GLGraphicsDevice.h">
+      <Filter>Graphics\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Device\GLExtensions.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">

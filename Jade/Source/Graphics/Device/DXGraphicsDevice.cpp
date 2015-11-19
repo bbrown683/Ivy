@@ -22,9 +22,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "DXContext.h"
+#include "DXGraphicsDevice.h"
 
-bool Jade::Graphics::DXContext::CreateContext()
+bool Jade::Graphics::DXGraphicsDevice::CreateDevice()
 {
 	UINT createDeviceFlags = 0;
 
@@ -82,8 +82,18 @@ bool Jade::Graphics::DXContext::CreateContext()
 	return true; // Successful.
 }
 
-bool Jade::Graphics::DXContext::ReleaseContext()
+bool Jade::Graphics::DXGraphicsDevice::ReleaseDevice()
 {
 	// Remove any loose pointers.
 	return false;
+}
+
+void Jade::Graphics::DXGraphicsDevice::Clear(Math::Color color)
+{
+
+}
+
+void Jade::Graphics::DXGraphicsDevice::Present()
+{
+
 }

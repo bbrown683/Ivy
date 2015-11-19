@@ -26,7 +26,7 @@ SOFTWARE.
 
 // Must be static as these will be used within our WndProc function.
 static HWND hWnd;
-static HINSTANCE hInstance = GetModuleHandle(NULL);
+static HINSTANCE hInstance = GetModuleHandle(nullptr);
 static bool open;
 static std::queue<Jade::Graphics::Event> events;
 
@@ -43,7 +43,7 @@ bool Jade::Graphics::Win32Window::InitWindow()
 	wcex.hInstance		= hInstance;
 	wcex.hIcon			= LoadIcon(hInstance, IDI_APPLICATION);
 	wcex.hCursor		= LoadCursor(hInstance, IDC_ARROW);
-	wcex.hbrBackground	= (HBRUSH)GetStockObject(BLACK_BRUSH);
+	wcex.hbrBackground	= static_cast<HBRUSH>(GetStockObject(NULL_BRUSH));
 	wcex.lpszMenuName	= nullptr;
 	wcex.lpszClassName	= "Jade";
 	wcex.hIconSm		= LoadIcon(hInstance, IDI_APPLICATION);
@@ -59,9 +59,8 @@ bool Jade::Graphics::Win32Window::InitWindow()
 			return false;
 		}
 		
-		// Create our context.
-		context = std::make_shared<Context>(this);
-		context->ChooseContext();
+		graphicsDevice = std::make_shared<GraphicsDeviceManager>(this);
+		graphicsDevice->SelectDevice();
 
 		ShowWindow(hWnd, SW_SHOW);
 		UpdateWindow(hWnd);
@@ -73,11 +72,11 @@ bool Jade::Graphics::Win32Window::InitWindow()
 }
 
 // Windows 32 message loop which adds each event to a queue that is maintained by the message procedure.
-bool Jade::Graphics::Win32Window::WindowEvent(Event* e)
+bool Jade::Graphics::Win32Window::WindowEvent(std::shared_ptr<Event> e)
 {
 	MSG msg;
 
-	e = new Event();
+	e = std::make_shared<Event>();
 
 	while (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
 	{
@@ -90,15 +89,9 @@ bool Jade::Graphics::Win32Window::WindowEvent(Event* e)
 		// Pop events off the queue.
 		&events.front();
 		events.pop();
-		
-		// Delete or there will be a nasty memory leak 
-		// each time we check for events.
-		delete e;
 
 		return true;
 	}
-
-	delete e;
 
 	return false;
 }
@@ -127,7 +120,7 @@ void Jade::Graphics::Win32Window::Close()
 	open = false;
 }
 
-// Returns the pointer of our window object which is used to create a rendering context.
+// Returns the pointer of our window object which is used to create a rendering graphicsDevice.
 void * Jade::Graphics::Win32Window::Handle()
 {
 	return hWnd;

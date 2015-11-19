@@ -46,44 +46,44 @@ namespace Jade
 
 			// All of our windows use this interface for their general implementations 
 			// to create interoperability for multiple operating systems.
-			IWindow* window;
+			std::shared_ptr<IWindow> window;
 
 		public:
 
 			// Returns a boolean determining if the window is still active.
-			bool IsOpen()
+			bool IsOpen() const
 			{
 				return window->IsOpen();
 			}
 
 			// Returns the width of the window.
-			int GetWidth()
+			int GetWidth() const
 			{
 				return window->GetWidth();
 			}
 
 			// Sets the width of the window.
-			void SetWidth(int width)
+			void SetWidth(int width) const
 			{
 				window->SetWidth(width);
 			}
 
 			// Returns the height of the window.
-			int GetHeight()
+			int GetHeight() const
 			{
 				return window->GetHeight();
 			}
 
 			// Sets the height of the window.
-			void SetHeight(int height)
+			void SetHeight(int height) const
 			{
 				window->SetHeight(height);
 			}
 
 			// Returns a boolean determining if the window is in fullscreen mode.
-			bool isFullscreen()
+			bool IsFullscreen() const
 			{
-				window->IsFullscreen();
+				return window->IsFullscreen();
 			}
 
 			Window(int width, int height, int x, int y, string title, bool fullscreen)
@@ -101,7 +101,7 @@ namespace Jade
 
 			bool PollEvents(Event* e)
 			{
-				return window->WindowEvent(e);
+				return window->WindowEvent(std::make_shared<Event>(*e));
 			}
 
 			void SwapBuffers()
@@ -123,11 +123,11 @@ namespace Jade
 				switch (Jade::System::Platform::GetPlatformID())
 				{
 				case System::Platform::PlatformID::Windows:
-					window = new Win32Window(width, height, x, y, title, fullscreen);
+					window = std::make_shared<Win32Window>(width, height, x, y, title, fullscreen);
 					break;
 				case System::Platform::PlatformID::MacOSX:
 				case System::Platform::PlatformID::Linux:
-					window = new X11Window(width, height, x, y, title, fullscreen);
+					window = std::make_shared<X11Window>(width, height, x, y, title, fullscreen);
 					break;
 				case System::Platform::PlatformID::Unknown:
 					window = nullptr;
@@ -136,15 +136,7 @@ namespace Jade
 
 				// If our window exists, initialize it.
 				if (window)
-				{
-					window->InitWindow();
-				}	
-			}
-
-			~Window()
-			{
-				// Cleanup resources.
-				delete window;
+					window->InitWindow();	
 			}
 		};
 	}

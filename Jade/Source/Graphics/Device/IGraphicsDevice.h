@@ -1,3 +1,5 @@
+#pragma once
+
 /*
 The MIT License (MIT)
 
@@ -22,4 +24,25 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "Renderer.h"
+#include "Math/Color.h"
+
+namespace Jade
+{
+	namespace Graphics
+	{
+		struct IGraphicsDevice
+		{
+		private:
+
+			virtual bool CreateDevice() = 0;
+
+			virtual bool ReleaseDevice() = 0;
+
+		public:
+
+			virtual void Clear(Math::Color color) = 0;
+			virtual void Present() = 0;
+		};
+	}
+}
+

@@ -26,40 +26,48 @@ SOFTWARE.
 
 #include "Core/Utility.h"
 
-#include "IContext.h"
 #include "Graphics/Window/IWindow.h"
-
-#include <Windows.h>
-#include <gl/GL.h>
+#include "Graphics/Device/IGraphicsDevice.h"
+#include "DXGraphicsDevice.h"
+#include "GLGraphicsDevice.h"
 
 namespace Jade
 {
 	namespace Graphics
 	{
-		class GLContext : public IContext
+		class GraphicsDeviceManager
 		{
 		private:
 
-			// Window object contains some data on our window such as size, 
-			// and the handle of it in memory which we need to create a context.
-			std::shared_ptr<IWindow> window;
-
-			HGLRC renderingContext;	// Handle to our OpenGL rendering context.
-			HDC hdc;			    // Handle to our device context.
+			std::shared_ptr<IGraphicsDevice> graphicsDevice;	// Do not allow to be set, but can be retrieved.
+			std::shared_ptr<IWindow> window;	// Do not allow to be set or retrieved.
 
 		public:
+			
+			// Some graphicsDevice information
+			//int backBufferWidth = window->GetWidth();			// back buffer width.
+			//int backBufferHeight = window->GetHeight();		// back buffer height.
+			//int stencilBits = 8;								// amount of stencil bits.
+			//int depthBits = 24;								// amount of depth bits.
+			//int colorBits = 32;								// amount of color bits.
+			//bool sampling = false;							// using sampling?
+			//int samplesCount = 0;								// how many samples if using sampling?
 
-			// Empty Device.
-			GLContext() : window(nullptr) { }
+			GraphicsDeviceManager() : graphicsDevice(nullptr), window(nullptr)  { }
 
-			GLContext(std::shared_ptr<IWindow> window)
+			GraphicsDeviceManager(IWindow* window)
 			{
-				this->window = window;
+				this->window = std::shared_ptr<IWindow>(window);
 			}
 
-			bool CreateContext() override;
+			std::shared_ptr<IGraphicsDevice> RetrieveDevice() const
+			{
+				return graphicsDevice;
+			}
 
-			bool ReleaseContext() override;
+			// Enumerates through the available devices and selects the best one available for rendering.
+			bool SelectDevice();
 		};
 	}
 }
+

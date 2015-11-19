@@ -1,5 +1,3 @@
-#pragma once
-
 /*
 The MIT License (MIT)
 
@@ -24,27 +22,30 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "IRenderer.h"
-#include "Graphics/Context/IContext.h"
+#include "GraphicsDeviceManager.h"
+#include "System/Platform.h"
 
-namespace Jade
+bool Jade::Graphics::GraphicsDeviceManager::SelectDevice()
 {
-	namespace Graphics
+	// either window or device is null.
+	if (!window || !graphicsDevice)
 	{
-		class GLRenderer : public IRenderer
-		{
-			// Represents the context we need to exist 
-			// before we do any rendering to the screen.
-			GLContext context;
+		#ifndef _WIN32	// MacOSX and Linux machines. 
 
-		public:
+		// Ensure platform is not unknown before attempting to create
+		// an OpenGL device.
+		if (Jade::System::Platform::GetPlatformID() != Jade::System::Platform::PlatformID::Unknown)
+			graphicsDevice = std::make_shared<GLGraphicsDevice>(window);
 
-			GLRenderer(GLContext context)
-			{
-				this->context = context;
-			}
+		#else // Windows machine.
 
-			void Draw() override;
-		};
+		// Windows will be running via DirectX once it is complete.
+		graphicsDevice = std::make_shared<GLGraphicsDevice>(window);
+
+		#endif
+
+		return true;
 	}
+
+	return false;
 }

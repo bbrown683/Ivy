@@ -47,6 +47,26 @@ namespace Jade
 				this->blue		= blue;
 				this->alpha		= alpha;
 			}
+
+			float GetRed() const
+			{
+				return red;
+			}
+
+			float GetGreen() const
+			{
+				return green;
+			}
+
+			float GetBlue() const
+			{
+				return blue;
+			}
+
+			float GetAlpha() const
+			{
+				return alpha;
+			}
 		};
 	}
 }

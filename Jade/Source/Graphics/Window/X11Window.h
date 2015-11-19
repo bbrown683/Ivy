@@ -29,7 +29,7 @@ SOFTWARE.
 #include "Event.h"
 
 #include "Core/Utility.h"
-#include "Graphics/Context/IContext.h"
+#include "Graphics/Device/GraphicsDeviceManager.h"
 
 namespace Jade
 {
@@ -46,7 +46,7 @@ namespace Jade
 			string title;
 			bool fullscreen;
 
-			IContext* context;
+			std::shared_ptr<GraphicsDeviceManager> graphicsDevice;
 
 		public:
 
@@ -124,7 +124,7 @@ namespace Jade
 		private:
 
 			bool InitWindow() override;
-			bool WindowEvent(Event* e) override;
+			bool WindowEvent(std::shared_ptr<Event> e) override;
 		};
 	}
 }
