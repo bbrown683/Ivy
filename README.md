@@ -2,5 +2,5 @@
 C++ Game Engine
 
 # Dependencies
-DirectX
-OpenGL
+* DirectX
+* OpenGL
