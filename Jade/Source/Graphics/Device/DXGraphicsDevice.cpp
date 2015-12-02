@@ -62,21 +62,39 @@ bool Jade::Graphics::DXGraphicsDevice::CreateDevice()
 	sd.BufferDesc.RefreshRate.Numerator = 60;
 	sd.BufferDesc.RefreshRate.Denominator = 1;
 	sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-	sd.OutputWindow = (HWND)window->Handle();
+	sd.OutputWindow = static_cast<HWND>(window->Handle());
 	sd.Windowed = true;
 	sd.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
 	sd.SampleDesc.Count = 1;
 	sd.SampleDesc.Quality = 0;
 	sd.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
-
 	
+	HRESULT result = D3D11CreateDeviceAndSwapChain(nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr, createDeviceFlags, featureLevels, 
+		numFeatureLevels, D3D11_SDK_VERSION, &sd, &m_pSwapChain, &m_pDevice, &m_FeatureLevel, &m_pImmediateContext);
+
+	if(!SUCCEEDED(result))
+	{
+		return false;
+	}
+
+	ID3D11Texture2D* m_pBackBuffer = nullptr;
+	m_pSwapChain->GetBuffer(NULL, __uuidof(ID3D11Texture2D), reinterpret_cast<void**>(&m_pBackBuffer));
+	m_pDevice->CreateRenderTargetView(m_pBackBuffer, nullptr, &m_pRenderTargetView);
+
+	// Release object now that it is unneeded.
+	m_pBackBuffer->Release();
+
+	m_pImmediateContext->OMSetRenderTargets(1, &m_pRenderTargetView, nullptr);
+
 	D3D11_VIEWPORT vp;
-	vp.Width = (FLOAT)window->GetWidth();
-	vp.Height = (FLOAT)window->GetHeight();
+	ZeroMemory(&vp, sizeof(D3D11_VIEWPORT));
+	vp.Width = static_cast<FLOAT>(window->GetWidth());
+	vp.Height = static_cast<FLOAT>(window->GetHeight());
 	vp.MinDepth = 0.0f;
 	vp.MaxDepth = 1.0f;
 	vp.TopLeftX = 0;
 	vp.TopLeftY = 0;
+
 	m_pImmediateContext->RSSetViewports(1, &vp);
 
 	return true; // Successful.
@@ -85,15 +103,23 @@ bool Jade::Graphics::DXGraphicsDevice::CreateDevice()
 bool Jade::Graphics::DXGraphicsDevice::ReleaseDevice()
 {
 	// Remove any loose pointers.
-	return false;
+	m_pImmediateContext->ClearState();
+	m_pRenderTargetView->Release();
+	m_pSwapChain->Release();
+	m_pImmediateContext->Release();
+	m_pDevice->Release();
+	
+	return true;
 }
 
 void Jade::Graphics::DXGraphicsDevice::Clear(Math::Color color)
-{
-
+{	
+	FLOAT colorRGBA[] = { color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() };
+	m_pImmediateContext->ClearRenderTargetView(m_pRenderTargetView, colorRGBA);
 }
 
+// Swaps the front and back buffers.
 void Jade::Graphics::DXGraphicsDevice::Present()
 {
-
+	m_pSwapChain->Present(0, 0);
 }

@@ -39,6 +39,8 @@
     <ClCompile Include="Graphics\Device\GLGraphicsDevice.cpp">
       <Filter>Graphics\Device</Filter>
     </ClCompile>
+    <ClCompile Include="Graphics\Shader\Shader.cpp" />
+    <ClCompile Include="Game.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\Vector4.h">
@@ -95,7 +97,7 @@
     <ClInclude Include="Graphics\Device\GLGraphicsDevice.h">
       <Filter>Graphics\Device</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Device\GLExtensions.h" />
+    <ClInclude Include="Game.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">

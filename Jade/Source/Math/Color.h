@@ -1,3 +1,5 @@
+#pragma once
+
 /*
 The MIT License (MIT)
 
@@ -22,12 +24,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#pragma once
-
 namespace Jade
 {
 	namespace Math
 	{
+		// Wrapper class for using Colors in both OpenGL and DirectX without having API dependencies.
 		struct Color
 		{
 		private:
@@ -39,7 +40,14 @@ namespace Jade
 
 		public:
 
-			// OpenGL accepts only values ranging from 0-1 as a float for colors.
+			// List of some common .NET Colors translated into their respective values for OpenGL and DirectX.
+			static const Color CornflowerBlue;
+			static const Color Red;
+			static const Color Green;
+			static const Color Blue;
+			static const Color Black;
+			static const Color White;
+
 			Color(float red, float green, float blue, float alpha)
 			{			
 				this->red		= red;

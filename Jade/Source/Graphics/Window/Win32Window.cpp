@@ -58,9 +58,6 @@ bool Jade::Graphics::Win32Window::InitWindow()
 		{
 			return false;
 		}
-		
-		graphicsDevice = std::make_shared<GraphicsDeviceManager>(this);
-		graphicsDevice->SelectDevice();
 
 		ShowWindow(hWnd, SW_SHOW);
 		UpdateWindow(hWnd);
@@ -114,10 +111,11 @@ bool Jade::Graphics::Win32Window::SwapWindowBuffers()
 // Forcefully closes the window and cleans up.
 void Jade::Graphics::Win32Window::Close()
 {
+	open = false;
+
 	CloseWindow(hWnd);
 	DestroyWindow(hWnd);
 	UnregisterClass("Jade", hInstance);
-	open = false;
 }
 
 // Returns the pointer of our window object which is used to create a rendering graphicsDevice.
@@ -139,10 +137,12 @@ LRESULT Jade::Graphics::Win32Window::WndProc(HWND hWnd, UINT message, WPARAM wPa
 		case WM_CREATE:
 			break;
 		case WM_CLOSE:
+			open = false;
+			event.SetEventType(Event::EventType::Close);
+
 			CloseWindow(hWnd);
 			DestroyWindow(hWnd);
 			UnregisterClass("Jade", hInstance);
-			open = false;
 			break;
 		default:
 			return DefWindowProc(hWnd, message, wParam, lParam);

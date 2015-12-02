@@ -22,12 +22,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include "glew.h"
+#include "GL/GL.h"
 #include "GLGraphicsDevice.h"
 
 bool Jade::Graphics::GLGraphicsDevice::CreateDevice()
 {
-	// Create dummy graphicsDevice.
-	
+	// Create a graphicsDevice.
 
 	PIXELFORMATDESCRIPTOR pfd =
 	{
@@ -58,6 +59,53 @@ bool Jade::Graphics::GLGraphicsDevice::CreateDevice()
 	wglMakeCurrent(hdc, renderingContext);
 
 	return true;
+
+	/*
+	HWND dummyWND = CreateWindow("Dummy", "Dummy", WS_POPUP | WS_DISABLED, 0, 0, 0, 0, nullptr, nullptr, nullptr, nullptr);
+
+	PIXELFORMATDESCRIPTOR dummyPFD =
+	{
+		sizeof(PIXELFORMATDESCRIPTOR),
+		1,
+		PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER,
+		PFD_TYPE_RGBA,
+		32,
+		0, 0, 0, 0, 0, 0,
+		0,
+		0,
+		0,
+		0, 0, 0, 0,
+		24,
+		8,
+		0,
+		PFD_MAIN_PLANE,
+		0,
+		0, 0, 0
+	};
+
+	HDC dummyDC = GetDC(dummyWND);
+
+	int iPixelFormat = ChoosePixelFormat(dummyDC, &dummyPFD);
+	SetPixelFormat(dummyDC, iPixelFormat, &dummyPFD);
+
+	HGLRC dummyContext = wglCreateContext(dummyDC);
+	wglMakeCurrent(dummyDC, dummyContext);
+
+	int major, minor;
+		
+	glGetIntegerv(GL_MAJOR_VERSION, &major);
+	glGetIntegerv(GL_MINOR_VERSION, &minor);
+		
+	// We only want to render using OpenGL 4+
+	if (major < 4)
+		return false;
+
+	if (glewInit() != GLEW_OK)
+		return false;
+
+
+	return true;
+	*/
 }
 
 bool Jade::Graphics::GLGraphicsDevice::ReleaseDevice()
@@ -74,5 +122,5 @@ void Jade::Graphics::GLGraphicsDevice::Clear(Math::Color color)
 
 void Jade::Graphics::GLGraphicsDevice::Present()
 {
-	
+	SwapBuffers(hdc);
 }

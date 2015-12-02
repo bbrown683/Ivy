@@ -23,7 +23,6 @@ SOFTWARE.
 */
 
 #include "GraphicsDeviceManager.h"
-#include "System/Platform.h"
 
 bool Jade::Graphics::GraphicsDeviceManager::SelectDevice()
 {
@@ -39,8 +38,8 @@ bool Jade::Graphics::GraphicsDeviceManager::SelectDevice()
 
 		#else // Windows machine.
 
-		// Windows will be running via DirectX once it is complete.
-		graphicsDevice = std::make_shared<GLGraphicsDevice>(window);
+		// Windows support for DirectX functionality is ensured by default.
+		graphicsDevice = std::make_shared<DXGraphicsDevice>(window);
 
 		#endif
 

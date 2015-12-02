@@ -29,7 +29,6 @@ SOFTWARE.
 #include "Event.h"
 
 #include "Core/Utility.h"
-#include "Graphics/Device/GraphicsDeviceManager.h"
 
 namespace Jade
 {
@@ -45,8 +44,6 @@ namespace Jade
 			int y;
 			string title;
 			bool fullscreen;
-
-			std::shared_ptr<GraphicsDeviceManager> graphicsDevice;
 
 		public:
 

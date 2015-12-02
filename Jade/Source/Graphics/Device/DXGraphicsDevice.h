@@ -43,13 +43,13 @@ namespace Jade
 
 			// Necessary to initialize a D3D graphicsDevice.
 
-			std::shared_ptr<ID3D11Device>				m_pDevice;				
-			std::shared_ptr<ID3D11DeviceContext>		m_pImmediateContext;
-			std::shared_ptr<IDXGISwapChain>				m_pSwapChain;
-			std::shared_ptr<ID3D11RenderTargetView>		m_pRenderTargetView;
-			D3D_DRIVER_TYPE								m_DriverType;
-			D3D_FEATURE_LEVEL							m_FeatureLevel;
-			D3D11_VIEWPORT								m_Viewport;
+			ID3D11Device*				m_pDevice;				
+			ID3D11DeviceContext*		m_pImmediateContext;
+			IDXGISwapChain*				m_pSwapChain;
+			ID3D11RenderTargetView*		m_pRenderTargetView;
+			D3D_DRIVER_TYPE				m_DriverType;
+			D3D_FEATURE_LEVEL			m_FeatureLevel;
+			D3D11_VIEWPORT				m_Viewport;
 
 			bool CreateDevice() override;
 
@@ -63,6 +63,28 @@ namespace Jade
 			DXGraphicsDevice(std::shared_ptr<IWindow> window)
 			{
 				this->window = window;
+
+				// Create our device.
+				CreateDevice();
+			}
+
+			~DXGraphicsDevice()
+			{
+				// Cleanup resources.
+				if(ReleaseDevice())
+				{
+					// Safe deletion of pointers.
+
+					m_pImmediateContext = nullptr;
+					m_pRenderTargetView = nullptr;
+					m_pSwapChain = nullptr;
+					m_pDevice = nullptr;
+
+					delete m_pImmediateContext;
+					delete m_pRenderTargetView;
+					delete m_pSwapChain;
+					delete m_pDevice;
+				}
 			}
 
 			void Clear(Math::Color color) override;

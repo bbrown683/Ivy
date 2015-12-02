@@ -26,7 +26,7 @@ SOFTWARE.
 
 #include "Core/Utility.h"
 
-#include "Graphics/Window/IWindow.h"
+#include "Graphics/Window/Window.h"
 #include "Graphics/Device/IGraphicsDevice.h"
 #include "DXGraphicsDevice.h"
 #include "GLGraphicsDevice.h"
@@ -42,25 +42,48 @@ namespace Jade
 			std::shared_ptr<IGraphicsDevice> graphicsDevice;	// Do not allow to be set, but can be retrieved.
 			std::shared_ptr<IWindow> window;	// Do not allow to be set or retrieved.
 
-		public:
+			int backBufferWidth;	// back buffer width.
+			int backBufferHeight;	// back buffer height.
+			int stencilBits;		// amount of stencil bits.
+			int depthBits;			// amount of depth bits.
+			int colorBits;			// amount of color bits.
+			bool sampling;			// using sampling?
+			int samples;			// how many samples if using sampling?
+			bool vsync;				// enable vertical sync?
+
+		public:						
+
+			// Note: Do not use this constructor as everything is set to null.
+			GraphicsDeviceManager() : graphicsDevice(nullptr), window(nullptr), backBufferWidth(0), backBufferHeight(0), 
+				stencilBits(0), depthBits(0), colorBits(0), sampling(false), samples(0), vsync(false) { }
+
 			
-			// Some graphicsDevice information
-			//int backBufferWidth = window->GetWidth();			// back buffer width.
-			//int backBufferHeight = window->GetHeight();		// back buffer height.
-			//int stencilBits = 8;								// amount of stencil bits.
-			//int depthBits = 24;								// amount of depth bits.
-			//int colorBits = 32;								// amount of color bits.
-			//bool sampling = false;							// using sampling?
-			//int samplesCount = 0;								// how many samples if using sampling?
-
-			GraphicsDeviceManager() : graphicsDevice(nullptr), window(nullptr)  { }
-
-			GraphicsDeviceManager(IWindow* window)
+			GraphicsDeviceManager(Window* window) : backBufferWidth(window->GetWidth()), backBufferHeight(window->GetHeight()),
+				stencilBits(24), depthBits(8), colorBits(32), sampling(false), samples(1), vsync(false)
 			{
-				this->window = std::shared_ptr<IWindow>(window);
+				this->window = window->Interface(); // Retrieve the interface object.
+
+				SelectDevice();
 			}
 
-			std::shared_ptr<IGraphicsDevice> RetrieveDevice() const
+			GraphicsDeviceManager(Window* window, int backBufferWidth, int backBufferHeight, int stencilBits, 
+				int depthBits, int colorBits, bool sampling, int samples, bool vsync)
+			{
+				this->window = window->Interface();	// Retrieve the interface object.
+				this->backBufferWidth = backBufferWidth;
+				this->backBufferHeight = backBufferHeight;
+				this->stencilBits = stencilBits;
+				this->depthBits = depthBits;
+				this->colorBits = colorBits;
+				this->sampling = sampling;
+				this->samples = samples;
+				this->vsync = vsync;
+
+				SelectDevice();
+			}
+
+			// Returns the GraphicsDevice that is ready to draw.
+			std::shared_ptr<IGraphicsDevice> GetGraphicsDevice() const
 			{
 				return graphicsDevice;
 			}

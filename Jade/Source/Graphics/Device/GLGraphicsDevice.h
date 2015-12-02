@@ -31,7 +31,7 @@ SOFTWARE.
 #include "Graphics/Window/IWindow.h"
 
 #include <Windows.h>
-#include <gl/GL.h>
+// #include <gl/GL.h>
 
 
 namespace Jade
@@ -64,6 +64,12 @@ namespace Jade
 
 				// Create our device.
 				CreateDevice();
+			}
+
+			~GLGraphicsDevice()
+			{
+				// Cleanup resources.
+				ReleaseDevice();
 			}
 
 			void Clear(Math::Color color) override;

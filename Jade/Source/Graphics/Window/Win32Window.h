@@ -33,7 +33,6 @@ SOFTWARE.
 #include "Event.h"
 
 #include "Core/Utility.h"
-#include "Graphics/Device/GraphicsDeviceManager.h"
 
 #include "Math/Point.h"
 
@@ -53,8 +52,6 @@ namespace Jade
 			bool fullscreen;
 
 			HDC hdc;
-
-			std::shared_ptr<GraphicsDeviceManager> graphicsDevice;
 
 		public:
 

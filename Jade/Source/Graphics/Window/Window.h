@@ -93,7 +93,7 @@ namespace Jade
 				this->x = x;
 				this->y = y;
 				this->title = title;
-				this->fullscreen;
+				this->fullscreen = fullscreen;
 
 				// Factory implementation to create the correct window at runtime.
 				CreateNativeWindow();
@@ -114,6 +114,11 @@ namespace Jade
 			{
 				window->Close();
 				this->~Window();
+			}
+
+			std::shared_ptr<IWindow> Interface() const
+			{
+				return window;
 			}
 
 		private:
