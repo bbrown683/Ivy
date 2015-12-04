@@ -1,5 +1,3 @@
-#pragma once
-
 /*
 The MIT License (MIT)
 
@@ -24,35 +22,29 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "Graphics/Window/Window.h"
-#include "Graphics/Device/Device.h"
+#include "Device.h"
+#include "DXDevice.h"
+#include "GLDevice.h"
 
-class Game
+std::shared_ptr<Jade::Graphics::IDevice> Jade::Graphics::Device::SelectDevice()
 {
-private:
-
-	std::shared_ptr<Jade::Graphics::Window> window;
-	std::shared_ptr<Jade::Graphics::Device> device;
-
-	int width;
-	int height;
-	int x;
-	int y;
-	string title;
-	bool fullscreen;
-
-public:
-
-	Game(int width, int height, int x, int y, string title, bool fullscreen)
+	// either window or device is null.
+	if (!window || !device)
 	{
-		window = std::make_shared<Jade::Graphics::Window>(Jade::Graphics::Window(width, height, x, y, title, fullscreen));
+		#ifndef _WIN32	// MacOSX and Linux machines. 
 
-		device = std::make_shared<Jade::Graphics::Device>(Jade::Graphics::Device(window));
+		// Ensure platform is not unknown before attempting to create
+		// an OpenGL device.
+		if (Jade::System::Platform::GetPlatformID() != Jade::System::Platform::PlatformID::Unknown)
+			return std::make_shared<GLDevice>(window);
+
+		#else // Windows machine.
+
+		// Windows support for DirectX functionality is ensured by default.
+		return std::make_shared<DXDevice>(window);
+
+		#endif
 	}
 
-	void Run();
-
-	void Render();
-
-	void Update();
-};
+	return nullptr;
+}

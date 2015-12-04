@@ -25,8 +25,6 @@ SOFTWARE.
 */
 
 #include "Core/Utility.h"
-
-#include "Event.h"
 #include "Math/Point.h"
 
 namespace Jade
@@ -36,13 +34,6 @@ namespace Jade
 		// Contains some methods that we can implement across multiple platforms to perform a task on a window.
 		struct IWindow
 		{
-			virtual bool IsOpen() = 0;
-			virtual bool IsFullscreen() = 0;
-			virtual bool WindowEvent(std::shared_ptr<Event> e) = 0;
-			virtual bool SwapWindowBuffers() = 0;
-			virtual void Close() = 0;
-			virtual void* Handle() = 0;
-			virtual bool InitWindow() = 0;
 			virtual int GetWidth() = 0;
 			virtual void SetWidth(int value) = 0;
 			virtual int GetHeight() = 0;
@@ -51,8 +42,25 @@ namespace Jade
 			virtual void SetX(int value) = 0;
 			virtual int GetY() = 0;
 			virtual void SetY(int value) = 0;
+			virtual string GetTitle() = 0;
+			virtual void SetTitle(string value) = 0;
 			virtual Math::Point GetPosition() = 0;
 			virtual void SetPosition(int x, int y) = 0;
+			virtual bool PollWindowEvents() = 0;
+			virtual void Close() = 0;
+			virtual void* Handle() = 0;
+			virtual bool InitWindow() = 0;
+			virtual void Show() = 0;
+			virtual void Hide() = 0;
+			virtual void Restore() = 0;
+			virtual void Maximize() = 0;
+			virtual bool IsMinimized() = 0;
+			virtual void Minimize() = 0;
+			virtual bool IsMaximized() = 0;
+			virtual bool IsVisible() = 0;
+			virtual bool IsOpen() = 0;
+			virtual bool IsFullscreen() = 0;
+			virtual bool IsActive() = 0;
 		};
 	}
 }

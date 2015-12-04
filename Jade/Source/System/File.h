@@ -24,35 +24,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "Graphics/Window/Window.h"
-#include "Graphics/Device/Device.h"
-
-class Game
+namespace Jade
 {
-private:
-
-	std::shared_ptr<Jade::Graphics::Window> window;
-	std::shared_ptr<Jade::Graphics::Device> device;
-
-	int width;
-	int height;
-	int x;
-	int y;
-	string title;
-	bool fullscreen;
-
-public:
-
-	Game(int width, int height, int x, int y, string title, bool fullscreen)
+	namespace System
 	{
-		window = std::make_shared<Jade::Graphics::Window>(Jade::Graphics::Window(width, height, x, y, title, fullscreen));
-
-		device = std::make_shared<Jade::Graphics::Device>(Jade::Graphics::Device(window));
+		class File
+		{
+			
+		};
 	}
-
-	void Run();
-
-	void Render();
-
-	void Update();
-};
+}

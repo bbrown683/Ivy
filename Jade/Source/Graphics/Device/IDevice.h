@@ -24,35 +24,25 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "Graphics/Window/Window.h"
-#include "Graphics/Device/Device.h"
+#include "Math/Color.h"
 
-class Game
+namespace Jade
 {
-private:
-
-	std::shared_ptr<Jade::Graphics::Window> window;
-	std::shared_ptr<Jade::Graphics::Device> device;
-
-	int width;
-	int height;
-	int x;
-	int y;
-	string title;
-	bool fullscreen;
-
-public:
-
-	Game(int width, int height, int x, int y, string title, bool fullscreen)
+	namespace Graphics
 	{
-		window = std::make_shared<Jade::Graphics::Window>(Jade::Graphics::Window(width, height, x, y, title, fullscreen));
+		struct IDevice
+		{
+		private:
 
-		device = std::make_shared<Jade::Graphics::Device>(Jade::Graphics::Device(window));
+			virtual bool Create() = 0;
+
+			virtual bool Release() = 0;
+
+		public:
+
+			virtual void Clear(Math::Color color) = 0;
+			virtual void Present() = 0;
+		};
 	}
+}
 
-	void Run();
-
-	void Render();
-
-	void Update();
-};

@@ -24,35 +24,51 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "Graphics/Window/Window.h"
+#include "Core/Utility.h"
+
+#include <d3d11.h>
+#include <d3dcommon.h>
+#include <d3dcompiler.h>
+
+#include "IShader.h"
 #include "Graphics/Device/Device.h"
 
-class Game
+namespace Jade
 {
-private:
-
-	std::shared_ptr<Jade::Graphics::Window> window;
-	std::shared_ptr<Jade::Graphics::Device> device;
-
-	int width;
-	int height;
-	int x;
-	int y;
-	string title;
-	bool fullscreen;
-
-public:
-
-	Game(int width, int height, int x, int y, string title, bool fullscreen)
+	namespace Graphics
 	{
-		window = std::make_shared<Jade::Graphics::Window>(Jade::Graphics::Window(width, height, x, y, title, fullscreen));
+		class DXShader : IShader
+		{
+		private:
 
-		device = std::make_shared<Jade::Graphics::Device>(Jade::Graphics::Device(window));
+			ID3DBlob* m_pVSBlob;
+			ID3DBlob* m_pPSBlob;
+
+			ID3D11PixelShader* m_pPixelShader;
+			ID3D11VertexShader* m_pVertexShader;
+
+			bool Create() override;
+			bool Release() override;
+
+		public:
+
+			DXShader()
+			{	
+				Create();
+			}
+
+			~DXShader()
+			{
+				Release();
+
+				delete m_pPSBlob;
+				delete m_pVSBlob;
+				delete m_pPixelShader;
+				delete m_pVertexShader;
+			}
+
+			bool Compile() override;
+
+		};
 	}
-
-	void Run();
-
-	void Render();
-
-	void Update();
-};
+}

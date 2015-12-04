@@ -1,5 +1,3 @@
-#pragma once
-
 /*
 The MIT License (MIT)
 
@@ -24,35 +22,31 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "Graphics/Window/Window.h"
-#include "Graphics/Device/Device.h"
+#include "GLDevice.h"
 
-class Game
+#include <GL/GL.h>
+
+bool Jade::Graphics::GLDevice::Create()
 {
-private:
+	sdlWindow = SDL_GL_GetCurrentWindow();
+	sdlContext = SDL_GL_CreateContext(sdlWindow);
+	
+	return sdlWindow != nullptr && sdlContext != nullptr ? true : false;
+}
 
-	std::shared_ptr<Jade::Graphics::Window> window;
-	std::shared_ptr<Jade::Graphics::Device> device;
+bool Jade::Graphics::GLDevice::Release()
+{
+	SDL_GL_DeleteContext(sdlContext);
+	return true;
+}
 
-	int width;
-	int height;
-	int x;
-	int y;
-	string title;
-	bool fullscreen;
+void Jade::Graphics::GLDevice::Clear(Math::Color color)
+{
+	glClear(GL_COLOR_BUFFER_BIT);
+	glClearColor(color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha());
+}
 
-public:
-
-	Game(int width, int height, int x, int y, string title, bool fullscreen)
-	{
-		window = std::make_shared<Jade::Graphics::Window>(Jade::Graphics::Window(width, height, x, y, title, fullscreen));
-
-		device = std::make_shared<Jade::Graphics::Device>(Jade::Graphics::Device(window));
-	}
-
-	void Run();
-
-	void Render();
-
-	void Update();
-};
+void Jade::Graphics::GLDevice::Present()
+{
+	SDL_GL_SwapWindow(sdlWindow);
+}

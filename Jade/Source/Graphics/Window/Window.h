@@ -27,8 +27,8 @@ SOFTWARE.
 #include "IWindow.h"
 #include "System/Platform.h"
 
-#include "Win32Window.h"
-#include "X11Window.h"
+#include "DXWindow.h"
+#include "GLWindow.h"
 
 namespace Jade
 {
@@ -37,6 +37,9 @@ namespace Jade
 		// Multi-platform window implementation.
 		class Window
 		{
+			// Jade needs to retrieve our interface object to create a device for the specific window.
+			friend class Device;
+
 			int width;
 			int height;
 			int x;
@@ -80,10 +83,34 @@ namespace Jade
 				window->SetHeight(height);
 			}
 
+			// Retrieves the handle of the window.
+			void* Handle() const
+			{
+				return window->Handle();
+			}
+
+			// Returns the title of the window.
+			string GetTitle() const
+			{
+				return window->GetTitle();
+			}
+
+			// Sets the title of the window.
+			void SetTitle(string title) const
+			{
+				window->SetTitle(title);
+			}
+
 			// Returns a boolean determining if the window is in fullscreen mode.
 			bool IsFullscreen() const
 			{
 				return window->IsFullscreen();
+			}
+
+			// Returns a boolean determining if the window has focus.
+			bool IsActive() const
+			{
+				return window->IsActive();
 			}
 
 			Window(int width, int height, int x, int y, string title, bool fullscreen)
@@ -99,14 +126,9 @@ namespace Jade
 				CreateNativeWindow();
 			}
 
-			bool PollEvents(Event* e)
+			bool PollEvents() const
 			{
-				return window->WindowEvent(std::make_shared<Event>(*e));
-			}
-
-			void SwapBuffers()
-			{
-				window->SwapWindowBuffers();
+				return window->PollWindowEvents();
 			}
 
 			// Closes the window and exits the application.
@@ -116,23 +138,18 @@ namespace Jade
 				this->~Window();
 			}
 
-			std::shared_ptr<IWindow> Interface() const
-			{
-				return window;
-			}
-
 		private:
 
 			void CreateNativeWindow()
 			{
-				switch (Jade::System::Platform::GetPlatformID())
+				switch (System::Platform::GetPlatformID())
 				{
 				case System::Platform::PlatformID::Windows:
-					window = std::make_shared<Win32Window>(width, height, x, y, title, fullscreen);
+					window = std::make_shared<DXWindow>(width, height, x, y, title, fullscreen);
 					break;
 				case System::Platform::PlatformID::MacOSX:
 				case System::Platform::PlatformID::Linux:
-					window = std::make_shared<X11Window>(width, height, x, y, title, fullscreen);
+					window = std::make_shared<GLWindow>(width, height, x, y, title, fullscreen);
 					break;
 				case System::Platform::PlatformID::Unknown:
 					window = nullptr;

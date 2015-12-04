@@ -1,5 +1,3 @@
-#pragma once
-
 /*
 The MIT License (MIT)
 
@@ -24,35 +22,29 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "Graphics/Window/Window.h"
-#include "Graphics/Device/Device.h"
+#include "DXShader.h"
+#include "Core/Utility.h"
 
-class Game
+bool Jade::Graphics::DXShader::Create()
 {
-private:
+	ID3DBlob* pErrorBlob = nullptr;
 
-	std::shared_ptr<Jade::Graphics::Window> window;
-	std::shared_ptr<Jade::Graphics::Device> device;
+	m_pPSBlob->Release();
+	m_pVSBlob->Release();
 
-	int width;
-	int height;
-	int x;
-	int y;
-	string title;
-	bool fullscreen;
+	return false;
+}
 
-public:
+bool Jade::Graphics::DXShader::Release()
+{
+	m_pPixelShader->Release();
+	m_pVertexShader->Release();
+	return false;
+}
 
-	Game(int width, int height, int x, int y, string title, bool fullscreen)
-	{
-		window = std::make_shared<Jade::Graphics::Window>(Jade::Graphics::Window(width, height, x, y, title, fullscreen));
+bool Jade::Graphics::DXShader::Compile()
+{
+	
 
-		device = std::make_shared<Jade::Graphics::Device>(Jade::Graphics::Device(window));
-	}
-
-	void Run();
-
-	void Render();
-
-	void Update();
-};
+	return false;
+}

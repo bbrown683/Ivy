@@ -24,35 +24,55 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "Graphics/Window/Window.h"
-#include "Graphics/Device/Device.h"
+#include "Core/Utility.h"
+#include "Math/Color.h"
 
-class Game
+#include "IDevice.h"
+#include "Graphics/Window/IWindow.h"
+
+#include "SDL.h"
+#include <Windows.h>
+
+namespace Jade
 {
-private:
-
-	std::shared_ptr<Jade::Graphics::Window> window;
-	std::shared_ptr<Jade::Graphics::Device> device;
-
-	int width;
-	int height;
-	int x;
-	int y;
-	string title;
-	bool fullscreen;
-
-public:
-
-	Game(int width, int height, int x, int y, string title, bool fullscreen)
+	namespace Graphics
 	{
-		window = std::make_shared<Jade::Graphics::Window>(Jade::Graphics::Window(width, height, x, y, title, fullscreen));
+		class GLDevice : public IDevice
+		{
+		private:
 
-		device = std::make_shared<Jade::Graphics::Device>(Jade::Graphics::Device(window));
+			// Window object contains some data on our window such as size, 
+			// and the handle of it in memory which we need to create a device.
+			std::shared_ptr<IWindow> window;
+
+			SDL_Window* sdlWindow;
+			SDL_GLContext sdlContext;
+
+			bool Create() override;
+
+			bool Release() override;
+
+		public:
+
+			// Empty Device.
+			GLDevice() : window(nullptr) { }
+
+			GLDevice(std::shared_ptr<IWindow> window)
+			{
+				this->window = window;
+
+				// Create our device.
+				Create();
+			}
+
+			~GLDevice()
+			{
+				// Cleanup resources.
+				Release();
+			}
+
+			void Clear(Math::Color color) override;
+			void Present() override;
+		};
 	}
-
-	void Run();
-
-	void Render();
-
-	void Update();
-};
+}

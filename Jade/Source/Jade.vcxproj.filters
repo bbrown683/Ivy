@@ -14,33 +14,31 @@
     <ClCompile Include="Math\Quaternion.cpp">
       <Filter>Math</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Window\Win32Window.cpp">
-      <Filter>Graphics\Window</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Window\Event.cpp">
-      <Filter>Graphics\Window</Filter>
-    </ClCompile>
     <ClCompile Include="Math\Matrix2.cpp" />
     <ClCompile Include="Math\Matrix3.cpp" />
     <ClCompile Include="Math\Matrix4.cpp" />
     <ClCompile Include="Math\Rectangle.cpp" />
     <ClCompile Include="Math\Ray.cpp" />
     <ClCompile Include="Math\Math.cpp" />
-    <ClCompile Include="Graphics\Window\X11Window.cpp" />
     <ClCompile Include="Math\Point.cpp" />
     <ClCompile Include="Math\Helper.cpp" />
     <ClCompile Include="Math\Color.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Graphics\Device\GraphicsDeviceManager.cpp" />
-    <ClCompile Include="Graphics\Device\DXGraphicsDevice.cpp">
-      <Filter>Graphics\Device</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Device\GLGraphicsDevice.cpp">
-      <Filter>Graphics\Device</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Shader\Shader.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Graphics\Shader\ShaderProgram.cpp" />
+    <ClCompile Include="Graphics\Shader\DXShader.cpp" />
+    <ClCompile Include="Graphics\Shader\GLShader.cpp" />
+    <ClCompile Include="System\File.cpp" />
+    <ClCompile Include="Graphics\Window\DXWindow.cpp" />
+    <ClCompile Include="Graphics\Window\GLWindow.cpp" />
+    <ClCompile Include="Graphics\Device\Device.cpp" />
+    <ClCompile Include="Graphics\Device\DXDevice.cpp">
+      <Filter>Graphics\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Device\GLDevice.cpp">
+      <Filter>Graphics\Device</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\Vector4.h">
@@ -58,12 +56,6 @@
     <ClInclude Include="Graphics\Window\Window.h">
       <Filter>Graphics\Window</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Window\Win32Window.h">
-      <Filter>Graphics\Window</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Window\Event.h">
-      <Filter>Graphics\Window</Filter>
-    </ClInclude>
     <ClInclude Include="Graphics\Window\IWindow.h">
       <Filter>Graphics\Window</Filter>
     </ClInclude>
@@ -78,26 +70,30 @@
     <ClInclude Include="Math\Ray.h" />
     <ClInclude Include="Math\Math.h" />
     <ClInclude Include="Math\Helper.h" />
-    <ClInclude Include="Graphics\ShaderProgram\ShaderProgram.h" />
-    <ClInclude Include="Graphics\Shader\Shader.h" />
     <ClInclude Include="Core\Factory.h" />
-    <ClInclude Include="Graphics\Window\X11Window.h" />
     <ClInclude Include="Math\Point.h" />
     <ClInclude Include="Graphics\Texture\Texture.h" />
     <ClInclude Include="Math\Color.h">
       <Filter>Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Device\GraphicsDeviceManager.h" />
-    <ClInclude Include="Graphics\Device\IGraphicsDevice.h">
-      <Filter>Graphics\Device</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Device\DXGraphicsDevice.h">
-      <Filter>Graphics\Device</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Device\GLGraphicsDevice.h">
-      <Filter>Graphics\Device</Filter>
-    </ClInclude>
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Graphics\Shader\ShaderProgram.h" />
+    <ClInclude Include="Graphics\Shader\IShader.h" />
+    <ClInclude Include="Graphics\Shader\DXShader.h" />
+    <ClInclude Include="Graphics\Shader\GLShader.h" />
+    <ClInclude Include="System\File.h" />
+    <ClInclude Include="Graphics\Window\DXWindow.h" />
+    <ClInclude Include="Graphics\Window\GLWindow.h" />
+    <ClInclude Include="Graphics\Device\IDevice.h">
+      <Filter>Graphics\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Device\Device.h" />
+    <ClInclude Include="Graphics\Device\DXDevice.h">
+      <Filter>Graphics\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Device\GLDevice.h">
+      <Filter>Graphics\Device</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">
