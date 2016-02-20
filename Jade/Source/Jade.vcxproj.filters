@@ -25,20 +25,17 @@
     <ClCompile Include="Math\Color.cpp">
       <Filter>Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="Graphics\Shader\ShaderProgram.cpp" />
+    <ClCompile Include="System\File.cpp" />
+    <ClCompile Include="Graphics\Device\Device.cpp" />
+    <ClCompile Include="Graphics\Device\DXDevice.cpp" />
     <ClCompile Include="Graphics\Shader\DXShader.cpp" />
     <ClCompile Include="Graphics\Shader\GLShader.cpp" />
-    <ClCompile Include="System\File.cpp" />
-    <ClCompile Include="Graphics\Window\DXWindow.cpp" />
-    <ClCompile Include="Graphics\Window\GLWindow.cpp" />
-    <ClCompile Include="Graphics\Device\Device.cpp" />
-    <ClCompile Include="Graphics\Device\DXDevice.cpp">
-      <Filter>Graphics\Device</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Device\GLDevice.cpp">
-      <Filter>Graphics\Device</Filter>
-    </ClCompile>
+    <ClCompile Include="Graphics\Window\NativeWindow.cpp" />
+    <ClCompile Include="Graphics\Device\GLDevice.cpp" />
+    <ClCompile Include="Graphics\Shader\Shader.cpp" />
+    <ClCompile Include="Graphics\Mesh\Mesh.cpp" />
+    <ClCompile Include="Graphics\Mesh\DXMesh.cpp" />
+    <ClCompile Include="Graphics\Mesh\GLMesh.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\Vector4.h">
@@ -53,12 +50,6 @@
     <ClInclude Include="Math\Quaternion.h">
       <Filter>Math</Filter>
     </ClInclude>
-    <ClInclude Include="Graphics\Window\Window.h">
-      <Filter>Graphics\Window</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Window\IWindow.h">
-      <Filter>Graphics\Window</Filter>
-    </ClInclude>
     <ClInclude Include="System\Platform.h">
       <Filter>System</Filter>
     </ClInclude>
@@ -72,28 +63,29 @@
     <ClInclude Include="Math\Helper.h" />
     <ClInclude Include="Core\Factory.h" />
     <ClInclude Include="Math\Point.h" />
-    <ClInclude Include="Graphics\Texture\Texture.h" />
     <ClInclude Include="Math\Color.h">
       <Filter>Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="Graphics\Shader\ShaderProgram.h" />
-    <ClInclude Include="Graphics\Shader\IShader.h" />
-    <ClInclude Include="Graphics\Shader\DXShader.h" />
-    <ClInclude Include="Graphics\Shader\GLShader.h" />
     <ClInclude Include="System\File.h" />
-    <ClInclude Include="Graphics\Window\DXWindow.h" />
-    <ClInclude Include="Graphics\Window\GLWindow.h" />
     <ClInclude Include="Graphics\Device\IDevice.h">
       <Filter>Graphics\Device</Filter>
     </ClInclude>
     <ClInclude Include="Graphics\Device\Device.h" />
-    <ClInclude Include="Graphics\Device\DXDevice.h">
-      <Filter>Graphics\Device</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Device\GLDevice.h">
-      <Filter>Graphics\Device</Filter>
-    </ClInclude>
+    <ClInclude Include="Graphics\Device\DXDevice.h" />
+    <ClInclude Include="Graphics\Window\IWindow.h" />
+    <ClInclude Include="Graphics\Shader\DXShader.h" />
+    <ClInclude Include="Graphics\Shader\GLShader.h" />
+    <ClInclude Include="Graphics\Shader\IShader.h" />
+    <ClInclude Include="Graphics\Texture\Texture.h" />
+    <ClInclude Include="Graphics\Window\NativeWindow.h" />
+    <ClInclude Include="Graphics\Window\Window.h" />
+    <ClInclude Include="Graphics\Shader\ShaderType.h" />
+    <ClInclude Include="Graphics\Device\GLDevice.h" />
+    <ClInclude Include="Graphics\Shader\Shader.h" />
+    <ClInclude Include="Graphics\Mesh\Mesh.h" />
+    <ClInclude Include="Graphics\Mesh\IMesh.h" />
+    <ClInclude Include="Graphics\Mesh\DXMesh.h" />
+    <ClInclude Include="Graphics\Mesh\GLMesh.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">

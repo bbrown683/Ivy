@@ -22,13 +22,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "Device.h"
-#include "DXDevice.h"
-#include "GLDevice.h"
+#include "Graphics/Device/Device.h"
+#include "Graphics/Device/DXDevice.h"
+#include "Graphics/Device/GLDevice.h"
 
 std::shared_ptr<Jade::Graphics::IDevice> Jade::Graphics::Device::SelectDevice()
 {
-	// either window or device is null.
+	// if either window or device is null.
 	if (!window || !device)
 	{
 		#ifndef _WIN32	// MacOSX and Linux machines. 

@@ -1,4 +1,5 @@
 #pragma once
+#include "IMesh.h"
 
 /*
 The MIT License (MIT)
@@ -24,24 +25,22 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "Math/Color.h"
+#include "Graphics/Mesh/IMesh.h"
 
 namespace Jade
 {
 	namespace Graphics
 	{
-		struct IDevice
+		class GLMesh : public IMesh
 		{
 		private:
 
-			virtual bool Create() = 0;
-			virtual bool Release() = 0;
+			bool Bind() override;
+			bool Unbind() override;
 
 		public:
 
-			virtual void Clear(Math::Color color) = 0;
-			virtual void Present() = 0;
+			void Draw() override;
 		};
 	}
 }
-

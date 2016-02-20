@@ -22,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "DXDevice.h"
+#include "Graphics/Device/DXDevice.h"
 
 bool Jade::Graphics::DXDevice::Create()
 {
@@ -121,5 +121,5 @@ void Jade::Graphics::DXDevice::Clear(Math::Color color)
 // Swaps the front and back buffers.
 void Jade::Graphics::DXDevice::Present()
 {
-	m_pSwapChain->Present(0, 0);
+	m_pSwapChain->Present(1, 0);
 }

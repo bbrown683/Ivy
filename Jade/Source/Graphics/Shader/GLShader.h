@@ -24,7 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "IShader.h"
+#include "Graphics/Shader/IShader.h"
 
 namespace Jade
 {
@@ -50,7 +50,7 @@ namespace Jade
 				Release();
 			}
 
-			bool Compile() override;
+			bool Compile(ShaderType type) override;
 		};
 	}
 }

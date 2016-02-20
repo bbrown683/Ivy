@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 /*
 The MIT License (MIT)
@@ -24,7 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "IWindow.h"
+#include "Graphics/Window/IWindow.h"
 
 #include "SDL.h"
 #include "SDL_syswm.h"
@@ -34,12 +34,12 @@ namespace Jade
 {
 	namespace Graphics
 	{
-		class DXWindow : public IWindow
+		class NativeWindow : public IWindow
 		{
 		private:
 
 			SDL_Window* m_pWindow; // SDLs window object.
-			SDL_SysWMinfo windowInfo; // Contains information of our window.
+			SDL_SysWMinfo m_WindowInfo; // Contains information of our window.
 
 			int width;
 			int height;
@@ -48,12 +48,12 @@ namespace Jade
 			string title;
 			bool fullscreen;
 
-			bool open		= false;
-			bool disposed	= false;
-			bool hidden		= false;
-			bool maximized	= false;
-			bool minimized	= false;
-			bool active		= false;
+			bool open = false;
+			bool disposed = false;
+			bool hidden = false;
+			bool maximized = false;
+			bool minimized = false;
+			bool active = false;
 
 			bool InitWindow() override;
 			bool PollWindowEvents() override;
@@ -66,7 +66,7 @@ namespace Jade
 			void SetWidth(int value) override;
 			int GetHeight() override;
 			void SetHeight(int value) override;
-			int GetX() override;			
+			int GetX() override;
 			void SetX(int value) override;
 			int GetY() override;
 			void SetY(int value) override;
@@ -87,8 +87,9 @@ namespace Jade
 			bool IsOpen() override;
 			bool IsFullscreen() override;
 			bool IsActive() override;
+			SDL_Window* GetSDLWindow() override;
 
-			DXWindow(int width, int height, int x, int y, string title, bool fullscreen) : m_pWindow(nullptr)
+			NativeWindow(int width, int height, int x, int y, string title, bool fullscreen) : m_pWindow(nullptr)
 			{
 				this->width = width;
 				this->height = height;
@@ -98,7 +99,7 @@ namespace Jade
 				this->fullscreen = fullscreen;
 			}
 
-			~DXWindow()
+			~NativeWindow()
 			{
 				// Ensure that we do not dispose SDL when it is unnecessary.
 				if (!disposed)
@@ -109,5 +110,3 @@ namespace Jade
 		};
 	}
 }
-
-

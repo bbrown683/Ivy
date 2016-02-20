@@ -1,5 +1,3 @@
-#pragma once
-
 /*
 The MIT License (MIT)
 
@@ -24,24 +22,4 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "Math/Color.h"
-
-namespace Jade
-{
-	namespace Graphics
-	{
-		struct IDevice
-		{
-		private:
-
-			virtual bool Create() = 0;
-			virtual bool Release() = 0;
-
-		public:
-
-			virtual void Clear(Math::Color color) = 0;
-			virtual void Present() = 0;
-		};
-	}
-}
-
+#include "Graphics/Mesh/Mesh.h"

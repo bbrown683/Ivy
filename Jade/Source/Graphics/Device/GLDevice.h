@@ -30,9 +30,6 @@ SOFTWARE.
 #include "IDevice.h"
 #include "Graphics/Window/IWindow.h"
 
-#include "SDL.h"
-#include <Windows.h>
-
 namespace Jade
 {
 	namespace Graphics
@@ -41,12 +38,11 @@ namespace Jade
 		{
 		private:
 
+			SDL_GLContext context;
+
 			// Window object contains some data on our window such as size, 
 			// and the handle of it in memory which we need to create a device.
 			std::shared_ptr<IWindow> window;
-
-			SDL_Window* sdlWindow;
-			SDL_GLContext sdlContext;
 
 			bool Create() override;
 

@@ -22,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "GLShader.h"
+#include "Graphics/Shader/GLShader.h"
 
 bool Jade::Graphics::GLShader::Create()
 {
@@ -34,7 +34,7 @@ bool Jade::Graphics::GLShader::Release()
 	return false;
 }
 
-bool Jade::Graphics::GLShader::Compile()
+bool Jade::Graphics::GLShader::Compile(ShaderType type)
 {
 	return false;
 }

@@ -24,12 +24,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include <d3d11.h>
+
 #include "Core/Utility.h"
 
-#include "IDevice.h"
+#include "Graphics/Device/IDevice.h"
 #include "Graphics/Window/Window.h"
-
-#include <d3d11_2.h>
 
 namespace Jade
 {
@@ -38,6 +38,9 @@ namespace Jade
 		class DXDevice : public IDevice
 		{
 		private:
+
+			// Our shaders will need access to our objects.
+			friend class DXShader;
 
 			std::shared_ptr<IWindow> window;
 

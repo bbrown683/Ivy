@@ -1,5 +1,3 @@
-#pragma once
-
 /*
 The MIT License (MIT)
 
@@ -24,3 +22,22 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include "glew.h"
+#include "gl/GL.h"
+
+#include "Graphics/Mesh/GLMesh.h"
+
+bool Jade::Graphics::GLMesh::Bind()
+{
+	return false;
+}
+
+bool Jade::Graphics::GLMesh::Unbind()
+{
+	return false;
+}
+
+void Jade::Graphics::GLMesh::Draw()
+{
+	
+}

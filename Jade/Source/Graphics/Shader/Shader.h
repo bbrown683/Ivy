@@ -24,24 +24,34 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "Math/Color.h"
+#include "Core/Utility.h"
+
+#include "Graphics/Device/Device.h"
+#include "Graphics/Shader/IShader.h"
 
 namespace Jade
 {
 	namespace Graphics
 	{
-		struct IDevice
+		class Shader
 		{
 		private:
 
-			virtual bool Create() = 0;
-			virtual bool Release() = 0;
+			std::shared_ptr<IDevice> device;
+			std::shared_ptr<IShader> shader;
+
+			std::shared_ptr<IShader> SelectShader();
 
 		public:
 
-			virtual void Clear(Math::Color color) = 0;
-			virtual void Present() = 0;
+			// Note: Do not use this constructor as everything is set to null.
+			Shader() : device(nullptr), shader(nullptr) { }
+
+			// Default shader constructor.
+			Shader(string filename)
+			{
+			
+			}
 		};
 	}
 }
-

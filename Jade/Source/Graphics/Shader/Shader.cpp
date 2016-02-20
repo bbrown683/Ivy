@@ -22,5 +22,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "ShaderProgram.h"
+#include "Graphics/Shader/Shader.h"
 
+std::shared_ptr<Jade::Graphics::IShader> Jade::Graphics::Shader::SelectShader()
+{
+	return nullptr;
+}

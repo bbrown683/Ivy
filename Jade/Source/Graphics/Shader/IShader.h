@@ -24,6 +24,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include "Graphics/Shader/ShaderType.h"
+
 namespace Jade
 {
 	namespace Graphics
@@ -38,7 +40,7 @@ namespace Jade
 
 		public:
 
-			virtual bool Compile();
+			virtual bool Compile(ShaderType type);
 		};
 	}
 }

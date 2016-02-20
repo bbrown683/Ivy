@@ -24,6 +24,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include "SDL.h"
+
 #include "Core/Utility.h"
 #include "Math/Point.h"
 
@@ -61,6 +63,7 @@ namespace Jade
 			virtual bool IsOpen() = 0;
 			virtual bool IsFullscreen() = 0;
 			virtual bool IsActive() = 0;
+			virtual SDL_Window* GetSDLWindow() = 0;
 		};
 	}
 }

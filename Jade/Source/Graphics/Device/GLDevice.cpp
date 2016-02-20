@@ -22,31 +22,41 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "GLDevice.h"
+#include "glew.h"
+#include <gl/GL.h>
 
-#include <GL/GL.h>
+#include "GLDevice.h"
+#include <cassert>
 
 bool Jade::Graphics::GLDevice::Create()
 {
-	sdlWindow = SDL_GL_GetCurrentWindow();
-	sdlContext = SDL_GL_CreateContext(sdlWindow);
-	
-	return sdlWindow != nullptr && sdlContext != nullptr ? true : false;
+	context = SDL_GL_CreateContext(window->GetSDLWindow());
+
+	SDL_GL_MakeCurrent(window->GetSDLWindow(), context);
+
+	SDL_GL_SetSwapInterval(1);
+
+	GLenum result = glewInit();
+
+	assert(result != GLEW_OK);
+
+	return result == GLEW_OK ? true : false;
 }
 
 bool Jade::Graphics::GLDevice::Release()
 {
-	SDL_GL_DeleteContext(sdlContext);
-	return true;
+	SDL_GL_DeleteContext(context);
+
+	return context == nullptr ? true : false;
 }
 
 void Jade::Graphics::GLDevice::Clear(Math::Color color)
 {
-	glClear(GL_COLOR_BUFFER_BIT);
 	glClearColor(color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha());
+	glClear(GL_COLOR_BUFFER_BIT);
 }
 
 void Jade::Graphics::GLDevice::Present()
 {
-	SDL_GL_SwapWindow(sdlWindow);
+	SDL_GL_SwapWindow(window->GetSDLWindow());
 }

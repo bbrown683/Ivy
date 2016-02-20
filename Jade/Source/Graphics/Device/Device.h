@@ -69,7 +69,7 @@ namespace Jade
 			Device(std::shared_ptr<Window> window) : backBufferWidth(window->GetWidth()), backBufferHeight(window->GetHeight()),
 				stencilBits(24), depthBits(8), colorBits(32), sampling(false), samples(1), vsync(false)
 			{
-				this->window = window->window; // Retrieve the interface object.
+				this->window = window->Instance(); // Retrieve the interface object.
 
 				device = SelectDevice();
 			}
@@ -77,7 +77,7 @@ namespace Jade
 			Device(std::shared_ptr<Window> window, int backBufferWidth, int backBufferHeight, int stencilBits,
 				int depthBits, int colorBits, bool sampling, int samples, bool vsync)
 			{
-				this->window = window->window;	// Retrieve the interface object.
+				this->window = window->Instance();	// Retrieve the interface object.
 				this->backBufferWidth = backBufferWidth;
 				this->backBufferHeight = backBufferHeight;
 				this->stencilBits = stencilBits;

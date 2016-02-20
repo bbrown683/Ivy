@@ -39,12 +39,31 @@ bool Jade::Graphics::DXShader::Release()
 {
 	m_pPixelShader->Release();
 	m_pVertexShader->Release();
+
 	return false;
 }
 
-bool Jade::Graphics::DXShader::Compile()
+bool Jade::Graphics::DXShader::Compile(ShaderType type)
 {
-	
+	// Compile the shader
+	ID3DBlob* pShaderBlob = nullptr;
+
+	if (type == ShaderType::Geometry)
+	{
+		//DXDevice::m_pDevice->CreateGeometryShader()
+	}
+	else if (type == ShaderType::Pixel)
+	{
+		//DXDevice::m_pDevice->CreatePixelShader()
+	}
+	else if (type == ShaderType::Tesselation)
+	{
+		//DXDevice::m_pDevice->CreateHullShader()
+	}
+	else if (type == ShaderType::Vertex)
+	{
+		//DXDevice::m_pDevice->CreateVertexShader()
+	}
 
 	return false;
 }

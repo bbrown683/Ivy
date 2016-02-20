@@ -24,11 +24,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "IWindow.h"
-#include "System/Platform.h"
+#include "Graphics/Window/IWindow.h"
 
-#include "DXWindow.h"
-#include "GLWindow.h"
+#include "Graphics/Window/NativeWindow.h"
 
 namespace Jade
 {
@@ -37,8 +35,7 @@ namespace Jade
 		// Multi-platform window implementation.
 		class Window
 		{
-			// Jade needs to retrieve our interface object to create a device for the specific window.
-			friend class Device;
+		private:
 
 			int width;
 			int height;
@@ -113,6 +110,11 @@ namespace Jade
 				return window->IsActive();
 			}
 
+			std::shared_ptr<IWindow> Instance() const
+			{
+				return window;
+			}
+
 			Window(int width, int height, int x, int y, string title, bool fullscreen)
 			{
 				this->width = width;
@@ -122,8 +124,11 @@ namespace Jade
 				this->title = title;
 				this->fullscreen = fullscreen;
 
-				// Factory implementation to create the correct window at runtime.
-				CreateNativeWindow();
+				window = std::make_shared<NativeWindow>(width, height, x, y, title, fullscreen);
+
+				// If our window exists, initialize it.
+				if (window)
+					window->InitWindow();
 			}
 
 			bool PollEvents() const
@@ -136,29 +141,6 @@ namespace Jade
 			{
 				window->Close();
 				this->~Window();
-			}
-
-		private:
-
-			void CreateNativeWindow()
-			{
-				switch (System::Platform::GetPlatformID())
-				{
-				case System::Platform::PlatformID::Windows:
-					window = std::make_shared<DXWindow>(width, height, x, y, title, fullscreen);
-					break;
-				case System::Platform::PlatformID::MacOSX:
-				case System::Platform::PlatformID::Linux:
-					window = std::make_shared<GLWindow>(width, height, x, y, title, fullscreen);
-					break;
-				case System::Platform::PlatformID::Unknown:
-					window = nullptr;
-					break;
-				}
-
-				// If our window exists, initialize it.
-				if (window)
-					window->InitWindow();	
 			}
 		};
 	}

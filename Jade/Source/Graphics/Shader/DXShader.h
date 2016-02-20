@@ -26,12 +26,8 @@ SOFTWARE.
 
 #include "Core/Utility.h"
 
-#include <d3d11.h>
-#include <d3dcommon.h>
-#include <d3dcompiler.h>
-
-#include "IShader.h"
-#include "Graphics/Device/Device.h"
+#include "Graphics/Shader/IShader.h"
+#include "Graphics/Device/DXDevice.h"
 
 namespace Jade
 {
@@ -41,19 +37,25 @@ namespace Jade
 		{
 		private:
 
+			std::shared_ptr<DXDevice> device;
+
 			ID3DBlob* m_pVSBlob;
 			ID3DBlob* m_pPSBlob;
 
-			ID3D11PixelShader* m_pPixelShader;
-			ID3D11VertexShader* m_pVertexShader;
+			ID3D11VertexShader*     m_pVertexShader;
+			ID3D11PixelShader*      m_pPixelShader;
+			ID3D11InputLayout*      m_pVertexLayout;
+			ID3D11Buffer*           m_pVertexBuffer;
 
 			bool Create() override;
 			bool Release() override;
 
 		public:
 
-			DXShader()
+			DXShader(std::shared_ptr<DXDevice> device)
 			{	
+				this->device = device;
+
 				Create();
 			}
 
@@ -65,9 +67,12 @@ namespace Jade
 				delete m_pVSBlob;
 				delete m_pPixelShader;
 				delete m_pVertexShader;
+
+				delete m_pVertexLayout;
+				delete m_pVertexBuffer;
 			}
 
-			bool Compile() override;
+			bool Compile(ShaderType type) override;
 
 		};
 	}
