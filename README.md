@@ -1,14 +1,14 @@
 # Jade
-An Open Source C++ Game Engine inspired by [Monogame](http://www.monogame.net/).
+An Open Source C++ Game Engine inspired by [Monogame](http://www.monogame.net/). This is compiled using Visual Studio 2015 Community Edition.
 
 # Dependencies
 * DirectX - Must be using one of the following Operating Systems: Windows Vista, Windows 7, Windows 8 and Windows 10 for compatibility.
-* OpenGL - This is used for non-Windows Operating Systems such as Linux or MacOSX that use the X11 windowing system.
+* OpenGL - This is used for non-Windows Operating Systems such as Linux or MacOSX that use the X11 or Cocoa windowing system.
 * Glew - This is needed to load all modern OpenGL entry points so they can be used.
-* SDL - Used to create a window, manage events, and allow us to create a device for Direct3D11 or OpenGL 4.5
+* SDL - Used to create a window, manage events, and allows us to create a device for Direct3D11 or OpenGL 4.5
 
 # Features
-Basic DirectX and OpenGL backend, allowing for use of either graphics API, which is currently chosen based on the specific Operating System in use. I am currently thinking of writing a shading language which compiles shaders at runtime into the respective API of choice, to prevent the need of having different shader files for each API that perform the same task.
+Basic DirectX and OpenGL backend, allowing for use of either graphics API, which is currently chosen based on the specific Operating System in use. Will be implementing the [HLSLCrossCompiler by James Jones](https://github.com/James-Jones/HLSLCrossCompiler) to create portable shader code.
 
 # Example Application
 ```c++
