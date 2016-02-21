@@ -32,8 +32,8 @@ namespace Jade
 		{
 		private:
 
-			virtual bool Bind() = 0;
-			virtual bool Unbind() = 0;
+			virtual void Bind() = 0;
+			virtual void Unbind() = 0;
 
 		public:
 

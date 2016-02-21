@@ -88,6 +88,9 @@
     <ClInclude Include="Graphics\Mesh\DXMesh.h" />
     <ClInclude Include="Graphics\Mesh\GLMesh.h" />
     <ClInclude Include="Graphics\Device\VKDevice.h" />
+    <ClInclude Include="Graphics\Device\GraphicsAPI.h" />
+    <ClInclude Include="System\LogManager.h" />
+    <ClInclude Include="Math\Vertex.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">
@@ -108,5 +111,9 @@
     <Filter Include="Graphics\Renderer">
       <UniqueIdentifier>{3d307a1d-7c82-445f-8c9c-bedbe0ff7502}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="pixel.hlsl" />
+    <FxCompile Include="vertex.hlsl" />
   </ItemGroup>
 </Project>

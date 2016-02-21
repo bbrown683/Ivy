@@ -47,13 +47,19 @@ namespace Jade
 
 			// Necessary to initialize a D3D device.
 
-			ID3D11Device*				m_pDevice;				
-			ID3D11DeviceContext*		m_pImmediateContext;
-			IDXGISwapChain*				m_pSwapChain;
-			ID3D11RenderTargetView*		m_pRenderTargetView;
+			ID3D11Device*				m_pDevice				= nullptr;
+			ID3D11DeviceContext*		m_pImmediateContext		= nullptr;
+			IDXGISwapChain*				m_pSwapChain			= nullptr;
+			ID3D11RenderTargetView*		m_pRenderTargetView		= nullptr;
 			D3D_DRIVER_TYPE				m_DriverType;
 			D3D_FEATURE_LEVEL			m_FeatureLevel;
 			D3D11_VIEWPORT				m_Viewport;
+
+			// Used in DXShader class.
+			ID3D11InputLayout*			m_pInputLayout			= nullptr;
+
+			// Used in DXMesh class.
+			ID3D11Buffer*				m_pBuffer				= nullptr;
 
 			bool Create() override;
 
@@ -78,16 +84,20 @@ namespace Jade
 				if(Release())
 				{
 					// Safe deletion of pointers to ensure none are lingering with values.
-
 					m_pImmediateContext = nullptr;
+					m_pBuffer = nullptr;
+					m_pInputLayout = nullptr;
 					m_pRenderTargetView = nullptr;
 					m_pSwapChain = nullptr;
 					m_pDevice = nullptr;
 
 					delete m_pImmediateContext;
+					delete m_pBuffer;
+					delete m_pInputLayout;
 					delete m_pRenderTargetView;
 					delete m_pSwapChain;
 					delete m_pDevice;
+					
 				}
 			}
 

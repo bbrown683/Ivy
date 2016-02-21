@@ -34,7 +34,7 @@ namespace Jade
 {
 	namespace Graphics
 	{
-		class DXShader : IShader
+		class DXShader : public IShader
 		{
 		private:
 
@@ -42,8 +42,15 @@ namespace Jade
 			ShaderType type;
 			std::shared_ptr<DXDevice> device;
 
-			ID3DBlob*				m_pShaderBlob;
-			ID3D11InputLayout*      m_pVertexLayout;
+			// Holds our shader compilation information.
+			ID3DBlob*				m_pShaderBlob		= nullptr;
+
+			ID3D11ComputeShader*	m_pComputeShader	= nullptr;
+			ID3D11DomainShader*		m_pDomainShader		= nullptr;
+			ID3D11GeometryShader*	m_pGeometryShader	= nullptr;
+			ID3D11HullShader*		m_pHullShader		= nullptr;
+			ID3D11PixelShader*		m_pPixelShader		= nullptr;
+			ID3D11VertexShader*		m_pVertexShader		= nullptr;
 
 			bool Create() override;
 			bool Release() override;
@@ -65,8 +72,23 @@ namespace Jade
 			{
 				Release();
 
+				m_pShaderBlob = nullptr;
+
+				m_pComputeShader = nullptr;
+				m_pDomainShader = nullptr;
+				m_pGeometryShader = nullptr;
+				m_pHullShader = nullptr;
+				m_pPixelShader = nullptr;
+				m_pVertexShader = nullptr;
+
 				delete m_pShaderBlob;
-				delete m_pVertexLayout;
+
+				delete m_pComputeShader;
+				delete m_pDomainShader;
+				delete m_pGeometryShader;
+				delete m_pHullShader;
+				delete m_pPixelShader;
+				delete m_pVertexShader;
 			}
 
 			bool Compile() override;

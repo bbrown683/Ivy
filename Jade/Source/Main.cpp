@@ -31,36 +31,37 @@ using Jade::Graphics::Window;
 using Jade::Graphics::Device;
 using Jade::Graphics::Shader;
 using Jade::Graphics::Mesh;
-using Jade::Math::Vector3;
 using Jade::Math::Color;
+using Jade::Math::Vertex;
 
 int main(int argc, char* argv[])
 {
 	// Creates a basic window that can be rendered to with either graphics API.
-	std::shared_ptr<Window> window = std::make_shared<Window>(Window(1080, 720, 100, 100, "Hello World", false));
+	std::shared_ptr<Window> window = std::make_shared<Window>(1080, 720, 100, 100, "Hello World", false);
 
 	// Creates an OpenGL or DirectX device depending on window type.
-	std::shared_ptr<Device> device = std::make_shared<Device>(Device(window));
+	std::shared_ptr<Device> device = std::make_shared<Device>(window);
 
 	// Create our two required shaders for drawing onto the surface.
-	std::shared_ptr<Shader>	vertexShader = std::make_shared<Shader>(Shader("vertex.hlsl", ShaderType::Vertex, device));
-	std::shared_ptr<Shader>	pixelShader = std::make_shared<Shader>(Shader("pixel.hlsl", ShaderType::Pixel, device));
+	std::shared_ptr<Shader>	vertexShader = std::make_shared<Shader>(L"vertex.hlsl", ShaderType::Vertex, device);
+	std::shared_ptr<Shader>	pixelShader = std::make_shared<Shader>(L"pixel.hlsl", ShaderType::Pixel, device);
 
-	// Create some vertices for our mesh.
-	Vector3 vertices[3] = { Vector3(0.0f, 0.5f, 0.5f), 
-							Vector3(0.5f, -0.5f, 0.5f),
-							Vector3(-0.5f, -0.5f, 0.5f) };
+	// Create some vertices for our triangle.
+	Vertex vertices[] = { 
+		DirectX::XMFLOAT3(0.0f, 0.5f, 0.5f),
+		DirectX::XMFLOAT3(0.5f, -0.5f, 0.5f),
+		DirectX::XMFLOAT3(-0.5f, -0.5f, 0.5f) };
 
 	// Create the mesh and binds the vertex buffer.
-	std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>(Mesh(vertices, device));
+	std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>(vertices, device);
 
 	while (window->IsOpen())
 	{
 		// Rendering
-		device->Clear(Color(Color::CornflowerBlue));
+		device->Clear(Color::CornflowerBlue);
 
 		// Draw the mesh.
-		mesh->Draw();
+		//mesh->Draw();
 
 		// Updating
 		device->Present();

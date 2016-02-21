@@ -24,46 +24,37 @@ SOFTWARE.
 
 #include "Graphics/Mesh/DXMesh.h"
 
-bool Jade::Graphics::DXMesh::Bind()
+void Jade::Graphics::DXMesh::Bind()
 {
 	D3D11_BUFFER_DESC bd;
 	ZeroMemory(&bd, sizeof(bd));
 	bd.Usage = D3D11_USAGE_DEFAULT;
-	bd.ByteWidth = sizeof(Math::Vector3) * 3;
+	bd.ByteWidth = sizeof(Math::Vertex) * 3;
 	bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 	bd.CPUAccessFlags = 0;
 	D3D11_SUBRESOURCE_DATA InitData;
 	ZeroMemory(&InitData, sizeof(InitData));
-	InitData.pSysMem = vertices;
+	InitData.pSysMem = vertex;
 
-	HRESULT hr = device->m_pDevice->CreateBuffer(&bd, &InitData, &m_pVertexBuffer);
+	HRESULT hr = device->m_pDevice->CreateBuffer(&bd, &InitData, &device->m_pBuffer);
 	
 	if(FAILED(hr))
 	{
-		m_pVertexBuffer->Release();
-
-		return false;
+		device->m_pBuffer->Release();
 	}
 
-	UINT stride = sizeof(Math::Vector3);
+	UINT stride = sizeof(Math::Vertex);
 	UINT offset = 0;
 
-	device->m_pImmediateContext->IASetVertexBuffers(0, 1, &m_pVertexBuffer, &stride, &offset);
+	device->m_pImmediateContext->IASetVertexBuffers(0, 1, &device->m_pBuffer, &stride, &offset);
 
-	return true;
+	device->m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 }
 
-bool Jade::Graphics::DXMesh::Unbind()
+void Jade::Graphics::DXMesh::Unbind()
 {
 	// Unbind vertex buffer.
-	device->m_pImmediateContext->IASetVertexBuffers(0, 1, nullptr, nullptr, nullptr);
-	
-	m_pVertexBuffer->Release();
-
-	if (m_pVertexBuffer == nullptr)
-		return true;
-
-	return false;
+	device->m_pImmediateContext->IASetVertexBuffers(0, 0, nullptr, nullptr, nullptr);
 }
 
 void Jade::Graphics::DXMesh::Draw()

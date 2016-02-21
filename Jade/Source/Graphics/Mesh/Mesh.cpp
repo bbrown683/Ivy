@@ -23,3 +23,25 @@ SOFTWARE.
 */
 
 #include "Graphics/Mesh/Mesh.h"
+
+std::shared_ptr<Jade::Graphics::IMesh> Jade::Graphics::Mesh::SelectMesh()
+{
+	switch (device->GetGraphicsAPI())
+	{
+		case GraphicsAPI::DirectX:
+		{
+			return std::make_shared<DXMesh>(vertex, std::dynamic_pointer_cast<DXDevice>(device->GetDeviceInterface()));
+		}
+		case GraphicsAPI::OpenGL:
+		{
+			// OpenGL uses a state machine so we dont need to pass a device.
+			return std::make_shared<GLMesh>(nullptr);
+		}
+		case GraphicsAPI::Vulkan:
+		{
+			break;
+		}
+	}
+
+	return nullptr;
+}

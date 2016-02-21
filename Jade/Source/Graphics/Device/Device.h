@@ -26,8 +26,9 @@ SOFTWARE.
 
 #include "Core/Utility.h"
 
-#include "Graphics/Window/Window.h"
+#include "Graphics/Device/GraphicsAPI.h"
 #include "Graphics/Device/IDevice.h"
+#include "Graphics/Window/Window.h"
 
 namespace Jade
 {
@@ -39,6 +40,8 @@ namespace Jade
 
 			std::shared_ptr<IDevice> device;
 			std::shared_ptr<IWindow> window;
+
+			GraphicsAPI api;
 
 			// Planned to be functional in future iterations, but for now we will not mess with these.
 			
@@ -69,7 +72,7 @@ namespace Jade
 			Device(std::shared_ptr<Window> window) : backBufferWidth(window->GetWidth()), backBufferHeight(window->GetHeight()),
 				stencilBits(24), depthBits(8), colorBits(32), sampling(false), samples(1), vsync(false)
 			{
-				this->window = window->Instance(); // Retrieve the interface object.
+				this->window = window->GetWindowInterface(); // Retrieve the interface object.
 
 				device = SelectDevice();
 			}
@@ -77,7 +80,7 @@ namespace Jade
 			Device(std::shared_ptr<Window> window, int backBufferWidth, int backBufferHeight, int stencilBits,
 				int depthBits, int colorBits, bool sampling, int samples, bool vsync)
 			{
-				this->window = window->Instance();	// Retrieve the interface object.
+				this->window = window->GetWindowInterface();	// Retrieve the interface object.
 				this->backBufferWidth = backBufferWidth;
 				this->backBufferHeight = backBufferHeight;
 				this->stencilBits = stencilBits;
@@ -105,6 +108,11 @@ namespace Jade
 			std::shared_ptr<IDevice> GetDeviceInterface() const
 			{
 				return device;
+			}
+
+			GraphicsAPI GetGraphicsAPI() const
+			{
+				return api;
 			}
 		};
 	}

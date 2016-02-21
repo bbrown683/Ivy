@@ -26,7 +26,10 @@ SOFTWARE.
 
 #include "Graphics/Device/Device.h"
 #include "Graphics/Mesh/IMesh.h"
-#include "Math/Vector3.h"
+#include "Graphics/Mesh/DXMesh.h"
+#include "Graphics/Mesh/GLMesh.h"
+
+//#include "Math/Vector3.h"
 
 namespace Jade
 {
@@ -36,17 +39,22 @@ namespace Jade
 		{
 		private:
 
-			Math::Vector3* vertices;
+			//Math::Vector3* vertices;
+			Math::Vertex* vertex;
 
 			std::shared_ptr<Device> device;
 			std::shared_ptr<IMesh> mesh;
 
+			std::shared_ptr<IMesh> SelectMesh();
+
 		public:
 
-			Mesh(Math::Vector3* vertices, std::shared_ptr<Device> device)
+			Mesh(Math::Vertex* vertex, std::shared_ptr<Device> device)//(Math::Vector3* vertices, std::shared_ptr<Device> device)
 			{
-				this->vertices = vertices;
+				this->vertex = vertex;
 				this->device = device;
+
+				mesh = SelectMesh();
 			}
 
 			void Draw()	const

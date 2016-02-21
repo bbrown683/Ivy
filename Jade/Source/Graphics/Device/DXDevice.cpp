@@ -22,6 +22,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include <iostream>
+
 #include "Graphics/Device/DXDevice.h"
 
 bool Jade::Graphics::DXDevice::Create()
@@ -97,18 +99,24 @@ bool Jade::Graphics::DXDevice::Create()
 
 	m_pImmediateContext->RSSetViewports(1, &vp);
 
+	std::cout << "DirectX device was created successfully..." << std::endl;
+
 	return true; // Successful.
 }
 
 bool Jade::Graphics::DXDevice::Release()
 {
 	// Remove any loose pointers.
-	m_pImmediateContext->ClearState();
-	m_pRenderTargetView->Release();
-	m_pSwapChain->Release();
-	m_pImmediateContext->Release();
-	m_pDevice->Release();
+	if(m_pImmediateContext)		m_pImmediateContext->ClearState();
+	if(m_pBuffer)				m_pBuffer->Release();
+	if(m_pInputLayout)			m_pInputLayout->Release();
+	if(m_pRenderTargetView)		m_pRenderTargetView->Release();
+	if(m_pSwapChain)			m_pSwapChain->Release();
+	if(m_pImmediateContext)		m_pImmediateContext->Release();
+	if(m_pDevice)				m_pDevice->Release();
 	
+	std::cout << "DirectX device was disposed of successfully..." << std::endl;
+
 	return true;
 }
 

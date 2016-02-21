@@ -1,3 +1,5 @@
+#pragma once
+
 /*
 The MIT License (MIT)
 
@@ -22,32 +24,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "Graphics/Device/Device.h"
-#include "Graphics/Device/DXDevice.h"
-#include "Graphics/Device/GLDevice.h"
-
-std::shared_ptr<Jade::Graphics::IDevice> Jade::Graphics::Device::SelectDevice()
+// Fast way to determine which API is being used by the graphics device.
+enum class GraphicsAPI
 {
-	// if either window or device is null.
-	if (!window || !device)
-	{
-		#ifndef _WIN32	// MacOSX and Linux machines. 
-
-		// Ensure platform is not unknown before attempting to create
-		// an OpenGL device.
-		if (Jade::System::Platform::GetPlatformID() != Jade::System::Platform::PlatformID::Unknown)
-		{
-			api = GraphicsAPI::OpenGL;
-			return std::make_shared<GLDevice>(window);
-		}
-		#else // Windows machine.
-
-		// Windows support for DirectX functionality is ensured by default.
-		api = GraphicsAPI::DirectX;
-		return std::make_shared<DXDevice>(window);
-
-		#endif
-	}
-
-	return nullptr;
-}
+	DirectX,
+	OpenGL,
+	Vulkan
+};

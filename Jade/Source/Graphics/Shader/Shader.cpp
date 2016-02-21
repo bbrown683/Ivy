@@ -26,5 +26,21 @@ SOFTWARE.
 
 std::shared_ptr<Jade::Graphics::IShader> Jade::Graphics::Shader::SelectShader()
 {
+	switch (device->GetGraphicsAPI())
+	{
+		case GraphicsAPI::DirectX:
+		{
+			return std::make_shared<DXShader>(filename, type, std::dynamic_pointer_cast<DXDevice>(device->GetDeviceInterface()));
+		}
+		case GraphicsAPI::OpenGL:
+		{
+			return std::make_shared<GLShader>();
+		}
+		case GraphicsAPI::Vulkan:
+		{
+			break;
+		}
+	}
+
 	return nullptr;
 }

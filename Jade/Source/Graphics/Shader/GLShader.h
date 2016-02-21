@@ -30,7 +30,7 @@ namespace Jade
 {
 	namespace Graphics
 	{
-		class GLShader : IShader
+		class GLShader : public IShader
 		{
 		private:
 

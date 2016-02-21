@@ -110,7 +110,7 @@ namespace Jade
 				return window->IsActive();
 			}
 
-			std::shared_ptr<IWindow> Instance() const
+			std::shared_ptr<IWindow> GetWindowInterface() const
 			{
 				return window;
 			}

@@ -28,7 +28,7 @@ SOFTWARE.
 
 #include "Graphics/Mesh/IMesh.h"
 #include "Graphics/Device/DXDevice.h"
-#include "Math/Vector3.h"
+#include "Math/Vertex.h"
 
 namespace Jade
 {
@@ -38,19 +38,25 @@ namespace Jade
 		{
 		private:
 
-			Math::Vector3* vertices;
+			Math::Vertex* vertex;
 			std::shared_ptr<DXDevice> device;
 
-			ID3D11Buffer* m_pVertexBuffer;
-
-			bool Bind() override;
-			bool Unbind() override;
+			void Bind() override;
+			void Unbind() override;
 
 		public:
 
-			DXMesh(Math::Vector3* vertices)
+			DXMesh(Math::Vertex* vertex, std::shared_ptr<DXDevice> device)
 			{
-				this->vertices = vertices;
+				this->vertex = vertex;
+				this->device = device;
+
+				Bind();
+			}
+
+			~DXMesh()
+			{
+				Unbind();
 			}
 
 			void Draw() override;
