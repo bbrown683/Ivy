@@ -28,6 +28,7 @@ SOFTWARE.
 
 #include "Graphics/Device/Device.h"
 #include "Graphics/Shader/IShader.h"
+#include "Graphics/Shader/ShaderType.h"
 
 namespace Jade
 {
@@ -37,7 +38,7 @@ namespace Jade
 		{
 		private:
 
-			std::shared_ptr<IDevice> device;
+			std::shared_ptr<Device> device;
 			std::shared_ptr<IShader> shader;
 
 			std::shared_ptr<IShader> SelectShader();
@@ -48,7 +49,7 @@ namespace Jade
 			Shader() : device(nullptr), shader(nullptr) { }
 
 			// Default shader constructor.
-			Shader(string filename)
+			Shader(string filename, ShaderType type, std::shared_ptr<Device> device)
 			{
 			
 			}

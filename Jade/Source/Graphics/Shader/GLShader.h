@@ -50,7 +50,7 @@ namespace Jade
 				Release();
 			}
 
-			bool Compile(ShaderType type) override;
+			bool Compile() override;
 		};
 	}
 }

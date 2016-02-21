@@ -23,3 +23,36 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
+
+#include "Graphics/Device/Device.h"
+#include "Graphics/Mesh/IMesh.h"
+#include "Math/Vector3.h"
+
+namespace Jade
+{
+	namespace Graphics
+	{
+		class Mesh
+		{
+		private:
+
+			Math::Vector3* vertices;
+
+			std::shared_ptr<Device> device;
+			std::shared_ptr<IMesh> mesh;
+
+		public:
+
+			Mesh(Math::Vector3* vertices, std::shared_ptr<Device> device)
+			{
+				this->vertices = vertices;
+				this->device = device;
+			}
+
+			void Draw()	const
+			{
+				mesh->Draw();
+			}
+		};
+	}
+}

@@ -25,10 +25,14 @@ SOFTWARE.
 #include "Graphics/Window/Window.h"
 #include "Graphics/Device/Device.h"
 #include "Graphics/Shader/Shader.h"
+#include "Graphics/Mesh/Mesh.h"
 
 using Jade::Graphics::Window;
 using Jade::Graphics::Device;
 using Jade::Graphics::Shader;
+using Jade::Graphics::Mesh;
+using Jade::Math::Vector3;
+using Jade::Math::Color;
 
 int main(int argc, char* argv[])
 {
@@ -39,13 +43,24 @@ int main(int argc, char* argv[])
 	std::shared_ptr<Device> device = std::make_shared<Device>(Device(window));
 
 	// Create our two required shaders for drawing onto the surface.
-	std::shared_ptr<Shader>	fragmentShader = std::make_shared<Shader>(Shader("fragment.hlsl"));
-	std::shared_ptr<Shader>	pixelShader = std::make_shared<Shader>(Shader("pixel.hlsl"));
+	std::shared_ptr<Shader>	vertexShader = std::make_shared<Shader>(Shader("vertex.hlsl", ShaderType::Vertex, device));
+	std::shared_ptr<Shader>	pixelShader = std::make_shared<Shader>(Shader("pixel.hlsl", ShaderType::Pixel, device));
+
+	// Create some vertices for our mesh.
+	Vector3 vertices[3] = { Vector3(0.0f, 0.5f, 0.5f), 
+							Vector3(0.5f, -0.5f, 0.5f),
+							Vector3(-0.5f, -0.5f, 0.5f) };
+
+	// Create the mesh and binds the vertex buffer.
+	std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>(Mesh(vertices, device));
 
 	while (window->IsOpen())
 	{
 		// Rendering
-		device->Clear(Jade::Math::Color(Jade::Math::Color::CornflowerBlue));
+		device->Clear(Color(Color::CornflowerBlue));
+
+		// Draw the mesh.
+		mesh->Draw();
 
 		// Updating
 		device->Present();

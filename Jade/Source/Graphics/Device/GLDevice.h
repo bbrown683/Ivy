@@ -69,6 +69,7 @@ namespace Jade
 
 			void Clear(Math::Color color) override;
 			void Present() override;
+			char* DeviceInformation() override;
 		};
 	}
 }

@@ -101,6 +101,11 @@ namespace Jade
 			{
 				device->Present();
 			}
+
+			std::shared_ptr<IDevice> GetDeviceInterface() const
+			{
+				return device;
+			}
 		};
 	}
 }

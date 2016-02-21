@@ -123,3 +123,8 @@ void Jade::Graphics::DXDevice::Present()
 {
 	m_pSwapChain->Present(1, 0);
 }
+
+char* Jade::Graphics::DXDevice::DeviceInformation()
+{
+	return nullptr;
+}

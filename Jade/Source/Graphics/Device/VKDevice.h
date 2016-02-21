@@ -24,20 +24,49 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include "Core/Utility.h"
+#include "Math/Color.h"
+
+#include "IDevice.h"
+#include "Graphics/Window/IWindow.h"
+
 namespace Jade
 {
-	namespace Math
+	namespace Graphics
 	{
-		struct Quaternion
+		class VKDevice : public IDevice
 		{
 		private:
 
+			// Window object contains some data on our window such as size, 
+			// and the handle of it in memory which we need to create a device.
+			std::shared_ptr<IWindow> window;
+
+			bool Create() override;
+
+			bool Release() override;
+
 		public:
 
-			Quaternion()
-			{
+			// Empty Device.
+			VKDevice() : window(nullptr) { }
 
+			VKDevice(std::shared_ptr<IWindow> window)
+			{
+				this->window = window;
+
+				// Create our device.
+				Create();
 			}
+
+			~VKDevice()
+			{
+				// Cleanup resources.
+				Release();
+			}
+
+			void Clear(Math::Color color) override;
+			void Present() override;
 		};
 	}
 }

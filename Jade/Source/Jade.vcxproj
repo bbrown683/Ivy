@@ -94,6 +94,7 @@
     <ClCompile Include="Graphics\Device\Device.cpp" />
     <ClCompile Include="Graphics\Device\DXDevice.cpp" />
     <ClCompile Include="Graphics\Device\GLDevice.cpp" />
+    <ClCompile Include="Graphics\Device\VKDevice.cpp" />
     <ClCompile Include="Graphics\Mesh\DXMesh.cpp" />
     <ClCompile Include="Graphics\Mesh\GLMesh.cpp" />
     <ClCompile Include="Graphics\Mesh\Mesh.cpp" />
@@ -122,6 +123,7 @@
     <ClInclude Include="Graphics\Device\Device.h" />
     <ClInclude Include="Graphics\Device\DXDevice.h" />
     <ClInclude Include="Graphics\Device\GLDevice.h" />
+    <ClInclude Include="Graphics\Device\VKDevice.h" />
     <ClInclude Include="Graphics\Mesh\DXMesh.h" />
     <ClInclude Include="Graphics\Mesh\GLMesh.h" />
     <ClInclude Include="Graphics\Mesh\IMesh.h" />

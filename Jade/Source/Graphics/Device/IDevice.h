@@ -41,6 +41,7 @@ namespace Jade
 
 			virtual void Clear(Math::Color color) = 0;
 			virtual void Present() = 0;
+			virtual char* DeviceInformation() = 0;
 		};
 	}
 }

@@ -34,7 +34,7 @@ bool Jade::Graphics::GLShader::Release()
 	return false;
 }
 
-bool Jade::Graphics::GLShader::Compile(ShaderType type)
+bool Jade::Graphics::GLShader::Compile()
 {
 	return false;
 }

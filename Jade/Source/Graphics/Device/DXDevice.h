@@ -41,6 +41,7 @@ namespace Jade
 
 			// Our shaders will need access to our objects.
 			friend class DXShader;
+			friend class DXMesh;
 
 			std::shared_ptr<IWindow> window;
 
@@ -92,6 +93,7 @@ namespace Jade
 
 			void Clear(Math::Color color) override;
 			void Present() override;
+			char* DeviceInformation() override;
 		};
 	}
 }

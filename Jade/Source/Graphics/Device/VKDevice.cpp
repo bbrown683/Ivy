@@ -1,5 +1,3 @@
-#pragma once
-
 /*
 The MIT License (MIT)
 
@@ -24,20 +22,24 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-namespace Jade
+#include "Graphics/Device/VKDevice.h"
+
+bool Jade::Graphics::VKDevice::Create()
 {
-	namespace Math
-	{
-		struct Quaternion
-		{
-		private:
+	return false;
+}
 
-		public:
+bool Jade::Graphics::VKDevice::Release()
+{
+	return false;
+}
 
-			Quaternion()
-			{
+void Jade::Graphics::VKDevice::Clear(Math::Color color)
+{
 
-			}
-		};
-	}
+}
+
+void Jade::Graphics::VKDevice::Present()
+{
+
 }

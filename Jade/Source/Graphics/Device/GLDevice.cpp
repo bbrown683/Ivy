@@ -60,3 +60,8 @@ void Jade::Graphics::GLDevice::Present()
 {
 	SDL_GL_SwapWindow(window->GetSDLWindow());
 }
+
+char* Jade::Graphics::GLDevice::DeviceInformation()
+{
+	return nullptr;
+}

@@ -24,9 +24,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-// Enum for classifying the type of shader to compile.
+// Enum for classifying the type of shader to create.
 enum class ShaderType
 {
+	Compute,
+	Domain,
 	Geometry,
 	Pixel,
 	Vertex,

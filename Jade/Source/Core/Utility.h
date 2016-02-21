@@ -27,6 +27,7 @@ SOFTWARE.
 // String define to reduce code clump.
 #include <string>
 #define string					std::string
+#define wstring					std::wstring
 
 // Pointer handling
 #include <memory>
