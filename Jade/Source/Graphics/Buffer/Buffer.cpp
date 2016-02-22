@@ -22,15 +22,15 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "Graphics/Mesh/Mesh.h"
+#include "Graphics/Buffer/Buffer.h"
 
-std::shared_ptr<Jade::Graphics::IMesh> Jade::Graphics::Mesh::SelectMesh()
+std::shared_ptr<Jade::Graphics::IBuffer> Jade::Graphics::Buffer::CreateBuffer()
 {
 	switch (device->GetGraphicsAPI())
 	{
 		case GraphicsAPI::DirectX:
 		{
-			return std::make_shared<DXMesh>(vertex, std::dynamic_pointer_cast<DXDevice>(device->GetDeviceInterface()));
+			return std::make_shared<DXBuffer>(vertex, std::dynamic_pointer_cast<DXDevice>(device->GetDeviceInterface()));
 		}
 		case GraphicsAPI::OpenGL:
 		{

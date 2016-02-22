@@ -41,7 +41,7 @@ namespace Jade
 
 			// Our shaders will need access to our objects.
 			friend class DXShader;
-			friend class DXMesh;
+			friend class DXBuffer;
 
 			std::shared_ptr<IWindow> window;
 
@@ -58,7 +58,7 @@ namespace Jade
 			// Used in DXShader class.
 			ID3D11InputLayout*			m_pInputLayout			= nullptr;
 
-			// Used in DXMesh class.
+			// Used in DXBuffer class.
 			ID3D11Buffer*				m_pBuffer				= nullptr;
 
 			bool Create() override;

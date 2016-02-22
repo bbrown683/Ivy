@@ -25,13 +25,14 @@ SOFTWARE.
 #include "Graphics/Window/Window.h"
 #include "Graphics/Device/Device.h"
 #include "Graphics/Shader/Shader.h"
-#include "Graphics/Mesh/Mesh.h"
+#include "Graphics/Buffer/Buffer.h"
 
 using Jade::Graphics::Window;
 using Jade::Graphics::Device;
 using Jade::Graphics::Shader;
-using Jade::Graphics::Mesh;
+using Jade::Graphics::Buffer;
 using Jade::Math::Color;
+using Jade::Math::Vector3;
 using Jade::Math::Vertex;
 
 int main(int argc, char* argv[])
@@ -47,21 +48,21 @@ int main(int argc, char* argv[])
 	std::shared_ptr<Shader>	pixelShader = std::make_shared<Shader>(L"pixel.hlsl", ShaderType::Pixel, device);
 
 	// Create some vertices for our triangle.
-	Vertex vertices[] = { 
-		DirectX::XMFLOAT3(0.0f, 0.5f, 0.5f),
-		DirectX::XMFLOAT3(0.5f, -0.5f, 0.5f),
-		DirectX::XMFLOAT3(-0.5f, -0.5f, 0.5f) };
+	Vertex vertices[] = {
+		{Vector3(0.0f, 0.5f, 0.5f), Color::Red },
+		{Vector3(0.5f, -0.5f, 0.5f), Color::Green },
+		{Vector3(-0.5f, -0.5f, 0.5f), Color::Blue } };
 
-	// Create the mesh and binds the vertex buffer.
-	std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>(vertices, device);
+	// Creates and binds the vertex buffer for drawing.
+	std::shared_ptr<Buffer> buffer = std::make_shared<Buffer>(vertices, device);
 
 	while (window->IsOpen())
 	{
 		// Rendering
 		device->Clear(Color::CornflowerBlue);
 
-		// Draw the mesh.
-		//mesh->Draw();
+		// Draw the vertices.
+		buffer->Draw();
 
 		// Updating
 		device->Present();

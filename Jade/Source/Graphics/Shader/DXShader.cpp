@@ -37,6 +37,13 @@ bool Jade::Graphics::DXShader::Create()
 		{
 			shaderResult = device->m_pDevice->CreateComputeShader(m_pShaderBlob->GetBufferPointer(), m_pShaderBlob->GetBufferSize(), nullptr, &m_pComputeShader);
 			
+			if (FAILED(shaderResult))
+			{
+				m_pShaderBlob->Release();
+
+				return false;
+			}
+
 			std::cout << "Compute shader was created successfully..." << std::endl;
 			break;
 		}
@@ -44,6 +51,13 @@ bool Jade::Graphics::DXShader::Create()
 		{
 			shaderResult = device->m_pDevice->CreateDomainShader(m_pShaderBlob->GetBufferPointer(), m_pShaderBlob->GetBufferSize(), nullptr, &m_pDomainShader);
 		
+			if (FAILED(shaderResult))
+			{
+				m_pShaderBlob->Release();
+
+				return false;
+			}
+
 			std::cout << "Domain shader was created successfully..." << std::endl;
 			break; 
 		}
@@ -51,12 +65,26 @@ bool Jade::Graphics::DXShader::Create()
 		{
 			shaderResult = device->m_pDevice->CreateGeometryShader(m_pShaderBlob->GetBufferPointer(), m_pShaderBlob->GetBufferSize(), nullptr, &m_pGeometryShader);
 			
+			if (FAILED(shaderResult))
+			{
+				m_pShaderBlob->Release();
+
+				return false;
+			}
+
 			std::cout << "Geometry shader was created successfully..." << std::endl;
 			break;
 		}	
 		case ShaderType::Pixel:
 		{
 			shaderResult = device->m_pDevice->CreatePixelShader(m_pShaderBlob->GetBufferPointer(), m_pShaderBlob->GetBufferSize(), nullptr, &m_pPixelShader);
+
+			if (FAILED(shaderResult))
+			{
+				m_pShaderBlob->Release();
+
+				return false;
+			}
 
 			device->m_pImmediateContext->PSSetShader(m_pPixelShader, nullptr, 0);
 
@@ -67,6 +95,13 @@ bool Jade::Graphics::DXShader::Create()
 		{
 			shaderResult = device->m_pDevice->CreateHullShader(m_pShaderBlob->GetBufferPointer(), m_pShaderBlob->GetBufferSize(), nullptr, &m_pHullShader);
 			
+			if (FAILED(shaderResult))
+			{
+				m_pShaderBlob->Release();
+
+				return false;
+			}
+
 			std::cout << "Tesselation shader was created successfully..." << std::endl;
 			break;
 		}
@@ -74,22 +109,35 @@ bool Jade::Graphics::DXShader::Create()
 		{
 			shaderResult = device->m_pDevice->CreateVertexShader(m_pShaderBlob->GetBufferPointer(), m_pShaderBlob->GetBufferSize(), nullptr, &m_pVertexShader);
 
+			if(FAILED(shaderResult))
+			{
+				m_pShaderBlob->Release();
+
+				return false;
+			}
+
 			// Define the input layout
 			D3D11_INPUT_ELEMENT_DESC inputLayout[] =
 			{
-				{ "POSITION",	0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0,	D3D11_INPUT_PER_VERTEX_DATA, 0 },
-				{ "TEXCOORD",	0, DXGI_FORMAT_R32G32_FLOAT,	0, 12,	D3D11_INPUT_PER_VERTEX_DATA, 0 },
-				{ "NORMAL",		0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 20,	D3D11_INPUT_PER_VERTEX_DATA, 0 },
+				{ "POSITION",	0, DXGI_FORMAT_R32G32B32_FLOAT	,	0, 0,	D3D11_INPUT_PER_VERTEX_DATA, 0 },
+				{ "COLOR"	,	0, DXGI_FORMAT_R32G32B32A32_FLOAT,	0, 16,	D3D11_INPUT_PER_VERTEX_DATA, 0 },
 			};
 
 			// Create the input layout.
 			HRESULT inputResult = device->m_pDevice->CreateInputLayout(inputLayout, ARRAYSIZE(inputLayout), m_pShaderBlob->GetBufferPointer(), m_pShaderBlob->GetBufferSize(), &device->m_pInputLayout);
 
+			if(FAILED(inputResult))
+			{
+				m_pShaderBlob->Release();
+
+				return false;
+			}
+
 			// Set the input layout
 			device->m_pImmediateContext->IASetInputLayout(device->m_pInputLayout);
 			device->m_pImmediateContext->VSSetShader(m_pVertexShader, nullptr, 0);
 
-			std::cout << "Vertex shader created successfully..." << std::endl;
+			std::cout << "Vertex shader was created successfully..." << std::endl;
 			break;
 		}	
 	}
@@ -102,12 +150,18 @@ bool Jade::Graphics::DXShader::Create()
 bool Jade::Graphics::DXShader::Release()
 {
 	// Release only what we allocated.
-	if(m_pComputeShader)	m_pComputeShader->Release();
-	if(m_pDomainShader)		m_pDomainShader->Release();
-	if(m_pGeometryShader)	m_pGeometryShader->Release();
-	if(m_pHullShader)		m_pHullShader->Release();
-	if(m_pPixelShader)		m_pPixelShader->Release();
-	if(m_pVertexShader)		m_pVertexShader->Release();
+	if(m_pComputeShader)
+		m_pComputeShader->Release();
+	if(m_pDomainShader)		
+		m_pDomainShader->Release();
+	if(m_pGeometryShader)	
+		m_pGeometryShader->Release();
+	if(m_pHullShader)		
+		m_pHullShader->Release();
+	if(m_pPixelShader)		
+		m_pPixelShader->Release();
+	if(m_pVertexShader)		
+		m_pVertexShader->Release();
 
 	std::cout << "Shader cleaning up..." << std::endl;
 
@@ -179,10 +233,10 @@ bool Jade::Graphics::DXShader::Compile()
 		switch(type)
 		{
 		case ShaderType::Pixel:
-			std::cout << "Pixel shader compilation completed successfully..." << std::endl;
+			std::cout << "Pixel shader was compiled successfully..." << std::endl;
 			break;
 		case ShaderType::Vertex:
-			std::cout << "Vertex shader compilation completed successfully..." << std::endl;
+			std::cout << "Vertex shader was compiled successfully..." << std::endl;
 		}
 
 		if(l_pErrorBlob)

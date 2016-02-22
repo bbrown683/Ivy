@@ -22,9 +22,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "Graphics/Mesh/DXMesh.h"
+#include "Graphics/Buffer/DXBuffer.h"
 
-void Jade::Graphics::DXMesh::Bind()
+void Jade::Graphics::DXBuffer::Bind()
 {
 	D3D11_BUFFER_DESC bd;
 	ZeroMemory(&bd, sizeof(bd));
@@ -42,23 +42,23 @@ void Jade::Graphics::DXMesh::Bind()
 	{
 		device->m_pBuffer->Release();
 	}
+}
 
+void Jade::Graphics::DXBuffer::Unbind()
+{
+	// Unbind vertex buffer.
+	device->m_pImmediateContext->IASetVertexBuffers(0, 0, nullptr, nullptr, nullptr);
+}
+
+void Jade::Graphics::DXBuffer::Draw()
+{
 	UINT stride = sizeof(Math::Vertex);
 	UINT offset = 0;
 
 	device->m_pImmediateContext->IASetVertexBuffers(0, 1, &device->m_pBuffer, &stride, &offset);
 
 	device->m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-}
 
-void Jade::Graphics::DXMesh::Unbind()
-{
-	// Unbind vertex buffer.
-	device->m_pImmediateContext->IASetVertexBuffers(0, 0, nullptr, nullptr, nullptr);
-}
-
-void Jade::Graphics::DXMesh::Draw()
-{
 	// Drawing using triangular meshes so we will be using 3 vertices.
 	device->m_pImmediateContext->Draw(3, 0);
 }

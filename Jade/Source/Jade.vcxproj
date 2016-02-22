@@ -95,9 +95,9 @@
     <ClCompile Include="Graphics\Device\DXDevice.cpp" />
     <ClCompile Include="Graphics\Device\GLDevice.cpp" />
     <ClCompile Include="Graphics\Device\VKDevice.cpp" />
-    <ClCompile Include="Graphics\Mesh\DXMesh.cpp" />
-    <ClCompile Include="Graphics\Mesh\GLMesh.cpp" />
-    <ClCompile Include="Graphics\Mesh\Mesh.cpp" />
+    <ClCompile Include="Graphics\Buffer\DXBuffer.cpp" />
+    <ClCompile Include="Graphics\Buffer\GLBuffer.cpp" />
+    <ClCompile Include="Graphics\Buffer\Buffer.cpp" />
     <ClCompile Include="Graphics\Shader\DXShader.cpp" />
     <ClCompile Include="Graphics\Shader\GLShader.cpp" />
     <ClCompile Include="Graphics\Shader\Shader.cpp" />
@@ -125,10 +125,10 @@
     <ClInclude Include="Graphics\Device\GLDevice.h" />
     <ClInclude Include="Graphics\Device\GraphicsAPI.h" />
     <ClInclude Include="Graphics\Device\VKDevice.h" />
-    <ClInclude Include="Graphics\Mesh\DXMesh.h" />
-    <ClInclude Include="Graphics\Mesh\GLMesh.h" />
-    <ClInclude Include="Graphics\Mesh\IMesh.h" />
-    <ClInclude Include="Graphics\Mesh\Mesh.h" />
+    <ClInclude Include="Graphics\Buffer\DXBuffer.h" />
+    <ClInclude Include="Graphics\Buffer\GLBuffer.h" />
+    <ClInclude Include="Graphics\Buffer\IBuffer.h" />
+    <ClInclude Include="Graphics\Buffer\Buffer.h" />
     <ClInclude Include="Graphics\Shader\DXShader.h" />
     <ClInclude Include="Graphics\Shader\GLShader.h" />
     <ClInclude Include="Graphics\Shader\IShader.h" />

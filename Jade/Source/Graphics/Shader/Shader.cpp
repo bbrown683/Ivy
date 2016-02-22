@@ -24,7 +24,7 @@ SOFTWARE.
 
 #include "Graphics/Shader/Shader.h"
 
-std::shared_ptr<Jade::Graphics::IShader> Jade::Graphics::Shader::SelectShader()
+std::shared_ptr<Jade::Graphics::IShader> Jade::Graphics::Shader::CreateShader()
 {
 	switch (device->GetGraphicsAPI())
 	{

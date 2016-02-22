@@ -33,10 +33,10 @@
     <ClCompile Include="Graphics\Window\NativeWindow.cpp" />
     <ClCompile Include="Graphics\Device\GLDevice.cpp" />
     <ClCompile Include="Graphics\Shader\Shader.cpp" />
-    <ClCompile Include="Graphics\Mesh\Mesh.cpp" />
-    <ClCompile Include="Graphics\Mesh\DXMesh.cpp" />
-    <ClCompile Include="Graphics\Mesh\GLMesh.cpp" />
     <ClCompile Include="Graphics\Device\VKDevice.cpp" />
+    <ClCompile Include="Graphics\Buffer\Buffer.cpp" />
+    <ClCompile Include="Graphics\Buffer\DXBuffer.cpp" />
+    <ClCompile Include="Graphics\Buffer\GLBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\Vector4.h">
@@ -83,14 +83,14 @@
     <ClInclude Include="Graphics\Shader\ShaderType.h" />
     <ClInclude Include="Graphics\Device\GLDevice.h" />
     <ClInclude Include="Graphics\Shader\Shader.h" />
-    <ClInclude Include="Graphics\Mesh\Mesh.h" />
-    <ClInclude Include="Graphics\Mesh\IMesh.h" />
-    <ClInclude Include="Graphics\Mesh\DXMesh.h" />
-    <ClInclude Include="Graphics\Mesh\GLMesh.h" />
     <ClInclude Include="Graphics\Device\VKDevice.h" />
     <ClInclude Include="Graphics\Device\GraphicsAPI.h" />
     <ClInclude Include="System\LogManager.h" />
     <ClInclude Include="Math\Vertex.h" />
+    <ClInclude Include="Graphics\Buffer\Buffer.h" />
+    <ClInclude Include="Graphics\Buffer\DXBuffer.h" />
+    <ClInclude Include="Graphics\Buffer\GLBuffer.h" />
+    <ClInclude Include="Graphics\Buffer\IBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">

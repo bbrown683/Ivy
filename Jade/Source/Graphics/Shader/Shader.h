@@ -48,7 +48,7 @@ namespace Jade
 			ShaderType type;
 			std::shared_ptr<Device> device;
 
-			std::shared_ptr<IShader> SelectShader();
+			std::shared_ptr<IShader> CreateShader();
 
 		public:
 
@@ -62,7 +62,7 @@ namespace Jade
 				this->type = type;
 				this->device = device;
 				
-				shader = SelectShader();
+				shader = CreateShader();
 			}
 		};
 	}

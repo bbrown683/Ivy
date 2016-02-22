@@ -24,42 +24,43 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "Core/Utility.h"
+#include "Graphics/Device/Device.h"
+#include "Graphics/Buffer/IBuffer.h"
+#include "Graphics/Buffer/DXBuffer.h"
+#include "Graphics/Buffer/GLBuffer.h"
 
-#include "Graphics/Mesh/IMesh.h"
-#include "Graphics/Device/DXDevice.h"
-#include "Math/Vertex.h"
+//#include "Math/Vector3.h"
 
 namespace Jade
 {
 	namespace Graphics
 	{
-		class DXMesh : public IMesh
+		class Buffer
 		{
 		private:
 
+			//Math::Vector3* vertices;
 			Math::Vertex* vertex;
-			std::shared_ptr<DXDevice> device;
 
-			void Bind() override;
-			void Unbind() override;
+			std::shared_ptr<Device> device;
+			std::shared_ptr<IBuffer> buffer;
+
+			std::shared_ptr<IBuffer> CreateBuffer();
 
 		public:
 
-			DXMesh(Math::Vertex* vertex, std::shared_ptr<DXDevice> device)
+			Buffer(Math::Vertex* vertex, std::shared_ptr<Device> device)//(Math::Vector3* vertices, std::shared_ptr<Device> device)
 			{
 				this->vertex = vertex;
 				this->device = device;
 
-				Bind();
+				buffer = CreateBuffer();
 			}
 
-			~DXMesh()
+			void Draw()	const
 			{
-				Unbind();
+				buffer->Draw();
 			}
-
-			void Draw() override;
 		};
 	}
 }

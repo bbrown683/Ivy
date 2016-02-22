@@ -1,5 +1,4 @@
 #pragma once
-#include "IMesh.h"
 
 /*
 The MIT License (MIT)
@@ -27,28 +26,37 @@ SOFTWARE.
 
 #include "Core/Utility.h"
 
-#include "Graphics/Mesh/IMesh.h"
-
-#include "Math/Vector3.h"
+#include "Graphics/Buffer/IBuffer.h"
+#include "Graphics/Device/DXDevice.h"
+#include "Math/Vertex.h"
 
 namespace Jade
 {
 	namespace Graphics
 	{
-		class GLMesh : public IMesh
+		class DXBuffer : public IBuffer
 		{
 		private:
 
-			Math::Vector3* vertices;
+			Math::Vertex* vertex;
+			std::shared_ptr<DXDevice> device;
 
 			void Bind() override;
 			void Unbind() override;
 
 		public:
 
-			GLMesh(Math::Vector3* vertices)
+			DXBuffer(Math::Vertex* vertex, std::shared_ptr<DXDevice> device)
 			{
-				this->vertices = vertices;
+				this->vertex = vertex;
+				this->device = device;
+
+				Bind();
+			}
+
+			~DXBuffer()
+			{
+				Unbind();
 			}
 
 			void Draw() override;

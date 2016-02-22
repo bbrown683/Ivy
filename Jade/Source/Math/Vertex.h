@@ -1,6 +1,7 @@
 #pragma once
 
-#include <DirectXMath.h>
+#include "Math/Vector3.h"
+#include "Math/Color.h"
 
 namespace Jade
 {
@@ -8,7 +9,8 @@ namespace Jade
 	{
 		struct Vertex
 		{
-			DirectX::XMFLOAT3 position;
+			Vector3 position;
+			Color color;
 		};
 	}
 }

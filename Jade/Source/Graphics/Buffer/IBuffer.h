@@ -1,3 +1,5 @@
+#pragma once
+
 /*
 The MIT License (MIT)
 
@@ -22,36 +24,20 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "glew.h"
-#include <gl/GL.h>
-
-#include "Graphics/Mesh/GLMesh.h"
-
-void Jade::Graphics::GLMesh::Bind()
+namespace Jade
 {
-	GLuint vertexArray;
-	GLuint vertexBuffer;
+	namespace Graphics
+	{
+		struct IBuffer
+		{
+		private:
 
-	// Generate our vertex array and Bind it to the first element.
-	glGenVertexArrays(1, &vertexArray);
-	glBindVertexArray(vertexArray);
+			virtual void Bind() = 0;
+			virtual void Unbind() = 0;
 
-	// Generate our vertex buffer and bind it.
-	glGenBuffers(1, &vertexBuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(GLuint) * sizeof(vertices) / sizeof(Math::Vector3), vertices, GL_STATIC_DRAW);
-}
+		public:
 
-void Jade::Graphics::GLMesh::Unbind()
-{
-	// Unbind the vertex buffer.
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-}
-
-void Jade::Graphics::GLMesh::Draw()
-{
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 0, GL_FLOAT, false, 0, nullptr);
-	glDrawArrays(GL_TRIANGLES, 0, sizeof(vertices) / sizeof(Math::Vector3));
-	glDisableVertexAttribArray(0);
+			virtual void Draw() = 0;
+		};
+	}
 }
