@@ -6,16 +6,16 @@ namespace Core
 	{
 	private:
 
-		long deltaTime;
+		float deltaTime;
 
 	public:
 
-		long GetDeltaTime() const
+		float GetDeltaTime() const
 		{
 			return deltaTime;
 		}
 
-		void SetDeltaTime(long value)
+		void SetDeltaTime(float value)
 		{
 			deltaTime = value;
 		}

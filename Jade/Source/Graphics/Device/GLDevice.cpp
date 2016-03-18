@@ -22,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "glew.h"
+#include "glew/glew.h"
 #include <gl/GL.h>
 
 #include "GLDevice.h"

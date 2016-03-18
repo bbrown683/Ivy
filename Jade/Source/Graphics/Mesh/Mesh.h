@@ -1,3 +1,5 @@
+#pragma once
+
 /*
 The MIT License (MIT)
 
@@ -22,36 +24,42 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "glew.h"
-#include <gl/GL.h>
+#include "Graphics/Device/Device.h"
+#include "Graphics/Mesh/IMesh.h"
+#include "Graphics/Mesh/DXMesh.h"
+#include "Graphics/Mesh/GLMesh.h"
 
-#include "Graphics/Buffer/GLBuffer.h"
+//#include "Math/Vector3.h"
 
-void Jade::Graphics::GLMesh::Bind()
+namespace Jade
 {
-	GLuint vertexArray;
-	GLuint vertexBuffer;
+	namespace Graphics
+	{
+		class Mesh
+		{
+		private:
 
-	// Generate our vertex array and Bind it to the first element.
-	glGenVertexArrays(1, &vertexArray);
-	glBindVertexArray(vertexArray);
+			Math::Vertex* vertex;
 
-	// Generate our vertex buffer and bind it.
-	glGenBuffers(1, &vertexBuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(GLuint) * sizeof(vertices) / sizeof(Math::Vector3), vertices, GL_STATIC_DRAW);
-}
+			std::shared_ptr<Device> device;
+			std::shared_ptr<IMesh> mesh;
 
-void Jade::Graphics::GLMesh::Unbind()
-{
-	// Unbind the vertex buffer.
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-}
+			std::shared_ptr<IMesh> CreateMesh();
 
-void Jade::Graphics::GLMesh::Draw()
-{
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 0, GL_FLOAT, false, 0, nullptr);
-	glDrawArrays(GL_TRIANGLES, 0, sizeof(vertices) / sizeof(Math::Vector3));
-	glDisableVertexAttribArray(0);
+		public:
+
+			Mesh(Math::Vertex* vertex, std::shared_ptr<Device> device)
+			{
+				this->vertex = vertex;
+				this->device = device;
+
+				mesh = CreateMesh();
+			}
+
+			void Draw()	const
+			{
+				mesh->Draw();
+			}
+		};
+	}
 }

@@ -26,15 +26,15 @@ SOFTWARE.
 
 #include "Core/Utility.h"
 
-#include "Graphics/Buffer/IBuffer.h"
 #include "Graphics/Device/DXDevice.h"
+#include "Graphics/Mesh/IMesh.h"
 #include "Math/Vertex.h"
 
 namespace Jade
 {
 	namespace Graphics
 	{
-		class DXBuffer : public IBuffer
+		class DXMesh : public IMesh
 		{
 		private:
 
@@ -46,7 +46,7 @@ namespace Jade
 
 		public:
 
-			DXBuffer(Math::Vertex* vertex, std::shared_ptr<DXDevice> device)
+			DXMesh(Math::Vertex* vertex, std::shared_ptr<DXDevice> device)
 			{
 				this->vertex = vertex;
 				this->device = device;
@@ -54,7 +54,7 @@ namespace Jade
 				Bind();
 			}
 
-			~DXBuffer()
+			~DXMesh()
 			{
 				Unbind();
 			}

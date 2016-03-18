@@ -142,6 +142,11 @@ namespace Jade
 				window->Close();
 				this->~Window();
 			}
+
+			float GetDeltaTime() const
+			{
+				return window->GetDeltaTime();
+			}
 		};
 	}
 }

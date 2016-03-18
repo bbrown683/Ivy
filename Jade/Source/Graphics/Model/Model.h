@@ -8,7 +8,7 @@
 
 #include "Core/Utility.h"
 #include "Math/Vertex.h"
-#include "Graphics/Buffer/Buffer.h"
+#include "Graphics/Mesh/Mesh.h"
 
 namespace Jade
 {
@@ -18,8 +18,8 @@ namespace Jade
 		{
 		private:
 
-			// Buffer(s) used to draw our shape.
-			std::vector<Buffer> buffer;
+			// Mesh(s) used to draw our shape.
+			std::vector<Mesh> meshes;
 
 			// Each model will have an array of vertices.
 			Math::Vertex* vertex;

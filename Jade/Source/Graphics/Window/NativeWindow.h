@@ -94,6 +94,7 @@ namespace Jade
 			bool IsOpen() override;
 			bool IsFullscreen() override;
 			bool IsActive() override;
+			float GetDeltaTime() override;
 			SDL_Window* GetSDLWindow() override;
 
 			NativeWindow(int width, int height, int x, int y, string title, bool fullscreen) : m_pWindow(nullptr)

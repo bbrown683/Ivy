@@ -22,9 +22,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "Graphics/Buffer/DXBuffer.h"
+#include "Graphics/Mesh/DXMesh.h"
 
-void Jade::Graphics::DXBuffer::Bind()
+void Jade::Graphics::DXMesh::Bind()
 {
 	D3D11_BUFFER_DESC desc;
 	ZeroMemory(&desc, sizeof(desc));
@@ -57,13 +57,13 @@ void Jade::Graphics::DXBuffer::Bind()
 	desc.MiscFlags = 0;
 }
 
-void Jade::Graphics::DXBuffer::Unbind()
+void Jade::Graphics::DXMesh::Unbind()
 {
 	// Unbind vertex buffer.
 	device->m_pImmediateContext->IASetVertexBuffers(0, 0, nullptr, nullptr, nullptr);
 }
 
-void Jade::Graphics::DXBuffer::Draw()
+void Jade::Graphics::DXMesh::Draw()
 {
 	// Drawing using triangular meshes so we will be using 3 vertices.
 	device->m_pImmediateContext->Draw(3, 0);

@@ -25,9 +25,9 @@ Jade::Math::Vertex* Jade::Graphics::Model::LoadModel(string filename)
 
 void Jade::Graphics::Model::Draw()
 {
-	// Loop through and draw each mesh.
-	for(unsigned int i = 0; i < buffer.size(); i++)
+	// Loop through and draw each meshes.
+	for(unsigned int i = 0; i < meshes.size(); i++)
 	{
-		buffer[i].Draw();
+		meshes[i].Draw();
 	}
 }

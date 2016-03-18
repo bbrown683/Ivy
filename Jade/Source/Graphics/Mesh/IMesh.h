@@ -24,42 +24,20 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "Graphics/Device/Device.h"
-#include "Graphics/Buffer/IBuffer.h"
-#include "Graphics/Buffer/DXBuffer.h"
-#include "Graphics/Buffer/GLBuffer.h"
-
-//#include "Math/Vector3.h"
-
 namespace Jade
 {
 	namespace Graphics
 	{
-		class Buffer
+		struct IMesh
 		{
 		private:
 
-			Math::Vertex* vertex;
-
-			std::shared_ptr<Device> device;
-			std::shared_ptr<IBuffer> buffer;
-
-			std::shared_ptr<IBuffer> CreateBuffer();
+			virtual void Bind() = 0;
+			virtual void Unbind() = 0;
 
 		public:
 
-			Buffer(Math::Vertex* vertex, std::shared_ptr<Device> device)
-			{
-				this->vertex = vertex;
-				this->device = device;
-
-				buffer = CreateBuffer();
-			}
-
-			void Draw()	const
-			{
-				buffer->Draw();
-			}
+			virtual void Draw() = 0;
 		};
 	}
 }

@@ -22,6 +22,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include <iostream>
+
 #include "Graphics/Window/NativeWindow.h"
 
 #include "System/Platform.h"
@@ -33,12 +35,15 @@ bool Jade::Graphics::NativeWindow::PollWindowEvents()
 
 	SDL_Event e;
 
-	int time = SDL_GetTicks();
-	timer.SetDeltaTime(timer.GetDeltaTime() - time);
-	time = timer.GetDeltaTime();
+	int startTime = SDL_GetTicks();
 
 	while (SDL_PollEvent(&e))
 	{
+		// Delta time computations.
+		//float loopedTime = static_cast<float>(SDL_GetTicks());
+		//timer.SetDeltaTime(loopedTime - startTime);
+		//startTime = loopedTime;
+
 		switch (e.type)
 		{
 		case SDL_QUIT:
@@ -247,6 +252,11 @@ bool Jade::Graphics::NativeWindow::IsFullscreen()
 bool Jade::Graphics::NativeWindow::IsActive()
 {
 	return active;
+}
+
+float Jade::Graphics::NativeWindow::GetDeltaTime()
+{
+	return timer.GetDeltaTime();
 }
 
 SDL_Window* Jade::Graphics::NativeWindow::GetSDLWindow()

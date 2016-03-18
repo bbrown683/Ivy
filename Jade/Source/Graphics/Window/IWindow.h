@@ -63,6 +63,7 @@ namespace Jade
 			virtual bool IsOpen() = 0;
 			virtual bool IsFullscreen() = 0;
 			virtual bool IsActive() = 0;
+			virtual float GetDeltaTime() = 0;
 			virtual SDL_Window* GetSDLWindow() = 0;
 		};
 	}

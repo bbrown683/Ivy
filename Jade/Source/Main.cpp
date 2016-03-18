@@ -25,12 +25,12 @@ SOFTWARE.
 #include "Graphics/Window/Window.h"
 #include "Graphics/Device/Device.h"
 #include "Graphics/Shader/Shader.h"
-#include "Graphics/Buffer/Buffer.h"
+#include "Graphics/Mesh/Mesh.h"
 
 using Jade::Graphics::Window;
 using Jade::Graphics::Device;
 using Jade::Graphics::Shader;
-using Jade::Graphics::Buffer;
+using Jade::Graphics::Mesh;
 using Jade::Math::Color;
 using Jade::Math::Vector3;
 using Jade::Math::Vertex;
@@ -49,20 +49,20 @@ int main(int argc, char* argv[])
 
 	// Create some vertices for our triangle.
 	Vertex vertices[] = {
-		{Vector3(0.0f, 0.5f, 0.5f), Color::Black },
-		{Vector3(0.5f, -0.5f, 0.5f), Color::White },
+		{Vector3(0.0f, 0.5f, 0.5f), Color::Red },
+		{Vector3(0.5f, -0.5f, 0.5f), Color::Green },
 		{Vector3(-0.5f, -0.5f, 0.5f), Color::Blue } };
 
 	// Creates and binds the vertex buffer for drawing.
-	std::shared_ptr<Buffer> buffer = std::make_shared<Buffer>(vertices, device);
+	std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>(vertices, device);
 
 	while (window->IsOpen())
 	{
 		// Rendering
-		device->Clear(Color::CornflowerBlue);
+		device->Clear(Color::Black);
 
 		// Draw the vertices.
-		buffer->Draw();
+		mesh->Draw();
 
 		// Updating
 		device->Present();
