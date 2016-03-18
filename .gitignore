@@ -15,27 +15,12 @@
 [Dd]ebugPublic/
 [Rr]elease/
 [Rr]eleases/
-x64/
+# x64/
 x86/
 build/
 bld/
-[Bb]in/
+#[Bb]in/
 [Oo]bj/
-
-# Exceptions for libraries and dll's
-*.dll
-*.lib
-
-!Assimp32.dll
-!Assimp64.dll
-!assimp.lib
-!glew32.dll
-!glew32.lib
-!glew32s.lib
-!SDL2.dll
-!SDL2main.dll
-!SDL2.lib
-
 
 # Visual Studo 2015 cache/options directory
 .vs/

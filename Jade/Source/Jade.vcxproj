@@ -90,7 +90,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>sdl2main.lib;sdl2.lib;opengl32.lib;glew32.lib;d3d11.lib;d3dcompiler.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)/ThirdParty/glew/libraries/$(PlatformTarget)/;$(SolutionDir)/ThirdParty/SDL/libraries/$(PlatformTarget)/;$(SolutionDir)/ThirdParty/assimp/libraries/$(PlatformTarget)/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)/ThirdParty/glew/lib/$(PlatformTarget)/;$(SolutionDir)/ThirdParty/SDL/lib/$(PlatformTarget)/;$(SolutionDir)/ThirdParty/assimp/lib/$(PlatformTarget)/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <SubSystem>Console</SubSystem>
       <EntryPointSymbol>
       </EntryPointSymbol>
@@ -107,7 +107,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>sdl2main.lib;sdl2.lib;opengl32.lib;glew32.lib;d3d11.lib;d3dcompiler.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)/ThirdParty/glew/libraries/$(PlatformTarget)/;$(SolutionDir)/ThirdParty/SDL/libraries/$(PlatformTarget)/;$(SolutionDir)/ThirdParty/assimp/libraries/$(PlatformTarget)/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)/ThirdParty/glew/lib/$(PlatformTarget)/;$(SolutionDir)/ThirdParty/SDL/lib/$(PlatformTarget)/;$(SolutionDir)/ThirdParty/assimp/lib/$(PlatformTarget)/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <SubSystem>Console</SubSystem>
       <EntryPointSymbol>
       </EntryPointSymbol>
