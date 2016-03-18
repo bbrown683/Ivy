@@ -26,22 +26,35 @@ SOFTWARE.
 
 void Jade::Graphics::DXBuffer::Bind()
 {
-	D3D11_BUFFER_DESC bd;
-	ZeroMemory(&bd, sizeof(bd));
-	bd.Usage = D3D11_USAGE_DEFAULT;
-	bd.ByteWidth = sizeof(Math::Vertex) * 3;
-	bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-	bd.CPUAccessFlags = 0;
+	D3D11_BUFFER_DESC desc;
+	ZeroMemory(&desc, sizeof(desc));
+	desc.Usage = D3D11_USAGE_DEFAULT;
+	desc.ByteWidth = sizeof(Math::Vertex) * 3;
+	desc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+	desc.CPUAccessFlags = 0;
 	D3D11_SUBRESOURCE_DATA InitData;
 	ZeroMemory(&InitData, sizeof(InitData));
 	InitData.pSysMem = vertex;
 
-	HRESULT hr = device->m_pDevice->CreateBuffer(&bd, &InitData, &device->m_pBuffer);
+	long hr = device->m_pDevice->CreateBuffer(&desc, &InitData, &device->m_pVertexBuffer);
 	
-	if(FAILED(hr))
+	if(hr < 0)
 	{
-		device->m_pBuffer->Release();
+		device->m_pVertexBuffer->Release();
 	}
+
+	unsigned int stride = sizeof(Math::Vertex);
+	unsigned int offset = 0;
+
+	device->m_pImmediateContext->IASetVertexBuffers(0, 1, &device->m_pVertexBuffer, &stride, &offset);
+
+	device->m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+	desc.Usage = D3D11_USAGE_DEFAULT;
+	desc.ByteWidth = sizeof(unsigned int) * 3;
+	desc.BindFlags = D3D11_BIND_INDEX_BUFFER;
+	desc.CPUAccessFlags = 0;
+	desc.MiscFlags = 0;
 }
 
 void Jade::Graphics::DXBuffer::Unbind()
@@ -52,13 +65,6 @@ void Jade::Graphics::DXBuffer::Unbind()
 
 void Jade::Graphics::DXBuffer::Draw()
 {
-	UINT stride = sizeof(Math::Vertex);
-	UINT offset = 0;
-
-	device->m_pImmediateContext->IASetVertexBuffers(0, 1, &device->m_pBuffer, &stride, &offset);
-
-	device->m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
 	// Drawing using triangular meshes so we will be using 3 vertices.
 	device->m_pImmediateContext->Draw(3, 0);
 }

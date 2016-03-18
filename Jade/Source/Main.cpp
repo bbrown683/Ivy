@@ -49,8 +49,8 @@ int main(int argc, char* argv[])
 
 	// Create some vertices for our triangle.
 	Vertex vertices[] = {
-		{Vector3(0.0f, 0.5f, 0.5f), Color::Red },
-		{Vector3(0.5f, -0.5f, 0.5f), Color::Green },
+		{Vector3(0.0f, 0.5f, 0.5f), Color::Black },
+		{Vector3(0.5f, -0.5f, 0.5f), Color::White },
 		{Vector3(-0.5f, -0.5f, 0.5f), Color::Blue } };
 
 	// Creates and binds the vertex buffer for drawing.

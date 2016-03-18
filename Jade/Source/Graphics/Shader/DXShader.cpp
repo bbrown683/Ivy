@@ -29,7 +29,7 @@ SOFTWARE.
 
 bool Jade::Graphics::DXShader::Create()
 {
-	HRESULT shaderResult = 0;
+	long shaderResult = 0;
 
 	switch (type)
 	{
@@ -37,7 +37,7 @@ bool Jade::Graphics::DXShader::Create()
 		{
 			shaderResult = device->m_pDevice->CreateComputeShader(m_pShaderBlob->GetBufferPointer(), m_pShaderBlob->GetBufferSize(), nullptr, &m_pComputeShader);
 			
-			if (FAILED(shaderResult))
+			if (shaderResult < 0)
 			{
 				m_pShaderBlob->Release();
 
@@ -51,7 +51,7 @@ bool Jade::Graphics::DXShader::Create()
 		{
 			shaderResult = device->m_pDevice->CreateDomainShader(m_pShaderBlob->GetBufferPointer(), m_pShaderBlob->GetBufferSize(), nullptr, &m_pDomainShader);
 		
-			if (FAILED(shaderResult))
+			if (shaderResult < 0)
 			{
 				m_pShaderBlob->Release();
 
@@ -65,7 +65,7 @@ bool Jade::Graphics::DXShader::Create()
 		{
 			shaderResult = device->m_pDevice->CreateGeometryShader(m_pShaderBlob->GetBufferPointer(), m_pShaderBlob->GetBufferSize(), nullptr, &m_pGeometryShader);
 			
-			if (FAILED(shaderResult))
+			if (shaderResult < 0)
 			{
 				m_pShaderBlob->Release();
 
@@ -79,7 +79,7 @@ bool Jade::Graphics::DXShader::Create()
 		{
 			shaderResult = device->m_pDevice->CreatePixelShader(m_pShaderBlob->GetBufferPointer(), m_pShaderBlob->GetBufferSize(), nullptr, &m_pPixelShader);
 
-			if (FAILED(shaderResult))
+			if (shaderResult < 0)
 			{
 				m_pShaderBlob->Release();
 
@@ -95,7 +95,7 @@ bool Jade::Graphics::DXShader::Create()
 		{
 			shaderResult = device->m_pDevice->CreateHullShader(m_pShaderBlob->GetBufferPointer(), m_pShaderBlob->GetBufferSize(), nullptr, &m_pHullShader);
 			
-			if (FAILED(shaderResult))
+			if (shaderResult < 0)
 			{
 				m_pShaderBlob->Release();
 
@@ -109,7 +109,7 @@ bool Jade::Graphics::DXShader::Create()
 		{
 			shaderResult = device->m_pDevice->CreateVertexShader(m_pShaderBlob->GetBufferPointer(), m_pShaderBlob->GetBufferSize(), nullptr, &m_pVertexShader);
 
-			if(FAILED(shaderResult))
+			if(shaderResult < 0)
 			{
 				m_pShaderBlob->Release();
 
@@ -119,14 +119,15 @@ bool Jade::Graphics::DXShader::Create()
 			// Define the input layout
 			D3D11_INPUT_ELEMENT_DESC inputLayout[] =
 			{
-				{ "POSITION",	0, DXGI_FORMAT_R32G32B32_FLOAT	,	0, 0,	D3D11_INPUT_PER_VERTEX_DATA, 0 },
-				{ "COLOR"	,	0, DXGI_FORMAT_R32G32B32A32_FLOAT,	0, 16,	D3D11_INPUT_PER_VERTEX_DATA, 0 },
+				{ "POSITION",	0, DXGI_FORMAT_R32G32B32_FLOAT	,	0, 0,	D3D11_INPUT_PER_VERTEX_DATA,	0 },
+				{ "COLOR"	,	0, DXGI_FORMAT_R32G32B32A32_FLOAT,	0, 16,	D3D11_INPUT_PER_VERTEX_DATA,	0 },
+				//{"TEXCOORD",	0, DXGI_FORMAT_R32G32B32A32_FLOAT,	0, 0,	D3D11_INPUT_PER_INSTANCE_DATA,	0},
 			};
 
 			// Create the input layout.
-			HRESULT inputResult = device->m_pDevice->CreateInputLayout(inputLayout, ARRAYSIZE(inputLayout), m_pShaderBlob->GetBufferPointer(), m_pShaderBlob->GetBufferSize(), &device->m_pInputLayout);
+			long inputResult = device->m_pDevice->CreateInputLayout(inputLayout, ARRAYSIZE(inputLayout), m_pShaderBlob->GetBufferPointer(), m_pShaderBlob->GetBufferSize(), &device->m_pInputLayout);
 
-			if(FAILED(inputResult))
+			if(inputResult < 0)
 			{
 				m_pShaderBlob->Release();
 
@@ -170,7 +171,7 @@ bool Jade::Graphics::DXShader::Release()
 
 bool Jade::Graphics::DXShader::Compile()
 {
-	UINT flags = D3DCOMPILE_ENABLE_STRICTNESS;
+	unsigned int flags = D3DCOMPILE_ENABLE_STRICTNESS;
 	
 #if defined( DEBUG ) || defined( _DEBUG )
 	// Set the D3DCOMPILE_DEBUG flag to embed debug information in the shaders.
@@ -217,9 +218,9 @@ bool Jade::Graphics::DXShader::Compile()
 		ID3DBlob* l_pErrorBlob = nullptr;
 
 		// Compile the shader
-		HRESULT hr = D3DCompileFromFile(filename.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE, "Main", profile, flags, 0, &m_pShaderBlob, &l_pErrorBlob);
+		long hr = D3DCompileFromFile(filename.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE, "Main", profile, flags, 0, &m_pShaderBlob, &l_pErrorBlob);
 
-		if (FAILED(hr))
+		if (hr < 0)
 		{
 			// Output compilation errors to console.
 			std::cout << static_cast<char*>(l_pErrorBlob->GetBufferPointer()) << std::endl;

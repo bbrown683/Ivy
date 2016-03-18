@@ -39,7 +39,6 @@ namespace Jade
 		{
 		private:
 
-			//Math::Vector3* vertices;
 			Math::Vertex* vertex;
 
 			std::shared_ptr<Device> device;
@@ -49,7 +48,7 @@ namespace Jade
 
 		public:
 
-			Buffer(Math::Vertex* vertex, std::shared_ptr<Device> device)//(Math::Vector3* vertices, std::shared_ptr<Device> device)
+			Buffer(Math::Vertex* vertex, std::shared_ptr<Device> device)
 			{
 				this->vertex = vertex;
 				this->device = device;

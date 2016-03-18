@@ -28,7 +28,7 @@ SOFTWARE.
 
 bool Jade::Graphics::DXDevice::Create()
 {
-	UINT createDeviceFlags = 0;
+	unsigned int createDeviceFlags = 0;
 
 #ifdef _DEBUG
 	// Add the debug device flag along with any other defined flags.
@@ -42,7 +42,7 @@ bool Jade::Graphics::DXDevice::Create()
 		D3D_DRIVER_TYPE_REFERENCE,
 	};
 
-	UINT numDriverTypes = ARRAYSIZE(driverTypes);
+	unsigned int numDriverTypes = ARRAYSIZE(driverTypes);
 
 	D3D_FEATURE_LEVEL featureLevels[] =
 	{
@@ -53,7 +53,7 @@ bool Jade::Graphics::DXDevice::Create()
 		D3D_FEATURE_LEVEL_9_3,
 	};
 
-	UINT numFeatureLevels = ARRAYSIZE(featureLevels);
+	unsigned int numFeatureLevels = ARRAYSIZE(featureLevels);
 
 	DXGI_SWAP_CHAIN_DESC sd;
 	ZeroMemory(&sd, sizeof(DXGI_SWAP_CHAIN_DESC));
@@ -71,10 +71,10 @@ bool Jade::Graphics::DXDevice::Create()
 	sd.SampleDesc.Quality = 0;
 	sd.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
 	
-	HRESULT result = D3D11CreateDeviceAndSwapChain(nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr, createDeviceFlags, featureLevels, 
+	long result = D3D11CreateDeviceAndSwapChain(nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr, createDeviceFlags, featureLevels, 
 		numFeatureLevels, D3D11_SDK_VERSION, &sd, &m_pSwapChain, &m_pDevice, &m_FeatureLevel, &m_pImmediateContext);
 
-	if(!SUCCEEDED(result))
+	if(result < 0)
 	{
 		return false;
 	}
@@ -90,8 +90,8 @@ bool Jade::Graphics::DXDevice::Create()
 
 	D3D11_VIEWPORT vp;
 	ZeroMemory(&vp, sizeof(D3D11_VIEWPORT));
-	vp.Width = static_cast<FLOAT>(window->GetWidth());
-	vp.Height = static_cast<FLOAT>(window->GetHeight());
+	vp.Width = static_cast<float>(window->GetWidth());
+	vp.Height = static_cast<float>(window->GetHeight());
 	vp.MinDepth = 0.0f;
 	vp.MaxDepth = 1.0f;
 	vp.TopLeftX = 0;
@@ -107,13 +107,24 @@ bool Jade::Graphics::DXDevice::Create()
 bool Jade::Graphics::DXDevice::Release()
 {
 	// Remove any loose pointers.
-	if(m_pImmediateContext)		m_pImmediateContext->ClearState();
-	if(m_pBuffer)				m_pBuffer->Release();
-	if(m_pInputLayout)			m_pInputLayout->Release();
-	if(m_pRenderTargetView)		m_pRenderTargetView->Release();
-	if(m_pSwapChain)			m_pSwapChain->Release();
-	if(m_pImmediateContext)		m_pImmediateContext->Release();
-	if(m_pDevice)				m_pDevice->Release();
+	if(m_pImmediateContext)		
+		m_pImmediateContext->ClearState();
+	if(m_pVertexBuffer)				
+		m_pVertexBuffer->Release();
+	if (m_pConstantBuffer)
+		m_pConstantBuffer->Release();
+	if (m_pIndexBuffer)
+		m_pIndexBuffer->Release();
+	if(m_pInputLayout)			
+		m_pInputLayout->Release();
+	if(m_pRenderTargetView)		
+		m_pRenderTargetView->Release();
+	if(m_pSwapChain)			
+		m_pSwapChain->Release();
+	if(m_pImmediateContext)		
+		m_pImmediateContext->Release();
+	if(m_pDevice)				
+		m_pDevice->Release();
 	
 	std::cout << "DirectX device was disposed of successfully..." << std::endl;
 
@@ -122,7 +133,7 @@ bool Jade::Graphics::DXDevice::Release()
 
 void Jade::Graphics::DXDevice::Clear(Math::Color color)
 {	
-	FLOAT colorRGBA[] = { color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() };
+	float colorRGBA[] = { color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() };
 	m_pImmediateContext->ClearRenderTargetView(m_pRenderTargetView, colorRGBA);
 }
 

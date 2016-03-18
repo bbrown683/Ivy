@@ -26,8 +26,10 @@ SOFTWARE.
 
 #include "Graphics/Window/IWindow.h"
 
-#include "SDL.h"
-#include "SDL_syswm.h"
+#include "SDL2/SDL.h"
+#include "SDL2/SDL_syswm.h"
+
+#include "Core/Time.h"
 #include "Core/Utility.h"
 
 namespace Jade
@@ -41,6 +43,7 @@ namespace Jade
 			SDL_Window* m_pWindow; // SDLs window object.
 			SDL_SysWMinfo m_WindowInfo; // Contains information of our window.
 
+			// Window parameters.
 			int width;
 			int height;
 			int x;
@@ -48,12 +51,16 @@ namespace Jade
 			string title;
 			bool fullscreen;
 
+			// Window checks.
 			bool open = false;
 			bool disposed = false;
 			bool hidden = false;
 			bool maximized = false;
 			bool minimized = false;
 			bool active = false;
+
+			// Keeps track of our time per frames.
+			Core::Time timer;
 
 			bool InitWindow() override;
 			bool PollWindowEvents() override;

@@ -59,7 +59,9 @@ namespace Jade
 			ID3D11InputLayout*			m_pInputLayout			= nullptr;
 
 			// Used in DXBuffer class.
-			ID3D11Buffer*				m_pBuffer				= nullptr;
+			ID3D11Buffer*				m_pVertexBuffer			= nullptr;
+			ID3D11Buffer*				m_pConstantBuffer		= nullptr;
+			ID3D11Buffer*				m_pIndexBuffer			= nullptr;
 
 			bool Create() override;
 
@@ -85,14 +87,18 @@ namespace Jade
 				{
 					// Safe deletion of pointers to ensure none are lingering with values.
 					m_pImmediateContext = nullptr;
-					m_pBuffer = nullptr;
+					m_pVertexBuffer = nullptr;
+					m_pConstantBuffer = nullptr;
+					m_pIndexBuffer = nullptr;
 					m_pInputLayout = nullptr;
 					m_pRenderTargetView = nullptr;
 					m_pSwapChain = nullptr;
 					m_pDevice = nullptr;
 
 					delete m_pImmediateContext;
-					delete m_pBuffer;
+					delete m_pVertexBuffer;
+					delete m_pConstantBuffer;
+					delete m_pIndexBuffer;
 					delete m_pInputLayout;
 					delete m_pRenderTargetView;
 					delete m_pSwapChain;

@@ -33,6 +33,10 @@ bool Jade::Graphics::NativeWindow::PollWindowEvents()
 
 	SDL_Event e;
 
+	int time = SDL_GetTicks();
+	timer.SetDeltaTime(timer.GetDeltaTime() - time);
+	time = timer.GetDeltaTime();
+
 	while (SDL_PollEvent(&e))
 	{
 		switch (e.type)
