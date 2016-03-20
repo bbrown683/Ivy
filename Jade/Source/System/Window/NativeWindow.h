@@ -62,6 +62,9 @@ namespace Jade
 			// Keeps track of our time per frames.
 			Core::Time timer;
 
+			// Test keys.
+			bool escape = false;
+
 			bool InitWindow() override;
 			bool PollWindowEvents() override;
 
@@ -94,6 +97,8 @@ namespace Jade
 			bool IsOpen() override;
 			bool IsFullscreen() override;
 			bool IsActive() override;
+			bool IsKeyDown(Key key) override;
+			bool IsKeyUp(Key key) override;
 			float GetDeltaTime() override;
 			SDL_Window* GetSDLWindow() override;
 

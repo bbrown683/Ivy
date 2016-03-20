@@ -46,7 +46,10 @@ namespace Jade
 			static const Color Green;
 			static const Color Blue;
 			static const Color Black;
+			static const Color Magenta;
+			static const Color Purple;
 			static const Color White;
+			static const Color Yellow;
 
 			Color(float red, float green, float blue, float alpha)
 			{			

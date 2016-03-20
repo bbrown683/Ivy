@@ -77,34 +77,20 @@ namespace Jade
 				this->window = window;
 
 				// Create our device.
-				Create();
+				if(!Create())
+				{
+					SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Device creation error", "Failed to initialize or create a DirectX11 Device.", window->GetSDLWindow());
+					
+					// Dispose of any allocated memory and close the window.
+					Release();
+					window->Close();
+				}
 			}
 
 			~DXDevice()
 			{
 				// Cleanup resources.
-				if(Release())
-				{
-					// Safe deletion of pointers to ensure none are lingering with values.
-					m_pImmediateContext = nullptr;
-					m_pVertexBuffer = nullptr;
-					m_pConstantBuffer = nullptr;
-					m_pIndexBuffer = nullptr;
-					m_pInputLayout = nullptr;
-					m_pRenderTargetView = nullptr;
-					m_pSwapChain = nullptr;
-					m_pDevice = nullptr;
-
-					delete m_pImmediateContext;
-					delete m_pVertexBuffer;
-					delete m_pConstantBuffer;
-					delete m_pIndexBuffer;
-					delete m_pInputLayout;
-					delete m_pRenderTargetView;
-					delete m_pSwapChain;
-					delete m_pDevice;
-					
-				}
+				Release();
 			}
 
 			void Clear(Math::Color color) override;

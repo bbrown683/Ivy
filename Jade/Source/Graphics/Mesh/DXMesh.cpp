@@ -47,9 +47,12 @@ void Jade::Graphics::DXMesh::Bind()
 	// Ensure it was created successfully.
 	if(hr < 0)
 	{
-		device->m_pVertexBuffer->Release();
+		if(device->m_pVertexBuffer)
+			device->m_pVertexBuffer->Release();
 
-		std::cout << "Vertex buffer creation failed..." << std::endl;
+		bufferSuccess = false;
+
+		std::cout << "ERROR: Vertex buffer creation failed..." << std::endl;
 	}
 	else
 	{
@@ -74,9 +77,12 @@ void Jade::Graphics::DXMesh::Bind()
 		// Ensure it was created successfully.
 		if (hr < 0)
 		{
-			device->m_pIndexBuffer->Release();
+			if(device->m_pIndexBuffer)
+				device->m_pIndexBuffer->Release();
 
-			std::cout << "Index buffer creation failed..." << std::endl;
+			bufferSuccess = false;
+
+			std::cout << "ERROR: Index buffer creation failed..." << std::endl;
 		}
 		else
 		{
@@ -89,7 +95,6 @@ void Jade::Graphics::DXMesh::Bind()
 			device->m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 			// Create the constant buffer
-			/*
 			desc.Usage = D3D11_USAGE_DEFAULT;
 			desc.ByteWidth = sizeof(ConstantBuffer);
 			desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
@@ -99,15 +104,30 @@ void Jade::Graphics::DXMesh::Bind()
 			
 			if (hr < 0)
 			{
-				device->m_pConstantBuffer->Release();
+				if(device->m_pConstantBuffer)
+					device->m_pConstantBuffer->Release();
 
-				std::cout << "Constant buffer creation failed." << std::endl;
+				bufferSuccess = false;
+
+				std::cout << "ERROR: Constant buffer creation failed." << std::endl;
 			}
 			else
 			{
-				std::cout << "Constant buffer was created successfully." << std::endl;
+				std::cout << "Constant buffer was created successfully..." << std::endl;
+
+				space.world = DirectX::XMMatrixIdentity();
+
+				// Initialize the view matrix
+				DirectX::XMVECTOR Eye = DirectX::XMVectorSet(0.0f, 1.0f, -5.0f, 0.0f);
+				DirectX::XMVECTOR At = DirectX::XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
+				DirectX::XMVECTOR Up = DirectX::XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
+				view = DirectX::XMMatrixLookAtLH(Eye, At, Up);
+				
+				// Set our projection matrix.
+				projection = DirectX::XMMatrixPerspectiveFovLH(DirectX::XM_PIDIV2, static_cast<float>(device->window->GetWidth()) / static_cast<float>(device->window->GetHeight()), 0.01f, 100.0f);
+
+				bufferSuccess = true;
 			}
-			*/
 		}
 	}
 }
@@ -120,5 +140,34 @@ void Jade::Graphics::DXMesh::Unbind()
 
 void Jade::Graphics::DXMesh::Draw()
 {
-	device->m_pImmediateContext->DrawIndexed(static_cast<unsigned int>(indices.size()), 0, 0);
+	// Ensure that everything was binded correctly before attempting to draw.
+	if (bufferSuccess)
+	{
+		// Update our time
+		static float t = 0.0f;
+		if (device->m_DriverType == D3D_DRIVER_TYPE_REFERENCE)
+		{
+			t += (float)DirectX::XM_PI * 0.0125f;
+		}
+		else
+		{
+			static ULONGLONG timeStart = 0;
+			ULONGLONG timeCur = GetTickCount64();
+			if (timeStart == 0)
+				timeStart = timeCur;
+			t = (timeCur - timeStart) / 1000.0f;
+		}
+
+		// Rotate our cube slightly.
+		world = DirectX::XMMatrixRotationX(-t) * DirectX::XMMatrixRotationY(t);
+
+		space.world = DirectX::XMMatrixTranspose(world);
+		space.view = DirectX::XMMatrixTranspose(view);
+		space.projection = DirectX::XMMatrixTranspose(projection);
+
+		device->m_pImmediateContext->UpdateSubresource(device->m_pConstantBuffer, 0, nullptr, &space, 0, 0);
+		device->m_pImmediateContext->VSSetConstantBuffers(0, 1, &device->m_pConstantBuffer);
+
+		device->m_pImmediateContext->DrawIndexed(static_cast<unsigned int>(indices.size()), 0, 0);
+	}
 }

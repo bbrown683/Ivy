@@ -39,7 +39,14 @@ bool Jade::Graphics::DXShader::Create()
 			
 			if (shaderResult < 0)
 			{
-				m_pShaderBlob->Release();
+				if (m_pShaderBlob)
+					m_pShaderBlob->Release();
+
+				// Output compilation errors to console.
+				std::cout << "ERROR: Computee shader creation failed..." << std::endl;
+
+				// Release any data associated with the shader if it gives an error.
+				Release();
 
 				return false;
 			}
@@ -53,7 +60,14 @@ bool Jade::Graphics::DXShader::Create()
 		
 			if (shaderResult < 0)
 			{
-				m_pShaderBlob->Release();
+				if (m_pShaderBlob)
+					m_pShaderBlob->Release();
+
+				// Output compilation errors to console.
+				std::cout << "ERROR: Domain shader creation failed..." << std::endl;
+
+				// Release any data associated with the shader if it gives an error.
+				Release();
 
 				return false;
 			}
@@ -67,7 +81,14 @@ bool Jade::Graphics::DXShader::Create()
 			
 			if (shaderResult < 0)
 			{
-				m_pShaderBlob->Release();
+				if (m_pShaderBlob)
+					m_pShaderBlob->Release();
+
+				// Output compilation errors to console.
+				std::cout << "ERROR: Geometry shader creation failed..." << std::endl;
+
+				// Release any data associated with the shader if it gives an error.
+				Release();
 
 				return false;
 			}
@@ -81,7 +102,14 @@ bool Jade::Graphics::DXShader::Create()
 
 			if (shaderResult < 0)
 			{
-				m_pShaderBlob->Release();
+				if (m_pShaderBlob)
+					m_pShaderBlob->Release();
+
+				// Output compilation errors to console.
+				std::cout << "ERROR: Pixel shader creation failed..." << std::endl;
+
+				// Release any data associated with the shader if it gives an error.
+				Release();
 
 				return false;
 			}
@@ -97,7 +125,14 @@ bool Jade::Graphics::DXShader::Create()
 			
 			if (shaderResult < 0)
 			{
-				m_pShaderBlob->Release();
+				if (m_pShaderBlob)
+					m_pShaderBlob->Release();
+
+				// Output compilation errors to console.
+				std::cout << "ERROR: Tesselation shader creation failed..." << std::endl;
+
+				// Release any data associated with the shader if it gives an error.
+				Release();
 
 				return false;
 			}
@@ -111,7 +146,14 @@ bool Jade::Graphics::DXShader::Create()
 
 			if(shaderResult < 0)
 			{
-				m_pShaderBlob->Release();
+				if (m_pShaderBlob)
+					m_pShaderBlob->Release();
+
+				// Output compilation errors to console.
+				std::cout << "ERROR: Vertex shader creation failed..." << std::endl;
+
+				// Release any data associated with the shader if it gives an error.
+				Release();
 
 				return false;
 			}
@@ -129,7 +171,14 @@ bool Jade::Graphics::DXShader::Create()
 
 			if(inputResult < 0)
 			{
-				m_pShaderBlob->Release();
+				if(m_pShaderBlob)
+					m_pShaderBlob->Release();
+
+				// Output compilation errors to console.
+				std::cout << "ERROR: Vertex shader creation failed..." << std::endl;
+
+				// Release any data associated with the shader if it gives an error.
+				Release();
 
 				return false;
 			}
@@ -163,6 +212,24 @@ bool Jade::Graphics::DXShader::Release()
 		m_pPixelShader->Release();
 	if(m_pVertexShader)		
 		m_pVertexShader->Release();
+
+	m_pShaderBlob = nullptr;
+
+	m_pComputeShader = nullptr;
+	m_pDomainShader = nullptr;
+	m_pGeometryShader = nullptr;
+	m_pHullShader = nullptr;
+	m_pPixelShader = nullptr;
+	m_pVertexShader = nullptr;
+
+	delete m_pShaderBlob;
+
+	delete m_pComputeShader;
+	delete m_pDomainShader;
+	delete m_pGeometryShader;
+	delete m_pHullShader;
+	delete m_pPixelShader;
+	delete m_pVertexShader;
 
 	std::cout << "Shader cleaning up..." << std::endl;
 
@@ -222,27 +289,35 @@ bool Jade::Graphics::DXShader::Compile()
 
 		// Compile the shader
 		// NOTE: Main must be used as the entrypoint of all shader files for consistency.
-		
 		long hr = D3DCompileFromFile(filepath.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE, "Main", profile, flags, 0, &m_pShaderBlob, &l_pErrorBlob);
 
 		if (hr < 0)
 		{
-			// Ensure that the blob has data to read from before attempting to print.
-			if(l_pErrorBlob->GetBufferPointer() != nullptr)
+			// Output compilation errors to console.
+			switch (type)
 			{
-				// Output compilation errors to console.
-				std::cout << static_cast<char*>(l_pErrorBlob->GetBufferPointer()) << std::endl;
-
-				// Release loose pointers.
-				l_pErrorBlob->Release();
-			}	
-			else
-			{
-				std::cout << "Unknown shader error..." << std::endl;
-
-				// Release loose pointers.
-				l_pErrorBlob->Release();
+			case ShaderType::Compute:
+				std::cout << "ERROR: Compute shader compilation failed..." << std::endl;
+				break;
+			case ShaderType::Domain:
+				std::cout << "ERROR: Domain shader compilation failed..." << std::endl;
+				break;
+			case ShaderType::Geometry:
+				std::cout << "ERROR: Geometry shader compilation failed..." << std::endl;
+				break;
+			case ShaderType::Pixel:
+				std::cout << "ERROR: Pixel shader compilation failed..." << std::endl;
+				break;
+			case ShaderType::Tesselation:
+				std::cout << "ERROR: Tesselation shader compilation failed..." << std::endl;
+				break;
+			case ShaderType::Vertex:
+				std::cout << "ERROR: Vertex shader compilation failed..." << std::endl;
+				break;
 			}
+
+			// Release any data associated with the shader if it gives an error.
+			Release();
 
 			return false;
 		}

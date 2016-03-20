@@ -25,6 +25,7 @@ SOFTWARE.
 */
 
 #include <vector>
+#include <directxmath.h>
 
 #include "Core/Utility.h"
 #include "Graphics/Device/DXDevice.h"
@@ -44,12 +45,19 @@ namespace Jade
 			std::vector<unsigned int> indices;
 			std::shared_ptr<DXDevice> device;
 
+			bool bufferSuccess;
+
 			typedef struct ConstantBuffer 
 			{
-				Math::Matrix4 world;
-				Math::Matrix4 view;
-				Math::Matrix4 projection;
+				DirectX::XMMATRIX world;
+				DirectX::XMMATRIX view;
+				DirectX::XMMATRIX projection;
 			} Space;
+
+			Space space;
+			DirectX::XMMATRIX world;
+			DirectX::XMMATRIX view;
+			DirectX::XMMATRIX projection;
 
 			void Bind() override;
 			void Unbind() override;

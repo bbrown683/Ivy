@@ -44,6 +44,10 @@ bool Jade::System::NativeWindow::PollWindowEvents()
 
 		switch (e.type)
 		{
+		case SDL_KEYDOWN:
+			if (e.key.keysym.sym == SDLK_ESCAPE)
+					escape = true;
+			break;
 		case SDL_QUIT:
 			open = false;
 			break;
@@ -254,6 +258,19 @@ bool Jade::System::NativeWindow::IsFullscreen()
 bool Jade::System::NativeWindow::IsActive()
 {
 	return active;
+}
+
+bool Jade::System::NativeWindow::IsKeyDown(Key key)
+{
+	if (key == Key::Escape)
+		return escape;
+
+	return false;
+}
+
+bool Jade::System::NativeWindow::IsKeyUp(Key key)
+{
+	return !IsKeyDown(key);
 }
 
 float Jade::System::NativeWindow::GetDeltaTime()

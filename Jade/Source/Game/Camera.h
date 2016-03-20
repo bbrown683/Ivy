@@ -24,13 +24,20 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include "Graphics/Device/Device.h"
+
 namespace Jade
 {
-	namespace Game
+	namespace Graphics
 	{
 		class Camera
 		{
+		public:
 
+			Camera(std::shared_ptr<Device> device)
+			{
+				
+			}
 		};
 	}
 }

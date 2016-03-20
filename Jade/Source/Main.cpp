@@ -22,10 +22,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include <iostream>
+
 #include "System/Window/Window.h"
 #include "Graphics/Device/Device.h"
 #include "Graphics/Shader/Shader.h"
 #include "Graphics/Mesh/Mesh.h"
+#include "Math/Math.h"
+#include "Math/Helper.h"
 
 using Jade::System::Window;
 using Jade::Graphics::Device;
@@ -48,24 +52,25 @@ int main(int argc, char* argv[])
 	std::shared_ptr<Shader>	pixelShader = std::make_shared<Shader>("pixel.hlsl", Jade::Graphics::ShaderType::Pixel, device);
 
 	// Create some vertices for our triangle.
+	/*
 	std::vector<Vertex> vertices = {
 		{ Vector3(0.0f, 0.5f, 0.5f), Color::Red },
 		{ Vector3(0.5f, -0.5f, 0.5f), Color::Green },
 		{ Vector3(-0.5f, -0.5f, 0.5f), Color::Blue } };
 
 	std::vector<unsigned int> indices = { 0, 1, 2 };
-
-	/* SQUARE - does not work as of yet most likely due to the viewport.
+	*/
+	// SQUARE - does not work as of yet most likely due to the viewport.
 	std::vector<Vertex> vertices =
 	{
 		{ Vector3(-1.0f, 1.0f, -1.0f), Color::Red },
-		{ Vector3(1.0f, 1.0f, -1.0f), Color::Red },
-		{ Vector3(1.0f, 1.0f, 1.0f), Color::Red },
-		{ Vector3(-1.0f, 1.0f, 1.0f), Color::Red },
-		{ Vector3(-1.0f, -1.0f, -1.0f), Color::Red },
-		{ Vector3(1.0f, -1.0f, -1.0f), Color::Red },
-		{ Vector3(1.0f, -1.0f, 1.0f), Color::Red },
-		{ Vector3(-1.0f, -1.0f, 1.0f), Color::Red },
+		{ Vector3(1.0f, 1.0f, -1.0f), Color::Green },
+		{ Vector3(1.0f, 1.0f, 1.0f), Color::Blue },
+		{ Vector3(-1.0f, 1.0f, 1.0f), Color::White },
+		{ Vector3(-1.0f, -1.0f, -1.0f), Color::Black },
+		{ Vector3(1.0f, -1.0f, -1.0f), Color::Purple },
+		{ Vector3(1.0f, -1.0f, 1.0f), Color::Yellow },
+		{ Vector3(-1.0f, -1.0f, 1.0f), Color::Magenta },
 	};
 
 	std::vector<unsigned int> indices =
@@ -88,7 +93,7 @@ int main(int argc, char* argv[])
 		6,4,5,
 		7,4,6,
 	};
-	*/
+	
 	// Creates and binds the vertex buffer for drawing the triangular mesh.
 	std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>(vertices, indices, device);
 
@@ -100,9 +105,16 @@ int main(int argc, char* argv[])
 		// Draw the vertices.
 		mesh->Draw();
 
-		// Updating
-		device->Present();
-		window->PollEvents();
+		// Updating if escape is not pressed.
+		if (window->IsKeyDown(Jade::System::Key::Escape))
+		{
+			window->Close();
+		}
+		else
+		{
+			device->Present();
+			window->PollEvents();
+		}
 	}
 
 	return 0;

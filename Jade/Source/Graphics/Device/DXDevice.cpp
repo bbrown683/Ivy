@@ -126,6 +126,25 @@ bool Jade::Graphics::DXDevice::Release()
 	if(m_pDevice)				
 		m_pDevice->Release();
 	
+	// Safe deletion of pointers to ensure none are lingering with values.
+	m_pImmediateContext = nullptr;
+	m_pVertexBuffer = nullptr;
+	m_pConstantBuffer = nullptr;
+	m_pIndexBuffer = nullptr;
+	m_pInputLayout = nullptr;
+	m_pRenderTargetView = nullptr;
+	m_pSwapChain = nullptr;
+	m_pDevice = nullptr;
+
+	delete m_pImmediateContext;
+	delete m_pVertexBuffer;
+	delete m_pConstantBuffer;
+	delete m_pIndexBuffer;
+	delete m_pInputLayout;
+	delete m_pRenderTargetView;
+	delete m_pSwapChain;
+	delete m_pDevice;
+
 	std::cout << "DirectX device was disposed of successfully..." << std::endl;
 
 	return true;

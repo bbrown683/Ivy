@@ -97,7 +97,9 @@
       <AdditionalOptions>/NODEFAULTLIB:MSVCRT %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /f /s /y "$(SolutionDir)ThirdParty\SDL\bin\$(PlatformTarget)\SDL2.dll" "$(OutputPath)"
+      <Command>xcopy /f /s /y "$(ProjectDir)vertex.hlsl" "$(OutputPath)"
+xcopy /f /s /y "$(ProjectDir)pixel.hlsl" "$(OutputPath)"
+xcopy /f /s /y "$(SolutionDir)ThirdParty\SDL\bin\$(PlatformTarget)\SDL2.dll" "$(OutputPath)"
 xcopy /f /s /y "$(SolutionDir)ThirdParty\glew\bin\$(PlatformTarget)\glew32.dll" "$(OutputPath)"
 if $(PlatformTarget) == x86 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp32.dll" "$(OutputPath)" 
 if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp64.dll" "$(OutputPath)" </Command>
@@ -119,7 +121,9 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
       <AdditionalOptions>/NODEFAULTLIB:MSVCRT %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /f /s /y "$(SolutionDir)ThirdParty\SDL\bin\$(PlatformTarget)\SDL2.dll" "$(OutputPath)"
+      <Command>xcopy /f /s /y "$(ProjectDir)vertex.hlsl" "$(OutputPath)"
+xcopy /f /s /y "$(ProjectDir)pixel.hlsl" "$(OutputPath)"
+xcopy /f /s /y "$(SolutionDir)ThirdParty\SDL\bin\$(PlatformTarget)\SDL2.dll" "$(OutputPath)"
 xcopy /f /s /y "$(SolutionDir)ThirdParty\glew\bin\$(PlatformTarget)\glew32.dll" "$(OutputPath)"
 if $(PlatformTarget) == x86 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp32.dll" "$(OutputPath)" 
 if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp64.dll" "$(OutputPath)" </Command>
@@ -149,7 +153,9 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /f /s /y "$(SolutionDir)ThirdParty\SDL\bin\$(PlatformTarget)\SDL2.dll" "$(OutputPath)"
+      <Command>xcopy /f /s /y "$(ProjectDir)vertex.hlsl" "$(OutputPath)"
+xcopy /f /s /y "$(ProjectDir)pixel.hlsl" "$(OutputPath)"
+xcopy /f /s /y "$(SolutionDir)ThirdParty\SDL\bin\$(PlatformTarget)\SDL2.dll" "$(OutputPath)"
 xcopy /f /s /y "$(SolutionDir)ThirdParty\glew\bin\$(PlatformTarget)\glew32.dll" "$(OutputPath)"
 if $(PlatformTarget) == x86 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp32.dll" "$(OutputPath)" 
 if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp64.dll" "$(OutputPath)" </Command>
@@ -179,7 +185,9 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /f /s /y "$(SolutionDir)ThirdParty\SDL\bin\$(PlatformTarget)\SDL2.dll" "$(OutputPath)"
+      <Command>xcopy /f /s /y "$(ProjectDir)vertex.hlsl" "$(OutputPath)"
+xcopy /f /s /y "$(ProjectDir)pixel.hlsl" "$(OutputPath)"
+xcopy /f /s /y "$(SolutionDir)ThirdParty\SDL\bin\$(PlatformTarget)\SDL2.dll" "$(OutputPath)"
 xcopy /f /s /y "$(SolutionDir)ThirdParty\glew\bin\$(PlatformTarget)\glew32.dll" "$(OutputPath)"
 if $(PlatformTarget) == x86 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp32.dll" "$(OutputPath)" 
 if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp64.dll" "$(OutputPath)" </Command>
@@ -236,6 +244,7 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClInclude Include="Graphics\Shader\ShaderType.h" />
     <ClInclude Include="Graphics\Texture\Texture.h" />
     <ClInclude Include="Graphics\Texture\TextureType.h" />
+    <ClInclude Include="System\Key.h" />
     <ClInclude Include="System\Window\IWindow.h" />
     <ClInclude Include="System\Window\NativeWindow.h" />
     <ClInclude Include="System\Window\Window.h" />

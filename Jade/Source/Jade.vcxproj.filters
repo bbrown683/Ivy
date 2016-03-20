@@ -97,6 +97,7 @@
     <ClInclude Include="System\Window\IWindow.h" />
     <ClInclude Include="System\Window\NativeWindow.h" />
     <ClInclude Include="System\Window\Window.h" />
+    <ClInclude Include="System\Key.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">

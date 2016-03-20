@@ -24,6 +24,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include <iostream>
+
 #include "Core/Utility.h"
 
 #include "Graphics/Shader/IShader.h"
@@ -64,31 +66,13 @@ namespace Jade
 				this->type = type;
 
 				// If our shaders compile correctly, we can create them.
-				if(Compile())
+				if (Compile())
 					Create();
 			}
 
 			~DXShader()
 			{
 				Release();
-
-				m_pShaderBlob = nullptr;
-
-				m_pComputeShader = nullptr;
-				m_pDomainShader = nullptr;
-				m_pGeometryShader = nullptr;
-				m_pHullShader = nullptr;
-				m_pPixelShader = nullptr;
-				m_pVertexShader = nullptr;
-
-				delete m_pShaderBlob;
-
-				delete m_pComputeShader;
-				delete m_pDomainShader;
-				delete m_pGeometryShader;
-				delete m_pHullShader;
-				delete m_pPixelShader;
-				delete m_pVertexShader;
 			}
 
 			bool Compile() override;

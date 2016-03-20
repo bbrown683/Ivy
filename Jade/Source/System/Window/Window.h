@@ -109,6 +109,18 @@ namespace Jade
 				return window->IsActive();
 			}
 
+			// Returns a boolean determining if a key was pressed.
+			bool IsKeyDown(Key key) const
+			{
+				return window->IsKeyDown(key);
+			}
+
+			// Returns a boolean determining if a key was not pressed.
+			bool IsKeyUp(Key key) const
+			{
+				return window->IsKeyUp(key);
+			}
+
 			std::shared_ptr<IWindow> GetWindowInterface() const
 			{
 				return window;
@@ -130,16 +142,20 @@ namespace Jade
 					window->InitWindow();
 			}
 
+			~Window()
+			{
+				Close();
+			}
+
 			bool PollEvents() const
 			{
 				return window->PollWindowEvents();
 			}
 
 			// Closes the window and exits the application.
-			void Close()
+			void Close() const
 			{
 				window->Close();
-				this->~Window();
 			}
 
 			float GetDeltaTime() const

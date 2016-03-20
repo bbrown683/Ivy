@@ -29,4 +29,7 @@ const Jade::Math::Color Jade::Math::Color::Red(1.0f, 0.0f, 0.0f, 1.0f);
 const Jade::Math::Color Jade::Math::Color::Green(0.0f, 1.0f, 0.0f, 1.0f);
 const Jade::Math::Color Jade::Math::Color::Blue(0.0f, 0.0f, 1.0f, 1.0f);
 const Jade::Math::Color Jade::Math::Color::Black(0.0f, 0.0f, 0.0f, 1.0f);
+const Jade::Math::Color Jade::Math::Color::Magenta(1.0f, 0.0f, 1.0f, 1.0f);
+const Jade::Math::Color Jade::Math::Color::Purple(0.502f, 0.0f, 0.502f, 1.0f);
 const Jade::Math::Color Jade::Math::Color::White(1.0f, 1.0f, 1.0f, 1.0f);
+const Jade::Math::Color Jade::Math::Color::Yellow(1.0f, 1.0f, 0.0f, 1.0f);
