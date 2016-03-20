@@ -38,7 +38,7 @@ namespace Jade
 		{
 		private:
 
-			wstring filename;
+			string filename;
 			ShaderType type;
 			std::shared_ptr<DXDevice> device;
 
@@ -57,7 +57,7 @@ namespace Jade
 
 		public:
 
-			DXShader(wstring filename, ShaderType type, std::shared_ptr<DXDevice> device)
+			DXShader(string filename, ShaderType type, std::shared_ptr<DXDevice> device)
 			{	
 				this->filename = filename;
 				this->device = device;

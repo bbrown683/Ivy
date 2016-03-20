@@ -49,7 +49,7 @@ namespace Jade
 				Math::Matrix4 world;
 				Math::Matrix4 view;
 				Math::Matrix4 projection;
-			} View;
+			} Space;
 
 			void Bind() override;
 			void Unbind() override;

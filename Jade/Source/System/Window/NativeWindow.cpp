@@ -174,6 +174,10 @@ bool Jade::System::NativeWindow::InitWindow()
 				SDL_SetWindowFullscreen(m_pWindow, SDL_WINDOW_FULLSCREEN_DESKTOP);
 			}
 
+			// Set Icon.
+			//SDL_Surface* icon = SDL_LoadBMP("test.bmp");
+			//SDL_SetWindowIcon(m_pWindow, icon);
+
 			// Capture window info so we can grab window handle.
 			SDL_GetVersion(&m_WindowInfo.version);
 			SDL_GetWindowWMInfo(m_pWindow, &m_WindowInfo);

@@ -49,11 +49,11 @@ void Jade::Graphics::DXMesh::Bind()
 	{
 		device->m_pVertexBuffer->Release();
 
-		std::cout << "Vertex buffer creation failed." << std::endl;
+		std::cout << "Vertex buffer creation failed..." << std::endl;
 	}
 	else
 	{
-		std::cout << "Vertex buffer was created successfully." << std::endl;
+		std::cout << "Vertex buffer was created successfully..." << std::endl;
 
 		unsigned int stride = sizeof(Math::Vertex);
 		unsigned int offset = 0;
@@ -76,17 +76,38 @@ void Jade::Graphics::DXMesh::Bind()
 		{
 			device->m_pIndexBuffer->Release();
 
-			std::cout << "Index buffer creation failed." << std::endl;
+			std::cout << "Index buffer creation failed..." << std::endl;
 		}
 		else
 		{
-			std::cout << "Index buffer was created successfully." << std::endl;
+			std::cout << "Index buffer was created successfully..." << std::endl;
 
 			// Assign index buffer.
 			device->m_pImmediateContext->IASetIndexBuffer(device->m_pIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
 
 			// Set the primitive topology.
 			device->m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+			// Create the constant buffer
+			/*
+			desc.Usage = D3D11_USAGE_DEFAULT;
+			desc.ByteWidth = sizeof(ConstantBuffer);
+			desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+			desc.CPUAccessFlags = 0;
+			
+			hr = device->m_pDevice->CreateBuffer(&desc, nullptr, &device->m_pConstantBuffer);
+			
+			if (hr < 0)
+			{
+				device->m_pConstantBuffer->Release();
+
+				std::cout << "Constant buffer creation failed." << std::endl;
+			}
+			else
+			{
+				std::cout << "Constant buffer was created successfully." << std::endl;
+			}
+			*/
 		}
 	}
 }

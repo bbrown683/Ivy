@@ -44,8 +44,8 @@ int main(int argc, char* argv[])
 	std::shared_ptr<Device> device = std::make_shared<Device>(window);
 
 	// Create our two required shaders for drawing onto the surface.
-	std::shared_ptr<Shader>	vertexShader = std::make_shared<Shader>(L".\\resources\\shaders\\vertex.hlsl", Jade::Graphics::ShaderType::Vertex, device);
-	std::shared_ptr<Shader>	pixelShader = std::make_shared<Shader>(L".\\resources\\shaders\\pixel.hlsl", Jade::Graphics::ShaderType::Pixel, device);
+	std::shared_ptr<Shader>	vertexShader = std::make_shared<Shader>("vertex.hlsl", Jade::Graphics::ShaderType::Vertex, device);
+	std::shared_ptr<Shader>	pixelShader = std::make_shared<Shader>("pixel.hlsl", Jade::Graphics::ShaderType::Pixel, device);
 
 	// Create some vertices for our triangle.
 	std::vector<Vertex> vertices = {
@@ -55,7 +55,7 @@ int main(int argc, char* argv[])
 
 	std::vector<unsigned int> indices = { 0, 1, 2 };
 
-	/* SQUARE - does not work as of yet.
+	/* SQUARE - does not work as of yet most likely due to the viewport.
 	std::vector<Vertex> vertices =
 	{
 		{ Vector3(-1.0f, 1.0f, -1.0f), Color::Red },

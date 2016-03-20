@@ -121,7 +121,7 @@ bool Jade::Graphics::DXShader::Create()
 			{
 				{ "POSITION",	0, DXGI_FORMAT_R32G32B32_FLOAT	,	0, 0,	D3D11_INPUT_PER_VERTEX_DATA,	0 },
 				{ "COLOR"	,	0, DXGI_FORMAT_R32G32B32A32_FLOAT,	0, 16,	D3D11_INPUT_PER_VERTEX_DATA,	0 },
-				//{"TEXCOORD",	0, DXGI_FORMAT_R32G32B32A32_FLOAT,	0, 0,	D3D11_INPUT_PER_INSTANCE_DATA,	0},
+				//{ "TEXCOORD",	0, DXGI_FORMAT_R32G32B32A32_FLOAT,	0, 28,	D3D11_INPUT_PER_INSTANCE_DATA,	0},
 			};
 
 			// Create the input layout.
@@ -217,9 +217,13 @@ bool Jade::Graphics::DXShader::Compile()
 	{
 		ID3DBlob* l_pErrorBlob = nullptr;
 
+		// Convert string to a wstring as D3DCompileFromFile requires it.
+		wstring filepath(filename.begin(), filename.end());
+
 		// Compile the shader
 		// NOTE: Main must be used as the entrypoint of all shader files for consistency.
-		long hr = D3DCompileFromFile(filename.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE, "Main", profile, flags, 0, &m_pShaderBlob, &l_pErrorBlob);
+		
+		long hr = D3DCompileFromFile(filepath.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE, "Main", profile, flags, 0, &m_pShaderBlob, &l_pErrorBlob);
 
 		if (hr < 0)
 		{
