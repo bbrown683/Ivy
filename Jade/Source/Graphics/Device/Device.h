@@ -25,10 +25,9 @@ SOFTWARE.
 */
 
 #include "Core/Utility.h"
-
 #include "Graphics/Device/GraphicsAPI.h"
 #include "Graphics/Device/IDevice.h"
-#include "Graphics/Window/Window.h"
+#include "System/Window/Window.h"
 
 namespace Jade
 {
@@ -39,7 +38,7 @@ namespace Jade
 		private:
 
 			std::shared_ptr<IDevice> device;
-			std::shared_ptr<IWindow> window;
+			std::shared_ptr<System::IWindow> window;
 
 			GraphicsAPI api;
 
@@ -69,7 +68,7 @@ namespace Jade
 				stencilBits(0), depthBits(0), colorBits(0), sampling(false), samples(0), vsync(false) { }
 
 			// Default device constructor.
-			Device(std::shared_ptr<Window> window) : backBufferWidth(window->GetWidth()), backBufferHeight(window->GetHeight()),
+			Device(std::shared_ptr<System::Window> window) : backBufferWidth(window->GetWidth()), backBufferHeight(window->GetHeight()),
 				stencilBits(24), depthBits(8), colorBits(32), sampling(false), samples(1), vsync(false)
 			{
 				this->window = window->GetWindowInterface(); // Retrieve the interface object.
@@ -77,7 +76,7 @@ namespace Jade
 				device = SelectDevice();
 			}
 
-			Device(std::shared_ptr<Window> window, int backBufferWidth, int backBufferHeight, int stencilBits,
+			Device(std::shared_ptr<System::Window> window, int backBufferWidth, int backBufferHeight, int stencilBits,
 				int depthBits, int colorBits, bool sampling, int samples, bool vsync)
 			{
 				this->window = window->GetWindowInterface();	// Retrieve the interface object.

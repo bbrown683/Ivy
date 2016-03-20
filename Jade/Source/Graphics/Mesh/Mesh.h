@@ -29,8 +29,6 @@ SOFTWARE.
 #include "Graphics/Mesh/DXMesh.h"
 #include "Graphics/Mesh/GLMesh.h"
 
-//#include "Math/Vector3.h"
-
 namespace Jade
 {
 	namespace Graphics
@@ -39,7 +37,8 @@ namespace Jade
 		{
 		private:
 
-			Math::Vertex* vertex;
+			std::vector<Math::Vertex> vertices;
+			std::vector<unsigned int> indices;
 
 			std::shared_ptr<Device> device;
 			std::shared_ptr<IMesh> mesh;
@@ -48,9 +47,10 @@ namespace Jade
 
 		public:
 
-			Mesh(Math::Vertex* vertex, std::shared_ptr<Device> device)
+			Mesh(std::vector<Math::Vertex> vertices, std::vector<unsigned int> indices, std::shared_ptr<Device> device)
 			{
-				this->vertex = vertex;
+				this->vertices = vertices;
+				this->indices = indices;
 				this->device = device;
 
 				mesh = CreateMesh();

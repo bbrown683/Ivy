@@ -24,7 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "Graphics/Window/IWindow.h"
+#include "System/Window/IWindow.h"
 
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_syswm.h"
@@ -34,7 +34,7 @@ SOFTWARE.
 
 namespace Jade
 {
-	namespace Graphics
+	namespace System
 	{
 		class NativeWindow : public IWindow
 		{

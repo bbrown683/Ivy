@@ -1,6 +1,12 @@
 #pragma once
 
-enum class TextureType
+namespace Jade
 {
-	Diffuse
-};
+	namespace Graphics
+	{
+		enum class TextureType
+		{
+			Diffuse
+		};
+	}
+}

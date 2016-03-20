@@ -30,12 +30,12 @@ std::shared_ptr<Jade::Graphics::IMesh> Jade::Graphics::Mesh::CreateMesh()
 	{
 		case GraphicsAPI::DirectX:
 		{
-			return std::make_shared<DXMesh>(vertex, std::dynamic_pointer_cast<DXDevice>(device->GetDeviceInterface()));
+			return std::make_shared<DXMesh>(vertices, indices, std::dynamic_pointer_cast<DXDevice>(device->GetDeviceInterface()));
 		}
 		case GraphicsAPI::OpenGL:
 		{
 			// OpenGL uses a state machine so we dont need to pass a device.
-			return std::make_shared<GLMesh>(nullptr);
+			return std::make_shared<GLMesh>(vertices, indices);
 		}
 		case GraphicsAPI::Vulkan:
 		{

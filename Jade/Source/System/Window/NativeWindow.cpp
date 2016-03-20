@@ -24,18 +24,16 @@ SOFTWARE.
 
 #include <iostream>
 
-#include "Graphics/Window/NativeWindow.h"
-
+#include "System/Window/NativeWindow.h"
 #include "System/Platform.h"
 
-bool Jade::Graphics::NativeWindow::PollWindowEvents()
+bool Jade::System::NativeWindow::PollWindowEvents()
 {
 	// Basic event loop. Events that involves rendering 
 	// such as Resizing is done by the graphics device itself.
-
 	SDL_Event e;
 
-	int startTime = SDL_GetTicks();
+	//int startTime = SDL_GetTicks();
 
 	while (SDL_PollEvent(&e))
 	{
@@ -55,7 +53,7 @@ bool Jade::Graphics::NativeWindow::PollWindowEvents()
 	return true;
 }
 
-void Jade::Graphics::NativeWindow::Close()
+void Jade::System::NativeWindow::Close()
 {
 	SDL_DestroyWindow(m_pWindow);
 	SDL_Quit();
@@ -63,7 +61,7 @@ void Jade::Graphics::NativeWindow::Close()
 	open = false;
 }
 
-void* Jade::Graphics::NativeWindow::Handle()
+void* Jade::System::NativeWindow::Handle()
 {
 	// With OpenGL being cross platform, we have to ensure 
 	// that the Window handle works for Jade's supported platforms.
@@ -76,74 +74,74 @@ void* Jade::Graphics::NativeWindow::Handle()
 #endif
 }
 
-int Jade::Graphics::NativeWindow::GetWidth()
+int Jade::System::NativeWindow::GetWidth()
 {
 	return width;
 }
 
-void Jade::Graphics::NativeWindow::SetWidth(int value)
+void Jade::System::NativeWindow::SetWidth(int value)
 {
 	SDL_SetWindowSize(m_pWindow, value, height);
 	this->width = value;
 }
 
-int Jade::Graphics::NativeWindow::GetHeight()
+int Jade::System::NativeWindow::GetHeight()
 {
 	return height;
 }
 
-void Jade::Graphics::NativeWindow::SetHeight(int value)
+void Jade::System::NativeWindow::SetHeight(int value)
 {
 	SDL_SetWindowSize(m_pWindow, width, value);
 	this->height = value;
 }
 
-int Jade::Graphics::NativeWindow::GetX()
+int Jade::System::NativeWindow::GetX()
 {
 	return x;
 }
 
-void Jade::Graphics::NativeWindow::SetX(int value)
+void Jade::System::NativeWindow::SetX(int value)
 {
 	SDL_SetWindowPosition(m_pWindow, value, x);
 	this->x = value;
 }
 
-int Jade::Graphics::NativeWindow::GetY()
+int Jade::System::NativeWindow::GetY()
 {
 	return y;
 }
 
-void Jade::Graphics::NativeWindow::SetY(int value)
+void Jade::System::NativeWindow::SetY(int value)
 {
 	SDL_SetWindowPosition(m_pWindow, x, value);
 	this->y = value;
 }
 
-string Jade::Graphics::NativeWindow::GetTitle()
+string Jade::System::NativeWindow::GetTitle()
 {
 	return title;
 }
 
-void Jade::Graphics::NativeWindow::SetTitle(string value)
+void Jade::System::NativeWindow::SetTitle(string value)
 {
 	SDL_SetWindowTitle(m_pWindow, value.c_str());
 	this->title = value;
 }
 
-Jade::Math::Point Jade::Graphics::NativeWindow::GetPosition()
+Jade::Math::Point Jade::System::NativeWindow::GetPosition()
 {
 	return Math::Point(static_cast<float>(x), static_cast<float>(y));
 }
 
-void Jade::Graphics::NativeWindow::SetPosition(int x, int y)
+void Jade::System::NativeWindow::SetPosition(int x, int y)
 {
 	SDL_SetWindowPosition(m_pWindow, x, y);
 	this->x = x;
 	this->y = y;
 }
 
-bool Jade::Graphics::NativeWindow::InitWindow()
+bool Jade::System::NativeWindow::InitWindow()
 {
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
@@ -189,19 +187,19 @@ bool Jade::Graphics::NativeWindow::InitWindow()
 	return false;
 }
 
-void Jade::Graphics::NativeWindow::Show()
+void Jade::System::NativeWindow::Show()
 {
 	SDL_ShowWindow(m_pWindow);
 	hidden = false;
 }
 
-void Jade::Graphics::NativeWindow::Hide()
+void Jade::System::NativeWindow::Hide()
 {
 	SDL_HideWindow(m_pWindow);
 	hidden = true;
 }
 
-void Jade::Graphics::NativeWindow::Restore()
+void Jade::System::NativeWindow::Restore()
 {
 	SDL_RestoreWindow(m_pWindow);
 
@@ -212,54 +210,54 @@ void Jade::Graphics::NativeWindow::Restore()
 		minimized = false;
 }
 
-void Jade::Graphics::NativeWindow::Maximize()
+void Jade::System::NativeWindow::Maximize()
 {
 	SDL_MaximizeWindow(m_pWindow);
 	maximized = true;
 }
 
-bool Jade::Graphics::NativeWindow::IsMaximized()
+bool Jade::System::NativeWindow::IsMaximized()
 {
 	return maximized;
 }
 
-void Jade::Graphics::NativeWindow::Minimize()
+void Jade::System::NativeWindow::Minimize()
 {
 	SDL_MinimizeWindow(m_pWindow);
 	minimized = true;
 }
 
-bool Jade::Graphics::NativeWindow::IsMinimized()
+bool Jade::System::NativeWindow::IsMinimized()
 {
 	return minimized;
 }
 
-bool Jade::Graphics::NativeWindow::IsVisible()
+bool Jade::System::NativeWindow::IsVisible()
 {
 	return !hidden;
 }
 
-bool Jade::Graphics::NativeWindow::IsOpen()
+bool Jade::System::NativeWindow::IsOpen()
 {
 	return open;
 }
 
-bool Jade::Graphics::NativeWindow::IsFullscreen()
+bool Jade::System::NativeWindow::IsFullscreen()
 {
 	return fullscreen;
 }
 
-bool Jade::Graphics::NativeWindow::IsActive()
+bool Jade::System::NativeWindow::IsActive()
 {
 	return active;
 }
 
-float Jade::Graphics::NativeWindow::GetDeltaTime()
+float Jade::System::NativeWindow::GetDeltaTime()
 {
 	return timer.GetDeltaTime();
 }
 
-SDL_Window* Jade::Graphics::NativeWindow::GetSDLWindow()
+SDL_Window* Jade::System::NativeWindow::GetSDLWindow()
 {
 	return m_pWindow;
 }

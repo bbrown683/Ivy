@@ -29,7 +29,7 @@ SOFTWARE.
 #include "Core/Utility.h"
 
 #include "Graphics/Device/IDevice.h"
-#include "Graphics/Window/Window.h"
+#include "System/Window/Window.h"
 
 namespace Jade
 {
@@ -43,7 +43,7 @@ namespace Jade
 			friend class DXShader;
 			friend class DXMesh;
 
-			std::shared_ptr<IWindow> window;
+			std::shared_ptr<System::IWindow> window;
 
 			// Necessary to initialize a D3D device.
 
@@ -72,7 +72,7 @@ namespace Jade
 			DXDevice() : window(nullptr) { }
 
 			// We have a window handle.
-			DXDevice(std::shared_ptr<IWindow> window)
+			DXDevice(std::shared_ptr<System::IWindow> window)
 			{
 				this->window = window;
 

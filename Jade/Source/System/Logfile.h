@@ -2,22 +2,25 @@
 
 #include "Core/Utility.h"
 
-namespace System
+namespace Jade
 {
-	class Logfile
+	namespace System
 	{
-	private:
+		class Logfile
+		{
+		private:
 
-	public:
+		public:
 
-		// Initializes our log manager.
-		void Initialize();
+			// Initializes our log manager.
+			void Initialize();
 
-		// 
-		void Destroy();
-		
-		// 
-		void Write(string filename);
+			// 
+			void Destroy();
 
-	};
+			// 
+			void Write(string filename);
+
+		};
+	}
 }

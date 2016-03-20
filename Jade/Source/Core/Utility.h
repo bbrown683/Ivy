@@ -31,3 +31,6 @@ SOFTWARE.
 
 // Pointer handling
 #include <memory>
+
+// Used to export symbols.
+#define JADEAPI					__declspec(dllexport)

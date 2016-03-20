@@ -1,6 +1,6 @@
 #include "Logfile.h"
 
-void System::Logfile::Write(string filename)
+void Jade::System::Logfile::Write(string filename)
 {
 
 }

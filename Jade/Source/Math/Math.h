@@ -84,6 +84,8 @@ namespace Jade
 
 			static float Round(float x);
 
+			static int Random();
+
 			static float Floor(float x);
 
 			static float Ceiling(float x);

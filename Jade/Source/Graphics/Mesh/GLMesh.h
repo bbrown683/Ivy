@@ -24,9 +24,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include <vector>
+
 #include "Core/Utility.h"
 #include "Graphics/Mesh/IMesh.h"
-#include "Math/Vector3.h"
+#include "Math/Vertex.h"
 
 namespace Jade
 {
@@ -36,16 +38,23 @@ namespace Jade
 		{
 		private:
 
-			Math::Vector3* vertices;
+			std::vector<Math::Vertex> vertices;
+			std::vector<unsigned int> indices;
 
 			void Bind() override;
 			void Unbind() override;
 
 		public:
 
-			GLMesh(Math::Vector3* vertices)
+			GLMesh(std::vector<Math::Vertex> vertices, std::vector<unsigned int> indices)
 			{
 				this->vertices = vertices;
+				this->indices = indices;
+			}
+
+			~GLMesh()
+			{
+				Unbind();
 			}
 
 			void Draw() override;

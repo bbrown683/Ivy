@@ -1,23 +1,26 @@
 #pragma once
 
-namespace Core
+namespace Jade
 {
-	class Time
+	namespace Core
 	{
-	private:
-
-		float deltaTime;
-
-	public:
-
-		float GetDeltaTime() const
+		class Time
 		{
-			return deltaTime;
-		}
+		private:
 
-		void SetDeltaTime(float value)
-		{
-			deltaTime = value;
-		}
-	};
+			float deltaTime;
+
+		public:
+
+			float GetDeltaTime() const
+			{
+				return deltaTime;
+			}
+
+			void SetDeltaTime(float value)
+			{
+				deltaTime = value;
+			}
+		};
+	}
 }

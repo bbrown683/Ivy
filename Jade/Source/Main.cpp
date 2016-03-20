@@ -22,12 +22,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "Graphics/Window/Window.h"
+#include "System/Window/Window.h"
 #include "Graphics/Device/Device.h"
 #include "Graphics/Shader/Shader.h"
 #include "Graphics/Mesh/Mesh.h"
 
-using Jade::Graphics::Window;
+using Jade::System::Window;
 using Jade::Graphics::Device;
 using Jade::Graphics::Shader;
 using Jade::Graphics::Mesh;
@@ -44,22 +44,58 @@ int main(int argc, char* argv[])
 	std::shared_ptr<Device> device = std::make_shared<Device>(window);
 
 	// Create our two required shaders for drawing onto the surface.
-	std::shared_ptr<Shader>	vertexShader = std::make_shared<Shader>(L"vertex.hlsl", ShaderType::Vertex, device);
-	std::shared_ptr<Shader>	pixelShader = std::make_shared<Shader>(L"pixel.hlsl", ShaderType::Pixel, device);
+	std::shared_ptr<Shader>	vertexShader = std::make_shared<Shader>(L".\\resources\\shaders\\vertex.hlsl", Jade::Graphics::ShaderType::Vertex, device);
+	std::shared_ptr<Shader>	pixelShader = std::make_shared<Shader>(L".\\resources\\shaders\\pixel.hlsl", Jade::Graphics::ShaderType::Pixel, device);
 
 	// Create some vertices for our triangle.
-	Vertex vertices[] = {
-		{Vector3(0.0f, 0.5f, 0.5f), Color::Red },
-		{Vector3(0.5f, -0.5f, 0.5f), Color::Green },
-		{Vector3(-0.5f, -0.5f, 0.5f), Color::Blue } };
+	std::vector<Vertex> vertices = {
+		{ Vector3(0.0f, 0.5f, 0.5f), Color::Red },
+		{ Vector3(0.5f, -0.5f, 0.5f), Color::Green },
+		{ Vector3(-0.5f, -0.5f, 0.5f), Color::Blue } };
 
-	// Creates and binds the vertex buffer for drawing.
-	std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>(vertices, device);
+	std::vector<unsigned int> indices = { 0, 1, 2 };
+
+	/* SQUARE - does not work as of yet.
+	std::vector<Vertex> vertices =
+	{
+		{ Vector3(-1.0f, 1.0f, -1.0f), Color::Red },
+		{ Vector3(1.0f, 1.0f, -1.0f), Color::Red },
+		{ Vector3(1.0f, 1.0f, 1.0f), Color::Red },
+		{ Vector3(-1.0f, 1.0f, 1.0f), Color::Red },
+		{ Vector3(-1.0f, -1.0f, -1.0f), Color::Red },
+		{ Vector3(1.0f, -1.0f, -1.0f), Color::Red },
+		{ Vector3(1.0f, -1.0f, 1.0f), Color::Red },
+		{ Vector3(-1.0f, -1.0f, 1.0f), Color::Red },
+	};
+
+	std::vector<unsigned int> indices =
+	{
+		3,1,0,
+		2,1,3,
+
+		0,5,4,
+		1,5,0,
+
+		3,4,7,
+		0,4,3,
+
+		1,6,5,
+		2,6,1,
+
+		2,7,6,
+		3,7,2,
+
+		6,4,5,
+		7,4,6,
+	};
+	*/
+	// Creates and binds the vertex buffer for drawing the triangular mesh.
+	std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>(vertices, indices, device);
 
 	while (window->IsOpen())
 	{
 		// Rendering
-		device->Clear(Color::Black);
+		device->Clear(Color::CornflowerBlue);
 
 		// Draw the vertices.
 		mesh->Draw();

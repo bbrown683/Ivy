@@ -2,8 +2,13 @@
 
 #include "Graphics/Texture/TextureType.h"
 
-struct Texture
+namespace Jade
 {
-
-	TextureType type;
-};
+	namespace Graphics
+	{
+		struct Texture
+		{
+			TextureType type;
+		};
+	}
+}

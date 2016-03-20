@@ -24,13 +24,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "Graphics/Window/IWindow.h"
-
-#include "Graphics/Window/NativeWindow.h"
+#include "System/Window/IWindow.h"
+#include "System/Window/NativeWindow.h"
 
 namespace Jade
 {
-	namespace Graphics
+	namespace System
 	{
 		// Multi-platform window implementation.
 		class Window

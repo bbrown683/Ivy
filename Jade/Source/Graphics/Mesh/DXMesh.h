@@ -24,11 +24,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "Core/Utility.h"
+#include <vector>
 
+#include "Core/Utility.h"
 #include "Graphics/Device/DXDevice.h"
 #include "Graphics/Mesh/IMesh.h"
 #include "Math/Vertex.h"
+#include "Math/Matrix4.h"
 
 namespace Jade
 {
@@ -38,17 +40,26 @@ namespace Jade
 		{
 		private:
 
-			Math::Vertex* vertex;
+			std::vector<Math::Vertex> vertices;
+			std::vector<unsigned int> indices;
 			std::shared_ptr<DXDevice> device;
+
+			typedef struct ConstantBuffer 
+			{
+				Math::Matrix4 world;
+				Math::Matrix4 view;
+				Math::Matrix4 projection;
+			} View;
 
 			void Bind() override;
 			void Unbind() override;
 
 		public:
 
-			DXMesh(Math::Vertex* vertex, std::shared_ptr<DXDevice> device)
+			DXMesh(std::vector<Math::Vertex> vertices, std::vector<unsigned int> indices, std::shared_ptr<DXDevice> device)
 			{
-				this->vertex = vertex;
+				this->vertices = vertices;
+				this->indices = indices;
 				this->device = device;
 
 				Bind();

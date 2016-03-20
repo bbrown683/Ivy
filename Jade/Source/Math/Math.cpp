@@ -117,6 +117,12 @@ float Jade::Math::Math::Round(float x)
 	return std::roundf(x);
 }
 
+// Returns either 0 or 1.
+int Jade::Math::Math::Random()
+{
+	return std::rand() % 2;
+}
+
 float Jade::Math::Math::Floor(float x)
 {
 	return std::floorf(x);

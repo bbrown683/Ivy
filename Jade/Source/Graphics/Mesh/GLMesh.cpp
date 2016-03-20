@@ -32,19 +32,19 @@ void Jade::Graphics::GLMesh::Bind()
 	GLuint vertexArray;
 	GLuint vertexBuffer;
 
-	// Generate our vertex array and Bind it to the first element.
+	// Generate our vertices array and Bind it to the first element.
 	glGenVertexArrays(1, &vertexArray);
 	glBindVertexArray(vertexArray);
 
-	// Generate our vertex buffer and bind it.
+	// Generate our vertices buffer and bind it.
 	glGenBuffers(1, &vertexBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(GLuint) * sizeof(vertices) / sizeof(Math::Vector3), vertices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(GLuint) * sizeof(vertices.data()) / sizeof(Math::Vector3), vertices.data(), GL_STATIC_DRAW);
 }
 
 void Jade::Graphics::GLMesh::Unbind()
 {
-	// Unbind the vertex buffer.
+	// Unbind the vertices buffer.
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
@@ -52,6 +52,6 @@ void Jade::Graphics::GLMesh::Draw()
 {
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 0, GL_FLOAT, false, 0, nullptr);
-	glDrawArrays(GL_TRIANGLES, 0, sizeof(vertices) / sizeof(Math::Vector3));
+	glDrawArrays(GL_TRIANGLES, 0, sizeof(vertices.data()) / sizeof(Math::Vector3));
 	glDisableVertexAttribArray(0);
 }

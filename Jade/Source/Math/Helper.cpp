@@ -23,3 +23,14 @@ SOFTWARE.
 */
 
 #include "Helper.h"
+
+float Jade::Math::Helper::FastInvSqrt(float x)
+{
+	// Entire algorithm is prettied up using modern C++ features to remove compiler warnings.
+	float xhalf = 0.5f * x;
+	int i = *reinterpret_cast<int*>(&x);
+	i = static_cast<int>(0x5fe6eb50c7b537a9 - (i >> 1));
+	x = *reinterpret_cast<float*>(&i);
+	x = x * (1.5f - xhalf * x * x);
+	return x;
+}

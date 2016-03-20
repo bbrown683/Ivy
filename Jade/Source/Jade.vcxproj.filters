@@ -30,7 +30,6 @@
     <ClCompile Include="Graphics\Device\DXDevice.cpp" />
     <ClCompile Include="Graphics\Shader\DXShader.cpp" />
     <ClCompile Include="Graphics\Shader\GLShader.cpp" />
-    <ClCompile Include="Graphics\Window\NativeWindow.cpp" />
     <ClCompile Include="Graphics\Device\GLDevice.cpp" />
     <ClCompile Include="Graphics\Shader\Shader.cpp" />
     <ClCompile Include="Graphics\Device\VKDevice.cpp" />
@@ -39,6 +38,7 @@
     <ClCompile Include="Graphics\Mesh\GLMesh.cpp" />
     <ClCompile Include="Graphics\Mesh\Mesh.cpp" />
     <ClCompile Include="Graphics\Mesh\DXMesh.cpp" />
+    <ClCompile Include="System\Window\NativeWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\Vector4.h">
@@ -75,13 +75,10 @@
     </ClInclude>
     <ClInclude Include="Graphics\Device\Device.h" />
     <ClInclude Include="Graphics\Device\DXDevice.h" />
-    <ClInclude Include="Graphics\Window\IWindow.h" />
     <ClInclude Include="Graphics\Shader\DXShader.h" />
     <ClInclude Include="Graphics\Shader\GLShader.h" />
     <ClInclude Include="Graphics\Shader\IShader.h" />
     <ClInclude Include="Graphics\Texture\Texture.h" />
-    <ClInclude Include="Graphics\Window\NativeWindow.h" />
-    <ClInclude Include="Graphics\Window\Window.h" />
     <ClInclude Include="Graphics\Shader\ShaderType.h" />
     <ClInclude Include="Graphics\Device\GLDevice.h" />
     <ClInclude Include="Graphics\Shader\Shader.h" />
@@ -96,6 +93,10 @@
     <ClInclude Include="Graphics\Mesh\GLMesh.h" />
     <ClInclude Include="Graphics\Mesh\Mesh.h" />
     <ClInclude Include="Graphics\Mesh\DXMesh.h" />
+    <ClInclude Include="Game\Camera.h" />
+    <ClInclude Include="System\Window\IWindow.h" />
+    <ClInclude Include="System\Window\NativeWindow.h" />
+    <ClInclude Include="System\Window\Window.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">

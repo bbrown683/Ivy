@@ -32,7 +32,8 @@ namespace Jade
 	{
 		class Helper
 		{
-			
+			// Performs a faster computation of the inverse square root method.
+			static float FastInvSqrt(float x);
 		};
 	}
 }

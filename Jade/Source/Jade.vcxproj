@@ -85,11 +85,10 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <AssemblerOutput>NoListing</AssemblerOutput>
       <AdditionalIncludeDirectories>$(SolutionDir)/ThirdParty/glew/include/;$(SolutionDir)/ThirdParty/SDL/include/;$(SolutionDir)/ThirdParty/assimp/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>sdl2main.lib;sdl2.lib;opengl32.lib;glew32.lib;d3d11.lib;d3dcompiler.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sdl2main.lib;sdl2.lib;opengl32.lib;glew32.lib;d3d11.lib;d3dcompiler.lib;assimp.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)/ThirdParty/glew/lib/$(PlatformTarget)/;$(SolutionDir)/ThirdParty/SDL/lib/$(PlatformTarget)/;$(SolutionDir)/ThirdParty/assimp/lib/$(PlatformTarget)/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <SubSystem>Console</SubSystem>
       <EntryPointSymbol>
@@ -102,11 +101,10 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <AssemblerOutput>NoListing</AssemblerOutput>
       <AdditionalIncludeDirectories>$(SolutionDir)/ThirdParty/glew/include/;$(SolutionDir)/ThirdParty/SDL/include/;$(SolutionDir)/ThirdParty/assimp/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>sdl2main.lib;sdl2.lib;opengl32.lib;glew32.lib;d3d11.lib;d3dcompiler.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sdl2main.lib;sdl2.lib;opengl32.lib;glew32.lib;d3d11.lib;d3dcompiler.lib;assimp.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)/ThirdParty/glew/lib/$(PlatformTarget)/;$(SolutionDir)/ThirdParty/SDL/lib/$(PlatformTarget)/;$(SolutionDir)/ThirdParty/assimp/lib/$(PlatformTarget)/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <SubSystem>Console</SubSystem>
       <EntryPointSymbol>
@@ -128,8 +126,8 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>sdl2main.lib;sdl2.lib;opengl32.lib;glew32.lib;d3d11.lib;d3dcompiler.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)/ThirdParty/glew/lib/win32/;$(SolutionDir)/ThirdParty/SDL/lib/win32/$(Configuration)/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sdl2main.lib;sdl2.lib;opengl32.lib;glew32.lib;d3d11.lib;d3dcompiler.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)/ThirdParty/glew/lib/$(PlatformTarget)/;$(SolutionDir)/ThirdParty/SDL/lib/$(PlatformTarget)/;$(SolutionDir)/ThirdParty/assimp/lib/$(PlatformTarget)/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <SubSystem>Windows</SubSystem>
       <EntryPointSymbol>
       </EntryPointSymbol>
@@ -151,8 +149,8 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>sdl2main.lib;sdl2.lib;opengl32.lib;glew32.lib;d3d11.lib;d3dcompiler.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)/ThirdParty/glew/lib/win32/;$(SolutionDir)/ThirdParty/SDL/lib/win32/$(Configuration)/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sdl2main.lib;sdl2.lib;opengl32.lib;glew32.lib;d3d11.lib;d3dcompiler.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)/ThirdParty/glew/lib/$(PlatformTarget)/;$(SolutionDir)/ThirdParty/SDL/lib/$(PlatformTarget)/;$(SolutionDir)/ThirdParty/assimp/lib/$(PlatformTarget)/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <SubSystem>Windows</SubSystem>
       <EntryPointSymbol>
       </EntryPointSymbol>
@@ -173,7 +171,7 @@
     <ClCompile Include="Graphics\Shader\DXShader.cpp" />
     <ClCompile Include="Graphics\Shader\GLShader.cpp" />
     <ClCompile Include="Graphics\Shader\Shader.cpp" />
-    <ClCompile Include="Graphics\Window\NativeWindow.cpp" />
+    <ClCompile Include="System\Window\NativeWindow.cpp" />
     <ClCompile Include="Math\Color.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Math\Helper.cpp" />
@@ -194,6 +192,7 @@
   <ItemGroup>
     <ClInclude Include="Core\Factory.h" />
     <ClInclude Include="Core\Time.h" />
+    <ClInclude Include="Game\Camera.h" />
     <ClInclude Include="Graphics\Device\Device.h" />
     <ClInclude Include="Graphics\Device\DXDevice.h" />
     <ClInclude Include="Graphics\Device\GLDevice.h" />
@@ -211,9 +210,9 @@
     <ClInclude Include="Graphics\Shader\ShaderType.h" />
     <ClInclude Include="Graphics\Texture\Texture.h" />
     <ClInclude Include="Graphics\Texture\TextureType.h" />
-    <ClInclude Include="Graphics\Window\IWindow.h" />
-    <ClInclude Include="Graphics\Window\NativeWindow.h" />
-    <ClInclude Include="Graphics\Window\Window.h" />
+    <ClInclude Include="System\Window\IWindow.h" />
+    <ClInclude Include="System\Window\NativeWindow.h" />
+    <ClInclude Include="System\Window\Window.h" />
     <ClInclude Include="Math\Color.h" />
     <ClInclude Include="Graphics\Device\IDevice.h" />
     <ClInclude Include="Math\Helper.h" />

@@ -25,12 +25,18 @@ SOFTWARE.
 */
 
 // Enum for classifying the type of shader to create.
-enum class ShaderType
+namespace Jade
 {
-	Compute,
-	Domain,
-	Geometry,
-	Pixel,
-	Vertex,
-	Tesselation
-};
+	namespace Graphics
+	{
+		enum class ShaderType
+		{
+			Compute,
+			Domain,
+			Geometry,
+			Pixel,
+			Vertex,
+			Tesselation
+		};
+	}
+}

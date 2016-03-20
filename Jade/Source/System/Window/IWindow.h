@@ -31,7 +31,7 @@ SOFTWARE.
 
 namespace Jade
 {
-	namespace Graphics
+	namespace System
 	{
 		// Contains some methods that we can implement across multiple platforms to perform a task on a window.
 		struct IWindow

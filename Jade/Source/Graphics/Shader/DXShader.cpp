@@ -218,15 +218,27 @@ bool Jade::Graphics::DXShader::Compile()
 		ID3DBlob* l_pErrorBlob = nullptr;
 
 		// Compile the shader
+		// NOTE: Main must be used as the entrypoint of all shader files for consistency.
 		long hr = D3DCompileFromFile(filename.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE, "Main", profile, flags, 0, &m_pShaderBlob, &l_pErrorBlob);
 
 		if (hr < 0)
 		{
-			// Output compilation errors to console.
-			std::cout << static_cast<char*>(l_pErrorBlob->GetBufferPointer()) << std::endl;
+			// Ensure that the blob has data to read from before attempting to print.
+			if(l_pErrorBlob->GetBufferPointer() != nullptr)
+			{
+				// Output compilation errors to console.
+				std::cout << static_cast<char*>(l_pErrorBlob->GetBufferPointer()) << std::endl;
 
-			// Release loose pointers.
-			l_pErrorBlob->Release();
+				// Release loose pointers.
+				l_pErrorBlob->Release();
+			}	
+			else
+			{
+				std::cout << "Unknown shader error..." << std::endl;
+
+				// Release loose pointers.
+				l_pErrorBlob->Release();
+			}
 
 			return false;
 		}

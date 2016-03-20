@@ -25,9 +25,15 @@ SOFTWARE.
 */
 
 // Fast way to determine which API is being used by the graphics device.
-enum class GraphicsAPI
+namespace Jade
 {
-	DirectX,
-	OpenGL,
-	Vulkan
-};
+	namespace Graphics
+	{
+		enum class GraphicsAPI
+		{
+			DirectX,
+			OpenGL,
+			Vulkan
+		};
+	}
+}
