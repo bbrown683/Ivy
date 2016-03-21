@@ -70,3 +70,6 @@ int main(int argc, char* argv[])
 
 # Progress Mark 2
 ![Result2](https://i.gyazo.com/80b709e60358b20c1ad912e354ad9b7b.png)
+
+# Progress Mark 3
+![Result2](https://i.gyazo.com/72abf317dcee2554e874d5877ddc60a2.png)
