@@ -24,13 +24,28 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include "Graphics/Device/Device.h"
+#include "Graphics/Camera/DXCamera.h"
+
 namespace Jade
 {
-	namespace Math
+	namespace Graphics
 	{
-		class Matrix2
+		class Camera
 		{
+		public:
 
+			std::shared_ptr<ICamera> camera;
+
+			Camera(std::shared_ptr<Device> device)
+			{
+				
+			}
+
+			void LookAt(Math::Vector3 position, Math::Vector3 target, Math::Vector3 direction)
+			{
+				camera->LookAt(position, target, direction);
+			}
 		};
 	}
 }

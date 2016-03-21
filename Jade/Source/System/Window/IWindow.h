@@ -26,6 +26,7 @@ SOFTWARE.
 
 #include "SDL2/SDL.h"
 
+#include "Core/Time.h"
 #include "Core/Utility.h"
 #include "Math/Point.h"
 #include "System/Key.h"
@@ -66,7 +67,7 @@ namespace Jade
 			virtual bool IsActive() = 0;
 			virtual bool IsKeyDown(Key key) = 0;
 			virtual bool IsKeyUp(Key key) = 0;
-			virtual float GetDeltaTime() = 0;
+			virtual Core::Time GetTime() = 0;
 			virtual SDL_Window* GetSDLWindow() = 0;
 		};
 	}

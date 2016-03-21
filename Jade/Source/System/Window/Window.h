@@ -158,9 +158,9 @@ namespace Jade
 				window->Close();
 			}
 
-			float GetDeltaTime() const
+			Core::Time GetTime() const
 			{
-				return window->GetDeltaTime();
+				return window->GetTime();
 			}
 		};
 	}

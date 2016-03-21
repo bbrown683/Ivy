@@ -33,6 +33,11 @@ static const Jade::Math::Vector3 Right		= Jade::Math::Vector3(1.0f, 0.0f, 0.0f);
 static const Jade::Math::Vector3 Up			= Jade::Math::Vector3(0.0f, 1.0f, 0.0f);
 static const Jade::Math::Vector3 Zero		= Jade::Math::Vector3(0.0f, 0.0f, 0.0f);
 
+float Jade::Math::Vector3::Distance(Vector3 target) const
+{
+	return Math::Sqrt(target.GetX() - x + target.GetY() - y + target.GetZ() - z);
+}
+
 void Jade::Math::Vector3::SetX(float value)
 {
 	this->x = value;
@@ -66,4 +71,9 @@ float Jade::Math::Vector3::GetZ() const
 float Jade::Math::Vector3::GetMagnitude() const
 {
 	return this->magnitude;
+}
+
+string Jade::Math::Vector3::ToString() const
+{
+	return "(" + std::to_string(x) + ", " + std::to_string(y) + ", " + std::to_string(z) + ")";
 }

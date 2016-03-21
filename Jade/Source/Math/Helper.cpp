@@ -34,3 +34,39 @@ float Jade::Math::Helper::FastInvSqrt(float x)
 	x = x * (1.5f - xhalf * x * x);
 	return x;
 }
+
+float Jade::Math::Helper::WrapAngle(float angle)
+{
+	// Go ahead and initialize our reducedAngle.
+	float reducedAngle = 0.0f;
+
+	// How many rotations an angle has can be determined by the times 
+	// in which it divides by 360 Degrees.
+	float timesToDivide = angle / (Math::TwoPi);
+
+	// Positive Angle > 360
+	if (timesToDivide > 1)
+	{
+		for (int i = 0; i < timesToDivide; i++)
+		{
+			reducedAngle = angle - (Math::TwoPi);
+		}
+
+		return reducedAngle;
+	}
+	// Negative Angle < -360
+	else if (timesToDivide < -1)
+	{
+		for (int i = 0; i > timesToDivide; i--)
+		{
+			reducedAngle = angle + (Math::TwoPi);
+		}
+
+		return reducedAngle;
+	}
+	// Already reduced if it does not meet above conditions.
+	else
+	{
+		return angle;
+	}
+}

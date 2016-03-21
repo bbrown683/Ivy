@@ -14,9 +14,6 @@
     <ClCompile Include="Math\Quaternion.cpp">
       <Filter>Math</Filter>
     </ClCompile>
-    <ClCompile Include="Math\Matrix2.cpp" />
-    <ClCompile Include="Math\Matrix3.cpp" />
-    <ClCompile Include="Math\Matrix4.cpp" />
     <ClCompile Include="Math\Rectangle.cpp" />
     <ClCompile Include="Math\Ray.cpp" />
     <ClCompile Include="Math\Math.cpp" />
@@ -33,12 +30,15 @@
     <ClCompile Include="Graphics\Device\GLDevice.cpp" />
     <ClCompile Include="Graphics\Shader\Shader.cpp" />
     <ClCompile Include="Graphics\Device\VKDevice.cpp" />
-    <ClCompile Include="System\Logfile.cpp" />
     <ClCompile Include="Graphics\Model\Model.cpp" />
     <ClCompile Include="Graphics\Mesh\GLMesh.cpp" />
     <ClCompile Include="Graphics\Mesh\Mesh.cpp" />
     <ClCompile Include="Graphics\Mesh\DXMesh.cpp" />
     <ClCompile Include="System\Window\NativeWindow.cpp" />
+    <ClCompile Include="System\Log.cpp" />
+    <ClCompile Include="Graphics\Camera\Camera.cpp" />
+    <ClCompile Include="Graphics\Camera\DXCamera.cpp" />
+    <ClCompile Include="Math\Matrix.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\Vector4.h">
@@ -57,12 +57,8 @@
       <Filter>System</Filter>
     </ClInclude>
     <ClInclude Include="Core\Utility.h" />
-    <ClInclude Include="Math\Matrix2.h" />
-    <ClInclude Include="Math\Matrix3.h" />
-    <ClInclude Include="Math\Matrix4.h" />
     <ClInclude Include="Math\Rectangle.h" />
     <ClInclude Include="Math\Ray.h" />
-    <ClInclude Include="Math\Math.h" />
     <ClInclude Include="Math\Helper.h" />
     <ClInclude Include="Core\Factory.h" />
     <ClInclude Include="Math\Point.h" />
@@ -85,7 +81,6 @@
     <ClInclude Include="Graphics\Device\VKDevice.h" />
     <ClInclude Include="Graphics\Device\GraphicsAPI.h" />
     <ClInclude Include="Math\Vertex.h" />
-    <ClInclude Include="System\Logfile.h" />
     <ClInclude Include="Graphics\Model\Model.h" />
     <ClInclude Include="Graphics\Texture\TextureType.h" />
     <ClInclude Include="Core\Time.h" />
@@ -93,11 +88,17 @@
     <ClInclude Include="Graphics\Mesh\GLMesh.h" />
     <ClInclude Include="Graphics\Mesh\Mesh.h" />
     <ClInclude Include="Graphics\Mesh\DXMesh.h" />
-    <ClInclude Include="Game\Camera.h" />
     <ClInclude Include="System\Window\IWindow.h" />
     <ClInclude Include="System\Window\NativeWindow.h" />
     <ClInclude Include="System\Window\Window.h" />
     <ClInclude Include="System\Key.h" />
+    <ClInclude Include="System\Log.h" />
+    <ClInclude Include="Graphics\Camera\Camera.h" />
+    <ClInclude Include="Graphics\Camera\ICamera.h" />
+    <ClInclude Include="Graphics\Camera\DXCamera.h" />
+    <ClInclude Include="Math\Matrix.h" />
+    <ClInclude Include="Math\Math.h" />
+    <ClInclude Include="Graphics\Camera\Scene.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">

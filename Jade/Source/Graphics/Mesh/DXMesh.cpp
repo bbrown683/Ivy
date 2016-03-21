@@ -143,23 +143,8 @@ void Jade::Graphics::DXMesh::Draw()
 	// Ensure that everything was binded correctly before attempting to draw.
 	if (bufferSuccess)
 	{
-		// Update our time
-		static float t = 0.0f;
-		if (device->m_DriverType == D3D_DRIVER_TYPE_REFERENCE)
-		{
-			t += (float)DirectX::XM_PI * 0.0125f;
-		}
-		else
-		{
-			static ULONGLONG timeStart = 0;
-			ULONGLONG timeCur = GetTickCount64();
-			if (timeStart == 0)
-				timeStart = timeCur;
-			t = (timeCur - timeStart) / 1000.0f;
-		}
-
 		// Rotate our cube slightly.
-		world = DirectX::XMMatrixRotationX(-t) * DirectX::XMMatrixRotationY(t);
+		world = DirectX::XMMatrixRotationY(device->window->GetTime().GetElaspedTime()) *  DirectX::XMMatrixRotationX(device->window->GetTime().GetElaspedTime());
 
 		space.world = DirectX::XMMatrixTranspose(world);
 		space.view = DirectX::XMMatrixTranspose(view);

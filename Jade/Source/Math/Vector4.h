@@ -24,7 +24,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "Math.h"
+#include "Core/Utility.h"
+#include "Math/Math.h"
 
 namespace Jade
 {
@@ -44,32 +45,32 @@ namespace Jade
 
 			// Vector4 operator overloads.
 
-			inline bool operator==(const Vector4 vector)
+			bool operator==(const Vector4 vector)
 			{
 				return (this->x - vector.x < Math::Epsilon) && (this->y - vector.y < Math::Epsilon) && (this->z - vector.z < Math::Epsilon) && (this->w - vector.w < Math::Epsilon) ? true : false;
 			}
 
-			inline bool operator!=(const Vector4 vector)
+			bool operator!=(const Vector4 vector)
 			{
 				return !(this == &vector);
 			}
 
-			inline Vector4 operator+(const Vector4 vector)
+			Vector4 operator+(const Vector4 vector)
 			{
 				return Vector4(this->x + vector.x, this->y + vector.y, this->z + vector.z, this->w + vector.w);
 			}
 
-			inline Vector4 operator-(const Vector4 vector)
+			Vector4 operator-(const Vector4 vector)
 			{
 				return Vector4(this->x - vector.x, this->y - vector.y, this->z - vector.z, this->w - vector.w);
 			}
 
-			inline Vector4 operator*(const float scalar)
+			Vector4 operator*(const float scalar)
 			{
 				return Vector4(this->x * scalar, this->y * scalar, this->z * scalar, this->w * scalar);
 			}
 
-			inline Vector4 operator/(const float scalar)
+			Vector4 operator/(const float scalar)
 			{
 				return Vector4(this->x / scalar, this->y - scalar, this->z / scalar, this->w / scalar);
 			}

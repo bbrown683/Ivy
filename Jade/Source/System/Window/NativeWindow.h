@@ -61,6 +61,7 @@ namespace Jade
 
 			// Keeps track of our time per frames.
 			Core::Time timer;
+			int startTime = 0;
 
 			// Test keys.
 			bool escape = false;
@@ -99,7 +100,7 @@ namespace Jade
 			bool IsActive() override;
 			bool IsKeyDown(Key key) override;
 			bool IsKeyUp(Key key) override;
-			float GetDeltaTime() override;
+			Core::Time GetTime() override;
 			SDL_Window* GetSDLWindow() override;
 
 			NativeWindow(int width, int height, int x, int y, string title, bool fullscreen) : m_pWindow(nullptr)

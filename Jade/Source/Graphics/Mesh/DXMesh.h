@@ -31,7 +31,7 @@ SOFTWARE.
 #include "Graphics/Device/DXDevice.h"
 #include "Graphics/Mesh/IMesh.h"
 #include "Math/Vertex.h"
-#include "Math/Matrix4.h"
+#include "Math/Matrix.h"
 
 namespace Jade
 {

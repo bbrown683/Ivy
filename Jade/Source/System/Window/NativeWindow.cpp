@@ -26,22 +26,23 @@ SOFTWARE.
 
 #include "System/Window/NativeWindow.h"
 #include "System/Platform.h"
+#include "System/Log.h"
 
 bool Jade::System::NativeWindow::PollWindowEvents()
 {
+	// Compute delta time.
+	// Delta time computations.
+	int currentTime = SDL_GetTicks();
+	if (startTime == 0)
+		startTime = currentTime;
+	timer.SetElapsedTime(static_cast<float>(currentTime - startTime) / 1000.0f);
+
 	// Basic event loop. Events that involves rendering 
 	// such as Resizing is done by the graphics device itself.
 	SDL_Event e;
 
-	//int startTime = SDL_GetTicks();
-
 	while (SDL_PollEvent(&e))
 	{
-		// Delta time computations.
-		//float loopedTime = static_cast<float>(SDL_GetTicks());
-		//timer.SetDeltaTime(loopedTime - startTime);
-		//startTime = loopedTime;
-
 		switch (e.type)
 		{
 		case SDL_KEYDOWN:
@@ -181,6 +182,9 @@ bool Jade::System::NativeWindow::InitWindow()
 			// Set Icon.
 			//SDL_Surface* icon = SDL_LoadBMP("test.bmp");
 			//SDL_SetWindowIcon(m_pWindow, icon);
+			
+			// Hide cursor.
+			SDL_ShowCursor(0);
 
 			// Capture window info so we can grab window handle.
 			SDL_GetVersion(&m_WindowInfo.version);
@@ -273,9 +277,9 @@ bool Jade::System::NativeWindow::IsKeyUp(Key key)
 	return !IsKeyDown(key);
 }
 
-float Jade::System::NativeWindow::GetDeltaTime()
+Jade::Core::Time Jade::System::NativeWindow::GetTime()
 {
-	return timer.GetDeltaTime();
+	return timer;
 }
 
 SDL_Window* Jade::System::NativeWindow::GetSDLWindow()

@@ -24,13 +24,35 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include <stdio.h>
+
+#include "Core/Utility.h"
+
 namespace Jade
 {
 	namespace System
 	{
 		class File
 		{
-			
+		private:
+
+			FILE* file;
+			string filename;
+		
+		public:
+
+			File(string filename)
+			{
+				this->filename = filename;
+			}
+
+			~File()
+			{
+				delete file;
+			}
+
+			string Read();
+			void Write(string text);
 		};
 	}
 }

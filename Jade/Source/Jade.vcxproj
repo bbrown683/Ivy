@@ -97,8 +97,8 @@
       <AdditionalOptions>/NODEFAULTLIB:MSVCRT %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /f /s /y "$(ProjectDir)vertex.hlsl" "$(OutputPath)"
-xcopy /f /s /y "$(ProjectDir)pixel.hlsl" "$(OutputPath)"
+      <Command>xcopy /f /s /y "$(ProjectDir)vertex.hlsl" "$(OutputPath)resources\shaders\"
+xcopy /f /s /y "$(ProjectDir)pixel.hlsl" "$(OutputPath)resources\shaders\"
 xcopy /f /s /y "$(SolutionDir)ThirdParty\SDL\bin\$(PlatformTarget)\SDL2.dll" "$(OutputPath)"
 xcopy /f /s /y "$(SolutionDir)ThirdParty\glew\bin\$(PlatformTarget)\glew32.dll" "$(OutputPath)"
 if $(PlatformTarget) == x86 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp32.dll" "$(OutputPath)" 
@@ -121,8 +121,8 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
       <AdditionalOptions>/NODEFAULTLIB:MSVCRT %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /f /s /y "$(ProjectDir)vertex.hlsl" "$(OutputPath)"
-xcopy /f /s /y "$(ProjectDir)pixel.hlsl" "$(OutputPath)"
+      <Command>xcopy /f /s /y "$(ProjectDir)vertex.hlsl" "$(OutputPath)resources\shaders\"
+xcopy /f /s /y "$(ProjectDir)pixel.hlsl" "$(OutputPath)resources\shaders\"
 xcopy /f /s /y "$(SolutionDir)ThirdParty\SDL\bin\$(PlatformTarget)\SDL2.dll" "$(OutputPath)"
 xcopy /f /s /y "$(SolutionDir)ThirdParty\glew\bin\$(PlatformTarget)\glew32.dll" "$(OutputPath)"
 if $(PlatformTarget) == x86 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp32.dll" "$(OutputPath)" 
@@ -153,8 +153,8 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /f /s /y "$(ProjectDir)vertex.hlsl" "$(OutputPath)"
-xcopy /f /s /y "$(ProjectDir)pixel.hlsl" "$(OutputPath)"
+      <Command>xcopy /f /s /y "$(ProjectDir)vertex.hlsl" "$(OutputPath)resources\shaders\"
+xcopy /f /s /y "$(ProjectDir)pixel.hlsl" "$(OutputPath)resources\shaders\"
 xcopy /f /s /y "$(SolutionDir)ThirdParty\SDL\bin\$(PlatformTarget)\SDL2.dll" "$(OutputPath)"
 xcopy /f /s /y "$(SolutionDir)ThirdParty\glew\bin\$(PlatformTarget)\glew32.dll" "$(OutputPath)"
 if $(PlatformTarget) == x86 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp32.dll" "$(OutputPath)" 
@@ -185,8 +185,8 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /f /s /y "$(ProjectDir)vertex.hlsl" "$(OutputPath)"
-xcopy /f /s /y "$(ProjectDir)pixel.hlsl" "$(OutputPath)"
+      <Command>xcopy /f /s /y "$(ProjectDir)vertex.hlsl" "$(OutputPath)resources\shaders\"
+xcopy /f /s /y "$(ProjectDir)pixel.hlsl" "$(OutputPath)resources\shaders\"
 xcopy /f /s /y "$(SolutionDir)ThirdParty\SDL\bin\$(PlatformTarget)\SDL2.dll" "$(OutputPath)"
 xcopy /f /s /y "$(SolutionDir)ThirdParty\glew\bin\$(PlatformTarget)\glew32.dll" "$(OutputPath)"
 if $(PlatformTarget) == x86 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp32.dll" "$(OutputPath)" 
@@ -194,6 +194,8 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Graphics\Camera\Camera.cpp" />
+    <ClCompile Include="Graphics\Camera\DXCamera.cpp" />
     <ClCompile Include="Graphics\Device\Device.cpp" />
     <ClCompile Include="Graphics\Device\DXDevice.cpp" />
     <ClCompile Include="Graphics\Device\GLDevice.cpp" />
@@ -210,9 +212,7 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Math\Helper.cpp" />
     <ClCompile Include="Math\Math.cpp" />
-    <ClCompile Include="Math\Matrix2.cpp" />
-    <ClCompile Include="Math\Matrix3.cpp" />
-    <ClCompile Include="Math\Matrix4.cpp" />
+    <ClCompile Include="Math\Matrix.cpp" />
     <ClCompile Include="Math\Point.cpp" />
     <ClCompile Include="Math\Quaternion.cpp" />
     <ClCompile Include="Math\Ray.cpp" />
@@ -221,12 +221,15 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClCompile Include="Math\Vector3.cpp" />
     <ClCompile Include="Math\Vector4.cpp" />
     <ClCompile Include="System\File.cpp" />
-    <ClCompile Include="System\Logfile.cpp" />
+    <ClCompile Include="System\Log.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Factory.h" />
     <ClInclude Include="Core\Time.h" />
-    <ClInclude Include="Game\Camera.h" />
+    <ClInclude Include="Graphics\Camera\Camera.h" />
+    <ClInclude Include="Graphics\Camera\DXCamera.h" />
+    <ClInclude Include="Graphics\Camera\ICamera.h" />
+    <ClInclude Include="Graphics\Camera\Scene.h" />
     <ClInclude Include="Graphics\Device\Device.h" />
     <ClInclude Include="Graphics\Device\DXDevice.h" />
     <ClInclude Include="Graphics\Device\GLDevice.h" />
@@ -244,6 +247,7 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClInclude Include="Graphics\Shader\ShaderType.h" />
     <ClInclude Include="Graphics\Texture\Texture.h" />
     <ClInclude Include="Graphics\Texture\TextureType.h" />
+    <ClInclude Include="Math\Math.h" />
     <ClInclude Include="System\Key.h" />
     <ClInclude Include="System\Window\IWindow.h" />
     <ClInclude Include="System\Window\NativeWindow.h" />
@@ -251,10 +255,7 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClInclude Include="Math\Color.h" />
     <ClInclude Include="Graphics\Device\IDevice.h" />
     <ClInclude Include="Math\Helper.h" />
-    <ClInclude Include="Math\Math.h" />
-    <ClInclude Include="Math\Matrix2.h" />
-    <ClInclude Include="Math\Matrix3.h" />
-    <ClInclude Include="Math\Matrix4.h" />
+    <ClInclude Include="Math\Matrix.h" />
     <ClInclude Include="Math\Point.h" />
     <ClInclude Include="Math\Quaternion.h" />
     <ClInclude Include="Math\Ray.h" />
@@ -264,7 +265,7 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClInclude Include="Math\Vector4.h" />
     <ClInclude Include="Math\Vertex.h" />
     <ClInclude Include="System\File.h" />
-    <ClInclude Include="System\Logfile.h" />
+    <ClInclude Include="System\Log.h" />
     <ClInclude Include="System\Platform.h" />
     <ClInclude Include="Core\Utility.h" />
   </ItemGroup>

@@ -28,16 +28,15 @@ SOFTWARE.
 #include "Graphics/Device/Device.h"
 #include "Graphics/Shader/Shader.h"
 #include "Graphics/Mesh/Mesh.h"
-#include "Math/Math.h"
-#include "Math/Helper.h"
 
-using Jade::System::Window;
 using Jade::Graphics::Device;
 using Jade::Graphics::Shader;
 using Jade::Graphics::Mesh;
 using Jade::Math::Color;
 using Jade::Math::Vector3;
 using Jade::Math::Vertex;
+using Jade::System::Key;
+using Jade::System::Window;
 
 int main(int argc, char* argv[])
 {
@@ -48,8 +47,8 @@ int main(int argc, char* argv[])
 	std::shared_ptr<Device> device = std::make_shared<Device>(window);
 
 	// Create our two required shaders for drawing onto the surface.
-	std::shared_ptr<Shader>	vertexShader = std::make_shared<Shader>("vertex.hlsl", Jade::Graphics::ShaderType::Vertex, device);
-	std::shared_ptr<Shader>	pixelShader = std::make_shared<Shader>("pixel.hlsl", Jade::Graphics::ShaderType::Pixel, device);
+	std::shared_ptr<Shader>	vertexShader = std::make_shared<Shader>(".\\resources\\shaders\\vertex.hlsl", Jade::Graphics::ShaderType::Vertex, device);
+	std::shared_ptr<Shader>	pixelShader = std::make_shared<Shader>(".\\resources\\shaders\\pixel.hlsl", Jade::Graphics::ShaderType::Pixel, device);
 
 	// Create some vertices for our triangle.
 	/*
@@ -60,7 +59,7 @@ int main(int argc, char* argv[])
 
 	std::vector<unsigned int> indices = { 0, 1, 2 };
 	*/
-	// SQUARE - does not work as of yet most likely due to the viewport.
+
 	std::vector<Vertex> vertices =
 	{
 		{ Vector3(-1.0f, 1.0f, -1.0f), Color::Red },
@@ -97,6 +96,12 @@ int main(int argc, char* argv[])
 	// Creates and binds the vertex buffer for drawing the triangular mesh.
 	std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>(vertices, indices, device);
 
+	Jade::Math::Matrix matrix(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+	matrix = matrix.Transpose();
+	std::cout << matrix.ToString() << std::endl;
+
+	std::cout << vertices[0].position.ToString() << std::endl;
+
 	while (window->IsOpen())
 	{
 		// Rendering
@@ -106,7 +111,7 @@ int main(int argc, char* argv[])
 		mesh->Draw();
 
 		// Updating if escape is not pressed.
-		if (window->IsKeyDown(Jade::System::Key::Escape))
+		if (window->IsKeyDown(Key::Escape))
 		{
 			window->Close();
 		}

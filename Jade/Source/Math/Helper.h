@@ -34,8 +34,11 @@ namespace Jade
 		{
 		public:
 
-			// Performs a faster computation of the inverse square root method.
+			// Loses slight accuracy for increased performance of an inverse square root.
 			static float FastInvSqrt(float x);
+
+			// Reduces a given angle to a value between ? and -?.
+			static float WrapAngle(float angle);
 		};
 	}
 }

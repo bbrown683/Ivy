@@ -24,7 +24,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "Math.h"
+#include "Core/Utility.h"
+#include "Math/Math.h"
 
 namespace Jade
 {
@@ -43,32 +44,32 @@ namespace Jade
 
 			// Vector3 operator overloads.
 
-			inline bool operator==(Vector3 vector) const
+			bool operator==(Vector3 vector) const
 			{
 				return (this->x - vector.x < Math::Epsilon) && (this->y - vector.y < Math::Epsilon) && (this->z - vector.z < Math::Epsilon) ? true : false;
 			}
 
-			inline bool operator!=(Vector3 vector) const
+			bool operator!=(Vector3 vector) const
 			{
 				return !(this == &vector);
 			}
 
-			inline Vector3 operator+(Vector3 vector) const
+			Vector3 operator+(Vector3 vector) const
 			{
 				return Vector3(this->x + vector.x, this->y + vector.y, this->z + vector.z);
 			}
 
-			inline Vector3 operator-(Vector3 vector) const
+			Vector3 operator-(Vector3 vector) const
 			{
 				return Vector3(this->x - vector.x, this->y - vector.y, this->z - vector.z);
 			}
 
-			inline Vector3 operator*(float scalar) const
+			Vector3 operator*(float scalar) const
 			{
 				return Vector3(this->x * scalar, this->y * scalar, this->z * scalar);
 			}
 
-			inline Vector3 operator/(float scalar) const
+			Vector3 operator/(float scalar) const
 			{
 				return Vector3(this->x / scalar, this->y - scalar, this->z / scalar);
 			}
@@ -102,6 +103,8 @@ namespace Jade
 			float GetZ() const;
 
 			float GetMagnitude() const;
+
+			string ToString() const;
 		};
 	}
 }
