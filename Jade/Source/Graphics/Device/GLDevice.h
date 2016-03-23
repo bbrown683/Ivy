@@ -24,11 +24,19 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#ifdef _WIN32
+#define WGL
+#include <Windows.h>
+#elif __linux__
+#define GLX
+#endif
+
 #include "Core/Utility.h"
 #include "Math/Color.h"
 
 #include "IDevice.h"
 #include "System/Window/IWindow.h"
+#include <iostream>
 
 namespace Jade
 {
@@ -38,7 +46,11 @@ namespace Jade
 		{
 		private:
 
-			SDL_GLContext context;
+#ifdef WGL
+			HDC dc;
+			HGLRC context;
+#endif
+			//SDL_GLContext context;
 
 			// Window object contains some data on our window such as size, 
 			// and the handle of it in memory which we need to create a device.
@@ -58,7 +70,8 @@ namespace Jade
 				this->window = window;
 
 				// Create our device.
-				Create();
+				if (!Create())
+					std::cout << "Something went wrong." << std::endl;
 			}
 
 			~GLDevice()

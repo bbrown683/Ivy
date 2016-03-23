@@ -59,6 +59,8 @@ namespace Jade
 			DirectX::XMMATRIX view;
 			DirectX::XMMATRIX projection;
 
+			ID3D11ShaderResourceView*	m_pTextureRV = nullptr;
+
 			void Bind() override;
 			void Unbind() override;
 

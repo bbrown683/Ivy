@@ -101,6 +101,11 @@ void Jade::System::NativeWindow::SetHeight(int value)
 	this->height = value;
 }
 
+float Jade::System::NativeWindow::GetAspectRatio()
+{
+	return static_cast<float>(GetWidth()) / static_cast<float>(GetHeight());
+}
+
 int Jade::System::NativeWindow::GetX()
 {
 	return x;
@@ -157,21 +162,8 @@ bool Jade::System::NativeWindow::InitWindow()
 	}
 	else
 	{
-		// Windows will be using DirectX by default due to built in support.
-		if(System::Platform::GetPlatformID() == System::Platform::PlatformID::Windows)
-		{
-			m_pWindow = SDL_CreateWindow(title.c_str(), x, y, width, height, SDL_WINDOW_SHOWN);
-		}
-		else
-		{
-			SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
-			SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
-			SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, true);
-			SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-
-			m_pWindow = SDL_CreateWindow(title.c_str(), x, y, width, height, SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
-		}
-
+		m_pWindow = SDL_CreateWindow(title.c_str(), x, y, width, height, SDL_WINDOW_SHOWN);
+		
 		if (m_pWindow)
 		{
 			if (fullscreen)
@@ -280,9 +272,4 @@ bool Jade::System::NativeWindow::IsKeyUp(Key key)
 Jade::Core::Time Jade::System::NativeWindow::GetTime()
 {
 	return timer;
-}
-
-SDL_Window* Jade::System::NativeWindow::GetSDLWindow()
-{
-	return m_pWindow;
 }

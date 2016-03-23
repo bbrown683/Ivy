@@ -22,6 +22,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+//#include "hlslcc/hlslcc.h"
+
 #include "Graphics/Shader/GLShader.h"
 
 bool Jade::Graphics::GLShader::Create()
@@ -36,5 +38,8 @@ bool Jade::Graphics::GLShader::Release()
 
 bool Jade::Graphics::GLShader::Compile()
 {
+	//GLSLShader* shader = nullptr;
+	//int id = TranslateHLSLFromFile("", 0, LANG_440, nullptr, nullptr, shader);
+
 	return false;
 }

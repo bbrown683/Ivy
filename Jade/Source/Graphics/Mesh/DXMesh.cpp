@@ -122,9 +122,9 @@ void Jade::Graphics::DXMesh::Bind()
 				DirectX::XMVECTOR At = DirectX::XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
 				DirectX::XMVECTOR Up = DirectX::XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
 				view = DirectX::XMMatrixLookAtLH(Eye, At, Up);
-				
+
 				// Set our projection matrix.
-				projection = DirectX::XMMatrixPerspectiveFovLH(DirectX::XM_PIDIV2, static_cast<float>(device->window->GetWidth()) / static_cast<float>(device->window->GetHeight()), 0.01f, 100.0f);
+				projection = DirectX::XMMatrixPerspectiveFovLH(DirectX::XM_PIDIV2, device->window->GetAspectRatio(), 0.01f, 100.0f);
 
 				bufferSuccess = true;
 			}
@@ -134,8 +134,9 @@ void Jade::Graphics::DXMesh::Bind()
 
 void Jade::Graphics::DXMesh::Unbind()
 {
-	// Unbind vertices buffer.
+	// Unbind buffers.
 	device->m_pImmediateContext->IASetVertexBuffers(0, 0, nullptr, nullptr, nullptr);
+	device->m_pImmediateContext->IASetIndexBuffer(nullptr, DXGI_FORMAT_R32_UINT, 0);
 }
 
 void Jade::Graphics::DXMesh::Draw()
@@ -152,7 +153,6 @@ void Jade::Graphics::DXMesh::Draw()
 
 		device->m_pImmediateContext->UpdateSubresource(device->m_pConstantBuffer, 0, nullptr, &space, 0, 0);
 		device->m_pImmediateContext->VSSetConstantBuffers(0, 1, &device->m_pConstantBuffer);
-
 		device->m_pImmediateContext->DrawIndexed(static_cast<unsigned int>(indices.size()), 0, 0);
 	}
 }

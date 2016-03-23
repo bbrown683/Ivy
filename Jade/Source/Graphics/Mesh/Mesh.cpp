@@ -30,7 +30,7 @@ std::shared_ptr<Jade::Graphics::IMesh> Jade::Graphics::Mesh::CreateMesh()
 	{
 		case GraphicsAPI::DirectX:
 		{
-			return std::make_shared<DXMesh>(vertices, indices, std::dynamic_pointer_cast<DXDevice>(device->GetDeviceInterface()));
+			return std::make_shared<DXMesh>(vertices, indices, std::dynamic_pointer_cast<DXDevice>(device->GetIDevice()));
 		}
 		case GraphicsAPI::OpenGL:
 		{

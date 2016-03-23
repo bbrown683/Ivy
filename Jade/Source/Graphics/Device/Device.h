@@ -49,7 +49,6 @@ namespace Jade
 			int stencilBits;		// Amount of stencil bits.
 			int depthBits;			// Amount of depth bits.
 			int colorBits;			// Amount of color bits.
-			bool sampling;			// Using sampling?
 			int samples;			// How many samples if using sampling?
 			bool vsync;				// Enable vertical sync?
 
@@ -59,37 +58,37 @@ namespace Jade
 			};
 
 			// Enumerates through the available devices and selects the best one available for rendering.
-			std::shared_ptr<IDevice> SelectDevice();
+			std::shared_ptr<IDevice> CreateDevice();
 
 		public:						
 
 			// Note: Do not use this constructor as everything is set to null.
 			Device() : device(nullptr), window(nullptr), backBufferWidth(0), backBufferHeight(0), 
-				stencilBits(0), depthBits(0), colorBits(0), sampling(false), samples(0), vsync(false) { }
+				stencilBits(0), depthBits(0), colorBits(0), samples(0), vsync(false) { }
 
 			// Default device constructor.
-			Device(std::shared_ptr<System::Window> window) : backBufferWidth(window->GetWidth()), backBufferHeight(window->GetHeight()),
-				stencilBits(24), depthBits(8), colorBits(32), sampling(false), samples(1), vsync(false)
+			Device(std::shared_ptr<System::Window> window, GraphicsAPI api) : backBufferWidth(window->GetWidth()), backBufferHeight(window->GetHeight()),
+				stencilBits(24), depthBits(8), colorBits(32), samples(1), vsync(false)
 			{
-				this->window = window->GetWindowInterface(); // Retrieve the interface object.
+				this->window = window->GetIWindow(); // Retrieve the interface object.
+				this->api = api;
 
-				device = SelectDevice();
+				device = CreateDevice();
 			}
 
 			Device(std::shared_ptr<System::Window> window, int backBufferWidth, int backBufferHeight, int stencilBits,
-				int depthBits, int colorBits, bool sampling, int samples, bool vsync)
+				int depthBits, int colorBits, int samples, bool vsync)
 			{
-				this->window = window->GetWindowInterface();	// Retrieve the interface object.
+				this->window = window->GetIWindow();	// Retrieve the interface object.
 				this->backBufferWidth = backBufferWidth;
 				this->backBufferHeight = backBufferHeight;
 				this->stencilBits = stencilBits;
 				this->depthBits = depthBits;
 				this->colorBits = colorBits;
-				this->sampling = sampling;
 				this->samples = samples;
 				this->vsync = vsync;
 
-				device = SelectDevice();
+				device = CreateDevice();
 			}
 
 			// Clears the buffer to the specified color.
@@ -104,7 +103,7 @@ namespace Jade
 				device->Present();
 			}
 
-			std::shared_ptr<IDevice> GetDeviceInterface() const
+			std::shared_ptr<IDevice> GetIDevice() const
 			{
 				return device;
 			}

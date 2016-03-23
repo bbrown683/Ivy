@@ -28,6 +28,8 @@ SOFTWARE.
 
 bool Jade::Graphics::DXDevice::Create()
 {
+	std::cout << "[Device Context]" << std::endl;
+
 	unsigned int createDeviceFlags = 0;
 
 #ifdef _DEBUG
@@ -46,7 +48,6 @@ bool Jade::Graphics::DXDevice::Create()
 
 	D3D_FEATURE_LEVEL featureLevels[] =
 	{
-		D3D_FEATURE_LEVEL_11_1,
 		D3D_FEATURE_LEVEL_11_0,
 		D3D_FEATURE_LEVEL_10_1,
 		D3D_FEATURE_LEVEL_10_0,
@@ -86,7 +87,31 @@ bool Jade::Graphics::DXDevice::Create()
 	// Release object now that it is unneeded.
 	m_pBackBuffer->Release();
 
-	m_pImmediateContext->OMSetRenderTargets(1, &m_pRenderTargetView, nullptr);
+	// Create depth stencil texture
+	D3D11_TEXTURE2D_DESC descDepth;
+	ZeroMemory(&descDepth, sizeof(descDepth));
+	descDepth.Width = window->GetWidth();
+	descDepth.Height = window->GetHeight();
+	descDepth.MipLevels = 1;
+	descDepth.ArraySize = 1;
+	descDepth.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+	descDepth.SampleDesc.Count = 1;
+	descDepth.SampleDesc.Quality = 0;
+	descDepth.Usage = D3D11_USAGE_DEFAULT;
+	descDepth.BindFlags = D3D11_BIND_DEPTH_STENCIL;
+	descDepth.CPUAccessFlags = 0;
+	descDepth.MiscFlags = 0;
+	result = m_pDevice->CreateTexture2D(&descDepth, nullptr, &m_pDepthStencil);
+	
+	// Create the depth stencil view
+	D3D11_DEPTH_STENCIL_VIEW_DESC descDSV;
+	ZeroMemory(&descDSV, sizeof(descDSV));
+	descDSV.Format = descDepth.Format;
+	descDSV.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
+	descDSV.Texture2D.MipSlice = 0;
+	result = m_pDevice->CreateDepthStencilView(m_pDepthStencil, &descDSV, &m_pDepthStencilView);
+
+	m_pImmediateContext->OMSetRenderTargets(1, &m_pRenderTargetView, m_pDepthStencilView);
 
 	D3D11_VIEWPORT vp;
 	ZeroMemory(&vp, sizeof(D3D11_VIEWPORT));
@@ -117,6 +142,10 @@ bool Jade::Graphics::DXDevice::Release()
 		m_pIndexBuffer->Release();
 	if(m_pInputLayout)			
 		m_pInputLayout->Release();
+	if (m_pDepthStencil)
+		m_pDepthStencil->Release();
+	if (m_pDepthStencilView)
+		m_pDepthStencilView->Release();
 	if(m_pRenderTargetView)		
 		m_pRenderTargetView->Release();
 	if(m_pSwapChain)			
@@ -132,6 +161,8 @@ bool Jade::Graphics::DXDevice::Release()
 	m_pConstantBuffer = nullptr;
 	m_pIndexBuffer = nullptr;
 	m_pInputLayout = nullptr;
+	m_pDepthStencil = nullptr;
+	m_pDepthStencilView = nullptr;
 	m_pRenderTargetView = nullptr;
 	m_pSwapChain = nullptr;
 	m_pDevice = nullptr;
@@ -141,6 +172,8 @@ bool Jade::Graphics::DXDevice::Release()
 	delete m_pConstantBuffer;
 	delete m_pIndexBuffer;
 	delete m_pInputLayout;
+	delete m_pDepthStencil;
+	delete m_pDepthStencilView;
 	delete m_pRenderTargetView;
 	delete m_pSwapChain;
 	delete m_pDevice;
@@ -154,6 +187,7 @@ void Jade::Graphics::DXDevice::Clear(Math::Color color)
 {	
 	float colorRGBA[] = { color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() };
 	m_pImmediateContext->ClearRenderTargetView(m_pRenderTargetView, colorRGBA);
+	m_pImmediateContext->ClearDepthStencilView(m_pDepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
 }
 
 // Swaps the front and back buffers.

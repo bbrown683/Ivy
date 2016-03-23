@@ -84,26 +84,17 @@ namespace Jade
 			}
 
 			Vector3 Cross(Vector3 vector) const;
-
-			Vector3 Dot(Vector3 vector) const;
-
+			float Dot(Vector3 vector) const;
 			float Distance(Vector3 target) const;
-
 			Vector3 Lerp(Vector3 start, Vector3 end, float delta) const;
-
-			void Normalize();
-
+			Vector3 Normalize() const;
 			void SetX(float value);
 			float GetX() const;
-
 			void SetY(float value);
 			float GetY() const;
-
 			void SetZ(float value);
 			float GetZ() const;
-
 			float GetMagnitude() const;
-
 			string ToString() const;
 		};
 	}

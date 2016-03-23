@@ -79,6 +79,12 @@ namespace Jade
 				window->SetHeight(height);
 			}
 
+			// Returns the aspect ratio of the window.
+			float GetAspectRatio() const
+			{
+				return window->GetAspectRatio();
+			}
+
 			// Retrieves the handle of the window.
 			void* Handle() const
 			{
@@ -121,9 +127,14 @@ namespace Jade
 				return window->IsKeyUp(key);
 			}
 
-			std::shared_ptr<IWindow> GetWindowInterface() const
+			std::shared_ptr<IWindow> GetIWindow() const
 			{
 				return window;
+			}
+
+			Core::Time GetTime() const
+			{
+				return window->GetTime();
 			}
 
 			Window(int width, int height, int x, int y, string title, bool fullscreen)
@@ -156,11 +167,6 @@ namespace Jade
 			void Close() const
 			{
 				window->Close();
-			}
-
-			Core::Time GetTime() const
-			{
-				return window->GetTime();
 			}
 		};
 	}

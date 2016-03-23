@@ -16,10 +16,19 @@ namespace Jade
 			std::shared_ptr<DXDevice> device;
 			std::shared_ptr<Scene> scene;
 
+			Math::Matrix world;
+			Math::Matrix view;
+			Math::Matrix projection;
+
+			float nearPlaneDistance, farPlaneDistance;
+
 		public:
 
-			DXCamera(std::shared_ptr<DXDevice> device)
+			DXCamera(float nearPlaneDistance, float farPlaneDistance, std::shared_ptr<DXDevice> device)
 			{
+				this->nearPlaneDistance = nearPlaneDistance;
+				this->farPlaneDistance = farPlaneDistance;
+
 				this->device = device;
 			}
 

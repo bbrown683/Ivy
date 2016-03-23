@@ -29,27 +29,27 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -85,11 +85,11 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)/ThirdParty/glew/include/;$(SolutionDir)/ThirdParty/SDL/include/;$(SolutionDir)/ThirdParty/assimp/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)/ThirdParty/glew/include/;$(SolutionDir)/ThirdParty/SDL/include/;$(SolutionDir)/ThirdParty/assimp/include/;$(SolutionDir)/ThirdParty/freeimage/include/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>sdl2main.lib;sdl2.lib;opengl32.lib;glew32.lib;d3d11.lib;d3dcompiler.lib;assimp.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/glew/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/SDL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sdl2main.lib;sdl2.lib;opengl32.lib;glew32.lib;d3d11.lib;d3dcompiler.lib;assimp.lib;freeimage.lib;gdi32.lib;user32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/glew/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/SDL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;$(SolutionDir)/ThirdParty/freeimage/lib/$(PlatformTarget)/</AdditionalLibraryDirectories>
       <SubSystem>Console</SubSystem>
       <EntryPointSymbol>
       </EntryPointSymbol>
@@ -101,6 +101,7 @@
 xcopy /f /s /y "$(ProjectDir)pixel.hlsl" "$(OutputPath)resources\shaders\"
 xcopy /f /s /y "$(SolutionDir)ThirdParty\SDL\bin\$(PlatformTarget)\SDL2.dll" "$(OutputPath)"
 xcopy /f /s /y "$(SolutionDir)ThirdParty\glew\bin\$(PlatformTarget)\glew32.dll" "$(OutputPath)"
+xcopy /f /s /y "$(SolutionDir)ThirdParty\freeimage\bin\$(PlatformTarget)\FreeImage.dll" "$(OutputPath)"
 if $(PlatformTarget) == x86 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp32.dll" "$(OutputPath)" 
 if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp64.dll" "$(OutputPath)" </Command>
     </PostBuildEvent>
@@ -109,11 +110,11 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)/ThirdParty/glew/include/;$(SolutionDir)/ThirdParty/SDL/include/;$(SolutionDir)/ThirdParty/assimp/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)/ThirdParty/glew/include/;$(SolutionDir)/ThirdParty/SDL/include/;$(SolutionDir)/ThirdParty/assimp/include/;$(SolutionDir)/ThirdParty/freeimage/include/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>sdl2main.lib;sdl2.lib;opengl32.lib;glew32.lib;d3d11.lib;d3dcompiler.lib;assimp.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/glew/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/SDL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sdl2main.lib;sdl2.lib;opengl32.lib;glew32.lib;d3d11.lib;d3dcompiler.lib;assimp.lib;freeimage.lib;gdi32.lib;user32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/glew/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/SDL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;$(SolutionDir)/ThirdParty/freeimage/lib/$(PlatformTarget)/</AdditionalLibraryDirectories>
       <SubSystem>Console</SubSystem>
       <EntryPointSymbol>
       </EntryPointSymbol>
@@ -125,6 +126,7 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
 xcopy /f /s /y "$(ProjectDir)pixel.hlsl" "$(OutputPath)resources\shaders\"
 xcopy /f /s /y "$(SolutionDir)ThirdParty\SDL\bin\$(PlatformTarget)\SDL2.dll" "$(OutputPath)"
 xcopy /f /s /y "$(SolutionDir)ThirdParty\glew\bin\$(PlatformTarget)\glew32.dll" "$(OutputPath)"
+xcopy /f /s /y "$(SolutionDir)ThirdParty\freeimage\bin\$(PlatformTarget)\FreeImage.dll" "$(OutputPath)"
 if $(PlatformTarget) == x86 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp32.dll" "$(OutputPath)" 
 if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp64.dll" "$(OutputPath)" </Command>
     </PostBuildEvent>
@@ -137,12 +139,12 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <AssemblerOutput>NoListing</AssemblerOutput>
-      <AdditionalIncludeDirectories>$(SolutionDir)/ThirdParty/glew/include/;$(SolutionDir)/ThirdParty/SDL/include/;$(SolutionDir)/ThirdParty/assimp/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)/ThirdParty/glew/include/;$(SolutionDir)/ThirdParty/SDL/include/;$(SolutionDir)/ThirdParty/assimp/include/;$(SolutionDir)/ThirdParty/freeimage/include/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>sdl2main.lib;sdl2.lib;opengl32.lib;glew32.lib;d3d11.lib;d3dcompiler.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/glew/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/SDL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sdl2main.lib;sdl2.lib;opengl32.lib;glew32.lib;d3d11.lib;d3dcompiler.lib;assimp.lib;freeimage.lib;gdi32.lib;user32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/glew/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/SDL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;$(SolutionDir)/ThirdParty/freeimage/lib/$(PlatformTarget)/</AdditionalLibraryDirectories>
       <SubSystem>Windows</SubSystem>
       <EntryPointSymbol>
       </EntryPointSymbol>
@@ -169,12 +171,12 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <AssemblerOutput>NoListing</AssemblerOutput>
-      <AdditionalIncludeDirectories>$(SolutionDir)/ThirdParty/glew/include/;$(SolutionDir)/ThirdParty/SDL/include/;$(SolutionDir)/ThirdParty/assimp/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)/ThirdParty/glew/include/;$(SolutionDir)/ThirdParty/SDL/include/;$(SolutionDir)/ThirdParty/assimp/include/;$(SolutionDir)/ThirdParty/freeimage/include/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>sdl2main.lib;sdl2.lib;opengl32.lib;glew32.lib;d3d11.lib;d3dcompiler.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/glew/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/SDL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sdl2main.lib;sdl2.lib;opengl32.lib;glew32.lib;d3d11.lib;d3dcompiler.lib;assimp.lib;freeimage.lib;gdi32.lib;user32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/glew/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/SDL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;$(SolutionDir)/ThirdParty/freeimage/lib/$(PlatformTarget)/</AdditionalLibraryDirectories>
       <SubSystem>Windows</SubSystem>
       <EntryPointSymbol>
       </EntryPointSymbol>
@@ -231,6 +233,7 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClInclude Include="Graphics\Camera\ICamera.h" />
     <ClInclude Include="Graphics\Camera\Scene.h" />
     <ClInclude Include="Graphics\Device\Device.h" />
+    <ClInclude Include="Graphics\Device\Specification.h" />
     <ClInclude Include="Graphics\Device\DXDevice.h" />
     <ClInclude Include="Graphics\Device\GLDevice.h" />
     <ClInclude Include="Graphics\Device\GraphicsAPI.h" />
@@ -248,6 +251,7 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClInclude Include="Graphics\Texture\Texture.h" />
     <ClInclude Include="Graphics\Texture\TextureType.h" />
     <ClInclude Include="Math\Math.h" />
+    <ClInclude Include="System\Configuration.h" />
     <ClInclude Include="System\Key.h" />
     <ClInclude Include="System\Window\IWindow.h" />
     <ClInclude Include="System\Window\NativeWindow.h" />

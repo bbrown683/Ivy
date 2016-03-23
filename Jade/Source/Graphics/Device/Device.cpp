@@ -26,27 +26,20 @@ SOFTWARE.
 #include "Graphics/Device/DXDevice.h"
 #include "Graphics/Device/GLDevice.h"
 
-std::shared_ptr<Jade::Graphics::IDevice> Jade::Graphics::Device::SelectDevice()
+std::shared_ptr<Jade::Graphics::IDevice> Jade::Graphics::Device::CreateDevice()
 {
 	// if either window or device is null.
 	if (!window || !device)
 	{
-		#ifndef _WIN32	// MacOSX and Linux machines. 
-
-		// Ensure platform is not unknown before attempting to create
-		// an OpenGL device.
-		if (Jade::System::Platform::GetPlatformID() != Jade::System::Platform::PlatformID::Unknown)
-		{
-			api = GraphicsAPI::OpenGL;
+		// Check what API is being requested.
+		if (api == GraphicsAPI::Default)
+			return nullptr;
+		if (api == GraphicsAPI::DirectX)
+			return std::make_shared<DXDevice>(window);
+		if (api == GraphicsAPI::OpenGL)
 			return std::make_shared<GLDevice>(window);
-		}
-		#else // Windows machine.
-
-		// Windows support for DirectX functionality is ensured by default.
-		api = GraphicsAPI::DirectX;
-		return std::make_shared<DXDevice>(window);
-
-		#endif
+		if (api == GraphicsAPI::Vulkan)
+			return nullptr;
 	}
 
 	return nullptr;

@@ -30,7 +30,7 @@ std::shared_ptr<Jade::Graphics::IShader> Jade::Graphics::Shader::CreateShader()
 	{
 		case GraphicsAPI::DirectX:
 		{
-			return std::make_shared<DXShader>(filename, type, std::dynamic_pointer_cast<DXDevice>(device->GetDeviceInterface()));
+			return std::make_shared<DXShader>(filename, type, std::dynamic_pointer_cast<DXDevice>(device->GetIDevice()));
 		}
 		case GraphicsAPI::OpenGL:
 		{

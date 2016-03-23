@@ -27,7 +27,6 @@ SOFTWARE.
 #include <d3d11.h>
 
 #include "Core/Utility.h"
-
 #include "Graphics/Device/IDevice.h"
 #include "System/Window/Window.h"
 
@@ -42,6 +41,7 @@ namespace Jade
 			// Our shaders will need access to our objects.
 			friend class DXShader;
 			friend class DXMesh;
+			friend class DXCamera;
 
 			std::shared_ptr<System::IWindow> window;
 
@@ -51,6 +51,8 @@ namespace Jade
 			ID3D11DeviceContext*		m_pImmediateContext		= nullptr;
 			IDXGISwapChain*				m_pSwapChain			= nullptr;
 			ID3D11RenderTargetView*		m_pRenderTargetView		= nullptr;
+			ID3D11Texture2D*			m_pDepthStencil			= nullptr;
+			ID3D11DepthStencilView*		m_pDepthStencilView		= nullptr;
 			D3D_DRIVER_TYPE				m_DriverType;
 			D3D_FEATURE_LEVEL			m_FeatureLevel;
 			D3D11_VIEWPORT				m_Viewport;
@@ -79,8 +81,6 @@ namespace Jade
 				// Create our device.
 				if(!Create())
 				{
-					SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Device creation error", "Failed to initialize or create a DirectX11 Device.", window->GetSDLWindow());
-					
 					// Dispose of any allocated memory and close the window.
 					Release();
 					window->Close();
@@ -96,6 +96,14 @@ namespace Jade
 			void Clear(Math::Color color) override;
 			void Present() override;
 			char* DeviceInformation() override;
+			std::shared_ptr<System::IWindow> GetIWindow();
+			ID3D11Device* GetID3D11Device();
+			ID3D11DeviceContext* GetID3D11DeviceContext();
+			IDXGISwapChain* GetIDXGISwapChain();
+			ID3D11RenderTargetView* GetID3D11RenderTargetView();
+			ID3D11Buffer* GetID3D11BufferVertex();
+			ID3D11Buffer* GetID3D11BufferIndex();
+			ID3D11Buffer* GetID3D11BufferConstant();
 		};
 	}
 }

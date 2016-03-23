@@ -40,11 +40,11 @@ using Jade::System::Window;
 
 int main(int argc, char* argv[])
 {
-	// Creates a basic window that can be rendered to with either graphics API.
+	// Creates a basic window that can be rendered with either graphics API.
 	std::shared_ptr<Window> window = std::make_shared<Window>(1080, 720, 100, 100, "Hello World", false);
 
-	// Creates an OpenGL or DirectX device depending on window type.
-	std::shared_ptr<Device> device = std::make_shared<Device>(window);
+	// Creates a graphics device.
+	std::shared_ptr<Device> device = std::make_shared<Device>(window, Jade::Graphics::GraphicsAPI::OpenGL);
 
 	// Create our two required shaders for drawing onto the surface.
 	std::shared_ptr<Shader>	vertexShader = std::make_shared<Shader>(".\\resources\\shaders\\vertex.hlsl", Jade::Graphics::ShaderType::Vertex, device);
@@ -95,12 +95,6 @@ int main(int argc, char* argv[])
 	
 	// Creates and binds the vertex buffer for drawing the triangular mesh.
 	std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>(vertices, indices, device);
-
-	Jade::Math::Matrix matrix(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
-	matrix = matrix.Transpose();
-	std::cout << matrix.ToString() << std::endl;
-
-	std::cout << vertices[0].position.ToString() << std::endl;
 
 	while (window->IsOpen())
 	{

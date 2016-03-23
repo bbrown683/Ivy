@@ -33,9 +33,26 @@ static const Jade::Math::Vector3 Right		= Jade::Math::Vector3(1.0f, 0.0f, 0.0f);
 static const Jade::Math::Vector3 Up			= Jade::Math::Vector3(0.0f, 1.0f, 0.0f);
 static const Jade::Math::Vector3 Zero		= Jade::Math::Vector3(0.0f, 0.0f, 0.0f);
 
+Jade::Math::Vector3 Jade::Math::Vector3::Cross(Vector3 vector) const
+{
+	return Vector3(this->y * vector.GetZ() - this->z * vector.GetY(), 
+		this->z * vector.GetX() - this->x * vector.GetZ(), 
+		this->x * vector.GetY() - this->y * vector.GetX());
+}
+
+float Jade::Math::Vector3::Dot(Vector3 vector) const
+{
+	return this->x * vector.GetX() + this->y * vector.GetY() + this->z * vector.GetZ();
+}
+
 float Jade::Math::Vector3::Distance(Vector3 target) const
 {
 	return Math::Sqrt(target.GetX() - x + target.GetY() - y + target.GetZ() - z);
+}
+
+Jade::Math::Vector3 Jade::Math::Vector3::Normalize() const
+{
+	return Vector3(x / magnitude, y / magnitude, z / magnitude);
 }
 
 void Jade::Math::Vector3::SetX(float value)

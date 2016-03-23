@@ -77,6 +77,7 @@ namespace Jade
 			void SetWidth(int value) override;
 			int GetHeight() override;
 			void SetHeight(int value) override;
+			float GetAspectRatio() override;
 			int GetX() override;
 			void SetX(int value) override;
 			int GetY() override;
@@ -101,7 +102,6 @@ namespace Jade
 			bool IsKeyDown(Key key) override;
 			bool IsKeyUp(Key key) override;
 			Core::Time GetTime() override;
-			SDL_Window* GetSDLWindow() override;
 
 			NativeWindow(int width, int height, int x, int y, string title, bool fullscreen) : m_pWindow(nullptr)
 			{

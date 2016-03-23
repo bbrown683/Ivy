@@ -45,9 +45,57 @@ float Jade::Math::Matrix::Determinant()
 	return 0.0f;
 }
 
+Jade::Math::Matrix Jade::Math::Matrix::CreateLeftHandPerspectiveView(float fieldOfView, float aspectRatio, float nearPlaneDistance, float farPlaneDistance)
+{
+	// Handling input parameters.
+	if ((fieldOfView >= 0 && fieldOfView <= Math::Pi) &&
+		(nearPlaneDistance > 0 && farPlaneDistance > 0) &&
+		(nearPlaneDistance < farPlaneDistance))
+		// For a summary of how this is computed use the link below.
+		// https://msdn.microsoft.com/en-us/library/bb205350(v=vs.85).aspx
+		return Matrix((1 / Math::Tan(fieldOfView) * 0.5f), 0.0f, 0.0f, 0.0f,
+			0.0f, ((1 / Math::Tan(fieldOfView * 0.5f)) / aspectRatio), 0.0f, 0.0f,
+			0.0f, 0.0f, nearPlaneDistance / (nearPlaneDistance - farPlaneDistance), -1.0f,
+			0.0f, 0.0f, -(nearPlaneDistance * farPlaneDistance) / (nearPlaneDistance - farPlaneDistance), 0.0f);
+
+	// return an empty matrix otherwise.
+	return Matrix();
+}
+
+Jade::Math::Matrix Jade::Math::Matrix::CreateRightHandPerspectiveView(float fieldOfView, float aspectRatio, float nearPlaneDistance, float farPlaneDistance)
+{
+	// Handling input parameters.
+	if ((fieldOfView >= 0 && fieldOfView <= Math::Pi) &&
+		(nearPlaneDistance > 0 && farPlaneDistance > 0) &&
+		(nearPlaneDistance < farPlaneDistance))
+		// For a summary of how this is computed use the link below.
+		// https://msdn.microsoft.com/en-us/library/bb205351(v=vs.85).aspx
+		return Matrix(((1 / Math::Tan(fieldOfView * 0.5f)) / aspectRatio), 0.0f, 0.0f, 0.0f, 
+			0.0f, (1 / Math::Tan(fieldOfView * 0.5f)), 0.0f, 0.0f, 
+			0.0f, 0.0f, nearPlaneDistance / (nearPlaneDistance - farPlaneDistance), -1.0f, 
+			0.0f, 0.0f, (nearPlaneDistance * farPlaneDistance) / (nearPlaneDistance - farPlaneDistance), 0.0f);
+	
+	// return an empty matrix otherwise.
+	return Matrix();
+}
+
 Jade::Math::Matrix Jade::Math::Matrix::Divide(Matrix other) const
 {
 	return *this / other;
+}
+
+Jade::Math::Matrix Jade::Math::Matrix::LookAt(Vector3 eye, Vector3 at, Vector3 up)
+{
+	Vector3 zAxis = (at - eye).Normalize();
+	Vector3 xAxis = up.Cross(zAxis).Normalize();
+	Vector3 yAxis = zAxis.Cross(xAxis);
+	
+	// For a summary of how this is computed use the link below.
+	// https://msdn.microsoft.com/en-us/library/windows/desktop/bb205342(v=vs.85).aspx
+	return Matrix(eye.GetX(), eye.GetY(), eye.GetZ(), 0, 
+		at.GetX(), at.GetY(), at.GetZ(), 0, 
+		up.GetX(), up.GetY(), up.GetZ(), 0, 
+		-xAxis.Dot(eye), -yAxis.Dot(eye), -(zAxis.Dot(eye)), 1);
 }
 
 Jade::Math::Matrix Jade::Math::Matrix::Multiply(Matrix other) const

@@ -33,13 +33,18 @@ namespace Jade
 	{
 		class Camera
 		{
-		public:
+		private:
 
 			std::shared_ptr<ICamera> camera;
+			std::shared_ptr<Device> device;
+			std::shared_ptr<ICamera> CreateCamera() const;
+
+		public:
 
 			Camera(std::shared_ptr<Device> device)
 			{
-				
+				this->device = device;
+				camera = CreateCamera();
 			}
 
 			void LookAt(Math::Vector3 position, Math::Vector3 target, Math::Vector3 direction)

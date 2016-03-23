@@ -22,43 +22,140 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+
 #include "glew/glew.h"
+#include "glew/wglew.h"
 #include <gl/GL.h>
 
 #include "GLDevice.h"
-#include <cassert>
+#include <iostream>
 
 bool Jade::Graphics::GLDevice::Create()
 {
-	context = SDL_GL_CreateContext(window->GetSDLWindow());
+#ifdef WGL
+	
+	std::cout << "[Device Context]" << std::endl;
 
-	SDL_GL_MakeCurrent(window->GetSDLWindow(), context);
+	HWND dummyWND = CreateWindowW(L"NULL", L"NULL", WS_DISABLED, 0, 0, 0, 0, nullptr, nullptr, GetModuleHandle(nullptr), nullptr);
+	HDC dummyDC = GetDC(dummyWND);
 
-	SDL_GL_SetSwapInterval(1);
+	PIXELFORMATDESCRIPTOR dummyPixelFormatDescriptor =
+	{
+		sizeof(dummyPixelFormatDescriptor), 1, PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER,
+		PFD_TYPE_RGBA, 32, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 24, 8, 0, PFD_MAIN_PLANE,
+		0, 0, 0, 0
+	};
 
+	int dummyPixelFormat = ChoosePixelFormat(dummyDC, &dummyPixelFormatDescriptor);
+	SetPixelFormat(dummyDC, dummyPixelFormat, &dummyPixelFormatDescriptor);
+
+	// Create dummy context
+	HGLRC dummyGLRC = wglCreateContext(dummyDC);
+	wglMakeCurrent(dummyDC, dummyGLRC);
+
+	// Supported OpenGL version.
+	int major, minor;
+	glGetIntegerv(GL_MAJOR_VERSION, &major);
+	glGetIntegerv(GL_MINOR_VERSION, &minor);
+
+	// Anything below 4.5 is unsupported.
+	if (major < 4 && minor < 5)
+		return false;
+
+	// Load extensions.
 	GLenum result = glewInit();
+	if(result != GLEW_OK)
+		return false;
 
-	assert(result != GLEW_OK);
+	// These extensions are required for the creation of a modern OpenGL context.
+	if(!WGLEW_ARB_pixel_format && !WGLEW_ARB_create_context)
+		return false;
 
-	return result == GLEW_OK ? true : false;
+	// Choose final pixel format
+	const int pixelAttribs[] =
+	{
+		WGL_DRAW_TO_WINDOW_ARB, GL_TRUE,
+		WGL_SUPPORT_OPENGL_ARB, GL_TRUE,
+		WGL_DOUBLE_BUFFER_ARB, GL_TRUE,
+		WGL_PIXEL_TYPE_ARB, WGL_TYPE_RGBA_ARB,
+		WGL_COLOR_BITS_ARB, 32,
+		WGL_DEPTH_BITS_ARB, 24,
+		WGL_STENCIL_BITS_ARB, 8,
+		WGL_SAMPLE_BUFFERS_ARB, GL_FALSE,
+		WGL_SAMPLES_ARB, 0,
+		0
+	};
+
+	// Get the device context for the SDL window.
+	dc = GetDC(reinterpret_cast<HWND>(window->Handle()));
+
+	int pixelFormat;
+	unsigned int formatCount;
+	wglChoosePixelFormatARB(dc, pixelAttribs, nullptr, 1, &pixelFormat, &formatCount);
+
+	if (!formatCount)
+		return false;
+	
+	SetPixelFormat(dc, pixelFormat, &dummyPixelFormatDescriptor);
+
+	int contextAttribs[] =
+	{
+		WGL_CONTEXT_MAJOR_VERSION_ARB, major,
+		WGL_CONTEXT_MINOR_VERSION_ARB, minor,
+		WGL_CONTEXT_PROFILE_MASK_ARB, WGL_CONTEXT_CORE_PROFILE_BIT_ARB,
+		0
+	};
+
+	// Create OpenGL 4.5 context		
+	context = wglCreateContextAttribsARB(dc, nullptr, contextAttribs);
+
+	// Failed to be created.
+	if(context == nullptr)
+		return false;
+
+	// Unbind dummy context and delete.
+	wglMakeCurrent(dc, nullptr);
+	wglDeleteContext(dummyGLRC);
+
+	// Bind main context and destroy dummy window.
+	wglMakeCurrent(dc, context);
+
+	// Handles vertical sync if supported.
+	if (WGLEW_EXT_swap_control)
+		wglSwapIntervalEXT(0);
+
+	std::cout << "Renderer: OpenGL " << major << "." << minor << std::endl;
+
+	return true;
+
+#elif GLX
+
+#endif
 }
 
 bool Jade::Graphics::GLDevice::Release()
 {
-	SDL_GL_DeleteContext(context);
+#ifdef WGL
+	// Unbind OpenGL context.
+	wglMakeCurrent(dc, nullptr);
+	wglDeleteContext(context);
+	ReleaseDC(reinterpret_cast<HWND>(window->Handle()), dc);
 
+#elif GLX
+
+#endif
 	return context == nullptr ? true : false;
 }
 
 void Jade::Graphics::GLDevice::Clear(Math::Color color)
 {
+	glClear(GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glClearColor(color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha());
-	glClear(GL_COLOR_BUFFER_BIT);
 }
 
 void Jade::Graphics::GLDevice::Present()
 {
-	SDL_GL_SwapWindow(window->GetSDLWindow());
+	SwapBuffers(dc);
 }
 
 char* Jade::Graphics::GLDevice::DeviceInformation()

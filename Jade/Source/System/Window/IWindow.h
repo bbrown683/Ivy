@@ -42,6 +42,7 @@ namespace Jade
 			virtual void SetWidth(int value) = 0;
 			virtual int GetHeight() = 0;
 			virtual void SetHeight(int value) = 0;
+			virtual float GetAspectRatio() = 0;
 			virtual int GetX() = 0;
 			virtual void SetX(int value) = 0;
 			virtual int GetY() = 0;
@@ -68,7 +69,6 @@ namespace Jade
 			virtual bool IsKeyDown(Key key) = 0;
 			virtual bool IsKeyUp(Key key) = 0;
 			virtual Core::Time GetTime() = 0;
-			virtual SDL_Window* GetSDLWindow() = 0;
 		};
 	}
 }

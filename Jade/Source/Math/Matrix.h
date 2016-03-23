@@ -29,6 +29,7 @@ SOFTWARE.
 
 #include "Core/Utility.h"
 #include "Math/Math.h"
+#include "Math/Vector3.h"
 
 namespace Jade
 {
@@ -62,27 +63,6 @@ namespace Jade
 			Matrix operator*(Matrix matrix) const
 			{
 				return Matrix();
-				/*
-				return Matrix(values[0][0] * matrix.values[0][0] + values[0][1] * matrix.values[1][0] + values[0][2] * matrix.values[2][0] + values[0][3] * matrix.values[3][0],
-				values[0, 1] = values[0, 0] * matrix.m[0, 1] + values[0, 1] * matrix.m[1, 1] + values[0, 2] * matrix.m[2, 1] + values[0, 3] * matrix.m[3, 1];
-				values[0, 2] = values[0, 0] * matrix.m[0, 2] + values[0, 1] * matrix.m[1, 2] + values[0, 2] * matrix.m[2, 2] + values[0, 3] * matrix.m[3, 2];
-				values[0, 3] = values[0, 0] * matrix.m[0, 3] + values[0, 1] * matrix.m[1, 3] + values[0, 2] * matrix.m[2, 3] + values[0, 3] * matrix.m[3, 3];
-
-				values[1, 0] = values[1, 0] * matrix.m[0, 0] + values[1, 1] * matrix.m[1, 0] + values[1, 2] * matrix.m[2, 0] + values[1, 3] * matrix.m[3, 0];
-				values[1, 1] = values[1, 1] * matrix.m[0, 1] + values[1, 1] * matrix.m[1, 1] + values[1, 2] * matrix.m[2, 1] + values[1, 3] * matrix.m[3, 1];
-				values[1, 2] = values[1, 2] * matrix.m[0, 2] + values[1, 1] * matrix.m[1, 2] + values[1, 2] * matrix.m[2, 2] + values[1, 3] * matrix.m[3, 2];
-				values[1, 3] = values[1, 3] * matrix.m[0, 3] + values[1, 1] * matrix.m[1, 3] + values[1, 2] * matrix.m[2, 3] + values[1, 3] * matrix.m[3, 3];
-
-				values[2, 0] = values[2, 0] * matrix.m[0, 0] + values[2, 1] * matrix.m[1, 0] + values[2, 2] * matrix.m[2, 0] + values[2, 3] * matrix.m[3, 0];
-				values[2, 1] = values[2, 1] * matrix.m[0, 1] + values[2, 1] * matrix.m[1, 1] + values[2, 2] * matrix.m[2, 1] + values[2, 3] * matrix.m[3, 1];
-				values[2, 2] = values[2, 2] * matrix.m[0, 2] + values[2, 1] * matrix.m[1, 2] + values[2, 2] * matrix.m[2, 2] + values[2, 3] * matrix.m[3, 2];
-				values[2, 3] = values[2, 3] * matrix.m[0, 3] + values[2, 1] * matrix.m[1, 3] + values[2, 2] * matrix.m[2, 3] + values[2, 3] * matrix.m[3, 3];
-
-				values[3, 0] = values[3, 0] * matrix.m[0, 0] + values[3, 1] * matrix.m[1, 0] + values[3, 2] * matrix.m[2, 0] + values[3, 3] * matrix.m[3, 0];
-				values[3, 1] = values[3, 1] * matrix.m[0, 1] + values[3, 1] * matrix.m[1, 1] + values[3, 2] * matrix.m[2, 1] + values[3, 3] * matrix.m[3, 1];
-				values[3, 2] = values[3, 2] * matrix.m[0, 2] + values[3, 1] * matrix.m[1, 2] + values[3, 2] * matrix.m[2, 2] + values[3, 3] * matrix.m[3, 2];
-				values[3, 3] = values[3, 3] * matrix.m[0, 3] + values[3, 1] * matrix.m[1, 3] + values[3, 2] * matrix.m[2, 3] + values[3, 3] * matrix.m[3, 3];);
-				*/
 			}
 
 			Matrix operator/(Matrix matrix) const
@@ -138,14 +118,18 @@ namespace Jade
 			}
 
 			Matrix Add(Matrix other) const;
-			std::vector<std::vector<float>> AsVector();
 			float Determinant();
+			Matrix CreateLeftHandPerspectiveView(float fieldOfView, float aspectRatio, float nearPlaneDistance, float farPlaneDistance);
+			Matrix CreateRightHandPerspectiveView(float fieldOfView, float aspectRatio, float nearPlaneDistance, float farPlaneDistance);
 			Matrix Divide(Matrix other) const;
+			Matrix LookAt(Vector3 eye, Vector3 at, Vector3 up);
 			Matrix Multiply(Matrix other) const;
+			Matrix Negate();
 			Matrix RotateAlongX(float radians) const;
 			Matrix RotateAlongY(float radians) const;
 			Matrix RotateAlongZ(float radians) const;
 			Matrix Subtract(Matrix other) const;
+			Matrix Translate(float xOffset, float yOffset, float zOffset);
 			Matrix Transpose();
 			string ToString();
 		};

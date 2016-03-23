@@ -99,6 +99,8 @@
     <ClInclude Include="Math\Matrix.h" />
     <ClInclude Include="Math\Math.h" />
     <ClInclude Include="Graphics\Camera\Scene.h" />
+    <ClInclude Include="System\Configuration.h" />
+    <ClInclude Include="Graphics\Device\Specification.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">
