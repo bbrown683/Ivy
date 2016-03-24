@@ -24,14 +24,14 @@ SOFTWARE.
 
 #include "Vector3.h"
 
-static const Jade::Math::Vector3 Back		= Jade::Math::Vector3(0.0f, 0.0f, -1.0f);
-static const Jade::Math::Vector3 Down		= Jade::Math::Vector3(0.0f, -1.0f, 0.0f);
-static const Jade::Math::Vector3 Forward	= Jade::Math::Vector3(0.0f, 0.0f, 1.0f);
-static const Jade::Math::Vector3 Left		= Jade::Math::Vector3(-1.0f, 0.0f, 0.0f);
-static const Jade::Math::Vector3 One		= Jade::Math::Vector3(1.0f, 1.0f, 1.0f);
-static const Jade::Math::Vector3 Right		= Jade::Math::Vector3(1.0f, 0.0f, 0.0f);
-static const Jade::Math::Vector3 Up			= Jade::Math::Vector3(0.0f, 1.0f, 0.0f);
-static const Jade::Math::Vector3 Zero		= Jade::Math::Vector3(0.0f, 0.0f, 0.0f);
+const Jade::Math::Vector3 Back		= Jade::Math::Vector3(0.0f, 0.0f, -1.0f);
+const Jade::Math::Vector3 Down		= Jade::Math::Vector3(0.0f, -1.0f, 0.0f);
+const Jade::Math::Vector3 Forward	= Jade::Math::Vector3(0.0f, 0.0f, 1.0f);
+const Jade::Math::Vector3 Left		= Jade::Math::Vector3(-1.0f, 0.0f, 0.0f);
+const Jade::Math::Vector3 One		= Jade::Math::Vector3(1.0f, 1.0f, 1.0f);
+const Jade::Math::Vector3 Right		= Jade::Math::Vector3(1.0f, 0.0f, 0.0f);
+const Jade::Math::Vector3 Up		= Jade::Math::Vector3(0.0f, 1.0f, 0.0f);
+const Jade::Math::Vector3 Zero		= Jade::Math::Vector3(0.0f, 0.0f, 0.0f);
 
 Jade::Math::Vector3 Jade::Math::Vector3::Cross(Vector3 vector) const
 {

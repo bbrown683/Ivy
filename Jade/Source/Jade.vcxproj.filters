@@ -39,6 +39,7 @@
     <ClCompile Include="Graphics\Camera\Camera.cpp" />
     <ClCompile Include="Graphics\Camera\DXCamera.cpp" />
     <ClCompile Include="Math\Matrix.cpp" />
+    <ClCompile Include="Core\Keyboard.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\Vector4.h">
@@ -91,7 +92,6 @@
     <ClInclude Include="System\Window\IWindow.h" />
     <ClInclude Include="System\Window\NativeWindow.h" />
     <ClInclude Include="System\Window\Window.h" />
-    <ClInclude Include="System\Key.h" />
     <ClInclude Include="System\Log.h" />
     <ClInclude Include="Graphics\Camera\Camera.h" />
     <ClInclude Include="Graphics\Camera\ICamera.h" />
@@ -101,6 +101,11 @@
     <ClInclude Include="Graphics\Camera\Scene.h" />
     <ClInclude Include="System\Configuration.h" />
     <ClInclude Include="Graphics\Device\Specification.h" />
+    <ClInclude Include="Core\Keyboard.h" />
+    <ClInclude Include="Core\Mouse.h" />
+    <ClInclude Include="Core\InputState.h" />
+    <ClInclude Include="Core\Input.h" />
+    <ClInclude Include="Core\Key.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">

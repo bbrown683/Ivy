@@ -74,6 +74,23 @@ namespace Jade
 				return Vector3(this->x / scalar, this->y - scalar, this->z / scalar);
 			}
 
+			static const Vector3 Back;
+			static const Vector3 Down;
+			static const Vector3 Forward;
+			static const Vector3 Left;
+			static const Vector3 One;
+			static const Vector3 Right;
+			static const Vector3 Up;
+			static const Vector3 Zero;
+
+			Vector3()
+			{
+				this->x = 0.0f;
+				this->y = 0.0f;
+				this->z = 0.0f;
+				this->magnitude = 0.0f;
+			}
+
 			Vector3(float x, float y, float z)
 			{
 				this->x = x;

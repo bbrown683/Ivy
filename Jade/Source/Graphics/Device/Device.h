@@ -27,6 +27,7 @@ SOFTWARE.
 #include "Core/Utility.h"
 #include "Graphics/Device/GraphicsAPI.h"
 #include "Graphics/Device/IDevice.h"
+#include "Graphics/Device/Specification.h"
 #include "System/Window/Window.h"
 
 namespace Jade
@@ -41,21 +42,7 @@ namespace Jade
 			std::shared_ptr<System::IWindow> window;
 
 			GraphicsAPI api;
-
-			// Planned to be functional in future iterations, but for now we will not mess with these.
-			
-			int backBufferWidth;	// Back buffer width.
-			int backBufferHeight;	// Back buffer height.
-			int stencilBits;		// Amount of stencil bits.
-			int depthBits;			// Amount of depth bits.
-			int colorBits;			// Amount of color bits.
-			int samples;			// How many samples if using sampling?
-			bool vsync;				// Enable vertical sync?
-
-			enum class ColorBits : int
-			{
-				R8G8B8A8, // 32 bits of color, 8 for each component.
-			};
+			Specification specification;
 
 			// Enumerates through the available devices and selects the best one available for rendering.
 			std::shared_ptr<IDevice> CreateDevice();
@@ -63,30 +50,36 @@ namespace Jade
 		public:						
 
 			// Note: Do not use this constructor as everything is set to null.
-			Device() : device(nullptr), window(nullptr), backBufferWidth(0), backBufferHeight(0), 
-				stencilBits(0), depthBits(0), colorBits(0), samples(0), vsync(false) { }
+			Device() : device(nullptr), window(nullptr) { }
 
 			// Default device constructor.
-			Device(std::shared_ptr<System::Window> window, GraphicsAPI api) : backBufferWidth(window->GetWidth()), backBufferHeight(window->GetHeight()),
-				stencilBits(24), depthBits(8), colorBits(32), samples(1), vsync(false)
+			Device(std::shared_ptr<System::Window> window, GraphicsAPI api)
 			{
 				this->window = window->GetIWindow(); // Retrieve the interface object.
 				this->api = api;
 
+				// Fill some default values.
+				specification.backBufferHeight = window->GetHeight();
+				specification.backBufferWidth = window->GetWidth();
+				specification.colorBits = 32;
+				specification.depthBits = 24;
+				specification.stencilBits = 8;
+				specification.samples = 1;
+				specification.vsync = true;
+
 				device = CreateDevice();
 			}
 
-			Device(std::shared_ptr<System::Window> window, int backBufferWidth, int backBufferHeight, int stencilBits,
-				int depthBits, int colorBits, int samples, bool vsync)
+			Device(std::shared_ptr<System::IWindow> window, Specification specification) : api(GraphicsAPI::Default)
+			{
+				this->window = window;
+				this->specification = specification;
+			}
+
+			Device(std::shared_ptr<System::Window> window, GraphicsAPI api, Specification specification)
 			{
 				this->window = window->GetIWindow();	// Retrieve the interface object.
-				this->backBufferWidth = backBufferWidth;
-				this->backBufferHeight = backBufferHeight;
-				this->stencilBits = stencilBits;
-				this->depthBits = depthBits;
-				this->colorBits = colorBits;
-				this->samples = samples;
-				this->vsync = vsync;
+				this->specification = specification;
 
 				device = CreateDevice();
 			}

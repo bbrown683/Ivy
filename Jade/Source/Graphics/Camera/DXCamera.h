@@ -20,6 +20,9 @@ namespace Jade
 			Math::Matrix view;
 			Math::Matrix projection;
 
+			Math::Vector3 position;
+			Math::Vector3 target;
+
 			float nearPlaneDistance, farPlaneDistance;
 
 		public:

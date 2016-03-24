@@ -42,7 +42,7 @@ bool Jade::Graphics::GLDevice::Create()
 	PIXELFORMATDESCRIPTOR dummyPixelFormatDescriptor =
 	{
 		sizeof(dummyPixelFormatDescriptor), 1, PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER,
-		PFD_TYPE_RGBA, 32, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 24, 8, 0, PFD_MAIN_PLANE,
+		PFD_TYPE_RGBA, static_cast<BYTE>(specification.colorBits), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, static_cast<BYTE>(specification.depthBits), static_cast<BYTE>(specification.stencilBits), 0, PFD_MAIN_PLANE,
 		0, 0, 0, 0
 	};
 
@@ -78,11 +78,11 @@ bool Jade::Graphics::GLDevice::Create()
 		WGL_SUPPORT_OPENGL_ARB, GL_TRUE,
 		WGL_DOUBLE_BUFFER_ARB, GL_TRUE,
 		WGL_PIXEL_TYPE_ARB, WGL_TYPE_RGBA_ARB,
-		WGL_COLOR_BITS_ARB, 32,
-		WGL_DEPTH_BITS_ARB, 24,
-		WGL_STENCIL_BITS_ARB, 8,
-		WGL_SAMPLE_BUFFERS_ARB, GL_FALSE,
-		WGL_SAMPLES_ARB, 0,
+		WGL_COLOR_BITS_ARB, specification.colorBits,
+		WGL_DEPTH_BITS_ARB, specification.depthBits,
+		WGL_STENCIL_BITS_ARB, specification.stencilBits,
+		WGL_SAMPLE_BUFFERS_ARB, (specification.samples > 1) ? GL_TRUE : GL_FALSE,
+		WGL_SAMPLES_ARB, (specification.samples > 1) ? specification.samples : 0,
 		0
 	};
 
@@ -106,7 +106,7 @@ bool Jade::Graphics::GLDevice::Create()
 		0
 	};
 
-	// Create OpenGL 4.5 context		
+	// Create OpenGL context		
 	context = wglCreateContextAttribsARB(dc, nullptr, contextAttribs);
 
 	// Failed to be created.
@@ -116,13 +116,15 @@ bool Jade::Graphics::GLDevice::Create()
 	// Unbind dummy context and delete.
 	wglMakeCurrent(dc, nullptr);
 	wglDeleteContext(dummyGLRC);
+	ReleaseDC(dummyWND, dummyDC);
+	DestroyWindow(dummyWND);
 
 	// Bind main context and destroy dummy window.
 	wglMakeCurrent(dc, context);
 
 	// Handles vertical sync if supported.
 	if (WGLEW_EXT_swap_control)
-		wglSwapIntervalEXT(0);
+		wglSwapIntervalEXT(specification.vsync);
 
 	std::cout << "Renderer: OpenGL " << major << "." << minor << std::endl;
 
@@ -155,7 +157,11 @@ void Jade::Graphics::GLDevice::Clear(Math::Color color)
 
 void Jade::Graphics::GLDevice::Present()
 {
+#ifdef WGL
 	SwapBuffers(dc);
+#elif GLX
+
+#endif
 }
 
 char* Jade::Graphics::GLDevice::DeviceInformation()

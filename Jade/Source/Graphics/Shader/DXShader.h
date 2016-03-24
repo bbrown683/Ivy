@@ -45,14 +45,14 @@ namespace Jade
 			std::shared_ptr<DXDevice> device;
 
 			// Holds our shader compilation information.
-			ID3DBlob*				m_pShaderBlob		= nullptr;
+			ComPtr<ID3DBlob>				m_pShaderBlob		= nullptr;
 
-			ID3D11ComputeShader*	m_pComputeShader	= nullptr;
-			ID3D11DomainShader*		m_pDomainShader		= nullptr;
-			ID3D11GeometryShader*	m_pGeometryShader	= nullptr;
-			ID3D11HullShader*		m_pHullShader		= nullptr;
-			ID3D11PixelShader*		m_pPixelShader		= nullptr;
-			ID3D11VertexShader*		m_pVertexShader		= nullptr;
+			ComPtr<ID3D11ComputeShader>		m_pComputeShader	= nullptr;
+			ComPtr<ID3D11DomainShader>		m_pDomainShader		= nullptr;
+			ComPtr<ID3D11GeometryShader>	m_pGeometryShader	= nullptr;
+			ComPtr<ID3D11HullShader>		m_pHullShader		= nullptr;
+			ComPtr<ID3D11PixelShader>		m_pPixelShader		= nullptr;
+			ComPtr<ID3D11VertexShader>		m_pVertexShader		= nullptr;
 
 			bool Create() override;
 			bool Release() override;

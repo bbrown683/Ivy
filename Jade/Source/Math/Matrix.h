@@ -25,7 +25,6 @@ SOFTWARE.
 */
 
 #include <iostream>
-#include <vector>
 
 #include "Core/Utility.h"
 #include "Math/Math.h"
@@ -118,11 +117,13 @@ namespace Jade
 			}
 
 			Matrix Add(Matrix other) const;
+			Matrix CreateLookAt(Vector3 eye, Vector3 at, Vector3 up);
+			Matrix CreateOrthographicView(float fieldOfView, float aspectRatio, float nearPlaneDistance, float farPlaneDistance);
+			Matrix CreatePerspectiveView(float fieldOfView, float aspectRatio, float nearPlaneDistance, float farPlaneDistance);
+			// Returns a reference o the raw data contained within the matrix.
+			float(&Data())[4][4];
 			float Determinant();
-			Matrix CreateLeftHandPerspectiveView(float fieldOfView, float aspectRatio, float nearPlaneDistance, float farPlaneDistance);
-			Matrix CreateRightHandPerspectiveView(float fieldOfView, float aspectRatio, float nearPlaneDistance, float farPlaneDistance);
 			Matrix Divide(Matrix other) const;
-			Matrix LookAt(Vector3 eye, Vector3 at, Vector3 up);
 			Matrix Multiply(Matrix other) const;
 			Matrix Negate();
 			Matrix RotateAlongX(float radians) const;

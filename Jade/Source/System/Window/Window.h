@@ -24,8 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "System/Window/IWindow.h"
-#include "System/Window/NativeWindow.h"
+#include <System/Window/NativeWindow.h>
 
 namespace Jade
 {
@@ -116,13 +115,13 @@ namespace Jade
 			}
 
 			// Returns a boolean determining if a key was pressed.
-			bool IsKeyDown(Key key) const
+			bool IsKeyDown(Core::Key key) const
 			{
 				return window->IsKeyDown(key);
 			}
 
 			// Returns a boolean determining if a key was not pressed.
-			bool IsKeyUp(Key key) const
+			bool IsKeyUp(Core::Key key) const
 			{
 				return window->IsKeyUp(key);
 			}
@@ -135,6 +134,11 @@ namespace Jade
 			Core::Time GetTime() const
 			{
 				return window->GetTime();
+			}
+
+			Core::Input GetInput() const
+			{
+				return window->GetInput();
 			}
 
 			Window(int width, int height, int x, int y, string title, bool fullscreen)

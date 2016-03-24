@@ -26,10 +26,10 @@ SOFTWARE.
 
 #include "SDL2/SDL.h"
 
-#include "Core/Time.h"
-#include "Core/Utility.h"
-#include "Math/Point.h"
-#include "System/Key.h"
+#include <Core/Input.h>
+#include <Core/Time.h>
+#include <Core/Utility.h>
+#include <Math/Point.h>
 
 namespace Jade
 {
@@ -66,9 +66,10 @@ namespace Jade
 			virtual bool IsOpen() = 0;
 			virtual bool IsFullscreen() = 0;
 			virtual bool IsActive() = 0;
-			virtual bool IsKeyDown(Key key) = 0;
-			virtual bool IsKeyUp(Key key) = 0;
+			virtual bool IsKeyDown(Core::Key key) = 0;
+			virtual bool IsKeyUp(Core::Key key) = 0;
 			virtual Core::Time GetTime() = 0;
+			virtual Core::Input GetInput() = 0;
 		};
 	}
 }

@@ -196,6 +196,7 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Core\Keyboard.cpp" />
     <ClCompile Include="Graphics\Camera\Camera.cpp" />
     <ClCompile Include="Graphics\Camera\DXCamera.cpp" />
     <ClCompile Include="Graphics\Device\Device.cpp" />
@@ -227,6 +228,10 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Factory.h" />
+    <ClInclude Include="Core\Input.h" />
+    <ClInclude Include="Core\InputState.h" />
+    <ClInclude Include="Core\Keyboard.h" />
+    <ClInclude Include="Core\Mouse.h" />
     <ClInclude Include="Core\Time.h" />
     <ClInclude Include="Graphics\Camera\Camera.h" />
     <ClInclude Include="Graphics\Camera\DXCamera.h" />
@@ -252,7 +257,7 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClInclude Include="Graphics\Texture\TextureType.h" />
     <ClInclude Include="Math\Math.h" />
     <ClInclude Include="System\Configuration.h" />
-    <ClInclude Include="System\Key.h" />
+    <ClInclude Include="Core\Key.h" />
     <ClInclude Include="System\Window\IWindow.h" />
     <ClInclude Include="System\Window\NativeWindow.h" />
     <ClInclude Include="System\Window\Window.h" />

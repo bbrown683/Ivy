@@ -24,14 +24,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "System/Window/IWindow.h"
-
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_syswm.h"
 
-#include "Core/Time.h"
-#include "Core/Utility.h"
-
+#include <Core/Input.h>
+#include <Core/Time.h>
+#include <Core/Utility.h>
+#include <System/Window/IWindow.h>
 namespace Jade
 {
 	namespace System
@@ -59,6 +58,9 @@ namespace Jade
 			bool minimized = false;
 			bool active = false;
 
+			// Input
+			Core::Input input;
+
 			// Keeps track of our time per frames.
 			Core::Time timer;
 			int startTime = 0;
@@ -68,6 +70,9 @@ namespace Jade
 
 			bool InitWindow() override;
 			bool PollWindowEvents() override;
+
+			// Helper class for reducing code clutter.
+			Core::Key ConvertKeycode(SDL_Keycode keycode);
 
 		public:
 
@@ -99,9 +104,10 @@ namespace Jade
 			bool IsOpen() override;
 			bool IsFullscreen() override;
 			bool IsActive() override;
-			bool IsKeyDown(Key key) override;
-			bool IsKeyUp(Key key) override;
+			bool IsKeyDown(Core::Key key) override;
+			bool IsKeyUp(Core::Key key) override;
 			Core::Time GetTime() override;
+			Core::Input GetInput() override;
 
 			NativeWindow(int width, int height, int x, int y, string title, bool fullscreen) : m_pWindow(nullptr)
 			{

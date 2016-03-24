@@ -25,8 +25,6 @@ SOFTWARE.
 #include <iostream>
 
 #include "System/Window/NativeWindow.h"
-#include "System/Platform.h"
-#include "System/Log.h"
 
 bool Jade::System::NativeWindow::PollWindowEvents()
 {
@@ -37,20 +35,27 @@ bool Jade::System::NativeWindow::PollWindowEvents()
 		startTime = currentTime;
 	timer.SetElapsedTime(static_cast<float>(currentTime - startTime) / 1000.0f);
 
+	const Uint8* state = SDL_GetKeyboardState(nullptr);
+
 	// Basic event loop. Events that involves rendering 
-	// such as Resizing is done by the graphics device itself.
+	// such as Resizing is handled by the graphics device itself.
 	SDL_Event e;
 
 	while (SDL_PollEvent(&e))
 	{
 		switch (e.type)
 		{
-		case SDL_KEYDOWN:
-			if (e.key.keysym.sym == SDLK_ESCAPE)
-					escape = true;
-			break;
+		// Close application.
 		case SDL_QUIT:
 			open = false;
+			break;
+		// Press.
+		case SDL_KEYDOWN:
+			input.keyboard.SetKeyState(ConvertKeycode(e.key.keysym.sym), Core::InputState::Pressed);
+			break;
+		// Release.
+		case SDL_KEYUP:
+			input.keyboard.SetKeyState(ConvertKeycode(e.key.keysym.sym), Core::InputState::Released);
 			break;
 		}
 	}
@@ -58,12 +63,37 @@ bool Jade::System::NativeWindow::PollWindowEvents()
 	return true;
 }
 
+Jade::Core::Key Jade::System::NativeWindow::ConvertKeycode(SDL_Keycode keycode)
+{
+	switch(keycode)
+	{
+	case SDLK_ESCAPE:
+		return Core::Key::Escape;
+	case SDLK_a:
+		return Core::Key::A;
+	case SDLK_b:
+		return Core::Key::B;
+	case SDLK_c:
+		return Core::Key::C;
+	case SDLK_d:
+		return Core::Key::D;
+	case SDLK_e:
+		return Core::Key::E;
+	case SDLK_f:
+		return Core::Key::F;
+	case SDLK_g:
+		return Core::Key::G;
+	default:
+		return Core::Key::Unknown;
+	}
+}
+
 void Jade::System::NativeWindow::Close()
 {
+	open = false;
+	
 	SDL_DestroyWindow(m_pWindow);
 	SDL_Quit();
-
-	open = false;
 }
 
 void* Jade::System::NativeWindow::Handle()
@@ -256,15 +286,15 @@ bool Jade::System::NativeWindow::IsActive()
 	return active;
 }
 
-bool Jade::System::NativeWindow::IsKeyDown(Key key)
+bool Jade::System::NativeWindow::IsKeyDown(Core::Key key)
 {
-	if (key == Key::Escape)
+	if (key == Core::Key::Escape)
 		return escape;
 
 	return false;
 }
 
-bool Jade::System::NativeWindow::IsKeyUp(Key key)
+bool Jade::System::NativeWindow::IsKeyUp(Core::Key key)
 {
 	return !IsKeyDown(key);
 }
@@ -272,4 +302,9 @@ bool Jade::System::NativeWindow::IsKeyUp(Key key)
 Jade::Core::Time Jade::System::NativeWindow::GetTime()
 {
 	return timer;
+}
+
+Jade::Core::Input Jade::System::NativeWindow::GetInput()
+{
+	return input;
 }

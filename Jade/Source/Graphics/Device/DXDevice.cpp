@@ -73,7 +73,7 @@ bool Jade::Graphics::DXDevice::Create()
 	sd.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
 	
 	long result = D3D11CreateDeviceAndSwapChain(nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr, createDeviceFlags, featureLevels, 
-		numFeatureLevels, D3D11_SDK_VERSION, &sd, &m_pSwapChain, &m_pDevice, &m_FeatureLevel, &m_pImmediateContext);
+		numFeatureLevels, D3D11_SDK_VERSION, &sd, m_pSwapChain.GetAddressOf(), m_pDevice.GetAddressOf(), &m_FeatureLevel, m_pImmediateContext.GetAddressOf());
 
 	if(result < 0)
 	{
@@ -81,8 +81,8 @@ bool Jade::Graphics::DXDevice::Create()
 	}
 
 	ID3D11Texture2D* m_pBackBuffer = nullptr;
-	m_pSwapChain->GetBuffer(NULL, __uuidof(ID3D11Texture2D), reinterpret_cast<void**>(&m_pBackBuffer));
-	m_pDevice->CreateRenderTargetView(m_pBackBuffer, nullptr, &m_pRenderTargetView);
+	m_pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), reinterpret_cast<void**>(&m_pBackBuffer));
+	m_pDevice->CreateRenderTargetView(m_pBackBuffer, nullptr, m_pRenderTargetView.GetAddressOf());
 
 	// Release object now that it is unneeded.
 	m_pBackBuffer->Release();
@@ -101,7 +101,7 @@ bool Jade::Graphics::DXDevice::Create()
 	descDepth.BindFlags = D3D11_BIND_DEPTH_STENCIL;
 	descDepth.CPUAccessFlags = 0;
 	descDepth.MiscFlags = 0;
-	result = m_pDevice->CreateTexture2D(&descDepth, nullptr, &m_pDepthStencil);
+	result = m_pDevice->CreateTexture2D(&descDepth, nullptr, m_pDepthStencil.GetAddressOf());
 	
 	// Create the depth stencil view
 	D3D11_DEPTH_STENCIL_VIEW_DESC descDSV;
@@ -109,9 +109,9 @@ bool Jade::Graphics::DXDevice::Create()
 	descDSV.Format = descDepth.Format;
 	descDSV.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
 	descDSV.Texture2D.MipSlice = 0;
-	result = m_pDevice->CreateDepthStencilView(m_pDepthStencil, &descDSV, &m_pDepthStencilView);
+	result = m_pDevice->CreateDepthStencilView(m_pDepthStencil.Get(), &descDSV, m_pDepthStencilView.GetAddressOf());
 
-	m_pImmediateContext->OMSetRenderTargets(1, &m_pRenderTargetView, m_pDepthStencilView);
+	m_pImmediateContext->OMSetRenderTargets(1, m_pRenderTargetView.GetAddressOf(), m_pDepthStencilView.Get());
 
 	D3D11_VIEWPORT vp;
 	ZeroMemory(&vp, sizeof(D3D11_VIEWPORT));
@@ -131,52 +131,7 @@ bool Jade::Graphics::DXDevice::Create()
 
 bool Jade::Graphics::DXDevice::Release()
 {
-	// Remove any loose pointers.
-	if(m_pImmediateContext)		
-		m_pImmediateContext->ClearState();
-	if(m_pVertexBuffer)				
-		m_pVertexBuffer->Release();
-	if (m_pConstantBuffer)
-		m_pConstantBuffer->Release();
-	if (m_pIndexBuffer)
-		m_pIndexBuffer->Release();
-	if(m_pInputLayout)			
-		m_pInputLayout->Release();
-	if (m_pDepthStencil)
-		m_pDepthStencil->Release();
-	if (m_pDepthStencilView)
-		m_pDepthStencilView->Release();
-	if(m_pRenderTargetView)		
-		m_pRenderTargetView->Release();
-	if(m_pSwapChain)			
-		m_pSwapChain->Release();
-	if(m_pImmediateContext)		
-		m_pImmediateContext->Release();
-	if(m_pDevice)				
-		m_pDevice->Release();
-	
-	// Safe deletion of pointers to ensure none are lingering with values.
-	m_pImmediateContext = nullptr;
-	m_pVertexBuffer = nullptr;
-	m_pConstantBuffer = nullptr;
-	m_pIndexBuffer = nullptr;
-	m_pInputLayout = nullptr;
-	m_pDepthStencil = nullptr;
-	m_pDepthStencilView = nullptr;
-	m_pRenderTargetView = nullptr;
-	m_pSwapChain = nullptr;
-	m_pDevice = nullptr;
-
-	delete m_pImmediateContext;
-	delete m_pVertexBuffer;
-	delete m_pConstantBuffer;
-	delete m_pIndexBuffer;
-	delete m_pInputLayout;
-	delete m_pDepthStencil;
-	delete m_pDepthStencilView;
-	delete m_pRenderTargetView;
-	delete m_pSwapChain;
-	delete m_pDevice;
+	// COM objects are disposed automatically through ComPtr.
 
 	std::cout << "DirectX device was disposed of successfully..." << std::endl;
 
@@ -186,17 +141,87 @@ bool Jade::Graphics::DXDevice::Release()
 void Jade::Graphics::DXDevice::Clear(Math::Color color)
 {	
 	float colorRGBA[] = { color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() };
-	m_pImmediateContext->ClearRenderTargetView(m_pRenderTargetView, colorRGBA);
-	m_pImmediateContext->ClearDepthStencilView(m_pDepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
+	m_pImmediateContext->ClearRenderTargetView(m_pRenderTargetView.Get(), colorRGBA);
+	m_pImmediateContext->ClearDepthStencilView(m_pDepthStencilView.Get(), D3D11_CLEAR_DEPTH, 1.0f, 0);
 }
 
 // Swaps the front and back buffers.
 void Jade::Graphics::DXDevice::Present()
 {
-	m_pSwapChain->Present(1, 0);
+	m_pSwapChain->Present(specification.vsync ? 1 : 0, 0);
 }
 
 char* Jade::Graphics::DXDevice::DeviceInformation()
 {
 	return nullptr;
+}
+
+std::shared_ptr<Jade::System::IWindow> Jade::Graphics::DXDevice::GetIWindow() const
+{
+	return window;
+}
+
+D3D_DRIVER_TYPE Jade::Graphics::DXDevice::GetD3DDriverType() const
+{
+	return m_DriverType;
+}
+
+D3D_FEATURE_LEVEL Jade::Graphics::DXDevice::GetD3DFeatureLevel() const
+{
+	return m_FeatureLevel;
+}
+
+D3D11_VIEWPORT Jade::Graphics::DXDevice::GetD3D11Viewport() const
+{
+	return m_Viewport;
+}
+
+const ComPtr<ID3D11Device>& Jade::Graphics::DXDevice::GetID3D11Device() const
+{
+	return m_pDevice;
+}
+
+const ComPtr<ID3D11DeviceContext>& Jade::Graphics::DXDevice::GetID3D11DeviceContext() const
+{
+	return m_pImmediateContext;
+}
+
+const ComPtr<IDXGISwapChain>& Jade::Graphics::DXDevice::GetIDXGISwapChain() const
+{
+	return m_pSwapChain;
+}
+
+const ComPtr<ID3D11RenderTargetView>& Jade::Graphics::DXDevice::GetID3D11RenderTargetView() const
+{
+	return m_pRenderTargetView;
+}
+
+const ComPtr<ID3D11Texture2D>& Jade::Graphics::DXDevice::GetID3D11DepthStencil() const
+{
+	return m_pDepthStencil;
+}
+
+const ComPtr<ID3D11DepthStencilView>& Jade::Graphics::DXDevice::GetID3D11DepthStencilView() const
+{
+	return m_pDepthStencilView;
+}
+
+const ComPtr<ID3D11InputLayout>& Jade::Graphics::DXDevice::GetID3D11InputLayout() const
+{
+	return m_pInputLayout;
+}
+
+const ComPtr<ID3D11Buffer>& Jade::Graphics::DXDevice::GetID3D11VertexBuffer() const
+{
+	return m_pVertexBuffer;
+}
+
+const ComPtr<ID3D11Buffer>& Jade::Graphics::DXDevice::GetID3D11IndexBuffer() const
+{
+	return m_pIndexBuffer;
+}
+
+const ComPtr<ID3D11Buffer>& Jade::Graphics::DXDevice::GetID3D11ConstantBuffer() const
+{
+	return m_pConstantBuffer;
 }

@@ -42,14 +42,11 @@ void Jade::Graphics::DXMesh::Bind()
 	InitData.pSysMem = vertices.data();
 
 	// Creaate vertices buffer.
-	long hr = device->m_pDevice->CreateBuffer(&desc, &InitData, &device->m_pVertexBuffer);
+	long hr = device->m_pDevice->CreateBuffer(&desc, &InitData, device->m_pVertexBuffer.GetAddressOf());
 	
 	// Ensure it was created successfully.
 	if(hr < 0)
 	{
-		if(device->m_pVertexBuffer)
-			device->m_pVertexBuffer->Release();
-
 		bufferSuccess = false;
 
 		std::cout << "ERROR: Vertex buffer creation failed..." << std::endl;
@@ -62,7 +59,7 @@ void Jade::Graphics::DXMesh::Bind()
 		unsigned int offset = 0;
 
 		// Set the vertices buffer.
-		device->m_pImmediateContext->IASetVertexBuffers(0, 1, &device->m_pVertexBuffer, &stride, &offset);
+		device->m_pImmediateContext->IASetVertexBuffers(0, 1, device->m_pVertexBuffer.GetAddressOf(), &stride, &offset);
 
 		// Set up the index buffer now.
 		desc.Usage = D3D11_USAGE_DEFAULT;
@@ -72,14 +69,11 @@ void Jade::Graphics::DXMesh::Bind()
 		InitData.pSysMem = indices.data();
 
 		// Create index buffer.
-		hr = device->m_pDevice->CreateBuffer(&desc, &InitData, &device->m_pIndexBuffer);
+		hr = device->m_pDevice->CreateBuffer(&desc, &InitData, device->m_pIndexBuffer.GetAddressOf());
 
 		// Ensure it was created successfully.
 		if (hr < 0)
 		{
-			if(device->m_pIndexBuffer)
-				device->m_pIndexBuffer->Release();
-
 			bufferSuccess = false;
 
 			std::cout << "ERROR: Index buffer creation failed..." << std::endl;
@@ -89,7 +83,7 @@ void Jade::Graphics::DXMesh::Bind()
 			std::cout << "Index buffer was created successfully..." << std::endl;
 
 			// Assign index buffer.
-			device->m_pImmediateContext->IASetIndexBuffer(device->m_pIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
+			device->m_pImmediateContext->IASetIndexBuffer(device->m_pIndexBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);
 
 			// Set the primitive topology.
 			device->m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
@@ -100,13 +94,10 @@ void Jade::Graphics::DXMesh::Bind()
 			desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
 			desc.CPUAccessFlags = 0;
 			
-			hr = device->m_pDevice->CreateBuffer(&desc, nullptr, &device->m_pConstantBuffer);
+			hr = device->m_pDevice->CreateBuffer(&desc, nullptr, device->m_pConstantBuffer.GetAddressOf());
 			
 			if (hr < 0)
 			{
-				if(device->m_pConstantBuffer)
-					device->m_pConstantBuffer->Release();
-
 				bufferSuccess = false;
 
 				std::cout << "ERROR: Constant buffer creation failed." << std::endl;
@@ -124,7 +115,7 @@ void Jade::Graphics::DXMesh::Bind()
 				view = DirectX::XMMatrixLookAtLH(Eye, At, Up);
 
 				// Set our projection matrix.
-				projection = DirectX::XMMatrixPerspectiveFovLH(DirectX::XM_PIDIV2, device->window->GetAspectRatio(), 0.01f, 100.0f);
+				projection = DirectX::XMMatrixPerspectiveFovLH(DirectX::XM_PIDIV2, device->window->GetAspectRatio(), 1.0f, 1000.0f);
 
 				bufferSuccess = true;
 			}
@@ -151,8 +142,8 @@ void Jade::Graphics::DXMesh::Draw()
 		space.view = DirectX::XMMatrixTranspose(view);
 		space.projection = DirectX::XMMatrixTranspose(projection);
 
-		device->m_pImmediateContext->UpdateSubresource(device->m_pConstantBuffer, 0, nullptr, &space, 0, 0);
-		device->m_pImmediateContext->VSSetConstantBuffers(0, 1, &device->m_pConstantBuffer);
+		device->m_pImmediateContext->UpdateSubresource(device->m_pConstantBuffer.Get(), 0, nullptr, &space, 0, 0);
+		device->m_pImmediateContext->VSSetConstantBuffers(0, 1, device->m_pConstantBuffer.GetAddressOf());
 		device->m_pImmediateContext->DrawIndexed(static_cast<unsigned int>(indices.size()), 0, 0);
 	}
 }

@@ -29,13 +29,13 @@ SOFTWARE.
 #include "Graphics/Shader/Shader.h"
 #include "Graphics/Mesh/Mesh.h"
 
+using Jade::Core::Key;
 using Jade::Graphics::Device;
 using Jade::Graphics::Shader;
 using Jade::Graphics::Mesh;
 using Jade::Math::Color;
 using Jade::Math::Vector3;
 using Jade::Math::Vertex;
-using Jade::System::Key;
 using Jade::System::Window;
 
 int main(int argc, char* argv[])
@@ -44,7 +44,7 @@ int main(int argc, char* argv[])
 	std::shared_ptr<Window> window = std::make_shared<Window>(1080, 720, 100, 100, "Hello World", false);
 
 	// Creates a graphics device.
-	std::shared_ptr<Device> device = std::make_shared<Device>(window, Jade::Graphics::GraphicsAPI::OpenGL);
+	std::shared_ptr<Device> device = std::make_shared<Device>(window, Jade::Graphics::GraphicsAPI::DirectX);
 
 	// Create our two required shaders for drawing onto the surface.
 	std::shared_ptr<Shader>	vertexShader = std::make_shared<Shader>(".\\resources\\shaders\\vertex.hlsl", Jade::Graphics::ShaderType::Vertex, device);
@@ -105,7 +105,7 @@ int main(int argc, char* argv[])
 		mesh->Draw();
 
 		// Updating if escape is not pressed.
-		if (window->IsKeyDown(Key::Escape))
+		if (window->GetInput().keyboard.IsKeyDown(Key::Escape))
 		{
 			window->Close();
 		}

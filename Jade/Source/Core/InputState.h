@@ -24,66 +24,16 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifdef _WIN32
-#define WGL
-#include <Windows.h>
-#elif __linux__
-#define GLX
-#endif
-
-#include "Core/Utility.h"
-#include "Math/Color.h"
-#include "Graphics/Device/IDevice.h"
-#include "Graphics/Device/Specification.h"
-#include "System/Window/IWindow.h"
-#include <iostream>
-
 namespace Jade
 {
-	namespace Graphics
+	namespace Core
 	{
-		class GLDevice : public IDevice
+		enum class InputState
 		{
-		private:
-
-#ifdef WGL
-			HDC dc;
-			HGLRC context;
-#endif
-
-			// Window object contains some data on our window such as size, 
-			// and the handle of it in memory which we need to create a device.
-			std::shared_ptr<System::IWindow> window;
-
-			Specification specification;
-
-			bool Create() override;
-
-			bool Release() override;
-
-		public:
-
-			// Empty Device.
-			GLDevice() : window(nullptr) { }
-
-			GLDevice(std::shared_ptr<System::IWindow> window, Specification specification)
-			{
-				this->window = window;
-
-				// Create our device.
-				if (!Create())
-					std::cout << "Something went wrong." << std::endl;
-			}
-
-			~GLDevice()
-			{
-				// Cleanup resources.
-				Release();
-			}
-
-			void Clear(Math::Color color) override;
-			void Present() override;
-			char* DeviceInformation() override;
+			// Input type is not being pressed.
+			Released,
+			// Input type is being pressed.
+			Pressed,
 		};
 	}
 }

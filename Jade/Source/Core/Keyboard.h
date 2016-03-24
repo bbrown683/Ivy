@@ -24,66 +24,25 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifdef _WIN32
-#define WGL
-#include <Windows.h>
-#elif __linux__
-#define GLX
-#endif
+#include <unordered_map>
 
-#include "Core/Utility.h"
-#include "Math/Color.h"
-#include "Graphics/Device/IDevice.h"
-#include "Graphics/Device/Specification.h"
-#include "System/Window/IWindow.h"
-#include <iostream>
+#include <Core/Key.h>
+#include <Core/InputState.h>
 
 namespace Jade
 {
-	namespace Graphics
+	namespace Core
 	{
-		class GLDevice : public IDevice
+		class Keyboard
 		{
-		private:
-
-#ifdef WGL
-			HDC dc;
-			HGLRC context;
-#endif
-
-			// Window object contains some data on our window such as size, 
-			// and the handle of it in memory which we need to create a device.
-			std::shared_ptr<System::IWindow> window;
-
-			Specification specification;
-
-			bool Create() override;
-
-			bool Release() override;
+			// Each update will update the key or button states.
+			std::unordered_map<Key, InputState> keyState;
 
 		public:
 
-			// Empty Device.
-			GLDevice() : window(nullptr) { }
-
-			GLDevice(std::shared_ptr<System::IWindow> window, Specification specification)
-			{
-				this->window = window;
-
-				// Create our device.
-				if (!Create())
-					std::cout << "Something went wrong." << std::endl;
-			}
-
-			~GLDevice()
-			{
-				// Cleanup resources.
-				Release();
-			}
-
-			void Clear(Math::Color color) override;
-			void Present() override;
-			char* DeviceInformation() override;
+			bool IsKeyUp(Key key);
+			bool IsKeyDown(Key key);
+			void SetKeyState(Key key, InputState state);
 		};
 	}
 }

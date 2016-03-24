@@ -35,9 +35,9 @@ std::shared_ptr<Jade::Graphics::IDevice> Jade::Graphics::Device::CreateDevice()
 		if (api == GraphicsAPI::Default)
 			return nullptr;
 		if (api == GraphicsAPI::DirectX)
-			return std::make_shared<DXDevice>(window);
+			return std::make_shared<DXDevice>(window, specification);
 		if (api == GraphicsAPI::OpenGL)
-			return std::make_shared<GLDevice>(window);
+			return std::make_shared<GLDevice>(window, specification);
 		if (api == GraphicsAPI::Vulkan)
 			return nullptr;
 	}

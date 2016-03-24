@@ -35,18 +35,15 @@ bool Jade::Graphics::DXShader::Create()
 	{
 		case ShaderType::Compute:
 		{
-			shaderResult = device->m_pDevice->CreateComputeShader(m_pShaderBlob->GetBufferPointer(), m_pShaderBlob->GetBufferSize(), nullptr, &m_pComputeShader);
+			shaderResult = device->m_pDevice->CreateComputeShader(m_pShaderBlob->GetBufferPointer(), m_pShaderBlob->GetBufferSize(), nullptr, m_pComputeShader.GetAddressOf());
 			
 			if (shaderResult < 0)
 			{
-				if (m_pShaderBlob)
-					m_pShaderBlob->Release();
-
 				// Output compilation errors to console.
-				std::cout << "ERROR: Computee shader creation failed..." << std::endl;
+				std::cout << "ERROR: Compute shader creation failed..." << std::endl;
 
 				// Release any data associated with the shader if it gives an error.
-				Release();
+				//Release();
 
 				return false;
 			}
@@ -56,18 +53,15 @@ bool Jade::Graphics::DXShader::Create()
 		}
 		case ShaderType::Domain:
 		{
-			shaderResult = device->m_pDevice->CreateDomainShader(m_pShaderBlob->GetBufferPointer(), m_pShaderBlob->GetBufferSize(), nullptr, &m_pDomainShader);
+			shaderResult = device->m_pDevice->CreateDomainShader(m_pShaderBlob->GetBufferPointer(), m_pShaderBlob->GetBufferSize(), nullptr, m_pDomainShader.GetAddressOf());
 		
 			if (shaderResult < 0)
 			{
-				if (m_pShaderBlob)
-					m_pShaderBlob->Release();
-
 				// Output compilation errors to console.
 				std::cout << "ERROR: Domain shader creation failed..." << std::endl;
 
 				// Release any data associated with the shader if it gives an error.
-				Release();
+				//Release();
 
 				return false;
 			}
@@ -77,18 +71,15 @@ bool Jade::Graphics::DXShader::Create()
 		}
 		case ShaderType::Geometry:
 		{
-			shaderResult = device->m_pDevice->CreateGeometryShader(m_pShaderBlob->GetBufferPointer(), m_pShaderBlob->GetBufferSize(), nullptr, &m_pGeometryShader);
+			shaderResult = device->m_pDevice->CreateGeometryShader(m_pShaderBlob->GetBufferPointer(), m_pShaderBlob->GetBufferSize(), nullptr, m_pGeometryShader.GetAddressOf());
 			
 			if (shaderResult < 0)
 			{
-				if (m_pShaderBlob)
-					m_pShaderBlob->Release();
-
 				// Output compilation errors to console.
 				std::cout << "ERROR: Geometry shader creation failed..." << std::endl;
 
 				// Release any data associated with the shader if it gives an error.
-				Release();
+				//Release();
 
 				return false;
 			}
@@ -98,41 +89,35 @@ bool Jade::Graphics::DXShader::Create()
 		}	
 		case ShaderType::Pixel:
 		{
-			shaderResult = device->m_pDevice->CreatePixelShader(m_pShaderBlob->GetBufferPointer(), m_pShaderBlob->GetBufferSize(), nullptr, &m_pPixelShader);
+			shaderResult = device->m_pDevice->CreatePixelShader(m_pShaderBlob->GetBufferPointer(), m_pShaderBlob->GetBufferSize(), nullptr, m_pPixelShader.GetAddressOf());
 
 			if (shaderResult < 0)
 			{
-				if (m_pShaderBlob)
-					m_pShaderBlob->Release();
-
 				// Output compilation errors to console.
 				std::cout << "ERROR: Pixel shader creation failed..." << std::endl;
 
 				// Release any data associated with the shader if it gives an error.
-				Release();
+				//Release();
 
 				return false;
 			}
 
-			device->m_pImmediateContext->PSSetShader(m_pPixelShader, nullptr, 0);
+			device->m_pImmediateContext->PSSetShader(m_pPixelShader.Get(), nullptr, 0);
 
 			std::cout << "Pixel shader was created successfully..." << std::endl;
 			break;
 		}
 		case ShaderType::Tesselation:
 		{
-			shaderResult = device->m_pDevice->CreateHullShader(m_pShaderBlob->GetBufferPointer(), m_pShaderBlob->GetBufferSize(), nullptr, &m_pHullShader);
+			shaderResult = device->m_pDevice->CreateHullShader(m_pShaderBlob->GetBufferPointer(), m_pShaderBlob->GetBufferSize(), nullptr, m_pHullShader.GetAddressOf());
 			
 			if (shaderResult < 0)
 			{
-				if (m_pShaderBlob)
-					m_pShaderBlob->Release();
-
 				// Output compilation errors to console.
 				std::cout << "ERROR: Tesselation shader creation failed..." << std::endl;
 
 				// Release any data associated with the shader if it gives an error.
-				Release();
+				//Release();
 
 				return false;
 			}
@@ -142,18 +127,15 @@ bool Jade::Graphics::DXShader::Create()
 		}
 		case ShaderType::Vertex:
 		{
-			shaderResult = device->m_pDevice->CreateVertexShader(m_pShaderBlob->GetBufferPointer(), m_pShaderBlob->GetBufferSize(), nullptr, &m_pVertexShader);
+			shaderResult = device->m_pDevice->CreateVertexShader(m_pShaderBlob->GetBufferPointer(), m_pShaderBlob->GetBufferSize(), nullptr, m_pVertexShader.GetAddressOf());
 
 			if(shaderResult < 0)
 			{
-				if (m_pShaderBlob)
-					m_pShaderBlob->Release();
-
 				// Output compilation errors to console.
 				std::cout << "ERROR: Vertex shader creation failed..." << std::endl;
 
 				// Release any data associated with the shader if it gives an error.
-				Release();
+				//Release();
 
 				return false;
 			}
@@ -168,32 +150,27 @@ bool Jade::Graphics::DXShader::Create()
 			};
 
 			// Create the input layout.
-			long inputResult = device->m_pDevice->CreateInputLayout(inputLayout, ARRAYSIZE(inputLayout), m_pShaderBlob->GetBufferPointer(), m_pShaderBlob->GetBufferSize(), &device->m_pInputLayout);
+			long inputResult = device->m_pDevice->CreateInputLayout(inputLayout, ARRAYSIZE(inputLayout), m_pShaderBlob->GetBufferPointer(), m_pShaderBlob->GetBufferSize(), device->m_pInputLayout.GetAddressOf());
 
 			if(inputResult < 0)
 			{
-				if(m_pShaderBlob)
-					m_pShaderBlob->Release();
-
 				// Output compilation errors to console.
 				std::cout << "ERROR: Vertex shader creation failed..." << std::endl;
 
 				// Release any data associated with the shader if it gives an error.
-				Release();
+				//Release();
 
 				return false;
 			}
 
 			// Set the input layout
-			device->m_pImmediateContext->IASetInputLayout(device->m_pInputLayout);
-			device->m_pImmediateContext->VSSetShader(m_pVertexShader, nullptr, 0);
+			device->m_pImmediateContext->IASetInputLayout(device->m_pInputLayout.Get());
+			device->m_pImmediateContext->VSSetShader(m_pVertexShader.Get(), nullptr, 0);
 
 			std::cout << "Vertex shader was created successfully..." << std::endl;
 			break;
 		}	
 	}
-
-	m_pShaderBlob->Release();
 
 	return true;
 }
@@ -201,36 +178,36 @@ bool Jade::Graphics::DXShader::Create()
 bool Jade::Graphics::DXShader::Release()
 {
 	// Release only what we allocated.
-	if(m_pComputeShader)
-		m_pComputeShader->Release();
-	if(m_pDomainShader)		
-		m_pDomainShader->Release();
-	if(m_pGeometryShader)	
-		m_pGeometryShader->Release();
-	if(m_pHullShader)		
-		m_pHullShader->Release();
-	if(m_pPixelShader)		
-		m_pPixelShader->Release();
-	if(m_pVertexShader)		
-		m_pVertexShader->Release();
+	//if(m_pComputeShader)
+	//	m_pComputeShader->Release();
+	//if(m_pDomainShader)		
+	//	m_pDomainShader->Release();
+	//if(m_pGeometryShader)	
+	//	m_pGeometryShader->Release();
+	//if(m_pHullShader)		
+	//	m_pHullShader->Release();
+	//if(m_pPixelShader)		
+	//	m_pPixelShader->Release();
+	//if(m_pVertexShader)		
+	//	m_pVertexShader->Release();
 
-	m_pShaderBlob = nullptr;
+	//m_pShaderBlob = nullptr;
 
-	m_pComputeShader = nullptr;
-	m_pDomainShader = nullptr;
-	m_pGeometryShader = nullptr;
-	m_pHullShader = nullptr;
-	m_pPixelShader = nullptr;
-	m_pVertexShader = nullptr;
+	//m_pComputeShader = nullptr;
+	//m_pDomainShader = nullptr;
+	//m_pGeometryShader = nullptr;
+	//m_pHullShader = nullptr;
+	//m_pPixelShader = nullptr;
+	//m_pVertexShader = nullptr;
 
-	delete m_pShaderBlob;
+	//delete m_pShaderBlob;
 
-	delete m_pComputeShader;
-	delete m_pDomainShader;
-	delete m_pGeometryShader;
-	delete m_pHullShader;
-	delete m_pPixelShader;
-	delete m_pVertexShader;
+	//delete m_pComputeShader;
+	//delete m_pDomainShader;
+	//delete m_pGeometryShader;
+	//delete m_pHullShader;
+	//delete m_pPixelShader;
+	//delete m_pVertexShader;
 
 	std::cout << "Shader cleaning up..." << std::endl;
 
@@ -283,14 +260,14 @@ bool Jade::Graphics::DXShader::Compile()
 
 	if(profile != "")
 	{
-		ID3DBlob* l_pErrorBlob = nullptr;
+		ComPtr<ID3DBlob> l_pErrorBlob = nullptr;
 
 		// Convert string to a wstring as D3DCompileFromFile requires it.
 		wstring filepath(filename.begin(), filename.end());
 
 		// Compile the shader
 		// NOTE: Main must be used as the entrypoint of all shader files for consistency.
-		long hr = D3DCompileFromFile(filepath.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE, "Main", profile, flags, 0, &m_pShaderBlob, &l_pErrorBlob);
+		long hr = D3DCompileFromFile(filepath.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE, "Main", profile, flags, 0, m_pShaderBlob.GetAddressOf(), l_pErrorBlob.GetAddressOf());
 
 		if (hr < 0)
 		{
@@ -331,11 +308,6 @@ bool Jade::Graphics::DXShader::Compile()
 		case ShaderType::Vertex:
 			std::cout << "Vertex shader was compiled successfully..." << std::endl;
 		}
-
-		if(l_pErrorBlob)
-			l_pErrorBlob->Release();
-
-		delete l_pErrorBlob;
 
 		return true;
 	}
