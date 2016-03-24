@@ -104,6 +104,11 @@ int main(int argc, char* argv[])
 		// Draw the vertices.
 		mesh->Draw();
 
+		// Gets the keys pressed and prints their enumerication value that is stored as an integer.
+		std::vector<Key> keysPressed = window->GetInput().keyboard.GetKeysPressed();
+		for (int i = 0; i < keysPressed.size(); i++)
+			std::cout << static_cast<int>(keysPressed[i]) << std::endl;
+		
 		// Updating if escape is not pressed.
 		if (window->GetInput().keyboard.IsKeyDown(Key::Escape))
 		{

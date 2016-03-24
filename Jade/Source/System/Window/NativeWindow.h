@@ -104,8 +104,6 @@ namespace Jade
 			bool IsOpen() override;
 			bool IsFullscreen() override;
 			bool IsActive() override;
-			bool IsKeyDown(Core::Key key) override;
-			bool IsKeyUp(Core::Key key) override;
 			Core::Time GetTime() override;
 			Core::Input GetInput() override;
 

@@ -90,6 +90,12 @@ namespace Jade
 				device->Clear(color);
 			}
 
+			// Hides the cursor when inside the window boundaries.
+			void HideCursor(bool toggle)
+			{
+				SDL_ShowCursor(!toggle);
+			}
+
 			// Presents the back buffer to the front for display.
 			void Present() const
 			{

@@ -67,8 +67,70 @@ Jade::Core::Key Jade::System::NativeWindow::ConvertKeycode(SDL_Keycode keycode)
 {
 	switch(keycode)
 	{
-	case SDLK_ESCAPE:
-		return Core::Key::Escape;
+	case SDLK_0:
+		return Core::Key::Digit0;
+	case SDLK_1:
+		return Core::Key::Digit1;
+	case SDLK_2:
+		return Core::Key::Digit2;
+	case SDLK_3:
+		return Core::Key::Digit3;
+	case SDLK_4:
+		return Core::Key::Digit4;
+	case SDLK_5:
+		return Core::Key::Digit5;
+	case SDLK_6:
+		return Core::Key::Digit6;
+	case SDLK_7:
+		return Core::Key::Digit7;
+	case SDLK_8:
+		return Core::Key::Digit8;
+	case SDLK_9:
+		return Core::Key::Digit9;
+	case SDLK_KP_0:
+		return Core::Key::NumberPad0;
+	case SDLK_KP_1:
+		return Core::Key::NumberPad1;
+	case SDLK_KP_2:
+		return Core::Key::NumberPad2;
+	case SDLK_KP_3:
+		return Core::Key::NumberPad3;
+	case SDLK_KP_4:
+		return Core::Key::NumberPad4;
+	case SDLK_KP_5:				
+		return Core::Key::NumberPad5;
+	case SDLK_KP_6:
+		return Core::Key::NumberPad6;
+	case SDLK_KP_7:
+		return Core::Key::NumberPad7;
+	case SDLK_KP_8:
+		return Core::Key::NumberPad8;
+	case SDLK_KP_9:
+		return Core::Key::NumberPad9;
+	case SDLK_F1:
+		return Core::Key::F1;
+	case SDLK_F2:
+		return Core::Key::F2;
+	case SDLK_F3:
+		return Core::Key::F3;
+	case SDLK_F4:
+		return Core::Key::F4;
+	case SDLK_F5:
+		return Core::Key::F5;
+	case SDLK_F6:
+		return Core::Key::F6;
+	case SDLK_F7:
+		return Core::Key::F7;
+	case SDLK_F8:
+		return Core::Key::F8;
+	case SDLK_F9:
+		return Core::Key::F9;
+	case SDLK_F10:
+		return Core::Key::F10;
+	case SDLK_F11:
+		return Core::Key::F11;
+	case SDLK_F12:
+		return Core::Key::F12;
 	case SDLK_a:
 		return Core::Key::A;
 	case SDLK_b:
@@ -83,6 +145,10 @@ Jade::Core::Key Jade::System::NativeWindow::ConvertKeycode(SDL_Keycode keycode)
 		return Core::Key::F;
 	case SDLK_g:
 		return Core::Key::G;
+	case SDLK_h:
+		return Core::Key::H;
+	case SDLK_ESCAPE:
+		return Core::Key::Escape;
 	default:
 		return Core::Key::Unknown;
 	}
@@ -206,7 +272,7 @@ bool Jade::System::NativeWindow::InitWindow()
 			//SDL_SetWindowIcon(m_pWindow, icon);
 			
 			// Hide cursor.
-			SDL_ShowCursor(0);
+			//SDL_ShowCursor(0);
 
 			// Capture window info so we can grab window handle.
 			SDL_GetVersion(&m_WindowInfo.version);
@@ -284,19 +350,6 @@ bool Jade::System::NativeWindow::IsFullscreen()
 bool Jade::System::NativeWindow::IsActive()
 {
 	return active;
-}
-
-bool Jade::System::NativeWindow::IsKeyDown(Core::Key key)
-{
-	if (key == Core::Key::Escape)
-		return escape;
-
-	return false;
-}
-
-bool Jade::System::NativeWindow::IsKeyUp(Core::Key key)
-{
-	return !IsKeyDown(key);
 }
 
 Jade::Core::Time Jade::System::NativeWindow::GetTime()

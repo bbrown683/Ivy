@@ -42,6 +42,7 @@ namespace Jade
 
 			bool IsKeyUp(Key key);
 			bool IsKeyDown(Key key);
+			std::vector<Key> GetKeysPressed();
 			void SetKeyState(Key key, InputState state);
 		};
 	}

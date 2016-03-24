@@ -114,18 +114,6 @@ namespace Jade
 				return window->IsActive();
 			}
 
-			// Returns a boolean determining if a key was pressed.
-			bool IsKeyDown(Core::Key key) const
-			{
-				return window->IsKeyDown(key);
-			}
-
-			// Returns a boolean determining if a key was not pressed.
-			bool IsKeyUp(Core::Key key) const
-			{
-				return window->IsKeyUp(key);
-			}
-
 			std::shared_ptr<IWindow> GetIWindow() const
 			{
 				return window;
