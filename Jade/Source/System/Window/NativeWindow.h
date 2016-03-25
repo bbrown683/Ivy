@@ -91,6 +91,7 @@ namespace Jade
 			void SetTitle(string value) override;
 			Math::Point GetPosition() override;
 			void SetPosition(int x, int y) override;
+			void SetIcon(string filename) override;
 			void Close() override;
 			void* Handle() override;
 			void Show() override;

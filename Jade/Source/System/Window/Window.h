@@ -102,6 +102,12 @@ namespace Jade
 				window->SetTitle(title);
 			}
 
+			// Sets the icon of the window.
+			void SetIcon(string filename) const
+			{
+				window->SetIcon(filename);
+			}
+
 			// Returns a boolean determining if the window is in fullscreen mode.
 			bool IsFullscreen() const
 			{
@@ -114,16 +120,19 @@ namespace Jade
 				return window->IsActive();
 			}
 
+			// Returns the underlying interface object of the window.
 			std::shared_ptr<IWindow> GetIWindow() const
 			{
 				return window;
 			}
 
+			// Returns an object that manages timers related to the window.
 			Core::Time GetTime() const
 			{
 				return window->GetTime();
 			}
 
+			// Returns an object that handles window input.
 			Core::Input GetInput() const
 			{
 				return window->GetInput();
@@ -150,6 +159,7 @@ namespace Jade
 				Close();
 			}
 
+			// Runs through the main window messaging loop handling events.
 			bool PollEvents() const
 			{
 				return window->PollWindowEvents();

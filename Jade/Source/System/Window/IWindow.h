@@ -49,6 +49,7 @@ namespace Jade
 			virtual void SetTitle(string value) = 0;
 			virtual Math::Point GetPosition() = 0;
 			virtual void SetPosition(int x, int y) = 0;
+			virtual void SetIcon(string filename) = 0;
 			virtual bool PollWindowEvents() = 0;
 			virtual void Close() = 0;
 			virtual void* Handle() = 0;

@@ -51,15 +51,16 @@ int main(int argc, char* argv[])
 	std::shared_ptr<Shader>	pixelShader = std::make_shared<Shader>(".\\resources\\shaders\\pixel.hlsl", Jade::Graphics::ShaderType::Pixel, device);
 
 	// Create some vertices for our triangle.
-	/*
 	std::vector<Vertex> vertices = {
 		{ Vector3(0.0f, 0.5f, 0.5f), Color::Red },
 		{ Vector3(0.5f, -0.5f, 0.5f), Color::Green },
 		{ Vector3(-0.5f, -0.5f, 0.5f), Color::Blue } };
 
 	std::vector<unsigned int> indices = { 0, 1, 2 };
-	*/
 
+	window->SetIcon("test.png");
+
+	/*
 	std::vector<Vertex> vertices =
 	{
 		{ Vector3(-1.0f, 1.0f, -1.0f), Color::Red },
@@ -92,7 +93,7 @@ int main(int argc, char* argv[])
 		6,4,5,
 		7,4,6,
 	};
-	
+	*/
 	// Creates and binds the vertex buffer for drawing the triangular mesh.
 	std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>(vertices, indices, device);
 
@@ -106,7 +107,7 @@ int main(int argc, char* argv[])
 
 		// Gets the keys pressed and prints their enumerication value that is stored as an integer.
 		std::vector<Key> keysPressed = window->GetInput().keyboard.GetKeysPressed();
-		for (int i = 0; i < keysPressed.size(); i++)
+		for (unsigned int i = 0; i < keysPressed.size(); i++)
 			std::cout << static_cast<int>(keysPressed[i]) << std::endl;
 		
 		// Updating if escape is not pressed.

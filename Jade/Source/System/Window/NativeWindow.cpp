@@ -25,6 +25,7 @@ SOFTWARE.
 #include <iostream>
 
 #include "System/Window/NativeWindow.h"
+#include "FreeImage/FreeImage.h"
 
 bool Jade::System::NativeWindow::PollWindowEvents()
 {
@@ -34,8 +35,6 @@ bool Jade::System::NativeWindow::PollWindowEvents()
 	if (startTime == 0)
 		startTime = currentTime;
 	timer.SetElapsedTime(static_cast<float>(currentTime - startTime) / 1000.0f);
-
-	const Uint8* state = SDL_GetKeyboardState(nullptr);
 
 	// Basic event loop. Events that involves rendering 
 	// such as Resizing is handled by the graphics device itself.
@@ -147,6 +146,58 @@ Jade::Core::Key Jade::System::NativeWindow::ConvertKeycode(SDL_Keycode keycode)
 		return Core::Key::G;
 	case SDLK_h:
 		return Core::Key::H;
+	case SDLK_i:
+		return Core::Key::I;
+	case SDLK_j:
+		return Core::Key::J;
+	case SDLK_k:
+		return Core::Key::K;
+	case SDLK_l:
+		return Core::Key::L;
+	case SDLK_m:
+		return Core::Key::M;
+	case SDLK_n:
+		return Core::Key::N;
+	case SDLK_o:
+		return Core::Key::O;
+	case SDLK_p:
+		return Core::Key::P;
+	case SDLK_q:
+		return Core::Key::Q;
+	case SDLK_r:
+		return Core::Key::R;
+	case SDLK_s:
+		return Core::Key::S;
+	case SDLK_t:
+		return Core::Key::T;
+	case SDLK_u:
+		return Core::Key::U;
+	case SDLK_v:
+		return Core::Key::V;
+	case SDLK_w:
+		return Core::Key::W;
+	case SDLK_x:
+		return Core::Key::X;
+	case SDLK_y:
+		return Core::Key::Y;
+	case SDLK_z:
+		return Core::Key::Z;
+	case SDLK_LALT:
+	case SDLK_RALT:
+		return Core::Key::Alt;
+	case SDLK_BACKSPACE:
+		return Core::Key::Backspace;
+	case SDLK_CAPSLOCK:
+		return Core::Key::CapsLock;
+	case SDLK_LCTRL:
+	case SDLK_RCTRL:
+		return Core::Key::Control;
+	case SDLK_DELETE:
+		return Core::Key::Delete;
+	case SDLK_END:
+		return Core::Key::End;
+	case SDLK_RETURN:
+		return Core::Key::Enter;
 	case SDLK_ESCAPE:
 		return Core::Key::Escape;
 	default:
@@ -154,8 +205,58 @@ Jade::Core::Key Jade::System::NativeWindow::ConvertKeycode(SDL_Keycode keycode)
 	}
 }
 
-void Jade::System::NativeWindow::Close()
+void Jade::System::NativeWindow::SetIcon(string filename)
 {
+	// SDL is picky about icons, therefore we will use
+	// FreeImage to load the icon and retrieve the bits 
+	// from the image and pass it to SDL.
+
+	// Get format of file so FreeImage knows how to load it into a bitmap.
+	FREE_IMAGE_FORMAT format = FreeImage_GetFileType(filename.c_str(), 0);
+	
+	if(format != FIF_UNKNOWN && FreeImage_FIFSupportsReading(format))
+	{
+		// Load and resize image.
+		FIBITMAP* bitmap = FreeImage_Load(format, filename.c_str());
+		bitmap = FreeImage_Rescale(bitmap, 32, 32, FILTER_BOX);
+
+		// Convert to a 24 bit image.
+		FIBITMAP* src = FreeImage_ConvertTo24Bits(bitmap);
+		FreeImage_Unload(bitmap);
+
+		// Create memory and open stream.
+		FIMEMORY* hMemory = nullptr;
+		hMemory = FreeImage_OpenMemory();
+
+		// Save to memory and gather size.
+		FreeImage_SaveToMemory(FIF_BMP, src, hMemory, 0);
+		FreeImage_Unload(src);
+
+		// Acquire the bitmap from memory then close the stream.
+		unsigned char* bits = nullptr;
+		unsigned long size	= 0;
+		FreeImage_AcquireMemory(hMemory, &bits, &size);
+
+		// Load the bits into the buffer and send it to a surface.
+		SDL_RWops* buffer = SDL_RWFromMem(bits, size);
+		SDL_Surface* icon = SDL_LoadBMP_RW(buffer, 1);
+
+		// Set the surface as an icon.
+		SDL_SetWindowIcon(m_pWindow, icon);
+
+		// No longer needed.
+		SDL_FreeSurface(icon);	
+		FreeImage_CloseMemory(hMemory);
+
+		// Prevent small memory leak.
+		bits = nullptr;
+		delete bits;
+	}
+}
+
+void Jade::System::NativeWindow::Close()
+{	
+
 	open = false;
 	
 	SDL_DestroyWindow(m_pWindow);
@@ -267,14 +368,7 @@ bool Jade::System::NativeWindow::InitWindow()
 				SDL_SetWindowFullscreen(m_pWindow, SDL_WINDOW_FULLSCREEN_DESKTOP);
 			}
 
-			// Set Icon.
-			//SDL_Surface* icon = SDL_LoadBMP("test.bmp");
-			//SDL_SetWindowIcon(m_pWindow, icon);
-			
-			// Hide cursor.
-			//SDL_ShowCursor(0);
-
-			// Capture window info so we can grab window handle.
+			// Capture window info so we can grab the window handle.
 			SDL_GetVersion(&m_WindowInfo.version);
 			SDL_GetWindowWMInfo(m_pWindow, &m_WindowInfo);
 

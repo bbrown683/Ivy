@@ -32,6 +32,9 @@ namespace Jade
 		{
 			// Default key.
 			Unknown,
+
+			// Main Keys.
+
 			Digit0,
 			Digit1,
 			Digit2,
