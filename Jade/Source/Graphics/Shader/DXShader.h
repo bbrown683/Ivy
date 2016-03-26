@@ -40,9 +40,9 @@ namespace Jade
 		{
 		private:
 
-			string filename;
-			ShaderType type;
 			std::shared_ptr<DXDevice> device;
+			std::string filename;
+			ShaderType type;
 
 			// Holds our shader compilation information.
 			ComPtr<ID3DBlob>				m_pShaderBlob		= nullptr;
@@ -59,10 +59,10 @@ namespace Jade
 
 		public:
 
-			DXShader(string filename, ShaderType type, std::shared_ptr<DXDevice> device)
+			DXShader(std::shared_ptr<DXDevice> device, std::string filename, ShaderType type)
 			{	
-				this->filename = filename;
 				this->device = device;
+				this->filename = filename;
 				this->type = type;
 
 				// If our shaders compile correctly, we can create them.

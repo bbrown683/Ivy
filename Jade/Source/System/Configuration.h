@@ -2,7 +2,7 @@
 
 namespace Jade
 {
-	namespace Graphics
+	namespace System
 	{
 		class Configuration
 		{

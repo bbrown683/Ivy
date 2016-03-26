@@ -6,7 +6,8 @@ namespace Jade
 	{
 		enum class TextureType
 		{
-			Diffuse
+			Diffuse,
+			Specular,
 		};
 	}
 }

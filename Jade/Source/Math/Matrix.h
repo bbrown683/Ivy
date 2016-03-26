@@ -132,7 +132,7 @@ namespace Jade
 			Matrix Subtract(Matrix other) const;
 			Matrix Translate(float xOffset, float yOffset, float zOffset);
 			Matrix Transpose();
-			string ToString();
+			std::string ToString();
 		};
 	}
 }

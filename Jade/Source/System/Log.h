@@ -18,7 +18,7 @@ namespace Jade
 		public:
 
 			// Writes text to the recieving stream.  
-			void Write(string text);
+			void Write(std::string text);
 		};
 	}
 }

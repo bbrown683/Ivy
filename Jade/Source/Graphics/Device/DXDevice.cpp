@@ -59,8 +59,8 @@ bool Jade::Graphics::DXDevice::Create()
 	DXGI_SWAP_CHAIN_DESC sd;
 	ZeroMemory(&sd, sizeof(DXGI_SWAP_CHAIN_DESC));
 	sd.BufferCount = 1;
-	sd.BufferDesc.Width = window->GetWidth();
-	sd.BufferDesc.Height = window->GetHeight();
+	sd.BufferDesc.Width = specification.backBufferWidth;
+	sd.BufferDesc.Height = specification.backBufferHeight;
 	sd.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
 	sd.BufferDesc.RefreshRate.Numerator = 60;
 	sd.BufferDesc.RefreshRate.Denominator = 1;

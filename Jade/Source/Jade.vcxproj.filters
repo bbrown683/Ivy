@@ -40,6 +40,9 @@
     <ClCompile Include="Graphics\Camera\DXCamera.cpp" />
     <ClCompile Include="Math\Matrix.cpp" />
     <ClCompile Include="Core\Keyboard.cpp" />
+    <ClCompile Include="Graphics\Buffer\IndexBuffer.cpp" />
+    <ClCompile Include="Graphics\Buffer\VertexBuffer.cpp" />
+    <ClCompile Include="Graphics\Buffer\DXVertexBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\Vector4.h">
@@ -106,6 +109,12 @@
     <ClInclude Include="Core\InputState.h" />
     <ClInclude Include="Core\Input.h" />
     <ClInclude Include="Core\Key.h" />
+    <ClInclude Include="Graphics\Buffer\IBuffer.h" />
+    <ClInclude Include="Graphics\Buffer\Usage.h" />
+    <ClInclude Include="Graphics\Buffer\VertexBuffer.h" />
+    <ClInclude Include="Graphics\Buffer\IndexBuffer.h" />
+    <ClInclude Include="Core\Result.h" />
+    <ClInclude Include="Graphics\Buffer\DXVertexBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">
@@ -128,7 +137,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="pixel.hlsl" />
-    <FxCompile Include="vertex.hlsl" />
+    <FxCompile Include="DXPixel.hlsl" />
+    <FxCompile Include="DXVertex.hlsl" />
   </ItemGroup>
 </Project>

@@ -24,11 +24,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <vector>
-
-#include "Core/Utility.h"
-#include "Graphics/Mesh/IMesh.h"
-#include "Math/Vertex.h"
+#include <Core/Utility.h>
+#include <Graphics/Device/GLDevice.h>
+#include <Graphics/Mesh/IMesh.h>
+#include <Math/Vertex.h>
 
 namespace Jade
 {
@@ -50,6 +49,8 @@ namespace Jade
 			{
 				this->vertices = vertices;
 				this->indices = indices;
+
+				Bind();
 			}
 
 			~GLMesh()

@@ -45,11 +45,11 @@ namespace Jade
 			virtual void SetX(int value) = 0;
 			virtual int GetY() = 0;
 			virtual void SetY(int value) = 0;
-			virtual string GetTitle() = 0;
-			virtual void SetTitle(string value) = 0;
+			virtual std::string GetTitle() = 0;
+			virtual void SetTitle(std::string value) = 0;
 			virtual Math::Point GetPosition() = 0;
 			virtual void SetPosition(int x, int y) = 0;
-			virtual void SetIcon(string filename) = 0;
+			virtual void SetIcon(std::string filename) = 0;
 			virtual bool PollWindowEvents() = 0;
 			virtual void Close() = 0;
 			virtual void* Handle() = 0;

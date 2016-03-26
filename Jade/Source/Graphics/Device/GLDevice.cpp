@@ -22,11 +22,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-
-#include "glew/glew.h"
-#include "glew/wglew.h"
-#include <gl/GL.h>
-
 #include "GLDevice.h"
 #include <iostream>
 
@@ -151,7 +146,7 @@ bool Jade::Graphics::GLDevice::Release()
 
 void Jade::Graphics::GLDevice::Clear(Math::Color color)
 {
-	glClear(GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT);
 	glClearColor(color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha());
 }
 

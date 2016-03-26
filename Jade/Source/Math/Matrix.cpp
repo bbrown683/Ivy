@@ -136,9 +136,9 @@ Jade::Math::Matrix Jade::Math::Matrix::Transpose()
 		values[0][3], values[1][3], values[2][3], values[3][3]);
 }
 
-string Jade::Math::Matrix::ToString()
+std::string Jade::Math::Matrix::ToString()
 {
-	string matrix = "";
+	std::string matrix = "";
 
 	for (int i = 0; i < 4; i++)
 	{

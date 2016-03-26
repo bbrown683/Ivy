@@ -263,7 +263,7 @@ bool Jade::Graphics::DXShader::Compile()
 		ComPtr<ID3DBlob> l_pErrorBlob = nullptr;
 
 		// Convert string to a wstring as D3DCompileFromFile requires it.
-		wstring filepath(filename.begin(), filename.end());
+		std::wstring filepath(filename.begin(), filename.end());
 
 		// Compile the shader
 		// NOTE: Main must be used as the entrypoint of all shader files for consistency.

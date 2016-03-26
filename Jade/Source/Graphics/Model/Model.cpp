@@ -26,7 +26,7 @@ SOFTWARE.
 
 #include "Model.h"
 
-Jade::Math::Vertex* Jade::Graphics::Model::LoadModel(string filename)
+Jade::Math::Vertex* Jade::Graphics::Model::LoadModel(std::string filename)
 {
 	Assimp::Importer importer;
 

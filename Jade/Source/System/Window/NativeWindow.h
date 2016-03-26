@@ -47,7 +47,7 @@ namespace Jade
 			int height;
 			int x;
 			int y;
-			string title;
+			std::string title;
 			bool fullscreen;
 
 			// Window checks.
@@ -87,11 +87,11 @@ namespace Jade
 			void SetX(int value) override;
 			int GetY() override;
 			void SetY(int value) override;
-			string GetTitle() override;
-			void SetTitle(string value) override;
+			std::string GetTitle() override;
+			void SetTitle(std::string value) override;
 			Math::Point GetPosition() override;
 			void SetPosition(int x, int y) override;
-			void SetIcon(string filename) override;
+			void SetIcon(std::string filename) override;
 			void Close() override;
 			void* Handle() override;
 			void Show() override;
@@ -108,7 +108,7 @@ namespace Jade
 			Core::Time GetTime() override;
 			Core::Input GetInput() override;
 
-			NativeWindow(int width, int height, int x, int y, string title, bool fullscreen) : m_pWindow(nullptr)
+			NativeWindow(int width, int height, int x, int y, std::string title, bool fullscreen) : m_pWindow(nullptr)
 			{
 				this->width = width;
 				this->height = height;

@@ -39,7 +39,7 @@ namespace Jade
 			int height;
 			int x;
 			int y;
-			string title;
+			std::string title;
 			bool fullscreen;
 
 			// All of our windows use this interface for their general implementations 
@@ -91,19 +91,19 @@ namespace Jade
 			}
 
 			// Returns the title of the window.
-			string GetTitle() const
+			std::string GetTitle() const
 			{
 				return window->GetTitle();
 			}
 
 			// Sets the title of the window.
-			void SetTitle(string title) const
+			void SetTitle(std::string title) const
 			{
 				window->SetTitle(title);
 			}
 
 			// Sets the icon of the window.
-			void SetIcon(string filename) const
+			void SetIcon(std::string filename) const
 			{
 				window->SetIcon(filename);
 			}
@@ -138,7 +138,7 @@ namespace Jade
 				return window->GetInput();
 			}
 
-			Window(int width, int height, int x, int y, string title, bool fullscreen)
+			Window(int width, int height, int x, int y, std::string title, bool fullscreen)
 			{
 				this->width = width;
 				this->height = height;

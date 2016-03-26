@@ -112,7 +112,7 @@ namespace Jade
 			void SetZ(float value);
 			float GetZ() const;
 			float GetMagnitude() const;
-			string ToString() const;
+			std::string ToString() const;
 		};
 	}
 }

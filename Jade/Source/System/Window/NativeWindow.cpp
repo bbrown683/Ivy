@@ -48,11 +48,11 @@ bool Jade::System::NativeWindow::PollWindowEvents()
 		case SDL_QUIT:
 			open = false;
 			break;
-		// Press.
+		// Key press.
 		case SDL_KEYDOWN:
 			input.keyboard.SetKeyState(ConvertKeycode(e.key.keysym.sym), Core::InputState::Pressed);
 			break;
-		// Release.
+		// Key release.
 		case SDL_KEYUP:
 			input.keyboard.SetKeyState(ConvertKeycode(e.key.keysym.sym), Core::InputState::Released);
 			break;
@@ -205,7 +205,7 @@ Jade::Core::Key Jade::System::NativeWindow::ConvertKeycode(SDL_Keycode keycode)
 	}
 }
 
-void Jade::System::NativeWindow::SetIcon(string filename)
+void Jade::System::NativeWindow::SetIcon(std::string filename)
 {
 	// SDL is picky about icons, therefore we will use
 	// FreeImage to load the icon and retrieve the bits 
@@ -221,11 +221,12 @@ void Jade::System::NativeWindow::SetIcon(string filename)
 		bitmap = FreeImage_Rescale(bitmap, 32, 32, FILTER_BOX);
 
 		// Convert to a 24 bit image.
+		// 8 bits per color channel.
 		FIBITMAP* src = FreeImage_ConvertTo24Bits(bitmap);
 		FreeImage_Unload(bitmap);
 
-		// Create memory and open stream.
-		FIMEMORY* hMemory = nullptr;
+		// Create and open memory stream.
+		FIMEMORY* hMemory;
 		hMemory = FreeImage_OpenMemory();
 
 		// Save to memory and gather size.
@@ -234,29 +235,27 @@ void Jade::System::NativeWindow::SetIcon(string filename)
 
 		// Acquire the bitmap from memory then close the stream.
 		unsigned char* bits = nullptr;
-		unsigned long size	= 0;
+		unsigned long size = 0;
 		FreeImage_AcquireMemory(hMemory, &bits, &size);
 
 		// Load the bits into the buffer and send it to a surface.
 		SDL_RWops* buffer = SDL_RWFromMem(bits, size);
 		SDL_Surface* icon = SDL_LoadBMP_RW(buffer, 1);
+		
+		// Close the buffer and memory since it is no longer needed.
+		SDL_RWclose(buffer);
+		FreeImage_CloseMemory(hMemory);
 
 		// Set the surface as an icon.
 		SDL_SetWindowIcon(m_pWindow, icon);
 
-		// No longer needed.
-		SDL_FreeSurface(icon);	
-		FreeImage_CloseMemory(hMemory);
-
-		// Prevent small memory leak.
-		bits = nullptr;
-		delete bits;
+		// Release the surface object after setting icon.
+		SDL_FreeSurface(icon);
 	}
 }
 
 void Jade::System::NativeWindow::Close()
 {	
-
 	open = false;
 	
 	SDL_DestroyWindow(m_pWindow);
@@ -325,12 +324,12 @@ void Jade::System::NativeWindow::SetY(int value)
 	this->y = value;
 }
 
-string Jade::System::NativeWindow::GetTitle()
+std::string Jade::System::NativeWindow::GetTitle()
 {
 	return title;
 }
 
-void Jade::System::NativeWindow::SetTitle(string value)
+void Jade::System::NativeWindow::SetTitle(std::string value)
 {
 	SDL_SetWindowTitle(m_pWindow, value.c_str());
 	this->title = value;

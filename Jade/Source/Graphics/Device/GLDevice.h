@@ -31,12 +31,15 @@ SOFTWARE.
 #define GLX
 #endif
 
-#include "Core/Utility.h"
-#include "Math/Color.h"
-#include "Graphics/Device/IDevice.h"
-#include "Graphics/Device/Specification.h"
-#include "System/Window/IWindow.h"
-#include <iostream>
+#include "glew/glew.h"
+#include "glew/wglew.h"
+#include <gl/GL.h>
+
+#include <Core/Utility.h>
+#include <Math/Color.h>
+#include <Graphics/Device/IDevice.h>
+#include <Graphics/Device/Specification.h>
+#include <System/Window/IWindow.h>
 
 namespace Jade
 {
@@ -58,7 +61,6 @@ namespace Jade
 			Specification specification;
 
 			bool Create() override;
-
 			bool Release() override;
 
 		public:
@@ -71,8 +73,7 @@ namespace Jade
 				this->window = window;
 
 				// Create our device.
-				if (!Create())
-					std::cout << "Something went wrong." << std::endl;
+				Create();
 			}
 
 			~GLDevice()

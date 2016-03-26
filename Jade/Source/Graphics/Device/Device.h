@@ -74,6 +74,8 @@ namespace Jade
 			{
 				this->window = window;
 				this->specification = specification;
+
+				device = CreateDevice();
 			}
 
 			Device(std::shared_ptr<System::Window> window, GraphicsAPI api, Specification specification)

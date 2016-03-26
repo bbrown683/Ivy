@@ -24,7 +24,16 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "Graphics/Shader/IShader.h"
+// Define before inclusion if on windows systems.
+#ifdef _WIN32
+#define USE_STDINT
+#endif
+#include "hlslcc/hlslcc.h"
+
+#include <Core/Utility.h>
+#include <Graphics/Device/GLDevice.h>
+#include <Graphics/Shader/IShader.h>
+#include <Graphics/Shader/ShaderType.h>
 
 namespace Jade
 {
@@ -34,15 +43,24 @@ namespace Jade
 		{
 		private:
 
-			bool Create() override;
+			std::string filename;
+			ShaderType type;
 
+			GLuint shader;
+			GLSLCrossDependencyData dependencies;
+
+			bool Create() override;
 			bool Release() override;
 
 		public:
 
-			GLShader()
+			GLShader(std::string filename, ShaderType type)
 			{
-				Create();
+				this->filename = filename;
+				this->type = type;
+
+				if(Create())
+					Compile();
 			}
 
 			~GLShader()

@@ -59,18 +59,16 @@ namespace Jade
 			DirectX::XMMATRIX view;
 			DirectX::XMMATRIX projection;
 
-			ID3D11ShaderResourceView*	m_pTextureRV = nullptr;
-
 			void Bind() override;
 			void Unbind() override;
 
 		public:
 
-			DXMesh(std::vector<Math::Vertex> vertices, std::vector<unsigned int> indices, std::shared_ptr<DXDevice> device)
+			DXMesh(std::shared_ptr<DXDevice> device, std::vector<Math::Vertex> vertices, std::vector<unsigned int> indices)
 			{
+				this->device = device;
 				this->vertices = vertices;
 				this->indices = indices;
-				this->device = device;
 
 				Bind();
 			}

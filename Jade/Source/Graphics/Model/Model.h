@@ -50,12 +50,12 @@ namespace Jade
 
 		public:
 
-			Model(string filename)
+			Model(std::string filename)
 			{
 				vertex = LoadModel(filename);
 			}
 
-			Math::Vertex* LoadModel(string filename);
+			Math::Vertex* LoadModel(std::string filename);
 			void Draw();
 		};
 	}

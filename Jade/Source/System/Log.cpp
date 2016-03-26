@@ -1,6 +1,6 @@
 #include "System/Log.h"
 
-void Jade::System::Log::Write(string text)
+void Jade::System::Log::Write(std::string text)
 {
 // With debug we write to the console stream.
 #ifdef _DEBUG

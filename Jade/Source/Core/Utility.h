@@ -24,10 +24,15 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-// String define to reduce code clump.
+//==============================================
+// Include some common headers.
+//==============================================
+
+// Strings.
 #include <string>
-#define string					std::string
-#define wstring					std::wstring
+
+// Vectors for wrapping arrays.
+#include <vector>
 
 // Pointer handling
 #include <memory>

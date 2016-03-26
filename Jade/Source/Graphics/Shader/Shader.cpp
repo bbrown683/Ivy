@@ -29,17 +29,11 @@ std::shared_ptr<Jade::Graphics::IShader> Jade::Graphics::Shader::CreateShader()
 	switch (device->GetGraphicsAPI())
 	{
 		case GraphicsAPI::DirectX:
-		{
-			return std::make_shared<DXShader>(filename, type, std::dynamic_pointer_cast<DXDevice>(device->GetIDevice()));
-		}
+			return std::make_shared<DXShader>(std::dynamic_pointer_cast<DXDevice>(device->GetIDevice()), filename, type);
 		case GraphicsAPI::OpenGL:
-		{
-			return std::make_shared<GLShader>();
-		}
+			return std::make_shared<GLShader>(filename, type);
 		case GraphicsAPI::Vulkan:
-		{
 			break;
-		}
 	}
 
 	return nullptr;

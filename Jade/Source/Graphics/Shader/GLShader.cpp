@@ -22,13 +22,37 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-//#include "hlslcc/hlslcc.h"
-
-#include "Graphics/Shader/GLShader.h"
+#include <Graphics/Shader/GLShader.h>
+#include <iostream>
 
 bool Jade::Graphics::GLShader::Create()
 {
-	return false;
+	std::cout << glGetString(GL_VERSION) << std::endl;
+
+	switch (type)
+	{
+	case ShaderType::Compute:
+		shader = glCreateShader(GL_COMPUTE_SHADER);
+		break;
+	case ShaderType::Domain:
+		shader = glCreateShader(GL_TESS_EVALUATION_SHADER);
+		break;
+	case ShaderType::Geometry:
+		shader = glCreateShader(GL_GEOMETRY_SHADER);
+		break;
+	case ShaderType::Pixel:
+		shader = glCreateShader(GL_FRAGMENT_SHADER);
+		break;
+	case ShaderType::Tesselation:
+		shader = glCreateShader(GL_TESS_CONTROL_SHADER);
+		break;
+	case ShaderType::Vertex:
+		shader = glCreateShader(GL_VERTEX_SHADER);
+		break;
+	default: break;
+	}
+
+	return shader != 0 ? true : false;
 }
 
 bool Jade::Graphics::GLShader::Release()
@@ -38,8 +62,8 @@ bool Jade::Graphics::GLShader::Release()
 
 bool Jade::Graphics::GLShader::Compile()
 {
-	//GLSLShader* shader = nullptr;
-	//int id = TranslateHLSLFromFile("", 0, LANG_440, nullptr, nullptr, shader);
-
-	return false;
+	GLSLShader result;
+	int id = TranslateHLSLFromFile(filename.c_str(), 0, LANG_440, nullptr, &dependencies, &result);
+	
+	return true;
 }

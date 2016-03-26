@@ -64,9 +64,7 @@ float Jade::Math::Helper::WrapAngle(float angle)
 
 		return reducedAngle;
 	}
+	
 	// Already reduced if it does not meet above conditions.
-	else
-	{
-		return angle;
-	}
+	return angle;
 }

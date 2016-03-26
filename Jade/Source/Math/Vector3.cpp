@@ -90,7 +90,7 @@ float Jade::Math::Vector3::GetMagnitude() const
 	return this->magnitude;
 }
 
-string Jade::Math::Vector3::ToString() const
+std::string Jade::Math::Vector3::ToString() const
 {
 	return "(" + std::to_string(x) + ", " + std::to_string(y) + ", " + std::to_string(z) + ")";
 }

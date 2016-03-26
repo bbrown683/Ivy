@@ -47,20 +47,19 @@ int main(int argc, char* argv[])
 	std::shared_ptr<Device> device = std::make_shared<Device>(window, Jade::Graphics::GraphicsAPI::DirectX);
 
 	// Create our two required shaders for drawing onto the surface.
-	std::shared_ptr<Shader>	vertexShader = std::make_shared<Shader>(".\\resources\\shaders\\vertex.hlsl", Jade::Graphics::ShaderType::Vertex, device);
-	std::shared_ptr<Shader>	pixelShader = std::make_shared<Shader>(".\\resources\\shaders\\pixel.hlsl", Jade::Graphics::ShaderType::Pixel, device);
+	std::shared_ptr<Shader>	vertexShader = std::make_shared<Shader>(device, ".\\resources\\shaders\\DXVertex.hlsl", Jade::Graphics::ShaderType::Vertex);
+	std::shared_ptr<Shader>	pixelShader = std::make_shared<Shader>(device, ".\\resources\\shaders\\DXPixel.hlsl", Jade::Graphics::ShaderType::Pixel);
 
 	// Create some vertices for our triangle.
+	/*
 	std::vector<Vertex> vertices = {
 		{ Vector3(0.0f, 0.5f, 0.5f), Color::Red },
 		{ Vector3(0.5f, -0.5f, 0.5f), Color::Green },
 		{ Vector3(-0.5f, -0.5f, 0.5f), Color::Blue } };
 
 	std::vector<unsigned int> indices = { 0, 1, 2 };
+	*/
 
-	window->SetIcon("test.png");
-
-	/*
 	std::vector<Vertex> vertices =
 	{
 		{ Vector3(-1.0f, 1.0f, -1.0f), Color::Red },
@@ -93,9 +92,9 @@ int main(int argc, char* argv[])
 		6,4,5,
 		7,4,6,
 	};
-	*/
+
 	// Creates and binds the vertex buffer for drawing the triangular mesh.
-	std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>(vertices, indices, device);
+	std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>(device, vertices, indices);
 
 	while (window->IsOpen())
 	{

@@ -28,8 +28,8 @@ SOFTWARE.
 
 std::shared_ptr<Jade::Graphics::IDevice> Jade::Graphics::Device::CreateDevice()
 {
-	// if either window or device is null.
-	if (!window || !device)
+	// Ensuring window is not null before attempting to attach a context.
+	if (window != nullptr)
 	{
 		// Check what API is being requested.
 		if (api == GraphicsAPI::Default)

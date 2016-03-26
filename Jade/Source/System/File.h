@@ -37,11 +37,11 @@ namespace Jade
 		private:
 
 			FILE* file;
-			string filename;
+			std::string filename;
 		
 		public:
 
-			File(string filename)
+			File(std::string filename)
 			{
 				this->filename = filename;
 			}
@@ -51,8 +51,8 @@ namespace Jade
 				delete file;
 			}
 
-			string Read();
-			void Write(string text);
+			std::string Read();
+			void Write(std::string text);
 		};
 	}
 }

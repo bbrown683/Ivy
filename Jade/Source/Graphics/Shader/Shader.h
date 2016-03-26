@@ -44,9 +44,9 @@ namespace Jade
 
 			std::shared_ptr<IShader> shader;
 
-			string filename;
-			ShaderType type;
 			std::shared_ptr<Device> device;
+			std::string filename;
+			ShaderType type;
 
 			std::shared_ptr<IShader> CreateShader();
 
@@ -56,11 +56,11 @@ namespace Jade
 			Shader() : shader(nullptr) { }
 
 			// Default shader constructor.
-			Shader(string filename, ShaderType type, std::shared_ptr<Device> device)
+			Shader(std::shared_ptr<Device> device, std::string filename, ShaderType type)
 			{
+				this->device = device;
 				this->filename = filename;
 				this->type = type;
-				this->device = device;
 				
 				shader = CreateShader();
 			}
