@@ -121,7 +121,7 @@ bool Jade::Graphics::GLDevice::Create()
 	if (WGLEW_EXT_swap_control)
 		wglSwapIntervalEXT(specification.vsync);
 
-	std::cout << "Renderer: OpenGL " << major << "." << minor << std::endl;
+	std::cout << "Renderer: OpenGL " << std::endl << glGetString(GL_VERSION) << std::endl;
 
 	return true;
 
@@ -146,7 +146,7 @@ bool Jade::Graphics::GLDevice::Release()
 
 void Jade::Graphics::GLDevice::Clear(Math::Color color)
 {
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 	glClearColor(color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha());
 }
 

@@ -24,6 +24,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include <Graphics/Shader/ShaderType.h>
+
 namespace Jade
 {
 	namespace Graphics
@@ -32,13 +34,12 @@ namespace Jade
 		{
 		private:
 
-			virtual bool Create() = 0;
-
+			virtual bool Create(ShaderType type) = 0;
 			virtual bool Release() = 0;
 
 		public:
 
-			virtual bool Compile() = 0;
+			virtual bool Compile(std::string filename, ShaderType type) = 0;
 		};
 	}
 }

@@ -25,45 +25,126 @@ SOFTWARE.
 #include <Graphics/Shader/GLShader.h>
 #include <iostream>
 
-bool Jade::Graphics::GLShader::Create()
+bool Jade::Graphics::GLShader::Create(ShaderType type)
 {
-	std::cout << glGetString(GL_VERSION) << std::endl;
-
 	switch (type)
 	{
 	case ShaderType::Compute:
-		shader = glCreateShader(GL_COMPUTE_SHADER);
-		break;
+		computeShader = glCreateShader(GL_COMPUTE_SHADER);
+		return true;
 	case ShaderType::Domain:
-		shader = glCreateShader(GL_TESS_EVALUATION_SHADER);
-		break;
+		evaluationShader = glCreateShader(GL_TESS_EVALUATION_SHADER);
+		return true;
 	case ShaderType::Geometry:
-		shader = glCreateShader(GL_GEOMETRY_SHADER);
-		break;
+		geometryShader = glCreateShader(GL_GEOMETRY_SHADER);
+		return true;
 	case ShaderType::Pixel:
 		shader = glCreateShader(GL_FRAGMENT_SHADER);
-		break;
+		return true;
 	case ShaderType::Tesselation:
-		shader = glCreateShader(GL_TESS_CONTROL_SHADER);
-		break;
+		controlShader = glCreateShader(GL_TESS_CONTROL_SHADER);
+		return true;
 	case ShaderType::Vertex:
 		shader = glCreateShader(GL_VERTEX_SHADER);
-		break;
+		return true;
 	default: break;
 	}
 
-	return shader != 0 ? true : false;
+	return false;
 }
 
 bool Jade::Graphics::GLShader::Release()
 {
-	return false;
+	glDeleteProgram(program);
+
+	return true;
 }
 
-bool Jade::Graphics::GLShader::Compile()
+bool Jade::Graphics::GLShader::Compile(std::string filename, ShaderType type)
 {
 	GLSLShader result;
 	int id = TranslateHLSLFromFile(filename.c_str(), 0, LANG_440, nullptr, &dependencies, &result);
-	
+
+	if (id != 0)
+	{
+		program = glCreateProgram();
+
+		glShaderSource(shader, 1, const_cast<const char **>(&result.sourceCode), nullptr);
+		glCompileShader(shader);
+
+		bool check;
+		check = CheckForErrors(shader, GL_COMPILE_STATUS, false, "Shader Compilation Error: ");
+		if (check == false)
+			return false;
+
+		glAttachShader(program, shader);
+		glLinkProgram(program);
+		check = CheckForErrors(program, GL_LINK_STATUS, true, "Shader Linking Error : ");
+		if (check == false)
+			return false;
+
+		glValidateProgram(program);
+		CheckForErrors(program, GL_VALIDATE_STATUS, true, "Shader Validation Error : ");
+		if (check == false)
+			return check;
+
+		glDetachShader(program, shader);
+		glDeleteShader(shader);
+
+		glUseProgram(program);
+
+		FreeGLSLShader(&result);
+
+		return true;
+	}
+
+	std::cout << "Failure." << std::endl;
+
+	return false;
+}
+
+bool Jade::Graphics::GLShader::CheckForErrors(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMessage)
+{
+	GLint success = 0;
+	GLchar error[1024] = { 0 };
+
+	if (isProgram)
+		glGetProgramiv(shader, flag, &success);
+	else
+		glGetShaderiv(shader, flag, &success);
+
+	if (success == GL_FALSE)
+	{
+		if (isProgram)
+			glGetProgramInfoLog(shader, sizeof error, nullptr, error);
+		else
+			glGetShaderInfoLog(shader, sizeof error, nullptr, error);
+
+		std::cerr << errorMessage << ": '" << error << "'" << std::endl;
+
+		return false;
+	}
+
 	return true;
+}
+
+GLuint Jade::Graphics::GLShader::GetShaderFromType(ShaderType type)
+{
+	switch (type)
+	{
+	case ShaderType::Compute:
+		return computeShader;
+	case ShaderType::Domain:
+		return evaluationShader;
+	case ShaderType::Geometry:
+		return geometryShader;
+	case ShaderType::Pixel:
+		return fragmentShader;
+	case ShaderType::Tesselation:
+		return controlShader;
+	case ShaderType::Vertex:
+		return vertexShader;
+	default:
+		return 0;
+	}
 }

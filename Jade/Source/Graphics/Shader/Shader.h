@@ -45,15 +45,26 @@ namespace Jade
 			std::shared_ptr<IShader> shader;
 
 			std::shared_ptr<Device> device;
+			std::unordered_map<std::string, ShaderType> shaders;
+			
 			std::string filename;
 			ShaderType type;
 
-			std::shared_ptr<IShader> CreateShader();
+			std::shared_ptr<IShader> CreateShader(std::shared_ptr<Device> device, std::unordered_map<std::string, ShaderType> shaders);
+			std::shared_ptr<IShader> CreateShader(std::shared_ptr<Device> device, std::string filename, ShaderType type);
 
 		public:
 
 			// Note: Do not use this constructor as everything is set to null.
 			Shader() : shader(nullptr) { }
+
+			Shader(std::shared_ptr<Device> device, std::unordered_map<std::string, ShaderType> shaders)
+			{
+				this->device = device;
+				this->shaders = shaders;
+
+				shader = CreateShader(device, shaders);
+			}
 
 			// Default shader constructor.
 			Shader(std::shared_ptr<Device> device, std::string filename, ShaderType type)
@@ -62,7 +73,7 @@ namespace Jade
 				this->filename = filename;
 				this->type = type;
 				
-				shader = CreateShader();
+				shader = CreateShader(device, filename, type);
 			}
 		};
 	}

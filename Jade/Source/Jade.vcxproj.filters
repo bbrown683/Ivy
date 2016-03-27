@@ -43,6 +43,7 @@
     <ClCompile Include="Graphics\Buffer\IndexBuffer.cpp" />
     <ClCompile Include="Graphics\Buffer\VertexBuffer.cpp" />
     <ClCompile Include="Graphics\Buffer\DXVertexBuffer.cpp" />
+    <ClCompile Include="Core\Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\Vector4.h">
@@ -139,5 +140,7 @@
   <ItemGroup>
     <FxCompile Include="DXPixel.hlsl" />
     <FxCompile Include="DXVertex.hlsl" />
+    <FxCompile Include="..\x64\Debug\resources\shaders\vertex.hlsl" />
+    <FxCompile Include="..\x64\Debug\resources\shaders\pixel.hlsl" />
   </ItemGroup>
 </Project>

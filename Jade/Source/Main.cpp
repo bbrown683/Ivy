@@ -28,6 +28,7 @@ SOFTWARE.
 #include "Graphics/Device/Device.h"
 #include "Graphics/Shader/Shader.h"
 #include "Graphics/Mesh/Mesh.h"
+#include <map>
 
 using Jade::Core::Key;
 using Jade::Graphics::Device;
@@ -47,8 +48,15 @@ int main(int argc, char* argv[])
 	std::shared_ptr<Device> device = std::make_shared<Device>(window, Jade::Graphics::GraphicsAPI::DirectX);
 
 	// Create our two required shaders for drawing onto the surface.
-	std::shared_ptr<Shader>	vertexShader = std::make_shared<Shader>(device, ".\\resources\\shaders\\DXVertex.hlsl", Jade::Graphics::ShaderType::Vertex);
-	std::shared_ptr<Shader>	pixelShader = std::make_shared<Shader>(device, ".\\resources\\shaders\\DXPixel.hlsl", Jade::Graphics::ShaderType::Pixel);
+	std::shared_ptr<Shader>	vertexShader = std::make_shared<Shader>(device, "DXVertex.hlsl", Jade::Graphics::ShaderType::Vertex);
+	std::shared_ptr<Shader>	pixelShader = std::make_shared<Shader>(device, "DXPixel.hlsl", Jade::Graphics::ShaderType::Pixel);
+
+	// Key value pair for shader filename and what type they are.
+	std::unordered_map<std::string, Jade::Graphics::ShaderType> shaders =
+	{
+		{ "DXVertex.cso", Jade::Graphics::ShaderType::Vertex },
+		{ "DXPixel.cso", Jade::Graphics::ShaderType::Pixel },
+	};
 
 	// Create some vertices for our triangle.
 	/*
@@ -59,7 +67,6 @@ int main(int argc, char* argv[])
 
 	std::vector<unsigned int> indices = { 0, 1, 2 };
 	*/
-
 	std::vector<Vertex> vertices =
 	{
 		{ Vector3(-1.0f, 1.0f, -1.0f), Color::Red },

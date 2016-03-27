@@ -40,6 +40,10 @@ namespace Jade
 			std::vector<Math::Vertex> vertices;
 			std::vector<unsigned int> indices;
 
+			GLuint vertexArray;
+			GLuint vertexBuffer;
+			GLuint indexBuffer;
+
 			void Bind() override;
 			void Unbind() override;
 

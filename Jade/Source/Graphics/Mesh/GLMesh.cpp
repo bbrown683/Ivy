@@ -26,9 +26,6 @@ SOFTWARE.
 
 void Jade::Graphics::GLMesh::Bind()
 {
-	GLuint vertexArray;
-	GLuint vertexBuffer;
-
 	// Generate our vertices array and Bind it to the first element.
 	glGenVertexArrays(1, &vertexArray);
 	glBindVertexArray(vertexArray);
@@ -36,19 +33,29 @@ void Jade::Graphics::GLMesh::Bind()
 	// Generate our vertices buffer and bind it.
 	glGenBuffers(1, &vertexBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(GLuint) * sizeof(vertices.data()) / sizeof(Math::Vector3), vertices.data(), GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, vertices.size(), vertices.data(), GL_STATIC_DRAW);
+	
+	// Generate a buffer for the indices;
+	//glGenBuffers(1, &indexBuffer);
+	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
+	//glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), &indices[0], GL_STATIC_DRAW);
+
+	glBindVertexArray(0);
 }
 
 void Jade::Graphics::GLMesh::Unbind()
 {
-	// Unbind the vertices buffer.
+	// Unbind and delete the vertex buffer.
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glDeleteBuffers(1, &vertexBuffer);
+	glDeleteVertexArrays(1, &vertexArray);
 }
 
 void Jade::Graphics::GLMesh::Draw()
 {
+	// Vertices.
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 0, GL_FLOAT, false, 0, nullptr);
-	glDrawArrays(GL_TRIANGLES, 0, sizeof(vertices.data()) / sizeof(Math::Vector3));
+	glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, nullptr);
+	glDrawArrays(GL_TRIANGLES, 0, 3);
 	glDisableVertexAttribArray(0);
 }

@@ -43,24 +43,47 @@ namespace Jade
 		{
 		private:
 
+			std::unordered_map<std::string, ShaderType> shaders;
+			
 			std::string filename;
 			ShaderType type;
 
+			// Possible shaders.
 			GLuint shader;
+			GLuint computeShader;
+			GLuint controlShader;
+			GLuint evaluationShader;
+			GLuint fragmentShader;
+			GLuint geometryShader;
+			GLuint vertexShader;
+
+			GLuint program;
 			GLSLCrossDependencyData dependencies;
 
-			bool Create() override;
+			bool Create(ShaderType type) override;
 			bool Release() override;
+			bool CheckForErrors(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMessage);
+			GLuint GetShaderFromType(ShaderType type);
 
 		public:
+
+			GLShader(std::unordered_map<std::string, ShaderType> shaders)
+			{
+				this->shaders = shaders;
+				
+				for (int i = 0; i < shaders.size(); i++)
+				{
+					
+				}
+			}
 
 			GLShader(std::string filename, ShaderType type)
 			{
 				this->filename = filename;
 				this->type = type;
 
-				if(Create())
-					Compile();
+				if (Create(type))
+					Compile(filename, type);
 			}
 
 			~GLShader()
@@ -68,7 +91,7 @@ namespace Jade
 				Release();
 			}
 
-			bool Compile() override;
+			bool Compile(std::string filename, ShaderType type) override;
 		};
 	}
 }

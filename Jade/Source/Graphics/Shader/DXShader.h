@@ -24,10 +24,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include <d3dcompiler.h>
 #include <iostream>
 
-#include "Core/Utility.h"
-
+#include <Core/Utility.h>
 #include "Graphics/Shader/IShader.h"
 #include "Graphics/Shader/ShaderType.h"
 #include "Graphics/Device/DXDevice.h"
@@ -42,6 +42,7 @@ namespace Jade
 
 			std::shared_ptr<DXDevice> device;
 			std::string filename;
+
 			ShaderType type;
 
 			// Holds our shader compilation information.
@@ -54,8 +55,12 @@ namespace Jade
 			ComPtr<ID3D11PixelShader>		m_pPixelShader		= nullptr;
 			ComPtr<ID3D11VertexShader>		m_pVertexShader		= nullptr;
 
-			bool Create() override;
+			bool Create(ShaderType type) override;
 			bool Release() override;
+
+			// Determines if we are using precompiled shaders.
+			// Means wee can skip the compilation process.
+			//bool precompiled = false;
 
 		public:
 
@@ -65,9 +70,31 @@ namespace Jade
 				this->filename = filename;
 				this->type = type;
 
-				// If our shaders compile correctly, we can create them.
-				if (Compile())
-					Create();
+				// Do not need to compile shaders that are already 
+				// in a bytecode format.
+				// .cso is the compiled shader file extension.
+				if(filename.find(".cso") != -1)
+				{
+					long shaderResult = 0;
+
+					shaderResult = D3DReadFileToBlob(Core::Utility::StringToWString(filename).c_str(), m_pShaderBlob.GetAddressOf());
+
+					if(shaderResult < 0)
+					{
+						// Output compilation errors to console.
+						std::cout << "ERROR: Failed to read compiled shader bytecode..." << std::endl;
+					}
+					else
+					{
+						Create(type);
+					}
+				}
+				// If our shaders are not already precompiled, compile them and create the object.
+				else
+				{
+					if (Compile(filename, type))
+						Create(type);
+				}
 			}
 
 			~DXShader()
@@ -75,7 +102,7 @@ namespace Jade
 				Release();
 			}
 
-			bool Compile() override;
+			bool Compile(std::string filename, ShaderType type) override;
 
 		};
 	}

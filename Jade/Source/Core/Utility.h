@@ -34,8 +34,27 @@ SOFTWARE.
 // Vectors for wrapping arrays.
 #include <vector>
 
+#include <unordered_map>
+
 // Pointer handling
 #include <memory>
 
+// Asserting conditions.
+#include <cassert>
+
 // Used to export symbols.
 #define JADEAPI					__declspec(dllexport)
+
+namespace Jade
+{
+	namespace Core
+	{
+		class Utility
+		{
+
+		public:
+
+			static std::wstring StringToWString(std::string string);
+		};
+	};
+}

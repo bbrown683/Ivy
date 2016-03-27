@@ -22,12 +22,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <d3dcompiler.h>
-#include <iostream>
-
 #include "Graphics/Shader/DXShader.h"
 
-bool Jade::Graphics::DXShader::Create()
+bool Jade::Graphics::DXShader::Create(ShaderType type)
 {
 	long shaderResult = 0;
 
@@ -43,7 +40,7 @@ bool Jade::Graphics::DXShader::Create()
 				std::cout << "ERROR: Compute shader creation failed..." << std::endl;
 
 				// Release any data associated with the shader if it gives an error.
-				//Release();
+				Release();
 
 				return false;
 			}
@@ -61,7 +58,7 @@ bool Jade::Graphics::DXShader::Create()
 				std::cout << "ERROR: Domain shader creation failed..." << std::endl;
 
 				// Release any data associated with the shader if it gives an error.
-				//Release();
+				Release();
 
 				return false;
 			}
@@ -79,7 +76,7 @@ bool Jade::Graphics::DXShader::Create()
 				std::cout << "ERROR: Geometry shader creation failed..." << std::endl;
 
 				// Release any data associated with the shader if it gives an error.
-				//Release();
+				Release();
 
 				return false;
 			}
@@ -97,7 +94,7 @@ bool Jade::Graphics::DXShader::Create()
 				std::cout << "ERROR: Pixel shader creation failed..." << std::endl;
 
 				// Release any data associated with the shader if it gives an error.
-				//Release();
+				Release();
 
 				return false;
 			}
@@ -117,7 +114,7 @@ bool Jade::Graphics::DXShader::Create()
 				std::cout << "ERROR: Tesselation shader creation failed..." << std::endl;
 
 				// Release any data associated with the shader if it gives an error.
-				//Release();
+				Release();
 
 				return false;
 			}
@@ -135,7 +132,7 @@ bool Jade::Graphics::DXShader::Create()
 				std::cout << "ERROR: Vertex shader creation failed..." << std::endl;
 
 				// Release any data associated with the shader if it gives an error.
-				//Release();
+				Release();
 
 				return false;
 			}
@@ -158,7 +155,7 @@ bool Jade::Graphics::DXShader::Create()
 				std::cout << "ERROR: Vertex shader creation failed..." << std::endl;
 
 				// Release any data associated with the shader if it gives an error.
-				//Release();
+				Release();
 
 				return false;
 			}
@@ -214,7 +211,7 @@ bool Jade::Graphics::DXShader::Release()
 	return true;
 }
 
-bool Jade::Graphics::DXShader::Compile()
+bool Jade::Graphics::DXShader::Compile(std::string filename, ShaderType type)
 {
 	unsigned int flags = D3DCOMPILE_ENABLE_STRICTNESS;
 	
@@ -262,12 +259,9 @@ bool Jade::Graphics::DXShader::Compile()
 	{
 		ComPtr<ID3DBlob> l_pErrorBlob = nullptr;
 
-		// Convert string to a wstring as D3DCompileFromFile requires it.
-		std::wstring filepath(filename.begin(), filename.end());
-
 		// Compile the shader
 		// NOTE: Main must be used as the entrypoint of all shader files for consistency.
-		long hr = D3DCompileFromFile(filepath.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE, "Main", profile, flags, 0, m_pShaderBlob.GetAddressOf(), l_pErrorBlob.GetAddressOf());
+		long hr = D3DCompileFromFile(Core::Utility::StringToWString(filename).c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE, "Main", profile, flags, 0, m_pShaderBlob.GetAddressOf(), l_pErrorBlob.GetAddressOf());
 
 		if (hr < 0)
 		{
