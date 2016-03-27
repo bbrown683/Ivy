@@ -48,6 +48,8 @@ namespace Jade
 			friend class DXShader;
 			friend class DXMesh;
 
+			friend class TestDXShader;
+
 			std::shared_ptr<System::IWindow> window;
 			Specification specification;
 

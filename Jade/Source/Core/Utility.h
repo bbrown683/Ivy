@@ -31,9 +31,9 @@ SOFTWARE.
 // Strings.
 #include <string>
 
-// Vectors for wrapping arrays.
+// Common data structures.
 #include <vector>
-
+#include <list>
 #include <unordered_map>
 
 // Pointer handling

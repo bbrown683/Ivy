@@ -28,6 +28,7 @@ SOFTWARE.
 
 #include "Graphics/Device/Device.h"
 #include "Graphics/Device/GraphicsAPI.h"
+#include "Graphics/Shader/TestDXShader.h"
 #include "Graphics/Shader/DXShader.h"
 #include "Graphics/Shader/GLShader.h"
 #include "Graphics/Shader/IShader.h"

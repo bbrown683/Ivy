@@ -232,6 +232,7 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClCompile Include="Graphics\Shader\DXShader.cpp" />
     <ClCompile Include="Graphics\Shader\GLShader.cpp" />
     <ClCompile Include="Graphics\Shader\Shader.cpp" />
+    <ClCompile Include="Graphics\Shader\TestDXShader.cpp" />
     <ClCompile Include="System\Window\NativeWindow.cpp" />
     <ClCompile Include="Math\Color.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -281,6 +282,7 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClInclude Include="Graphics\Shader\IShader.h" />
     <ClInclude Include="Graphics\Shader\Shader.h" />
     <ClInclude Include="Graphics\Shader\ShaderType.h" />
+    <ClInclude Include="Graphics\Shader\TestDXShader.h" />
     <ClInclude Include="Graphics\Texture\Texture.h" />
     <ClInclude Include="Graphics\Texture\TextureType.h" />
     <ClInclude Include="Math\Math.h" />

@@ -82,16 +82,13 @@ namespace Jade
 				this->filename = filename;
 				this->type = type;
 
-				if (Create(type))
-					Compile(filename, type);
+				GLShader::Create(type);
 			}
 
 			~GLShader()
 			{
-				Release();
+				GLShader::Release();
 			}
-
-			bool Compile(std::string filename, ShaderType type) override;
 		};
 	}
 }

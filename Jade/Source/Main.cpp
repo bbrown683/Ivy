@@ -48,8 +48,8 @@ int main(int argc, char* argv[])
 	std::shared_ptr<Device> device = std::make_shared<Device>(window, Jade::Graphics::GraphicsAPI::DirectX);
 
 	// Create our two required shaders for drawing onto the surface.
-	std::shared_ptr<Shader>	vertexShader = std::make_shared<Shader>(device, "DXVertex.hlsl", Jade::Graphics::ShaderType::Vertex);
-	std::shared_ptr<Shader>	pixelShader = std::make_shared<Shader>(device, "DXPixel.hlsl", Jade::Graphics::ShaderType::Pixel);
+	//std::shared_ptr<Shader>	vertexShader = std::make_shared<Shader>(device, "DXVertex.hlsl", Jade::Graphics::ShaderType::Vertex);
+	//std::shared_ptr<Shader>	pixelShader = std::make_shared<Shader>(device, "DXPixel.hlsl", Jade::Graphics::ShaderType::Pixel);
 
 	// Key value pair for shader filename and what type they are.
 	std::unordered_map<std::string, Jade::Graphics::ShaderType> shaders =
@@ -57,6 +57,8 @@ int main(int argc, char* argv[])
 		{ "DXVertex.cso", Jade::Graphics::ShaderType::Vertex },
 		{ "DXPixel.cso", Jade::Graphics::ShaderType::Pixel },
 	};
+
+	std::shared_ptr<Shader>	shader = std::make_shared<Shader>(device, shaders);
 
 	// Create some vertices for our triangle.
 	/*

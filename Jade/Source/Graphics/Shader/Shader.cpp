@@ -24,6 +24,21 @@ SOFTWARE.
 
 #include "Graphics/Shader/Shader.h"
 
+std::shared_ptr<Jade::Graphics::IShader> Jade::Graphics::Shader::CreateShader(std::shared_ptr<Device> device, std::unordered_map<std::string, ShaderType> shaders)
+{
+	switch (device->GetGraphicsAPI())
+	{
+	case GraphicsAPI::DirectX:
+		return std::make_shared<TestDXShader>(std::dynamic_pointer_cast<DXDevice>(device->GetIDevice()), shaders);
+	case GraphicsAPI::OpenGL:
+		return std::make_shared<GLShader>(filename, type);
+	case GraphicsAPI::Vulkan:
+		break;
+	}
+
+	return nullptr;
+}
+
 std::shared_ptr<Jade::Graphics::IShader> Jade::Graphics::Shader::CreateShader(std::shared_ptr<Device> device, std::string filename, ShaderType type)
 {
 	switch (device->GetGraphicsAPI())

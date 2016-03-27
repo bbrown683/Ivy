@@ -44,6 +44,7 @@
     <ClCompile Include="Graphics\Buffer\VertexBuffer.cpp" />
     <ClCompile Include="Graphics\Buffer\DXVertexBuffer.cpp" />
     <ClCompile Include="Core\Utility.cpp" />
+    <ClCompile Include="Graphics\Shader\TestDXShader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\Vector4.h">
@@ -116,6 +117,7 @@
     <ClInclude Include="Graphics\Buffer\IndexBuffer.h" />
     <ClInclude Include="Core\Result.h" />
     <ClInclude Include="Graphics\Buffer\DXVertexBuffer.h" />
+    <ClInclude Include="Graphics\Shader\TestDXShader.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">

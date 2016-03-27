@@ -73,7 +73,12 @@ namespace Jade
 				this->window = window;
 
 				// Create our device.
-				Create();
+				if (!Create())
+				{
+					// Dispose of any allocated memory and close the window.
+					Release();
+					window->Close();
+				}
 			}
 
 			~GLDevice()
