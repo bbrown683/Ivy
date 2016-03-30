@@ -93,11 +93,11 @@ namespace Jade
 					// If it succeeds we can create the shader.
 					if (CopyToBlob(iType, m_pTemporaryBlob))
 					{
-					if (!TestDXShader::Create(iType))
-						exit(EXIT_FAILURE);
+						if (!TestDXShader::Create(iType))
+							TestDXShader::Release();
 					}
 					else
-						exit(EXIT_FAILURE);
+						TestDXShader::Release();
 				}
 			}
 

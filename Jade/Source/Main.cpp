@@ -28,16 +28,12 @@ SOFTWARE.
 #include "Graphics/Device/Device.h"
 #include "Graphics/Shader/Shader.h"
 #include "Graphics/Mesh/Mesh.h"
-#include <map>
+#include "Graphics/Model/Model.h"
 
-using Jade::Core::Key;
-using Jade::Graphics::Device;
-using Jade::Graphics::Shader;
-using Jade::Graphics::Mesh;
-using Jade::Math::Color;
-using Jade::Math::Vector3;
-using Jade::Math::Vertex;
-using Jade::System::Window;
+using namespace Jade::Core;
+using namespace Jade::Graphics;
+using namespace Jade::Math;
+using namespace Jade::System;
 
 int main(int argc, char* argv[])
 {
@@ -45,30 +41,19 @@ int main(int argc, char* argv[])
 	std::shared_ptr<Window> window = std::make_shared<Window>(1080, 720, 100, 100, "Hello World", false);
 
 	// Creates a graphics device.
-	std::shared_ptr<Device> device = std::make_shared<Device>(window, Jade::Graphics::GraphicsAPI::DirectX);
-
-	// Create our two required shaders for drawing onto the surface.
-	//std::shared_ptr<Shader>	vertexShader = std::make_shared<Shader>(device, "DXVertex.hlsl", Jade::Graphics::ShaderType::Vertex);
-	//std::shared_ptr<Shader>	pixelShader = std::make_shared<Shader>(device, "DXPixel.hlsl", Jade::Graphics::ShaderType::Pixel);
+	std::shared_ptr<Device> device = std::make_shared<Device>(window, GraphicsAPI::DirectX);
 
 	// Key value pair for shader filename and what type they are.
-	std::unordered_map<std::string, Jade::Graphics::ShaderType> shaders =
+	std::unordered_map<std::string, ShaderType> shaders =
 	{
-		{ "DXVertex.cso", Jade::Graphics::ShaderType::Vertex },
-		{ "DXPixel.cso", Jade::Graphics::ShaderType::Pixel },
+		{ ".\\resources\\shaders\\vertex.cso", ShaderType::Vertex },
+		{ ".\\resources\\shaders\\pixel.cso", ShaderType::Pixel },
 	};
 
 	std::shared_ptr<Shader>	shader = std::make_shared<Shader>(device, shaders);
 
 	// Create some vertices for our triangle.
-	/*
-	std::vector<Vertex> vertices = {
-		{ Vector3(0.0f, 0.5f, 0.5f), Color::Red },
-		{ Vector3(0.5f, -0.5f, 0.5f), Color::Green },
-		{ Vector3(-0.5f, -0.5f, 0.5f), Color::Blue } };
-
-	std::vector<unsigned int> indices = { 0, 1, 2 };
-	*/
+	
 	std::vector<Vertex> vertices =
 	{
 		{ Vector3(-1.0f, 1.0f, -1.0f), Color::Red },
@@ -102,6 +87,9 @@ int main(int argc, char* argv[])
 		7,4,6,
 	};
 
+	//std::shared_ptr<Model> model = std::make_shared<Model>(device);
+	//model->Load(".\\resources\\models\\teapot.obj");
+
 	// Creates and binds the vertex buffer for drawing the triangular mesh.
 	std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>(device, vertices, indices);
 
@@ -112,6 +100,7 @@ int main(int argc, char* argv[])
 
 		// Draw the vertices.
 		mesh->Draw();
+		//model->Draw();
 
 		// Gets the keys pressed and prints their enumerication value that is stored as an integer.
 		std::vector<Key> keysPressed = window->GetInput().keyboard.GetKeysPressed();

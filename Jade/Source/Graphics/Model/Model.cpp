@@ -26,7 +26,7 @@ SOFTWARE.
 
 #include "Model.h"
 
-Jade::Math::Vertex* Jade::Graphics::Model::LoadModel(std::string filename)
+void Jade::Graphics::Model::Load(std::string filename)
 {
 	Assimp::Importer importer;
 
@@ -36,15 +36,53 @@ Jade::Math::Vertex* Jade::Graphics::Model::LoadModel(std::string filename)
 	{
 		std::cout << "Assimp: Error - " << importer.GetErrorString() << std::endl;
 		
-		return nullptr;
+		std::cout << "errr" << std::endl;
+
+		return;
 	}
 
-	for(unsigned int i = 0; i < scene->mRootNode->mNumMeshes; i++)
+	// Iterates through each mesh and assigns them their respective vertices and indices.
+	for(unsigned int i = 0; i < scene->mNumMeshes; i++)
 	{
-		aiMesh* mesh = scene->mMeshes[scene->mRootNode->mMeshes[i]];
-	}
+		// Set current mesh for assimp importer.
+		aiMesh* aMesh = scene->mMeshes[i];
 
-	return nullptr;
+		unsigned int channels = aMesh->GetNumColorChannels();
+
+		std::vector<Math::Vertex> vertices;
+		std::vector<unsigned int> indices;
+
+		// Grab the vertex position and colors for the mesh.
+		for (unsigned int j = 0; j < aMesh->mNumVertices; j++)
+		{
+			aiVector3D* aPosition = &aMesh->mVertices[j];
+			//aiColor4D* aColor = aMesh->mColors[channels];
+
+			Math::Vector3 position(aPosition->x, aPosition->y, aPosition->z);
+			//Math::Color color(aColor->r, aColor->g, aColor->b, aColor->a);
+
+			Math::Vertex vertex
+			{
+				vertex.position = position,
+				vertex.color = Math::Color::Black,
+			};
+
+			vertices.push_back(vertex);
+		}
+
+		// Grab the indices for the mesh.
+		for (unsigned int j = 0; j < aMesh->mNumFaces; j++)
+		{
+			aiFace face = aMesh->mFaces[j];
+
+			for (unsigned int k = 0; k < face.mNumIndices; k++)
+			{
+				indices.push_back(face.mIndices[j]);
+			}
+		}
+
+		meshes.push_back(Mesh(device, vertices, indices));
+	}
 }
 
 void Jade::Graphics::Model::Draw()

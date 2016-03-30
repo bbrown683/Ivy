@@ -88,19 +88,19 @@
       <AdditionalIncludeDirectories>$(SolutionDir)/ThirdParty/glew/include/;$(SolutionDir)/ThirdParty/SDL/include/;$(SolutionDir)/ThirdParty/assimp/include/;$(SolutionDir)/ThirdParty/freeimage/include/;$(SolutionDir)/ThirdParty/hlslcc/include/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>sdl2main.lib;sdl2.lib;opengl32.lib;glew32.lib;d3d11.lib;d3dcompiler.lib;assimp.lib;freeimage.lib;libhlslcc.lib;gdi32.lib;user32.lib</AdditionalDependencies>
+      <AdditionalDependencies>sdl2main.lib;sdl2.lib;opengl32.lib;glew32s.lib;d3d11.lib;d3dcompiler.lib;assimp.lib;freeimage.lib;libhlslcc.lib;gdi32.lib;user32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/glew/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/SDL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;$(SolutionDir)/ThirdParty/freeimage/lib/$(PlatformTarget)/;$(SolutionDir)/ThirdParty/hlslcc/lib/$(PlatformTarget)/</AdditionalLibraryDirectories>
       <SubSystem>Console</SubSystem>
       <EntryPointSymbol>
       </EntryPointSymbol>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
-      <AdditionalOptions>/NODEFAULTLIB:MSVCRT %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/NODEFAULTLIB:MSVCRT.lib;/NODEFAULTLIB:LIBCMT.lib;</AdditionalOptions>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /f /s /y "$(ProjectDir)dxvertex.hlsl" "$(OutputPath)resources\shaders\"
-xcopy /f /s /y "$(ProjectDir)dxpixel.hlsl" "$(OutputPath)resources\shaders\"
+      <Command>xcopy /f /s /y "$(ProjectDir)vertex.hlsl" "$(OutputPath)resources\shaders\"
+xcopy /f /s /y "$(ProjectDir)pixel.hlsl" "$(OutputPath)resources\shaders\"
 xcopy /f /s /y "$(SolutionDir)ThirdParty\SDL\bin\$(PlatformTarget)\SDL2.dll" "$(OutputPath)"
-xcopy /f /s /y "$(SolutionDir)ThirdParty\glew\bin\$(PlatformTarget)\glew32.dll" "$(OutputPath)"
 xcopy /f /s /y "$(SolutionDir)ThirdParty\freeimage\bin\$(PlatformTarget)\FreeImage.dll" "$(OutputPath)"
 if $(PlatformTarget) == x86 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp32.dll" "$(OutputPath)" 
 if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp64.dll" "$(OutputPath)" </Command>
@@ -108,6 +108,7 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <FxCompile>
       <ShaderModel>5.0</ShaderModel>
       <EntryPointName>Main</EntryPointName>
+      <ObjectFileOutput>$(OutDir)resources/shaders/%(Filename).cso</ObjectFileOutput>
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -117,19 +118,19 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
       <AdditionalIncludeDirectories>$(SolutionDir)/ThirdParty/glew/include/;$(SolutionDir)/ThirdParty/SDL/include/;$(SolutionDir)/ThirdParty/assimp/include/;$(SolutionDir)/ThirdParty/freeimage/include/;$(SolutionDir)/ThirdParty/hlslcc/include/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>sdl2main.lib;sdl2.lib;opengl32.lib;glew32.lib;d3d11.lib;d3dcompiler.lib;assimp.lib;freeimage.lib;libhlslcc.lib;gdi32.lib;user32.lib</AdditionalDependencies>
+      <AdditionalDependencies>sdl2main.lib;sdl2.lib;opengl32.lib;glew32s.lib;d3d11.lib;d3dcompiler.lib;assimp.lib;freeimage.lib;libhlslcc.lib;gdi32.lib;user32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/glew/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/SDL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;$(SolutionDir)/ThirdParty/freeimage/lib/$(PlatformTarget)/;$(SolutionDir)/ThirdParty/hlslcc/lib/$(PlatformTarget)/</AdditionalLibraryDirectories>
       <SubSystem>Console</SubSystem>
       <EntryPointSymbol>
       </EntryPointSymbol>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
-      <AdditionalOptions>/NODEFAULTLIB:MSVCRT %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>/NODEFAULTLIB:MSVCRT.lib;/NODEFAULTLIB:LIBCMT.lib;</AdditionalOptions>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /f /s /y "$(ProjectDir)dxvertex.hlsl" "$(OutputPath)resources\shaders\"
-xcopy /f /s /y "$(ProjectDir)dxpixel.hlsl" "$(OutputPath)resources\shaders\"
+      <Command>xcopy /f /s /y "$(ProjectDir)vertex.hlsl" "$(OutputPath)resources\shaders\"
+xcopy /f /s /y "$(ProjectDir)pixel.hlsl" "$(OutputPath)resources\shaders\"
 xcopy /f /s /y "$(SolutionDir)ThirdParty\SDL\bin\$(PlatformTarget)\SDL2.dll" "$(OutputPath)"
-xcopy /f /s /y "$(SolutionDir)ThirdParty\glew\bin\$(PlatformTarget)\glew32.dll" "$(OutputPath)"
 xcopy /f /s /y "$(SolutionDir)ThirdParty\freeimage\bin\$(PlatformTarget)\FreeImage.dll" "$(OutputPath)"
 if $(PlatformTarget) == x86 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp32.dll" "$(OutputPath)" 
 if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp64.dll" "$(OutputPath)" </Command>
@@ -137,6 +138,7 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <FxCompile>
       <ShaderModel>5.0</ShaderModel>
       <EntryPointName>Main</EntryPointName>
+      <ObjectFileOutput>$(OutDir)resources/shaders/%(Filename).cso</ObjectFileOutput>
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -151,22 +153,20 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>sdl2main.lib;sdl2.lib;opengl32.lib;glew32.lib;d3d11.lib;d3dcompiler.lib;assimp.lib;freeimage.lib;libhlslcc.lib;gdi32.lib;user32.lib</AdditionalDependencies>
+      <AdditionalDependencies>sdl2main.lib;sdl2.lib;opengl32.lib;glew32s.lib;d3d11.lib;d3dcompiler.lib;assimp.lib;freeimage.lib;libhlslcc.lib;gdi32.lib;user32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/glew/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/SDL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;$(SolutionDir)/ThirdParty/freeimage/lib/$(PlatformTarget)/;$(SolutionDir)/ThirdParty/hlslcc/lib/$(PlatformTarget)/</AdditionalLibraryDirectories>
       <SubSystem>Windows</SubSystem>
       <EntryPointSymbol>
       </EntryPointSymbol>
-      <AdditionalOptions>
-      </AdditionalOptions>
+      <AdditionalOptions>/NODEFAULTLIB:LIBCMT.LIB</AdditionalOptions>
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /f /s /y "$(ProjectDir)dxvertex.hlsl" "$(OutputPath)resources\shaders\"
-xcopy /f /s /y "$(ProjectDir)dxpixel.hlsl" "$(OutputPath)resources\shaders\"
+      <Command>xcopy /f /s /y "$(ProjectDir)vertex.hlsl" "$(OutputPath)resources\shaders\"
+xcopy /f /s /y "$(ProjectDir)pixel.hlsl" "$(OutputPath)resources\shaders\"
 xcopy /f /s /y "$(SolutionDir)ThirdParty\SDL\bin\$(PlatformTarget)\SDL2.dll" "$(OutputPath)"
-xcopy /f /s /y "$(SolutionDir)ThirdParty\glew\bin\$(PlatformTarget)\glew32.dll" "$(OutputPath)"
 xcopy /f /s /y "$(SolutionDir)ThirdParty\freeimage\bin\$(PlatformTarget)\FreeImage.dll" "$(OutputPath)"
 if $(PlatformTarget) == x86 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp32.dll" "$(OutputPath)" 
 if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp64.dll" "$(OutputPath)" </Command>
@@ -174,6 +174,7 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <FxCompile>
       <ShaderModel>5.0</ShaderModel>
       <EntryPointName>Main</EntryPointName>
+      <ObjectFileOutput>$(OutDir)resources/shaders/%(Filename).cso</ObjectFileOutput>
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -188,22 +189,20 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>sdl2main.lib;sdl2.lib;opengl32.lib;glew32.lib;d3d11.lib;d3dcompiler.lib;assimp.lib;freeimage.lib;libhlslcc.lib;gdi32.lib;user32.lib</AdditionalDependencies>
+      <AdditionalDependencies>sdl2main.lib;sdl2.lib;opengl32.lib;glew32s.lib;d3d11.lib;d3dcompiler.lib;assimp.lib;freeimage.lib;libhlslcc.lib;gdi32.lib;user32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/glew/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/SDL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;$(SolutionDir)/ThirdParty/freeimage/lib/$(PlatformTarget)/;$(SolutionDir)/ThirdParty/hlslcc/lib/$(PlatformTarget)/</AdditionalLibraryDirectories>
       <SubSystem>Windows</SubSystem>
       <EntryPointSymbol>
       </EntryPointSymbol>
-      <AdditionalOptions>
-      </AdditionalOptions>
+      <AdditionalOptions>/NODEFAULTLIB:LIBCMT.LIB</AdditionalOptions>
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /f /s /y "$(ProjectDir)dxvertex.hlsl" "$(OutputPath)resources\shaders\"
-xcopy /f /s /y "$(ProjectDir)dxpixel.hlsl" "$(OutputPath)resources\shaders\"
+      <Command>xcopy /f /s /y "$(ProjectDir)vertex.hlsl" "$(OutputPath)resources\shaders\"
+xcopy /f /s /y "$(ProjectDir)pixel.hlsl" "$(OutputPath)resources\shaders\"
 xcopy /f /s /y "$(SolutionDir)ThirdParty\SDL\bin\$(PlatformTarget)\SDL2.dll" "$(OutputPath)"
-xcopy /f /s /y "$(SolutionDir)ThirdParty\glew\bin\$(PlatformTarget)\glew32.dll" "$(OutputPath)"
 xcopy /f /s /y "$(SolutionDir)ThirdParty\freeimage\bin\$(PlatformTarget)\FreeImage.dll" "$(OutputPath)"
 if $(PlatformTarget) == x86 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp32.dll" "$(OutputPath)" 
 if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp64.dll" "$(OutputPath)" </Command>
@@ -211,6 +210,7 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <FxCompile>
       <ShaderModel>5.0</ShaderModel>
       <EntryPointName>Main</EntryPointName>
+      <ObjectFileOutput>$(OutDir)resources/shaders/%(Filename).cso</ObjectFileOutput>
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -309,21 +309,13 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClInclude Include="Core\Utility.h" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="..\x64\Debug\resources\shaders\pixel.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
-    </FxCompile>
-    <FxCompile Include="..\x64\Debug\resources\shaders\vertex.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
-    </FxCompile>
-    <FxCompile Include="DXPixel.hlsl">
+    <FxCompile Include="pixel.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
     </FxCompile>
-    <FxCompile Include="DXVertex.hlsl">
+    <FxCompile Include="vertex.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>

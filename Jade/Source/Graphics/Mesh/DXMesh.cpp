@@ -115,7 +115,7 @@ void Jade::Graphics::DXMesh::Bind()
 				view = DirectX::XMMatrixLookAtLH(Eye, At, Up);
 
 				// Set our projection matrix.
-				projection = DirectX::XMMatrixPerspectiveFovLH(DirectX::XM_PIDIV2, device->window->GetAspectRatio(), 1.0f, 1000.0f);
+				projection = DirectX::XMMatrixPerspectiveFovLH(DirectX::XM_PIDIV2, device->window->GetAspectRatio(), 0.1f, 10000.0f);
 
 				bufferSuccess = true;
 			}

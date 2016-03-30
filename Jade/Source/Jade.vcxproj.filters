@@ -140,9 +140,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="DXPixel.hlsl" />
-    <FxCompile Include="DXVertex.hlsl" />
-    <FxCompile Include="..\x64\Debug\resources\shaders\vertex.hlsl" />
-    <FxCompile Include="..\x64\Debug\resources\shaders\pixel.hlsl" />
+    <FxCompile Include="vertex.hlsl" />
+    <FxCompile Include="pixel.hlsl" />
   </ItemGroup>
 </Project>

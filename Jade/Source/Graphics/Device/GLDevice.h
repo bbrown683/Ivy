@@ -31,6 +31,8 @@ SOFTWARE.
 #define GLX
 #endif
 
+// We will link glew statically.
+#define GLEW_STATIC
 #include "glew/glew.h"
 #include "glew/wglew.h"
 #include <gl/GL.h>

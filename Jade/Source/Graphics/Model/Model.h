@@ -42,6 +42,9 @@ namespace Jade
 		{
 		private:
 
+			// Need the device for DirectX to create our mesh.
+			std::shared_ptr<Device> device;
+
 			// Mesh(s) used to draw our shape.
 			std::vector<Mesh> meshes;
 
@@ -50,12 +53,12 @@ namespace Jade
 
 		public:
 
-			Model(std::string filename)
+			Model(std::shared_ptr<Device> device)
 			{
-				vertex = LoadModel(filename);
+				this->device = device;
 			}
 
-			Math::Vertex* LoadModel(std::string filename);
+			void Load(std::string filename);
 			void Draw();
 		};
 	}

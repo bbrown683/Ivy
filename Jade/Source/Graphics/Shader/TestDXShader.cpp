@@ -174,7 +174,7 @@ bool Jade::Graphics::TestDXShader::Create(ShaderType type)
 
 bool Jade::Graphics::TestDXShader::Release()
 {
-	std::cout << "Shader cleaning up..." << std::endl;
+	std::cout << "Shaders cleaning up..." << std::endl;
 
 	return true;
 }

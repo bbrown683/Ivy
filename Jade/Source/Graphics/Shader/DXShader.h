@@ -84,7 +84,7 @@ namespace Jade
 						// Output compilation errors to console.
 						std::cout << "ERROR: Failed to read compiled shader bytecode..." << std::endl;
 
-						Release();
+						DXShader::Release();
 						exit(EXIT_FAILURE);
 					}
 
@@ -94,7 +94,7 @@ namespace Jade
 
 			~DXShader()
 			{
-				Release();
+				DXShader::Release();
 			}
 
 			//bool Compile(std::string filename, ShaderType type) override;
