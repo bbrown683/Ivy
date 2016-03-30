@@ -51,6 +51,11 @@ namespace Jade
 			static const Color White;
 			static const Color Yellow;
 
+			Color(): red(0), green(0), blue(0), alpha(1)
+			{
+				
+			}
+
 			Color(float red, float green, float blue, float alpha)
 			{			
 				this->red		= red;

@@ -131,8 +131,6 @@ bool Jade::Graphics::DXDevice::Create()
 
 bool Jade::Graphics::DXDevice::Release()
 {
-	// COM objects are disposed automatically through ComPtr.
-
 	std::cout << "DirectX device was disposed of successfully..." << std::endl;
 
 	return true;
@@ -206,6 +204,7 @@ const ComPtr<ID3D11DepthStencilView>& Jade::Graphics::DXDevice::GetID3D11DepthSt
 	return m_pDepthStencilView;
 }
 
+/*
 const ComPtr<ID3D11InputLayout>& Jade::Graphics::DXDevice::GetID3D11InputLayout() const
 {
 	return m_pInputLayout;
@@ -225,3 +224,4 @@ const ComPtr<ID3D11Buffer>& Jade::Graphics::DXDevice::GetID3D11ConstantBuffer() 
 {
 	return m_pConstantBuffer;
 }
+*/

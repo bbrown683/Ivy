@@ -147,7 +147,7 @@ bool Jade::Graphics::DXShader::Create(ShaderType type)
 			};
 
 			// Create the input layout.
-			long inputResult = device->m_pDevice->CreateInputLayout(inputLayout, ARRAYSIZE(inputLayout), m_pShaderBlob->GetBufferPointer(), m_pShaderBlob->GetBufferSize(), device->m_pInputLayout.GetAddressOf());
+			long inputResult = device->m_pDevice->CreateInputLayout(inputLayout, ARRAYSIZE(inputLayout), m_pShaderBlob->GetBufferPointer(), m_pShaderBlob->GetBufferSize(), m_pInputLayout.GetAddressOf());
 
 			if(inputResult < 0)
 			{
@@ -161,7 +161,7 @@ bool Jade::Graphics::DXShader::Create(ShaderType type)
 			}
 
 			// Set the input layout
-			device->m_pImmediateContext->IASetInputLayout(device->m_pInputLayout.Get());
+			device->m_pImmediateContext->IASetInputLayout(m_pInputLayout.Get());
 			device->m_pImmediateContext->VSSetShader(m_pVertexShader.Get(), nullptr, 0);
 
 			std::cout << "Vertex shader was created successfully..." << std::endl;
@@ -174,37 +174,13 @@ bool Jade::Graphics::DXShader::Create(ShaderType type)
 
 bool Jade::Graphics::DXShader::Release()
 {
-	// Release only what we allocated.
-	//if(m_pComputeShader)
-	//	m_pComputeShader->Release();
-	//if(m_pDomainShader)		
-	//	m_pDomainShader->Release();
-	//if(m_pGeometryShader)	
-	//	m_pGeometryShader->Release();
-	//if(m_pHullShader)		
-	//	m_pHullShader->Release();
-	//if(m_pPixelShader)		
-	//	m_pPixelShader->Release();
-	//if(m_pVertexShader)		
-	//	m_pVertexShader->Release();
-
-	//m_pShaderBlob = nullptr;
-
-	//m_pComputeShader = nullptr;
-	//m_pDomainShader = nullptr;
-	//m_pGeometryShader = nullptr;
-	//m_pHullShader = nullptr;
-	//m_pPixelShader = nullptr;
-	//m_pVertexShader = nullptr;
-
-	//delete m_pShaderBlob;
-
-	//delete m_pComputeShader;
-	//delete m_pDomainShader;
-	//delete m_pGeometryShader;
-	//delete m_pHullShader;
-	//delete m_pPixelShader;
-	//delete m_pVertexShader;
+	m_pShaderBlob = nullptr;
+	m_pComputeShader = nullptr;
+	m_pDomainShader = nullptr;
+	m_pGeometryShader = nullptr;
+	m_pHullShader = nullptr;
+	m_pPixelShader = nullptr;
+	m_pVertexShader = nullptr;
 
 	std::cout << "Shader cleaning up..." << std::endl;
 

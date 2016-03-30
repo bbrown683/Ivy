@@ -43,7 +43,7 @@ namespace Jade
 			Pixel,
 			// Vertex Shader.
 			Vertex,
-			// Tesselation Shader (OpenGL), also known as a
+			// Tesselation Control Shader (OpenGL), also known as a
 			// Hull Shader (DirectX).
 			Tesselation
 		};

@@ -48,6 +48,8 @@ namespace Jade
 			// Holds our shader compilation information.
 			ComPtr<ID3DBlob>				m_pShaderBlob		= nullptr;
 
+			ComPtr<ID3D11InputLayout>		m_pInputLayout		= nullptr;
+
 			ComPtr<ID3D11ComputeShader>		m_pComputeShader	= nullptr;
 			ComPtr<ID3D11DomainShader>		m_pDomainShader		= nullptr;
 			ComPtr<ID3D11GeometryShader>	m_pGeometryShader	= nullptr;

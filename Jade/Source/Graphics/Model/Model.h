@@ -48,9 +48,6 @@ namespace Jade
 			// Mesh(s) used to draw our shape.
 			std::vector<Mesh> meshes;
 
-			// Each model will have an array of vertices.
-			Math::Vertex* vertex;
-
 		public:
 
 			Model(std::shared_ptr<Device> device)
@@ -58,6 +55,7 @@ namespace Jade
 				this->device = device;
 			}
 
+			std::vector<Mesh> GetMeshes() const;
 			void Load(std::string filename);
 			void Draw();
 		};

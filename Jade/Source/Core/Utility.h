@@ -34,7 +34,11 @@ SOFTWARE.
 // Common data structures.
 #include <vector>
 #include <list>
+#include <map>
 #include <unordered_map>
+
+// Multithreading.
+#include <thread>
 
 // Pointer handling
 #include <memory>

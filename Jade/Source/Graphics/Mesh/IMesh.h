@@ -30,13 +30,8 @@ namespace Jade
 	{
 		struct IMesh
 		{
-		private:
-
 			virtual void Bind() = 0;
 			virtual void Unbind() = 0;
-
-		public:
-
 			virtual void Draw() = 0;
 		};
 	}

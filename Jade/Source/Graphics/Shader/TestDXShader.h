@@ -43,7 +43,7 @@ namespace Jade
 		private:
 
 			std::shared_ptr<DXDevice> device;
-			std::unordered_map<std::string, ShaderType> shaders;
+			std::map<std::string, ShaderType> shaders;
 
 			// Holds our shader compilation information.
 			ComPtr<ID3DBlob>				m_pComputeShaderBlob = nullptr;
@@ -52,6 +52,9 @@ namespace Jade
 			ComPtr<ID3DBlob>				m_pHullShaderBlob = nullptr;
 			ComPtr<ID3DBlob>				m_pPixelShaderBlob = nullptr;
 			ComPtr<ID3DBlob>				m_pVertexShaderBlob = nullptr;
+
+			// Contains the input layout for the vertex buffer.
+			ComPtr<ID3D11InputLayout>		m_pInputLayout = nullptr;
 
 			// Different shader objects.
 			ComPtr<ID3D11ComputeShader>		m_pComputeShader = nullptr;
@@ -67,7 +70,7 @@ namespace Jade
 
 		public:
 
-			TestDXShader(std::shared_ptr<DXDevice> device, std::unordered_map<std::string, ShaderType> shaders)
+			TestDXShader(std::shared_ptr<DXDevice> device, std::map<std::string, ShaderType> shaders)
 			{
 				this->device = device;
 				this->shaders = shaders;

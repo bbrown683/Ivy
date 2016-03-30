@@ -65,16 +65,7 @@ namespace Jade
 			ComPtr<ID3D11Texture2D> m_pDepthStencil = nullptr;
 			ComPtr<ID3D11DepthStencilView> m_pDepthStencilView = nullptr;
 
-			// Used in DXShader class.
-			ComPtr<ID3D11InputLayout> m_pInputLayout = nullptr;
-
-			// Used in DXMesh class.
-			ComPtr<ID3D11Buffer> m_pVertexBuffer = nullptr;
-			ComPtr<ID3D11Buffer> m_pConstantBuffer = nullptr;
-			ComPtr<ID3D11Buffer> m_pIndexBuffer = nullptr;
-
 			bool Create() override;
-
 			bool Release() override;
 
 		public:
@@ -88,10 +79,10 @@ namespace Jade
 				this->specification = specification;
 
 				// Create our device.
-				if (!Create())
+				if (!DXDevice::Create())
 				{
 					// Dispose of any allocated memory and close the window.
-					Release();
+					DXDevice::Release();
 					window->Close();
 				}
 			}
@@ -99,7 +90,7 @@ namespace Jade
 			~DXDevice()
 			{
 				// Cleanup resources.
-				Release();
+				DXDevice::Release();
 			}
 
 			// Main functions inherited by Device class.
@@ -119,9 +110,6 @@ namespace Jade
 			const ComPtr<ID3D11Texture2D>& GetID3D11DepthStencil() const;
 			const ComPtr<ID3D11DepthStencilView>& GetID3D11DepthStencilView() const;
 			const ComPtr<ID3D11InputLayout>& GetID3D11InputLayout() const;
-			const ComPtr<ID3D11Buffer>& GetID3D11VertexBuffer() const;
-			const ComPtr<ID3D11Buffer>& GetID3D11IndexBuffer() const;
-			const ComPtr<ID3D11Buffer>& GetID3D11ConstantBuffer() const;
 		};
 	}
 }

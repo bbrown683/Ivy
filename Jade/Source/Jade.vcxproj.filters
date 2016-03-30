@@ -143,4 +143,7 @@
     <FxCompile Include="vertex.hlsl" />
     <FxCompile Include="pixel.hlsl" />
   </ItemGroup>
+  <ItemGroup>
+    <Object Include="teapot.obj" />
+  </ItemGroup>
 </Project>

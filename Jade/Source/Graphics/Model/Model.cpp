@@ -26,11 +26,19 @@ SOFTWARE.
 
 #include "Model.h"
 
+std::vector<Jade::Graphics::Mesh> Jade::Graphics::Model::GetMeshes() const
+{
+	return meshes;
+}
+
 void Jade::Graphics::Model::Load(std::string filename)
 {
 	Assimp::Importer importer;
 
-	const aiScene* scene = importer.ReadFile(filename, aiProcess_Triangulate);
+	const aiScene* scene = importer.ReadFile(filename, aiProcess_Triangulate | 
+		aiProcess_JoinIdenticalVertices | 
+		aiProcess_OptimizeMeshes | 
+		aiProcess_SplitLargeMeshes);
 
 	if (!scene || scene->mFlags == AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
 	{
@@ -42,10 +50,12 @@ void Jade::Graphics::Model::Load(std::string filename)
 	}
 
 	// Iterates through each mesh and assigns them their respective vertices and indices.
-	for(unsigned int i = 0; i < scene->mNumMeshes; i++)
+	for(unsigned int i = 0; i < scene->mNumMeshes; ++i)
 	{
+		std::cout << "Mesh # : " << i << std::endl;
+
 		// Set current mesh for assimp importer.
-		aiMesh* aMesh = scene->mMeshes[i];
+		const aiMesh* aMesh = scene->mMeshes[i];
 
 		unsigned int channels = aMesh->GetNumColorChannels();
 
@@ -55,17 +65,22 @@ void Jade::Graphics::Model::Load(std::string filename)
 		// Grab the vertex position and colors for the mesh.
 		for (unsigned int j = 0; j < aMesh->mNumVertices; j++)
 		{
-			aiVector3D* aPosition = &aMesh->mVertices[j];
-			//aiColor4D* aColor = aMesh->mColors[channels];
+			const aiVector3D* aPosition = &aMesh->mVertices[j];	
+			//const aiColor4D aColor = aMesh->mColors[0][i];
+
+			//std::cout << aPosition->x << "," << aPosition->y << "," << aPosition->z << std::endl;
 
 			Math::Vector3 position(aPosition->x, aPosition->y, aPosition->z);
-			//Math::Color color(aColor->r, aColor->g, aColor->b, aColor->a);
+			Math::Color color(1.0f, 1.0f, 1.0f, 1.0f);
 
-			Math::Vertex vertex
-			{
-				vertex.position = position,
-				vertex.color = Math::Color::Black,
-			};
+			//if (aMesh->HasVertexColors(0))
+				//color = Math::Color(aColor.r, aColor.g, aColor.b, aColor.a);
+			//else
+				//color = Math::Color::White;
+
+			Math::Vertex vertex;
+			vertex.position = position;
+			vertex.color = color;
 
 			vertices.push_back(vertex);
 		}
@@ -73,12 +88,13 @@ void Jade::Graphics::Model::Load(std::string filename)
 		// Grab the indices for the mesh.
 		for (unsigned int j = 0; j < aMesh->mNumFaces; j++)
 		{
-			aiFace face = aMesh->mFaces[j];
+			const struct aiFace* face = &aMesh->mFaces[j];
 
-			for (unsigned int k = 0; k < face.mNumIndices; k++)
-			{
-				indices.push_back(face.mIndices[j]);
-			}
+			if (face->mNumIndices == 3)
+				for (unsigned int k = 0; k < face->mNumIndices; k++)
+					indices.push_back(face->mIndices[k]);
+			else
+				std::cout << "ERROR: Faces are not triangulated..." << std::endl;
 		}
 
 		meshes.push_back(Mesh(device, vertices, indices));
@@ -89,7 +105,5 @@ void Jade::Graphics::Model::Draw()
 {
 	// Loop through and draw each meshes.
 	for(unsigned int i = 0; i < meshes.size(); i++)
-	{
 		meshes[i].Draw();
-	}
 }

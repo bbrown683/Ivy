@@ -147,7 +147,7 @@ bool Jade::Graphics::TestDXShader::Create(ShaderType type)
 			};
 
 			// Create the input layout.
-			long inputResult = device->m_pDevice->CreateInputLayout(inputLayout, ARRAYSIZE(inputLayout), m_pVertexShaderBlob->GetBufferPointer(), m_pVertexShaderBlob->GetBufferSize(), device->m_pInputLayout.GetAddressOf());
+			long inputResult = device->m_pDevice->CreateInputLayout(inputLayout, ARRAYSIZE(inputLayout), m_pVertexShaderBlob->GetBufferPointer(), m_pVertexShaderBlob->GetBufferSize(), m_pInputLayout.GetAddressOf());
 
 			if (inputResult < 0)
 			{
@@ -161,7 +161,7 @@ bool Jade::Graphics::TestDXShader::Create(ShaderType type)
 			}
 
 			// Set the input layout
-			device->m_pImmediateContext->IASetInputLayout(device->m_pInputLayout.Get());
+			device->m_pImmediateContext->IASetInputLayout(m_pInputLayout.Get());
 			device->m_pImmediateContext->VSSetShader(m_pVertexShader.Get(), nullptr, 0);
 
 			std::cout << "Vertex shader was created successfully..." << std::endl;

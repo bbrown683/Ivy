@@ -30,6 +30,7 @@ SOFTWARE.
 #include "Core/Utility.h"
 #include "Graphics/Device/DXDevice.h"
 #include "Graphics/Mesh/IMesh.h"
+#include "Math/Math.h"
 #include "Math/Vertex.h"
 #include "Math/Matrix.h"
 
@@ -59,8 +60,10 @@ namespace Jade
 			DirectX::XMMATRIX view;
 			DirectX::XMMATRIX projection;
 
-			void Bind() override;
-			void Unbind() override;
+			// Buffers.
+			ComPtr<ID3D11Buffer> m_pVertexBuffer;
+			ComPtr<ID3D11Buffer> m_pConstantBuffer;
+			ComPtr<ID3D11Buffer> m_pIndexBuffer;
 
 		public:
 
@@ -78,6 +81,8 @@ namespace Jade
 				Unbind();
 			}
 
+			void Bind() override;
+			void Unbind() override;
 			void Draw() override;
 		};
 	}

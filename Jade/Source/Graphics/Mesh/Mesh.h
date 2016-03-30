@@ -60,6 +60,16 @@ namespace Jade
 			{
 				mesh->Draw();
 			}
+
+			void Bind() const
+			{
+				mesh->Bind();
+			}
+
+			void Unbind() const
+			{
+				mesh->Unbind();
+			}
 		};
 	}
 }

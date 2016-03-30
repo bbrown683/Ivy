@@ -27,7 +27,6 @@ SOFTWARE.
 #include "System/Window/Window.h"
 #include "Graphics/Device/Device.h"
 #include "Graphics/Shader/Shader.h"
-#include "Graphics/Mesh/Mesh.h"
 #include "Graphics/Model/Model.h"
 
 using namespace Jade::Core;
@@ -43,64 +42,27 @@ int main(int argc, char* argv[])
 	// Creates a graphics device.
 	std::shared_ptr<Device> device = std::make_shared<Device>(window, GraphicsAPI::DirectX);
 
-	// Key value pair for shader filename and what type they are.
-	std::unordered_map<std::string, ShaderType> shaders =
+	// 
+	std::map<std::string, ShaderType> shaders =
 	{
 		{ ".\\resources\\shaders\\vertex.cso", ShaderType::Vertex },
 		{ ".\\resources\\shaders\\pixel.cso", ShaderType::Pixel },
 	};
 
+	// Create our shaders.
 	std::shared_ptr<Shader>	shader = std::make_shared<Shader>(device, shaders);
 
-	// Create some vertices for our triangle.
-	
-	std::vector<Vertex> vertices =
-	{
-		{ Vector3(-1.0f, 1.0f, -1.0f), Color::Red },
-		{ Vector3(1.0f, 1.0f, -1.0f), Color::Green },
-		{ Vector3(1.0f, 1.0f, 1.0f), Color::Blue },
-		{ Vector3(-1.0f, 1.0f, 1.0f), Color::White },
-		{ Vector3(-1.0f, -1.0f, -1.0f), Color::Black },
-		{ Vector3(1.0f, -1.0f, -1.0f), Color::Purple },
-		{ Vector3(1.0f, -1.0f, 1.0f), Color::Yellow },
-		{ Vector3(-1.0f, -1.0f, 1.0f), Color::Magenta },
-	};
-
-	std::vector<unsigned int> indices =
-	{
-		3,1,0,
-		2,1,3,
-
-		0,5,4,
-		1,5,0,
-
-		3,4,7,
-		0,4,3,
-
-		1,6,5,
-		2,6,1,
-
-		2,7,6,
-		3,7,2,
-
-		6,4,5,
-		7,4,6,
-	};
-
-	//std::shared_ptr<Model> model = std::make_shared<Model>(device);
-	//model->Load(".\\resources\\models\\teapot.obj");
-
-	// Creates and binds the vertex buffer for drawing the triangular mesh.
-	std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>(device, vertices, indices);
+	// Create and load the model.
+	std::shared_ptr<Model> model = std::make_shared<Model>(device);
+	model->Load(".\\resources\\models\\teapot.obj");
 
 	while (window->IsOpen())
 	{
 		// Rendering
 		device->Clear(Color::CornflowerBlue);
 
-		// Draw the vertices.
-		mesh->Draw();
-		//model->Draw();
+		// Draw the model.
+		model->Draw();
 
 		// Gets the keys pressed and prints their enumerication value that is stored as an integer.
 		std::vector<Key> keysPressed = window->GetInput().keyboard.GetKeysPressed();
