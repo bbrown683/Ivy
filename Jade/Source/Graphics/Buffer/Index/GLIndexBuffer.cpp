@@ -22,30 +22,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <Graphics/Buffer/VertexBuffer.h>
+#include "GLIndexBuffer.h"
 
-std::shared_ptr<Jade::Graphics::IBuffer> Jade::Graphics::VertexBuffer::CreateBuffer(std::shared_ptr<Device> device, std::vector<Math::Vertex> vertices, Usage usage)
+bool Jade::Graphics::GLIndexBuffer::Bind()
 {
-	switch (device->GetGraphicsAPI())
-	{
-	case GraphicsAPI::DirectX:
-		return std::make_shared<DXVertexBuffer>(std::dynamic_pointer_cast<DXDevice>(device->GetIDevice()), vertices, usage);
-	case GraphicsAPI::OpenGL:
-		// OpenGL uses a state machine so we dont need to pass a device.
-		return std::make_shared<GLVertexBuffer>(vertices, usage);
-	case GraphicsAPI::Vulkan:
-		break;
-	}
-
-	return nullptr;
+	return false;
 }
 
-bool Jade::Graphics::VertexBuffer::Bind()
+bool Jade::Graphics::GLIndexBuffer::Unbind()
 {
-	return vertexBuffer->Bind();
-}
-
-bool Jade::Graphics::VertexBuffer::Unbind()
-{
-	return vertexBuffer->Unbind();
+	return false;
 }

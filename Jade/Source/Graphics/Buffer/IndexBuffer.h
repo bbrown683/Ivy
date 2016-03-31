@@ -25,6 +25,8 @@ SOFTWARE.
 */
 
 #include <Graphics/Buffer/IBuffer.h>
+#include <Graphics/Buffer/Index/DXIndexBuffer.h>
+#include <Graphics/Buffer/Index/GLIndexBuffer.h>
 #include <Graphics/Buffer/Usage.h>
 #include <Graphics/Device/Device.h>
 
@@ -32,21 +34,22 @@ namespace Jade
 {
 	namespace Graphics
 	{
-		class IndexBuffer : public IBuffer
+		class IndexBuffer
 		{
-			std::shared_ptr<Device>	device;
-			Usage usage;
+		private:
+
+			std::shared_ptr<IBuffer> indexBuffer;
+			std::shared_ptr<IBuffer> CreateIndexBuffer(std::shared_ptr<Device> device, std::vector<unsigned int> indices, Usage usage);
 
 		public:
 
-			IndexBuffer(std::shared_ptr<Device> device, Usage usage)
+			IndexBuffer(std::shared_ptr<Device> device, std::vector<unsigned int> indices, Usage usage)
 			{
-				this->device = device;
-				this->usage = usage;
+				indexBuffer = CreateIndexBuffer(device, indices, usage);
 			}
 
-			bool Bind() override;
-			bool Unbind() override;
+			bool Bind();
+			bool Unbind();
 		};
 	}
 }

@@ -6,11 +6,8 @@ namespace Jade
 	{
 		enum class Usage
 		{
-			None,
-			ReadOnly,
-			WriteOnly,
+			Default,
 			Dynamic,
-			Staging, 
 		};
 	}
 }

@@ -24,8 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <unordered_map>
-
+#include <Core/Utility.h>
 #include <Core/Key.h>
 #include <Core/InputState.h>
 
@@ -36,7 +35,7 @@ namespace Jade
 		class Keyboard
 		{
 			// Each update will update the key or button states.
-			std::unordered_map<Key, InputState> keyState;
+			std::map<Key, InputState> keyState;
 
 		public:
 

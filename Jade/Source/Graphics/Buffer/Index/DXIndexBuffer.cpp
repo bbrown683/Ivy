@@ -22,30 +22,37 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <Graphics/Buffer/VertexBuffer.h>
+#include "DXIndexBuffer.h"
 
-std::shared_ptr<Jade::Graphics::IBuffer> Jade::Graphics::VertexBuffer::CreateBuffer(std::shared_ptr<Device> device, std::vector<Math::Vertex> vertices, Usage usage)
-{
-	switch (device->GetGraphicsAPI())
-	{
-	case GraphicsAPI::DirectX:
-		return std::make_shared<DXVertexBuffer>(std::dynamic_pointer_cast<DXDevice>(device->GetIDevice()), vertices, usage);
-	case GraphicsAPI::OpenGL:
-		// OpenGL uses a state machine so we dont need to pass a device.
-		return std::make_shared<GLVertexBuffer>(vertices, usage);
-	case GraphicsAPI::Vulkan:
-		break;
-	}
+bool Jade::Graphics::DXIndexBuffer::Bind()
+{	
+	D3D11_BUFFER_DESC desc;
+	ZeroMemory(&desc, sizeof(desc));
+	desc.Usage = D3D11_USAGE_DEFAULT;
+	desc.ByteWidth = static_cast<unsigned int>(sizeof(unsigned int) * indices.size());
+	desc.BindFlags = D3D11_BIND_INDEX_BUFFER;
+	desc.CPUAccessFlags = 0;
 
-	return nullptr;
+	D3D11_SUBRESOURCE_DATA InitData;
+	ZeroMemory(&InitData, sizeof(InitData));
+	
+	InitData.pSysMem = indices.data();
+
+	// Create index buffer.
+	long hr = device->m_pDevice->CreateBuffer(&desc, &InitData, m_pIndexBuffer.GetAddressOf());
+
+	if (hr < 0)
+		return false;
+
+	// Assign index buffer.
+	device->m_pImmediateContext->IASetIndexBuffer(m_pIndexBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);
+
+	return true;
 }
 
-bool Jade::Graphics::VertexBuffer::Bind()
+bool Jade::Graphics::DXIndexBuffer::Unbind()
 {
-	return vertexBuffer->Bind();
-}
+	device->m_pImmediateContext->IASetIndexBuffer(nullptr, DXGI_FORMAT_R32_UINT, 0);
 
-bool Jade::Graphics::VertexBuffer::Unbind()
-{
-	return vertexBuffer->Unbind();
+	return true;
 }

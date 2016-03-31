@@ -61,6 +61,9 @@ void Jade::Graphics::DXMesh::Bind()
 		// Set the vertices buffer.
 		device->m_pImmediateContext->IASetVertexBuffers(0, 1, m_pVertexBuffer.GetAddressOf(), &stride, &offset);
 
+		// Set the primitive topology.
+		device->m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
 		// Set up the index buffer now.
 		desc.Usage = D3D11_USAGE_DEFAULT;
 		desc.ByteWidth = static_cast<unsigned int>(sizeof(unsigned int) * indices.size());
@@ -86,7 +89,7 @@ void Jade::Graphics::DXMesh::Bind()
 			device->m_pImmediateContext->IASetIndexBuffer(m_pIndexBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);
 
 			// Set the primitive topology.
-			device->m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+			//device->m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 			// Create the constant buffer
 			desc.Usage = D3D11_USAGE_DEFAULT;
@@ -109,7 +112,7 @@ void Jade::Graphics::DXMesh::Bind()
 				space.world = DirectX::XMMatrixIdentity();
 
 				// Initialize the view matrix
-				DirectX::XMVECTOR Eye = DirectX::XMVectorSet(0.0f, 1.0f, -5.0f, 0.0f);
+				DirectX::XMVECTOR Eye = DirectX::XMVectorSet(0.0f, 1.0f, -3.0f, 0.0f);
 				DirectX::XMVECTOR At = DirectX::XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
 				DirectX::XMVECTOR Up = DirectX::XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
 				view = DirectX::XMMatrixLookAtLH(Eye, At, Up);

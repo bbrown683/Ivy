@@ -11,6 +11,8 @@ namespace Jade
 		{
 			Vector3 position;
 			Color color;
+			// Vector3 normal;
+			// Texture texture;
 		};
 	}
 }

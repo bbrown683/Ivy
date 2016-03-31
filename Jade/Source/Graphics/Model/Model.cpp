@@ -50,7 +50,7 @@ void Jade::Graphics::Model::Load(std::string filename)
 	}
 
 	// Iterates through each mesh and assigns them their respective vertices and indices.
-	for(unsigned int i = 0; i < scene->mNumMeshes; ++i)
+	for(unsigned int i = 0; i < scene->mNumMeshes; i++)
 	{
 		std::cout << "Mesh # : " << i << std::endl;
 

@@ -200,6 +200,51 @@ Jade::Core::Key Jade::System::NativeWindow::ConvertKeycode(SDL_Keycode keycode)
 		return Core::Key::Enter;
 	case SDLK_ESCAPE:
 		return Core::Key::Escape;
+	case SDLK_HOME:
+		return Core::Key::Home;
+	case SDLK_INSERT:
+		return Core::Key::Insert;
+	case SDLK_PAGEUP:
+		return Core::Key::PageUp;
+	case SDLK_PAGEDOWN:
+		return Core::Key::PageDown;
+	case SDLK_LSHIFT:
+	case SDLK_RSHIFT:
+		return Core::Key::Shift;
+	case SDLK_SPACE:
+		return Core::Key::Space;
+	case SDLK_TAB:
+		return Core::Key::Tab;
+	case SDLK_DOWN:
+		return Core::Key::Down;
+	case SDLK_LEFT:
+		return Core::Key::Left;
+	case SDLK_RIGHT:
+		return Core::Key::Right;
+	case SDLK_UP:
+		return Core::Key::Up;
+	case SDLK_PLUS:
+		return Core::Key::Plus;
+	case SDLK_PERIOD:
+		return Core::Key::Peroid;
+	case SDLK_SLASH:
+		return Core::Key::Slash;
+	case SDLK_ASTERISK:
+		return Core::Key::Asterisk;
+	case SDLK_MINUS:
+		return Core::Key::Dash;
+	case SDLK_LEFTBRACKET:
+		return Core::Key::LeftBracket;
+	case SDLK_RIGHTBRACKET:
+		return Core::Key::RightBracket;
+	case SDLK_LEFTPAREN:
+		return Core::Key::LeftParenthesis;
+	case SDLK_RIGHTPAREN:
+		return Core::Key::RightParenthesis;
+	case SDLK_QUOTE:
+		return Core::Key::Apostrophe;
+	case SDLK_QUOTEDBL:
+		return Core::Key::Quote;
 	default:
 		return Core::Key::Unknown;
 	}

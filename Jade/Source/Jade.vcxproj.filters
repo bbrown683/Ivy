@@ -42,9 +42,14 @@
     <ClCompile Include="Core\Keyboard.cpp" />
     <ClCompile Include="Graphics\Buffer\IndexBuffer.cpp" />
     <ClCompile Include="Graphics\Buffer\VertexBuffer.cpp" />
-    <ClCompile Include="Graphics\Buffer\DXVertexBuffer.cpp" />
     <ClCompile Include="Core\Utility.cpp" />
     <ClCompile Include="Graphics\Shader\TestDXShader.cpp" />
+    <ClCompile Include="Graphics\Buffer\DXConstantBuffer.cpp" />
+    <ClCompile Include="Graphics\Buffer\Vertex\DXVertexBuffer.cpp" />
+    <ClCompile Include="Graphics\Buffer\Vertex\GLVertexBuffer.cpp" />
+    <ClCompile Include="Graphics\Buffer\Index\DXIndexBuffer.cpp" />
+    <ClCompile Include="Graphics\Buffer\Index\GLIndexBuffer.cpp" />
+    <ClCompile Include="System\Thread.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\Vector4.h">
@@ -116,8 +121,13 @@
     <ClInclude Include="Graphics\Buffer\VertexBuffer.h" />
     <ClInclude Include="Graphics\Buffer\IndexBuffer.h" />
     <ClInclude Include="Core\Result.h" />
-    <ClInclude Include="Graphics\Buffer\DXVertexBuffer.h" />
     <ClInclude Include="Graphics\Shader\TestDXShader.h" />
+    <ClInclude Include="Graphics\Buffer\DXConstantBuffer.h" />
+    <ClInclude Include="Graphics\Buffer\Vertex\DXVertexBuffer.h" />
+    <ClInclude Include="Graphics\Buffer\Vertex\GLVertexBuffer.h" />
+    <ClInclude Include="Graphics\Buffer\Index\DXIndexBuffer.h" />
+    <ClInclude Include="Graphics\Buffer\Index\GLIndexBuffer.h" />
+    <ClInclude Include="System\Thread.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">
@@ -144,6 +154,6 @@
     <FxCompile Include="pixel.hlsl" />
   </ItemGroup>
   <ItemGroup>
-    <Object Include="teapot.obj" />
+    <None Include="teapot.obj" />
   </ItemGroup>
 </Project>

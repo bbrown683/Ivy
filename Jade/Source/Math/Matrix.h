@@ -26,9 +26,9 @@ SOFTWARE.
 
 #include <iostream>
 
-#include "Core/Utility.h"
-#include "Math/Math.h"
-#include "Math/Vector3.h"
+#include <Core/Utility.h>
+#include <Math/Math.h>
+#include <Math/Vector3.h>
 
 namespace Jade
 {
@@ -116,22 +116,39 @@ namespace Jade
 				values[3][3] = m33;
 			}
 
+			//! Adds two matrices and returns a matrix as a result.
 			Matrix Add(Matrix other) const;
+			//! Returns a matrix with the camera vectors.
 			Matrix CreateLookAt(Vector3 eye, Vector3 at, Vector3 up);
+			//! Returns a matrix that is of an Orthographic view.
 			Matrix CreateOrthographicView(float fieldOfView, float aspectRatio, float nearPlaneDistance, float farPlaneDistance);
+			//! Returns a matrix that is of a Perspective view.
 			Matrix CreatePerspectiveView(float fieldOfView, float aspectRatio, float nearPlaneDistance, float farPlaneDistance);
-			// Returns a reference o the raw data contained within the matrix.
+			//! Returns a reference to the raw data contained within the matrix.
 			float(&Data())[4][4];
+			//! Returns the determinant of the matrix.
 			float Determinant();
+			//! Divides two matrices and returns a matrix as a result.
 			Matrix Divide(Matrix other) const;
+			//! Returns a matrix that is the inverse.
+			Matrix Inverse();
+			//! Multiplies two matrices and returns a matrix as a result.
 			Matrix Multiply(Matrix other) const;
+			//! Returns a matrix with the values negated.
 			Matrix Negate();
+			//! Rotates the matrix along the x-axis by a specified amount in radians.
 			Matrix RotateAlongX(float radians) const;
+			//! Rotates the matrix along the y - axis by a specified amount in radians.
 			Matrix RotateAlongY(float radians) const;
+			//! Rotates the matrix along the z - axis by a specified amount in radians.
 			Matrix RotateAlongZ(float radians) const;
+			//! Subtracts two matrices and returns a matrix as a result.
 			Matrix Subtract(Matrix other) const;
+			//! Returns a matrix that is translated by the specified offsets.
 			Matrix Translate(float xOffset, float yOffset, float zOffset);
+			//! Returns a matrix where the rows are columns and the columns are rows.
 			Matrix Transpose();
+			//! Returns a string representation of the matrix.
 			std::string ToString();
 		};
 	}

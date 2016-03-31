@@ -220,7 +220,11 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
   <ItemGroup>
     <ClCompile Include="Core\Keyboard.cpp" />
     <ClCompile Include="Core\Utility.cpp" />
-    <ClCompile Include="Graphics\Buffer\DXVertexBuffer.cpp" />
+    <ClCompile Include="Graphics\Buffer\DXConstantBuffer.cpp" />
+    <ClCompile Include="Graphics\Buffer\Index\DXIndexBuffer.cpp" />
+    <ClCompile Include="Graphics\Buffer\Index\GLIndexBuffer.cpp" />
+    <ClCompile Include="Graphics\Buffer\Vertex\DXVertexBuffer.cpp" />
+    <ClCompile Include="Graphics\Buffer\Vertex\GLVertexBuffer.cpp" />
     <ClCompile Include="Graphics\Buffer\IndexBuffer.cpp" />
     <ClCompile Include="Graphics\Buffer\VertexBuffer.cpp" />
     <ClCompile Include="Graphics\Camera\Camera.cpp" />
@@ -237,6 +241,7 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClCompile Include="Graphics\Shader\GLShader.cpp" />
     <ClCompile Include="Graphics\Shader\Shader.cpp" />
     <ClCompile Include="Graphics\Shader\TestDXShader.cpp" />
+    <ClCompile Include="System\Thread.cpp" />
     <ClCompile Include="System\Window\NativeWindow.cpp" />
     <ClCompile Include="Math\Color.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -261,7 +266,11 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClInclude Include="Core\Mouse.h" />
     <ClInclude Include="Core\Result.h" />
     <ClInclude Include="Core\Time.h" />
-    <ClInclude Include="Graphics\Buffer\DXVertexBuffer.h" />
+    <ClInclude Include="Graphics\Buffer\DXConstantBuffer.h" />
+    <ClInclude Include="Graphics\Buffer\Index\DXIndexBuffer.h" />
+    <ClInclude Include="Graphics\Buffer\Index\GLIndexBuffer.h" />
+    <ClInclude Include="Graphics\Buffer\Vertex\DXVertexBuffer.h" />
+    <ClInclude Include="Graphics\Buffer\Vertex\GLVertexBuffer.h" />
     <ClInclude Include="Graphics\Buffer\IBuffer.h" />
     <ClInclude Include="Graphics\Buffer\IndexBuffer.h" />
     <ClInclude Include="Graphics\Buffer\Usage.h" />
@@ -292,6 +301,7 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClInclude Include="Math\Math.h" />
     <ClInclude Include="System\Configuration.h" />
     <ClInclude Include="Core\Key.h" />
+    <ClInclude Include="System\Thread.h" />
     <ClInclude Include="System\Window\IWindow.h" />
     <ClInclude Include="System\Window\NativeWindow.h" />
     <ClInclude Include="System\Window\Window.h" />

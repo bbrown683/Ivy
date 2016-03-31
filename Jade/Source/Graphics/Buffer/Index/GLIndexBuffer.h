@@ -1,7 +1,5 @@
 #pragma once
 
-#pragma once
-
 /*
 The MIT License (MIT)
 
@@ -28,24 +26,25 @@ SOFTWARE.
 
 #include <Graphics/Buffer/IBuffer.h>
 #include <Graphics/Buffer/Usage.h>
-#include <Graphics/Device/DXDevice.h>
+#include <Graphics/Device/GLDevice.h>
+#include <Math/Vertex.h>
 
 namespace Jade
 {
 	namespace Graphics
 	{
-		class DXVertexBuffer : public IBuffer
+		class GLIndexBuffer : public IBuffer
 		{
 		private:
 
-			std::shared_ptr<DXDevice>	device;
+			std::vector<unsigned int> indices;
 			Usage usage;
 
 		public:
 
-			DXVertexBuffer(std::shared_ptr<DXDevice> device, unsigned int vertexCount, Usage usage)
+			GLIndexBuffer(std::vector<unsigned int> indices, Usage usage)
 			{
-				this->device = device;
+				this->indices = indices;
 				this->usage = usage;
 			}
 

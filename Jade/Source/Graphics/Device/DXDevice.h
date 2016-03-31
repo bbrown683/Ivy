@@ -49,6 +49,8 @@ namespace Jade
 			friend class DXMesh;
 
 			friend class TestDXShader;
+			friend class DXVertexBuffer;
+			friend class DXIndexBuffer;
 
 			std::shared_ptr<System::IWindow> window;
 			Specification specification;

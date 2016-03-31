@@ -25,6 +25,8 @@ SOFTWARE.
 */
 
 #include <Graphics/Buffer/IBuffer.h>
+#include <Graphics/Buffer/Vertex/DXVertexBuffer.h>
+#include <Graphics/Buffer/Vertex/GLVertexBuffer.h>
 #include <Graphics/Buffer/Usage.h>
 #include <Graphics/Device/Device.h>
 
@@ -32,25 +34,26 @@ namespace Jade
 {
 	namespace Graphics
 	{
-		class VertexBuffer : public IBuffer
+		class VertexBuffer
 		{
 		private:
 
 			std::shared_ptr<Device>	device;
+			std::vector<Math::Vertex> vertices;
 			Usage usage;
 
-			std::shared_ptr<IBuffer> CreateBuffer(std::shared_ptr<Device> device);
+			std::shared_ptr<IBuffer> vertexBuffer;
+			std::shared_ptr<IBuffer> CreateBuffer(std::shared_ptr<Device> device, std::vector<Math::Vertex> vertices, Usage usage);
 
 		public:
 
-			VertexBuffer(std::shared_ptr<Device> device, Usage usage)
+			VertexBuffer(std::shared_ptr<Device> device, std::vector<Math::Vertex> vertices, Usage usage)
 			{
-				this->device = device;
-				this->usage = usage;
+				vertexBuffer = CreateBuffer(device, vertices, usage);
 			}
 
-			bool Bind() override;
-			bool Unbind() override;
+			bool Bind();
+			bool Unbind();
 		};
 	}
 }

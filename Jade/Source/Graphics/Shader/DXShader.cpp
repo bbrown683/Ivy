@@ -174,14 +174,6 @@ bool Jade::Graphics::DXShader::Create(ShaderType type)
 
 bool Jade::Graphics::DXShader::Release()
 {
-	m_pShaderBlob = nullptr;
-	m_pComputeShader = nullptr;
-	m_pDomainShader = nullptr;
-	m_pGeometryShader = nullptr;
-	m_pHullShader = nullptr;
-	m_pPixelShader = nullptr;
-	m_pVertexShader = nullptr;
-
 	std::cout << "Shader cleaning up..." << std::endl;
 
 	return true;
