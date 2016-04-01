@@ -48,56 +48,70 @@ void Jade::Graphics::Model::Load(std::string filename)
 
 		return;
 	}
-
-	// Iterates through each mesh and assigns them their respective vertices and indices.
-	for(unsigned int i = 0; i < scene->mNumMeshes; i++)
+	
+	if (scene->HasMeshes())
 	{
-		std::cout << "Mesh # : " << i << std::endl;
-
-		// Set current mesh for assimp importer.
-		const aiMesh* aMesh = scene->mMeshes[i];
-
-		unsigned int channels = aMesh->GetNumColorChannels();
-
-		std::vector<Math::Vertex> vertices;
-		std::vector<unsigned int> indices;
-
-		// Grab the vertex position and colors for the mesh.
-		for (unsigned int j = 0; j < aMesh->mNumVertices; j++)
+		// Iterates through each mesh and assigns them their respective vertices and indices.
+		for (unsigned int i = 0; i < scene->mNumMeshes; i++)
 		{
-			const aiVector3D* aPosition = &aMesh->mVertices[j];	
-			//const aiColor4D aColor = aMesh->mColors[0][i];
+			std::cout << "Mesh # : " << i << std::endl;
 
-			//std::cout << aPosition->x << "," << aPosition->y << "," << aPosition->z << std::endl;
+			// Set current mesh for assimp importer.
+			const aiMesh* aMesh = scene->mMeshes[i];
 
-			Math::Vector3 position(aPosition->x, aPosition->y, aPosition->z);
-			Math::Color color(1.0f, 1.0f, 1.0f, 1.0f);
+			unsigned int channels = aMesh->GetNumColorChannels();
 
-			//if (aMesh->HasVertexColors(0))
-				//color = Math::Color(aColor.r, aColor.g, aColor.b, aColor.a);
-			//else
-				//color = Math::Color::White;
+			std::vector<Math::Vertex> vertices;
+			std::vector<unsigned int> indices;
 
-			Math::Vertex vertex;
-			vertex.position = position;
-			vertex.color = color;
+			// Grab the vertex position and colors for the mesh.
+			for (unsigned int j = 0; j < aMesh->mNumVertices; j++)
+			{
+				const aiVector3D* aPosition = &aMesh->mVertices[j];
+				//const aiColor4D* aColor = &aMesh->mColors[0][i];
 
-			vertices.push_back(vertex);
+				Math::Vector3 position(aPosition->x, aPosition->y, aPosition->z);
+				Math::Color color(1.0f, 1.0f, 1.0f, 1.0f);
+
+				//if (aMesh->HasVertexColors(0))
+					//color = Math::Color(aColor.r, aColor.g, aColor.b, aColor.a);
+				//else
+					//color = Math::Color::White;
+
+				Math::Vertex vertex;
+				vertex.position = position;
+				vertex.color = color;
+
+				vertices.push_back(vertex);
+			}
+
+			// Grab the indices for the mesh.
+			for (unsigned int j = 0; j < aMesh->mNumFaces; j++)
+			{
+				const struct aiFace* face = &aMesh->mFaces[j];
+
+				if (face->mNumIndices == 3)
+					for (unsigned int k = 0; k < face->mNumIndices; k++)
+						indices.push_back(face->mIndices[k]);
+				else
+					std::cout << "ERROR: Faces are not triangulated..." << std::endl;
+			}
+
+			meshes.push_back(Mesh(device, vertices, indices));
 		}
+	}
 
-		// Grab the indices for the mesh.
-		for (unsigned int j = 0; j < aMesh->mNumFaces; j++)
+	if(scene->HasTextures())
+	{
+		for (unsigned int i = 0; i < scene->mNumTextures; i++)
 		{
-			const struct aiFace* face = &aMesh->mFaces[j];
+			aiTexture* aTexture = scene->mTextures[i];
 
-			if (face->mNumIndices == 3)
-				for (unsigned int k = 0; k < face->mNumIndices; k++)
-					indices.push_back(face->mIndices[k]);
-			else
-				std::cout << "ERROR: Faces are not triangulated..." << std::endl;
+			if(aTexture->CheckFormat(aTexture->achFormatHint))
+			{
+				
+			}
 		}
-
-		meshes.push_back(Mesh(device, vertices, indices));
 	}
 }
 

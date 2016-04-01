@@ -113,10 +113,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">SOFTWARE.</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">*/</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &lt;Core/Input.h&gt;</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &lt;Core/Time.h&gt;</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#include &lt;Core/Utility.h&gt;</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &lt;Math/Point.h&gt;</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &lt;Input/Input.h&gt;</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &lt;Core/Utility.h&gt;</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#include &lt;Math/Point.h&gt;</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &lt;System/Timer.h&gt;</span></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_jade.html">Jade</a></div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;{</div>
@@ -142,7 +142,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            <span class="keyword">virtual</span> <span class="keywordtype">bool</span> PollWindowEvents() = 0;</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            <span class="keyword">virtual</span> <span class="keywordtype">void</span> Close() = 0;</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            <span class="keyword">virtual</span> <span class="keywordtype">void</span>* Handle() = 0;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            <span class="keyword">virtual</span> <span class="keywordtype">bool</span> InitWindow() = 0;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            <span class="keyword">virtual</span> <span class="keywordtype">bool</span> Create() = 0;</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            <span class="keyword">virtual</span> <span class="keywordtype">void</span> Show() = 0;</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <span class="keyword">virtual</span> <span class="keywordtype">void</span> Hide() = 0;</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            <span class="keyword">virtual</span> <span class="keywordtype">void</span> Restore() = 0;</div>
@@ -154,16 +154,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            <span class="keyword">virtual</span> <span class="keywordtype">bool</span> IsOpen() = 0;</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            <span class="keyword">virtual</span> <span class="keywordtype">bool</span> IsFullscreen() = 0;</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            <span class="keyword">virtual</span> <span class="keywordtype">bool</span> IsActive() = 0;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            <span class="keyword">virtual</span> <a class="code" href="class_jade_1_1_core_1_1_time.html">Core::Time</a> GetTime() = 0;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            <span class="keyword">virtual</span> <a class="code" href="struct_jade_1_1_core_1_1_input.html">Core::Input</a> GetInput() = 0;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            <span class="keyword">virtual</span> <a class="code" href="class_jade_1_1_system_1_1_timer.html">Timer</a> GetTimer() = 0;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            <span class="keyword">virtual</span> <a class="code" href="struct_jade_1_1_input_1_1_input.html">Input::Input</a> GetInput() = 0;</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        };</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    }</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;}</div>
-<div class="ttc" id="struct_jade_1_1_core_1_1_input_html"><div class="ttname"><a href="struct_jade_1_1_core_1_1_input.html">Jade::Core::Input</a></div><div class="ttdef"><b>Definition:</b> Input.h:35</div></div>
-<div class="ttc" id="namespace_jade_html"><div class="ttname"><a href="namespace_jade.html">Jade</a></div><div class="ttdef"><b>Definition:</b> Input.h:30</div></div>
+<div class="ttc" id="class_jade_1_1_system_1_1_timer_html"><div class="ttname"><a href="class_jade_1_1_system_1_1_timer.html">Jade::System::Timer</a></div><div class="ttdef"><b>Definition:</b> Timer.h:7</div></div>
+<div class="ttc" id="namespace_jade_html"><div class="ttname"><a href="namespace_jade.html">Jade</a></div><div class="ttdef"><b>Definition:</b> Utility.h:52</div></div>
+<div class="ttc" id="struct_jade_1_1_input_1_1_input_html"><div class="ttname"><a href="struct_jade_1_1_input_1_1_input.html">Jade::Input::Input</a></div><div class="ttdef"><b>Definition:</b> Input.h:35</div></div>
 <div class="ttc" id="class_jade_1_1_math_1_1_point_html"><div class="ttname"><a href="class_jade_1_1_math_1_1_point.html">Jade::Math::Point</a></div><div class="ttdef"><b>Definition:</b> Point.h:31</div></div>
 <div class="ttc" id="struct_jade_1_1_system_1_1_i_window_html"><div class="ttname"><a href="struct_jade_1_1_system_1_1_i_window.html">Jade::System::IWindow</a></div><div class="ttdef"><b>Definition:</b> IWindow.h:37</div></div>
-<div class="ttc" id="class_jade_1_1_core_1_1_time_html"><div class="ttname"><a href="class_jade_1_1_core_1_1_time.html">Jade::Core::Time</a></div><div class="ttdef"><b>Definition:</b> Time.h:7</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -65,6 +65,9 @@ namespace Jade
 			ComPtr<ID3D11Buffer> m_pConstantBuffer;
 			ComPtr<ID3D11Buffer> m_pIndexBuffer;
 
+			void Bind() override;
+			void Unbind() override;
+
 		public:
 
 			DXMesh(std::shared_ptr<DXDevice> device, std::vector<Math::Vertex> vertices, std::vector<unsigned int> indices)
@@ -73,16 +76,14 @@ namespace Jade
 				this->vertices = vertices;
 				this->indices = indices;
 
-				Bind();
+				DXMesh::Bind();
 			}
 
 			~DXMesh()
 			{
-				Unbind();
+				DXMesh::Unbind();
 			}
 
-			void Bind() override;
-			void Unbind() override;
 			void Draw() override;
 		};
 	}

@@ -42,7 +42,6 @@ namespace Jade
 			std::vector<unsigned int> indices;
 
 			std::shared_ptr<IMesh> mesh;
-			std::shared_ptr<IMesh> Initialize();
 
 		public:
 
@@ -52,7 +51,19 @@ namespace Jade
 				this->vertices = vertices;
 				this->indices = indices;
 
-				mesh = Initialize();
+				switch (device.GetGraphicsAPI())
+				{
+				case GraphicsAPI::DirectX:
+					mesh = std::make_shared<DXMesh>(std::dynamic_pointer_cast<DXDevice>(device.GetIDevice()), vertices, indices);
+					break;
+				case GraphicsAPI::OpenGL:
+					// OpenGL uses a state machine so we dont need to pass a device.
+					mesh = std::make_shared<GLMesh>(vertices, indices);
+					break;
+				case GraphicsAPI::Vulkan:
+					mesh = nullptr;
+					break;
+				}
 			}
 
 			void Draw()	const
@@ -60,14 +71,14 @@ namespace Jade
 				mesh->Draw();
 			}
 
-			void Bind() const
+			std::vector<Math::Vertex> GetVertices()	const
 			{
-				mesh->Bind();
+				return vertices;
 			}
 
-			void Unbind() const
+			std::vector<unsigned int> GetIndices() const
 			{
-				mesh->Unbind();
+				return indices;
 			}
 		};
 	}

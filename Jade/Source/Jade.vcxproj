@@ -218,6 +218,8 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Graphics\Texture\DXTexture.cpp" />
+    <ClCompile Include="Graphics\Texture\GLTexture.cpp" />
     <ClCompile Include="Input\Keyboard.cpp" />
     <ClCompile Include="Core\Utility.cpp" />
     <ClCompile Include="Graphics\Buffer\DXConstantBuffer.cpp" />
@@ -237,12 +239,9 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClCompile Include="Graphics\Font\Font.cpp" />
     <ClCompile Include="Graphics\Mesh\DXMesh.cpp" />
     <ClCompile Include="Graphics\Mesh\GLMesh.cpp" />
-    <ClCompile Include="Graphics\Mesh\Mesh.cpp" />
     <ClCompile Include="Graphics\Model\Model.cpp" />
-    <ClCompile Include="Graphics\Shader\DXShader.cpp" />
     <ClCompile Include="Graphics\Shader\GLShader.cpp" />
-    <ClCompile Include="Graphics\Shader\Shader.cpp" />
-    <ClCompile Include="Graphics\Shader\TestDXShader.cpp" />
+    <ClCompile Include="Graphics\Shader\DXShader.cpp" />
     <ClCompile Include="System\Thread.cpp" />
     <ClCompile Include="System\Window\NativeWindow.cpp" />
     <ClCompile Include="Math\Color.cpp" />
@@ -261,6 +260,9 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClCompile Include="System\Log.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Graphics\Texture\DXTexture.h" />
+    <ClInclude Include="Graphics\Texture\GLTexture.h" />
+    <ClInclude Include="Graphics\Texture\ITexture.h" />
     <ClInclude Include="Input\Input.h" />
     <ClInclude Include="Input\InputState.h" />
     <ClInclude Include="Input\Keyboard.h" />
@@ -292,12 +294,11 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClInclude Include="Graphics\Mesh\IMesh.h" />
     <ClInclude Include="Graphics\Mesh\Mesh.h" />
     <ClInclude Include="Graphics\Model\Model.h" />
-    <ClInclude Include="Graphics\Shader\DXShader.h" />
     <ClInclude Include="Graphics\Shader\GLShader.h" />
     <ClInclude Include="Graphics\Shader\IShader.h" />
     <ClInclude Include="Graphics\Shader\Shader.h" />
     <ClInclude Include="Graphics\Shader\ShaderType.h" />
-    <ClInclude Include="Graphics\Shader\TestDXShader.h" />
+    <ClInclude Include="Graphics\Shader\DXShader.h" />
     <ClInclude Include="Graphics\Texture\Texture.h" />
     <ClInclude Include="Graphics\Texture\TextureType.h" />
     <ClInclude Include="Math\Math.h" />

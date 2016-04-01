@@ -54,12 +54,6 @@ namespace Jade
 			{
 				this->device = device;
 			}
-			/*
-			Model(std::shared_ptr<Device> device)
-			{
-				this->device = device;
-			}
-			*/
 
 			std::vector<Mesh> GetMeshes() const;
 			void Load(std::string filename);

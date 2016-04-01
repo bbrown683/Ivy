@@ -32,8 +32,8 @@ bool Jade::Graphics::DXShader::Create(ShaderType type)
 	{
 		case ShaderType::Compute:
 		{
-			shaderResult = device->m_pDevice->CreateComputeShader(m_pShaderBlob->GetBufferPointer(), m_pShaderBlob->GetBufferSize(), nullptr, m_pComputeShader.GetAddressOf());
-			
+			shaderResult = device->GetID3D11Device()->CreateComputeShader(m_pComputeShaderBlob->GetBufferPointer(), m_pComputeShaderBlob->GetBufferSize(), nullptr, m_pComputeShader.GetAddressOf());
+
 			if (shaderResult < 0)
 			{
 				// Output compilation errors to console.
@@ -50,8 +50,8 @@ bool Jade::Graphics::DXShader::Create(ShaderType type)
 		}
 		case ShaderType::Domain:
 		{
-			shaderResult = device->m_pDevice->CreateDomainShader(m_pShaderBlob->GetBufferPointer(), m_pShaderBlob->GetBufferSize(), nullptr, m_pDomainShader.GetAddressOf());
-		
+			shaderResult = device->GetID3D11Device()->CreateDomainShader(m_pDomainShaderBlob->GetBufferPointer(), m_pDomainShaderBlob->GetBufferSize(), nullptr, m_pDomainShader.GetAddressOf());
+
 			if (shaderResult < 0)
 			{
 				// Output compilation errors to console.
@@ -64,12 +64,12 @@ bool Jade::Graphics::DXShader::Create(ShaderType type)
 			}
 
 			std::cout << "Domain shader was created successfully..." << std::endl;
-			break; 
+			break;
 		}
 		case ShaderType::Geometry:
 		{
-			shaderResult = device->m_pDevice->CreateGeometryShader(m_pShaderBlob->GetBufferPointer(), m_pShaderBlob->GetBufferSize(), nullptr, m_pGeometryShader.GetAddressOf());
-			
+			shaderResult = device->GetID3D11Device()->CreateGeometryShader(m_pGeometryShaderBlob->GetBufferPointer(), m_pGeometryShaderBlob->GetBufferSize(), nullptr, m_pGeometryShader.GetAddressOf());
+
 			if (shaderResult < 0)
 			{
 				// Output compilation errors to console.
@@ -83,10 +83,10 @@ bool Jade::Graphics::DXShader::Create(ShaderType type)
 
 			std::cout << "Geometry shader was created successfully..." << std::endl;
 			break;
-		}	
+		}
 		case ShaderType::Pixel:
 		{
-			shaderResult = device->m_pDevice->CreatePixelShader(m_pShaderBlob->GetBufferPointer(), m_pShaderBlob->GetBufferSize(), nullptr, m_pPixelShader.GetAddressOf());
+			shaderResult = device->GetID3D11Device()->CreatePixelShader(m_pPixelShaderBlob->GetBufferPointer(), m_pPixelShaderBlob->GetBufferSize(), nullptr, m_pPixelShader.GetAddressOf());
 
 			if (shaderResult < 0)
 			{
@@ -99,15 +99,15 @@ bool Jade::Graphics::DXShader::Create(ShaderType type)
 				return false;
 			}
 
-			device->m_pImmediateContext->PSSetShader(m_pPixelShader.Get(), nullptr, 0);
+			device->GetID3D11DeviceContext()->PSSetShader(m_pPixelShader.Get(), nullptr, 0);
 
 			std::cout << "Pixel shader was created successfully..." << std::endl;
 			break;
 		}
 		case ShaderType::Tesselation:
 		{
-			shaderResult = device->m_pDevice->CreateHullShader(m_pShaderBlob->GetBufferPointer(), m_pShaderBlob->GetBufferSize(), nullptr, m_pHullShader.GetAddressOf());
-			
+			shaderResult = device->GetID3D11Device()->CreateHullShader(m_pHullShaderBlob->GetBufferPointer(), m_pHullShaderBlob->GetBufferSize(), nullptr, m_pHullShader.GetAddressOf());
+
 			if (shaderResult < 0)
 			{
 				// Output compilation errors to console.
@@ -124,9 +124,9 @@ bool Jade::Graphics::DXShader::Create(ShaderType type)
 		}
 		case ShaderType::Vertex:
 		{
-			shaderResult = device->m_pDevice->CreateVertexShader(m_pShaderBlob->GetBufferPointer(), m_pShaderBlob->GetBufferSize(), nullptr, m_pVertexShader.GetAddressOf());
+			shaderResult = device->GetID3D11Device()->CreateVertexShader(m_pVertexShaderBlob->GetBufferPointer(), m_pVertexShaderBlob->GetBufferSize(), nullptr, m_pVertexShader.GetAddressOf());
 
-			if(shaderResult < 0)
+			if (shaderResult < 0)
 			{
 				// Output compilation errors to console.
 				std::cout << "ERROR: Vertex shader creation failed..." << std::endl;
@@ -143,13 +143,13 @@ bool Jade::Graphics::DXShader::Create(ShaderType type)
 				{ "POSITION",	0, DXGI_FORMAT_R32G32B32_FLOAT	,	0, 0,	D3D11_INPUT_PER_VERTEX_DATA,	0 },
 				{ "COLOR"	,	0, DXGI_FORMAT_R32G32B32A32_FLOAT,	0, 16,	D3D11_INPUT_PER_VERTEX_DATA,	0 },
 				//{ "TEXCOORD",	0, DXGI_FORMAT_R32G32_FLOAT,	0, 12,	D3D11_INPUT_PER_INSTANCE_DATA,	0},
-				
+
 			};
 
 			// Create the input layout.
-			long inputResult = device->m_pDevice->CreateInputLayout(inputLayout, ARRAYSIZE(inputLayout), m_pShaderBlob->GetBufferPointer(), m_pShaderBlob->GetBufferSize(), m_pInputLayout.GetAddressOf());
+			long inputResult = device->GetID3D11Device()->CreateInputLayout(inputLayout, ARRAYSIZE(inputLayout), m_pVertexShaderBlob->GetBufferPointer(), m_pVertexShaderBlob->GetBufferSize(), m_pInputLayout.GetAddressOf());
 
-			if(inputResult < 0)
+			if (inputResult < 0)
 			{
 				// Output compilation errors to console.
 				std::cout << "ERROR: Vertex shader creation failed..." << std::endl;
@@ -161,12 +161,12 @@ bool Jade::Graphics::DXShader::Create(ShaderType type)
 			}
 
 			// Set the input layout
-			device->m_pImmediateContext->IASetInputLayout(m_pInputLayout.Get());
-			device->m_pImmediateContext->VSSetShader(m_pVertexShader.Get(), nullptr, 0);
+			device->GetID3D11DeviceContext()->IASetInputLayout(m_pInputLayout.Get());
+			device->GetID3D11DeviceContext()->VSSetShader(m_pVertexShader.Get(), nullptr, 0);
 
 			std::cout << "Vertex shader was created successfully..." << std::endl;
 			break;
-		}	
+		}
 	}
 
 	return true;
@@ -174,107 +174,36 @@ bool Jade::Graphics::DXShader::Create(ShaderType type)
 
 bool Jade::Graphics::DXShader::Release()
 {
-	std::cout << "Shader cleaning up..." << std::endl;
+	std::cout << "Shaders cleaning up..." << std::endl;
 
 	return true;
 }
 
-/*
-bool Jade::Graphics::DXShader::Compile(std::string filename, ShaderType type)
+bool Jade::Graphics::DXShader::CopyToBlob(ShaderType type, ComPtr<ID3DBlob> blob)
 {
-	unsigned int flags = D3DCOMPILE_ENABLE_STRICTNESS;
-	
-#if defined( DEBUG ) || defined( _DEBUG )
-	// Set the D3DCOMPILE_DEBUG flag to embed debug information in the shaders.
-	// Setting this flag improves the shader debugging experience, but still allows 
-	// the shaders to be optimized and to run exactly the way they will run in 
-	// the release configuration of this program.
-	flags |= D3DCOMPILE_DEBUG;
+	long hr = -1;
 
-	// Disable optimizations to further improve shader debugging
-	flags |= D3DCOMPILE_SKIP_OPTIMIZATION;
-
-#endif
-
-	// Prefer higher shader profile when possible as 5.0 provides better performance on 11-class hardware.
-	LPCSTR profile = "";
-	
-	D3D_FEATURE_LEVEL featureLevel = device->m_pDevice->GetFeatureLevel();
-
-	// Setting correct profile for the shader compilation.
 	switch(type)
 	{
 	case ShaderType::Compute:
-		profile = (featureLevel >= D3D_FEATURE_LEVEL_11_0) ? "cs_5_0" : "cs_4_0";
+		hr = blob.CopyTo(m_pComputeShaderBlob.GetAddressOf());
 		break;
 	case ShaderType::Domain:
-		profile = (featureLevel >= D3D_FEATURE_LEVEL_11_0) ? "ds_5_0" : "ds_4_0";
+		hr = blob.CopyTo(m_pDomainShaderBlob.GetAddressOf());
 		break;
 	case ShaderType::Geometry:
-		profile = (featureLevel >= D3D_FEATURE_LEVEL_11_0) ? "gs_5_0" : "gs_4_0";
+		hr = blob.CopyTo(m_pGeometryShaderBlob.GetAddressOf());
 		break;
 	case ShaderType::Pixel:
-		profile = (featureLevel >= D3D_FEATURE_LEVEL_11_0) ? "ps_5_0" : "ps_4_0";
-		break;
-	case ShaderType::Tesselation:
-		profile = (featureLevel >= D3D_FEATURE_LEVEL_11_0) ? "hs_5_0" : "hs_4_0";
+		hr = blob.CopyTo(m_pPixelShaderBlob.GetAddressOf());
 		break;
 	case ShaderType::Vertex:
-		profile = (featureLevel >= D3D_FEATURE_LEVEL_11_0) ? "vs_5_0" : "vs_4_0";
+		hr = blob.CopyTo(m_pVertexShaderBlob.GetAddressOf());
+		break;
+	case ShaderType::Tesselation:
+		hr = blob.CopyTo(m_pHullShader.GetAddressOf());
 		break;
 	}
 
-	if(profile != "")
-	{
-		ComPtr<ID3DBlob> l_pErrorBlob = nullptr;
-
-		// Compile the shader
-		// NOTE: Main must be used as the entrypoint of all shader files for consistency.
-		long hr = D3DCompileFromFile(Core::Utility::StringToWString(filename).c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE, "Main", profile, flags, 0, m_pShaderBlob.GetAddressOf(), l_pErrorBlob.GetAddressOf());
-
-		if (hr < 0)
-		{
-			// Output compilation errors to console.
-			switch (type)
-			{
-			case ShaderType::Compute:
-				std::cout << "ERROR: Compute shader compilation failed..." << std::endl;
-				break;
-			case ShaderType::Domain:
-				std::cout << "ERROR: Domain shader compilation failed..." << std::endl;
-				break;
-			case ShaderType::Geometry:
-				std::cout << "ERROR: Geometry shader compilation failed..." << std::endl;
-				break;
-			case ShaderType::Pixel:
-				std::cout << "ERROR: Pixel shader compilation failed..." << std::endl;
-				break;
-			case ShaderType::Tesselation:
-				std::cout << "ERROR: Tesselation shader compilation failed..." << std::endl;
-				break;
-			case ShaderType::Vertex:
-				std::cout << "ERROR: Vertex shader compilation failed..." << std::endl;
-				break;
-			}
-
-			// Release any data associated with the shader if it gives an error.
-			Release();
-
-			return false;
-		}
-
-		switch(type)
-		{
-		case ShaderType::Pixel:
-			std::cout << "Pixel shader was compiled successfully..." << std::endl;
-			break;
-		case ShaderType::Vertex:
-			std::cout << "Vertex shader was compiled successfully..." << std::endl;
-		}
-
-		return true;
-	}
-
-	return false;
+	return hr < 0 ? false : true;
 }
-*/

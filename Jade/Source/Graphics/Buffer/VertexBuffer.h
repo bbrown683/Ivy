@@ -38,18 +38,29 @@ namespace Jade
 		{
 		private:
 
-			std::shared_ptr<Device>	device;
+			Device	device;
 			std::vector<Math::Vertex> vertices;
 			Usage usage;
 
 			std::shared_ptr<IBuffer> vertexBuffer;
-			std::shared_ptr<IBuffer> CreateBuffer(std::shared_ptr<Device> device, std::vector<Math::Vertex> vertices, Usage usage);
 
 		public:
 
-			VertexBuffer(std::shared_ptr<Device> device, std::vector<Math::Vertex> vertices, Usage usage)
+			VertexBuffer(Device device, std::vector<Math::Vertex> vertices, Usage usage)
 			{
-				vertexBuffer = CreateBuffer(device, vertices, usage);
+				switch (device.GetGraphicsAPI())
+				{
+				case GraphicsAPI::DirectX:
+					vertexBuffer = std::make_shared<DXVertexBuffer>(std::dynamic_pointer_cast<DXDevice>(device.GetIDevice()), vertices, usage);
+					break;
+				case GraphicsAPI::OpenGL:
+					// OpenGL uses a state machine so we dont need to pass a device.
+					vertexBuffer = std::make_shared<GLVertexBuffer>(vertices, usage);
+					break;
+				case GraphicsAPI::Vulkan:
+					vertexBuffer = nullptr;
+					break;
+				}
 			}
 
 			bool Bind();

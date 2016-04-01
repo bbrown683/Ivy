@@ -16,7 +16,7 @@ bool Jade::Graphics::DXVertexBuffer::Bind()
 	InitData.pSysMem = vertices.data();
 
 	// Creaate vertices buffer.
-	long hr = device->m_pDevice->CreateBuffer(&desc, &InitData, m_pVertexBuffer.GetAddressOf());
+	long hr = device->GetID3D11Device()->CreateBuffer(&desc, &InitData, m_pVertexBuffer.GetAddressOf());
 
 	// We had an error creating the buffer.
 	if (hr < 0)
@@ -27,10 +27,10 @@ bool Jade::Graphics::DXVertexBuffer::Bind()
 	unsigned int offset = 0;
 
 	// Set the vertices buffer.
-	device->m_pImmediateContext->IASetVertexBuffers(0, 1, m_pVertexBuffer.GetAddressOf(), &stride, &offset);
+	device->GetID3D11DeviceContext()->IASetVertexBuffers(0, 1, m_pVertexBuffer.GetAddressOf(), &stride, &offset);
 
 	// Set the primitive topology.
-	device->m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	device->GetID3D11DeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 	return true;
 }
@@ -38,7 +38,7 @@ bool Jade::Graphics::DXVertexBuffer::Bind()
 bool Jade::Graphics::DXVertexBuffer::Unbind()
 {
 	// Unbind buffers.
-	device->m_pImmediateContext->IASetVertexBuffers(0, 0, nullptr, nullptr, nullptr);
+	device->GetID3D11DeviceContext()->IASetVertexBuffers(0, 0, nullptr, nullptr, nullptr);
 
 	return true;
 }

@@ -45,15 +45,6 @@ namespace Jade
 		{
 		private:
 
-			// Our shaders will need access to our objects.
-			// Temporary workaround... Yeah I get it. Its bad. 
-			friend class DXShader;
-			friend class DXMesh;
-
-			friend class TestDXShader;
-			friend class DXVertexBuffer;
-			friend class DXIndexBuffer;
-
 			std::shared_ptr<System::IWindow> window;
 			Specification specification;
 

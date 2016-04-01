@@ -28,7 +28,6 @@ SOFTWARE.
 
 #include "Graphics/Device/Device.h"
 #include "Graphics/Device/GraphicsAPI.h"
-#include "Graphics/Shader/TestDXShader.h"
 #include "Graphics/Shader/DXShader.h"
 #include "Graphics/Shader/GLShader.h"
 #include "Graphics/Shader/IShader.h"
@@ -45,14 +44,10 @@ namespace Jade
 
 			Device device;
 			std::map<std::string, ShaderType> shaders;
-			
 			std::string filename;
 			ShaderType type;
 
 			std::shared_ptr<IShader> shader;
-			std::shared_ptr<IShader> CreateShader(Device device, std::map<std::string, ShaderType> shaders);
-			//std::shared_ptr<IShader> CreateShader(std::shared_ptr<Device> device, std::map<std::string, ShaderType> shaders);
-			std::shared_ptr<IShader> CreateShader(std::shared_ptr<Device> device, std::string filename, ShaderType type);
 
 		public:
 
@@ -64,29 +59,19 @@ namespace Jade
 				this->device = device;
 				this->shaders = shaders;
 
-				shader = CreateShader(device, shaders);
+				switch (device.GetGraphicsAPI())
+				{
+				case GraphicsAPI::DirectX:
+					shader = std::make_shared<DXShader>(std::dynamic_pointer_cast<DXDevice>(device.GetIDevice()), shaders);
+					break;
+				case GraphicsAPI::OpenGL:
+					shader = std::make_shared<GLShader>(filename, type);
+					break;
+				case GraphicsAPI::Vulkan:
+					shader = nullptr;
+					break;
+				}
 			}
-			/*
-			Shader(std::shared_ptr<Device> device, std::map<std::string, ShaderType> shaders)
-			{
-				this->device = device;
-				this->shaders = shaders;
-
-				shader = CreateShader(device, shaders);
-			}
-			*/
-
-			// Default shader constructor.
-			/*
-			Shader(std::shared_ptr<Device> device, std::string filename, ShaderType type)
-			{
-				this->device = device;
-				this->filename = filename;
-				this->type = type;
-				
-				shader = CreateShader(device, filename, type);
-			}
-			*/
 		};
 	}
 }

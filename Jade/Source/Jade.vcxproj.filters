@@ -25,14 +25,11 @@
     <ClCompile Include="System\File.cpp" />
     <ClCompile Include="Graphics\Device\Device.cpp" />
     <ClCompile Include="Graphics\Device\DXDevice.cpp" />
-    <ClCompile Include="Graphics\Shader\DXShader.cpp" />
     <ClCompile Include="Graphics\Shader\GLShader.cpp" />
     <ClCompile Include="Graphics\Device\GLDevice.cpp" />
-    <ClCompile Include="Graphics\Shader\Shader.cpp" />
     <ClCompile Include="Graphics\Device\VKDevice.cpp" />
     <ClCompile Include="Graphics\Model\Model.cpp" />
     <ClCompile Include="Graphics\Mesh\GLMesh.cpp" />
-    <ClCompile Include="Graphics\Mesh\Mesh.cpp" />
     <ClCompile Include="Graphics\Mesh\DXMesh.cpp" />
     <ClCompile Include="System\Window\NativeWindow.cpp" />
     <ClCompile Include="System\Log.cpp" />
@@ -42,7 +39,6 @@
     <ClCompile Include="Graphics\Buffer\IndexBuffer.cpp" />
     <ClCompile Include="Graphics\Buffer\VertexBuffer.cpp" />
     <ClCompile Include="Core\Utility.cpp" />
-    <ClCompile Include="Graphics\Shader\TestDXShader.cpp" />
     <ClCompile Include="Graphics\Buffer\DXConstantBuffer.cpp" />
     <ClCompile Include="System\Thread.cpp" />
     <ClCompile Include="Graphics\Font\Font.cpp" />
@@ -52,6 +48,9 @@
     <ClCompile Include="Graphics\Buffer\DXVertexBuffer.cpp" />
     <ClCompile Include="Graphics\Buffer\GLVertexBuffer.cpp" />
     <ClCompile Include="Input\Keyboard.cpp" />
+    <ClCompile Include="Graphics\Texture\DXTexture.cpp" />
+    <ClCompile Include="Graphics\Texture\GLTexture.cpp" />
+    <ClCompile Include="Graphics\Shader\DXShader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\Vector4.h">
@@ -83,7 +82,6 @@
     </ClInclude>
     <ClInclude Include="Graphics\Device\Device.h" />
     <ClInclude Include="Graphics\Device\DXDevice.h" />
-    <ClInclude Include="Graphics\Shader\DXShader.h" />
     <ClInclude Include="Graphics\Shader\GLShader.h" />
     <ClInclude Include="Graphics\Shader\IShader.h" />
     <ClInclude Include="Graphics\Texture\Texture.h" />
@@ -115,7 +113,6 @@
     <ClInclude Include="Graphics\Buffer\Usage.h" />
     <ClInclude Include="Graphics\Buffer\VertexBuffer.h" />
     <ClInclude Include="Graphics\Buffer\IndexBuffer.h" />
-    <ClInclude Include="Graphics\Shader\TestDXShader.h" />
     <ClInclude Include="Graphics\Buffer\DXConstantBuffer.h" />
     <ClInclude Include="System\Thread.h" />
     <ClInclude Include="Graphics\Font\Font.h" />
@@ -130,6 +127,10 @@
     <ClInclude Include="Input\Keyboard.h" />
     <ClInclude Include="Input\Mouse.h" />
     <ClInclude Include="System\Timer.h" />
+    <ClInclude Include="Graphics\Texture\ITexture.h" />
+    <ClInclude Include="Graphics\Texture\DXTexture.h" />
+    <ClInclude Include="Graphics\Texture\GLTexture.h" />
+    <ClInclude Include="Graphics\Shader\DXShader.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">

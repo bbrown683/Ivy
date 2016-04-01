@@ -45,7 +45,6 @@ namespace Jade
 			// All of our windows use this interface for their general implementations 
 			// to create interoperability for multiple operating systems.
 			std::shared_ptr<IWindow> window;
-			std::shared_ptr<IWindow> Initialize();
 
 		public:
 
@@ -139,6 +138,7 @@ namespace Jade
 				return window->GetInput();
 			}
 
+			// Do not use.
 			Window() : window(nullptr) { }
 
 			// Use this constructor.

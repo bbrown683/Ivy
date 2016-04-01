@@ -39,20 +39,20 @@ bool Jade::Graphics::DXIndexBuffer::Bind()
 	InitData.pSysMem = indices.data();
 
 	// Create index buffer.
-	long hr = device->m_pDevice->CreateBuffer(&desc, &InitData, m_pIndexBuffer.GetAddressOf());
+	long hr = device->GetID3D11Device()->CreateBuffer(&desc, &InitData, m_pIndexBuffer.GetAddressOf());
 
 	if (hr < 0)
 		return false;
 
 	// Assign index buffer.
-	device->m_pImmediateContext->IASetIndexBuffer(m_pIndexBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);
+	device->GetID3D11DeviceContext()->IASetIndexBuffer(m_pIndexBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);
 
 	return true;
 }
 
 bool Jade::Graphics::DXIndexBuffer::Unbind()
 {
-	device->m_pImmediateContext->IASetIndexBuffer(nullptr, DXGI_FORMAT_R32_UINT, 0);
+	device->GetID3D11DeviceContext()->IASetIndexBuffer(nullptr, DXGI_FORMAT_R32_UINT, 0);
 
 	return true;
 }

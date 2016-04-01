@@ -44,6 +44,9 @@ namespace Jade
 			GLuint vertexBuffer;
 			GLuint indexBuffer;
 
+			void Bind() override;
+			void Unbind() override;
+
 		public:
 
 			GLMesh(std::vector<Math::Vertex> vertices, std::vector<unsigned int> indices)
@@ -59,8 +62,6 @@ namespace Jade
 				GLMesh::Unbind();
 			}
 
-			void Bind() override;
-			void Unbind() override;
 			void Draw() override;
 		};
 	}
