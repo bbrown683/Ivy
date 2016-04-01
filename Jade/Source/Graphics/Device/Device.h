@@ -38,52 +38,52 @@ namespace Jade
 		{
 		private:
 
-			std::shared_ptr<IDevice> device;
-			std::shared_ptr<System::IWindow> window;
-
+			System::Window window;
 			GraphicsAPI api;
 			Specification specification;
 
 			// Enumerates through the available devices and selects the best one available for rendering.
-			std::shared_ptr<IDevice> CreateDevice();
+			std::shared_ptr<IDevice> device;
+			std::shared_ptr<IDevice> Initialize();
 
 		public:						
 
 			// Note: Do not use this constructor as everything is set to null.
-			Device() : device(nullptr), window(nullptr) { }
+			Device() : device(nullptr) {} 
 
 			// Default device constructor.
-			Device(std::shared_ptr<System::Window> window, GraphicsAPI api)
+
+			Device(System::Window window, GraphicsAPI api)
 			{
-				this->window = window->GetIWindow(); // Retrieve the interface object.
+				this->window = window;
 				this->api = api;
 
 				// Fill some default values.
-				specification.backBufferHeight = window->GetHeight();
-				specification.backBufferWidth = window->GetWidth();
+				specification.backBufferHeight = window.GetHeight();
+				specification.backBufferWidth = window.GetWidth();
 				specification.colorBits = 32;
 				specification.depthBits = 24;
 				specification.stencilBits = 8;
 				specification.samples = 1;
 				specification.vsync = true;
 
-				device = CreateDevice();
+				device = Initialize();
 			}
 
-			Device(std::shared_ptr<System::IWindow> window, Specification specification) : api(GraphicsAPI::Default)
+			Device(System::Window window, Specification specification) : api(GraphicsAPI::Default)
 			{
 				this->window = window;
 				this->specification = specification;
 
-				device = CreateDevice();
+				device = Initialize();
 			}
 
-			Device(std::shared_ptr<System::Window> window, GraphicsAPI api, Specification specification)
+			Device(System::Window window, GraphicsAPI api, Specification specification)
 			{
-				this->window = window->GetIWindow();	// Retrieve the interface object.
+				this->window = window;
 				this->specification = specification;
 
-				device = CreateDevice();
+				device = Initialize();
 			}
 
 			// Clears the buffer to the specified color.

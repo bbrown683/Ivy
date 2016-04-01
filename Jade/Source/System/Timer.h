@@ -2,9 +2,9 @@
 
 namespace Jade
 {
-	namespace Core
+	namespace System
 	{
-		class Time
+		class Timer
 		{
 		private:
 

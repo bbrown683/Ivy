@@ -24,13 +24,16 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include <iostream>
+
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_syswm.h"
 
-#include <Core/Input.h>
-#include <Core/Time.h>
 #include <Core/Utility.h>
+#include <Input/Input.h>
 #include <System/Window/IWindow.h>
+#include <System/Timer.h>
+
 namespace Jade
 {
 	namespace System
@@ -59,20 +62,20 @@ namespace Jade
 			bool active = false;
 
 			// Input
-			Core::Input input;
+			Input::Input input;
 
 			// Keeps track of our time per frames.
-			Core::Time timer;
+			Timer timer;
 			int startTime = 0;
 
 			// Test keys.
 			bool escape = false;
 
-			bool InitWindow() override;
+			bool Create() override;
 			bool PollWindowEvents() override;
 
 			// Helper class for reducing code clutter.
-			Core::Key ConvertKeycode(SDL_Keycode keycode);
+			Input::Key ConvertKeycode(SDL_Keycode keycode);
 
 		public:
 
@@ -105,8 +108,8 @@ namespace Jade
 			bool IsOpen() override;
 			bool IsFullscreen() override;
 			bool IsActive() override;
-			Core::Time GetTime() override;
-			Core::Input GetInput() override;
+			System::Timer GetTimer() override;
+			Input::Input GetInput() override;
 
 			NativeWindow(int width, int height, int x, int y, std::string title, bool fullscreen) : m_pWindow(nullptr)
 			{
@@ -116,15 +119,16 @@ namespace Jade
 				this->y = y;
 				this->title = title;
 				this->fullscreen = fullscreen;
+
+				if (!NativeWindow::Create())
+					NativeWindow::Close();
 			}
 
 			~NativeWindow()
 			{
-				// Ensure that we do not dispose SDL when it is unnecessary.
-				if (!disposed)
-				{
-					Close();
-				}
+				NativeWindow::Close();
+
+				std::cout << "Window closing..." << std::endl;
 			}
 		};
 	}

@@ -24,18 +24,16 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <Core/Keyboard.h>
-#include <Core/Mouse.h>
-
 namespace Jade
 {
-	namespace Core
+	namespace Input
 	{
-		// Provides control over multiple forms of input.
-		struct Input
+		enum class InputState
 		{
-			Keyboard keyboard;
-			Mouse mouse;
+			// Input type is not being pressed.
+			Released,
+			// Input type is being pressed.
+			Pressed,
 		};
 	}
 }

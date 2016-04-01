@@ -25,8 +25,8 @@ SOFTWARE.
 */
 
 #include <Graphics/Buffer/IBuffer.h>
-#include <Graphics/Buffer/Index/DXIndexBuffer.h>
-#include <Graphics/Buffer/Index/GLIndexBuffer.h>
+#include <Graphics/Buffer/DXIndexBuffer.h>
+#include <Graphics/Buffer/GLIndexBuffer.h>
 #include <Graphics/Buffer/Usage.h>
 #include <Graphics/Device/Device.h>
 

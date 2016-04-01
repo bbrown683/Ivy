@@ -39,17 +39,19 @@
     <ClCompile Include="Graphics\Camera\Camera.cpp" />
     <ClCompile Include="Graphics\Camera\DXCamera.cpp" />
     <ClCompile Include="Math\Matrix.cpp" />
-    <ClCompile Include="Core\Keyboard.cpp" />
     <ClCompile Include="Graphics\Buffer\IndexBuffer.cpp" />
     <ClCompile Include="Graphics\Buffer\VertexBuffer.cpp" />
     <ClCompile Include="Core\Utility.cpp" />
     <ClCompile Include="Graphics\Shader\TestDXShader.cpp" />
     <ClCompile Include="Graphics\Buffer\DXConstantBuffer.cpp" />
-    <ClCompile Include="Graphics\Buffer\Vertex\DXVertexBuffer.cpp" />
-    <ClCompile Include="Graphics\Buffer\Vertex\GLVertexBuffer.cpp" />
-    <ClCompile Include="Graphics\Buffer\Index\DXIndexBuffer.cpp" />
-    <ClCompile Include="Graphics\Buffer\Index\GLIndexBuffer.cpp" />
     <ClCompile Include="System\Thread.cpp" />
+    <ClCompile Include="Graphics\Font\Font.cpp" />
+    <ClCompile Include="Graphics\Buffer\GLUniformBuffer.cpp" />
+    <ClCompile Include="Graphics\Buffer\DXIndexBuffer.cpp" />
+    <ClCompile Include="Graphics\Buffer\GLIndexBuffer.cpp" />
+    <ClCompile Include="Graphics\Buffer\DXVertexBuffer.cpp" />
+    <ClCompile Include="Graphics\Buffer\GLVertexBuffer.cpp" />
+    <ClCompile Include="Input\Keyboard.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\Vector4.h">
@@ -71,7 +73,6 @@
     <ClInclude Include="Math\Rectangle.h" />
     <ClInclude Include="Math\Ray.h" />
     <ClInclude Include="Math\Helper.h" />
-    <ClInclude Include="Core\Factory.h" />
     <ClInclude Include="Math\Point.h" />
     <ClInclude Include="Math\Color.h">
       <Filter>Graphics</Filter>
@@ -94,7 +95,6 @@
     <ClInclude Include="Math\Vertex.h" />
     <ClInclude Include="Graphics\Model\Model.h" />
     <ClInclude Include="Graphics\Texture\TextureType.h" />
-    <ClInclude Include="Core\Time.h" />
     <ClInclude Include="Graphics\Mesh\IMesh.h" />
     <ClInclude Include="Graphics\Mesh\GLMesh.h" />
     <ClInclude Include="Graphics\Mesh\Mesh.h" />
@@ -111,23 +111,25 @@
     <ClInclude Include="Graphics\Camera\Scene.h" />
     <ClInclude Include="System\Configuration.h" />
     <ClInclude Include="Graphics\Device\Specification.h" />
-    <ClInclude Include="Core\Keyboard.h" />
-    <ClInclude Include="Core\Mouse.h" />
-    <ClInclude Include="Core\InputState.h" />
-    <ClInclude Include="Core\Input.h" />
-    <ClInclude Include="Core\Key.h" />
     <ClInclude Include="Graphics\Buffer\IBuffer.h" />
     <ClInclude Include="Graphics\Buffer\Usage.h" />
     <ClInclude Include="Graphics\Buffer\VertexBuffer.h" />
     <ClInclude Include="Graphics\Buffer\IndexBuffer.h" />
-    <ClInclude Include="Core\Result.h" />
     <ClInclude Include="Graphics\Shader\TestDXShader.h" />
     <ClInclude Include="Graphics\Buffer\DXConstantBuffer.h" />
-    <ClInclude Include="Graphics\Buffer\Vertex\DXVertexBuffer.h" />
-    <ClInclude Include="Graphics\Buffer\Vertex\GLVertexBuffer.h" />
-    <ClInclude Include="Graphics\Buffer\Index\DXIndexBuffer.h" />
-    <ClInclude Include="Graphics\Buffer\Index\GLIndexBuffer.h" />
     <ClInclude Include="System\Thread.h" />
+    <ClInclude Include="Graphics\Font\Font.h" />
+    <ClInclude Include="Graphics\Buffer\GLUniformBuffer.h" />
+    <ClInclude Include="Graphics\Buffer\DXIndexBuffer.h" />
+    <ClInclude Include="Graphics\Buffer\GLIndexBuffer.h" />
+    <ClInclude Include="Graphics\Buffer\DXVertexBuffer.h" />
+    <ClInclude Include="Graphics\Buffer\GLVertexBuffer.h" />
+    <ClInclude Include="Input\Input.h" />
+    <ClInclude Include="Input\InputState.h" />
+    <ClInclude Include="Input\Key.h" />
+    <ClInclude Include="Input\Keyboard.h" />
+    <ClInclude Include="Input\Mouse.h" />
+    <ClInclude Include="System\Timer.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">

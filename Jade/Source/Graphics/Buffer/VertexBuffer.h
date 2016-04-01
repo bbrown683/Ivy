@@ -25,8 +25,8 @@ SOFTWARE.
 */
 
 #include <Graphics/Buffer/IBuffer.h>
-#include <Graphics/Buffer/Vertex/DXVertexBuffer.h>
-#include <Graphics/Buffer/Vertex/GLVertexBuffer.h>
+#include <Graphics/Buffer/DXVertexBuffer.h>
+#include <Graphics/Buffer/GLVertexBuffer.h>
 #include <Graphics/Buffer/Usage.h>
 #include <Graphics/Device/Device.h>
 

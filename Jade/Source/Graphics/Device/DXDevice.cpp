@@ -56,6 +56,9 @@ bool Jade::Graphics::DXDevice::Create()
 
 	unsigned int numFeatureLevels = ARRAYSIZE(featureLevels);
 
+	if (window->Handle() == nullptr)
+		return false;
+
 	DXGI_SWAP_CHAIN_DESC sd;
 	ZeroMemory(&sd, sizeof(DXGI_SWAP_CHAIN_DESC));
 	sd.BufferCount = 1;
@@ -82,7 +85,7 @@ bool Jade::Graphics::DXDevice::Create()
 
 	ID3D11Texture2D* m_pBackBuffer = nullptr;
 	m_pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), reinterpret_cast<void**>(&m_pBackBuffer));
-	m_pDevice->CreateRenderTargetView(m_pBackBuffer, nullptr, m_pRenderTargetView.GetAddressOf());
+	result = m_pDevice->CreateRenderTargetView(m_pBackBuffer, nullptr, m_pRenderTargetView.GetAddressOf());
 
 	// Release object now that it is unneeded.
 	m_pBackBuffer->Release();
@@ -203,25 +206,3 @@ const ComPtr<ID3D11DepthStencilView>& Jade::Graphics::DXDevice::GetID3D11DepthSt
 {
 	return m_pDepthStencilView;
 }
-
-/*
-const ComPtr<ID3D11InputLayout>& Jade::Graphics::DXDevice::GetID3D11InputLayout() const
-{
-	return m_pInputLayout;
-}
-
-const ComPtr<ID3D11Buffer>& Jade::Graphics::DXDevice::GetID3D11VertexBuffer() const
-{
-	return m_pVertexBuffer;
-}
-
-const ComPtr<ID3D11Buffer>& Jade::Graphics::DXDevice::GetID3D11IndexBuffer() const
-{
-	return m_pIndexBuffer;
-}
-
-const ComPtr<ID3D11Buffer>& Jade::Graphics::DXDevice::GetID3D11ConstantBuffer() const
-{
-	return m_pConstantBuffer;
-}
-*/

@@ -1,5 +1,3 @@
-#pragma once
-
 /*
 The MIT License (MIT)
 
@@ -24,3 +22,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include "GLUniformBuffer.h"
+
+bool Jade::Graphics::GLUniformBuffer::Bind()
+{
+	return false;
+}
+
+bool Jade::Graphics::GLUniformBuffer::Unbind()
+{
+	return false;
+}

@@ -37,23 +37,22 @@ namespace Jade
 		{
 		private:
 
-			std::shared_ptr<Device> device;
+			Device device;
 			std::vector<Math::Vertex> vertices;
 			std::vector<unsigned int> indices;
 
 			std::shared_ptr<IMesh> mesh;
-
-			std::shared_ptr<IMesh> CreateMesh();
+			std::shared_ptr<IMesh> Initialize();
 
 		public:
 
-			Mesh(std::shared_ptr<Device> device, std::vector<Math::Vertex> vertices, std::vector<unsigned int> indices)
+			Mesh(Device device, std::vector<Math::Vertex> vertices, std::vector<unsigned int> indices)
 			{
 				this->device = device;
 				this->vertices = vertices;
 				this->indices = indices;
 
-				mesh = CreateMesh();
+				mesh = Initialize();
 			}
 
 			void Draw()	const

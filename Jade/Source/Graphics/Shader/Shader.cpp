@@ -24,12 +24,12 @@ SOFTWARE.
 
 #include "Graphics/Shader/Shader.h"
 
-std::shared_ptr<Jade::Graphics::IShader> Jade::Graphics::Shader::CreateShader(std::shared_ptr<Device> device, std::map<std::string, ShaderType> shaders)
+std::shared_ptr<Jade::Graphics::IShader> Jade::Graphics::Shader::CreateShader(Device device, std::map<std::string, ShaderType> shaders)
 {
-	switch (device->GetGraphicsAPI())
+	switch (device.GetGraphicsAPI())
 	{
 	case GraphicsAPI::DirectX:
-		return std::make_shared<TestDXShader>(std::dynamic_pointer_cast<DXDevice>(device->GetIDevice()), shaders);
+		return std::make_shared<TestDXShader>(std::dynamic_pointer_cast<DXDevice>(device.GetIDevice()), shaders);
 	case GraphicsAPI::OpenGL:
 		return std::make_shared<GLShader>(filename, type);
 	case GraphicsAPI::Vulkan:

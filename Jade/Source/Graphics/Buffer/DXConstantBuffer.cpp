@@ -23,3 +23,13 @@ SOFTWARE.
 */
 
 #include "DXConstantBuffer.h"
+
+bool Jade::Graphics::DXConstantBuffer::Bind()
+{
+	return false;
+}
+
+bool Jade::Graphics::DXConstantBuffer::Unbind()
+{
+	return false;
+}

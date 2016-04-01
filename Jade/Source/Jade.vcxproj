@@ -89,7 +89,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>sdl2main.lib;sdl2.lib;opengl32.lib;glew32s.lib;d3d11.lib;d3dcompiler.lib;assimp.lib;freeimage.lib;libhlslcc.lib;gdi32.lib;user32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/glew/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/SDL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;$(SolutionDir)/ThirdParty/freeimage/lib/$(PlatformTarget)/;$(SolutionDir)/ThirdParty/hlslcc/lib/$(PlatformTarget)/</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/glew/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/SDL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/freeimage/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/hlslcc/lib/$(PlatformTarget)/</AdditionalLibraryDirectories>
       <SubSystem>Console</SubSystem>
       <EntryPointSymbol>
       </EntryPointSymbol>
@@ -120,7 +120,7 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     </ClCompile>
     <Link>
       <AdditionalDependencies>sdl2main.lib;sdl2.lib;opengl32.lib;glew32s.lib;d3d11.lib;d3dcompiler.lib;assimp.lib;freeimage.lib;libhlslcc.lib;gdi32.lib;user32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/glew/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/SDL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;$(SolutionDir)/ThirdParty/freeimage/lib/$(PlatformTarget)/;$(SolutionDir)/ThirdParty/hlslcc/lib/$(PlatformTarget)/</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/glew/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/SDL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/freeimage/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/hlslcc/lib/$(PlatformTarget)/</AdditionalLibraryDirectories>
       <SubSystem>Console</SubSystem>
       <EntryPointSymbol>
       </EntryPointSymbol>
@@ -156,7 +156,7 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>sdl2main.lib;sdl2.lib;opengl32.lib;glew32s.lib;d3d11.lib;d3dcompiler.lib;assimp.lib;freeimage.lib;libhlslcc.lib;gdi32.lib;user32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/glew/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/SDL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;$(SolutionDir)/ThirdParty/freeimage/lib/$(PlatformTarget)/;$(SolutionDir)/ThirdParty/hlslcc/lib/$(PlatformTarget)/</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/glew/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/SDL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/freeimage/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/hlslcc/lib/$(PlatformTarget)/</AdditionalLibraryDirectories>
       <SubSystem>Windows</SubSystem>
       <EntryPointSymbol>
       </EntryPointSymbol>
@@ -193,7 +193,7 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>sdl2main.lib;sdl2.lib;opengl32.lib;glew32s.lib;d3d11.lib;d3dcompiler.lib;assimp.lib;freeimage.lib;libhlslcc.lib;gdi32.lib;user32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/glew/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/SDL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;$(SolutionDir)/ThirdParty/freeimage/lib/$(PlatformTarget)/;$(SolutionDir)/ThirdParty/hlslcc/lib/$(PlatformTarget)/</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/glew/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/SDL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/freeimage/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/hlslcc/lib/$(PlatformTarget)/</AdditionalLibraryDirectories>
       <SubSystem>Windows</SubSystem>
       <EntryPointSymbol>
       </EntryPointSymbol>
@@ -218,13 +218,14 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Core\Keyboard.cpp" />
+    <ClCompile Include="Input\Keyboard.cpp" />
     <ClCompile Include="Core\Utility.cpp" />
     <ClCompile Include="Graphics\Buffer\DXConstantBuffer.cpp" />
-    <ClCompile Include="Graphics\Buffer\Index\DXIndexBuffer.cpp" />
-    <ClCompile Include="Graphics\Buffer\Index\GLIndexBuffer.cpp" />
-    <ClCompile Include="Graphics\Buffer\Vertex\DXVertexBuffer.cpp" />
-    <ClCompile Include="Graphics\Buffer\Vertex\GLVertexBuffer.cpp" />
+    <ClCompile Include="Graphics\Buffer\GLUniformBuffer.cpp" />
+    <ClCompile Include="Graphics\Buffer\DXIndexBuffer.cpp" />
+    <ClCompile Include="Graphics\Buffer\GLIndexBuffer.cpp" />
+    <ClCompile Include="Graphics\Buffer\DXVertexBuffer.cpp" />
+    <ClCompile Include="Graphics\Buffer\GLVertexBuffer.cpp" />
     <ClCompile Include="Graphics\Buffer\IndexBuffer.cpp" />
     <ClCompile Include="Graphics\Buffer\VertexBuffer.cpp" />
     <ClCompile Include="Graphics\Camera\Camera.cpp" />
@@ -233,6 +234,7 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClCompile Include="Graphics\Device\DXDevice.cpp" />
     <ClCompile Include="Graphics\Device\GLDevice.cpp" />
     <ClCompile Include="Graphics\Device\VKDevice.cpp" />
+    <ClCompile Include="Graphics\Font\Font.cpp" />
     <ClCompile Include="Graphics\Mesh\DXMesh.cpp" />
     <ClCompile Include="Graphics\Mesh\GLMesh.cpp" />
     <ClCompile Include="Graphics\Mesh\Mesh.cpp" />
@@ -259,18 +261,17 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClCompile Include="System\Log.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Core\Factory.h" />
-    <ClInclude Include="Core\Input.h" />
-    <ClInclude Include="Core\InputState.h" />
-    <ClInclude Include="Core\Keyboard.h" />
-    <ClInclude Include="Core\Mouse.h" />
-    <ClInclude Include="Core\Result.h" />
-    <ClInclude Include="Core\Time.h" />
+    <ClInclude Include="Input\Input.h" />
+    <ClInclude Include="Input\InputState.h" />
+    <ClInclude Include="Input\Keyboard.h" />
+    <ClInclude Include="Input\Mouse.h" />
+    <ClInclude Include="System\Timer.h" />
     <ClInclude Include="Graphics\Buffer\DXConstantBuffer.h" />
-    <ClInclude Include="Graphics\Buffer\Index\DXIndexBuffer.h" />
-    <ClInclude Include="Graphics\Buffer\Index\GLIndexBuffer.h" />
-    <ClInclude Include="Graphics\Buffer\Vertex\DXVertexBuffer.h" />
-    <ClInclude Include="Graphics\Buffer\Vertex\GLVertexBuffer.h" />
+    <ClInclude Include="Graphics\Buffer\GLUniformBuffer.h" />
+    <ClInclude Include="Graphics\Buffer\DXIndexBuffer.h" />
+    <ClInclude Include="Graphics\Buffer\GLIndexBuffer.h" />
+    <ClInclude Include="Graphics\Buffer\DXVertexBuffer.h" />
+    <ClInclude Include="Graphics\Buffer\GLVertexBuffer.h" />
     <ClInclude Include="Graphics\Buffer\IBuffer.h" />
     <ClInclude Include="Graphics\Buffer\IndexBuffer.h" />
     <ClInclude Include="Graphics\Buffer\Usage.h" />
@@ -285,6 +286,7 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClInclude Include="Graphics\Device\GLDevice.h" />
     <ClInclude Include="Graphics\Device\GraphicsAPI.h" />
     <ClInclude Include="Graphics\Device\VKDevice.h" />
+    <ClInclude Include="Graphics\Font\Font.h" />
     <ClInclude Include="Graphics\Mesh\DXMesh.h" />
     <ClInclude Include="Graphics\Mesh\GLMesh.h" />
     <ClInclude Include="Graphics\Mesh\IMesh.h" />
@@ -300,7 +302,7 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClInclude Include="Graphics\Texture\TextureType.h" />
     <ClInclude Include="Math\Math.h" />
     <ClInclude Include="System\Configuration.h" />
-    <ClInclude Include="Core\Key.h" />
+    <ClInclude Include="Input\Key.h" />
     <ClInclude Include="System\Thread.h" />
     <ClInclude Include="System\Window\IWindow.h" />
     <ClInclude Include="System\Window\NativeWindow.h" />

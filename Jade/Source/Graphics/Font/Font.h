@@ -24,16 +24,30 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+//#include "ft2build.h"
+//#include FT_FREETYPE_H
+
+#include <Core/Utility.h>
+
 namespace Jade
 {
-	namespace Core
+	namespace Graphics
 	{
-		enum class InputState
+		// Class for font rendering.
+		class Font
 		{
-			// Input type is not being pressed.
-			Released,
-			// Input type is being pressed.
-			Pressed,
+		private:
+
+			std::string filename;
+
+		public:
+
+			Font(std::string filename)
+			{
+				this->filename = filename;
+			}
+
+			bool Load();
 		};
 	}
 }

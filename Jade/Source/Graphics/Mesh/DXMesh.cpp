@@ -88,9 +88,6 @@ void Jade::Graphics::DXMesh::Bind()
 			// Assign index buffer.
 			device->m_pImmediateContext->IASetIndexBuffer(m_pIndexBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);
 
-			// Set the primitive topology.
-			//device->m_pImmediateContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
 			// Create the constant buffer
 			desc.Usage = D3D11_USAGE_DEFAULT;
 			desc.ByteWidth = sizeof(ConstantBuffer);
@@ -139,7 +136,7 @@ void Jade::Graphics::DXMesh::Draw()
 	if (bufferSuccess)
 	{
 		// Rotate our cube slightly.
-		world = DirectX::XMMatrixRotationY(device->window->GetTime().GetElaspedTime());
+		world = DirectX::XMMatrixRotationY(device->window->GetTimer().GetElaspedTime());
 
 		space.world = XMMatrixTranspose(world);
 		space.view = XMMatrixTranspose(view);

@@ -23,3 +23,37 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
+
+#include <Graphics/Buffer/IBuffer.h>
+#include <Graphics/Buffer/Usage.h>
+#include <Graphics/Device/DXDevice.h>
+#include <Math/Vertex.h>
+
+namespace Jade
+{
+	namespace Graphics
+	{
+		class DXConstantBuffer : public IBuffer
+		{
+		private:
+
+			std::shared_ptr<DXDevice> device;
+			std::vector<unsigned int> indices;
+			Usage usage;
+
+			ComPtr<ID3D11Buffer> m_pConstantBuffer;
+
+		public:
+
+			DXConstantBuffer(std::shared_ptr<DXDevice> device, std::vector<unsigned int> indices, Usage usage)
+			{
+				this->device = device;
+				this->indices = indices;
+				this->usage = usage;
+			}
+
+			bool Bind() override;
+			bool Unbind() override;
+		};
+	}
+}

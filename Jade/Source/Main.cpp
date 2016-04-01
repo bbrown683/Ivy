@@ -28,8 +28,10 @@ SOFTWARE.
 #include "Graphics/Device/Device.h"
 #include "Graphics/Shader/Shader.h"
 #include "Graphics/Model/Model.h"
+#include "Graphics/Font/Font.h"
 
 using namespace Jade::Core;
+using namespace Jade::Input;
 using namespace Jade::Graphics;
 using namespace Jade::Math;
 using namespace Jade::System;
@@ -37,12 +39,12 @@ using namespace Jade::System;
 int main(int argc, char* argv[])
 {
 	// Creates a basic window that can be rendered with either graphics API.
-	std::shared_ptr<Window> window = std::make_shared<Window>(1080, 720, 100, 100, "Hello World", false);
+	Window window(1080, 720, 100, 100, "Hello World", false);
 
 	// Creates a graphics device.
-	std::shared_ptr<Device> device = std::make_shared<Device>(window, GraphicsAPI::DirectX);
+	Device device(window, GraphicsAPI::DirectX);
 
-	// 
+	// Map for holding our shaders. 
 	std::map<std::string, ShaderType> shaders =
 	{
 		{ ".\\resources\\shaders\\vertex.cso", ShaderType::Vertex },
@@ -50,34 +52,35 @@ int main(int argc, char* argv[])
 	};
 
 	// Create our shaders.
-	std::shared_ptr<Shader>	shader = std::make_shared<Shader>(device, shaders);
+	Shader shader(device, shaders);
 
 	// Create and load the model.
-	std::shared_ptr<Model> model = std::make_shared<Model>(device);
-	model->Load(".\\resources\\models\\teapot.obj");
+	Model model(device);
+	model.Load(".\\resources\\models\\teapot.obj");
 
-	while (window->IsOpen())
+	Font font(".\\resources\\fonts\\consolas.ttf");
+
+	while (window.IsOpen())
 	{
 		// Rendering
-		device->Clear(Color::CornflowerBlue);
+		device.Clear(Color::CornflowerBlue);
 
 		// Draw the model.
-		model->Draw();
+		model.Draw();
 
 		// Gets the keys pressed and prints their enumerication value that is stored as an integer.
-		std::vector<Key> keysPressed = window->GetInput().keyboard.GetKeysPressed();
+		std::vector<Key> keysPressed = window.GetInput().keyboard.GetKeysPressed();
 		for (unsigned int i = 0; i < keysPressed.size(); i++)
 			std::cout << static_cast<int>(keysPressed[i]) << std::endl;
 		
-		// Updating if escape is not pressed.
-		if (window->GetInput().keyboard.IsKeyDown(Key::Escape))
+		if(window.GetInput().keyboard.IsKeyDown(Key::Escape))
 		{
-			window->Close();
+			window.Close();
 		}
 		else
 		{
-			device->Present();
-			window->PollEvents();
+			device.Present();
+			window.PollEvents();
 		}
 	}
 

@@ -27,6 +27,8 @@ SOFTWARE.
 #include <wrl/client.h>
 #include <d3d11.h>
 
+#include <iostream>
+
 #include "Core/Utility.h"
 #include "Graphics/Device/IDevice.h"
 #include "Graphics/Device/Specification.h"
@@ -85,7 +87,6 @@ namespace Jade
 				{
 					// Dispose of any allocated memory and close the window.
 					DXDevice::Release();
-					window->Close();
 				}
 			}
 
@@ -111,7 +112,6 @@ namespace Jade
 			const ComPtr<ID3D11RenderTargetView>& GetID3D11RenderTargetView() const;
 			const ComPtr<ID3D11Texture2D>& GetID3D11DepthStencil() const;
 			const ComPtr<ID3D11DepthStencilView>& GetID3D11DepthStencilView() const;
-			const ComPtr<ID3D11InputLayout>& GetID3D11InputLayout() const;
 		};
 	}
 }

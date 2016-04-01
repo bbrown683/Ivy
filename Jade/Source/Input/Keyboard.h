@@ -25,12 +25,12 @@ SOFTWARE.
 */
 
 #include <Core/Utility.h>
-#include <Core/Key.h>
-#include <Core/InputState.h>
+#include <Input/Key.h>
+#include <Input/InputState.h>
 
 namespace Jade
 {
-	namespace Core
+	namespace Input
 	{
 		class Keyboard
 		{

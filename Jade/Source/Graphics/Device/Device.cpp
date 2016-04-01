@@ -26,18 +26,18 @@ SOFTWARE.
 #include "Graphics/Device/DXDevice.h"
 #include "Graphics/Device/GLDevice.h"
 
-std::shared_ptr<Jade::Graphics::IDevice> Jade::Graphics::Device::CreateDevice()
+std::shared_ptr<Jade::Graphics::IDevice> Jade::Graphics::Device::Initialize()
 {
-	// Ensuring window is not null before attempting to attach a context.
-	if (window != nullptr)
+	// Ensuring window interface is not null before attempting to attach a context.
+	if (window.GetIWindow() != nullptr)
 	{
 		// Check what API is being requested.
 		if (api == GraphicsAPI::Default)
 			return nullptr;
 		if (api == GraphicsAPI::DirectX)
-			return std::make_shared<DXDevice>(window, specification);
+			return std::make_shared<DXDevice>(window.GetIWindow(), specification);
 		if (api == GraphicsAPI::OpenGL)
-			return std::make_shared<GLDevice>(window, specification);
+			return std::make_shared<GLDevice>(window.GetIWindow(), specification);
 		if (api == GraphicsAPI::Vulkan)
 			return nullptr;
 	}

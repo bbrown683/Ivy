@@ -24,10 +24,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <Core/Input.h>
-#include <Core/Time.h>
+#include <Input/Input.h>
 #include <Core/Utility.h>
 #include <Math/Point.h>
+#include <System/Timer.h>
 
 namespace Jade
 {
@@ -53,7 +53,7 @@ namespace Jade
 			virtual bool PollWindowEvents() = 0;
 			virtual void Close() = 0;
 			virtual void* Handle() = 0;
-			virtual bool InitWindow() = 0;
+			virtual bool Create() = 0;
 			virtual void Show() = 0;
 			virtual void Hide() = 0;
 			virtual void Restore() = 0;
@@ -65,8 +65,8 @@ namespace Jade
 			virtual bool IsOpen() = 0;
 			virtual bool IsFullscreen() = 0;
 			virtual bool IsActive() = 0;
-			virtual Core::Time GetTime() = 0;
-			virtual Core::Input GetInput() = 0;
+			virtual Timer GetTimer() = 0;
+			virtual Input::Input GetInput() = 0;
 		};
 	}
 }

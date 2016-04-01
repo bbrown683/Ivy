@@ -45,6 +45,7 @@ namespace Jade
 			// All of our windows use this interface for their general implementations 
 			// to create interoperability for multiple operating systems.
 			std::shared_ptr<IWindow> window;
+			std::shared_ptr<IWindow> Initialize();
 
 		public:
 
@@ -127,17 +128,20 @@ namespace Jade
 			}
 
 			// Returns an object that manages timers related to the window.
-			Core::Time GetTime() const
+			Timer GetTime() const
 			{
-				return window->GetTime();
+				return window->GetTimer();
 			}
 
 			// Returns an object that handles window input.
-			Core::Input GetInput() const
+			Input::Input GetInput() const
 			{
 				return window->GetInput();
 			}
 
+			Window() : window(nullptr) { }
+
+			// Use this constructor.
 			Window(int width, int height, int x, int y, std::string title, bool fullscreen)
 			{
 				this->width = width;
@@ -147,16 +151,8 @@ namespace Jade
 				this->title = title;
 				this->fullscreen = fullscreen;
 
+				// Create our window.
 				window = std::make_shared<NativeWindow>(width, height, x, y, title, fullscreen);
-
-				// If our window exists, initialize it.
-				if (window)
-					window->InitWindow();
-			}
-
-			~Window()
-			{
-				Close();
 			}
 
 			// Runs through the main window messaging loop handling events.

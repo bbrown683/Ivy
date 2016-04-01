@@ -24,13 +24,13 @@ SOFTWARE.
 
 #include "Graphics/Mesh/Mesh.h"
 
-std::shared_ptr<Jade::Graphics::IMesh> Jade::Graphics::Mesh::CreateMesh()
+std::shared_ptr<Jade::Graphics::IMesh> Jade::Graphics::Mesh::Initialize()
 {
-	switch (device->GetGraphicsAPI())
+	switch (device.GetGraphicsAPI())
 	{
 		case GraphicsAPI::DirectX:
 		{
-			return std::make_shared<DXMesh>(std::dynamic_pointer_cast<DXDevice>(device->GetIDevice()), vertices, indices);
+			return std::make_shared<DXMesh>(std::dynamic_pointer_cast<DXDevice>(device.GetIDevice()), vertices, indices);
 		}
 		case GraphicsAPI::OpenGL:
 		{

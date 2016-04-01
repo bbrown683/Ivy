@@ -43,15 +43,15 @@ namespace Jade
 		{
 		private:
 
-			std::shared_ptr<IShader> shader;
-
-			std::shared_ptr<Device> device;
+			Device device;
 			std::map<std::string, ShaderType> shaders;
 			
 			std::string filename;
 			ShaderType type;
 
-			std::shared_ptr<IShader> CreateShader(std::shared_ptr<Device> device, std::map<std::string, ShaderType> shaders);
+			std::shared_ptr<IShader> shader;
+			std::shared_ptr<IShader> CreateShader(Device device, std::map<std::string, ShaderType> shaders);
+			//std::shared_ptr<IShader> CreateShader(std::shared_ptr<Device> device, std::map<std::string, ShaderType> shaders);
 			std::shared_ptr<IShader> CreateShader(std::shared_ptr<Device> device, std::string filename, ShaderType type);
 
 		public:
@@ -59,6 +59,14 @@ namespace Jade
 			// Note: Do not use this constructor as everything is set to null.
 			Shader() : shader(nullptr) { }
 
+			Shader(Device device, std::map<std::string, ShaderType> shaders)
+			{
+				this->device = device;
+				this->shaders = shaders;
+
+				shader = CreateShader(device, shaders);
+			}
+			/*
 			Shader(std::shared_ptr<Device> device, std::map<std::string, ShaderType> shaders)
 			{
 				this->device = device;
@@ -66,8 +74,10 @@ namespace Jade
 
 				shader = CreateShader(device, shaders);
 			}
+			*/
 
 			// Default shader constructor.
+			/*
 			Shader(std::shared_ptr<Device> device, std::string filename, ShaderType type)
 			{
 				this->device = device;
@@ -76,6 +86,7 @@ namespace Jade
 				
 				shader = CreateShader(device, filename, type);
 			}
+			*/
 		};
 	}
 }

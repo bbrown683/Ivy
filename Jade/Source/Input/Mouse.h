@@ -24,46 +24,18 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <vector>
-
-#include "assimp/Importer.hpp"
-#include "assimp/Scene.h"
-#include "assimp/postprocess.h"
-
-#include "Core/Utility.h"
-#include "Math/Vertex.h"
-#include "Graphics/Mesh/Mesh.h"
+#include <Input/InputState.h>
 
 namespace Jade
 {
-	namespace Graphics
+	namespace Input
 	{
-		class Model
+		class Mouse
 		{
-		private:
-
-			// Need the device for DirectX to create our mesh.
-			Device device;
-
-			// Mesh(s) used to draw our shape.
-			std::vector<Mesh> meshes;
-
-		public:
-
-			Model(Device device)
-			{
-				this->device = device;
-			}
-			/*
-			Model(std::shared_ptr<Device> device)
-			{
-				this->device = device;
-			}
-			*/
-
-			std::vector<Mesh> GetMeshes() const;
-			void Load(std::string filename);
-			void Draw();
+			InputState mouseState;
+			
+			int x;
+			int y;
 		};
 	}
 }

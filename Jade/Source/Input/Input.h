@@ -1,5 +1,4 @@
 #pragma once
-#include "InputState.h"
 
 /*
 The MIT License (MIT)
@@ -25,19 +24,18 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <Core/InputState.h>
+#include <Input/Keyboard.h>
+#include <Input/Mouse.h>
 
 namespace Jade
 {
-	namespace Core
+	namespace Input
 	{
-		class Mouse
+		// Provides control over multiple forms of input.
+		struct Input
 		{
-			InputState current;
-			InputState previous;
-			
-			int x;
-			int y;
+			Keyboard keyboard;
+			Mouse mouse;
 		};
 	}
 }

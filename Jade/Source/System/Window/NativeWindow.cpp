@@ -29,8 +29,7 @@ SOFTWARE.
 
 bool Jade::System::NativeWindow::PollWindowEvents()
 {
-	// Compute delta time.
-	// Delta time computations.
+	// Compute estimated time.
 	int currentTime = SDL_GetTicks();
 	if (startTime == 0)
 		startTime = currentTime;
@@ -46,15 +45,15 @@ bool Jade::System::NativeWindow::PollWindowEvents()
 		{
 		// Close application.
 		case SDL_QUIT:
-			open = false;
+			Close();
 			break;
 		// Key press.
 		case SDL_KEYDOWN:
-			input.keyboard.SetKeyState(ConvertKeycode(e.key.keysym.sym), Core::InputState::Pressed);
+			input.keyboard.SetKeyState(ConvertKeycode(e.key.keysym.sym), Input::InputState::Pressed);
 			break;
 		// Key release.
 		case SDL_KEYUP:
-			input.keyboard.SetKeyState(ConvertKeycode(e.key.keysym.sym), Core::InputState::Released);
+			input.keyboard.SetKeyState(ConvertKeycode(e.key.keysym.sym), Input::InputState::Released);
 			break;
 		}
 	}
@@ -62,191 +61,191 @@ bool Jade::System::NativeWindow::PollWindowEvents()
 	return true;
 }
 
-Jade::Core::Key Jade::System::NativeWindow::ConvertKeycode(SDL_Keycode keycode)
+Jade::Input::Key Jade::System::NativeWindow::ConvertKeycode(SDL_Keycode keycode)
 {
 	switch(keycode)
 	{
 	case SDLK_0:
-		return Core::Key::Digit0;
+		return Input::Key::Digit0;
 	case SDLK_1:
-		return Core::Key::Digit1;
+		return Input::Key::Digit1;
 	case SDLK_2:
-		return Core::Key::Digit2;
+		return Input::Key::Digit2;
 	case SDLK_3:
-		return Core::Key::Digit3;
+		return Input::Key::Digit3;
 	case SDLK_4:
-		return Core::Key::Digit4;
+		return Input::Key::Digit4;
 	case SDLK_5:
-		return Core::Key::Digit5;
+		return Input::Key::Digit5;
 	case SDLK_6:
-		return Core::Key::Digit6;
+		return Input::Key::Digit6;
 	case SDLK_7:
-		return Core::Key::Digit7;
+		return Input::Key::Digit7;
 	case SDLK_8:
-		return Core::Key::Digit8;
+		return Input::Key::Digit8;
 	case SDLK_9:
-		return Core::Key::Digit9;
+		return Input::Key::Digit9;
 	case SDLK_KP_0:
-		return Core::Key::NumberPad0;
+		return Input::Key::NumberPad0;
 	case SDLK_KP_1:
-		return Core::Key::NumberPad1;
+		return Input::Key::NumberPad1;
 	case SDLK_KP_2:
-		return Core::Key::NumberPad2;
+		return Input::Key::NumberPad2;
 	case SDLK_KP_3:
-		return Core::Key::NumberPad3;
+		return Input::Key::NumberPad3;
 	case SDLK_KP_4:
-		return Core::Key::NumberPad4;
+		return Input::Key::NumberPad4;
 	case SDLK_KP_5:				
-		return Core::Key::NumberPad5;
+		return Input::Key::NumberPad5;
 	case SDLK_KP_6:
-		return Core::Key::NumberPad6;
+		return Input::Key::NumberPad6;
 	case SDLK_KP_7:
-		return Core::Key::NumberPad7;
+		return Input::Key::NumberPad7;
 	case SDLK_KP_8:
-		return Core::Key::NumberPad8;
+		return Input::Key::NumberPad8;
 	case SDLK_KP_9:
-		return Core::Key::NumberPad9;
+		return Input::Key::NumberPad9;
 	case SDLK_F1:
-		return Core::Key::F1;
+		return Input::Key::F1;
 	case SDLK_F2:
-		return Core::Key::F2;
+		return Input::Key::F2;
 	case SDLK_F3:
-		return Core::Key::F3;
+		return Input::Key::F3;
 	case SDLK_F4:
-		return Core::Key::F4;
+		return Input::Key::F4;
 	case SDLK_F5:
-		return Core::Key::F5;
+		return Input::Key::F5;
 	case SDLK_F6:
-		return Core::Key::F6;
+		return Input::Key::F6;
 	case SDLK_F7:
-		return Core::Key::F7;
+		return Input::Key::F7;
 	case SDLK_F8:
-		return Core::Key::F8;
+		return Input::Key::F8;
 	case SDLK_F9:
-		return Core::Key::F9;
+		return Input::Key::F9;
 	case SDLK_F10:
-		return Core::Key::F10;
+		return Input::Key::F10;
 	case SDLK_F11:
-		return Core::Key::F11;
+		return Input::Key::F11;
 	case SDLK_F12:
-		return Core::Key::F12;
+		return Input::Key::F12;
 	case SDLK_a:
-		return Core::Key::A;
+		return Input::Key::A;
 	case SDLK_b:
-		return Core::Key::B;
+		return Input::Key::B;
 	case SDLK_c:
-		return Core::Key::C;
+		return Input::Key::C;
 	case SDLK_d:
-		return Core::Key::D;
+		return Input::Key::D;
 	case SDLK_e:
-		return Core::Key::E;
+		return Input::Key::E;
 	case SDLK_f:
-		return Core::Key::F;
+		return Input::Key::F;
 	case SDLK_g:
-		return Core::Key::G;
+		return Input::Key::G;
 	case SDLK_h:
-		return Core::Key::H;
+		return Input::Key::H;
 	case SDLK_i:
-		return Core::Key::I;
+		return Input::Key::I;
 	case SDLK_j:
-		return Core::Key::J;
+		return Input::Key::J;
 	case SDLK_k:
-		return Core::Key::K;
+		return Input::Key::K;
 	case SDLK_l:
-		return Core::Key::L;
+		return Input::Key::L;
 	case SDLK_m:
-		return Core::Key::M;
+		return Input::Key::M;
 	case SDLK_n:
-		return Core::Key::N;
+		return Input::Key::N;
 	case SDLK_o:
-		return Core::Key::O;
+		return Input::Key::O;
 	case SDLK_p:
-		return Core::Key::P;
+		return Input::Key::P;
 	case SDLK_q:
-		return Core::Key::Q;
+		return Input::Key::Q;
 	case SDLK_r:
-		return Core::Key::R;
+		return Input::Key::R;
 	case SDLK_s:
-		return Core::Key::S;
+		return Input::Key::S;
 	case SDLK_t:
-		return Core::Key::T;
+		return Input::Key::T;
 	case SDLK_u:
-		return Core::Key::U;
+		return Input::Key::U;
 	case SDLK_v:
-		return Core::Key::V;
+		return Input::Key::V;
 	case SDLK_w:
-		return Core::Key::W;
+		return Input::Key::W;
 	case SDLK_x:
-		return Core::Key::X;
+		return Input::Key::X;
 	case SDLK_y:
-		return Core::Key::Y;
+		return Input::Key::Y;
 	case SDLK_z:
-		return Core::Key::Z;
+		return Input::Key::Z;
 	case SDLK_LALT:
 	case SDLK_RALT:
-		return Core::Key::Alt;
+		return Input::Key::Alt;
 	case SDLK_BACKSPACE:
-		return Core::Key::Backspace;
+		return Input::Key::Backspace;
 	case SDLK_CAPSLOCK:
-		return Core::Key::CapsLock;
+		return Input::Key::CapsLock;
 	case SDLK_LCTRL:
 	case SDLK_RCTRL:
-		return Core::Key::Control;
+		return Input::Key::Control;
 	case SDLK_DELETE:
-		return Core::Key::Delete;
+		return Input::Key::Delete;
 	case SDLK_END:
-		return Core::Key::End;
+		return Input::Key::End;
 	case SDLK_RETURN:
-		return Core::Key::Enter;
+		return Input::Key::Enter;
 	case SDLK_ESCAPE:
-		return Core::Key::Escape;
+		return Input::Key::Escape;
 	case SDLK_HOME:
-		return Core::Key::Home;
+		return Input::Key::Home;
 	case SDLK_INSERT:
-		return Core::Key::Insert;
+		return Input::Key::Insert;
 	case SDLK_PAGEUP:
-		return Core::Key::PageUp;
+		return Input::Key::PageUp;
 	case SDLK_PAGEDOWN:
-		return Core::Key::PageDown;
+		return Input::Key::PageDown;
 	case SDLK_LSHIFT:
 	case SDLK_RSHIFT:
-		return Core::Key::Shift;
+		return Input::Key::Shift;
 	case SDLK_SPACE:
-		return Core::Key::Space;
+		return Input::Key::Space;
 	case SDLK_TAB:
-		return Core::Key::Tab;
+		return Input::Key::Tab;
 	case SDLK_DOWN:
-		return Core::Key::Down;
+		return Input::Key::Down;
 	case SDLK_LEFT:
-		return Core::Key::Left;
+		return Input::Key::Left;
 	case SDLK_RIGHT:
-		return Core::Key::Right;
+		return Input::Key::Right;
 	case SDLK_UP:
-		return Core::Key::Up;
+		return Input::Key::Up;
 	case SDLK_PLUS:
-		return Core::Key::Plus;
+		return Input::Key::Plus;
 	case SDLK_PERIOD:
-		return Core::Key::Peroid;
+		return Input::Key::Peroid;
 	case SDLK_SLASH:
-		return Core::Key::Slash;
+		return Input::Key::Slash;
 	case SDLK_ASTERISK:
-		return Core::Key::Asterisk;
+		return Input::Key::Asterisk;
 	case SDLK_MINUS:
-		return Core::Key::Dash;
+		return Input::Key::Dash;
 	case SDLK_LEFTBRACKET:
-		return Core::Key::LeftBracket;
+		return Input::Key::LeftBracket;
 	case SDLK_RIGHTBRACKET:
-		return Core::Key::RightBracket;
+		return Input::Key::RightBracket;																															 
 	case SDLK_LEFTPAREN:
-		return Core::Key::LeftParenthesis;
+		return Input::Key::LeftParenthesis;
 	case SDLK_RIGHTPAREN:
-		return Core::Key::RightParenthesis;
+		return Input::Key::RightParenthesis;
 	case SDLK_QUOTE:
-		return Core::Key::Apostrophe;
+		return Input::Key::Apostrophe;
 	case SDLK_QUOTEDBL:
-		return Core::Key::Quote;
+		return Input::Key::Quote;
 	default:
-		return Core::Key::Unknown;
+		return Input::Key::Unknown;
 	}
 }
 
@@ -392,14 +391,12 @@ void Jade::System::NativeWindow::SetPosition(int x, int y)
 	this->y = y;
 }
 
-bool Jade::System::NativeWindow::InitWindow()
+bool Jade::System::NativeWindow::Create()
 {
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
 		// Cleanup resources.
 		Close();
-
-		disposed = true;
 	}
 	else
 	{
@@ -490,12 +487,12 @@ bool Jade::System::NativeWindow::IsActive()
 	return active;
 }
 
-Jade::Core::Time Jade::System::NativeWindow::GetTime()
+Jade::System::Timer Jade::System::NativeWindow::GetTimer()
 {
 	return timer;
 }
 
-Jade::Core::Input Jade::System::NativeWindow::GetInput()
+Jade::Input::Input Jade::System::NativeWindow::GetInput()
 {
 	return input;
 }

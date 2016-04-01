@@ -26,7 +26,7 @@ SOFTWARE.
 
 namespace Jade
 {
-	namespace Core
+	namespace Input
 	{
 		enum class Key
 		{
