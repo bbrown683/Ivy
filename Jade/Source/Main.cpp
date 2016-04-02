@@ -54,7 +54,7 @@ int main(int argc, char* argv[])
 
 	// Create and load the model.
 	Model model(device);
-	model.Load(".\\resources\\models\\teapot.obj");
+	model.Load(".\\resources\\models\\cube.obj");
 
 	Font font(".\\resources\\fonts\\consolas.ttf");
 

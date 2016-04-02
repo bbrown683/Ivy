@@ -24,41 +24,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifdef _WIN32
-
-#include <Graphics/Device/DXDevice.h>
-#include <Graphics/Texture/ITexture.h>
-
-// Have to define after due to defines.
-#include "FreeImage/freeimage.h"
-
 namespace Jade
 {
-	namespace Graphics
+	namespace Audio
 	{
-		class DXTexture : public ITexture
+		class AudioDevice
 		{
-		private:
-
-			std::shared_ptr<DXDevice> device;
-			std::string filename;
-
-			ComPtr<ID3D11Texture2D> m_pTexture = nullptr;
-			ComPtr<ID3D11ShaderResourceView> m_pShaderResourceView = nullptr;
-			ComPtr<ID3D11SamplerState> m_pSamplerState = nullptr;
-
-		public:
-
-			DXTexture(std::shared_ptr<DXDevice> device, std::string filename)
-			{
-				this->device = device;
-				this->filename = filename;
-			}
-
-			bool Bind() override;
-			bool Unbind() override;
+			
 		};
 	}
 }
-
-#endif // _WIN32

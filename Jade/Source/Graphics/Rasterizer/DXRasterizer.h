@@ -24,41 +24,32 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifdef _WIN32
-
 #include <Graphics/Device/DXDevice.h>
-#include <Graphics/Texture/ITexture.h>
-
-// Have to define after due to defines.
-#include "FreeImage/freeimage.h"
+#include <Graphics/Rasterizer/RasterizerSetting.h>
+#include <Graphics/Rasterizer/IRasterizer.h>
 
 namespace Jade
 {
 	namespace Graphics
 	{
-		class DXTexture : public ITexture
+		class DXRasterizer : public IRasterizer
 		{
 		private:
 
 			std::shared_ptr<DXDevice> device;
-			std::string filename;
+			RasterizerSetting rasterizerSetting;
 
-			ComPtr<ID3D11Texture2D> m_pTexture = nullptr;
-			ComPtr<ID3D11ShaderResourceView> m_pShaderResourceView = nullptr;
-			ComPtr<ID3D11SamplerState> m_pSamplerState = nullptr;
+			ComPtr<ID3D11RasterizerState> m_pRasterizerState;
 
 		public:
 
-			DXTexture(std::shared_ptr<DXDevice> device, std::string filename)
+			DXRasterizer(std::shared_ptr<DXDevice> device, RasterizerSetting rasterizerSetting)
 			{
 				this->device = device;
-				this->filename = filename;
+				this->rasterizerSetting = rasterizerSetting;
 			}
 
-			bool Bind() override;
-			bool Unbind() override;
+			bool SetState() override;
 		};
 	}
 }
-
-#endif // _WIN32

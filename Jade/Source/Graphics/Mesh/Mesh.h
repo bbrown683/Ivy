@@ -28,6 +28,7 @@ SOFTWARE.
 #include "Graphics/Mesh/IMesh.h"
 #include "Graphics/Mesh/DXMesh.h"
 #include "Graphics/Mesh/GLMesh.h"
+#include "Graphics/Texture/Texture.h"
 
 namespace Jade
 {
@@ -42,6 +43,10 @@ namespace Jade
 			std::vector<unsigned int> indices;
 
 			std::shared_ptr<IMesh> mesh;
+
+			Math::Matrix view;
+			Math::Matrix world;
+			Math::Matrix projection;
 
 		public:
 

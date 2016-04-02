@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Math/Vector2.h"
 #include "Math/Vector3.h"
 #include "Math/Color.h"
 
@@ -11,7 +12,7 @@ namespace Jade
 		{
 			Vector3 position;
 			Color color;
-			// Vector3 normal;
+			//Vector2 texture;
 			// Texture texture;
 		};
 	}

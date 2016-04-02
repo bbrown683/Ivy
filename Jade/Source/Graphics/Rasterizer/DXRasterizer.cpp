@@ -1,5 +1,3 @@
-#pragma once
-
 /*
 The MIT License (MIT)
 
@@ -24,41 +22,17 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifdef _WIN32
+#include "DXRasterizer.h"
 
-#include <Graphics/Device/DXDevice.h>
-#include <Graphics/Texture/ITexture.h>
-
-// Have to define after due to defines.
-#include "FreeImage/freeimage.h"
-
-namespace Jade
+bool Jade::Graphics::DXRasterizer::SetState()
 {
-	namespace Graphics
-	{
-		class DXTexture : public ITexture
-		{
-		private:
+	D3D11_RASTERIZER_DESC rasDesc;
+	ZeroMemory(&rasDesc, sizeof(rasDesc));
 
-			std::shared_ptr<DXDevice> device;
-			std::string filename;
+	HRESULT hr = device->GetID3D11Device()->CreateRasterizerState(&rasDesc, m_pRasterizerState.GetAddressOf());
 
-			ComPtr<ID3D11Texture2D> m_pTexture = nullptr;
-			ComPtr<ID3D11ShaderResourceView> m_pShaderResourceView = nullptr;
-			ComPtr<ID3D11SamplerState> m_pSamplerState = nullptr;
+	if (FAILED(hr))
+		return false;
 
-		public:
-
-			DXTexture(std::shared_ptr<DXDevice> device, std::string filename)
-			{
-				this->device = device;
-				this->filename = filename;
-			}
-
-			bool Bind() override;
-			bool Unbind() override;
-		};
-	}
+	return true;
 }
-
-#endif // _WIN32

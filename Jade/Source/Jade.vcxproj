@@ -218,6 +218,7 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Graphics\Rasterizer\DXRasterizer.cpp" />
     <ClCompile Include="Graphics\Texture\DXTexture.cpp" />
     <ClCompile Include="Graphics\Texture\GLTexture.cpp" />
     <ClCompile Include="Input\Keyboard.cpp" />
@@ -260,6 +261,12 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClCompile Include="System\Log.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Audio\AudioDevice.h" />
+    <ClInclude Include="Graphics\Rasterizer\CullMode.h" />
+    <ClInclude Include="Graphics\Rasterizer\DXRasterizer.h" />
+    <ClInclude Include="Graphics\Rasterizer\IRasterizer.h" />
+    <ClInclude Include="Graphics\Rasterizer\Rasterizer.h" />
+    <ClInclude Include="Graphics\Rasterizer\RasterizerSetting.h" />
     <ClInclude Include="Graphics\Texture\DXTexture.h" />
     <ClInclude Include="Graphics\Texture\GLTexture.h" />
     <ClInclude Include="Graphics\Texture\ITexture.h" />

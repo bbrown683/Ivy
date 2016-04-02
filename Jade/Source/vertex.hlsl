@@ -8,6 +8,9 @@ cbuffer ConstantBuffer : register(b0)
 	matrix Projection;
 }
 
+Texture2D shaderTexture;
+SamplerState SampleType;
+
 //--------------------------------------------------------------------------------------
 // Vertex Shader Variables
 //--------------------------------------------------------------------------------------

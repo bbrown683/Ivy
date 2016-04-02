@@ -26,7 +26,20 @@ SOFTWARE.
 
 bool Jade::Graphics::DXConstantBuffer::Bind()
 {
-	return false;
+	// Create the constant buffer
+	D3D11_BUFFER_DESC desc;
+	ZeroMemory(&desc, sizeof(desc));
+	desc.Usage = D3D11_USAGE_DEFAULT;
+	desc.ByteWidth = sizeof(ConstantBuffer);
+	desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+	desc.CPUAccessFlags = 0;
+
+	HRESULT hr = device->GetID3D11Device()->CreateBuffer(&desc, nullptr, m_pConstantBuffer.GetAddressOf());
+
+	if (FAILED(hr))
+		return false;
+
+	return true;
 }
 
 bool Jade::Graphics::DXConstantBuffer::Unbind()

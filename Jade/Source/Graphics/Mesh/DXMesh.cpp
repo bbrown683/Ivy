@@ -28,6 +28,9 @@ SOFTWARE.
 
 void Jade::Graphics::DXMesh::Bind()
 {
+	HRESULT hr;
+	
+	// Create the vertex buffer;
 	D3D11_BUFFER_DESC desc;
 	ZeroMemory(&desc, sizeof(desc));
 	desc.Usage = D3D11_USAGE_DEFAULT;
@@ -42,10 +45,10 @@ void Jade::Graphics::DXMesh::Bind()
 	InitData.pSysMem = vertices.data();
 
 	// Creaate vertices buffer.
-	long hr = device->GetID3D11Device()->CreateBuffer(&desc, &InitData, m_pVertexBuffer.GetAddressOf());
+	hr = device->GetID3D11Device()->CreateBuffer(&desc, &InitData, m_pVertexBuffer.GetAddressOf());
 	
 	// Ensure it was created successfully.
-	if(hr < 0)
+	if(FAILED(hr))
 	{
 		bufferSuccess = false;
 
@@ -75,7 +78,7 @@ void Jade::Graphics::DXMesh::Bind()
 		hr = device->GetID3D11Device()->CreateBuffer(&desc, &InitData, m_pIndexBuffer.GetAddressOf());
 
 		// Ensure it was created successfully.
-		if (hr < 0)
+		if (FAILED(hr))
 		{
 			bufferSuccess = false;
 
@@ -96,7 +99,7 @@ void Jade::Graphics::DXMesh::Bind()
 			
 			hr = device->GetID3D11Device()->CreateBuffer(&desc, nullptr, m_pConstantBuffer.GetAddressOf());
 
-			if (hr < 0)
+			if (FAILED(hr))
 			{
 				bufferSuccess = false;
 

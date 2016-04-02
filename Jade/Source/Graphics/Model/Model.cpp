@@ -22,8 +22,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <iostream>
-
 #include "Model.h"
 
 std::vector<Jade::Graphics::Mesh> Jade::Graphics::Model::GetMeshes() const
@@ -68,15 +66,18 @@ void Jade::Graphics::Model::Load(std::string filename)
 			for (unsigned int j = 0; j < aMesh->mNumVertices; j++)
 			{
 				const aiVector3D* aPosition = &aMesh->mVertices[j];
-				//const aiColor4D* aColor = &aMesh->mColors[0][i];
+				const aiColor4D* aColor;
 
 				Math::Vector3 position(aPosition->x, aPosition->y, aPosition->z);
-				Math::Color color(1.0f, 1.0f, 1.0f, 1.0f);
+				Math::Color color;
 
-				//if (aMesh->HasVertexColors(0))
-					//color = Math::Color(aColor.r, aColor.g, aColor.b, aColor.a);
-				//else
-					//color = Math::Color::White;
+				if (aMesh->HasVertexColors(0))
+				{
+					aColor = &aMesh->mColors[0][i];
+					color = Math::Color(aColor->r, aColor->g, aColor->b, aColor->a);
+				}
+				else
+					color = Math::Color::White;
 
 				Math::Vertex vertex;
 				vertex.position = position;
@@ -101,16 +102,13 @@ void Jade::Graphics::Model::Load(std::string filename)
 		}
 	}
 
-	if(scene->HasTextures())
+	if(scene->HasMaterials())
 	{
-		for (unsigned int i = 0; i < scene->mNumTextures; i++)
+		for (unsigned int i = 0; i < scene->mNumMaterials; i++)
 		{
-			aiTexture* aTexture = scene->mTextures[i];
-
-			if(aTexture->CheckFormat(aTexture->achFormatHint))
-			{
-				
-			}
+			const aiMaterial* aMaterial = scene->mMaterials[i];
+			
+			std::cout << "Material found for model..." << std::endl;
 		}
 	}
 }

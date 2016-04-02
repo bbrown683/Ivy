@@ -29,6 +29,8 @@ SOFTWARE.
 #include <Graphics/Device/DXDevice.h>
 #include <Math/Vertex.h>
 
+#include <directxmath.h>
+
 namespace Jade
 {
 	namespace Graphics
@@ -38,17 +40,27 @@ namespace Jade
 		private:
 
 			std::shared_ptr<DXDevice> device;
-			std::vector<unsigned int> indices;
 			Usage usage;
+
+			typedef struct ConstantBuffer
+			{
+				DirectX::XMMATRIX world;
+				DirectX::XMMATRIX view;
+				DirectX::XMMATRIX projection;
+			} Space;
+
+			Space space;
+			DirectX::XMMATRIX world;
+			DirectX::XMMATRIX view;
+			DirectX::XMMATRIX projection;
 
 			ComPtr<ID3D11Buffer> m_pConstantBuffer;
 
 		public:
 
-			DXConstantBuffer(std::shared_ptr<DXDevice> device, std::vector<unsigned int> indices, Usage usage)
+			DXConstantBuffer(std::shared_ptr<DXDevice> device, Usage usage)
 			{
 				this->device = device;
-				this->indices = indices;
 				this->usage = usage;
 			}
 

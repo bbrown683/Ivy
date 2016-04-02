@@ -24,14 +24,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <vector>
-
 #include "assimp/Importer.hpp"
 #include "assimp/Scene.h"
 #include "assimp/postprocess.h"
 
 #include "Core/Utility.h"
-#include "Math/Vertex.h"
 #include "Graphics/Mesh/Mesh.h"
 
 namespace Jade
@@ -42,7 +39,7 @@ namespace Jade
 		{
 		private:
 
-			// Need the device for DirectX to create our mesh.
+			// Needed the device for DirectX to create our mesh.
 			Device device;
 
 			// Mesh(s) used to draw our shape.

@@ -30,6 +30,8 @@ bool Jade::Graphics::DXDevice::Create()
 {
 	std::cout << "[Device Context]" << std::endl;
 
+	HRESULT hr;
+
 	unsigned int createDeviceFlags = 0;
 
 #ifdef _DEBUG
@@ -75,44 +77,51 @@ bool Jade::Graphics::DXDevice::Create()
 	sd.SampleDesc.Quality = 0;
 	sd.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
 	
-	long result = D3D11CreateDeviceAndSwapChain(nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr, createDeviceFlags, featureLevels, 
+	hr = D3D11CreateDeviceAndSwapChain(nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr, createDeviceFlags, featureLevels, 
 		numFeatureLevels, D3D11_SDK_VERSION, &sd, m_pSwapChain.GetAddressOf(), m_pDevice.GetAddressOf(), &m_FeatureLevel, m_pImmediateContext.GetAddressOf());
 
-	if(result < 0)
-	{
+	if (FAILED(hr))
 		return false;
-	}
 
 	ID3D11Texture2D* m_pBackBuffer = nullptr;
 	m_pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), reinterpret_cast<void**>(&m_pBackBuffer));
-	result = m_pDevice->CreateRenderTargetView(m_pBackBuffer, nullptr, m_pRenderTargetView.GetAddressOf());
+	hr = m_pDevice->CreateRenderTargetView(m_pBackBuffer, nullptr, m_pRenderTargetView.GetAddressOf());
+
+	if (FAILED(hr))
+		return false;
 
 	// Release object now that it is unneeded.
 	m_pBackBuffer->Release();
 
 	// Create depth stencil texture
-	D3D11_TEXTURE2D_DESC descDepth;
-	ZeroMemory(&descDepth, sizeof(descDepth));
-	descDepth.Width = window->GetWidth();
-	descDepth.Height = window->GetHeight();
-	descDepth.MipLevels = 1;
-	descDepth.ArraySize = 1;
-	descDepth.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
-	descDepth.SampleDesc.Count = 1;
-	descDepth.SampleDesc.Quality = 0;
-	descDepth.Usage = D3D11_USAGE_DEFAULT;
-	descDepth.BindFlags = D3D11_BIND_DEPTH_STENCIL;
-	descDepth.CPUAccessFlags = 0;
-	descDepth.MiscFlags = 0;
-	result = m_pDevice->CreateTexture2D(&descDepth, nullptr, m_pDepthStencil.GetAddressOf());
+	D3D11_TEXTURE2D_DESC depthDesc;
+	ZeroMemory(&depthDesc, sizeof(depthDesc));
+	depthDesc.Width = window->GetWidth();
+	depthDesc.Height = window->GetHeight();
+	depthDesc.MipLevels = 1;
+	depthDesc.ArraySize = 1;
+	depthDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+	depthDesc.SampleDesc.Count = 1;
+	depthDesc.SampleDesc.Quality = 0;
+	depthDesc.Usage = D3D11_USAGE_DEFAULT;
+	depthDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
+	depthDesc.CPUAccessFlags = 0;
+	depthDesc.MiscFlags = 0;
+	hr = m_pDevice->CreateTexture2D(&depthDesc, nullptr, m_pDepthStencil.GetAddressOf());
+
+	if (FAILED(hr))
+		return false;
 	
 	// Create the depth stencil view
-	D3D11_DEPTH_STENCIL_VIEW_DESC descDSV;
-	ZeroMemory(&descDSV, sizeof(descDSV));
-	descDSV.Format = descDepth.Format;
-	descDSV.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
-	descDSV.Texture2D.MipSlice = 0;
-	result = m_pDevice->CreateDepthStencilView(m_pDepthStencil.Get(), &descDSV, m_pDepthStencilView.GetAddressOf());
+	D3D11_DEPTH_STENCIL_VIEW_DESC stencilDesc;
+	ZeroMemory(&stencilDesc, sizeof(stencilDesc));
+	stencilDesc.Format = depthDesc.Format;
+	stencilDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
+	stencilDesc.Texture2D.MipSlice = 0;
+	hr = m_pDevice->CreateDepthStencilView(m_pDepthStencil.Get(), &stencilDesc, m_pDepthStencilView.GetAddressOf());
+
+	if (FAILED(hr))
+		return false;
 
 	m_pImmediateContext->OMSetRenderTargets(1, m_pRenderTargetView.GetAddressOf(), m_pDepthStencilView.Get());
 
