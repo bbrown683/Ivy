@@ -27,6 +27,7 @@ SOFTWARE.
 #include "Graphics/Shader/Shader.h"
 #include "Graphics/Model/Model.h"
 #include "Graphics/Font/Font.h"
+#include "Graphics/Rasterizer/Rasterizer.h"
 
 using namespace Jade::Core;
 using namespace Jade::Input;
@@ -42,11 +43,19 @@ int main(int argc, char* argv[])
 	// Creates a graphics device.
 	Device device(window, GraphicsAPI::DirectX);
 
+	// Used to enable culling or wireframe modes.
+	RasterizerSetting setting;
+	setting.cullMode = CullMode::Back;
+	setting.fillMode = FillMode::Solid;
+
+	// Set the rasterizer to our settings.
+	Rasterizer(device, setting);
+
 	// Map for holding our shaders. 
 	std::map<std::string, ShaderType> shaders =
 	{
-		{ ".\\resources\\shaders\\vertex.cso", ShaderType::Vertex },
 		{ ".\\resources\\shaders\\pixel.cso", ShaderType::Pixel },
+		{ ".\\resources\\shaders\\vertex.cso", ShaderType::Vertex },
 	};
 
 	// Create our shaders.
@@ -54,7 +63,7 @@ int main(int argc, char* argv[])
 
 	// Create and load the model.
 	Model model(device);
-	model.Load(".\\resources\\models\\cube.obj");
+	model.Load(".\\resources\\models\\MonoCube.dae");
 
 	Font font(".\\resources\\fonts\\consolas.ttf");
 

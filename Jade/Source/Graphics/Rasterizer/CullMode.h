@@ -28,12 +28,11 @@ namespace Jade
 {
 	namespace Graphics
 	{
-		enum CullMode
+		enum class CullMode
 		{
 			None,
 			Front,
 			Back,
-			FrontAndBack,
 		};
 	}
 }

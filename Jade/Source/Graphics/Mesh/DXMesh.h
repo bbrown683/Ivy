@@ -42,9 +42,9 @@ namespace Jade
 		{
 		private:
 
+			std::shared_ptr<DXDevice> device;
 			std::vector<Math::Vertex> vertices;
 			std::vector<unsigned int> indices;
-			std::shared_ptr<DXDevice> device;
 
 			bool bufferSuccess;
 

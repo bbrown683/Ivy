@@ -34,11 +34,18 @@ bool Jade::Graphics::DXTexture::Bind()
 	if (!FreeImage_FIFSupportsReading(fif))
 		return false;
 
-	FIBITMAP* bitmap = FreeImage_Load(fif, filename.c_str());
+	// We need to direct freeimage to the location of the texture from our executable.
+	std::string filepath = ".\\resources\\models\\";
+	filepath.append(filename);
+
+	FIBITMAP* bitmap = FreeImage_Load(fif, filepath.c_str());
 
 	// Null check.
-	if (!bitmap)
+	if (bitmap == nullptr)
+	{
+		std::cout << "Failed to load material " << filename << " successfully..." << std::endl;
 		return false;
+	}
 
 	// Ensure it is of 32 bits per pixel.
 	if(FreeImage_GetBPP(bitmap) != 32)
@@ -55,9 +62,6 @@ bool Jade::Graphics::DXTexture::Bind()
 	
 	// Retrieve the bits of the bitmap.
 	BYTE* bits = FreeImage_GetBits(bitmap);
-
-	// We are now done with freeimage, unload to prevent leaks.
-	FreeImage_Unload(bitmap);
 
 	// Create our texture description.
 	D3D11_TEXTURE2D_DESC texDesc;
@@ -79,13 +83,15 @@ bool Jade::Graphics::DXTexture::Bind()
 	ZeroMemory(&subData, sizeof(subData));
 	subData.pSysMem = bits;
 	subData.SysMemPitch = pitch;
-	subData.SysMemSlicePitch = sizeof(bits);
 	
 	// Create the texture;
 	HRESULT hr = device->GetID3D11Device()->CreateTexture2D(&texDesc, &subData, m_pTexture.GetAddressOf());
 
 	if(FAILED(hr))
+	{
+		std::cout << "Texture2D failed to be created..." << std::endl;
 		return false;
+	}
 
 	// We now need the resource description for our texture.
 	D3D11_SHADER_RESOURCE_VIEW_DESC resDesc;
@@ -98,7 +104,10 @@ bool Jade::Graphics::DXTexture::Bind()
 	hr = device->GetID3D11Device()->CreateShaderResourceView(m_pTexture.Get(), &resDesc, m_pShaderResourceView.GetAddressOf());
 
 	if (FAILED(hr))
+	{
+		std::cout << "ShaderResourceView failed to be created..." << std::endl;
 		return false;
+	}
 
 	// Generate our mip maps.
 	device->GetID3D11DeviceContext()->GenerateMips(m_pShaderResourceView.Get());
@@ -118,7 +127,18 @@ bool Jade::Graphics::DXTexture::Bind()
 	hr = device->GetID3D11Device()->CreateSamplerState(&sampDesc, m_pSamplerState.GetAddressOf());
 
 	if (FAILED(hr))
+	{
+		std::cout << "SamplerState failed to be created..." << std::endl;
 		return false;
+	}
+
+	device->GetID3D11DeviceContext()->PSSetShaderResources(0, 1, m_pShaderResourceView.GetAddressOf());
+	device->GetID3D11DeviceContext()->PSSetSamplers(0, 1, m_pSamplerState.GetAddressOf());
+
+	// We are now done with freeimage, unload to prevent leaks.
+	FreeImage_Unload(bitmap);
+
+	std::cout << "Texture " << filename << " was created successfully..." << std::endl;
 
 	return true;
 }

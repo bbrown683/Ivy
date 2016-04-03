@@ -112,7 +112,7 @@ void Jade::Graphics::DXMesh::Bind()
 				space.world = DirectX::XMMatrixIdentity();
 
 				// Initialize the view matrix
-				DirectX::XMVECTOR Eye = DirectX::XMVectorSet(0.0f, 1.0f, -3.0f, 0.0f);
+				DirectX::XMVECTOR Eye = DirectX::XMVectorSet(0.0f, 1.0f, -5.0f, 0.0f);
 				DirectX::XMVECTOR At = DirectX::XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
 				DirectX::XMVECTOR Up = DirectX::XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
 				view = DirectX::XMMatrixLookAtLH(Eye, At, Up);

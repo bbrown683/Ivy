@@ -26,13 +26,38 @@ SOFTWARE.
 
 bool Jade::Graphics::DXRasterizer::SetState()
 {
-	D3D11_RASTERIZER_DESC rasDesc;
-	ZeroMemory(&rasDesc, sizeof(rasDesc));
+	D3D11_RASTERIZER_DESC rasterDesc;
+	ZeroMemory(&rasterDesc, sizeof(rasterDesc));
+	
+	// Set culling mode.
+	switch(rasterizerSetting.cullMode)
+	{
+	case CullMode::Front: rasterDesc.CullMode = D3D11_CULL_FRONT; break;
+	case CullMode::Back: rasterDesc.CullMode = D3D11_CULL_BACK; break;
+	default: rasterDesc.CullMode = D3D11_CULL_NONE; break;
+	}
 
-	HRESULT hr = device->GetID3D11Device()->CreateRasterizerState(&rasDesc, m_pRasterizerState.GetAddressOf());
+	// Set everything else.
+	rasterDesc.AntialiasedLineEnable = false;
+	rasterDesc.DepthBias = 0;
+	rasterDesc.DepthBiasClamp = 0.0f;
+	rasterDesc.DepthClipEnable = true;
+	rasterDesc.FillMode = (rasterizerSetting.fillMode == FillMode::Solid) ? D3D11_FILL_SOLID : D3D11_FILL_WIREFRAME;
+	rasterDesc.FrontCounterClockwise = false;
+	rasterDesc.MultisampleEnable = false;
+	rasterDesc.ScissorEnable = false;
+	rasterDesc.SlopeScaledDepthBias = 0.0f;
+
+	// Create the state.
+	HRESULT hr = device->GetID3D11Device()->CreateRasterizerState(&rasterDesc, m_pRasterizerState.GetAddressOf());
 
 	if (FAILED(hr))
 		return false;
+
+	// If state creation succeeds we can set the state.
+	device->GetID3D11DeviceContext()->RSSetState(m_pRasterizerState.Get());
+
+	std::cout << "Rasterizer state was created successfully..." << std::endl;
 
 	return true;
 }

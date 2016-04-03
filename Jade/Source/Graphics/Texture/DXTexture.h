@@ -28,8 +28,9 @@ SOFTWARE.
 
 #include <Graphics/Device/DXDevice.h>
 #include <Graphics/Texture/ITexture.h>
+#include <Graphics/Texture/TextureType.h>
 
-// Have to define after due to defines.
+// Have to define after due to conflictions with DirectX.
 #include "FreeImage/freeimage.h"
 
 namespace Jade
@@ -42,6 +43,7 @@ namespace Jade
 
 			std::shared_ptr<DXDevice> device;
 			std::string filename;
+			TextureType type;
 
 			ComPtr<ID3D11Texture2D> m_pTexture = nullptr;
 			ComPtr<ID3D11ShaderResourceView> m_pShaderResourceView = nullptr;
@@ -49,10 +51,13 @@ namespace Jade
 
 		public:
 
-			DXTexture(std::shared_ptr<DXDevice> device, std::string filename)
+			DXTexture(std::shared_ptr<DXDevice> device, std::string filename, TextureType type)
 			{
 				this->device = device;
 				this->filename = filename;
+				this->type = type;
+
+				DXTexture::Bind();
 			}
 
 			bool Bind() override;

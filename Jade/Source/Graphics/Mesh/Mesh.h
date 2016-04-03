@@ -41,6 +41,7 @@ namespace Jade
 			Device device;
 			std::vector<Math::Vertex> vertices;
 			std::vector<unsigned int> indices;
+			std::vector<Texture> textures;
 
 			std::shared_ptr<IMesh> mesh;
 
@@ -50,11 +51,12 @@ namespace Jade
 
 		public:
 
-			Mesh(Device device, std::vector<Math::Vertex> vertices, std::vector<unsigned int> indices)
+			Mesh(Device device, std::vector<Math::Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures)
 			{
 				this->device = device;
 				this->vertices = vertices;
 				this->indices = indices;
+				this->textures = textures;
 
 				switch (device.GetGraphicsAPI())
 				{

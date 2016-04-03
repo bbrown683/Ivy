@@ -42,35 +42,37 @@ namespace Jade
 
 			// Vector2 operator overloads.
 
-			inline bool operator==(const Vector2 vector)
+			bool operator==(const Vector2 vector)
 			{
 				return (this->x - vector.x < Math::Epsilon) && (this->y - vector.y < Math::Epsilon) ? true : false;
 			}
 
-			inline bool operator!=(const Vector2 vector)
+			bool operator!=(const Vector2 vector)
 			{
 				return !(this == &vector);
 			}
 
-			inline Vector2 operator+(const Vector2 vector)
+			Vector2 operator+(const Vector2 vector)
 			{
 				return Vector2(this->x + vector.x, this->y + vector.y);
 			}
 
-			inline Vector2 operator-(const Vector2 vector)
+			Vector2 operator-(const Vector2 vector)
 			{
 				return Vector2(this->x - vector.x, this->y - vector.y);
 			}
 
-			inline Vector2 operator*(const float scalar)
+			Vector2 operator*(const float scalar)
 			{
 				return Vector2(this->x * scalar, this->y * scalar);
 			}
 
-			inline Vector2 operator/(const float scalar)
+			Vector2 operator/(const float scalar)
 			{
 				return Vector2(this->x / scalar, this->y - scalar);
 			}
+
+			Vector2() : x(0.0f),y(0.0f) {}
 
 			Vector2(float x, float y)
 			{

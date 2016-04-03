@@ -52,6 +52,7 @@
     <ClCompile Include="Graphics\Texture\GLTexture.cpp" />
     <ClCompile Include="Graphics\Shader\DXShader.cpp" />
     <ClCompile Include="Graphics\Rasterizer\DXRasterizer.cpp" />
+    <ClCompile Include="Graphics\Rasterizer\GLRasterizer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\Vector4.h">
@@ -138,6 +139,10 @@
     <ClInclude Include="Graphics\Rasterizer\RasterizerSetting.h" />
     <ClInclude Include="Graphics\Rasterizer\CullMode.h" />
     <ClInclude Include="Audio\AudioDevice.h" />
+    <ClInclude Include="Graphics\Rasterizer\FillMode.h" />
+    <ClInclude Include="Graphics\Rasterizer\GLRasterizer.h" />
+    <ClInclude Include="Math\AABB.h" />
+    <ClInclude Include="Math\OBB.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">

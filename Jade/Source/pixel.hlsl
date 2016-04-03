@@ -1,7 +1,17 @@
+Texture2D txDiffuse : register(t0);
+SamplerState samLinear : register(s0);
+
+struct PS_INPUT
+{
+	float4 pos : SV_POSITION;
+	float3 nor : NORMAL;
+	float2 tex : TEXCOORD;
+};
+
 //--------------------------------------------------------------------------------------
 // Pixel Shader Program
 //--------------------------------------------------------------------------------------
-float4 Main(float4 position : SV_POSITION, float4 color : COLOR) : SV_TARGET
+float4 Main(PS_INPUT input) : SV_TARGET
 {
-	return color;
+	return txDiffuse.Sample(samLinear, input.tex);
 }

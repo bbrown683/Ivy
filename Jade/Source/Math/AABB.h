@@ -26,21 +26,11 @@ SOFTWARE.
 
 namespace Jade
 {
-	namespace Graphics
+	namespace Math
 	{
-		enum TextureType
+		// Represents an Axis-aligned Bounding Box.
+		class AABB
 		{
-			Unknown,
-			Ambient,
-			Diffuse,
-			Displacement,
-			Emmisive,
-			Height,
-			Lightmap,
-			Normal,
-			Opacity,
-			Reflection,
-			Specular,
 			
 		};
 	}

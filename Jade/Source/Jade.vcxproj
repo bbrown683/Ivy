@@ -219,6 +219,7 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Graphics\Rasterizer\DXRasterizer.cpp" />
+    <ClCompile Include="Graphics\Rasterizer\GLRasterizer.cpp" />
     <ClCompile Include="Graphics\Texture\DXTexture.cpp" />
     <ClCompile Include="Graphics\Texture\GLTexture.cpp" />
     <ClCompile Include="Input\Keyboard.cpp" />
@@ -264,6 +265,8 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClInclude Include="Audio\AudioDevice.h" />
     <ClInclude Include="Graphics\Rasterizer\CullMode.h" />
     <ClInclude Include="Graphics\Rasterizer\DXRasterizer.h" />
+    <ClInclude Include="Graphics\Rasterizer\FillMode.h" />
+    <ClInclude Include="Graphics\Rasterizer\GLRasterizer.h" />
     <ClInclude Include="Graphics\Rasterizer\IRasterizer.h" />
     <ClInclude Include="Graphics\Rasterizer\Rasterizer.h" />
     <ClInclude Include="Graphics\Rasterizer\RasterizerSetting.h" />
@@ -274,6 +277,8 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClInclude Include="Input\InputState.h" />
     <ClInclude Include="Input\Keyboard.h" />
     <ClInclude Include="Input\Mouse.h" />
+    <ClInclude Include="Math\AABB.h" />
+    <ClInclude Include="Math\OBB.h" />
     <ClInclude Include="System\Timer.h" />
     <ClInclude Include="Graphics\Buffer\DXConstantBuffer.h" />
     <ClInclude Include="Graphics\Buffer\GLUniformBuffer.h" />

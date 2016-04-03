@@ -44,6 +44,7 @@ namespace Jade
 
 			// Mesh(s) used to draw our shape.
 			std::vector<Mesh> meshes;
+			std::vector<Texture> textures;
 
 		public:
 

@@ -3,35 +3,47 @@
 //--------------------------------------------------------------------------------------
 cbuffer ConstantBuffer : register(b0)
 {
-	matrix World;
-	matrix View;
-	matrix Projection;
+	matrix world;
+	matrix view;
+	matrix projection;
 }
 
-Texture2D shaderTexture;
-SamplerState SampleType;
+Texture2D txDiffuse : register(t0);
+SamplerState samLinear : register(s0);
 
 //--------------------------------------------------------------------------------------
 // Vertex Shader Variables
 //--------------------------------------------------------------------------------------
-struct VOut
+struct VS_INPUT
 {
-	float4 position : SV_POSITION;
-	float4 color : COLOR;
+	float4 pos : POSITION;
+	float3 nor : NORMAL;
+	float2 tex : TEXCOORD;
+};
+
+struct PS_INPUT
+{
+	float4 pos : SV_POSITION;
+	float3 nor : NORMAL;
+	float2 tex : TEXCOORD;
 };
 
 //--------------------------------------------------------------------------------------
 // Vertex Shader Program
 //--------------------------------------------------------------------------------------
-VOut Main(float4 position : POSITION, float4 color : COLOR)
+PS_INPUT Main(VS_INPUT input)
 {
-	VOut output;
+	PS_INPUT output = (PS_INPUT)0;
 
-	//output.position = position;
-	output.position = mul(position, World);
-	output.position = mul(output.position, View);
-	output.position = mul(output.position, Projection);
-	output.color = color;
+	output.pos = mul(input.pos, world);
+	output.pos = mul(output.pos, view);
+	output.pos = mul(output.pos, projection);
+
+	// Calculate the normal vector against the world matrix only and then normalize the final value.
+	output.nor = mul(input.nor, (float3x3)world);
+	output.nor = normalize(output.nor);
+
+	output.tex = input.tex;
 
 	return output;
 }

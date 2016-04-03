@@ -47,6 +47,8 @@ namespace Jade
 			{
 				this->device = device;
 				this->rasterizerSetting = rasterizerSetting;
+
+				DXRasterizer::SetState();
 			}
 
 			bool SetState() override;

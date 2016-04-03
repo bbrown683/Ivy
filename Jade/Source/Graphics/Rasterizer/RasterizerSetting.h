@@ -25,6 +25,7 @@ SOFTWARE.
 */
 
 #include <Graphics/Rasterizer/CullMode.h>
+#include <Graphics/Rasterizer/FillMode.h>
 
 namespace Jade
 {
@@ -33,6 +34,7 @@ namespace Jade
 		struct RasterizerSetting
 		{
 			CullMode cullMode;
+			FillMode fillMode;
 		};
 	}
 }

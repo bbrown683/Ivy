@@ -24,6 +24,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include <Graphics/Device/Device.h>
+#include <Graphics/Rasterizer/DXRasterizer.h>
+#include <Graphics/Rasterizer/IRasterizer.h>
+#include <Graphics/Rasterizer/RasterizerSetting.h>
+
 namespace Jade
 {
 	namespace Graphics
@@ -32,13 +37,19 @@ namespace Jade
 		{
 		private:
 
+			Device device;
+			RasterizerSetting rasterizerSetting;
 
+			std::shared_ptr<IRasterizer> rasterizer;
 
 		public:
 
-			Rasterizer()
+			Rasterizer(Device device, RasterizerSetting rasterizerSetting)
 			{
+				this->device = device;
+				this->rasterizerSetting = rasterizerSetting;
 
+				rasterizer = std::make_shared<DXRasterizer>(std::dynamic_pointer_cast<DXDevice>(device.GetIDevice()), rasterizerSetting);
 			}
 		};
 	}
