@@ -24,12 +24,15 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <vector>
 #include <directxmath.h>
 
 #include "Core/Utility.h"
-#include "Graphics/Device/DXDevice.h"
-#include "Graphics/Mesh/IMesh.h"
+#include <Graphics/Buffer/VertexBuffer.h>
+#include <Graphics/Buffer/IndexBuffer.h>
+#include <Graphics/Buffer/ConstantBuffer.h>
+#include <Graphics/Device/DXDevice.h>
+#include <Graphics/Mesh/IMesh.h>
+#include <Graphics/Texture/Texture.h>
 #include "Math/Math.h"
 #include "Math/Vertex.h"
 #include "Math/Matrix.h"
@@ -45,10 +48,11 @@ namespace Jade
 			std::shared_ptr<DXDevice> device;
 			std::vector<Math::Vertex> vertices;
 			std::vector<unsigned int> indices;
+			std::vector<Texture> textures;
 
 			bool bufferSuccess;
 
-			typedef struct ConstantBuffer 
+			typedef struct Matrices 
 			{
 				DirectX::XMMATRIX world;
 				DirectX::XMMATRIX view;
@@ -70,12 +74,13 @@ namespace Jade
 
 		public:
 
-			DXMesh(std::shared_ptr<DXDevice> device, std::vector<Math::Vertex> vertices, std::vector<unsigned int> indices)
+			DXMesh(std::shared_ptr<DXDevice> device, std::vector<Math::Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures)
 			{
 				this->device = device;
 				this->vertices = vertices;
 				this->indices = indices;
-
+				this->textures = textures;
+				
 				DXMesh::Bind();
 			}
 

@@ -28,6 +28,7 @@ SOFTWARE.
 #include "Graphics/Model/Model.h"
 #include "Graphics/Font/Font.h"
 #include "Graphics/Rasterizer/Rasterizer.h"
+#include "Graphics/Camera/Camera.h"
 
 using namespace Jade::Core;
 using namespace Jade::Input;
@@ -61,11 +62,8 @@ int main(int argc, char* argv[])
 	// Create our shaders.
 	Shader shader(device, shaders);
 
-	// Create and load the model.
 	Model model(device);
-	model.Load(".\\resources\\models\\MonoCube.dae");
-
-	Font font(".\\resources\\fonts\\consolas.ttf");
+	model.Load(".\\resources\\models\\testcube.obj");
 
 	while (window.IsOpen())
 	{

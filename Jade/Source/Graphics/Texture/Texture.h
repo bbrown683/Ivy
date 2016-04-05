@@ -45,25 +45,43 @@ namespace Jade
 
 		public:
 
+			Texture() : texture(nullptr) { }
+
 			Texture(Device device, std::string filename, TextureType type)
 			{
 				this->device = device;
 				this->filename = filename;
 				this->type = type;
 
-				if (!filename.empty())
+				switch (device.GetGraphicsAPI())
 				{
-					switch (device.GetGraphicsAPI())
-					{
-					case GraphicsAPI::DirectX:
-						texture = std::make_shared<DXTexture>(std::dynamic_pointer_cast<DXDevice>(device.GetIDevice()), filename, type);
-					case GraphicsAPI::OpenGL:
-						texture = nullptr;
-					case GraphicsAPI::Vulkan:
-						texture = nullptr;
-					default: texture = nullptr;
-					}
+				case GraphicsAPI::DirectX:
+					texture = std::make_shared<DXTexture>(std::dynamic_pointer_cast<DXDevice>(device.GetIDevice()), filename, type);
+					break;
+				case GraphicsAPI::OpenGL:
+					texture = nullptr;
+					break;
+				case GraphicsAPI::Vulkan:
+					texture = nullptr;
+					break;
+				default: texture = nullptr;
+					break;
 				}
+			}
+			
+			bool Bind()	const
+			{
+				return texture->Bind();
+			}
+
+			std::string GetFilename()
+			{
+				return filename;
+			}
+
+			std::shared_ptr<ITexture> GetITexture() const
+			{
+				return texture;
 			}
 		};
 	}

@@ -122,16 +122,14 @@ bool Jade::Graphics::DXShader::Create(ShaderType type)
 			// Define the input layout
 			D3D11_INPUT_ELEMENT_DESC inputLayout[] =
 			{
-				{ "POSITION",	0, DXGI_FORMAT_R32G32B32_FLOAT		,	0,							  0,	D3D11_INPUT_PER_VERTEX_DATA,	0 },
-				{ "NORMAL",		0, DXGI_FORMAT_R32G32B32_FLOAT		,	0, D3D11_APPEND_ALIGNED_ELEMENT,	D3D11_INPUT_PER_VERTEX_DATA,	0 },
-				{ "TEXCOORD",	0, DXGI_FORMAT_R32G32_FLOAT			,	0, D3D11_APPEND_ALIGNED_ELEMENT,	D3D11_INPUT_PER_VERTEX_DATA,	0 },
-				//{ "COLOR"	,	0, DXGI_FORMAT_R32G32B32A32_FLOAT,	0, 16,	D3D11_INPUT_PER_VERTEX_DATA,	0 },
+				{ "POSITION",	0, DXGI_FORMAT_R32G32B32_FLOAT	,	0,	0,	D3D11_INPUT_PER_VERTEX_DATA,	0 },
+				{ "TEXCOORD",	0, DXGI_FORMAT_R32G32_FLOAT		,	0, 16,	D3D11_INPUT_PER_VERTEX_DATA,	0 },
 			};
 
 			// Create the input layout.
-			long inputResult = device->GetID3D11Device()->CreateInputLayout(inputLayout, ARRAYSIZE(inputLayout), m_pVertexShaderBlob->GetBufferPointer(), m_pVertexShaderBlob->GetBufferSize(), m_pInputLayout.GetAddressOf());
+			hr = device->GetID3D11Device()->CreateInputLayout(inputLayout, ARRAYSIZE(inputLayout), m_pVertexShaderBlob->GetBufferPointer(), m_pVertexShaderBlob->GetBufferSize(), m_pInputLayout.GetAddressOf());
 
-			if (inputResult < 0)
+			if (FAILED(hr))
 			{
 				// Output compilation errors to console.
 				std::cout << "ERROR: Vertex shader creation failed..." << std::endl;

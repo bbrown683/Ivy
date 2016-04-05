@@ -36,7 +36,6 @@ namespace Jade
 			virtual void Unbind() = 0;
 
 		public:
-
 			virtual void Draw() = 0;
 		};
 	}

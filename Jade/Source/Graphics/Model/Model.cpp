@@ -33,14 +33,11 @@ void Jade::Graphics::Model::Load(std::string filename)
 {
 	Assimp::Importer importer;
 
-	const aiScene* scene = importer.ReadFile(filename, aiProcess_Triangulate |
-		aiProcess_CalcTangentSpace |
-		aiProcess_GenNormals |
+	const aiScene* scene = importer.ReadFile(filename,
+		aiProcess_Triangulate |
+		aiProcess_JoinIdenticalVertices |
 		aiProcess_GenUVCoords |
-		aiProcess_ConvertToLeftHanded |
-		aiProcess_JoinIdenticalVertices | 
-		aiProcess_SortByPType |
-		aiProcess_TransformUVCoords);
+		aiProcess_FlipUVs);
 
 	if (!scene || scene->mFlags == AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
 	{
@@ -48,7 +45,103 @@ void Jade::Graphics::Model::Load(std::string filename)
 
 		return;
 	}
-	
+
+	// Process ASSIMP's root node recursively
+	this->ProcessNode(scene->mRootNode, scene);
+}
+
+void Jade::Graphics::Model::ProcessNode(aiNode * node, const aiScene * scene)
+{
+	// Process each mesh located at the current node
+	for (GLuint i = 0; i < node->mNumMeshes; i++)
+	{
+		// The node object only contains indices to index the actual objects in the scene. 
+		// The scene contains all the data, node is just to keep stuff organized (like relations between nodes).
+		aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
+		this->meshes.push_back(this->ProcessMesh(mesh, scene));
+	}
+	// After we've processed all of the meshes (if any) we then recursively process each of the children nodes
+	for (GLuint i = 0; i < node->mNumChildren; i++)
+	{
+		this->ProcessNode(node->mChildren[i], scene);
+	}
+}
+
+Jade::Graphics::Mesh Jade::Graphics::Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
+{	
+	std::cout << "[Mesh Data]" << std::endl;
+
+	Math::Vertex vertex;
+
+	std::vector<Math::Vertex> vertices;
+	std::vector<unsigned int> indices;
+	std::vector<Texture> textures;
+
+	// Grab the vertex position and colors for the mesh.
+	for (unsigned int i = 0; i < mesh->mNumVertices; i++)
+	{
+		if (mesh->HasPositions())
+		{
+			aiVector3D aPosition = mesh->mVertices[i];
+			Math::Vector3 position(aPosition.x, aPosition.y, aPosition.z);
+			vertex.position = position;
+		}
+
+		if (mesh->HasNormals())
+		{
+			aiVector3D aNormal = mesh->mNormals[i];
+			Math::Vector3 normal(aNormal.x, aNormal.y, aNormal.z);
+			//vertex.normal = normal;
+		}
+
+		if (mesh->HasTangentsAndBitangents())
+		{
+			aiVector3D aTangent = mesh->mTangents[i];
+			Math::Vector3 tangent(aTangent.x, aTangent.y, aTangent.z);
+
+			aiVector3D aBitangent = mesh->mBitangents[i];
+			Math::Vector3 bitangent(aBitangent.x, aBitangent.y, aBitangent.z);
+		}
+
+		if (mesh->HasTextureCoords(0))
+		{
+			aiVector3D aTexCoord = mesh->mTextureCoords[0][i];
+			Math::Vector2 texCoord(aTexCoord.x, aTexCoord.y);
+			vertex.texCoord = texCoord;
+		}
+
+		vertices.push_back(vertex);
+	}
+
+	// Grab the indices for the mesh.
+	for (unsigned int i = 0; i < mesh->mNumFaces; i++)
+	{
+		aiFace face = mesh->mFaces[i];
+
+		for (unsigned int j = 0; j < face.mNumIndices; j++)
+			indices.push_back(face.mIndices[j]);
+	}
+
+	// Check to see if mesh has a texture.
+	if (mesh->mMaterialIndex >= 0)
+	{
+		aiMaterial* aMaterial = scene->mMaterials[mesh->mMaterialIndex];
+
+		// Iterate though each texture type if they exist.
+		for (unsigned int i = 0; i < aMaterial->GetTextureCount(aiTextureType_DIFFUSE); i++)
+		{
+			// Get the texture for the material.
+			aiString string;
+			aMaterial->GetTexture(aiTextureType_DIFFUSE, i, &string);
+			std::cout << "Diffuse texture " << string.C_Str() << " was found for mesh..." << std::endl;
+			textures.push_back(Texture(device, string.C_Str(), Diffuse));
+		}
+	}
+
+	return Mesh(device, vertices, indices, textures);
+}
+
+	/*
 	if (scene->HasMeshes())
 	{
 		// Iterates through each mesh and assigns them their respective vertices and indices.
@@ -59,12 +152,7 @@ void Jade::Graphics::Model::Load(std::string filename)
 			// Set current mesh for assimp importer.
 			const aiMesh* aMesh = scene->mMeshes[i];
 
-			//unsigned int channels = aMesh->GetNumColorChannels();
-			Math::Vertex vertex;
 
-			std::vector<Math::Vertex> vertices;
-			std::vector<unsigned int> indices;
-			std::vector<Texture> textures;
 
 			// Grab the vertex position and colors for the mesh.
 			for (unsigned int j = 0; j < aMesh->mNumVertices; j++)
@@ -80,21 +168,24 @@ void Jade::Graphics::Model::Load(std::string filename)
 				{
 					aiVector3D aNormal = aMesh->mNormals[j];
 					Math::Vector3 normal(aNormal.x, aNormal.y, aNormal.z);
-					vertex.normal = normal;
+					//vertex.normal = normal;
 				}
 
 				if(aMesh->HasTangentsAndBitangents())
 				{
-					
+					aiVector3D aTangent = aMesh->mTangents[j];
+					Math::Vector3 tangent(aTangent.x, aTangent.y, aTangent.z);
+
+					aiVector3D aBitangent = aMesh->mBitangents[j];
+					Math::Vector3 bitangent(aBitangent.x, aBitangent.y, aBitangent.z);
 				}
 
 				if (aMesh->HasTextureCoords(0))
 				{
 					aiVector3D aTexCoord = aMesh->mTextureCoords[0][j];
-					Math::Vector2 texCoord(aTexCoord.y, aTexCoord.x);
+					Math::Vector2 texCoord(aTexCoord.x, aTexCoord.y);
 					vertex.texCoord = texCoord;
 				}
-
 
 				vertices.push_back(vertex);
 			}
@@ -173,14 +264,17 @@ void Jade::Graphics::Model::Load(std::string filename)
 				}
 			}
 
+			textures.push_back(Texture(device, "M4A1-s.tga", Diffuse));
+
 			meshes.push_back(Mesh(device, vertices, indices, textures));
 		}
 	}
 }
+*/
 
 void Jade::Graphics::Model::Draw()
 {
-	// Loop through and draw each meshes.
-	for(unsigned int i = 0; i < meshes.size(); i++)
+	// Loop through and draw each mesh.
+	for (unsigned int i = 0; i < meshes.size(); i++)
 		meshes[i].Draw();
 }

@@ -72,7 +72,19 @@ namespace Jade
 				return Vector2(this->x / scalar, this->y - scalar);
 			}
 
-			Vector2() : x(0.0f),y(0.0f) {}
+			static const Vector2 Down;
+			static const Vector2 Left;
+			static const Vector2 One;
+			static const Vector2 Right;
+			static const Vector2 Up;
+			static const Vector2 Zero;
+
+			Vector2()
+			{
+				this->x = 0.0f;
+				this->y = 0.0f;
+				this->magnitude = 0.0f;
+			}
 
 			Vector2(float x, float y)
 			{

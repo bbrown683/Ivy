@@ -1,31 +1,29 @@
 //--------------------------------------------------------------------------------------
 // Constant Buffer Variables
 //--------------------------------------------------------------------------------------
-cbuffer ConstantBuffer : register(b0)
+cbuffer ConstantBuffer
 {
 	matrix world;
 	matrix view;
 	matrix projection;
 }
 
-Texture2D txDiffuse : register(t0);
-SamplerState samLinear : register(s0);
+Texture2D txDiffuse;
+SamplerState samLinear;
 
 //--------------------------------------------------------------------------------------
 // Vertex Shader Variables
 //--------------------------------------------------------------------------------------
 struct VS_INPUT
 {
-	float4 pos : POSITION;
-	float3 nor : NORMAL;
-	float2 tex : TEXCOORD;
+	float4 Pos : POSITION;
+	float2 Tex : TEXCOORD0;
 };
 
 struct PS_INPUT
 {
-	float4 pos : SV_POSITION;
-	float3 nor : NORMAL;
-	float2 tex : TEXCOORD;
+	float4 Pos : SV_POSITION;
+	float2 Tex : TEXCOORD0;
 };
 
 //--------------------------------------------------------------------------------------
@@ -35,15 +33,13 @@ PS_INPUT Main(VS_INPUT input)
 {
 	PS_INPUT output = (PS_INPUT)0;
 
-	output.pos = mul(input.pos, world);
-	output.pos = mul(output.pos, view);
-	output.pos = mul(output.pos, projection);
+	input.Pos.w = 1.0f;
 
-	// Calculate the normal vector against the world matrix only and then normalize the final value.
-	output.nor = mul(input.nor, (float3x3)world);
-	output.nor = normalize(output.nor);
+	output.Pos = mul(input.Pos, world);
+	output.Pos = mul(output.Pos, view);
+	output.Pos = mul(output.Pos, projection);
 
-	output.tex = input.tex;
+	output.Tex = input.Tex;
 
 	return output;
 }

@@ -2,11 +2,11 @@
 
 std::shared_ptr<Jade::Graphics::ICamera> Jade::Graphics::Camera::CreateCamera() const
 {
-	switch (device->GetGraphicsAPI())
+	switch (device.GetGraphicsAPI())
 	{
 		case GraphicsAPI::DirectX:
 		{
-			return std::make_shared<DXCamera>(0.1f, 100.0f, std::dynamic_pointer_cast<DXDevice>(device->GetIDevice()));
+			return std::make_shared<DXCamera>(nearPlaneDistance, farPlaneDistance, std::dynamic_pointer_cast<DXDevice>(device.GetIDevice()));
 		}
 		case GraphicsAPI::OpenGL:
 		{

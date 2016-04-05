@@ -59,6 +59,8 @@ namespace Jade
 			ComPtr<ID3D11RenderTargetView> m_pRenderTargetView = nullptr;
 			ComPtr<ID3D11Texture2D> m_pDepthStencil = nullptr;
 			ComPtr<ID3D11DepthStencilView> m_pDepthStencilView = nullptr;
+			ComPtr<ID3D11DepthStencilState> m_pDepthStencilState = nullptr;
+			ComPtr<ID3D11SamplerState> m_pSamplerState = nullptr;
 
 			bool Create() override;
 			bool Release() override;

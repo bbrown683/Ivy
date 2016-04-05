@@ -93,7 +93,7 @@ void Jade::Graphics::DXMesh::Bind()
 
 			// Create the constant buffer
 			desc.Usage = D3D11_USAGE_DEFAULT;
-			desc.ByteWidth = sizeof(ConstantBuffer);
+			desc.ByteWidth = sizeof(Matrices);
 			desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
 			desc.CPUAccessFlags = 0;
 			
@@ -117,8 +117,21 @@ void Jade::Graphics::DXMesh::Bind()
 				DirectX::XMVECTOR Up = DirectX::XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
 				view = DirectX::XMMatrixLookAtLH(Eye, At, Up);
 
+				space.view = XMMatrixTranspose(view);
+
 				// Set our projection matrix.
-				projection = DirectX::XMMatrixPerspectiveFovLH(DirectX::XM_PIDIV2, device->GetIWindow()->GetAspectRatio(), 1.0f, 10000.0f);
+				projection = DirectX::XMMatrixPerspectiveFovLH(DirectX::XM_PIDIV2, device->GetIWindow()->GetAspectRatio(), 0.01f, 100.0f);
+
+				space.projection = XMMatrixTranspose(projection);
+
+				// After buffer is created we can bind the textures.
+				for (int i = 0; i < textures.size(); i++)
+				{
+					if(textures[i].Bind())				  
+						std::cout << "Texture " << textures[i].GetFilename() << " was bound successfully..." << std::endl;
+					else
+						std::cout << "Texture " << textures[i].GetFilename() << " failed to bind to mesh..." << std::endl;
+				}
 
 				bufferSuccess = true;
 			}
@@ -131,6 +144,8 @@ void Jade::Graphics::DXMesh::Unbind()
 	// Unbind buffers.
 	device->GetID3D11DeviceContext()->IASetVertexBuffers(0, 0, nullptr, nullptr, nullptr);
 	device->GetID3D11DeviceContext()->IASetIndexBuffer(nullptr, DXGI_FORMAT_R32_UINT, 0);
+
+	std::cout << "Releasing mesh and cleaning up..." << std::endl;
 }
 
 void Jade::Graphics::DXMesh::Draw()
@@ -139,11 +154,9 @@ void Jade::Graphics::DXMesh::Draw()
 	if (bufferSuccess)
 	{
 		// Rotate our cube slightly.
-		world = DirectX::XMMatrixRotationY(device->GetIWindow()->GetTimer().GetElaspedTime());
+		world = DirectX::XMMatrixRotationY(device->GetIWindow()->GetTimer().GetElaspedTime()) * DirectX::XMMatrixRotationX(device->GetIWindow()->GetTimer().GetElaspedTime());
 
 		space.world = XMMatrixTranspose(world);
-		space.view = XMMatrixTranspose(view);
-		space.projection = XMMatrixTranspose(projection);
 
 		device->GetID3D11DeviceContext()->UpdateSubresource(m_pConstantBuffer.Get(), 0, nullptr, &space, 0, 0);
 		device->GetID3D11DeviceContext()->VSSetConstantBuffers(0, 1, m_pConstantBuffer.GetAddressOf());

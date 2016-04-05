@@ -36,13 +36,18 @@ namespace Jade
 		private:
 
 			std::shared_ptr<ICamera> camera;
-			std::shared_ptr<Device> device;
+			Device device;
+			float nearPlaneDistance; 
+			float farPlaneDistance;
+
 			std::shared_ptr<ICamera> CreateCamera() const;
 
 		public:
 
-			Camera(std::shared_ptr<Device> device)
+			Camera(float nearPlaneDistance, float farPlaneDistance, Device device)
 			{
+				this->nearPlaneDistance = nearPlaneDistance;
+				this->farPlaneDistance = farPlaneDistance;
 				this->device = device;
 				camera = CreateCamera();
 			}

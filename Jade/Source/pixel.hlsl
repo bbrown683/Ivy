@@ -1,11 +1,10 @@
-Texture2D txDiffuse : register(t0);
-SamplerState samLinear : register(s0);
+Texture2D txDiffuse;
+SamplerState samLinear;
 
 struct PS_INPUT
 {
-	float4 pos : SV_POSITION;
-	float3 nor : NORMAL;
-	float2 tex : TEXCOORD;
+	float4 Pos : SV_POSITION;
+	float2 Tex : TEXCOORD0;
 };
 
 //--------------------------------------------------------------------------------------
@@ -13,5 +12,6 @@ struct PS_INPUT
 //--------------------------------------------------------------------------------------
 float4 Main(PS_INPUT input) : SV_TARGET
 {
-	return txDiffuse.Sample(samLinear, input.tex);
+	// Sample the pixel color from the texture using the sampler at this texture coordinate location.
+	return txDiffuse.Sample(samLinear, input.Tex);
 }

@@ -24,74 +24,45 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "Graphics/Device/Device.h"
-#include "Graphics/Mesh/IMesh.h"
-#include "Graphics/Mesh/DXMesh.h"
-#include "Graphics/Mesh/GLMesh.h"
-#include "Graphics/Texture/Texture.h"
+#include <Graphics/Buffer/IBuffer.h>
+#include <Graphics/Buffer/DXIndexBuffer.h>
+#include <Graphics/Buffer/GLIndexBuffer.h>
+#include <Graphics/Buffer/Usage.h>
+#include <Graphics/Device/Device.h>
+#include "DXConstantBuffer.h"
 
 namespace Jade
 {
 	namespace Graphics
 	{
-		class Mesh
+		class ConstantBuffer
 		{
 		private:
 
-			Device device;
-			std::vector<Math::Vertex> vertices;
-			std::vector<unsigned int> indices;
-			std::vector<Texture> textures;
-
-			std::shared_ptr<IMesh> mesh;
-
-			Math::Matrix view;
-			Math::Matrix world;
-			Math::Matrix projection;
+			std::shared_ptr<IBuffer> constantBuffer;
+			//std::shared_ptr<IBuffer> CreateConstantBuffer(std::shared_ptr<Device> device, std::vector<unsigned int> indices, Usage usage);
 
 		public:
 
-			Mesh(Device device, std::vector<Math::Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures)
+			ConstantBuffer(Device device, std::vector<unsigned int> indices, Usage usage)
 			{
-				this->device = device;
-				this->vertices = vertices;
-				this->indices = indices;
-				this->textures = textures;
-
 				switch (device.GetGraphicsAPI())
 				{
 				case GraphicsAPI::DirectX:
-					mesh = std::make_shared<DXMesh>(std::dynamic_pointer_cast<DXDevice>(device.GetIDevice()), vertices, indices, textures);
+					constantBuffer = std::make_shared<DXConstantBuffer>(std::dynamic_pointer_cast<DXDevice>(device.GetIDevice()), usage);
 					break;
 				case GraphicsAPI::OpenGL:
 					// OpenGL uses a state machine so we dont need to pass a device.
-					mesh = std::make_shared<GLMesh>(vertices, indices);
+					constantBuffer = nullptr;
 					break;
 				case GraphicsAPI::Vulkan:
-					mesh = nullptr;
+					constantBuffer = nullptr;
 					break;
 				}
 			}
 
-			void Draw()	const
-			{
-				mesh->Draw();
-			}
-
-			std::vector<Math::Vertex> GetVertices()	const
-			{
-				return vertices;
-			}
-
-			std::vector<unsigned int> GetIndices() const
-			{
-				return indices;
-			}
-
-			std::vector<Texture> GetTextures() const
-			{
-				return textures;
-			}
+			bool Bind();
+			bool Unbind();
 		};
 	}
 }

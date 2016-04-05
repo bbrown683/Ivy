@@ -53,6 +53,7 @@
     <ClCompile Include="Graphics\Shader\DXShader.cpp" />
     <ClCompile Include="Graphics\Rasterizer\DXRasterizer.cpp" />
     <ClCompile Include="Graphics\Rasterizer\GLRasterizer.cpp" />
+    <ClCompile Include="Graphics\Buffer\ConstantBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\Vector4.h">
@@ -143,6 +144,7 @@
     <ClInclude Include="Graphics\Rasterizer\GLRasterizer.h" />
     <ClInclude Include="Math\AABB.h" />
     <ClInclude Include="Math\OBB.h" />
+    <ClInclude Include="Graphics\Buffer\ConstantBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">

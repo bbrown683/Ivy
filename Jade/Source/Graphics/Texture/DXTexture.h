@@ -56,12 +56,17 @@ namespace Jade
 				this->device = device;
 				this->filename = filename;
 				this->type = type;
+			}
 
-				DXTexture::Bind();
+			~DXTexture()
+			{
+				DXTexture::Unbind();
 			}
 
 			bool Bind() override;
 			bool Unbind() override;
+			ComPtr<ID3D11ShaderResourceView>& GetID3D11ShaderResourceView();
+			ComPtr<ID3D11SamplerState>& GetID3D11SamplerState();
 		};
 	}
 }
