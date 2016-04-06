@@ -27,14 +27,10 @@ An Open Source C++ Game Engine inspired by [Monogame](http://www.monogame.net/).
 #include "Graphics/Device/Device.h"
 #include "Graphics/Shader/Shader.h"
 #include "Graphics/Model/Model.h"
-#include "Graphics/Font/Font.h"
-#include "Graphics/Rasterizer/Rasterizer.h"
-#include "Graphics/Camera/Camera.h"
 
 using namespace Jade::Core;
 using namespace Jade::Input;
 using namespace Jade::Graphics;
-using namespace Jade::Math;
 using namespace Jade::System;
 
 int main(int argc, char* argv[])
