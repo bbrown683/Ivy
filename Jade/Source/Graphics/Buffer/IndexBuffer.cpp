@@ -42,10 +42,10 @@ std::shared_ptr<Jade::Graphics::IBuffer> Jade::Graphics::IndexBuffer::CreateInde
 
 bool Jade::Graphics::IndexBuffer::Bind()
 {
-	return false;
+	return indexBuffer->Bind();
 }
 
 bool Jade::Graphics::IndexBuffer::Unbind()
 {
-	return false;
+	return indexBuffer->Unbind();
 }

@@ -37,6 +37,8 @@ namespace Jade
 		{
 		private:
 
+			GLuint indexBuffer;
+
 			std::vector<unsigned int> indices;
 			Usage usage;
 

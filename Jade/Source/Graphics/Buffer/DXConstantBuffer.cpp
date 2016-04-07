@@ -22,6 +22,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#ifdef _WIN32
+
 #include "DXConstantBuffer.h"
 
 bool Jade::Graphics::DXConstantBuffer::Bind()
@@ -46,3 +48,5 @@ bool Jade::Graphics::DXConstantBuffer::Unbind()
 {
 	return false;
 }
+
+#endif // _WIN32

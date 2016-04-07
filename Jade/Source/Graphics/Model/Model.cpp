@@ -33,10 +33,11 @@ void Jade::Graphics::Model::Load(std::string filename)
 {
 	Assimp::Importer importer;
 
-	const aiScene* scene = importer.ReadFile(filename,
+	const aiScene* scene = importer.ReadFile(filename, aiProcess_CalcTangentSpace |
 		aiProcess_Triangulate |
 		aiProcess_JoinIdenticalVertices |
 		aiProcess_GenUVCoords |
+		aiProcess_GenNormals |
 		aiProcess_FlipUVs);
 
 	if (!scene || scene->mFlags == AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
@@ -91,7 +92,7 @@ Jade::Graphics::Mesh Jade::Graphics::Model::ProcessMesh(aiMesh* mesh, const aiSc
 		{
 			aiVector3D aNormal = mesh->mNormals[i];
 			Math::Vector3 normal(aNormal.x, aNormal.y, aNormal.z);
-			//vertex.normal = normal;
+			vertex.normal = normal;
 		}
 
 		if (mesh->HasTangentsAndBitangents())
@@ -133,144 +134,40 @@ Jade::Graphics::Mesh Jade::Graphics::Model::ProcessMesh(aiMesh* mesh, const aiSc
 			// Get the texture for the material.
 			aiString string;
 			aMaterial->GetTexture(aiTextureType_DIFFUSE, i, &string);
-			std::cout << "Diffuse texture " << string.C_Str() << " was found for mesh..." << std::endl;
-			textures.push_back(Texture(device, string.C_Str(), Diffuse));
+			std::cout << "Diffuse texture " << string.C_Str() << " was found..." << std::endl;
+			textures.push_back(Texture(device, string.C_Str(), TextureType::Diffuse));
+		}
+
+		for (unsigned int i = 0; i < aMaterial->GetTextureCount(aiTextureType_SPECULAR); i++)
+		{
+			// Get the texture for the material.
+			aiString string;
+			aMaterial->GetTexture(aiTextureType_SPECULAR, i, &string);
+			std::cout << "Specular texture " << string.C_Str() << " was found..." << std::endl;
+			textures.push_back(Texture(device, string.C_Str(), TextureType::Specular));
+		}
+
+		for (unsigned int i = 0; i < aMaterial->GetTextureCount(aiTextureType_NORMALS); i++)
+		{
+			// Get the texture for the material.
+			aiString string;
+			aMaterial->GetTexture(aiTextureType_NORMALS, i, &string);
+			std::cout << "Normal texture " << string.C_Str() << " was found..." << std::endl;
+			textures.push_back(Texture(device, string.C_Str(), TextureType::Normal));
+		}
+
+		for (unsigned int i = 0; i < aMaterial->GetTextureCount(aiTextureType_AMBIENT); i++)
+		{
+			// Get the texture for the material.
+			aiString string;
+			aMaterial->GetTexture(aiTextureType_DIFFUSE, i, &string);
+			std::cout << "Diffuse texture " << string.C_Str() << " was found..." << std::endl;
+			textures.push_back(Texture(device, string.C_Str(), TextureType::Ambient));
 		}
 	}
 
 	return Mesh(device, vertices, indices, textures);
 }
-
-	/*
-	if (scene->HasMeshes())
-	{
-		// Iterates through each mesh and assigns them their respective vertices and indices.
-		for (unsigned int i = 0; i < scene->mNumMeshes; i++)
-		{
-			std::cout << "Mesh # : " << i + 1 << std::endl;
-
-			// Set current mesh for assimp importer.
-			const aiMesh* aMesh = scene->mMeshes[i];
-
-
-
-			// Grab the vertex position and colors for the mesh.
-			for (unsigned int j = 0; j < aMesh->mNumVertices; j++)
-			{
-				if (aMesh->HasPositions())
-				{
-					aiVector3D aPosition = aMesh->mVertices[j];
-					Math::Vector3 position(aPosition.x, aPosition.y, aPosition.z);
-					vertex.position = position;
-				}
-
-				if(aMesh->HasNormals())
-				{
-					aiVector3D aNormal = aMesh->mNormals[j];
-					Math::Vector3 normal(aNormal.x, aNormal.y, aNormal.z);
-					//vertex.normal = normal;
-				}
-
-				if(aMesh->HasTangentsAndBitangents())
-				{
-					aiVector3D aTangent = aMesh->mTangents[j];
-					Math::Vector3 tangent(aTangent.x, aTangent.y, aTangent.z);
-
-					aiVector3D aBitangent = aMesh->mBitangents[j];
-					Math::Vector3 bitangent(aBitangent.x, aBitangent.y, aBitangent.z);
-				}
-
-				if (aMesh->HasTextureCoords(0))
-				{
-					aiVector3D aTexCoord = aMesh->mTextureCoords[0][j];
-					Math::Vector2 texCoord(aTexCoord.x, aTexCoord.y);
-					vertex.texCoord = texCoord;
-				}
-
-				vertices.push_back(vertex);
-			}
-
-			// Grab the indices for the mesh.
-			for (unsigned int j = 0; j < aMesh->mNumFaces; j++)
-			{
-				aiFace face = aMesh->mFaces[j];
-
-				if (face.mNumIndices == 3)
-					for (unsigned int k = 0; k < face.mNumIndices; k++)
-						indices.push_back(face.mIndices[k]);
-				else
-					std::cout << "ERROR: Faces are not triangulated..." << std::endl;
-			}
-
-			// Check to see if mesh has a texture.
-			if(aMesh->mMaterialIndex >= 0)
-			{
-				const aiMaterial* aMaterial = scene->mMaterials[aMesh->mMaterialIndex];
-
-				// Iterate though each texture type if they exist.
-
-				for (unsigned int j = 0; j < aMaterial->GetTextureCount(aiTextureType_DIFFUSE); j++)
-				{
-					// Get the texture for the material.
-					aiString string;
-					aMaterial->GetTexture(aiTextureType_DIFFUSE, j, &string);
-					std::cout << "Diffuse texture " << string.C_Str() << " was found for mesh..." << std::endl;
-					textures.push_back(Texture(device, string.C_Str(), Diffuse));
-				}
-
-				for (unsigned int j = 0; j < aMaterial->GetTextureCount(aiTextureType_SPECULAR); j++)
-				{
-					// Get the texture for the material.
-					aiString string;
-					aMaterial->GetTexture(aiTextureType_SPECULAR, j, &string);
-					std::cout << "Specular texture " << string.C_Str() << " was found for mesh..." << std::endl;
-					textures.push_back(Texture(device, string.C_Str(), Specular));
-				}
-
-				for (unsigned int j = 0; j < aMaterial->GetTextureCount(aiTextureType_HEIGHT); j++)
-				{
-					// Get the texture for the material.
-					aiString string;
-					aMaterial->GetTexture(aiTextureType_HEIGHT, j, &string);
-					std::cout << "Height texture " << string.C_Str() << " was found for mesh..." << std::endl;
-					textures.push_back(Texture(device, string.C_Str(), Height));
-				}
-
-				for (unsigned int j = 0; j < aMaterial->GetTextureCount(aiTextureType_OPACITY); j++)
-				{
-					// Get the texture for the material.
-					aiString string;
-					aMaterial->GetTexture(aiTextureType_OPACITY, j, &string);
-					std::cout << "Opacity texture " << string.C_Str() << " was found for mesh..." << std::endl;
-					textures.push_back(Texture(device, string.C_Str(), Opacity));
-				}
-
-				for (unsigned int j = 0; j < aMaterial->GetTextureCount(aiTextureType_NORMALS); j++)
-				{
-					// Get the texture for the material.
-					aiString string;
-					aMaterial->GetTexture(aiTextureType_NORMALS, j, &string);
-					std::cout << "Normal texture " << string.C_Str() << " was found for mesh..." << std::endl;
-					textures.push_back(Texture(device, string.C_Str(), Normal));
-				}
-
-				for (unsigned int j = 0; j < aMaterial->GetTextureCount(aiTextureType_AMBIENT); j++)
-				{
-					// Get the texture for the material.
-					aiString string;
-					aMaterial->GetTexture(aiTextureType_AMBIENT, j, &string);
-					std::cout << "Ambient texture " << string.C_Str() << " was found for mesh..." << std::endl;
-					textures.push_back(Texture(device, string.C_Str(), Ambient));
-				}
-			}
-
-			textures.push_back(Texture(device, "M4A1-s.tga", Diffuse));
-
-			meshes.push_back(Mesh(device, vertices, indices, textures));
-		}
-	}
-}
-*/
 
 void Jade::Graphics::Model::Draw()
 {

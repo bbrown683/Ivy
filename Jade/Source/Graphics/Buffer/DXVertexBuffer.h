@@ -54,6 +54,11 @@ namespace Jade
 				this->usage = usage;
 			}
 
+			~DXVertexBuffer()
+			{
+				DXVertexBuffer::Unbind();
+			}
+
 			bool Bind() override;
 			bool Unbind() override;
 		};

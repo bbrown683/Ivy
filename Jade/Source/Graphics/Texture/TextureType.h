@@ -28,7 +28,7 @@ namespace Jade
 {
 	namespace Graphics
 	{
-		enum TextureType
+		enum class TextureType
 		{
 			Unknown,
 			Ambient,

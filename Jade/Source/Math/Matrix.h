@@ -119,11 +119,11 @@ namespace Jade
 			//! Adds two matrices and returns a matrix as a result.
 			Matrix Add(Matrix other) const;
 			//! Returns a matrix with the camera vectors.
-			Matrix CreateLookAt(Vector3 eye, Vector3 at, Vector3 up);
+			static Matrix CreateLookAt(Vector3 eye, Vector3 at, Vector3 up);
 			//! Returns a matrix that is of an Orthographic view.
-			Matrix CreateOrthographicView(float fieldOfView, float aspectRatio, float nearPlaneDistance, float farPlaneDistance);
+			static Matrix CreateOrthographicView(float fieldOfView, float aspectRatio, float nearPlaneDistance, float farPlaneDistance);
 			//! Returns a matrix that is of a Perspective view.
-			Matrix CreatePerspectiveView(float fieldOfView, float aspectRatio, float nearPlaneDistance, float farPlaneDistance);
+			static Matrix CreatePerspectiveView(float fieldOfView, float aspectRatio, float nearPlaneDistance, float farPlaneDistance);
 			//! Returns a reference to the raw data contained within the matrix.
 			float(&Data())[4][4];
 			//! Returns the determinant of the matrix.
@@ -137,9 +137,9 @@ namespace Jade
 			//! Returns a matrix with the values negated.
 			Matrix Negate();
 			//! Rotates the matrix along the x-axis by a specified amount in radians.
-			Matrix RotateAlongX(float radians) const;
+			static Matrix RotateAlongX(float radians);
 			//! Rotates the matrix along the y - axis by a specified amount in radians.
-			Matrix RotateAlongY(float radians) const;
+			static Matrix RotateAlongY(float radians);
 			//! Rotates the matrix along the z - axis by a specified amount in radians.
 			Matrix RotateAlongZ(float radians) const;
 			//! Subtracts two matrices and returns a matrix as a result.

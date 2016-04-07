@@ -22,6 +22,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#ifdef _WIN32
+
 #include "DXIndexBuffer.h"
 
 bool Jade::Graphics::DXIndexBuffer::Bind()
@@ -39,9 +41,9 @@ bool Jade::Graphics::DXIndexBuffer::Bind()
 	InitData.pSysMem = indices.data();
 
 	// Create index buffer.
-	long hr = device->GetID3D11Device()->CreateBuffer(&desc, &InitData, m_pIndexBuffer.GetAddressOf());
+	HRESULT hr = device->GetID3D11Device()->CreateBuffer(&desc, &InitData, m_pIndexBuffer.GetAddressOf());
 
-	if (hr < 0)
+	if (FAILED(hr))
 		return false;
 
 	// Assign index buffer.
@@ -56,3 +58,5 @@ bool Jade::Graphics::DXIndexBuffer::Unbind()
 
 	return true;
 }
+
+#endif // _WIN32

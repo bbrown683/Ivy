@@ -37,6 +37,9 @@ namespace Jade
 		{
 		private:
 
+			GLuint vertexArray;
+			GLuint vertexBuffer;
+
 			std::vector<Math::Vertex> vertices;
 			Usage usage;
 

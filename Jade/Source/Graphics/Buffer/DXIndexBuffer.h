@@ -24,6 +24,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#ifdef _WIN32
+
 #include <Graphics/Buffer/IBuffer.h>
 #include <Graphics/Buffer/Usage.h>
 #include <Graphics/Device/DXDevice.h>
@@ -52,8 +54,15 @@ namespace Jade
 				this->usage = usage;
 			}
 
+			~DXIndexBuffer()
+			{
+				DXIndexBuffer::Unbind();
+			}
+
 			bool Bind() override;
 			bool Unbind() override;
 		};
 	}
 }
+
+#endif // _WIN32

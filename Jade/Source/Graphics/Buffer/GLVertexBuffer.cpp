@@ -26,10 +26,24 @@ SOFTWARE.
 
 bool Jade::Graphics::GLVertexBuffer::Bind()
 {
-	return false;
+	// Generate our vertices array and bind it to the first element.
+	glGenVertexArrays(1, &vertexArray);
+	glBindVertexArray(vertexArray);
+
+	// Generate our vertices buffer and bind it.
+	glGenBuffers(1, &vertexBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
+	glBufferData(GL_ARRAY_BUFFER, vertices.size(), vertices.data(), GL_STATIC_DRAW); // currently avoiding the use of dynamic drawing for simplicity.
+
+	return true;
 }
 
 bool Jade::Graphics::GLVertexBuffer::Unbind()
 {
-	return false;
+	// Unbind and delete the vertex buffer.
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glDeleteBuffers(1, &vertexBuffer);
+	glDeleteVertexArrays(1, &vertexArray);
+
+	return true;
 }

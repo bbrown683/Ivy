@@ -23,7 +23,6 @@ SOFTWARE.
 */
 
 #include "GLDevice.h"
-#include <iostream>
 
 bool Jade::Graphics::GLDevice::Create()
 {

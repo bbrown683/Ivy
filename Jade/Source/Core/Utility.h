@@ -28,6 +28,9 @@ SOFTWARE.
 // Include some common headers.
 //==============================================
 
+// I/O
+#include <iostream>
+
 // Strings.
 #include <string>
 

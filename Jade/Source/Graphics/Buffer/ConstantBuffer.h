@@ -44,6 +44,8 @@ namespace Jade
 
 		public:
 
+			ConstantBuffer() { }
+
 			ConstantBuffer(Device device, std::vector<unsigned int> indices, Usage usage)
 			{
 				switch (device.GetGraphicsAPI())

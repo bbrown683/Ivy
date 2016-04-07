@@ -22,19 +22,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "System/Window/Window.h"
-#include "Graphics/Device/Device.h"
-#include "Graphics/Shader/Shader.h"
-#include "Graphics/Model/Model.h"
-#include "Graphics/Font/Font.h"
-#include "Graphics/Rasterizer/Rasterizer.h"
-#include "Graphics/Camera/Camera.h"
+// Main engine defintions.
+#define JADE_USING_NAMESPACE 
+#define JADE_INCLUDE_ALL
 
-using namespace Jade::Core;
-using namespace Jade::Input;
-using namespace Jade::Graphics;
-using namespace Jade::Math;
-using namespace Jade::System;
+// Include the header.
+#include "Jade.h"
 
 int main(int argc, char* argv[])
 {
@@ -63,7 +56,13 @@ int main(int argc, char* argv[])
 	Shader shader(device, shaders);
 
 	Model model(device);
-	model.Load(".\\resources\\models\\testcube.obj");
+	model.Load(".\\resources\\models\\MonoCube.dae");
+
+	//Font font(device, ".\\resources\\fonts\\consola.ttf", 16);
+
+	Matrix matrix(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
+	matrix = matrix + Matrix::Identity;
+	std::cout << matrix.Data()[1][0] << std::endl;
 
 	while (window.IsOpen())
 	{

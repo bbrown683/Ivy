@@ -43,6 +43,8 @@ namespace Jade
 
 		public:
 
+			IndexBuffer() { } 
+
 			IndexBuffer(std::shared_ptr<Device> device, std::vector<unsigned int> indices, Usage usage)
 			{
 				indexBuffer = CreateIndexBuffer(device, indices, usage);

@@ -22,8 +22,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <iostream>
-
 #include "Graphics/Mesh/DXMesh.h"
 
 void Jade::Graphics::DXMesh::Bind()
@@ -120,14 +118,14 @@ void Jade::Graphics::DXMesh::Bind()
 				space.view = XMMatrixTranspose(view);
 
 				// Set our projection matrix.
-				projection = DirectX::XMMatrixPerspectiveFovLH(DirectX::XM_PIDIV2, device->GetIWindow()->GetAspectRatio(), 0.01f, 100.0f);
+				projection = DirectX::XMMatrixPerspectiveFovLH(DirectX::XM_PIDIV2, device->GetIWindow()->GetAspectRatio(), 0.01f, 1000.0f);
 
 				space.projection = XMMatrixTranspose(projection);
 
 				// After buffer is created we can bind the textures.
 				for (int i = 0; i < textures.size(); i++)
 				{
-					if(textures[i].Bind())				  
+					if(textures[i].CreateTextureFromFile())				  
 						std::cout << "Texture " << textures[i].GetFilename() << " was bound successfully..." << std::endl;
 					else
 						std::cout << "Texture " << textures[i].GetFilename() << " failed to bind to mesh..." << std::endl;
@@ -154,7 +152,7 @@ void Jade::Graphics::DXMesh::Draw()
 	if (bufferSuccess)
 	{
 		// Rotate our cube slightly.
-		world = DirectX::XMMatrixRotationY(device->GetIWindow()->GetTimer().GetElaspedTime()) * DirectX::XMMatrixRotationX(device->GetIWindow()->GetTimer().GetElaspedTime());
+		world = DirectX::XMMatrixRotationY(device->GetIWindow()->GetTimer().GetElaspedTime());// *DirectX::XMMatrixRotationX(device->GetIWindow()->GetTimer().GetElaspedTime());
 
 		space.world = XMMatrixTranspose(world);
 

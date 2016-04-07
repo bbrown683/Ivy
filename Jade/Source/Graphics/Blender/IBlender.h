@@ -26,12 +26,11 @@ SOFTWARE.
 
 namespace Jade
 {
-	namespace Math
+	namespace Graphics
 	{
-		// Represents an Axis-aligned Bounding Box.
-		class AABB
+		struct IBlender
 		{
-			
+			virtual bool SetBlendState(unsigned int mask) = 0;
 		};
 	}
 }

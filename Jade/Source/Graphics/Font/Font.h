@@ -24,10 +24,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-//#include "ft2build.h"
-//#include FT_FREETYPE_H
+#include "ft2build.h"
+#include FT_FREETYPE_H
 
 #include <Core/Utility.h>
+#include <Graphics/Device/Device.h>
 
 namespace Jade
 {
@@ -38,16 +39,24 @@ namespace Jade
 		{
 		private:
 
+			Device device;
 			std::string filename;
+			int pixelSize;
 
 		public:
-
-			Font(std::string filename)
+ 
+			Font(Device device, std::string filename, int pixelSize)
 			{
+				this->device = device;
 				this->filename = filename;
+				this->pixelSize = pixelSize;
+
+				Load();
 			}
 
-			bool Load();
+			// Draws the given text at the specified x and y coordinates at a certain pixel size.
+			bool Draw(std::string text, int x, int y);
+			void Load();
 		};
 	}
 }

@@ -69,9 +69,9 @@ namespace Jade
 				}
 			}
 			
-			bool Bind()	const
+			bool CreateTextureFromFile() const
 			{
-				return texture->Bind();
+				return texture->CreateTextureFromFile();
 			}
 
 			std::string GetFilename()

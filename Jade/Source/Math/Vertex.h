@@ -37,7 +37,7 @@ namespace Jade
 		{
 			Vector3 position;
 			Vector2 texCoord;
-			//Vector3 normal;
+			Vector3 normal;
 		};
 	}
 }

@@ -45,6 +45,8 @@ namespace Jade
 		{
 		private:
 
+			VertexBuffer vBuffer;
+
 			std::shared_ptr<DXDevice> device;
 			std::vector<Math::Vertex> vertices;
 			std::vector<unsigned int> indices;

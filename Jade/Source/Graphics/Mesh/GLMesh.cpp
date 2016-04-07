@@ -40,7 +40,7 @@ void Jade::Graphics::GLMesh::Bind()
 	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
 	//glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), &indices[0], GL_STATIC_DRAW);
 
-	glBindVertexArray(0);
+	//glBindVertexArray(0);
 }
 
 void Jade::Graphics::GLMesh::Unbind()
@@ -56,6 +56,6 @@ void Jade::Graphics::GLMesh::Draw()
 	// Vertices.
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, nullptr);
-	glDrawArrays(GL_TRIANGLES, 0, 3);
+	glDrawArrays(GL_TRIANGLES, 0, sizeof(vertices));
 	glDisableVertexAttribArray(0);
 }

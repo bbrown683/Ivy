@@ -46,6 +46,8 @@ namespace Jade
 
 		public:
 
+			VertexBuffer() { }
+
 			VertexBuffer(Device device, std::vector<Math::Vertex> vertices, Usage usage)
 			{
 				switch (device.GetGraphicsAPI())

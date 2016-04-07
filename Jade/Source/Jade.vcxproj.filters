@@ -54,6 +54,8 @@
     <ClCompile Include="Graphics\Rasterizer\DXRasterizer.cpp" />
     <ClCompile Include="Graphics\Rasterizer\GLRasterizer.cpp" />
     <ClCompile Include="Graphics\Buffer\ConstantBuffer.cpp" />
+    <ClCompile Include="Graphics\Blender\DXBlender.cpp" />
+    <ClCompile Include="Graphics\Font\DXFont.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\Vector4.h">
@@ -142,9 +144,14 @@
     <ClInclude Include="Audio\AudioDevice.h" />
     <ClInclude Include="Graphics\Rasterizer\FillMode.h" />
     <ClInclude Include="Graphics\Rasterizer\GLRasterizer.h" />
-    <ClInclude Include="Math\AABB.h" />
-    <ClInclude Include="Math\OBB.h" />
     <ClInclude Include="Graphics\Buffer\ConstantBuffer.h" />
+    <ClInclude Include="Graphics\Blender\IBlender.h" />
+    <ClInclude Include="Graphics\Blender\DXBlender.h" />
+    <ClInclude Include="Graphics\Blender\Blender.h" />
+    <ClInclude Include="Graphics\Font\Glyph.h" />
+    <ClInclude Include="Graphics\Font\DXFont.h" />
+    <ClInclude Include="Graphics\Buffer\DrawBuffer.h" />
+    <ClInclude Include="Jade.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">

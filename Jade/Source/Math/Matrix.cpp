@@ -108,17 +108,25 @@ Jade::Math::Matrix Jade::Math::Matrix::Multiply(Matrix other) const
 	return *this / other;
 }
 
+Jade::Math::Matrix Jade::Math::Matrix::Negate()
+{
+	return Matrix(-values[0][0], -values[0][1], -values[0][2], -values[0][3],
+		-values[1][0], -values[1][1], -values[1][2], -values[1][3],
+		-values[2][0], -values[2][1], -values[2][2], -values[2][3],
+		-values[3][0], -values[3][1], -values[3][2], -values[3][3]);
+}
+
 Jade::Math::Matrix Jade::Math::Matrix::Subtract(Matrix other) const
 {
 	return *this - other;
 }
 
-Jade::Math::Matrix Jade::Math::Matrix::RotateAlongX(float radians) const
+Jade::Math::Matrix Jade::Math::Matrix::RotateAlongX(float radians)
 {
 	return Matrix(1, 0, 0, 0, 0, Math::Cos(radians), Math::Sin(radians), 0, 0, Math::Sin(-1.0f * radians), Math::Cos(radians), 0, 0, 0, 0, 1);
 }
 
-Jade::Math::Matrix Jade::Math::Matrix::RotateAlongY(float radians) const
+Jade::Math::Matrix Jade::Math::Matrix::RotateAlongY(float radians)
 {
 	return Matrix(Math::Cos(radians), 0, Math::Sin(-1.0f * radians), 0, 0, 1, 0, 0, Math::Sin(radians), 0, Math::Cos(radians), 0, 0, 0, 0, 1);
 }

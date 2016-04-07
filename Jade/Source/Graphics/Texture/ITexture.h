@@ -31,8 +31,8 @@ namespace Jade
 		struct ITexture
 		{
 		public:
-			virtual bool Bind() = 0;
-			virtual bool Unbind() = 0;
+			virtual bool CreateTextureFromFile() = 0;
+			virtual bool CreateTextureFromMemory() = 0;
 		};
 	}
 }

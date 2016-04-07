@@ -26,10 +26,18 @@ SOFTWARE.
 
 bool Jade::Graphics::GLIndexBuffer::Bind()
 {
-	return false;
+	// Generate a buffer for the indices;
+	glGenBuffers(1, &indexBuffer);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), &indices[0], GL_STATIC_DRAW);
+
+	return true;
 }
 
 bool Jade::Graphics::GLIndexBuffer::Unbind()
 {
-	return false;
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	glDeleteBuffers(1, &indexBuffer);
+
+	return true;
 }

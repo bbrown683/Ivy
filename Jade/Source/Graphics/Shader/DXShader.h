@@ -25,7 +25,6 @@ SOFTWARE.
 */
 
 #include <d3dcompiler.h>
-#include <iostream>
 
 #include <Core/Utility.h>
 #include "Graphics/Shader/IShader.h"

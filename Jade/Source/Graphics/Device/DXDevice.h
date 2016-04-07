@@ -27,8 +27,6 @@ SOFTWARE.
 #include <wrl/client.h>
 #include <d3d11.h>
 
-#include <iostream>
-
 #include "Core/Utility.h"
 #include "Graphics/Device/IDevice.h"
 #include "Graphics/Device/Specification.h"

@@ -16,10 +16,10 @@ bool Jade::Graphics::DXVertexBuffer::Bind()
 	InitData.pSysMem = vertices.data();
 
 	// Creaate vertices buffer.
-	long hr = device->GetID3D11Device()->CreateBuffer(&desc, &InitData, m_pVertexBuffer.GetAddressOf());
+	HRESULT hr = device->GetID3D11Device()->CreateBuffer(&desc, &InitData, m_pVertexBuffer.GetAddressOf());
 
 	// We had an error creating the buffer.
-	if (hr < 0)
+	if (FAILED(hr))
 		return false;
 
 	// Set the memory stride.
