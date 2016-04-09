@@ -24,8 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <Graphics/Buffer/IBuffer.h>
-#include <Graphics/Buffer/Usage.h>
+#include <Graphics/Buffer/IIndexBuffer.h>
 #include <Graphics/Device/GLDevice.h>
 #include <Math/Vertex.h>
 
@@ -33,23 +32,20 @@ namespace Jade
 {
 	namespace Graphics
 	{
-		class GLIndexBuffer : public IBuffer
+		class GLIndexBuffer : public IIndexBuffer
 		{
 		private:
 
 			GLuint indexBuffer;
 
 			std::vector<unsigned int> indices;
-			Usage usage;
 
 		public:
 
-			GLIndexBuffer(std::vector<unsigned int> indices, Usage usage)
-			{
-				this->indices = indices;
-				this->usage = usage;
-			}
+			GLIndexBuffer() { }
 
+			std::vector<unsigned int> GetIndices() override;
+			void SetIndices(std::vector<unsigned int> indices) override;
 			bool Bind() override;
 			bool Unbind() override;
 		};

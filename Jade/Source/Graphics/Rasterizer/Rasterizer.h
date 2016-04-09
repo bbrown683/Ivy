@@ -27,29 +27,38 @@ SOFTWARE.
 #include <Graphics/Device/Device.h>
 #include <Graphics/Rasterizer/DXRasterizer.h>
 #include <Graphics/Rasterizer/IRasterizer.h>
-#include <Graphics/Rasterizer/RasterizerSetting.h>
 
 namespace Jade
 {
 	namespace Graphics
 	{
+		/* \brief 
+		 *  
+		 */
 		class Rasterizer
 		{
 		private:
 
 			Device device;
-			RasterizerSetting rasterizerSetting;
 
 			std::shared_ptr<IRasterizer> rasterizer;
 
 		public:
 
-			Rasterizer(Device device, RasterizerSetting rasterizerSetting)
+			Rasterizer(Device device)
 			{
 				this->device = device;
-				this->rasterizerSetting = rasterizerSetting;
 
-				rasterizer = std::make_shared<DXRasterizer>(std::dynamic_pointer_cast<DXDevice>(device.GetIDevice()), rasterizerSetting);
+				rasterizer = std::make_shared<DXRasterizer>(std::dynamic_pointer_cast<DXDevice>(device.GetIDevice()));
+			}
+
+			/*! \brief Sets the rasterizer state to the specified cull mode and fill mode.
+			* @param[in] cullMode Represents the faces that will be hidden from view when rendering. Front, Back, and None are accepted values here. 
+			* @param[in] fillMode Represents how the faces will be rendered. Solid and Wireframe are accepted values here.
+			*/
+			bool SetRasterizerState(CullMode cullMode, FillMode fillMode, WindMode windMode) const
+			{
+				return rasterizer->SetRasterizerState(cullMode, fillMode, windMode);
 			}
 		};
 	}

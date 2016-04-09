@@ -79,7 +79,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_3669d3da2fb4067fb806a1e62fde93aa.html">Source</a></li><li class="navelem"><a class="el" href="dir_087b994012a1e7b9917630f8226ed1ea.html">Graphics</a></li><li class="navelem"><a class="el" href="dir_37cf032e088c2491275151a5f98119ea.html">Buffer</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_74389ed8173ad57b461b9d623a1f3867.html">Source</a></li><li class="navelem"><a class="el" href="dir_f40ad9b8929dc461cf57247ad0f896ed.html">Graphics</a></li><li class="navelem"><a class="el" href="dir_67301cce28a6074bf40bbcdb3814c6a7.html">Buffer</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -126,24 +126,26 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        {</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="keyword">private</span>:</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            std::vector&lt;unsigned int&gt; indices;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            Usage usage;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            GLuint indexBuffer;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            std::vector&lt;unsigned int&gt; indices;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            Usage usage;</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            <a class="code" href="class_jade_1_1_graphics_1_1_g_l_index_buffer.html">GLIndexBuffer</a>(std::vector&lt;unsigned int&gt; indices, Usage usage)</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            {</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                this-&gt;indices = indices;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                this-&gt;usage = usage;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            }</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            <span class="keywordtype">bool</span> Bind() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            <span class="keywordtype">bool</span> Unbind() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        };</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    }</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;}</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            <a class="code" href="class_jade_1_1_graphics_1_1_g_l_index_buffer.html">GLIndexBuffer</a>(std::vector&lt;unsigned int&gt; indices, Usage usage)</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            {</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                this-&gt;indices = indices;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                this-&gt;usage = usage;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            }</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            <span class="keywordtype">bool</span> Bind() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            <span class="keywordtype">bool</span> Unbind() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        };</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    }</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;}</div>
 <div class="ttc" id="struct_jade_1_1_graphics_1_1_i_buffer_html"><div class="ttname"><a href="struct_jade_1_1_graphics_1_1_i_buffer.html">Jade::Graphics::IBuffer</a></div><div class="ttdef"><b>Definition:</b> IBuffer.h:31</div></div>
-<div class="ttc" id="namespace_jade_html"><div class="ttname"><a href="namespace_jade.html">Jade</a></div><div class="ttdef"><b>Definition:</b> Utility.h:52</div></div>
+<div class="ttc" id="namespace_jade_html"><div class="ttname"><a href="namespace_jade.html">Jade</a></div><div class="ttdef"><b>Definition:</b> AudioDevice.h:29</div></div>
 <div class="ttc" id="class_jade_1_1_graphics_1_1_g_l_index_buffer_html"><div class="ttname"><a href="class_jade_1_1_graphics_1_1_g_l_index_buffer.html">Jade::Graphics::GLIndexBuffer</a></div><div class="ttdef"><b>Definition:</b> GLIndexBuffer.h:36</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

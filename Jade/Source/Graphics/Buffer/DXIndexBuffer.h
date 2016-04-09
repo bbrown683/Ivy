@@ -26,8 +26,7 @@ SOFTWARE.
 
 #ifdef _WIN32
 
-#include <Graphics/Buffer/IBuffer.h>
-#include <Graphics/Buffer/Usage.h>
+#include <Graphics/Buffer/IIndexBuffer.h>
 #include <Graphics/Device/DXDevice.h>
 #include <Math/Vertex.h>
 
@@ -35,23 +34,20 @@ namespace Jade
 {
 	namespace Graphics
 	{
-		class DXIndexBuffer : public IBuffer
+		class DXIndexBuffer : public IIndexBuffer
 		{
 		private:
 
 			std::shared_ptr<DXDevice> device;
 			std::vector<unsigned int> indices;
-			Usage usage;
 
 			ComPtr<ID3D11Buffer> m_pIndexBuffer;
 
 		public:
 
-			DXIndexBuffer(std::shared_ptr<DXDevice> device, std::vector<unsigned int> indices, Usage usage)
+			DXIndexBuffer(std::shared_ptr<DXDevice> device)
 			{
 				this->device = device;
-				this->indices = indices;
-				this->usage = usage;
 			}
 
 			~DXIndexBuffer()
@@ -59,6 +55,8 @@ namespace Jade
 				DXIndexBuffer::Unbind();
 			}
 
+			std::vector<unsigned int> GetIndices() override;
+			void SetIndices(std::vector<unsigned int> indices) override;
 			bool Bind() override;
 			bool Unbind() override;
 		};

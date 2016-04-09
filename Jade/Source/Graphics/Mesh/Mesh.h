@@ -45,10 +45,6 @@ namespace Jade
 
 			std::shared_ptr<IMesh> mesh;
 
-			Math::Matrix view;
-			Math::Matrix world;
-			Math::Matrix projection;
-
 		public:
 
 			Mesh(Device device, std::vector<Math::Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures)
@@ -72,6 +68,17 @@ namespace Jade
 					break;
 				}
 			}
+
+
+			Mesh(int null, Device device, std::vector<Math::Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures)
+			{
+				this->device = device;
+				this->vertices = vertices;
+				this->indices = indices;
+				this->textures = textures;
+			}
+
+			void Initialize();
 
 			void Draw()	const
 			{

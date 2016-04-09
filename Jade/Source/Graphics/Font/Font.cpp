@@ -24,23 +24,24 @@ SOFTWARE.
 
 #include "Font.h"
 
-bool Jade::Graphics::Font::Draw(std::string text, int x, int y)
+void Jade::Graphics::Font::Draw(std::string text, int x, int y)
 {
-	return false;
+	
 }
 
-void Jade::Graphics::Font::Load()
+void Jade::Graphics::Font::Load(std::string filename, int pixelSize)
 {
+	if(filename.empty())
+		throw Core::ArgumentNullException("filename", __FILE__, __LINE__);
+
 	std::cout << "[Font Data]" << std::endl;
 
 	FT_Library library;
 
 	FT_Error error = FT_Init_FreeType(&library);
+	
 	if (error)
-	{
-		std::cout << "Failed to initialize FreeType..." << std::endl;
-		return;
-	}
+		throw Core::InitializationException("Failed to initialize FreeType.");
 
 	FT_Face face;
 	error = FT_New_Face(library, filename.c_str(), 0, &face);
@@ -51,6 +52,7 @@ void Jade::Graphics::Font::Load()
 		return;
 	}
 
+	// We must load the font at a specified size.
 	error = FT_Set_Pixel_Sizes(face, 0, pixelSize);
 
 	if(error)
@@ -71,7 +73,5 @@ void Jade::Graphics::Font::Load()
 			fprintf(stderr, "Character %c failed to load successfully...\n", i);
 			continue;
 		}
-
-
 	}
 }

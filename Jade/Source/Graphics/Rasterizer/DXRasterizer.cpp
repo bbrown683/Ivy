@@ -24,13 +24,17 @@ SOFTWARE.
 
 #include "DXRasterizer.h"
 
-bool Jade::Graphics::DXRasterizer::SetState()
+bool Jade::Graphics::DXRasterizer::SetRasterizerState(CullMode cullMode, FillMode fillMode, WindMode windMode)
 {
+	// Reset the rasterizer if it is currently in use before creating a new one.
+	if (m_pRasterizerState)
+		m_pRasterizerState.Reset();
+
 	D3D11_RASTERIZER_DESC rasterDesc;
 	ZeroMemory(&rasterDesc, sizeof(rasterDesc));
 	
 	// Set culling mode.
-	switch(rasterizerSetting.cullMode)
+	switch(cullMode)
 	{
 	case CullMode::Front: rasterDesc.CullMode = D3D11_CULL_FRONT; break;
 	case CullMode::Back: rasterDesc.CullMode = D3D11_CULL_BACK; break;
@@ -42,8 +46,8 @@ bool Jade::Graphics::DXRasterizer::SetState()
 	rasterDesc.DepthBias = 0;
 	rasterDesc.DepthBiasClamp = 0.0f;
 	rasterDesc.DepthClipEnable = true;
-	rasterDesc.FillMode = (rasterizerSetting.fillMode == FillMode::Solid) ? D3D11_FILL_SOLID : D3D11_FILL_WIREFRAME;
-	rasterDesc.FrontCounterClockwise = false;
+	rasterDesc.FillMode = (fillMode == FillMode::Solid) ? D3D11_FILL_SOLID : D3D11_FILL_WIREFRAME;	// Render as solid or wireframe.
+	rasterDesc.FrontCounterClockwise = windMode == WindMode::CounterClockwise ? true : false; // ClockWise or CounterClockWise is front
 	rasterDesc.MultisampleEnable = false;
 	rasterDesc.ScissorEnable = false;
 	rasterDesc.SlopeScaledDepthBias = 0.0f;

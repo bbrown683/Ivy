@@ -25,7 +25,6 @@ SOFTWARE.
 */
 
 #include <Graphics/Device/DXDevice.h>
-#include <Graphics/Rasterizer/RasterizerSetting.h>
 #include <Graphics/Rasterizer/IRasterizer.h>
 
 namespace Jade
@@ -37,21 +36,17 @@ namespace Jade
 		private:
 
 			std::shared_ptr<DXDevice> device;
-			RasterizerSetting rasterizerSetting;
 
 			ComPtr<ID3D11RasterizerState> m_pRasterizerState;
 
 		public:
 
-			DXRasterizer(std::shared_ptr<DXDevice> device, RasterizerSetting rasterizerSetting)
+			DXRasterizer(std::shared_ptr<DXDevice> device)
 			{
 				this->device = device;
-				this->rasterizerSetting = rasterizerSetting;
-
-				DXRasterizer::SetState();
 			}
 
-			bool SetState() override;
+			bool SetRasterizerState(CullMode cullMode, FillMode fillMode, WindMode windMode) override;
 		};
 	}
 }

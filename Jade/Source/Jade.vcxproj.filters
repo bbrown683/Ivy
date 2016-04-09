@@ -55,7 +55,8 @@
     <ClCompile Include="Graphics\Rasterizer\GLRasterizer.cpp" />
     <ClCompile Include="Graphics\Buffer\ConstantBuffer.cpp" />
     <ClCompile Include="Graphics\Blender\DXBlender.cpp" />
-    <ClCompile Include="Graphics\Font\DXFont.cpp" />
+    <ClCompile Include="Graphics\Buffer\DrawBuffer.cpp" />
+    <ClCompile Include="Graphics\Mesh\TestMesh.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\Vector4.h">
@@ -114,8 +115,6 @@
     <ClInclude Include="Graphics\Camera\Scene.h" />
     <ClInclude Include="System\Configuration.h" />
     <ClInclude Include="Graphics\Device\Specification.h" />
-    <ClInclude Include="Graphics\Buffer\IBuffer.h" />
-    <ClInclude Include="Graphics\Buffer\Usage.h" />
     <ClInclude Include="Graphics\Buffer\VertexBuffer.h" />
     <ClInclude Include="Graphics\Buffer\IndexBuffer.h" />
     <ClInclude Include="Graphics\Buffer\DXConstantBuffer.h" />
@@ -139,7 +138,6 @@
     <ClInclude Include="Graphics\Rasterizer\Rasterizer.h" />
     <ClInclude Include="Graphics\Rasterizer\IRasterizer.h" />
     <ClInclude Include="Graphics\Rasterizer\DXRasterizer.h" />
-    <ClInclude Include="Graphics\Rasterizer\RasterizerSetting.h" />
     <ClInclude Include="Graphics\Rasterizer\CullMode.h" />
     <ClInclude Include="Audio\AudioDevice.h" />
     <ClInclude Include="Graphics\Rasterizer\FillMode.h" />
@@ -149,9 +147,24 @@
     <ClInclude Include="Graphics\Blender\DXBlender.h" />
     <ClInclude Include="Graphics\Blender\Blender.h" />
     <ClInclude Include="Graphics\Font\Glyph.h" />
-    <ClInclude Include="Graphics\Font\DXFont.h" />
     <ClInclude Include="Graphics\Buffer\DrawBuffer.h" />
     <ClInclude Include="Jade.h" />
+    <ClInclude Include="Graphics\Rasterizer\WindMode.h" />
+    <ClInclude Include="Core\Asset.h" />
+    <ClInclude Include="Core\IAsset.h" />
+    <ClInclude Include="Core\Exception\ShaderCreationException.h" />
+    <ClInclude Include="Core\Exception\DeviceCreationException.h" />
+    <ClInclude Include="Core\Exception\ShaderCompilationException.h" />
+    <ClInclude Include="Core\Exception\Exception.h" />
+    <ClInclude Include="Core\Exception\ArgumentNullException.h" />
+    <ClInclude Include="Core\Exception\FileNotFoundException.h" />
+    <ClInclude Include="Core\Exception\InitializationException.h" />
+    <ClInclude Include="Graphics\Buffer\IVertexBuffer.h" />
+    <ClInclude Include="Graphics\Buffer\IUniformBuffer.h" />
+    <ClInclude Include="Graphics\Buffer\IIndexBuffer.h" />
+    <ClInclude Include="Graphics\Buffer\DXDrawBuffer.h" />
+    <ClInclude Include="Graphics\Buffer\GLDrawBuffer.h" />
+    <ClInclude Include="Graphics\Mesh\TestMesh.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">

@@ -32,7 +32,8 @@ namespace Jade
 		{
 		public:
 			virtual bool CreateTextureFromFile() = 0;
-			virtual bool CreateTextureFromMemory() = 0;
+			virtual bool CreateTextureFromFile(std::string filename) = 0;
+			virtual bool CreateTextureFromMemory(unsigned char* bits, int width, int height, int bpp) = 0;
 		};
 	}
 }

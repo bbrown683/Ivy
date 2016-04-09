@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['utility',['Utility',['../class_jade_1_1_core_1_1_utility.html',1,'Jade::Core']]]
+  ['scene',['Scene',['../struct_jade_1_1_graphics_1_1_scene.html',1,'Jade::Graphics']]],
+  ['shader',['Shader',['../class_jade_1_1_graphics_1_1_shader.html',1,'Jade::Graphics']]],
+  ['specification',['Specification',['../struct_jade_1_1_graphics_1_1_specification.html',1,'Jade::Graphics']]]
 ];

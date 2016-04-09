@@ -58,6 +58,7 @@ bool Jade::Graphics::DXDevice::Create()
 
 	unsigned int numFeatureLevels = ARRAYSIZE(featureLevels);
 
+	// This should not be null.
 	if (window->Handle() == nullptr)
 		return false;
 

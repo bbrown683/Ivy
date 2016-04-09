@@ -38,12 +38,8 @@ int main(int argc, char* argv[])
 	Device device(window, GraphicsAPI::DirectX);
 
 	// Used to enable culling or wireframe modes.
-	RasterizerSetting setting;
-	setting.cullMode = CullMode::Back;
-	setting.fillMode = FillMode::Solid;
-
-	// Set the rasterizer to our settings.
-	Rasterizer(device, setting);
+	Rasterizer rasterizer(device);
+	rasterizer.SetRasterizerState(CullMode::Back, FillMode::Solid, WindMode::Clockwise);
 
 	// Map for holding our shaders. 
 	std::map<std::string, ShaderType> shaders =
@@ -58,11 +54,8 @@ int main(int argc, char* argv[])
 	Model model(device);
 	model.Load(".\\resources\\models\\MonoCube.dae");
 
-	//Font font(device, ".\\resources\\fonts\\consola.ttf", 16);
-
-	Matrix matrix(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
-	matrix = matrix + Matrix::Identity;
-	std::cout << matrix.Data()[1][0] << std::endl;
+	Font font(device);
+	font.Load(".\\resources\\fonts\\consola.ttf", 16);
 
 	while (window.IsOpen())
 	{
@@ -77,15 +70,18 @@ int main(int argc, char* argv[])
 		for (unsigned int i = 0; i < keysPressed.size(); i++)
 			std::cout << static_cast<int>(keysPressed[i]) << std::endl;
 		
-		if(window.GetInput().keyboard.IsKeyDown(Key::Escape))
-		{
-			window.Close();
-		}
+		// Example mode swapping mid rendering.
+		if (window.GetInput().keyboard.IsKeyDown(Key::R))
+			rasterizer.SetRasterizerState(CullMode::Back, FillMode::Wireframe, WindMode::Clockwise);
 		else
-		{
-			device.Present();
-			window.PollEvents();
-		}
+			rasterizer.SetRasterizerState(CullMode::Back, FillMode::Solid, WindMode::Clockwise);
+
+		// Submit close request if we detect user is exiting application.
+		if (window.GetInput().keyboard.IsKeyDown(Key::Escape))
+			window.Close();
+
+		device.Present();
+		window.PollEvents();
 	}
 
 	return 0;

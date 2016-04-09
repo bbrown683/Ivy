@@ -29,6 +29,7 @@ SOFTWARE.
 
 #include <Core/Utility.h>
 #include <Graphics/Device/Device.h>
+#include <Core/Exception/Exception.h>
 
 namespace Jade
 {
@@ -40,23 +41,18 @@ namespace Jade
 		private:
 
 			Device device;
-			std::string filename;
-			int pixelSize;
 
 		public:
  
-			Font(Device device, std::string filename, int pixelSize)
+			Font(Device device)
 			{
 				this->device = device;
-				this->filename = filename;
-				this->pixelSize = pixelSize;
-
-				Load();
 			}
 
-			// Draws the given text at the specified x and y coordinates at a certain pixel size.
-			bool Draw(std::string text, int x, int y);
-			void Load();
+			//! Draws the given text at the specified x and y coordinates at a certain pixel size.
+			void Draw(std::string text, int x, int y);
+			//! Loads the specified font file and creates a bitmap of the images with the designated pixel size.
+			void Load(std::string filename, int pixelSize);
 		};
 	}
 }

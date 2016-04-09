@@ -26,8 +26,21 @@ SOFTWARE.
 
 #include "DXIndexBuffer.h"
 
+std::vector<unsigned int> Jade::Graphics::DXIndexBuffer::GetIndices()
+{
+	return indices;
+}
+
+void Jade::Graphics::DXIndexBuffer::SetIndices(std::vector<unsigned int> indices)
+{
+	this->indices = indices;
+}
+
 bool Jade::Graphics::DXIndexBuffer::Bind()
 {	
+	if (m_pIndexBuffer)
+		m_pIndexBuffer.Reset();
+
 	D3D11_BUFFER_DESC desc;
 	ZeroMemory(&desc, sizeof(desc));
 	desc.Usage = D3D11_USAGE_DEFAULT;

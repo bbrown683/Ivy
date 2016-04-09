@@ -24,8 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <Graphics/Buffer/IBuffer.h>
-#include <Graphics/Buffer/Usage.h>
+#include <Graphics/Buffer/IUniformBuffer.h>
 #include <Graphics/Device/GLDevice.h>
 #include <Math/Vertex.h>
 
@@ -33,20 +32,21 @@ namespace Jade
 {
 	namespace Graphics
 	{
-		class GLUniformBuffer : public IBuffer
+		class GLUniformBuffer : public IUniformBuffer
 		{
 		private:
 
-			std::vector<Math::Vertex> vertices;
-			Usage usage;
-
 		public:
 
-			GLUniformBuffer(std::vector<Math::Vertex> vertices, Usage usage)
-			{
-				this->vertices = vertices;
-				this->usage = usage;
-			}
+			GLUniformBuffer() { }
+
+			Math::Matrix GetProjectionMatrix() override;
+			Math::Matrix GetViewMatrix() override;
+			Math::Matrix GetWorldMatrix() override;
+
+			void SetProjectionMatrix(Math::Matrix matrix) override;
+			void SetViewMatrix(Math::Matrix matrix) override;
+			void SetWorldMatrix(Math::Matrix matrix) override;
 
 			bool Bind() override;
 			bool Unbind() override;

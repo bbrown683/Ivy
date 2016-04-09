@@ -27,6 +27,7 @@ SOFTWARE.
 #include <wrl/client.h>
 #include <d3d11.h>
 
+#include "Core/Exception/Exception.h"
 #include "Core/Utility.h"
 #include "Graphics/Device/IDevice.h"
 #include "Graphics/Device/Specification.h"
@@ -76,8 +77,9 @@ namespace Jade
 				// Create our device.
 				if (!DXDevice::Create())
 				{
-					// Dispose of any allocated memory and close the window.
-					DXDevice::Release();
+					// If device fails we need to throw an exception 
+					// as it can get nasty otherwise.
+					throw Core::DeviceCreationException();
 				}
 			}
 

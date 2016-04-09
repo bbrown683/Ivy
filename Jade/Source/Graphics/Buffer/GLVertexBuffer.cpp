@@ -24,6 +24,16 @@ SOFTWARE.
 
 #include "GLVertexBuffer.h"
 
+std::vector<Jade::Math::Vertex> Jade::Graphics::GLVertexBuffer::GetVertices()
+{
+	return vertices;
+}
+
+void Jade::Graphics::GLVertexBuffer::SetVertices(std::vector<Math::Vertex> vertices)
+{
+	this->vertices = vertices;
+}
+
 bool Jade::Graphics::GLVertexBuffer::Bind()
 {
 	// Generate our vertices array and bind it to the first element.

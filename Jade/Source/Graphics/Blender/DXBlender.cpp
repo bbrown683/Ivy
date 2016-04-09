@@ -2,6 +2,10 @@
 
 bool Jade::Graphics::DXBlender::SetBlendState(unsigned int mask)
 {
+	// Reset the blend state before attempting to create a new one.
+	if (m_pBlendState)
+		m_pBlendState.Reset();
+
 	D3D11_BLEND_DESC desc;
 	ZeroMemory(&desc, sizeof(desc));
 	desc.RenderTarget[0].BlendEnable = true;

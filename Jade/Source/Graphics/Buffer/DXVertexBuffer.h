@@ -26,8 +26,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <Graphics/Buffer/IBuffer.h>
-#include <Graphics/Buffer/Usage.h>
+#include <Graphics/Buffer/IVertexBuffer.h>
 #include <Graphics/Device/DXDevice.h>
 #include <Math/Vertex.h>
 
@@ -35,23 +34,20 @@ namespace Jade
 {
 	namespace Graphics
 	{
-		class DXVertexBuffer : public IBuffer
+		class DXVertexBuffer : public IVertexBuffer
 		{
 		private:
 
 			std::shared_ptr<DXDevice> device;
 			std::vector<Math::Vertex> vertices;
-			Usage usage;
 
 			ComPtr<ID3D11Buffer> m_pVertexBuffer;
 
 		public:
 
-			DXVertexBuffer(std::shared_ptr<DXDevice> device, std::vector<Math::Vertex> vertices, Usage usage)
+			DXVertexBuffer(std::shared_ptr<DXDevice> device)
 			{
 				this->device = device;
-				this->vertices = vertices;
-				this->usage = usage;
 			}
 
 			~DXVertexBuffer()
@@ -59,6 +55,8 @@ namespace Jade
 				DXVertexBuffer::Unbind();
 			}
 
+			std::vector<Math::Vertex> GetVertices() override;
+			void SetVertices(std::vector<Math::Vertex> vertices) override;
 			bool Bind() override;
 			bool Unbind() override;
 		};

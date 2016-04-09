@@ -1,5 +1,15 @@
 #include "DXVertexBuffer.h"
 
+std::vector<Jade::Math::Vertex> Jade::Graphics::DXVertexBuffer::GetVertices()
+{
+	return vertices;
+}
+
+void Jade::Graphics::DXVertexBuffer::SetVertices(std::vector<Math::Vertex> vertices)
+{
+	this->vertices = vertices;
+}
+
 bool Jade::Graphics::DXVertexBuffer::Bind()
 {
 	D3D11_BUFFER_DESC desc;

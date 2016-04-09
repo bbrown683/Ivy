@@ -46,6 +46,7 @@ SOFTWARE.
 // Core
 #ifdef JADE_INCLUDE_CORE
 #include "Core/Utility.h"
+#include "Core/Exception/Exception.h"
 #endif // JADE_INCLUDE_CORE
 
 // Graphics
@@ -76,6 +77,7 @@ SOFTWARE.
 #include "Math/Vector2.h"
 #include "Math/Vector3.h"
 #include "Math/Vector4.h"
+#include "Math/Vertex.h"
 #endif // JADE_INCLUDE_MATH
 
 // System

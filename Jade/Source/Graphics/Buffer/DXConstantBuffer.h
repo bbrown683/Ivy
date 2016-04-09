@@ -26,45 +26,45 @@ SOFTWARE.
 
 #ifdef _WIN32
 
-#include <Graphics/Buffer/IBuffer.h>
-#include <Graphics/Buffer/Usage.h>
+#include <Graphics/Buffer/IUniformBuffer.h>
 #include <Graphics/Device/DXDevice.h>
-#include <Math/Vertex.h>
-
-#include <directxmath.h>
+#include <Math/Matrix.h>
 
 namespace Jade
 {
 	namespace Graphics
 	{
-		class DXConstantBuffer : public IBuffer
+		class DXConstantBuffer : public IUniformBuffer
 		{
 		private:
 
 			std::shared_ptr<DXDevice> device;
-			Usage usage;
 
-			typedef struct ConstantBuffer
+			struct Uniform
 			{
-				DirectX::XMMATRIX world;
-				DirectX::XMMATRIX view;
-				DirectX::XMMATRIX projection;
-			} Space;
+				Math::Matrix world;
+				Math::Matrix view;
+				Math::Matrix projection;
+			};
 
-			Space space;
-			DirectX::XMMATRIX world;
-			DirectX::XMMATRIX view;
-			DirectX::XMMATRIX projection;
+			Uniform uniform;
 
 			ComPtr<ID3D11Buffer> m_pConstantBuffer;
 
 		public:
 
-			DXConstantBuffer(std::shared_ptr<DXDevice> device, Usage usage)
+			DXConstantBuffer(std::shared_ptr<DXDevice> device)
 			{
 				this->device = device;
-				this->usage = usage;
 			}
+
+			Math::Matrix GetProjectionMatrix() override;
+			Math::Matrix GetViewMatrix() override;
+			Math::Matrix GetWorldMatrix() override;
+
+			void SetProjectionMatrix(Math::Matrix matrix) override;
+			void SetViewMatrix(Math::Matrix matrix) override;
+			void SetWorldMatrix(Math::Matrix matrix) override;
 
 			bool Bind() override;
 			bool Unbind() override;

@@ -68,10 +68,37 @@ namespace Jade
 					break;
 				}
 			}
+
+			Texture(Device device)
+			{
+				this->device = device;
+				this->filename = filename;
+				this->type = type;
+
+				switch (device.GetGraphicsAPI())
+				{
+				case GraphicsAPI::DirectX:
+					texture = std::make_shared<DXTexture>(std::dynamic_pointer_cast<DXDevice>(device.GetIDevice()));
+					break;
+				case GraphicsAPI::OpenGL:
+					texture = nullptr;
+					break;
+				case GraphicsAPI::Vulkan:
+					texture = nullptr;
+					break;
+				default: texture = nullptr;
+					break;
+				}
+			}
 			
 			bool CreateTextureFromFile() const
 			{
 				return texture->CreateTextureFromFile();
+			}
+
+			bool CreateTextureFromFile(std::string filename) const
+			{
+				return texture->CreateTextureFromFile(filename);
 			}
 
 			std::string GetFilename()

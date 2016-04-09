@@ -24,10 +24,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <Graphics/Buffer/IBuffer.h>
+#include <Graphics/Buffer/IVertexBuffer.h>
 #include <Graphics/Buffer/DXVertexBuffer.h>
 #include <Graphics/Buffer/GLVertexBuffer.h>
-#include <Graphics/Buffer/Usage.h>
 #include <Graphics/Device/Device.h>
 
 namespace Jade
@@ -38,26 +37,24 @@ namespace Jade
 		{
 		private:
 
-			Device	device;
-			std::vector<Math::Vertex> vertices;
-			Usage usage;
+			Device device;
 
-			std::shared_ptr<IBuffer> vertexBuffer;
+			std::shared_ptr<IVertexBuffer> vertexBuffer;
 
 		public:
 
 			VertexBuffer() { }
 
-			VertexBuffer(Device device, std::vector<Math::Vertex> vertices, Usage usage)
+			VertexBuffer(Device device)
 			{
 				switch (device.GetGraphicsAPI())
 				{
 				case GraphicsAPI::DirectX:
-					vertexBuffer = std::make_shared<DXVertexBuffer>(std::dynamic_pointer_cast<DXDevice>(device.GetIDevice()), vertices, usage);
+					vertexBuffer = std::make_shared<DXVertexBuffer>(std::dynamic_pointer_cast<DXDevice>(device.GetIDevice()));
 					break;
 				case GraphicsAPI::OpenGL:
 					// OpenGL uses a state machine so we dont need to pass a device.
-					vertexBuffer = std::make_shared<GLVertexBuffer>(vertices, usage);
+					vertexBuffer = std::make_shared<GLVertexBuffer>();
 					break;
 				case GraphicsAPI::Vulkan:
 					vertexBuffer = nullptr;
@@ -65,6 +62,8 @@ namespace Jade
 				}
 			}
 
+			std::vector<Math::Vertex> GetVertices();
+			void SetVertices(std::vector<Math::Vertex> vertices);
 			bool Bind();
 			bool Unbind();
 		};

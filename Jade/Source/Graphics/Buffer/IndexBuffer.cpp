@@ -24,20 +24,14 @@ SOFTWARE.
 
 #include <Graphics/Buffer/IndexBuffer.h>
 
-std::shared_ptr<Jade::Graphics::IBuffer> Jade::Graphics::IndexBuffer::CreateIndexBuffer(std::shared_ptr<Device> device, std::vector<unsigned> indices, Usage usage)
+std::vector<unsigned int> Jade::Graphics::IndexBuffer::GetIndices()
 {
-	switch (device->GetGraphicsAPI())
-	{
-	case GraphicsAPI::DirectX:
-		return std::make_shared<DXIndexBuffer>(std::dynamic_pointer_cast<DXDevice>(device->GetIDevice()), indices, usage);
-	case GraphicsAPI::OpenGL:
-		// OpenGL uses a state machine so we dont need to pass a device.
-		return std::make_shared<GLIndexBuffer>(indices, usage);
-	case GraphicsAPI::Vulkan:
-		break;
-	}
+	return indexBuffer->GetIndices();
+}
 
-	return nullptr;
+void Jade::Graphics::IndexBuffer::SetIndices(std::vector<unsigned int> indices)
+{
+	indexBuffer->SetIndices(indices);
 }
 
 bool Jade::Graphics::IndexBuffer::Bind()

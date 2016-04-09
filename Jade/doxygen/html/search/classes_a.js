@@ -1,5 +1,8 @@
 var searchData=
 [
-  ['platform',['Platform',['../class_jade_1_1_system_1_1_platform.html',1,'Jade::System']]],
-  ['point',['Point',['../class_jade_1_1_math_1_1_point.html',1,'Jade::Math']]]
+  ['math',['Math',['../class_jade_1_1_math_1_1_math.html',1,'Jade::Math']]],
+  ['matrix',['Matrix',['../struct_jade_1_1_math_1_1_matrix.html',1,'Jade::Math']]],
+  ['mesh',['Mesh',['../class_jade_1_1_graphics_1_1_mesh.html',1,'Jade::Graphics']]],
+  ['model',['Model',['../class_jade_1_1_graphics_1_1_model.html',1,'Jade::Graphics']]],
+  ['mouse',['Mouse',['../class_jade_1_1_input_1_1_mouse.html',1,'Jade::Input']]]
 ];

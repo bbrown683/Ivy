@@ -765,15 +765,18 @@ WARN_LOGFILE           =
 # spaces. See also FILE_PATTERNS and EXTENSION_MAPPING
 # Note: If this tag is empty the current directory is searched.
 
+INPUT		       += ../Source/Audio/
 INPUT		       += ../Source/Core/
 INPUT		       += ../Source/Input/ 
 INPUT		       += ../Source/Graphics/ 
+INPUT		       += ../Source/Graphics/Blender/
 INPUT		       += ../Source/Graphics/Buffer/
 INPUT		       += ../Source/Graphics/Camera/
 INPUT		       += ../Source/Graphics/Device/
 INPUT		       += ../Source/Graphics/Font/
 INPUT		       += ../Source/Graphics/Mesh/
 INPUT		       += ../Source/Graphics/Model/
+INPUT		       += ../Source/Graphics/Rasterizer/
 INPUT		       += ../Source/Graphics/Shader/
 INPUT		       += ../Source/Graphics/Texture/
 INPUT 		       += ../Source/Math/

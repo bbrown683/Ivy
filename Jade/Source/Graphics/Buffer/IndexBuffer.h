@@ -24,10 +24,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <Graphics/Buffer/IBuffer.h>
+#include <Graphics/Buffer/IIndexBuffer.h>
 #include <Graphics/Buffer/DXIndexBuffer.h>
 #include <Graphics/Buffer/GLIndexBuffer.h>
-#include <Graphics/Buffer/Usage.h>
 #include <Graphics/Device/Device.h>
 
 namespace Jade
@@ -38,18 +37,31 @@ namespace Jade
 		{
 		private:
 
-			std::shared_ptr<IBuffer> indexBuffer;
-			std::shared_ptr<IBuffer> CreateIndexBuffer(std::shared_ptr<Device> device, std::vector<unsigned int> indices, Usage usage);
+			std::shared_ptr<IIndexBuffer> indexBuffer;
 
 		public:
 
 			IndexBuffer() { } 
 
-			IndexBuffer(std::shared_ptr<Device> device, std::vector<unsigned int> indices, Usage usage)
+			IndexBuffer(Device device)
 			{
-				indexBuffer = CreateIndexBuffer(device, indices, usage);
+				switch (device.GetGraphicsAPI())
+				{
+				case GraphicsAPI::DirectX:
+					indexBuffer = std::make_shared<DXIndexBuffer>(std::dynamic_pointer_cast<DXDevice>(device.GetIDevice()));
+					break;
+				case GraphicsAPI::OpenGL:
+					// OpenGL uses a state machine so we dont need to pass a device.
+					indexBuffer = std::make_shared<GLIndexBuffer>();
+					break;
+				case GraphicsAPI::Vulkan:
+					indexBuffer = nullptr;
+					break;
+				}
 			}
 
+			std::vector<unsigned int> GetIndices();
+			void SetIndices(std::vector<unsigned int> indices);
 			bool Bind();
 			bool Unbind();
 		};

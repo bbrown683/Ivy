@@ -24,6 +24,16 @@ SOFTWARE.
 
 #include <Graphics/Buffer/VertexBuffer.h>
 
+std::vector<Jade::Math::Vertex> Jade::Graphics::VertexBuffer::GetVertices()
+{
+	return vertexBuffer->GetVertices();
+}
+
+void Jade::Graphics::VertexBuffer::SetVertices(std::vector<Math::Vertex> vertices)
+{
+	vertexBuffer->SetVertices(vertices);
+}
+
 bool Jade::Graphics::VertexBuffer::Bind()
 {
 	return vertexBuffer->Bind();

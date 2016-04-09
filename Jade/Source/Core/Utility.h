@@ -49,6 +49,9 @@ SOFTWARE.
 // Asserting conditions.
 #include <cassert>
 
+// Exception system.
+#include <exception>
+
 // Used to export symbols.
 #define JADEAPI					__declspec(dllexport)
 

@@ -63,13 +63,9 @@ namespace Jade
 				this->type = type;
 			}
 
-			DXTexture(std::shared_ptr<DXDevice> device, unsigned char* bits, int width, int height, int bpp)
+			DXTexture(std::shared_ptr<DXDevice> device)
 			{
 				this->device = device;
-				this->bits = bits;
-				this->width = width;
-				this->height = height;
-				this->bpp = bpp;
 			}
 
 			~DXTexture()
@@ -79,8 +75,9 @@ namespace Jade
 
 			//! Creates a texture from the file specified in the constructor and returns a bool determining if it was successful.
 			bool CreateTextureFromFile() override;
+			bool CreateTextureFromFile(std::string filename) override;
 			//! Creates a texture from the bits specified in the constructor and returns a bool determining if it was successful.
-			bool CreateTextureFromMemory() override;
+			bool CreateTextureFromMemory(unsigned char* bits, int width, int height, int bpp) override;
 		};
 	}
 }

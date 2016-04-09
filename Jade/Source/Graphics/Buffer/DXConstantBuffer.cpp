@@ -26,13 +26,46 @@ SOFTWARE.
 
 #include "DXConstantBuffer.h"
 
+Jade::Math::Matrix Jade::Graphics::DXConstantBuffer::GetProjectionMatrix()
+{
+	return uniform.projection;
+}
+
+Jade::Math::Matrix Jade::Graphics::DXConstantBuffer::GetViewMatrix()
+{
+	return uniform.view;
+}
+
+Jade::Math::Matrix Jade::Graphics::DXConstantBuffer::GetWorldMatrix()
+{
+	return uniform.world;
+}
+
+void Jade::Graphics::DXConstantBuffer::SetProjectionMatrix(Math::Matrix matrix)
+{
+	uniform.projection = matrix;
+}
+
+void Jade::Graphics::DXConstantBuffer::SetViewMatrix(Math::Matrix matrix)
+{
+	uniform.view = matrix;
+}
+
+void Jade::Graphics::DXConstantBuffer::SetWorldMatrix(Math::Matrix matrix)
+{
+	uniform.world = matrix;
+}
+
 bool Jade::Graphics::DXConstantBuffer::Bind()
 {
+	if (m_pConstantBuffer)
+		m_pConstantBuffer.Reset();
+	
 	// Create the constant buffer
 	D3D11_BUFFER_DESC desc;
 	ZeroMemory(&desc, sizeof(desc));
 	desc.Usage = D3D11_USAGE_DEFAULT;
-	desc.ByteWidth = sizeof(ConstantBuffer);
+	desc.ByteWidth = sizeof(Uniform);
 	desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
 	desc.CPUAccessFlags = 0;
 

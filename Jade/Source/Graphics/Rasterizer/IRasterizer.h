@@ -24,13 +24,17 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include "Graphics/Rasterizer/CullMode.h"
+#include "Graphics/Rasterizer/FillMode.h"
+#include "Graphics/Rasterizer/WindMode.h"
+
 namespace Jade
 {
 	namespace Graphics
 	{
 		struct IRasterizer
 		{
-			virtual bool SetState() = 0;
+			virtual bool SetRasterizerState(CullMode cullMode, FillMode fillMode, WindMode windMode) = 0;
 		};
 	}
 }
