@@ -23,4 +23,23 @@ SOFTWARE.
 */
 
 #include "File.h"
+#include <Core/Exception/FileNotFoundException.h>
 
+std::string Jade::System::File::ReadToEnd()
+{
+	file.open(filename.c_str());
+
+	if (file.is_open())
+	{
+
+	}
+	else
+		throw Core::FileNotFoundException();
+
+	return std::string();
+}
+
+void Jade::System::File::Write(std::string text)
+{
+
+}

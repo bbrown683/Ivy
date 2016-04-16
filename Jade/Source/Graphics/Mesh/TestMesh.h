@@ -42,7 +42,6 @@ namespace Jade
 			std::vector<Math::Vertex> vertices;
 			std::vector<unsigned int> indices;
 			std::vector<std::string> textures;
-			std::vector<Texture> texture;
 
 			std::shared_ptr<IMesh> mesh;
 
@@ -52,7 +51,7 @@ namespace Jade
 
 		public:
 
-			TestMesh(int null, Device device, std::vector<Math::Vertex> vertices, std::vector<unsigned int> indices, std::vector<std::string> textures)
+			TestMesh(Device device, std::vector<Math::Vertex> vertices, std::vector<unsigned int> indices, std::vector<std::string> textures)
 			{
 				this->device = device;
 				this->vertices = vertices;

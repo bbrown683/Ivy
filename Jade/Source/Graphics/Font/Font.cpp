@@ -26,7 +26,11 @@ SOFTWARE.
 
 void Jade::Graphics::Font::Draw(std::string text, int x, int y)
 {
-	
+	// Get the texture objects contained in the text stream.
+	for(char c : text)
+	{
+			//textures[c - 32].Update();
+	}
 }
 
 void Jade::Graphics::Font::Load(std::string filename, int pixelSize)
@@ -34,44 +38,19 @@ void Jade::Graphics::Font::Load(std::string filename, int pixelSize)
 	if(filename.empty())
 		throw Core::ArgumentNullException("filename", __FILE__, __LINE__);
 
+	System::File file(filename);
+	std::string data = file.ReadToEnd();
+
 	std::cout << "[Font Data]" << std::endl;
 
-	FT_Library library;
-
-	FT_Error error = FT_Init_FreeType(&library);
-	
-	if (error)
-		throw Core::InitializationException("Failed to initialize FreeType.");
-
-	FT_Face face;
-	error = FT_New_Face(library, filename.c_str(), 0, &face);
-
-	if (error)
+	/*
+	stbtt_fontinfo fontInfo;
+	if (stbtt_InitFont(&fontInfo, reinterpret_cast<const unsigned char*>(data.c_str()),
+		stbtt_GetFontOffsetForIndex(reinterpret_cast<const unsigned char*>(data.c_str()), 0)))
 	{
-		std::cout << "Failed to load face from font file " << filename << "..." << std::endl;
-		return;
+
 	}
-
-	// We must load the font at a specified size.
-	error = FT_Set_Pixel_Sizes(face, 0, pixelSize);
-
-	if(error)
-	{
-		std::cout << "Failed to load face from font file " << filename << "..." << std::endl;
-		return;
-	}
-
-	std::cout << "Font " << filename << " was loaded..." << std::endl;
-
-	FT_GlyphSlot glyph = face->glyph;
-
-	// Load each ASCII character.
-	for (int i = 32; i < 256; i++)
-	{
-		if (FT_Load_Char(face, i, FT_LOAD_RENDER))
-		{
-			fprintf(stderr, "Character %c failed to load successfully...\n", i);
-			continue;
-		}
-	}
+	else
+		throw Core::InitializationException("Failed to initialize stb_truetype.");
+	*/
 }

@@ -6,7 +6,7 @@ void Jade::System::Log::Write(std::string text)
 #ifdef _DEBUG
 	std::cout << text << std::endl;
 #else
-// Otherwise we write to a filestream.
+// Otherwise we write to a file stream.
 	File file(__TIMESTAMP__);
 	
 #endif

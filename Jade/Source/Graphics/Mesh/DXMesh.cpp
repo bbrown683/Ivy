@@ -125,7 +125,7 @@ void Jade::Graphics::DXMesh::Bind()
 				// After buffer is created we can bind the textures.
 				for (int i = 0; i < textures.size(); i++)
 				{
-					if(textures[i].CreateTextureFromFile())				  
+					if (textures[i].CreateTextureFromFile())
 						std::cout << "Texture " << textures[i].GetFilename() << " was bound successfully..." << std::endl;
 					else
 						std::cout << "Texture " << textures[i].GetFilename() << " failed to bind to mesh..." << std::endl;
@@ -158,6 +158,10 @@ void Jade::Graphics::DXMesh::Draw()
 
 		device->GetID3D11DeviceContext()->UpdateSubresource(m_pConstantBuffer.Get(), 0, nullptr, &space, 0, 0);
 		device->GetID3D11DeviceContext()->VSSetConstantBuffers(0, 1, m_pConstantBuffer.GetAddressOf());
+
+		for (int i = 0; i < textures.size(); i++)
+			textures[i].Update();
+
 		device->GetID3D11DeviceContext()->DrawIndexed(static_cast<unsigned int>(indices.size()), 0, 0);
 	}
 }

@@ -57,6 +57,8 @@
     <ClCompile Include="Graphics\Blender\DXBlender.cpp" />
     <ClCompile Include="Graphics\Buffer\DrawBuffer.cpp" />
     <ClCompile Include="Graphics\Mesh\TestMesh.cpp" />
+    <ClCompile Include="Audio\AudioDevice.cpp" />
+    <ClCompile Include="Graphics\Widget\Canvas.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\Vector4.h">
@@ -146,12 +148,9 @@
     <ClInclude Include="Graphics\Blender\IBlender.h" />
     <ClInclude Include="Graphics\Blender\DXBlender.h" />
     <ClInclude Include="Graphics\Blender\Blender.h" />
-    <ClInclude Include="Graphics\Font\Glyph.h" />
     <ClInclude Include="Graphics\Buffer\DrawBuffer.h" />
     <ClInclude Include="Jade.h" />
     <ClInclude Include="Graphics\Rasterizer\WindMode.h" />
-    <ClInclude Include="Core\Asset.h" />
-    <ClInclude Include="Core\IAsset.h" />
     <ClInclude Include="Core\Exception\ShaderCreationException.h" />
     <ClInclude Include="Core\Exception\DeviceCreationException.h" />
     <ClInclude Include="Core\Exception\ShaderCompilationException.h" />
@@ -165,6 +164,11 @@
     <ClInclude Include="Graphics\Buffer\DXDrawBuffer.h" />
     <ClInclude Include="Graphics\Buffer\GLDrawBuffer.h" />
     <ClInclude Include="Graphics\Mesh\TestMesh.h" />
+    <ClInclude Include="Graphics\Widget\Widget.h" />
+    <ClInclude Include="Graphics\Widget\Canvas.h" />
+    <ClInclude Include="Core\Exception\BufferCreationException.h" />
+    <ClInclude Include="Graphics\Texture\TextureFactory.h" />
+    <ClInclude Include="Graphics\Rasterizer\RasterizerFactory.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">

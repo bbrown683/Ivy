@@ -24,9 +24,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <stdio.h>
+#include <fstream>
 
-#include "Core/Utility.h"
+#include <Core/Utility.h>
 
 namespace Jade
 {
@@ -36,9 +36,12 @@ namespace Jade
 		{
 		private:
 
-			FILE* file;
+			std::ifstream file;
 			std::string filename;
 		
+			// Keeps track of what line to read from.
+			unsigned int line;
+
 		public:
 
 			File(std::string filename)
@@ -46,12 +49,9 @@ namespace Jade
 				this->filename = filename;
 			}
 
-			~File()
-			{
-				delete file;
-			}
-
-			std::string Read();
+			//! \brief Returns a string object that contains all the data in the file.
+			std::string ReadToEnd();
+			//! \brief Writes the specified text to the file.
 			void Write(std::string text);
 		};
 	}

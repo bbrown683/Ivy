@@ -22,14 +22,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <iostream>
-
 #include "System/Window/NativeWindow.h"
-#include "FreeImage/FreeImage.h"
 
 bool Jade::System::NativeWindow::PollWindowEvents()
 {
-	// Compute estimated time.
+	// Compute elapsed time.
 	int currentTime = SDL_GetTicks();
 	if (startTime == 0)
 		startTime = currentTime;
@@ -251,6 +248,8 @@ Jade::Input::Key Jade::System::NativeWindow::ConvertKeycode(SDL_Keycode keycode)
 
 void Jade::System::NativeWindow::SetIcon(std::string filename)
 {
+	// Deprecating this due to attempting to reduce library clutter.
+#ifdef USE_FREEIMAGE
 	// SDL is picky about icons, therefore we will use
 	// FreeImage to load the icon and retrieve the bits 
 	// from the image and pass it to SDL.
@@ -281,21 +280,39 @@ void Jade::System::NativeWindow::SetIcon(std::string filename)
 		unsigned char* bits = nullptr;
 		unsigned long size = 0;
 		FreeImage_AcquireMemory(hMemory, &bits, &size);
+#endif
+	/*
+	// Load image without grabbing irrelevant information.
+	int width, height, bpp;
+	unsigned char* bits = stbi_load(filename.c_str(), &width, &height, &bpp, STBI_rgb_alpha);
 
-		// Load the bits into the buffer and send it to a surface.
-		SDL_RWops* buffer = SDL_RWFromMem(bits, size);
-		SDL_Surface* icon = SDL_LoadBMP_RW(buffer, 1);
-		
-		// Close the buffer and memory since it is no longer needed.
-		SDL_RWclose(buffer);
-		FreeImage_CloseMemory(hMemory);
+	if (bits)
+	{	
+		// We need to resize the image.
+		unsigned char* resizedBits = static_cast<unsigned char*>(malloc(32 * 32 * 4));
+		if (stbir_resize_uint8(bits, width, height, 0, resizedBits, 32, 32, 0, 4))
+		{
+			// Free the old image.
+			stbi_image_free(bits);
 
-		// Set the surface as an icon.
-		SDL_SetWindowIcon(m_pWindow, icon);
+			// Load the bits into the buffer and send it to a surface.
+			SDL_RWops* buffer = SDL_RWFromMem(resizedBits, sizeof resizedBits);
+			SDL_Surface* icon = SDL_LoadBMP_RW(buffer, 1);
 
-		// Release the surface object after setting icon.
-		SDL_FreeSurface(icon);
+			// Close the buffer and memory since it is no longer needed.
+			SDL_RWclose(buffer);
+
+			// Set the surface as an icon.
+			SDL_SetWindowIcon(m_pWindow, icon);
+
+			// Release the surface object after setting icon.
+			SDL_FreeSurface(icon);
+		}
+
+		// Release the resized image.
+		free(resizedBits);
 	}
+	*/
 }
 
 void Jade::System::NativeWindow::Close()

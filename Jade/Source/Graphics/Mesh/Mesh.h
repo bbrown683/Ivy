@@ -75,7 +75,7 @@ namespace Jade
 				this->device = device;
 				this->vertices = vertices;
 				this->indices = indices;
-				this->textures = textures;
+				//this->textures = textures;
 			}
 
 			void Initialize();
@@ -95,10 +95,12 @@ namespace Jade
 				return indices;
 			}
 
+			/*
 			std::vector<Texture> GetTextures() const
 			{
 				return textures;
 			}
+			*/
 		};
 	}
 }

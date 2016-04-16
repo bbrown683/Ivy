@@ -32,6 +32,7 @@ namespace Jade
 		{
 			Unknown,
 			Ambient,
+			Bitmap, // Font rendering.
 			Diffuse,
 			Displacement,
 			Emmisive,
@@ -41,7 +42,6 @@ namespace Jade
 			Opacity,
 			Reflection,
 			Specular,
-			
 		};
 	}
 }

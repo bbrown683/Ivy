@@ -24,12 +24,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "ft2build.h"
-#include FT_FREETYPE_H
+#include "stb/stb_truetype.h"
 
 #include <Core/Utility.h>
-#include <Graphics/Device/Device.h>
 #include <Core/Exception/Exception.h>
+#include <Graphics/Device/Device.h>
+#include <Graphics/Texture/Texture.h>
+#include <System/File.h>
 
 namespace Jade
 {
@@ -41,6 +42,7 @@ namespace Jade
 		private:
 
 			Device device;
+			std::vector<Texture> textures;
 
 		public:
  

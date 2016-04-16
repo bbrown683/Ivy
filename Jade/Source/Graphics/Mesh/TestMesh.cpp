@@ -11,7 +11,6 @@ void Jade::Graphics::TestMesh::Initialize()
 
 	for (int i = 0; i < textures.size(); i++)
 	{
-		texture.push_back(device);
-		texture[i].CreateTextureFromFile(textures[i]);
+
 	}
 }

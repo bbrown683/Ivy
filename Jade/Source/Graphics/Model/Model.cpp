@@ -77,7 +77,6 @@ Jade::Graphics::Mesh Jade::Graphics::Model::ProcessMesh(aiMesh* mesh, const aiSc
 	std::vector<Math::Vertex> vertices;
 	std::vector<unsigned int> indices;
 	std::vector<Texture> textures;
-	//std::vector<std::string> textures;
 
 	// Grab the vertex position and colors for the mesh.
 	for (unsigned int i = 0; i < mesh->mNumVertices; i++)
@@ -137,7 +136,6 @@ Jade::Graphics::Mesh Jade::Graphics::Model::ProcessMesh(aiMesh* mesh, const aiSc
 			aMaterial->GetTexture(aiTextureType_DIFFUSE, i, &string);
 			std::cout << "Diffuse texture " << string.C_Str() << " was found..." << std::endl;
 			textures.push_back(Texture(device, string.C_Str(), TextureType::Diffuse));
-			//textures.push_back(Texture(device, string.C_Str());
 		}
 
 		for (unsigned int i = 0; i < aMaterial->GetTextureCount(aiTextureType_SPECULAR); i++)

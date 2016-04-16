@@ -33,13 +33,13 @@ int main(int argc, char* argv[])
 {
 	// Creates a basic window that can be rendered with either graphics API.
 	Window window(1080, 720, 100, 100, "Hello World", false);
+	//window.SetIcon(".\\resources\\models\\jellal.png");
 
 	// Creates a graphics device.
 	Device device(window, GraphicsAPI::DirectX);
 
 	// Used to enable culling or wireframe modes.
 	Rasterizer rasterizer(device);
-	rasterizer.SetRasterizerState(CullMode::Back, FillMode::Solid, WindMode::Clockwise);
 
 	// Map for holding our shaders. 
 	std::map<std::string, ShaderType> shaders =
@@ -51,11 +51,13 @@ int main(int argc, char* argv[])
 	// Create our shaders.
 	Shader shader(device, shaders);
 
+	// Dynamic model and font loading.
+	// This allows us to load a new instance with the same object.
 	Model model(device);
 	model.Load(".\\resources\\models\\MonoCube.dae");
 
 	Font font(device);
-	font.Load(".\\resources\\fonts\\consola.ttf", 16);
+	font.Load(".\\resources\\fonts\\arial.ttf", 16);
 
 	while (window.IsOpen())
 	{
@@ -65,12 +67,14 @@ int main(int argc, char* argv[])
 		// Draw the model.
 		model.Draw();
 
+		font.Draw("Hello World", 10, 10);
+
 		// Gets the keys pressed and prints their enumerication value that is stored as an integer.
 		std::vector<Key> keysPressed = window.GetInput().keyboard.GetKeysPressed();
 		for (unsigned int i = 0; i < keysPressed.size(); i++)
 			std::cout << static_cast<int>(keysPressed[i]) << std::endl;
 		
-		// Example mode swapping mid rendering.
+		// Example rasterizer mode swapping while rendering.
 		if (window.GetInput().keyboard.IsKeyDown(Key::R))
 			rasterizer.SetRasterizerState(CullMode::Back, FillMode::Wireframe, WindMode::Clockwise);
 		else
@@ -80,6 +84,7 @@ int main(int argc, char* argv[])
 		if (window.GetInput().keyboard.IsKeyDown(Key::Escape))
 			window.Close();
 
+		// Swap buffers and perform system event loop.
 		device.Present();
 		window.PollEvents();
 	}

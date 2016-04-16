@@ -28,6 +28,7 @@ SOFTWARE.
 #include <Graphics/Texture/DXTexture.h>
 #include "Graphics/Texture/GLTexture.h"
 #include <Graphics/Texture/ITexture.h>
+#include "TextureFactory.h"
 
 namespace Jade
 {
@@ -41,6 +42,10 @@ namespace Jade
 			std::string filename;
 			TextureType type;
 
+			unsigned char* bits; 
+			int width;
+			int height; 
+
 			std::shared_ptr<ITexture> texture;
 
 		public:
@@ -53,55 +58,37 @@ namespace Jade
 				this->filename = filename;
 				this->type = type;
 
-				switch (device.GetGraphicsAPI())
-				{
-				case GraphicsAPI::DirectX:
-					texture = std::make_shared<DXTexture>(std::dynamic_pointer_cast<DXDevice>(device.GetIDevice()), filename, type);
-					break;
-				case GraphicsAPI::OpenGL:
-					texture = nullptr;
-					break;
-				case GraphicsAPI::Vulkan:
-					texture = nullptr;
-					break;
-				default: texture = nullptr;
-					break;
-				}
+				texture = TextureFactory::Generate<ITexture>(device, filename, type);
+			
 			}
 
-			Texture(Device device)
+			Texture(Device device, unsigned char* bits, int width, int height, int pitch, TextureType type)
 			{
 				this->device = device;
-				this->filename = filename;
+				this->bits = bits;
+				this->width = width;
+				this->height = height;
 				this->type = type;
-
-				switch (device.GetGraphicsAPI())
-				{
-				case GraphicsAPI::DirectX:
-					texture = std::make_shared<DXTexture>(std::dynamic_pointer_cast<DXDevice>(device.GetIDevice()));
-					break;
-				case GraphicsAPI::OpenGL:
-					texture = nullptr;
-					break;
-				case GraphicsAPI::Vulkan:
-					texture = nullptr;
-					break;
-				default: texture = nullptr;
-					break;
-				}
+				
+				texture = TextureFactory::Generate<ITexture>(device, bits, width, height, pitch, type);
 			}
-			
+
 			bool CreateTextureFromFile() const
 			{
 				return texture->CreateTextureFromFile();
 			}
 
-			bool CreateTextureFromFile(std::string filename) const
+			bool CreateTextureFromMemory() const
 			{
-				return texture->CreateTextureFromFile(filename);
+				return texture->CreateTextureFromMemory();
 			}
 
-			std::string GetFilename()
+			void Update() const
+			{
+				return texture->Update();
+			}
+
+			std::string GetFilename() const
 			{
 				return filename;
 			}

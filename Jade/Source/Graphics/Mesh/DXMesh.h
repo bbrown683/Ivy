@@ -70,6 +70,7 @@ namespace Jade
 			ComPtr<ID3D11Buffer> m_pVertexBuffer;
 			ComPtr<ID3D11Buffer> m_pConstantBuffer;
 			ComPtr<ID3D11Buffer> m_pIndexBuffer;
+			
 
 			void Bind() override;
 			void Unbind() override;
@@ -82,7 +83,7 @@ namespace Jade
 				this->vertices = vertices;
 				this->indices = indices;
 				this->textures = textures;
-				
+
 				DXMesh::Bind();
 			}
 

@@ -30,18 +30,16 @@ namespace Jade
 {
 	namespace System
 	{
-		// Class with basic threading
+		// Class with basic and managed threading
 		class Thread
 		{
-		private:
-
-			// Keeps track of how many threads are executing concurrently.
-			unsigned int threadCount;
-
 		public:
 
+			// Keeps track of how many threads are executing concurrently.
+			static unsigned int threadCount;
+
 			// Executes the thread in a managed manner. 
-			void Execute(std::thread thread);
+			static void Execute(std::thread thread);
 		};
 	}
 }

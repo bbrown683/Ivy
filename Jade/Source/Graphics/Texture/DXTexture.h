@@ -26,12 +26,11 @@ SOFTWARE.
 
 #ifdef _WIN32
 
+#include "stb/stb_image.h"
+
 #include <Graphics/Device/DXDevice.h>
 #include <Graphics/Texture/ITexture.h>
 #include <Graphics/Texture/TextureType.h>
-
-// include freeimage after directx headers to remove any naming conflicts.
-#include "freeimage/freeimage.h"
 
 namespace Jade
 {
@@ -48,7 +47,7 @@ namespace Jade
 			unsigned char* bits;
 			int width;
 			int height;
-			int bpp;
+			int pitch;
 
 			ComPtr<ID3D11Texture2D> m_pTexture = nullptr;
 			ComPtr<ID3D11ShaderResourceView> m_pShaderResourceView = nullptr;
@@ -63,21 +62,27 @@ namespace Jade
 				this->type = type;
 			}
 
-			DXTexture(std::shared_ptr<DXDevice> device)
+			DXTexture(std::shared_ptr<DXDevice> device, unsigned char* bits, int width, int height, int pitch, TextureType type)
 			{
 				this->device = device;
+				this->bits = bits;
+				this->width = width;
+				this->height = height;
+				this->pitch = pitch;
+				this->type = type;
 			}
 
 			~DXTexture()
 			{
-				std::cout << "Texture " << filename << " was released successfully..." << std::endl;
+				std::cout << "Texture was released successfully..." << std::endl;
 			}
 
 			//! Creates a texture from the file specified in the constructor and returns a bool determining if it was successful.
 			bool CreateTextureFromFile() override;
-			bool CreateTextureFromFile(std::string filename) override;
 			//! Creates a texture from the bits specified in the constructor and returns a bool determining if it was successful.
-			bool CreateTextureFromMemory(unsigned char* bits, int width, int height, int bpp) override;
+			bool CreateTextureFromMemory() override;
+			//! Updates the texture resources to ensure that they remain the target of the drawing operations.
+			void Update() override;
 		};
 	}
 }

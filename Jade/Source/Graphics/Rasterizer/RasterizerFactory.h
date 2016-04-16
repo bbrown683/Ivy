@@ -1,3 +1,5 @@
+#pragma once
+
 /*
 The MIT License (MIT)
 
@@ -22,21 +24,28 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <System/Thread.h>
+#include <Graphics/Device/Device.h>
 
-// Initialize our counter.
-unsigned int Jade::System::Thread::threadCount = 0;
-
-void Jade::System::Thread::Execute(std::thread thread)
+namespace Jade
 {
-	// This ensures we do not attempt to create more threads 
-	// than the system is capable of handling.
-	if (threadCount != std::thread::hardware_concurrency())
+	namespace Graphics
 	{
-		// Increment thread count.
-		threadCount++;
-		thread.detach();
-	}
+		class RasterizerFactory
+		{
+		public:
 
-	// Decrement thread count once its determined thread has been completed.
+			template<typename T>
+			static std::shared_ptr<T> Generate(Device device)
+			{
+				switch (device.GetGraphicsAPI())
+				{
+					case GraphicsAPI::Default: return nullptr;
+					case GraphicsAPI::DirectX: return std::make_shared<DXRasterizer>(std::dynamic_pointer_cast<DXDevice>(device.GetIDevice()));
+					case GraphicsAPI::OpenGL: return std::make_shared<GLRasterizer>();
+					case GraphicsAPI::Vulkan: return nullptr;
+					default: return nullptr;
+				}
+			}
+		};
+	}
 }

@@ -47,7 +47,7 @@ bool Jade::Graphics::DXRasterizer::SetRasterizerState(CullMode cullMode, FillMod
 	rasterDesc.DepthBiasClamp = 0.0f;
 	rasterDesc.DepthClipEnable = true;
 	rasterDesc.FillMode = (fillMode == FillMode::Solid) ? D3D11_FILL_SOLID : D3D11_FILL_WIREFRAME;	// Render as solid or wireframe.
-	rasterDesc.FrontCounterClockwise = windMode == WindMode::CounterClockwise ? true : false; // ClockWise or CounterClockWise is front
+	rasterDesc.FrontCounterClockwise = (windMode == WindMode::CounterClockwise) ? true : false; // ClockWise or CounterClockWise is front
 	rasterDesc.MultisampleEnable = false;
 	rasterDesc.ScissorEnable = false;
 	rasterDesc.SlopeScaledDepthBias = 0.0f;
@@ -60,8 +60,6 @@ bool Jade::Graphics::DXRasterizer::SetRasterizerState(CullMode cullMode, FillMod
 
 	// If state creation succeeds we can set the state.
 	device->GetID3D11DeviceContext()->RSSetState(m_pRasterizerState.Get());
-
-	std::cout << "Rasterizer state was created successfully..." << std::endl;
 
 	return true;
 }

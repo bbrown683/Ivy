@@ -27,6 +27,8 @@ SOFTWARE.
 #include "Core/Utility.h"
 #include "Graphics/Device/GraphicsAPI.h"
 #include "Graphics/Device/IDevice.h"
+#include "Graphics/Device/DXDevice.h"
+#include "Graphics/Device/GLDevice.h"
 #include "Graphics/Device/Specification.h"
 #include "System/Window/Window.h"
 

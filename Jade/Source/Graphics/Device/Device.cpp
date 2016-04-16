@@ -23,8 +23,6 @@ SOFTWARE.
 */
 
 #include "Graphics/Device/Device.h"
-#include "Graphics/Device/DXDevice.h"
-#include "Graphics/Device/GLDevice.h"
 
 std::shared_ptr<Jade::Graphics::IDevice> Jade::Graphics::Device::Initialize()
 {

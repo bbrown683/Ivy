@@ -24,10 +24,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <iostream>
-
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_syswm.h"
+
+#include "stb/stb_image.h"
+#include "stb/stb_image_resize.h"
 
 #include <Core/Utility.h>
 #include <Input/Input.h>

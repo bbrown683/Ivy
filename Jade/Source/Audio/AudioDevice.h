@@ -32,7 +32,7 @@ namespace Jade
 	{
 		class AudioDevice
 		{
-		
+			void Create();
 		};
 	}
 }
