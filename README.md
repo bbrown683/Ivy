@@ -7,8 +7,8 @@ An Open Source C++ Game Engine inspired by [Monogame](http://www.monogame.net/).
 
 # Libraries Linked Against
 * Assimp 3.0.0
-* FreeImage 3.17.0
-* FreeType 2.6.0
+* stb_image
+* stb_truetype
 * Glew 1.13.0
 * HLSLCC
 * OpenAL 1.1
