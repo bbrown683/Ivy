@@ -24,11 +24,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "stb/stb_truetype.h"
-
 #include <Core/Utility.h>
 #include <Core/Exception/Exception.h>
 #include <Graphics/Device/Device.h>
+#include <Graphics/Font/Glyph.h>
+#include <Graphics/SpriteBatch/SpriteBatch.h>
 #include <Graphics/Texture/Texture.h>
 #include <System/File.h>
 

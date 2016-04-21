@@ -36,7 +36,7 @@ bool Jade::Graphics::VKDevice::Release()
 
 void Jade::Graphics::VKDevice::Clear(Math::Color color)
 {
-
+	
 }
 
 void Jade::Graphics::VKDevice::Present()

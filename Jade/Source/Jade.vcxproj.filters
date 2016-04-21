@@ -59,6 +59,7 @@
     <ClCompile Include="Graphics\Mesh\TestMesh.cpp" />
     <ClCompile Include="Audio\AudioDevice.cpp" />
     <ClCompile Include="Graphics\Widget\Canvas.cpp" />
+    <ClCompile Include="Graphics\SpriteBatch\SpriteBatch.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\Vector4.h">
@@ -169,6 +170,9 @@
     <ClInclude Include="Core\Exception\BufferCreationException.h" />
     <ClInclude Include="Graphics\Texture\TextureFactory.h" />
     <ClInclude Include="Graphics\Rasterizer\RasterizerFactory.h" />
+    <ClInclude Include="Graphics\SpriteBatch\SpriteBatch.h" />
+    <ClInclude Include="Graphics\Buffer\DXDynamicVertexBuffer.h" />
+    <ClInclude Include="Graphics\Font\Glyph.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">

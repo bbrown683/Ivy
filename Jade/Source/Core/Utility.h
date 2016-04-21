@@ -64,6 +64,7 @@ namespace Jade
 
 		public:
 
+			static char* StringToChar(std::string string);
 			static std::string GetFilePath();
 			static std::wstring StringToWString(std::string string);
 		};

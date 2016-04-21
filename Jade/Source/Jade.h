@@ -89,6 +89,10 @@ SOFTWARE.
 
 // System
 #ifdef JADE_INCLUDE_SYSTEM
+#include "System/Configuration.h"
+#include "System/File.h"
+#include "System/Log.h"
+#include "System/Platform.h"
 #include "System/Window/Window.h"
 #endif // JADE_INCLUDE_SYSTEM
 

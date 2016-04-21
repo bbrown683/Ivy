@@ -29,27 +29,27 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -84,8 +84,8 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty/glew/include/;$(SolutionDir)ThirdParty/SDL/include/;$(SolutionDir)ThirdParty/assimp/include/;$(SolutionDir)ThirdParty/hlslcc/include/;$(SolutionDir)ThirdParty/OpenAL/include/;$(SolutionDir)ThirdParty/stb/include/</AdditionalIncludeDirectories>
+      <SDLCheck>false</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty/glew/include/;$(SolutionDir)ThirdParty/SDL/include/;$(SolutionDir)ThirdParty/assimp/include/;$(SolutionDir)ThirdParty/hlslcc/include/;$(SolutionDir)ThirdParty/OpenAL/include/;$(SolutionDir)ThirdParty/stb/include/;$(SolutionDir)ThirdParty/nuklear/include/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>sdl2main.lib;sdl2.lib;opengl32.lib;glew32s.lib;d3d11.lib;d3dcompiler.lib;assimp.lib;libhlslcc.lib;gdi32.lib;user32.lib;openal32.lib</AdditionalDependencies>
@@ -114,8 +114,8 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty/glew/include/;$(SolutionDir)ThirdParty/SDL/include/;$(SolutionDir)ThirdParty/assimp/include/;$(SolutionDir)ThirdParty/hlslcc/include/;$(SolutionDir)ThirdParty/OpenAL/include/;$(SolutionDir)ThirdParty/stb/include/</AdditionalIncludeDirectories>
+      <SDLCheck>false</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty/glew/include/;$(SolutionDir)ThirdParty/SDL/include/;$(SolutionDir)ThirdParty/assimp/include/;$(SolutionDir)ThirdParty/hlslcc/include/;$(SolutionDir)ThirdParty/OpenAL/include/;$(SolutionDir)ThirdParty/stb/include/;$(SolutionDir)ThirdParty/nuklear/include/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>sdl2main.lib;sdl2.lib;opengl32.lib;glew32s.lib;d3d11.lib;d3dcompiler.lib;assimp.lib;libhlslcc.lib;gdi32.lib;user32.lib;openal32.lib</AdditionalDependencies>
@@ -147,9 +147,9 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>false</SDLCheck>
       <AssemblerOutput>NoListing</AssemblerOutput>
-      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty/glew/include/;$(SolutionDir)ThirdParty/SDL/include/;$(SolutionDir)ThirdParty/assimp/include/;$(SolutionDir)ThirdParty/hlslcc/include/;$(SolutionDir)ThirdParty/OpenAL/include/;$(SolutionDir)ThirdParty/stb/include/</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty/glew/include/;$(SolutionDir)ThirdParty/SDL/include/;$(SolutionDir)ThirdParty/assimp/include/;$(SolutionDir)ThirdParty/hlslcc/include/;$(SolutionDir)ThirdParty/OpenAL/include/;$(SolutionDir)ThirdParty/stb/include/;$(SolutionDir)ThirdParty/nuklear/include/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -183,9 +183,9 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>false</SDLCheck>
       <AssemblerOutput>NoListing</AssemblerOutput>
-      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty/glew/include/;$(SolutionDir)ThirdParty/SDL/include/;$(SolutionDir)ThirdParty/assimp/include/;$(SolutionDir)ThirdParty/hlslcc/include/;$(SolutionDir)ThirdParty/OpenAL/include/;$(SolutionDir)ThirdParty/stb/include/</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty/glew/include/;$(SolutionDir)ThirdParty/SDL/include/;$(SolutionDir)ThirdParty/assimp/include/;$(SolutionDir)ThirdParty/hlslcc/include/;$(SolutionDir)ThirdParty/OpenAL/include/;$(SolutionDir)ThirdParty/stb/include/;$(SolutionDir)ThirdParty/nuklear/include/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -221,6 +221,7 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClCompile Include="Graphics\Mesh\TestMesh.cpp" />
     <ClCompile Include="Graphics\Rasterizer\DXRasterizer.cpp" />
     <ClCompile Include="Graphics\Rasterizer\GLRasterizer.cpp" />
+    <ClCompile Include="Graphics\SpriteBatch\SpriteBatch.cpp" />
     <ClCompile Include="Graphics\Texture\DXTexture.cpp" />
     <ClCompile Include="Graphics\Texture\GLTexture.cpp" />
     <ClCompile Include="Graphics\Widget\Canvas.cpp" />
@@ -279,12 +280,15 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClInclude Include="Graphics\Buffer\ConstantBuffer.h" />
     <ClInclude Include="Graphics\Buffer\DrawBuffer.h" />
     <ClInclude Include="Graphics\Buffer\DXDrawBuffer.h" />
+    <ClInclude Include="Graphics\Buffer\DXDynamicVertexBuffer.h" />
     <ClInclude Include="Graphics\Buffer\GLDrawBuffer.h" />
     <ClInclude Include="Graphics\Buffer\IIndexBuffer.h" />
     <ClInclude Include="Graphics\Buffer\IUniformBuffer.h" />
+    <ClInclude Include="Graphics\Font\Glyph.h" />
     <ClInclude Include="Graphics\Mesh\TestMesh.h" />
     <ClInclude Include="Graphics\Rasterizer\RasterizerFactory.h" />
     <ClInclude Include="Graphics\Rasterizer\WindMode.h" />
+    <ClInclude Include="Graphics\SpriteBatch\SpriteBatch.h" />
     <ClInclude Include="Graphics\Texture\TextureFactory.h" />
     <ClInclude Include="Graphics\Widget\Canvas.h" />
     <ClInclude Include="Graphics\Widget\Widget.h" />

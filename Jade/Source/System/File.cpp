@@ -25,21 +25,39 @@ SOFTWARE.
 #include "File.h"
 #include <Core/Exception/FileNotFoundException.h>
 
-std::string Jade::System::File::ReadToEnd()
+std::string Jade::System::File::Read()
 {
-	file.open(filename.c_str());
+	std::ifstream t(filename);
+	
+	std::string str((std::istreambuf_iterator<char>(t)),
+		std::istreambuf_iterator<char>());
 
+	return str;
+
+	/*
+	file.open(filename.c_str(), std::fstream::in | std::fstream::binary);
+	
 	if (file.is_open())
 	{
+		std::stringstream stream;
+		stream << file.rdbuf();
+		file.close();
 
+		std::string data = stream.str();
+
+		return stream.str();
 	}
-	else
-		throw Core::FileNotFoundException();
-
-	return std::string();
+	*/
+	
+	//throw Core::FileNotFoundException(filename);
 }
 
 void Jade::System::File::Write(std::string text)
 {
+	file.open(filename.c_str(), std::fstream::out | std::fstream::binary);
 
+	if(file.is_open())
+	{
+
+	}
 }

@@ -26,11 +26,7 @@ SOFTWARE.
 
 void Jade::Graphics::Font::Draw(std::string text, int x, int y)
 {
-	// Get the texture objects contained in the text stream.
-	for(char c : text)
-	{
-			//textures[c - 32].Update();
-	}
+
 }
 
 void Jade::Graphics::Font::Load(std::string filename, int pixelSize)
@@ -38,19 +34,41 @@ void Jade::Graphics::Font::Load(std::string filename, int pixelSize)
 	if(filename.empty())
 		throw Core::ArgumentNullException("filename", __FILE__, __LINE__);
 
-	System::File file(filename);
-	std::string data = file.ReadToEnd();
 
 	std::cout << "[Font Data]" << std::endl;
 
-	/*
-	stbtt_fontinfo fontInfo;
-	if (stbtt_InitFont(&fontInfo, reinterpret_cast<const unsigned char*>(data.c_str()),
-		stbtt_GetFontOffsetForIndex(reinterpret_cast<const unsigned char*>(data.c_str()), 0)))
-	{
+	System::File file(filename);
+	std::string contents = file.Read();
 
+	FILE* write;
+	fopen_s(&write, "test.txt", "w");
+	fwrite(contents.data(), sizeof(char), sizeof contents.data(), write);
+	fclose(write);
+
+	/*
+	if (buffer != nullptr)
+	{
+		stbtt_fontinfo fontInfo;
+		if (stbtt_InitFont(&fontInfo, buffer, stbtt_GetFontOffsetForIndex(buffer, 0)))
+		{
+			unsigned char* bitmap = nullptr;
+
+			// We only need the 95 printable ASCII characters.
+			for (int i = 32; i < 127; i++)
+			{
+				Glyph glyph;
+				bitmap = stbtt_GetCodepointBitmap(&fontInfo, 0, stbtt_ScaleForPixelHeight(&fontInfo, static_cast<float>(pixelSize)), i, &glyph.width, &glyph.height, &glyph.xOffset, &glyph.yOffset);
+
+				if (bitmap == nullptr)
+					std::cout << "Failed to load character " << static_cast<char>(i) << "..." << std::endl;
+				else
+					continue;
+			}
+		}
 	}
 	else
-		throw Core::InitializationException("Failed to initialize stb_truetype.");
+	{
+		std::cout << "Null contents..." << std::endl;
+	}
 	*/
 }

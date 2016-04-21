@@ -24,34 +24,19 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <fstream>
-#include <sstream>
-#include <streambuf>
-
-#include <Core/Utility.h>
+#include "stb/stb_truetype.h"
 
 namespace Jade
 {
-	namespace System
+	namespace Graphics
 	{
-		class File
+		class SpriteBatch
 		{
-		private:
-
-			std::fstream file;
-			std::string filename;
-
 		public:
 
-			File(std::string filename)
-			{
-				this->filename = filename;
-			}
-
-			//! \brief Reads a file in its entirity and returns a string object that contains all the data.
-			std::string Read();
-			//! \brief Writes the specified text to the file.
-			void Write(std::string text);
+			void Begin();
+			void Draw();
+			void End();
 		};
 	}
 }

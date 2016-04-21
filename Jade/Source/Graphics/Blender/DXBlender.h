@@ -47,7 +47,7 @@ namespace Jade
 				this->device = device;
 			}
 
-			//! Sets the blend state for the specified mask value in hexadecimal.
+			//! \brief Sets the blend state for the specified mask value in hexadecimal.
 			//! Example: 0xffffffff is the mask for enabling alpha blending.
 			bool SetBlendState(unsigned int mask) override;
 		};

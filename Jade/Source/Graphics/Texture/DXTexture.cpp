@@ -24,8 +24,6 @@ SOFTWARE.
 
 #ifdef _WIN32
 
-//#define STB_IMAGE_IMPLEMENTATION
-
 #include "DXTexture.h"
 
 bool Jade::Graphics::DXTexture::CreateTextureFromFile()

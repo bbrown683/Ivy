@@ -33,7 +33,6 @@ int main(int argc, char* argv[])
 {
 	// Creates a basic window that can be rendered with either graphics API.
 	Window window(1080, 720, 100, 100, "Hello World", false);
-	//window.SetIcon(".\\resources\\models\\jellal.png");
 
 	// Creates a graphics device.
 	Device device(window, GraphicsAPI::DirectX);
@@ -57,7 +56,7 @@ int main(int argc, char* argv[])
 	model.Load(".\\resources\\models\\MonoCube.dae");
 
 	Font font(device);
-	font.Load(".\\resources\\fonts\\arial.ttf", 16);
+	font.Load(".\\resources\\fonts\\consola.ttf", 16);
 
 	while (window.IsOpen())
 	{
