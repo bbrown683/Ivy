@@ -85,7 +85,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>false</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty/glew/include/;$(SolutionDir)ThirdParty/SDL/include/;$(SolutionDir)ThirdParty/assimp/include/;$(SolutionDir)ThirdParty/hlslcc/include/;$(SolutionDir)ThirdParty/OpenAL/include/;$(SolutionDir)ThirdParty/stb/include/;$(SolutionDir)ThirdParty/nuklear/include/</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty/glew/include/;$(SolutionDir)ThirdParty/SDL/include/;$(SolutionDir)ThirdParty/assimp/include/;$(SolutionDir)ThirdParty/hlslcc/include/;$(SolutionDir)ThirdParty/OpenAL/include/;$(SolutionDir)ThirdParty/stb/include/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>sdl2main.lib;sdl2.lib;opengl32.lib;glew32s.lib;d3d11.lib;d3dcompiler.lib;assimp.lib;libhlslcc.lib;gdi32.lib;user32.lib;openal32.lib</AdditionalDependencies>
@@ -115,7 +115,7 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>false</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty/glew/include/;$(SolutionDir)ThirdParty/SDL/include/;$(SolutionDir)ThirdParty/assimp/include/;$(SolutionDir)ThirdParty/hlslcc/include/;$(SolutionDir)ThirdParty/OpenAL/include/;$(SolutionDir)ThirdParty/stb/include/;$(SolutionDir)ThirdParty/nuklear/include/</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty/glew/include/;$(SolutionDir)ThirdParty/SDL/include/;$(SolutionDir)ThirdParty/assimp/include/;$(SolutionDir)ThirdParty/hlslcc/include/;$(SolutionDir)ThirdParty/OpenAL/include/;$(SolutionDir)ThirdParty/stb/include/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>sdl2main.lib;sdl2.lib;opengl32.lib;glew32s.lib;d3d11.lib;d3dcompiler.lib;assimp.lib;libhlslcc.lib;gdi32.lib;user32.lib;openal32.lib</AdditionalDependencies>
@@ -149,7 +149,7 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>false</SDLCheck>
       <AssemblerOutput>NoListing</AssemblerOutput>
-      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty/glew/include/;$(SolutionDir)ThirdParty/SDL/include/;$(SolutionDir)ThirdParty/assimp/include/;$(SolutionDir)ThirdParty/hlslcc/include/;$(SolutionDir)ThirdParty/OpenAL/include/;$(SolutionDir)ThirdParty/stb/include/;$(SolutionDir)ThirdParty/nuklear/include/</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty/glew/include/;$(SolutionDir)ThirdParty/SDL/include/;$(SolutionDir)ThirdParty/assimp/include/;$(SolutionDir)ThirdParty/hlslcc/include/;$(SolutionDir)ThirdParty/OpenAL/include/;$(SolutionDir)ThirdParty/stb/include/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -185,7 +185,7 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>false</SDLCheck>
       <AssemblerOutput>NoListing</AssemblerOutput>
-      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty/glew/include/;$(SolutionDir)ThirdParty/SDL/include/;$(SolutionDir)ThirdParty/assimp/include/;$(SolutionDir)ThirdParty/hlslcc/include/;$(SolutionDir)ThirdParty/OpenAL/include/;$(SolutionDir)ThirdParty/stb/include/;$(SolutionDir)ThirdParty/nuklear/include/</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty/glew/include/;$(SolutionDir)ThirdParty/SDL/include/;$(SolutionDir)ThirdParty/assimp/include/;$(SolutionDir)ThirdParty/hlslcc/include/;$(SolutionDir)ThirdParty/OpenAL/include/;$(SolutionDir)ThirdParty/stb/include/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
