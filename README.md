@@ -10,7 +10,7 @@ An Open Source C++ Game Engine inspired by [Monogame](http://www.monogame.net/).
 * stb_image
 * stb_truetype
 * Glew 1.13.0
-* HLSLCC
+* HLSLCC << Will be shortly replaced by Google's [ANGLE](angleproject.org).
 * OpenAL 1.1
 * SDL 2.0.4 
 * Windows 8 SDK
