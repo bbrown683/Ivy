@@ -2,18 +2,17 @@
 An Open Source C++ Game Engine inspired by [Monogame](http://www.monogame.net/). This is compiled using Visual Studio 2015 Community Edition.
 
 # Supported Graphics API's
-* DirectX11
+* DirectX11 (About to be replaced with OpenGL overhaul. This will ensure the engine is cross platform.)
 * OpenGL 3.2+
 
 # Libraries Linked Against
 * Assimp 3.0.0
 * stb_image
 * stb_truetype
-* Glew 1.13.0
-* HLSLCC << Will be shortly replaced by Google's [ANGLE](https://chromium.googlesource.com/angle/angle/+/master/README.md).
+* Glew 1.13.0 (Will write our own OpenGL entry point loader.)
 * OpenAL 1.1
-* SDL 2.0.4 
-* Windows 8 SDK
+* SDL 2.0.4 (About to be replaced with Window system overhaul.)
+* Windows 8 SDK (Will be removed along with DirectX11 support.)
 
 # Features
 * Should be portable
