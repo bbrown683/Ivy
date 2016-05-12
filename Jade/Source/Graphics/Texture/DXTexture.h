@@ -44,10 +44,11 @@ namespace Jade
 			std::string filename;
 			TextureType type;
 
-			unsigned char* bits;
+			unsigned char* bitmap;
 			int width;
 			int height;
 			int pitch;
+			unsigned int bits;
 
 			ComPtr<ID3D11Texture2D> m_pTexture = nullptr;
 			ComPtr<ID3D11ShaderResourceView> m_pShaderResourceView = nullptr;
@@ -62,13 +63,14 @@ namespace Jade
 				this->type = type;
 			}
 
-			DXTexture(std::shared_ptr<DXDevice> device, unsigned char* bits, int width, int height, int pitch, TextureType type)
+			DXTexture(std::shared_ptr<DXDevice> device, unsigned char* bitmap, int width, int height, int pitch, unsigned int bits, TextureType type)
 			{
 				this->device = device;
-				this->bits = bits;
+				this->bitmap = bitmap;
 				this->width = width;
 				this->height = height;
 				this->pitch = pitch;
+				this->bits = bits;
 				this->type = type;
 			}
 

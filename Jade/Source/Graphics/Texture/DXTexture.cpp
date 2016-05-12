@@ -35,7 +35,7 @@ bool Jade::Graphics::DXTexture::CreateTextureFromFile()
 
 	// Load bitmap and get the specified information about it.
 	int width, height, bpp;
-	unsigned char* bitmap = stbi_load(filepath.c_str(), &width, &height, &bpp, STBI_rgb_alpha);
+	unsigned char* aBitmap = stbi_load(filepath.c_str(), &width, &height, &bpp, STBI_rgb_alpha);
 
 	// Create our texture description.
 	D3D11_TEXTURE2D_DESC texDesc;
@@ -55,7 +55,7 @@ bool Jade::Graphics::DXTexture::CreateTextureFromFile()
 	// Pass our bitmap data.
 	D3D11_SUBRESOURCE_DATA subData;
 	ZeroMemory(&subData, sizeof(subData));
-	subData.pSysMem = bitmap;
+	subData.pSysMem = aBitmap;
 	subData.SysMemPitch = width * bpp;
 
 	// Create the texture;
@@ -107,7 +107,7 @@ bool Jade::Graphics::DXTexture::CreateTextureFromFile()
 	}
 
 	// We are now done with stb_image, unload to prevent leaks.
-	stbi_image_free(bitmap);
+	stbi_image_free(aBitmap);
 
 	std::cout << "Texture " << filename << " was created successfully..." << std::endl;
 
@@ -117,7 +117,7 @@ bool Jade::Graphics::DXTexture::CreateTextureFromFile()
 // Used for texturing bits contained in memory such as bitmaps from FreeType.
 bool Jade::Graphics::DXTexture::CreateTextureFromMemory()
 {
-	if (bits)
+	if (bitmap)
 	{
 		// Create our texture description.
 		D3D11_TEXTURE2D_DESC texDesc;
@@ -126,7 +126,18 @@ bool Jade::Graphics::DXTexture::CreateTextureFromMemory()
 		texDesc.Height = height;
 		texDesc.MipLevels = 1;
 		texDesc.ArraySize = 1;
-		texDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+
+		if (bits == 8)
+			texDesc.Format = DXGI_FORMAT_R8_UNORM;
+		else if (bits == 16)
+			texDesc.Format = DXGI_FORMAT_R8G8_UNORM;
+		else if (bits == 24)
+			texDesc.Format = DXGI_FORMAT_R16_UNORM;
+		else if (bits == 32)
+			texDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+		else
+			return false; // Invalid value.
+
 		texDesc.SampleDesc.Count = 1;
 		texDesc.SampleDesc.Quality = 0;
 		texDesc.Usage = D3D11_USAGE_DEFAULT;
@@ -137,7 +148,7 @@ bool Jade::Graphics::DXTexture::CreateTextureFromMemory()
 		// Pass our bitmap data.
 		D3D11_SUBRESOURCE_DATA subData;
 		ZeroMemory(&subData, sizeof(subData));
-		subData.pSysMem = bits;
+		subData.pSysMem = bitmap;
 		subData.SysMemPitch = pitch;
 
 		// Create the texture;

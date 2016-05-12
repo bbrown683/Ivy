@@ -42,9 +42,10 @@ namespace Jade
 			std::string filename;
 			TextureType type;
 
-			unsigned char* bits; 
+			unsigned char* bitmap; 
 			int width;
 			int height; 
+			unsigned int bits;
 
 			std::shared_ptr<ITexture> texture;
 
@@ -62,15 +63,16 @@ namespace Jade
 			
 			}
 
-			Texture(Device device, unsigned char* bits, int width, int height, int pitch, TextureType type)
+			Texture(Device device, unsigned char* bitmap, int width, int height, int pitch, unsigned int bits, TextureType type)
 			{
 				this->device = device;
-				this->bits = bits;
+				this->bitmap = bitmap;
 				this->width = width;
 				this->height = height;
+				this->bits = bits;
 				this->type = type;
 				
-				texture = TextureFactory::Generate<ITexture>(device, bits, width, height, pitch, type);
+				texture = TextureFactory::Generate<ITexture>(device, bitmap, width, height, pitch, bits, type);
 			}
 
 			bool CreateTextureFromFile() const

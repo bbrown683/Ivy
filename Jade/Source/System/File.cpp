@@ -27,29 +27,35 @@ SOFTWARE.
 
 std::string Jade::System::File::Read()
 {
-	std::ifstream t;
+	// Uses the C API for reading files.
 
-	t.open(filename, std::ios_base::binary | std::ios_base::in);
+	// MSVC wants use to use the secure alternative.
+#ifdef _MSC_VER
+	fopen_s(&file, filename.c_str(), "rb");
+#else
+	file = fopen(filename.c_str(), "rb");
+#endif
 
-	if (t.is_open())
-	{
-		std::string str((std::istreambuf_iterator<char>(t)),
-			std::istreambuf_iterator<char>());
+	if (!file)
+		throw Core::FileNotFoundException(filename);
 
-		t.close();
+	// Get the size of the file so we can preallocate 
+	// the correct amount for the vector.
+	long pos = ftell(file);
+	fseek(file, 0, SEEK_END);
+	long size = ftell(file);
+	fseek(file, pos, SEEK_SET);
 
-		return str;
-	}
-
-	throw Core::FileNotFoundException(filename);
+	std::vector<char> buffer(size + 1);
+	fread(buffer.data(), size, 1, file);
+	buffer[size] = 0;
+	fclose(file);
+	
+	// Return string after assignment.
+	return content = std::string(buffer.begin(), buffer.end());
 }
 
 void Jade::System::File::Write(std::string text)
 {
-	file.open(filename.c_str(), std::fstream::out | std::fstream::binary);
 
-	if(file.is_open())
-	{
-
-	}
 }

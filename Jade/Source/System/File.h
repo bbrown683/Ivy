@@ -24,11 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <fstream>
-#include <sstream>
-#include <streambuf>
-
-#include <Core/Utility.h>
+#include "Core/Utility.h"
 
 namespace Jade
 {
@@ -38,8 +34,9 @@ namespace Jade
 		{
 		private:
 
-			std::fstream file;
+			FILE* file;
 			std::string filename;
+			std::string content; // This allows us to reaccess the content of a file without having to read again.
 
 		public:
 
