@@ -24,10 +24,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <Core/Utility.h>
-#include <Graphics/Device/GLDevice.h>
-#include <Graphics/Mesh/IMesh.h>
-#include <Math/Vertex.h>
+#include "Core/Utility.h"
+#include "Graphics/Device/GLDevice.h"
+#include "Graphics/Mesh/IMesh.h"
+#include "Graphics/Shader/GLShader.h"
+#include "Math/Vertex.h"
 
 namespace Jade
 {
@@ -37,8 +38,9 @@ namespace Jade
 		{
 		private:
 
+			std::shared_ptr<GLShader> shader;
 			std::vector<Math::Vertex> vertices;
-			std::vector<unsigned int> indices;
+			std::vector<unsigned short> indices;
 
 			GLuint vertexArray;
 			GLuint vertexBuffer;
@@ -49,8 +51,9 @@ namespace Jade
 
 		public:
 
-			GLMesh(std::vector<Math::Vertex> vertices, std::vector<unsigned int> indices)
+			GLMesh(std::shared_ptr<GLShader> shader, std::vector<Math::Vertex> vertices, std::vector<unsigned short> indices)
 			{
+				this->shader = shader;
 				this->vertices = vertices;
 				this->indices = indices;
 

@@ -24,73 +24,81 @@ SOFTWARE.
 
 #include "Vector3.h"
 
-const Jade::Math::Vector3 Back		= Jade::Math::Vector3(0.0f, 0.0f, -1.0f);
-const Jade::Math::Vector3 Down		= Jade::Math::Vector3(0.0f, -1.0f, 0.0f);
-const Jade::Math::Vector3 Forward	= Jade::Math::Vector3(0.0f, 0.0f, 1.0f);
-const Jade::Math::Vector3 Left		= Jade::Math::Vector3(-1.0f, 0.0f, 0.0f);
-const Jade::Math::Vector3 One		= Jade::Math::Vector3(1.0f, 1.0f, 1.0f);
-const Jade::Math::Vector3 Right		= Jade::Math::Vector3(1.0f, 0.0f, 0.0f);
-const Jade::Math::Vector3 Up		= Jade::Math::Vector3(0.0f, 1.0f, 0.0f);
-const Jade::Math::Vector3 Zero		= Jade::Math::Vector3(0.0f, 0.0f, 0.0f);
+const Jade::Math::Vector3 Back = Jade::Math::Vector3(0.0f, 0.0f, -1.0f);
+const Jade::Math::Vector3 Down = Jade::Math::Vector3(0.0f, -1.0f, 0.0f);
+const Jade::Math::Vector3 Forward = Jade::Math::Vector3(0.0f, 0.0f, 1.0f);
+const Jade::Math::Vector3 Left = Jade::Math::Vector3(-1.0f, 0.0f, 0.0f);
+const Jade::Math::Vector3 One = Jade::Math::Vector3(1.0f, 1.0f, 1.0f);
+const Jade::Math::Vector3 Right = Jade::Math::Vector3(1.0f, 0.0f, 0.0f);
+const Jade::Math::Vector3 Up = Jade::Math::Vector3(0.0f, 1.0f, 0.0f);
+const Jade::Math::Vector3 Zero = Jade::Math::Vector3(0.0f, 0.0f, 0.0f);
 
 Jade::Math::Vector3 Jade::Math::Vector3::Cross(Vector3 vector) const
 {
-	return Vector3(this->y * vector.GetZ() - this->z * vector.GetY(), 
-		this->z * vector.GetX() - this->x * vector.GetZ(), 
-		this->x * vector.GetY() - this->y * vector.GetX());
+	glm::vec3 cross = glm::cross(values, vector.values);
+	return Vector3(cross.x, cross.y, cross.z);
 }
 
 float Jade::Math::Vector3::Dot(Vector3 vector) const
 {
-	return this->x * vector.GetX() + this->y * vector.GetY() + this->z * vector.GetZ();
+	return dot(values, vector.values);
 }
 
 float Jade::Math::Vector3::Distance(Vector3 target) const
 {
-	return Math::Sqrt(target.GetX() - x + target.GetY() - y + target.GetZ() - z);
+	return distance(values, target.values);
+}
+
+glm::vec3 Jade::Math::Vector3::GetRawData()
+{
+	return values;
+}
+
+Jade::Math::Vector3 Jade::Math::Vector3::Lerp(Vector3 start, Vector3 end, float delta) const
+{
+	glm::vec3 lerp = glm::lerp(start.values, end.values, delta);
+	return Vector3(lerp.x, lerp.y, lerp.z);
 }
 
 Jade::Math::Vector3 Jade::Math::Vector3::Normalize() const
 {
-	return Vector3(x / magnitude, y / magnitude, z / magnitude);
+	glm::vec3 normalized = normalize(values);
+	return Vector3(normalized.x, normalized.y, normalized.z);
 }
 
 void Jade::Math::Vector3::SetX(float value)
 {
-	this->x = value;
+	values.x = value;
 }
 
 float Jade::Math::Vector3::GetX() const
 {
-	return this->x;
+	return values.x;
 }
 
 void Jade::Math::Vector3::SetY(float value)
 {
-	this->y = value;
+	values.y = value;
 }
 
 float Jade::Math::Vector3::GetY() const
 {
-	return this->y;
+	return values.y;
 }
 
 void Jade::Math::Vector3::SetZ(float value)
 {
-	this->z = value;
+	values.z = value;
 }
 
 float Jade::Math::Vector3::GetZ() const
 {
-	return this->z;
-}
-
-float Jade::Math::Vector3::GetMagnitude() const
-{
-	return this->magnitude;
+	return values.z;
 }
 
 std::string Jade::Math::Vector3::ToString() const
 {
-	return "(" + std::to_string(x) + ", " + std::to_string(y) + ", " + std::to_string(z) + ")";
+	return "(" + std::to_string(values.x) + ", " +
+		std::to_string(values.y) + ", " +
+		std::to_string(values.z) + ")";
 }

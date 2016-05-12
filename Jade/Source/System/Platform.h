@@ -45,10 +45,13 @@ namespace Jade
 			{
 				// _WIN32 is defined for both 32bit and 64bit compilations on Windows machines.
 				#ifdef _WIN32
+					#define JADE_PLATFORM_WINDOWS
 					return PlatformID::Windows;
 				#elif __APPLE__
+					#define JADE_PLATFORM_APPLE
 					return PlatformID::MacOSX;
 				#elif __linux__
+					#define JADE_PLATFORM_LINUX
 					return PlatformID::Linux;
 				// Unknown Operating System not supported by Jade.
 				#else

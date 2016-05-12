@@ -42,7 +42,6 @@ namespace Jade
 		private:
 
 			Device device;
-
 			std::shared_ptr<IRasterizer> rasterizer;
 
 		public:
@@ -51,7 +50,8 @@ namespace Jade
 			{
 				this->device = device;
 
-				rasterizer = RasterizerFactory::Generate<IRasterizer>(device);//std::make_shared<DXRasterizer>(std::dynamic_pointer_cast<DXDevice>(device.GetIDevice()));
+				//std::make_shared<DXRasterizer>(std::dynamic_pointer_cast<DXDevice>(device.GetIDevice()));
+				rasterizer = RasterizerFactory::Generate<IRasterizer>(device);
 			}
 
 			/*! \brief Sets the rasterizer state to the specified cull and fill mode.
@@ -61,6 +61,21 @@ namespace Jade
 			bool SetRasterizerState(CullMode cullMode, FillMode fillMode, WindMode windMode) const
 			{
 				return rasterizer->SetRasterizerState(cullMode, fillMode, windMode);
+			}
+
+			CullMode GetCullMode() const
+			{
+				return rasterizer->GetCullMode();
+			}
+
+			FillMode GetFillMode() const
+			{
+				return rasterizer->GetFillMode();
+			}
+
+			WindMode GetWindMode() const
+			{
+				return rasterizer->GetWindMode();
 			}
 		};
 	}

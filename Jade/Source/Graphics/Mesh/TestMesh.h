@@ -30,6 +30,11 @@ SOFTWARE.
 #include "Graphics/Mesh/GLMesh.h"
 #include "Graphics/Texture/Texture.h"
 
+// Note: This is a prototype of what I want the mesh class to resemble.
+// No need to have interfaces to implement their own mesh, but rather
+// implement buffer objects that are interfaces to an implementation needed
+// for a mesh.
+
 namespace Jade
 {
 	namespace Graphics
@@ -40,7 +45,7 @@ namespace Jade
 
 			Device device;
 			std::vector<Math::Vertex> vertices;
-			std::vector<unsigned int> indices;
+			std::vector<unsigned short> indices;
 			std::vector<std::string> textures;
 
 			std::shared_ptr<IMesh> mesh;
@@ -51,7 +56,7 @@ namespace Jade
 
 		public:
 
-			TestMesh(Device device, std::vector<Math::Vertex> vertices, std::vector<unsigned int> indices, std::vector<std::string> textures)
+			TestMesh(Device device, std::vector<Math::Vertex> vertices, std::vector<unsigned short> indices, std::vector<std::string> textures)
 			{
 				this->device = device;
 				this->vertices = vertices;
@@ -71,7 +76,7 @@ namespace Jade
 				return vertices;
 			}
 
-			std::vector<unsigned int> GetIndices() const
+			std::vector<unsigned short> GetIndices() const
 			{
 				return indices;
 			}

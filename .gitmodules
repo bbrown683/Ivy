@@ -1,3 +1,0 @@
-[submodule "Jade/thirdparty/glslang"]
-	path = Jade/thirdparty/glslang
-	url = https://github.com/bbrown683/glslang.git

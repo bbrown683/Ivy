@@ -24,16 +24,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-// Define before inclusion if on windows systems.
-#ifdef _WIN32
-#define USE_STDINT
-#endif
-#include "hlslcc/hlslcc.h"
-
-#include <Core/Utility.h>
-#include <Graphics/Device/GLDevice.h>
-#include <Graphics/Shader/IShader.h>
-#include <Graphics/Shader/ShaderType.h>
+#include "Core/Utility.h"
+#include "Graphics/Device/GLDevice.h"
+#include "Graphics/Shader/IShader.h"
+#include "Graphics/Shader/ShaderType.h"
 
 namespace Jade
 {
@@ -41,49 +35,31 @@ namespace Jade
 	{
 		class GLShader : public IShader
 		{
-		private:
+			std::map<std::string, ShaderType> shaders;
+			std::vector<GLuint> shaderIDs;
+			GLuint programID;
 
-			std::unordered_map<std::string, ShaderType> shaders;
-			
-			std::string filename;
-			ShaderType type;
-
-			// Possible shaders.
-			GLuint shader;
-			GLuint computeShader;
-			GLuint controlShader;
-			GLuint evaluationShader;
-			GLuint fragmentShader;
-			GLuint geometryShader;
-			GLuint vertexShader;
-
-			GLuint program;
-			GLSLCrossDependencyData dependencies;
-
-			bool Create(ShaderType type) override;
+			bool Create(std::string filename, ShaderType type) override;
+			bool Compile(std::string filename, ShaderType type) override;
 			bool Release() override;
 			bool CheckForErrors(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMessage);
-			GLuint GetShaderFromType(ShaderType type);
 
 		public:
 
-			GLShader(std::unordered_map<std::string, ShaderType> shaders)
+			GLShader(std::map<std::string, ShaderType> shaders)
 			{
 				this->shaders = shaders;
 				
-				for (int i = 0; i < shaders.size(); i++)
+				for(auto iterator = shaders.begin(); iterator != shaders.end(); ++iterator)
 				{
-					
+					std::string iString = iterator->first;
+					ShaderType iType = iterator->second;
+
+					GLShader::Create(iString, iType);
 				}
 			}
 
-			GLShader(std::string filename, ShaderType type)
-			{
-				this->filename = filename;
-				this->type = type;
-
-				GLShader::Create(type);
-			}
+			bool CreateProgram();
 
 			~GLShader()
 			{

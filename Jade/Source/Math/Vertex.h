@@ -36,7 +36,7 @@ namespace Jade
 		struct Vertex
 		{
 			Vector3 position;
-			Vector2 texCoord;
+			Vector2 texture;
 			Vector3 normal;
 		};
 	}

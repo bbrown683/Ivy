@@ -26,6 +26,11 @@ SOFTWARE.
 
 bool Jade::Graphics::DXRasterizer::SetRasterizerState(CullMode cullMode, FillMode fillMode, WindMode windMode)
 {
+	// Set variables.
+	this->cullMode = cullMode;
+	this->fillMode = fillMode;
+	this->windMode = windMode;
+
 	// Reset the rasterizer if it is currently in use before creating a new one.
 	if (m_pRasterizerState)
 		m_pRasterizerState.Reset();
@@ -62,4 +67,19 @@ bool Jade::Graphics::DXRasterizer::SetRasterizerState(CullMode cullMode, FillMod
 	device->GetID3D11DeviceContext()->RSSetState(m_pRasterizerState.Get());
 
 	return true;
+}
+
+Jade::Graphics::CullMode Jade::Graphics::DXRasterizer::GetCullMode()
+{
+	return cullMode;
+}
+
+Jade::Graphics::FillMode Jade::Graphics::DXRasterizer::GetFillMode()
+{
+	return fillMode;
+}
+
+Jade::Graphics::WindMode Jade::Graphics::DXRasterizer::GetWindMode()
+{
+	return windMode;
 }

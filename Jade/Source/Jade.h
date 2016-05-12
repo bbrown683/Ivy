@@ -114,7 +114,7 @@ SOFTWARE.
 #define JMath Jade::Math
 #endif // JADE_INCLUDE_MATH
 #ifdef JADE_INCLUDE_SYSTEM
-#define JSystem Jade::System;
+#define JSystem Jade::System
 #endif // JADE_INCLUDE_SYSTEM
 
 // Include before calling header.

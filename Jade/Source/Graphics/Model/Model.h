@@ -41,22 +41,22 @@ namespace Jade
 
 			// Needed the device for DirectX to create our mesh.
 			Device device;
+			Shader shader;
 
 			// Mesh(s) used to draw our shape.
 			std::vector<Mesh> meshes;
 
 		public:
 
-			Model(Device device)
+			Model(Device device, Shader shader)
 			{
 				this->device = device;
+				this->shader = shader;
 			}
 
-			std::vector<Mesh> GetMeshes() const;
 			void Load(std::string filename);
-			void ProcessNode(aiNode* node, const aiScene* scene);
-			Mesh ProcessMesh(aiMesh* mesh, const aiScene* scene);
 			void Draw();
+			std::vector<Mesh> GetMeshes() const;
 		};
 	}
 }

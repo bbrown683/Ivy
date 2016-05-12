@@ -37,13 +37,16 @@ namespace Jade
 		{
 		private:
 
-			
+			CullMode cullMode;
+			FillMode fillMode;
+			WindMode windMode;
 
 		public:
 
-			GLRasterizer() { }
-
 			bool SetRasterizerState(CullMode cullMode, FillMode fillMode, WindMode windMode) override;
+			CullMode GetCullMode() override;
+			FillMode GetFillMode() override;
+			WindMode GetWindMode() override;
 		};
 	}
 }

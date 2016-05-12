@@ -27,6 +27,10 @@ SOFTWARE.
 #include "Core/Utility.h"
 #include "Math/Math.h"
 
+#include <glm/vec3.hpp>
+#include <glm/geometric.hpp>
+#include <glm/gtx/compatibility.hpp>
+
 namespace Jade
 {
 	namespace Math
@@ -35,10 +39,7 @@ namespace Jade
 		{
 		private:
 
-			float x;
-			float y;
-			float z;
-			float magnitude;
+			glm::vec3 values;
 
 		public:
 
@@ -46,32 +47,50 @@ namespace Jade
 
 			bool operator==(Vector3 vector) const
 			{
-				return (this->x - vector.x < Math::Epsilon) && (this->y - vector.y < Math::Epsilon) && (this->z - vector.z < Math::Epsilon) ? true : false;
+				return (this->values.x - vector.values.x < Math::Epsilon) &&
+					(this->values.y - vector.values.y < Math::Epsilon) &&
+					(this->values.z - vector.values.z < Math::Epsilon) ? true : false;
 			}
 
 			bool operator!=(Vector3 vector) const
 			{
-				return !(this == &vector);
+				return !(*this == vector);
 			}
 
 			Vector3 operator+(Vector3 vector) const
 			{
-				return Vector3(this->x + vector.x, this->y + vector.y, this->z + vector.z);
+				glm::vec3 add = values + vector.values;
+				return Vector3(add.x, add.y, add.z);
+			}
+
+			Vector3 operator+(float scalar) const
+			{
+				glm::vec3 add = values + scalar;
+				return Vector3(add.x, add.y, add.z);
 			}
 
 			Vector3 operator-(Vector3 vector) const
 			{
-				return Vector3(this->x - vector.x, this->y - vector.y, this->z - vector.z);
+				glm::vec3 sub = values - vector.values;
+				return Vector3(sub.x, sub.y, sub.z);
+			}
+
+			Vector3 operator-(float scalar) const
+			{
+				glm::vec3 sub = values - scalar;
+				return Vector3(sub.x, sub.y, sub.z);
 			}
 
 			Vector3 operator*(float scalar) const
 			{
-				return Vector3(this->x * scalar, this->y * scalar, this->z * scalar);
+				glm::vec3 mul = values * scalar;
+				return Vector3(mul.x, mul.y, mul.z);
 			}
 
 			Vector3 operator/(float scalar) const
 			{
-				return Vector3(this->x / scalar, this->y - scalar, this->z / scalar);
+				glm::vec3 div = values / scalar;
+				return Vector3(div.x, div.y, div.z);
 			}
 
 			static const Vector3 Back;
@@ -85,24 +104,18 @@ namespace Jade
 
 			Vector3()
 			{
-				this->x = 0.0f;
-				this->y = 0.0f;
-				this->z = 0.0f;
-				this->magnitude = 0.0f;
+				values = glm::vec3();
 			}
 
 			Vector3(float x, float y, float z)
 			{
-				this->x = x;
-				this->y = y;
-				this->z = z;
-
-				magnitude = Math::Sqrt(x * x + y * y + z * z);
+				values = glm::vec3(x, y, z);
 			}
 
 			Vector3 Cross(Vector3 vector) const;
 			float Dot(Vector3 vector) const;
 			float Distance(Vector3 target) const;
+			glm::vec3 GetRawData();
 			Vector3 Lerp(Vector3 start, Vector3 end, float delta) const;
 			Vector3 Normalize() const;
 			void SetX(float value);
@@ -111,7 +124,6 @@ namespace Jade
 			float GetY() const;
 			void SetZ(float value);
 			float GetZ() const;
-			float GetMagnitude() const;
 			std::string ToString() const;
 		};
 	}

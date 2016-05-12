@@ -27,29 +27,21 @@ SOFTWARE.
 
 std::string Jade::System::File::Read()
 {
-	std::ifstream t(filename);
-	
-	std::string str((std::istreambuf_iterator<char>(t)),
-		std::istreambuf_iterator<char>());
+	std::ifstream t;
 
-	return str;
+	t.open(filename, std::ios_base::binary | std::ios_base::in);
 
-	/*
-	file.open(filename.c_str(), std::fstream::in | std::fstream::binary);
-	
-	if (file.is_open())
+	if (t.is_open())
 	{
-		std::stringstream stream;
-		stream << file.rdbuf();
-		file.close();
+		std::string str((std::istreambuf_iterator<char>(t)),
+			std::istreambuf_iterator<char>());
 
-		std::string data = stream.str();
+		t.close();
 
-		return stream.str();
+		return str;
 	}
-	*/
-	
-	//throw Core::FileNotFoundException(filename);
+
+	throw Core::FileNotFoundException(filename);
 }
 
 void Jade::System::File::Write(std::string text)

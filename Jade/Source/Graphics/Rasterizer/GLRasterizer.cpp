@@ -27,6 +27,12 @@ SOFTWARE.
 
 bool Jade::Graphics::GLRasterizer::SetRasterizerState(CullMode cullMode, FillMode fillMode, WindMode windMode)
 {	
+	// Set variables.
+	this->cullMode = cullMode;
+	this->fillMode = fillMode;
+	this->windMode = windMode;
+
+	// OpenGL modifications.
 	switch(cullMode)
 	{
 	case CullMode::None: glCullFace(GL_BACK); break;
@@ -39,4 +45,19 @@ bool Jade::Graphics::GLRasterizer::SetRasterizerState(CullMode cullMode, FillMod
 	glFrontFace(windMode == WindMode::CounterClockwise ? GL_CCW : GL_CW);
 
 	return true;
+}
+
+Jade::Graphics::CullMode Jade::Graphics::GLRasterizer::GetCullMode()
+{
+	return cullMode;
+}
+
+Jade::Graphics::FillMode Jade::Graphics::GLRasterizer::GetFillMode()
+{
+	return fillMode;
+}
+
+Jade::Graphics::WindMode Jade::Graphics::GLRasterizer::GetWindMode()
+{
+	return windMode;
 }

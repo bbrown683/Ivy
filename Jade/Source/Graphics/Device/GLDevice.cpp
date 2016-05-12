@@ -26,7 +26,7 @@ SOFTWARE.
 
 bool Jade::Graphics::GLDevice::Create()
 {
-#ifdef WGL
+#ifdef JADE_PLATFORM_WINDOWS
 	
 	std::cout << "[Device Context]" << std::endl;
 
@@ -36,7 +36,8 @@ bool Jade::Graphics::GLDevice::Create()
 	PIXELFORMATDESCRIPTOR dummyPixelFormatDescriptor =
 	{
 		sizeof(dummyPixelFormatDescriptor), 1, PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER,
-		PFD_TYPE_RGBA, static_cast<BYTE>(specification.colorBits), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, static_cast<BYTE>(specification.depthBits), static_cast<BYTE>(specification.stencilBits), 0, PFD_MAIN_PLANE,
+		PFD_TYPE_RGBA, static_cast<BYTE>(specification.colorBits), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+		static_cast<BYTE>(specification.depthBits), static_cast<BYTE>(specification.stencilBits), 0, PFD_MAIN_PLANE,
 		0, 0, 0, 0
 	};
 
@@ -47,22 +48,26 @@ bool Jade::Graphics::GLDevice::Create()
 	HGLRC dummyGLRC = wglCreateContext(dummyDC);
 	wglMakeCurrent(dummyDC, dummyGLRC);
 
-	// Supported OpenGL version.
+	// Initialize OpenGL entry points.
+	if (!gladLoadGL())
+		return false;
+
+	// Highest supported OpenGL version.
+	// Used to generate a context.
 	int major, minor;
 	glGetIntegerv(GL_MAJOR_VERSION, &major);
 	glGetIntegerv(GL_MINOR_VERSION, &minor);
 
-	// Anything below 4.5 is unsupported.
-	if (major < 4 && minor < 5)
+	// Anything below 3.2 is unsupported.
+	if (major < 3 && minor < 2)
 		return false;
 
-	// Load extensions.
-	GLenum result = glewInit();
-	if(result != GLEW_OK)
-		return false;
+	// Required extensions.
+#if defined(WGL_ARB_pixel_format) && defined(WGL_ARB_create_context) \
+	&& defined(WGL_ARB_multisample) && defined(WGL_EXT_swap_control)
 
-	// These extensions are required for the creation of a modern OpenGL context.
-	if(!WGLEW_ARB_pixel_format && !WGLEW_ARB_create_context)
+	// Initialize WGL extensions.
+	if (!gladLoadWGL(dummyDC))
 		return false;
 
 	// Choose final pixel format
@@ -89,22 +94,21 @@ bool Jade::Graphics::GLDevice::Create()
 
 	if (!formatCount)
 		return false;
-	
+
 	SetPixelFormat(dc, pixelFormat, &dummyPixelFormatDescriptor);
 
 	int contextAttribs[] =
 	{
 		WGL_CONTEXT_MAJOR_VERSION_ARB, major,
 		WGL_CONTEXT_MINOR_VERSION_ARB, minor,
-		WGL_CONTEXT_PROFILE_MASK_ARB, WGL_CONTEXT_CORE_PROFILE_BIT_ARB,
-		0
+		0, 0
 	};
-
-	// Create OpenGL context		
+	
+	// Create the OpenGL context		
 	context = wglCreateContextAttribsARB(dc, nullptr, contextAttribs);
 
 	// Failed to be created.
-	if(context == nullptr)
+	if (context == nullptr)
 		return false;
 
 	// Unbind dummy context and delete.
@@ -116,28 +120,33 @@ bool Jade::Graphics::GLDevice::Create()
 	// Bind main context and destroy dummy window.
 	wglMakeCurrent(dc, context);
 
-	// Handles vertical sync if supported.
-	if (WGLEW_EXT_swap_control)
-		wglSwapIntervalEXT(specification.vsync);
+	// Refresh rate.
+	wglSwapIntervalEXT(specification.vsync);
+
+#else
+	return false;
+#endif // Extensions 
+#elif JADE_PLATFORM_LINUX
+	if (!gladLoadGL())
+		return false;
+
+
+#endif // JADE_PLATFORM
 
 	std::cout << "Renderer: OpenGL " << std::endl << glGetString(GL_VERSION) << std::endl;
 
 	return true;
-
-#elif GLX
-
-#endif
 }
+
 
 bool Jade::Graphics::GLDevice::Release()
 {
-#ifdef WGL
+#ifdef JADE_PLATFORM_WINDOWS
 	// Unbind OpenGL context.
 	wglMakeCurrent(dc, nullptr);
 	wglDeleteContext(context);
 	ReleaseDC(reinterpret_cast<HWND>(window->Handle()), dc);
-
-#elif GLX
+#elif JADE_PLATFORM_LINUX
 
 #endif
 	return context == nullptr ? true : false;
@@ -151,14 +160,14 @@ void Jade::Graphics::GLDevice::Clear(Math::Color color)
 
 void Jade::Graphics::GLDevice::Present()
 {
-#ifdef WGL
+#ifdef JADE_PLATFORM_WINDOWS
 	SwapBuffers(dc);
-#elif GLX
+#elif JADE_PLATFORM_LINUX
 
 #endif
 }
 
-char* Jade::Graphics::GLDevice::DeviceInformation()
+char * Jade::Graphics::GLDevice::DeviceInformation()
 {
 	return nullptr;
 }

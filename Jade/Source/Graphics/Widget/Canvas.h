@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Core/Utility.h>
 #include <Graphics/Widget/Widget.h>
 
 namespace Jade

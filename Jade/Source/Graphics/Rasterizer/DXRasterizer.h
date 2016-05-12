@@ -36,8 +36,11 @@ namespace Jade
 		private:
 
 			std::shared_ptr<DXDevice> device;
-
 			ComPtr<ID3D11RasterizerState> m_pRasterizerState;
+
+			CullMode cullMode;
+			FillMode fillMode;
+			WindMode windMode;
 
 		public:
 
@@ -47,6 +50,9 @@ namespace Jade
 			}
 
 			bool SetRasterizerState(CullMode cullMode, FillMode fillMode, WindMode windMode) override;
+			CullMode GetCullMode() override;
+			FillMode GetFillMode() override;
+			WindMode GetWindMode() override;
 		};
 	}
 }

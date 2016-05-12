@@ -28,6 +28,7 @@ SOFTWARE.
 #include "Graphics/Mesh/IMesh.h"
 #include "Graphics/Mesh/DXMesh.h"
 #include "Graphics/Mesh/GLMesh.h"
+#include "Graphics/Shader/Shader.h"
 #include "Graphics/Texture/Texture.h"
 
 namespace Jade
@@ -40,14 +41,14 @@ namespace Jade
 
 			Device device;
 			std::vector<Math::Vertex> vertices;
-			std::vector<unsigned int> indices;
+			std::vector<unsigned short> indices;
 			std::vector<Texture> textures;
 
 			std::shared_ptr<IMesh> mesh;
 
 		public:
 
-			Mesh(Device device, std::vector<Math::Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures)
+			Mesh(Device device, Shader shader, std::vector<Math::Vertex> vertices, std::vector<unsigned short> indices, std::vector<Texture> textures)
 			{
 				this->device = device;
 				this->vertices = vertices;
@@ -60,25 +61,15 @@ namespace Jade
 					mesh = std::make_shared<DXMesh>(std::dynamic_pointer_cast<DXDevice>(device.GetIDevice()), vertices, indices, textures);
 					break;
 				case GraphicsAPI::OpenGL:
-					// OpenGL uses a state machine so we dont need to pass a device.
-					mesh = std::make_shared<GLMesh>(vertices, indices);
+					// OpenGL uses a state machine so we dont need to pass a device,
+					// but it needs the current shader object to do binding.
+					mesh = std::make_shared<GLMesh>(std::dynamic_pointer_cast<GLShader>(shader.GetIShader()), vertices, indices);
 					break;
 				case GraphicsAPI::Vulkan:
 					mesh = nullptr;
 					break;
 				}
 			}
-
-
-			Mesh(int null, Device device, std::vector<Math::Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures)
-			{
-				this->device = device;
-				this->vertices = vertices;
-				this->indices = indices;
-				//this->textures = textures;
-			}
-
-			void Initialize();
 
 			void Draw()	const
 			{
@@ -90,17 +81,15 @@ namespace Jade
 				return vertices;
 			}
 
-			std::vector<unsigned int> GetIndices() const
+			std::vector<unsigned short> GetIndices() const
 			{
 				return indices;
 			}
 
-			/*
 			std::vector<Texture> GetTextures() const
 			{
 				return textures;
 			}
-			*/
 		};
 	}
 }

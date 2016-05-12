@@ -33,14 +33,27 @@ void Jade::Graphics::GLMesh::Bind()
 	// Generate our vertices buffer and bind it.
 	glGenBuffers(1, &vertexBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
-	glBufferData(GL_ARRAY_BUFFER, vertices.size(), vertices.data(), GL_STATIC_DRAW);
-	
-	// Generate a buffer for the indices;
-	//glGenBuffers(1, &indexBuffer);
-	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
-	//glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), &indices[0], GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Math::Vertex), vertices.data(), GL_STATIC_DRAW);
 
-	//glBindVertexArray(0);
+	// Positions.
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, false, sizeof(Math::Vertex),
+		reinterpret_cast<GLvoid*>offsetof(struct Math::Vertex, position));
+
+	// Texture Coordinates.
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(1, 2, GL_FLOAT, false, sizeof(Math::Vertex),
+		reinterpret_cast<GLvoid*>offsetof(struct Math::Vertex, texture));
+
+	// Normals.
+	glEnableVertexAttribArray(2);
+	glVertexAttribPointer(2, 3, GL_FLOAT, false, sizeof(Math::Vertex),
+		reinterpret_cast<GLvoid*>offsetof(struct Math::Vertex, normal));
+
+	// Generate a buffer for the indices;
+	glGenBuffers(1, &indexBuffer);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned short), indices.data(), GL_STATIC_DRAW);
 }
 
 void Jade::Graphics::GLMesh::Unbind()
@@ -49,13 +62,11 @@ void Jade::Graphics::GLMesh::Unbind()
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glDeleteBuffers(1, &vertexBuffer);
 	glDeleteVertexArrays(1, &vertexArray);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	glDeleteBuffers(1, &indexBuffer);
 }
 
 void Jade::Graphics::GLMesh::Draw()
 {
-	// Vertices.
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, nullptr);
-	glDrawArrays(GL_TRIANGLES, 0, sizeof(vertices));
-	glDisableVertexAttribArray(0);
+	glDrawElements(GL_TRIANGLE_STRIP, static_cast<GLsizei>(indices.size()), GL_UNSIGNED_SHORT, nullptr);
 }

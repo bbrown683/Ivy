@@ -22,88 +22,61 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <Graphics/Shader/GLShader.h>
-#include <iostream>
+#include "Graphics/Shader/GLShader.h"
+#include "System/File.h"
 
-bool Jade::Graphics::GLShader::Create(ShaderType type)
-{
+bool Jade::Graphics::GLShader::Create(std::string filename, ShaderType type)
+{	
+	GLuint shader;
+	
 	switch (type)
 	{
-	case ShaderType::Compute:
-		computeShader = glCreateShader(GL_COMPUTE_SHADER);
-		break;
-	case ShaderType::Domain:
-		evaluationShader = glCreateShader(GL_TESS_EVALUATION_SHADER);
-		break;
-	case ShaderType::Geometry:
-		geometryShader = glCreateShader(GL_GEOMETRY_SHADER);
-		break;
 	case ShaderType::Pixel:
+		std::cout << "[Fragment Shader]" << std::endl;
 		shader = glCreateShader(GL_FRAGMENT_SHADER);
 		break;
-	case ShaderType::Tesselation:
-		controlShader = glCreateShader(GL_TESS_CONTROL_SHADER);
-		break;
 	case ShaderType::Vertex:
+		std::cout << "[Vertex Shader]" << std::endl;
 		shader = glCreateShader(GL_VERTEX_SHADER);
 		break;
 	default: return false;
 	}
 
-	GLSLShader result;
-	int id = TranslateHLSLFromFile(filename.c_str(), 0, LANG_440, nullptr, &dependencies, &result);
+	// Read the file into a string.
+	System::File file(filename);
+	std::string data = file.Read();
 
-	if (id != 0)
+	// Print out shader code for debugging purposes.
+	std::cout << data << std::endl;
+
+	// glShaderSource needs a const char* of our file data.
+	const char* source = data.c_str();
+	glShaderSource(shader, 1, &source, nullptr);
+	glCompileShader(shader);
+
+	// Used to print errors if there are any.
+	std::string buffer;
+	if(CheckForErrors(shader, GL_COMPILE_STATUS, false, buffer))
 	{
-		program = glCreateProgram();
-
-		glShaderSource(shader, 1, const_cast<const char **>(&result.sourceCode), nullptr);
-		glCompileShader(shader);
-
-		bool check;
-		check = CheckForErrors(shader, GL_COMPILE_STATUS, false, "Shader Compilation Error: ");
-		if (check == false)
-			return false;
-
-		glAttachShader(program, shader);
-		glLinkProgram(program);
-		check = CheckForErrors(program, GL_LINK_STATUS, true, "Shader Linking Error : ");
-		if (check == false)
-			return false;
-
-		glValidateProgram(program);
-		CheckForErrors(program, GL_VALIDATE_STATUS, true, "Shader Validation Error : ");
-		if (check == false)
-			return check;
-
-		glDetachShader(program, shader);
-		glDeleteShader(shader);
-
-		glUseProgram(program);
-
-		FreeGLSLShader(&result);
+		shaderIDs.push_back(shader);
 
 		return true;
 	}
 
 	return false;
+}
 
+bool Jade::Graphics::GLShader::Compile(std::string filename, ShaderType type)
+{
 	return false;
 }
 
 bool Jade::Graphics::GLShader::Release()
 {
-	glDeleteProgram(program);
-
+	glDeleteProgram(programID);
+   
 	return true;
 }
-
-/*
-bool Jade::Graphics::GLShader::Compile(std::string filename, ShaderType type)
-{
-
-}
-*/
 
 bool Jade::Graphics::GLShader::CheckForErrors(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMessage)
 {
@@ -130,23 +103,42 @@ bool Jade::Graphics::GLShader::CheckForErrors(GLuint shader, GLuint flag, bool i
 	return true;
 }
 
-GLuint Jade::Graphics::GLShader::GetShaderFromType(ShaderType type)
+bool Jade::Graphics::GLShader::CreateProgram()
 {
-	switch (type)
+	programID = glCreateProgram();
+	
+	for (int i = 0; i < shaderIDs.size(); i++)
+		glAttachShader(programID, shaderIDs[i]);
+
+	std::cout << "[Program]" << std::endl;
+
+	// After all shaders are attached, 
+	// we can now link them to a single program.
+	glLinkProgram(programID);
+	
+	std::string buffer;
+	if (CheckForErrors(programID, GL_LINK_STATUS, true, buffer))
 	{
-	case ShaderType::Compute:
-		return computeShader;
-	case ShaderType::Domain:
-		return evaluationShader;
-	case ShaderType::Geometry:
-		return geometryShader;
-	case ShaderType::Pixel:
-		return fragmentShader;
-	case ShaderType::Tesselation:
-		return controlShader;
-	case ShaderType::Vertex:
-		return vertexShader;
-	default:
-		return 0;
+		std::cout << "Program was linked successfully." << std::endl;
+
+		for (int i = 0; i < shaderIDs.size(); i++)
+		{
+			// Detach shaders from program and mark them for deletion.
+			glDetachShader(programID, shaderIDs[i]);
+			glDeleteShader(shaderIDs[i]);
+		}
+
+		// Lastly we validate the program can execute.
+		glValidateProgram(programID);
+
+		if (CheckForErrors(programID, GL_VALIDATE_STATUS, true, buffer))
+		{
+			std::cout << "Program was validated successfully." << std::endl;
+			glUseProgram(programID);
+
+			return true;
+		}
 	}
+
+	return false;
 }

@@ -60,8 +60,8 @@ namespace Jade
 				}
 			}
 
-			std::vector<unsigned int> GetIndices();
-			void SetIndices(std::vector<unsigned int> indices);
+			std::vector<unsigned short> GetIndices();
+			void SetIndices(std::vector<unsigned short> indices);
 			bool Bind();
 			bool Unbind();
 		};

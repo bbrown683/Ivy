@@ -61,7 +61,8 @@ namespace Jade
 			ComPtr<ID3D11PixelShader>		m_pPixelShader = nullptr;
 			ComPtr<ID3D11VertexShader>		m_pVertexShader = nullptr;
 
-			bool Create(ShaderType type) override;
+			bool Create(std::string filename, ShaderType type) override;
+			bool Compile(std::string filename, ShaderType type) override;
 			bool Release() override;
 			bool CopyToBlob(ShaderType type, ComPtr<ID3DBlob> blob);
 
@@ -93,7 +94,7 @@ namespace Jade
 					// If it succeeds we can create the shader.
 					if (CopyToBlob(iType, m_pTemporaryBlob))
 					{
-						if (!DXShader::Create(iType))
+						if (!DXShader::Create("", iType))
 							DXShader::Release();
 					}
 					else

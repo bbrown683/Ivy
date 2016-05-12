@@ -45,11 +45,12 @@ namespace Jade
 		{
 		private:
 
-			VertexBuffer vBuffer;
+			// TODO: Remove all DirectX math related components and 
+			// replace with our own math system.
 
 			std::shared_ptr<DXDevice> device;
 			std::vector<Math::Vertex> vertices;
-			std::vector<unsigned int> indices;
+			std::vector<unsigned short> indices;
 			std::vector<Texture> textures;
 
 			bool bufferSuccess;
@@ -77,7 +78,7 @@ namespace Jade
 
 		public:
 
-			DXMesh(std::shared_ptr<DXDevice> device, std::vector<Math::Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures)
+			DXMesh(std::shared_ptr<DXDevice> device, std::vector<Math::Vertex> vertices, std::vector<unsigned short> indices, std::vector<Texture> textures)
 			{
 				this->device = device;
 				this->vertices = vertices;

@@ -31,21 +31,11 @@ namespace Jade
 	{
 		enum class ShaderType
 		{
-			// Compute Shader.
-			Compute,
-			// Domain Shader (DirectX), also known as a 
-			// Tesselation Evaluation Shader (OpenGL).
-			Domain,
-			// Geometry Shader.
-			Geometry,
 			// Pixel Shader (DirectX), also known as a
 			// Fragment Shader (OpenGL).
 			Pixel,
 			// Vertex Shader.
 			Vertex,
-			// Tesselation Control Shader (OpenGL), also known as a
-			// Hull Shader (DirectX).
-			Tesselation
 		};
 	}
 }

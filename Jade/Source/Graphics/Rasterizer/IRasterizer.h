@@ -34,7 +34,12 @@ namespace Jade
 	{
 		struct IRasterizer
 		{
+		public:
+
 			virtual bool SetRasterizerState(CullMode cullMode, FillMode fillMode, WindMode windMode) = 0;
+			virtual CullMode GetCullMode() = 0;
+			virtual FillMode GetFillMode() = 0;
+			virtual WindMode GetWindMode() = 0;
 		};
 	}
 }

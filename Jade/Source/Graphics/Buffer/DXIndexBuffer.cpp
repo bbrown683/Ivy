@@ -26,12 +26,12 @@ SOFTWARE.
 
 #include "DXIndexBuffer.h"
 
-std::vector<unsigned int> Jade::Graphics::DXIndexBuffer::GetIndices()
+std::vector<unsigned short> Jade::Graphics::DXIndexBuffer::GetIndices()
 {
 	return indices;
 }
 
-void Jade::Graphics::DXIndexBuffer::SetIndices(std::vector<unsigned int> indices)
+void Jade::Graphics::DXIndexBuffer::SetIndices(std::vector<unsigned short> indices)
 {
 	this->indices = indices;
 }
@@ -44,7 +44,7 @@ bool Jade::Graphics::DXIndexBuffer::Bind()
 	D3D11_BUFFER_DESC desc;
 	ZeroMemory(&desc, sizeof(desc));
 	desc.Usage = D3D11_USAGE_DEFAULT;
-	desc.ByteWidth = static_cast<unsigned int>(sizeof(unsigned int) * indices.size());
+	desc.ByteWidth = static_cast<unsigned int>(sizeof(unsigned short) * indices.size());
 	desc.BindFlags = D3D11_BIND_INDEX_BUFFER;
 	desc.CPUAccessFlags = 0;
 
@@ -60,14 +60,14 @@ bool Jade::Graphics::DXIndexBuffer::Bind()
 		return false;
 
 	// Assign index buffer.
-	device->GetID3D11DeviceContext()->IASetIndexBuffer(m_pIndexBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);
+	device->GetID3D11DeviceContext()->IASetIndexBuffer(m_pIndexBuffer.Get(), DXGI_FORMAT_R16_UINT, 0);
 
 	return true;
 }
 
 bool Jade::Graphics::DXIndexBuffer::Unbind()
 {
-	device->GetID3D11DeviceContext()->IASetIndexBuffer(nullptr, DXGI_FORMAT_R32_UINT, 0);
+	device->GetID3D11DeviceContext()->IASetIndexBuffer(nullptr, DXGI_FORMAT_R16_UINT, 0);
 
 	return true;
 }

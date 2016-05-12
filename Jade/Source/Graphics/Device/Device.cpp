@@ -30,8 +30,6 @@ std::shared_ptr<Jade::Graphics::IDevice> Jade::Graphics::Device::Initialize()
 	if (window.GetIWindow() != nullptr)
 	{
 		// Check what API is being requested.
-		if (api == GraphicsAPI::Default)
-			return nullptr;
 		if (api == GraphicsAPI::DirectX)
 			return std::make_shared<DXDevice>(window.GetIWindow(), specification);
 		if (api == GraphicsAPI::OpenGL)

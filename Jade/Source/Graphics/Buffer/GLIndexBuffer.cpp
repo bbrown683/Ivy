@@ -24,12 +24,12 @@ SOFTWARE.
 
 #include "GLIndexBuffer.h"
 
-std::vector<unsigned int> Jade::Graphics::GLIndexBuffer::GetIndices()
+std::vector<unsigned short> Jade::Graphics::GLIndexBuffer::GetIndices()
 {
 	return indices;
 }
 
-void Jade::Graphics::GLIndexBuffer::SetIndices(std::vector<unsigned int> indices)
+void Jade::Graphics::GLIndexBuffer::SetIndices(std::vector<unsigned short> indices)
 {
 	this->indices = indices;
 }

@@ -24,13 +24,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include "stb/stb_truetype.h"
+
 #include <Core/Utility.h>
 #include <Core/Exception/Exception.h>
 #include <Graphics/Device/Device.h>
 #include <Graphics/Font/Glyph.h>
-#include <Graphics/SpriteBatch/SpriteBatch.h>
 #include <Graphics/Texture/Texture.h>
-#include <System/File.h>
 
 namespace Jade
 {
@@ -42,17 +42,23 @@ namespace Jade
 		private:
 
 			Device device;
-			std::vector<Texture> textures;
+			std::vector<Glyph> glyph;
+
+			std::vector<stbtt_bakedchar> cdata;
+			Texture texture;
 
 		public:
  
 			Font(Device device)
 			{
 				this->device = device;
+
+				// Will store the 95 printable ASCII characters.
+				cdata = std::vector<stbtt_bakedchar>(96);
 			}
 
 			//! Draws the given text at the specified x and y coordinates at a certain pixel size.
-			void Draw(std::string text, int x, int y);
+			void Draw(std::string text, float x, float y);
 			//! Loads the specified font file and creates a bitmap of the images with the designated pixel size.
 			void Load(std::string filename, int pixelSize);
 		};

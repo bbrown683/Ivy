@@ -30,6 +30,9 @@ SOFTWARE.
 #include <Math/Math.h>
 #include <Math/Vector3.h>
 
+#include <glm/matrix.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+
 namespace Jade
 {
 	namespace Math
@@ -39,39 +42,49 @@ namespace Jade
 		{
 		private:
 
-			float values[4][4];
+			glm::mat4 values;
 
 		public:
 
 			Matrix operator+(Matrix matrix) const
 			{
-				return Matrix(values[0][0] + matrix.values[0][0], values[0][1] + matrix.values[0][1], values[0][2] + matrix.values[0][2], values[0][3] + matrix.values[0][3], 
-					values[1][0] + matrix.values[1][0], values[1][1] + matrix.values[1][1], values[1][2] + matrix.values[1][2], values[1][3] + matrix.values[1][3], 
-					values[2][0] + matrix.values[2][0], values[2][1] + matrix.values[2][1], values[2][2] + matrix.values[2][2], values[2][3] + matrix.values[2][3], 
-					values[3][0] + matrix.values[3][0], values[3][1] + matrix.values[3][1], values[3][2] + matrix.values[3][2], values[3][3] + matrix.values[3][3]);
+				glm::mat4 add = values + matrix.values;
+				return Matrix(add[0][0], add[0][1], add[0][2], add[0][3],
+					add[1][0], add[1][1], add[1][2], add[1][3],
+					add[2][0], add[2][1], add[2][2], add[2][3],
+					add[3][0], add[3][1], add[3][2], add[3][3]);
 			}
 
 			Matrix operator-(Matrix matrix) const
 			{
-				return Matrix(values[0][0] - matrix.values[0][0], values[0][1] - matrix.values[0][1], values[0][2] - matrix.values[0][2], values[0][3] - matrix.values[0][3],
-					values[1][0] - matrix.values[1][0], values[1][1] - matrix.values[1][1], values[1][2] - matrix.values[1][2], values[1][3] - matrix.values[1][3],
-					values[2][0] - matrix.values[2][0], values[2][1] - matrix.values[2][1], values[2][2] - matrix.values[2][2], values[2][3] - matrix.values[2][3],
-					values[3][0] - matrix.values[3][0], values[3][1] - matrix.values[3][1], values[3][2] - matrix.values[3][2], values[3][3] - matrix.values[3][3]);
+				glm::mat4 sub = values - matrix.values;
+				return Matrix(sub[0][0], sub[0][1], sub[0][2], sub[0][3],
+					sub[1][0], sub[1][1], sub[1][2], sub[1][3],
+					sub[2][0], sub[2][1], sub[2][2], sub[2][3],
+					sub[3][0], sub[3][1], sub[3][2], sub[3][3]);
 			}
 
 			Matrix operator*(Matrix matrix) const
 			{
-				return Matrix();
+				glm::mat4 mul = values * matrix.values;
+				return Matrix(mul[0][0], mul[0][1], mul[0][2], mul[0][3],
+					mul[1][0], mul[1][1], mul[1][2], mul[1][3],
+					mul[2][0], mul[2][1], mul[2][2], mul[2][3],
+					mul[3][0], mul[3][1], mul[3][2], mul[3][3]);
 			}
 
 			Matrix operator/(Matrix matrix) const
 			{
-				return Matrix();
+				glm::mat4 div = values / matrix.values;
+				return Matrix(div[0][0], div[0][1], div[0][2], div[0][3],
+					div[1][0], div[1][1], div[1][2], div[1][3],
+					div[2][0], div[2][1], div[2][2], div[2][3],
+					div[3][0], div[3][1], div[3][2], div[3][3]);
 			}
 
 			static const Matrix Identity;
 			static const Matrix Zero;
-			
+
 			// Sets all values to 0.0f by default.
 			Matrix()
 			{
@@ -93,9 +106,9 @@ namespace Jade
 				values[3][3] = 0.0f;
 			}
 
-			Matrix(float m00, float m01, float m02, float m03, 
-				float m10, float m11, float m12, float m13, 
-				float m20, float m21, float m22, float m23, 
+			Matrix(float m00, float m01, float m02, float m03,
+				float m10, float m11, float m12, float m13,
+				float m20, float m21, float m22, float m23,
 				float m30, float m31, float m32, float m33)
 			{
 				values[0][0] = m00;
@@ -125,7 +138,7 @@ namespace Jade
 			//! Returns a matrix that is of a Perspective view.
 			static Matrix CreatePerspectiveView(float fieldOfView, float aspectRatio, float nearPlaneDistance, float farPlaneDistance);
 			//! Returns a reference to the raw data contained within the matrix.
-			float(&Data())[4][4];
+			glm::mat4 GetRawData();
 			//! Returns the determinant of the matrix.
 			float Determinant();
 			//! Divides two matrices and returns a matrix as a result.
@@ -141,7 +154,7 @@ namespace Jade
 			//! Rotates the matrix along the y - axis by a specified amount in radians.
 			static Matrix RotateAlongY(float radians);
 			//! Rotates the matrix along the z - axis by a specified amount in radians.
-			Matrix RotateAlongZ(float radians) const;
+			static Matrix RotateAlongZ(float radians);
 			//! Subtracts two matrices and returns a matrix as a result.
 			Matrix Subtract(Matrix other) const;
 			//! Returns a matrix that is translated by the specified offsets.

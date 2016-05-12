@@ -32,8 +32,8 @@ namespace Jade
 	{
 		struct IIndexBuffer
 		{
-			virtual std::vector<unsigned int> GetIndices() = 0;
-			virtual void SetIndices(std::vector<unsigned int> indices) = 0;
+			virtual std::vector<unsigned short> GetIndices() = 0;
+			virtual void SetIndices(std::vector<unsigned short> indices) = 0;
 			virtual bool Bind() = 0;
 			virtual bool Unbind() = 0;
 		};

@@ -27,6 +27,7 @@ SOFTWARE.
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
 #include "ConstantBuffer.h"
+#include "DrawType.h"
 
 namespace Jade
 {
@@ -56,7 +57,7 @@ namespace Jade
 			}
 
 			//! Draws to the current buffers.
-			void DrawToBuffer();
+			void DrawToBuffer(DrawType type);
 		};
 	}
 }

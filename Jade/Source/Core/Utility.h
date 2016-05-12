@@ -28,6 +28,9 @@ SOFTWARE.
 // Include some common headers.
 //==============================================
 
+// Platform define.
+#include "System/Platform.h"
+
 // I/O
 #include <iostream>
 
@@ -64,7 +67,6 @@ namespace Jade
 
 		public:
 
-			static char* StringToChar(std::string string);
 			static std::string GetFilePath();
 			static std::wstring StringToWString(std::string string);
 		};

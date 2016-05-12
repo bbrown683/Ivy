@@ -16,7 +16,6 @@ namespace Jade
 			{
 				switch(device.GetGraphicsAPI())
 				{
-					case GraphicsAPI::Default: return nullptr;
 					case GraphicsAPI::DirectX: return std::make_shared<DXTexture>(std::dynamic_pointer_cast<DXDevice>(device.GetIDevice()), params...);
 					case GraphicsAPI::OpenGL: return nullptr;
 					case GraphicsAPI::Vulkan: return nullptr;

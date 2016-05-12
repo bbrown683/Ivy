@@ -23,7 +23,15 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-// Initialize our external headers here.
+// Initialize nuklear.
+#define NK_IMPLEMENTATION
+#define NK_INCLUDE_FIXED_TYPES
+#define NK_INCLUDE_DEFAULT_ALLOCATOR
+#define NK_INCLUDE_VERTEX_BUFFER_OUTPUT
+#define NK_INCLUDE_FONT_BAKING
+#include "nuklear/nuklear.h"
+
+// Initialize stb libraries.
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb/stb_image.h" 
 #define STB_IMAGE_RESIZE_IMPLEMENTATION 
@@ -32,12 +40,6 @@ SOFTWARE.
 #include "stb/stb_truetype.h"
 
 #include "Utility.h"
-
-char* Jade::Core::Utility::StringToChar(std::string string)
-{
-	// Returns a reference to the first index in the vector which is a char.
-	return &string[0u];
-}
 
 std::string Jade::Core::Utility::GetFilePath()
 {

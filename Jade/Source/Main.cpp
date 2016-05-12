@@ -52,11 +52,11 @@ int main(int argc, char* argv[])
 
 	// Dynamic model and font loading.
 	// This allows us to load a new instance with the same object.
-	Model model(device);
+	Model model(device, shader);
 	model.Load(".\\resources\\models\\MonoCube.dae");
 
-	Font font(device);
-	font.Load(".\\resources\\fonts\\consola.ttf", 16);
+	//Font font(device);
+	//font.Load(".\\resources\\fonts\\consola.ttf", 16);
 
 	while (window.IsOpen())
 	{
@@ -66,7 +66,7 @@ int main(int argc, char* argv[])
 		// Draw the model.
 		model.Draw();
 
-		font.Draw("Hello World", 10, 10);
+		//font.Draw("Hello World", 10, 10);
 
 		// Gets the keys pressed and prints their enumerication value that is stored as an integer.
 		std::vector<Key> keysPressed = window.GetInput().keyboard.GetKeysPressed();

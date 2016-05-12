@@ -24,44 +24,62 @@ SOFTWARE.
 
 #include "Vector2.h"
 
-const Jade::Math::Vector2 Down		= Jade::Math::Vector2(0.0f, -1.0f);
-const Jade::Math::Vector2 Left		= Jade::Math::Vector2(-1.0f, 0.0f);
-const Jade::Math::Vector2 One		= Jade::Math::Vector2(1.0f, 1.0f);
-const Jade::Math::Vector2 Right		= Jade::Math::Vector2(1.0f, 0.0f);
-const Jade::Math::Vector2 Up		= Jade::Math::Vector2(0.0f, 1.0f);
-const Jade::Math::Vector2 Zero		= Jade::Math::Vector2(0.0f, 0.0f);
+const Jade::Math::Vector2 Down = Jade::Math::Vector2(0.0f, -1.0f);
+const Jade::Math::Vector2 Left = Jade::Math::Vector2(-1.0f, 0.0f);
+const Jade::Math::Vector2 One = Jade::Math::Vector2(1.0f, 1.0f);
+const Jade::Math::Vector2 Right = Jade::Math::Vector2(1.0f, 0.0f);
+const Jade::Math::Vector2 Up = Jade::Math::Vector2(0.0f, 1.0f);
+const Jade::Math::Vector2 Zero = Jade::Math::Vector2(0.0f, 0.0f);
 
-float Jade::Math::Vector2::Distance(Vector2 target)
+float Jade::Math::Vector2::Dot(Vector2 vector) const
 {
-	return 0.0f;
+	return dot(values, vector.values);
 }
 
-void Jade::Math::Vector2::Normalize()
+float Jade::Math::Vector2::Distance(Vector2 target) const
 {
+	return distance(values, target.values);
+}
 
+glm::vec2 Jade::Math::Vector2::GetRawData()
+{
+	return values;
+}
+
+Jade::Math::Vector2 Jade::Math::Vector2::Lerp(Vector2 start, Vector2 end, float delta) const
+{
+	glm::vec2 lerp = glm::lerp(start.values, end.values, delta);
+	return Vector2(lerp.x, lerp.y);
+}
+
+Jade::Math::Vector2 Jade::Math::Vector2::Normalize() const
+{
+	glm::vec2 normalized = normalize(values);
+	return Vector2(normalized.x, normalized.y);
 }
 
 void Jade::Math::Vector2::SetX(float value)
 {
-	x = value;
+	values.x = value;
 }
 
-float Jade::Math::Vector2::GetX()
+float Jade::Math::Vector2::GetX() const
 {
-	return x;
+	return values.x;
 }
 
 void Jade::Math::Vector2::SetY(float value)
 {
-	y = value;
+	values.y = value;
 }
 
-float Jade::Math::Vector2::GetY()
+float Jade::Math::Vector2::GetY() const
 {
-	return y;
+	return values.y;
 }
 
-float Jade::Math::Vector2::GetMagnitude()
+std::string Jade::Math::Vector2::ToString() const
 {
-	return magnitude;
+	return "(" + std::to_string(values.x) + ", " +
+		std::to_string(values.y) + ")";
 }

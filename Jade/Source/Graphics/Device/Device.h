@@ -72,7 +72,7 @@ namespace Jade
 				device = Initialize();
 			}
 
-			Device(System::Window window, Specification specification) : api(GraphicsAPI::Default)
+			Device(System::Window window, Specification specification)
 			{
 				this->window = window;
 				this->specification = specification;

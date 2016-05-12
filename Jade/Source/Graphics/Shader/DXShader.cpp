@@ -24,54 +24,12 @@ SOFTWARE.
 
 #include "Graphics/Shader/DXShader.h"
 
-bool Jade::Graphics::DXShader::Create(ShaderType type)
+bool Jade::Graphics::DXShader::Create(std::string filename, ShaderType type)
 {
 	HRESULT hr;
 
 	switch (type)
 	{
-		case ShaderType::Compute:
-		{
-			hr = device->GetID3D11Device()->CreateComputeShader(m_pComputeShaderBlob->GetBufferPointer(), m_pComputeShaderBlob->GetBufferSize(), nullptr, m_pComputeShader.GetAddressOf());
-
-			if (FAILED(hr))
-			{
-				// Output compilation errors to console.
-				std::cout << "ERROR: Compute shader creation failed..." << std::endl;
-				return false;
-			}
-
-			std::cout << "Compute shader was created successfully..." << std::endl;
-			break;
-		}
-		case ShaderType::Domain:
-		{
-			hr = device->GetID3D11Device()->CreateDomainShader(m_pDomainShaderBlob->GetBufferPointer(), m_pDomainShaderBlob->GetBufferSize(), nullptr, m_pDomainShader.GetAddressOf());
-
-			if (FAILED(hr))
-			{
-				// Output compilation errors to console.
-				std::cout << "ERROR: Domain shader creation failed..." << std::endl;
-				return false;
-			}
-
-			std::cout << "Domain shader was created successfully..." << std::endl;
-			break;
-		}
-		case ShaderType::Geometry:
-		{
-			hr = device->GetID3D11Device()->CreateGeometryShader(m_pGeometryShaderBlob->GetBufferPointer(), m_pGeometryShaderBlob->GetBufferSize(), nullptr, m_pGeometryShader.GetAddressOf());
-
-			if (FAILED(hr))
-			{
-				// Output compilation errors to console.
-				std::cout << "ERROR: Geometry shader creation failed..." << std::endl;
-				return false;
-			}
-
-			std::cout << "Geometry shader was created successfully..." << std::endl;
-			break;
-		}
 		case ShaderType::Pixel:
 		{
 			hr = device->GetID3D11Device()->CreatePixelShader(m_pPixelShaderBlob->GetBufferPointer(), m_pPixelShaderBlob->GetBufferSize(), nullptr, m_pPixelShader.GetAddressOf());
@@ -86,20 +44,6 @@ bool Jade::Graphics::DXShader::Create(ShaderType type)
 			device->GetID3D11DeviceContext()->PSSetShader(m_pPixelShader.Get(), nullptr, 0);
 
 			std::cout << "Pixel shader was created successfully..." << std::endl;
-			break;
-		}
-		case ShaderType::Tesselation:
-		{
-			hr = device->GetID3D11Device()->CreateHullShader(m_pHullShaderBlob->GetBufferPointer(), m_pHullShaderBlob->GetBufferSize(), nullptr, m_pHullShader.GetAddressOf());
-
-			if (FAILED(hr))
-			{
-				// Output compilation errors to console.
-				std::cout << "ERROR: Tesselation shader creation failed..." << std::endl;
-				return false;
-			}
-
-			std::cout << "Tesselation shader was created successfully..." << std::endl;
 			break;
 		}
 		case ShaderType::Vertex:
@@ -117,8 +61,8 @@ bool Jade::Graphics::DXShader::Create(ShaderType type)
 			D3D11_INPUT_ELEMENT_DESC inputLayout[] =
 			{
 				{ "POSITION",	0, DXGI_FORMAT_R32G32B32_FLOAT	,	0,	0,	D3D11_INPUT_PER_VERTEX_DATA,	0 },
-				{ "TEXCOORD",	0, DXGI_FORMAT_R32G32_FLOAT		,	0, 16,	D3D11_INPUT_PER_VERTEX_DATA,	0 },
-				{ "NORMAL"  ,	0, DXGI_FORMAT_R32G32B32_FLOAT	,	0, 16,  D3D11_INPUT_PER_VERTEX_DATA,	0 },	
+				{ "TEXCOORD",	0, DXGI_FORMAT_R32G32_FLOAT		,	0, 12,	D3D11_INPUT_PER_VERTEX_DATA,	0 },
+				{ "NORMAL"  ,	0, DXGI_FORMAT_R32G32B32_FLOAT	,	0, 12,  D3D11_INPUT_PER_VERTEX_DATA,	0 },	
 			};
 
 			// Create the input layout.
@@ -143,6 +87,11 @@ bool Jade::Graphics::DXShader::Create(ShaderType type)
 	return true;
 }
 
+bool Jade::Graphics::DXShader::Compile(std::string filename, ShaderType type)
+{
+	return false;
+}
+
 bool Jade::Graphics::DXShader::Release()
 {
 	std::cout << "Shaders cleaning up..." << std::endl;
@@ -156,23 +105,11 @@ bool Jade::Graphics::DXShader::CopyToBlob(ShaderType type, ComPtr<ID3DBlob> blob
 
 	switch(type)
 	{
-	case ShaderType::Compute:
-		hr = blob.CopyTo(m_pComputeShaderBlob.GetAddressOf());
-		break;
-	case ShaderType::Domain:
-		hr = blob.CopyTo(m_pDomainShaderBlob.GetAddressOf());
-		break;
-	case ShaderType::Geometry:
-		hr = blob.CopyTo(m_pGeometryShaderBlob.GetAddressOf());
-		break;
 	case ShaderType::Pixel:
 		hr = blob.CopyTo(m_pPixelShaderBlob.GetAddressOf());
 		break;
 	case ShaderType::Vertex:
 		hr = blob.CopyTo(m_pVertexShaderBlob.GetAddressOf());
-		break;
-	case ShaderType::Tesselation:
-		hr = blob.CopyTo(m_pHullShader.GetAddressOf());
 		break;
 	default:
 		hr = -1;

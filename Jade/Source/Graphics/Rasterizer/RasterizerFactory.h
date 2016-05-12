@@ -39,7 +39,6 @@ namespace Jade
 			{
 				switch (device.GetGraphicsAPI())
 				{
-					case GraphicsAPI::Default: return nullptr;
 					case GraphicsAPI::DirectX: return std::make_shared<DXRasterizer>(std::dynamic_pointer_cast<DXDevice>(device.GetIDevice()));
 					case GraphicsAPI::OpenGL: return std::make_shared<GLRasterizer>();
 					case GraphicsAPI::Vulkan: return nullptr;

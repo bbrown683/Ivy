@@ -31,8 +31,6 @@ namespace Jade
 	{
 		enum class GraphicsAPI
 		{
-			// Selects an appropriate device at runtime.
-			Default,
 			// Selects the DirectX API.
 			DirectX,
 			// Selects the OpenGL API.

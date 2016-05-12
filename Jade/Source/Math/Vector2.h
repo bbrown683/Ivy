@@ -24,7 +24,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "Math.h"
+#include "Core/Utility.h"
+#include "Math/Math.h"
+
+#include <glm/vec2.hpp>
+#include <glm/geometric.hpp>
+#include <glm/gtx/compatibility.hpp>
 
 namespace Jade
 {
@@ -34,42 +39,57 @@ namespace Jade
 		{
 		private:
 
-			float x;
-			float y;
-			float magnitude;
+			glm::vec2 values;
 
 		public:
 
 			// Vector2 operator overloads.
 
-			bool operator==(const Vector2 vector)
+			bool operator==(Vector2 vector) const
 			{
-				return (this->x - vector.x < Math::Epsilon) && (this->y - vector.y < Math::Epsilon) ? true : false;
+				return (this->values.x - vector.values.x < Math::Epsilon) &&
+					(this->values.y - vector.values.y < Math::Epsilon) ? true : false;
 			}
 
-			bool operator!=(const Vector2 vector)
+			bool operator!=(Vector2 vector) const
 			{
-				return !(this == &vector);
+				return !(*this == vector);
 			}
 
-			Vector2 operator+(const Vector2 vector)
+			Vector2 operator+(Vector2 vector) const
 			{
-				return Vector2(this->x + vector.x, this->y + vector.y);
+				glm::vec2 add = values + vector.values;
+				return Vector2(add.x, add.y);
 			}
 
-			Vector2 operator-(const Vector2 vector)
+			Vector2 operator+(float scalar) const
 			{
-				return Vector2(this->x - vector.x, this->y - vector.y);
+				glm::vec2 add = values + scalar;
+				return Vector2(add.x, add.y);
 			}
 
-			Vector2 operator*(const float scalar)
+			Vector2 operator-(Vector2 vector) const
 			{
-				return Vector2(this->x * scalar, this->y * scalar);
+				glm::vec2 sub = values - vector.values;
+				return Vector2(sub.x, sub.y);
 			}
 
-			Vector2 operator/(const float scalar)
+			Vector2 operator-(float scalar) const
 			{
-				return Vector2(this->x / scalar, this->y - scalar);
+				glm::vec2 sub = values - scalar;
+				return Vector2(sub.x, sub.y);
+			}
+
+			Vector2 operator*(float scalar) const
+			{
+				glm::vec2 mul = values * scalar;
+				return Vector2(mul.x, mul.y);
+			}
+
+			Vector2 operator/(float scalar) const
+			{
+				glm::vec2 div = values / scalar;
+				return Vector2(div.x, div.y);
 			}
 
 			static const Vector2 Down;
@@ -81,30 +101,24 @@ namespace Jade
 
 			Vector2()
 			{
-				this->x = 0.0f;
-				this->y = 0.0f;
-				this->magnitude = 0.0f;
+				values = glm::vec2();
 			}
 
 			Vector2(float x, float y)
 			{
-				this->x = x;
-				this->y = y;
-
-				magnitude = Math::Sqrt(x * x + y * y);
+				values = glm::vec2(x, y);
 			}
 
-			float Distance(Vector2 target);
-
-			void Normalize();
-
+			float Dot(Vector2 vector) const;
+			float Distance(Vector2 target) const;
+			glm::vec2 GetRawData();
+			Vector2 Lerp(Vector2 start, Vector2 end, float delta) const;
+			Vector2 Normalize() const;
 			void SetX(float value);
-			float GetX();
-
+			float GetX() const;
 			void SetY(float value);
-			float GetY();
-			
-			float GetMagnitude();
+			float GetY() const;
+			std::string ToString() const;
 		};
 	}
 }

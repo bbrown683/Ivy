@@ -34,7 +34,8 @@ namespace Jade
 		{
 		private:
 
-			virtual bool Create(ShaderType type) = 0;
+			virtual bool Create(std::string filename, ShaderType type) = 0;
+			virtual bool Compile(std::string filename, ShaderType type) = 0;
 			virtual bool Release() = 0;
 
 		public:

@@ -39,7 +39,7 @@ namespace Jade
 		private:
 
 			std::shared_ptr<DXDevice> device;
-			std::vector<unsigned int> indices;
+			std::vector<unsigned short> indices;
 
 			ComPtr<ID3D11Buffer> m_pIndexBuffer;
 
@@ -55,8 +55,8 @@ namespace Jade
 				DXIndexBuffer::Unbind();
 			}
 
-			std::vector<unsigned int> GetIndices() override;
-			void SetIndices(std::vector<unsigned int> indices) override;
+			std::vector<unsigned short> GetIndices() override;
+			void SetIndices(std::vector<unsigned short> indices) override;
 			bool Bind() override;
 			bool Unbind() override;
 		};

@@ -67,7 +67,7 @@ void Jade::Graphics::DXMesh::Bind()
 
 		// Set up the index buffer now.
 		desc.Usage = D3D11_USAGE_DEFAULT;
-		desc.ByteWidth = static_cast<unsigned int>(sizeof(unsigned int) * indices.size());
+		desc.ByteWidth = static_cast<unsigned int>(sizeof(unsigned short) * indices.size());
 		desc.BindFlags = D3D11_BIND_INDEX_BUFFER;
 		desc.CPUAccessFlags = 0;
 		InitData.pSysMem = indices.data();
@@ -87,7 +87,7 @@ void Jade::Graphics::DXMesh::Bind()
 			std::cout << "Index buffer was created successfully..." << std::endl;
 
 			// Assign index buffer.
-			device->GetID3D11DeviceContext()->IASetIndexBuffer(m_pIndexBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);
+			device->GetID3D11DeviceContext()->IASetIndexBuffer(m_pIndexBuffer.Get(), DXGI_FORMAT_R16_UINT, 0);
 
 			// Create the constant buffer
 			desc.Usage = D3D11_USAGE_DEFAULT;
@@ -109,7 +109,6 @@ void Jade::Graphics::DXMesh::Bind()
 
 				space.world = DirectX::XMMatrixIdentity();
 
-				// Initialize the view matrix
 				DirectX::XMVECTOR Eye = DirectX::XMVectorSet(0.0f, 1.0f, -5.0f, 0.0f);
 				DirectX::XMVECTOR At = DirectX::XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
 				DirectX::XMVECTOR Up = DirectX::XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
@@ -141,7 +140,7 @@ void Jade::Graphics::DXMesh::Unbind()
 {
 	// Unbind buffers.
 	device->GetID3D11DeviceContext()->IASetVertexBuffers(0, 0, nullptr, nullptr, nullptr);
-	device->GetID3D11DeviceContext()->IASetIndexBuffer(nullptr, DXGI_FORMAT_R32_UINT, 0);
+	device->GetID3D11DeviceContext()->IASetIndexBuffer(nullptr, DXGI_FORMAT_R16_UINT, 0);
 
 	std::cout << "Releasing mesh and cleaning up..." << std::endl;
 }

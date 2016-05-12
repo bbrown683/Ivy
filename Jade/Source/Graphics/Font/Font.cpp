@@ -24,51 +24,42 @@ SOFTWARE.
 
 #include "Font.h"
 
-void Jade::Graphics::Font::Draw(std::string text, int x, int y)
+void Jade::Graphics::Font::Draw(std::string text, float x, float y)
 {
+	texture.Update();
 
+	for(char c : text)
+	{
+		stbtt_aligned_quad q;
+		stbtt_GetBakedQuad(cdata.data(), 512, 512, static_cast<int>(c - 32), &x, &y, &q, 1);
+		std::cout << "X0: " << q.x0 << std::endl;
+		std::cout << "X1: " << q.x1 << std::endl;
+	}
 }
 
 void Jade::Graphics::Font::Load(std::string filename, int pixelSize)
 {
-	if(filename.empty())
+	if (filename.empty())
 		throw Core::ArgumentNullException("filename", __FILE__, __LINE__);
-
 
 	std::cout << "[Font Data]" << std::endl;
 
-	System::File file(filename);
-	std::string contents = file.Read();
+	// Huge ass buffer. 1 shifted to the left 20 digits.
+	std::vector<unsigned char> ttf_buffer(1 << 20);
 
-	FILE* write;
-	fopen_s(&write, "test.txt", "w");
-	fwrite(contents.data(), sizeof(char), sizeof contents.data(), write);
-	fclose(write);
+	// Create 512 x 512 bitmap of our printable characters.
+	std::vector<unsigned char> temp_bitmap(512 * 512);
 
-	/*
-	if (buffer != nullptr)
+	FILE* file;
+	fopen_s(&file, filename.c_str(), "rb");
+
+	fread(&ttf_buffer, 1, 1 << 20, file);
+	if (stbtt_BakeFontBitmap(ttf_buffer.data(), 0, 32.0, temp_bitmap.data(), 512, 512, 32, 96, cdata.data()))
 	{
-		stbtt_fontinfo fontInfo;
-		if (stbtt_InitFont(&fontInfo, buffer, stbtt_GetFontOffsetForIndex(buffer, 0)))
-		{
-			unsigned char* bitmap = nullptr;
-
-			// We only need the 95 printable ASCII characters.
-			for (int i = 32; i < 127; i++)
-			{
-				Glyph glyph;
-				bitmap = stbtt_GetCodepointBitmap(&fontInfo, 0, stbtt_ScaleForPixelHeight(&fontInfo, static_cast<float>(pixelSize)), i, &glyph.width, &glyph.height, &glyph.xOffset, &glyph.yOffset);
-
-				if (bitmap == nullptr)
-					std::cout << "Failed to load character " << static_cast<char>(i) << "..." << std::endl;
-				else
-					continue;
-			}
-		}
+		// Apparently pitch is 1.
+		// Fill in everything else like normal.
+		texture = Texture(device, temp_bitmap.data(), 512, 512, 1, TextureType::Bitmap);
+		if (texture.CreateTextureFromMemory())
+			std::cout << "Successfully created texture." << std::endl;
 	}
-	else
-	{
-		std::cout << "Null contents..." << std::endl;
-	}
-	*/
 }

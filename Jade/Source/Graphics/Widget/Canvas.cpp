@@ -7,6 +7,7 @@ Jade::Math::Point Jade::Graphics::Canvas::GetPosition()
 
 void Jade::Graphics::Canvas::SetPosition(int x, int y)
 {
+
 }
 
 void Jade::Graphics::Canvas::Show()

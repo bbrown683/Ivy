@@ -65,12 +65,17 @@ namespace Jade
 					shader = std::make_shared<DXShader>(std::dynamic_pointer_cast<DXDevice>(device.GetIDevice()), shaders);
 					break;
 				case GraphicsAPI::OpenGL:
-					shader = std::make_shared<GLShader>(filename, type);
+					shader = std::make_shared<GLShader>(shaders);
 					break;
 				case GraphicsAPI::Vulkan:
 					shader = nullptr;
 					break;
 				}
+			}
+
+			std::shared_ptr<IShader> GetIShader() const
+			{
+				return shader;
 			}
 		};
 	}

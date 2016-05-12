@@ -25,7 +25,6 @@
     <ClCompile Include="System\File.cpp" />
     <ClCompile Include="Graphics\Device\Device.cpp" />
     <ClCompile Include="Graphics\Device\DXDevice.cpp" />
-    <ClCompile Include="Graphics\Shader\GLShader.cpp" />
     <ClCompile Include="Graphics\Device\GLDevice.cpp" />
     <ClCompile Include="Graphics\Device\VKDevice.cpp" />
     <ClCompile Include="Graphics\Model\Model.cpp" />
@@ -60,6 +59,9 @@
     <ClCompile Include="Audio\AudioDevice.cpp" />
     <ClCompile Include="Graphics\Widget\Canvas.cpp" />
     <ClCompile Include="Graphics\SpriteBatch\SpriteBatch.cpp" />
+    <ClCompile Include="Graphics\Shader\GLShader.cpp" />
+    <ClCompile Include="Graphics\GL\glad\gl\src\glad.c" />
+    <ClCompile Include="Graphics\GL\glad\wgl\src\glad_wgl.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\Vector4.h">
@@ -91,7 +93,6 @@
     </ClInclude>
     <ClInclude Include="Graphics\Device\Device.h" />
     <ClInclude Include="Graphics\Device\DXDevice.h" />
-    <ClInclude Include="Graphics\Shader\GLShader.h" />
     <ClInclude Include="Graphics\Shader\IShader.h" />
     <ClInclude Include="Graphics\Texture\Texture.h" />
     <ClInclude Include="Graphics\Shader\ShaderType.h" />
@@ -171,8 +172,14 @@
     <ClInclude Include="Graphics\Texture\TextureFactory.h" />
     <ClInclude Include="Graphics\Rasterizer\RasterizerFactory.h" />
     <ClInclude Include="Graphics\SpriteBatch\SpriteBatch.h" />
-    <ClInclude Include="Graphics\Buffer\DXDynamicVertexBuffer.h" />
     <ClInclude Include="Graphics\Font\Glyph.h" />
+    <ClInclude Include="Graphics\GL\GladLoader.h" />
+    <ClInclude Include="Graphics\Shader\GLShader.h" />
+    <ClInclude Include="Graphics\GL\glad\gl\include\glad\glad.h" />
+    <ClInclude Include="Graphics\GL\glad\gl\include\KHR\khrplatform.h" />
+    <ClInclude Include="Graphics\GL\glad\wgl\include\glad\glad_wgl.h" />
+    <ClInclude Include="Graphics\GL\glad\wgl\include\KHR\khrplatform.h" />
+    <ClInclude Include="Graphics\Buffer\DrawType.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">
