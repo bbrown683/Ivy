@@ -152,6 +152,11 @@ bool Jade::Graphics::GLDevice::Release()
 	return context == nullptr ? true : false;
 }
 
+void Jade::Graphics::GLDevice::OnWindowResize()
+{
+	glViewport(0, 0, window->GetWidth(), window->GetHeight());
+}
+
 void Jade::Graphics::GLDevice::Clear(Math::Color color)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);

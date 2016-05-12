@@ -24,8 +24,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <iostream>
-
 #include <Core/Utility.h>
 #include <Math/Math.h>
 #include <Math/Vector3.h>
@@ -131,12 +129,16 @@ namespace Jade
 
 			//! Adds two matrices and returns a matrix as a result.
 			Matrix Add(Matrix other) const;
-			//! Returns a matrix with the camera vectors.
-			static Matrix CreateLookAt(Vector3 eye, Vector3 at, Vector3 up);
+			//! Returns a left-handed matrix with the camera vectors.
+			static Matrix CreateLookAtLH(Vector3 eye, Vector3 at, Vector3 up);
+			//! Returns a right-handed matrix with the camera vectors.
+			static Matrix CreateLookAtRH(Vector3 eye, Vector3 at, Vector3 up);
 			//! Returns a matrix that is of an Orthographic view.
 			static Matrix CreateOrthographicView(float fieldOfView, float aspectRatio, float nearPlaneDistance, float farPlaneDistance);
-			//! Returns a matrix that is of a Perspective view.
-			static Matrix CreatePerspectiveView(float fieldOfView, float aspectRatio, float nearPlaneDistance, float farPlaneDistance);
+			//! Returns a left-handed matrix that is of a Perspective view.
+			static Matrix CreatePerspectiveViewLH(float fieldOfView, float width, float height, float nearPlaneDistance, float farPlaneDistance);
+			//! Returns a right-handed matrix that is of a Perspective view.
+			static Matrix CreatePerspectiveViewRH(float fieldOfView, float width, float height, float nearPlaneDistance, float farPlaneDistance);
 			//! Returns a reference to the raw data contained within the matrix.
 			glm::mat4 GetRawData();
 			//! Returns the determinant of the matrix.

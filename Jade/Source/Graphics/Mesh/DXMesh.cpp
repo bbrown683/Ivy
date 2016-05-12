@@ -24,6 +24,7 @@ SOFTWARE.
 
 #include "Graphics/Mesh/DXMesh.h"
 
+#ifdef JADE_PLATFORM_WINDOWS
 void Jade::Graphics::DXMesh::Bind()
 {
 	HRESULT hr;
@@ -91,7 +92,8 @@ void Jade::Graphics::DXMesh::Bind()
 
 			// Create the constant buffer
 			desc.Usage = D3D11_USAGE_DEFAULT;
-			desc.ByteWidth = sizeof(Matrices);
+			desc.ByteWidth = sizeof(Math::Space);
+			//desc.ByteWidth = sizeof(Matrices);
 			desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
 			desc.CPUAccessFlags = 0;
 			
@@ -107,22 +109,21 @@ void Jade::Graphics::DXMesh::Bind()
 			{
 				std::cout << "Constant buffer was created successfully..." << std::endl;
 
-				space.world = DirectX::XMMatrixIdentity();
+				space.world = Math::Matrix::Identity;
 
-				DirectX::XMVECTOR Eye = DirectX::XMVectorSet(0.0f, 1.0f, -5.0f, 0.0f);
-				DirectX::XMVECTOR At = DirectX::XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
-				DirectX::XMVECTOR Up = DirectX::XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
-				view = DirectX::XMMatrixLookAtLH(Eye, At, Up);
+				Math::Vector3 eye = Math::Vector3(0.0f, 1.0f, -5.0f);
+				Math::Vector3 at = Math::Vector3(0.0, 1.0f, 0.0);
+				Math::Vector3 up = Math::Vector3::Up;
 
-				space.view = XMMatrixTranspose(view);
+				space.view = Math::Matrix::CreateLookAtLH(eye, at, up).Transpose();
 
 				// Set our projection matrix.
-				projection = DirectX::XMMatrixPerspectiveFovLH(DirectX::XM_PIDIV2, device->GetIWindow()->GetAspectRatio(), 0.01f, 1000.0f);
-
-				space.projection = XMMatrixTranspose(projection);
+				space.projection = Math::Matrix::CreatePerspectiveViewLH(
+					Math::Math::PiOverTwo, static_cast<float>(device->GetIWindow()->GetWidth()),
+					static_cast<float>(device->GetIWindow()->GetHeight()), 0.01f, 1000.0f).Transpose();
 
 				// After buffer is created we can bind the textures.
-				for (int i = 0; i < textures.size(); i++)
+				for (unsigned int i = 0; i < textures.size(); i++)
 				{
 					if (textures[i].CreateTextureFromFile())
 						std::cout << "Texture " << textures[i].GetFilename() << " was bound successfully..." << std::endl;
@@ -151,16 +152,16 @@ void Jade::Graphics::DXMesh::Draw()
 	if (bufferSuccess)
 	{
 		// Rotate our cube slightly.
-		world = DirectX::XMMatrixRotationY(device->GetIWindow()->GetTimer().GetElaspedTime());// *DirectX::XMMatrixRotationX(device->GetIWindow()->GetTimer().GetElaspedTime());
-
-		space.world = XMMatrixTranspose(world);
+		space.world = Math::Matrix::RotateAlongY(device->GetIWindow()->GetTimer().GetElaspedTime()).Transpose();
 
 		device->GetID3D11DeviceContext()->UpdateSubresource(m_pConstantBuffer.Get(), 0, nullptr, &space, 0, 0);
 		device->GetID3D11DeviceContext()->VSSetConstantBuffers(0, 1, m_pConstantBuffer.GetAddressOf());
 
-		for (int i = 0; i < textures.size(); i++)
+		// Update textures for each mesh.
+		for (unsigned int i = 0; i < textures.size(); i++)
 			textures[i].Update();
 
 		device->GetID3D11DeviceContext()->DrawIndexed(static_cast<unsigned int>(indices.size()), 0, 0);
 	}
 }
+#endif

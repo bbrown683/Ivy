@@ -22,10 +22,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <iostream>
-
 #include "Graphics/Device/DXDevice.h"
 
+#ifdef JADE_PLATFORM_WINDOWS
 bool Jade::Graphics::DXDevice::Create()
 {
 	std::cout << "[Device Context]" << std::endl;
@@ -78,11 +77,17 @@ bool Jade::Graphics::DXDevice::Create()
 	sd.SampleDesc.Quality = 0;
 	sd.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
 	
-	hr = D3D11CreateDeviceAndSwapChain(nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr, createDeviceFlags, featureLevels, 
-		numFeatureLevels, D3D11_SDK_VERSION, &sd, m_pSwapChain.GetAddressOf(), m_pDevice.GetAddressOf(), &m_FeatureLevel, m_pImmediateContext.GetAddressOf());
+	// Iterate through the drivers.
+	for (unsigned int i = 0; i < numDriverTypes; i++)
+	{
+		hr = D3D11CreateDeviceAndSwapChain(nullptr, driverTypes[i], nullptr, createDeviceFlags, featureLevels,
+				numFeatureLevels, D3D11_SDK_VERSION, &sd, m_pSwapChain.GetAddressOf(), m_pDevice.GetAddressOf(), &m_FeatureLevel, m_pImmediateContext.GetAddressOf());
 
-	if (FAILED(hr))
-		return false;
+		if (FAILED(hr))
+			return false;
+		if (SUCCEEDED(hr))
+			break;
+	}
 
 	ComPtr<ID3D11Texture2D> m_pBackBuffer = nullptr;
 	m_pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), reinterpret_cast<void**>(m_pBackBuffer.GetAddressOf()));
@@ -156,16 +161,15 @@ bool Jade::Graphics::DXDevice::Create()
 
 	m_pImmediateContext->OMSetRenderTargets(1, m_pRenderTargetView.GetAddressOf(), m_pDepthStencilView.Get());
 
-	D3D11_VIEWPORT vp;
-	ZeroMemory(&vp, sizeof(D3D11_VIEWPORT));
-	vp.Width = static_cast<float>(window->GetWidth());
-	vp.Height = static_cast<float>(window->GetHeight());
-	vp.MinDepth = 0.0f;
-	vp.MaxDepth = 1.0f;
-	vp.TopLeftX = 0;
-	vp.TopLeftY = 0;
+	ZeroMemory(&m_Viewport, sizeof(D3D11_VIEWPORT));
+	m_Viewport.Width = static_cast<float>(window->GetWidth());
+	m_Viewport.Height = static_cast<float>(window->GetHeight());
+	m_Viewport.MinDepth = 0.0f;
+	m_Viewport.MaxDepth = 1.0f;
+	m_Viewport.TopLeftX = 0;
+	m_Viewport.TopLeftY = 0;
 
-	m_pImmediateContext->RSSetViewports(1, &vp);
+	m_pImmediateContext->RSSetViewports(1, &m_Viewport);
 
 	std::cout << "DirectX device was created successfully..." << std::endl;
 
@@ -177,6 +181,13 @@ bool Jade::Graphics::DXDevice::Release()
 	std::cout << "DirectX device was disposed of successfully..." << std::endl;
 
 	return true;
+}
+
+void Jade::Graphics::DXDevice::OnWindowResize()
+{
+	// Update width and height.
+	m_Viewport.Width = static_cast<float>(window->GetWidth());
+	m_Viewport.Height = static_cast<float>(window->GetHeight());
 }
 
 void Jade::Graphics::DXDevice::Clear(Math::Color color)
@@ -246,3 +257,4 @@ const ComPtr<ID3D11DepthStencilView>& Jade::Graphics::DXDevice::GetID3D11DepthSt
 {
 	return m_pDepthStencilView;
 }
+#endif

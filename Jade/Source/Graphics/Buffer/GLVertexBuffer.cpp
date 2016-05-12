@@ -36,14 +36,29 @@ void Jade::Graphics::GLVertexBuffer::SetVertices(std::vector<Math::Vertex> verti
 
 bool Jade::Graphics::GLVertexBuffer::Bind()
 {
-	// Generate our vertices array and bind it to the first element.
+	// Generate our vertices array and Bind it to the first element.
 	glGenVertexArrays(1, &vertexArray);
 	glBindVertexArray(vertexArray);
 
 	// Generate our vertices buffer and bind it.
 	glGenBuffers(1, &vertexBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
-	glBufferData(GL_ARRAY_BUFFER, vertices.size(), vertices.data(), GL_STATIC_DRAW); // currently avoiding the use of dynamic drawing for simplicity.
+	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Math::Vertex), vertices.data(), GL_STATIC_DRAW);
+
+	// Positions.
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, false, sizeof(Math::Vertex),
+		reinterpret_cast<GLvoid*>offsetof(struct Math::Vertex, position));
+
+	// Texture Coordinates.
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(1, 2, GL_FLOAT, false, sizeof(Math::Vertex),
+		reinterpret_cast<GLvoid*>offsetof(struct Math::Vertex, texture));
+
+	// Normals.
+	glEnableVertexAttribArray(2);
+	glVertexAttribPointer(2, 3, GL_FLOAT, false, sizeof(Math::Vertex),
+		reinterpret_cast<GLvoid*>offsetof(struct Math::Vertex, normal));
 
 	return true;
 }

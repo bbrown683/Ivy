@@ -24,12 +24,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <d3dcompiler.h>
-
 #include <Core/Utility.h>
 #include "Graphics/Shader/IShader.h"
 #include "Graphics/Shader/ShaderType.h"
 #include "Graphics/Device/DXDevice.h"
+
+#ifdef JADE_PLATFORM_WINDOWS
+#include <d3dcompiler.h>
 
 namespace Jade
 {
@@ -43,10 +44,6 @@ namespace Jade
 			std::map<std::string, ShaderType> shaders;
 
 			// Holds our shader compilation information.
-			ComPtr<ID3DBlob>				m_pComputeShaderBlob = nullptr;
-			ComPtr<ID3DBlob>				m_pDomainShaderBlob = nullptr;
-			ComPtr<ID3DBlob>				m_pGeometryShaderBlob = nullptr;
-			ComPtr<ID3DBlob>				m_pHullShaderBlob = nullptr;
 			ComPtr<ID3DBlob>				m_pPixelShaderBlob = nullptr;
 			ComPtr<ID3DBlob>				m_pVertexShaderBlob = nullptr;
 
@@ -54,10 +51,6 @@ namespace Jade
 			ComPtr<ID3D11InputLayout>		m_pInputLayout = nullptr;
 
 			// Different shader objects.
-			ComPtr<ID3D11ComputeShader>		m_pComputeShader = nullptr;
-			ComPtr<ID3D11DomainShader>		m_pDomainShader = nullptr;
-			ComPtr<ID3D11GeometryShader>	m_pGeometryShader = nullptr;
-			ComPtr<ID3D11HullShader>		m_pHullShader = nullptr;
 			ComPtr<ID3D11PixelShader>		m_pPixelShader = nullptr;
 			ComPtr<ID3D11VertexShader>		m_pVertexShader = nullptr;
 
@@ -109,3 +102,4 @@ namespace Jade
 		};
 	}
 }
+#endif

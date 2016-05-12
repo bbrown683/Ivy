@@ -26,11 +26,12 @@ SOFTWARE.
 
 #include "Graphics/GL/GladLoader.h"
 
-#include <Core/Utility.h>
-#include <Math/Color.h>
-#include <Graphics/Device/IDevice.h>
-#include <Graphics/Device/Specification.h>
-#include <System/Window/IWindow.h>
+#include "Core/Exception/Exception.h"
+#include "Core/Utility.h"
+#include "Math/Color.h"
+#include "Graphics/Device/IDevice.h"
+#include "Graphics/Device/Specification.h"
+#include "System/Window/IWindow.h"
 
 namespace Jade
 {
@@ -50,6 +51,7 @@ namespace Jade
 
 			bool Create() override;
 			bool Release() override;
+			void OnWindowResize() override;
 
 		public:
 
@@ -63,9 +65,7 @@ namespace Jade
 				// Create our device.
 				if (!Create())
 				{
-					// Dispose of any allocated memory and close the window.
-					Release();
-					window->Close();
+					throw Core::DeviceCreationException();
 				}
 			}
 

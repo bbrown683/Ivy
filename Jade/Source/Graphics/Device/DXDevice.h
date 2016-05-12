@@ -24,14 +24,15 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <wrl/client.h>
-#include <d3d11.h>
-
 #include "Core/Exception/Exception.h"
 #include "Core/Utility.h"
 #include "Graphics/Device/IDevice.h"
 #include "Graphics/Device/Specification.h"
 #include "System/Window/Window.h"
+
+#ifdef JADE_PLATFORM_WINDOWS
+#include <wrl/client.h>
+#include <d3d11.h>
 
 // Declare to create cleaner code below.
 using namespace Microsoft::WRL;
@@ -42,8 +43,6 @@ namespace Jade
 	{
 		class DXDevice : public IDevice
 		{
-		private:
-
 			std::shared_ptr<System::IWindow> window;
 			Specification specification;
 
@@ -63,6 +62,7 @@ namespace Jade
 
 			bool Create() override;
 			bool Release() override;
+			void OnWindowResize() override;
 
 		public:
 
@@ -108,4 +108,4 @@ namespace Jade
 		};
 	}
 }
-
+#endif

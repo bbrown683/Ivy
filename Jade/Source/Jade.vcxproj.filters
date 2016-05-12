@@ -62,6 +62,7 @@
     <ClCompile Include="Graphics\Shader\GLShader.cpp" />
     <ClCompile Include="Graphics\GL\glad\gl\src\glad.c" />
     <ClCompile Include="Graphics\GL\glad\wgl\src\glad_wgl.c" />
+    <ClCompile Include="Graphics\Model\Importer\Importer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\Vector4.h">
@@ -180,6 +181,9 @@
     <ClInclude Include="Graphics\GL\glad\wgl\include\glad\glad_wgl.h" />
     <ClInclude Include="Graphics\GL\glad\wgl\include\KHR\khrplatform.h" />
     <ClInclude Include="Graphics\Buffer\DrawType.h" />
+    <ClInclude Include="Graphics\Model\Importer\Importer.h" />
+    <ClInclude Include="Graphics\Model\Importer\ModelType.h" />
+    <ClInclude Include="Math\Space.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">

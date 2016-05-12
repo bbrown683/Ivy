@@ -24,19 +24,17 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <directxmath.h>
-
 #include "Core/Utility.h"
-#include <Graphics/Buffer/VertexBuffer.h>
-#include <Graphics/Buffer/IndexBuffer.h>
-#include <Graphics/Buffer/ConstantBuffer.h>
-#include <Graphics/Device/DXDevice.h>
-#include <Graphics/Mesh/IMesh.h>
-#include <Graphics/Texture/Texture.h>
-#include "Math/Math.h"
+#include "Graphics/Buffer/VertexBuffer.h"
+#include "Graphics/Buffer/IndexBuffer.h"
+#include "Graphics/Buffer/ConstantBuffer.h"
+#include "Graphics/Device/DXDevice.h"
+#include "Graphics/Mesh/IMesh.h"
+#include "Graphics/Texture/Texture.h"
+#include "Math/Space.h"
 #include "Math/Vertex.h"
-#include "Math/Matrix.h"
 
+#ifdef JADE_PLATFORM_WINDOWS
 namespace Jade
 {
 	namespace Graphics
@@ -45,9 +43,6 @@ namespace Jade
 		{
 		private:
 
-			// TODO: Remove all DirectX math related components and 
-			// replace with our own math system.
-
 			std::shared_ptr<DXDevice> device;
 			std::vector<Math::Vertex> vertices;
 			std::vector<unsigned short> indices;
@@ -55,24 +50,13 @@ namespace Jade
 
 			bool bufferSuccess;
 
-			typedef struct Matrices 
-			{
-				DirectX::XMMATRIX world;
-				DirectX::XMMATRIX view;
-				DirectX::XMMATRIX projection;
-			} Space;
-
-			Space space;
-			DirectX::XMMATRIX world;
-			DirectX::XMMATRIX view;
-			DirectX::XMMATRIX projection;
+			Math::Space space;
 
 			// Buffers.
 			ComPtr<ID3D11Buffer> m_pVertexBuffer;
 			ComPtr<ID3D11Buffer> m_pConstantBuffer;
 			ComPtr<ID3D11Buffer> m_pIndexBuffer;
 			
-
 			void Bind() override;
 			void Unbind() override;
 
@@ -97,3 +81,4 @@ namespace Jade
 		};
 	}
 }
+#endif

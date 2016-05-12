@@ -24,6 +24,7 @@ SOFTWARE.
 
 #include "DXRasterizer.h"
 
+#ifdef JADE_PLATFORM_WINDOWS
 bool Jade::Graphics::DXRasterizer::SetRasterizerState(CullMode cullMode, FillMode fillMode, WindMode windMode)
 {
 	// Set variables.
@@ -41,7 +42,7 @@ bool Jade::Graphics::DXRasterizer::SetRasterizerState(CullMode cullMode, FillMod
 	// Set culling mode.
 	switch(cullMode)
 	{
-	case CullMode::Front: rasterDesc.CullMode = D3D11_CULL_FRONT; break;
+	case CullMode::Front: rasterDesc.CullMode = D3D11_CULL_FRONT; break; 
 	case CullMode::Back: rasterDesc.CullMode = D3D11_CULL_BACK; break;
 	default: rasterDesc.CullMode = D3D11_CULL_NONE; break;
 	}
@@ -83,3 +84,4 @@ Jade::Graphics::WindMode Jade::Graphics::DXRasterizer::GetWindMode()
 {
 	return windMode;
 }
+#endif

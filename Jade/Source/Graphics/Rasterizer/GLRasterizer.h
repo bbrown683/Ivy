@@ -37,6 +37,8 @@ namespace Jade
 		{
 		private:
 
+			// OpenGL requires us to disable culling and enable it on reuse.
+			bool disabled;
 			CullMode cullMode;
 			FillMode fillMode;
 			WindMode windMode;

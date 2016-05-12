@@ -36,6 +36,7 @@ namespace Jade
 
 			virtual bool Create() = 0;
 			virtual bool Release() = 0;
+			virtual void OnWindowResize() = 0;
 
 		public:
 

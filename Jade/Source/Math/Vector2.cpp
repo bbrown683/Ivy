@@ -24,12 +24,12 @@ SOFTWARE.
 
 #include "Vector2.h"
 
-const Jade::Math::Vector2 Down = Jade::Math::Vector2(0.0f, -1.0f);
-const Jade::Math::Vector2 Left = Jade::Math::Vector2(-1.0f, 0.0f);
-const Jade::Math::Vector2 One = Jade::Math::Vector2(1.0f, 1.0f);
-const Jade::Math::Vector2 Right = Jade::Math::Vector2(1.0f, 0.0f);
-const Jade::Math::Vector2 Up = Jade::Math::Vector2(0.0f, 1.0f);
-const Jade::Math::Vector2 Zero = Jade::Math::Vector2(0.0f, 0.0f);
+const Jade::Math::Vector2 Jade::Math::Vector2::Down(0.0f, -1.0f);
+const Jade::Math::Vector2 Jade::Math::Vector2::Left(-1.0f, 0.0f);
+const Jade::Math::Vector2 Jade::Math::Vector2::One(1.0f, 1.0f);
+const Jade::Math::Vector2 Jade::Math::Vector2::Right(1.0f, 0.0f);
+const Jade::Math::Vector2 Jade::Math::Vector2::Up(0.0f, 1.0f);
+const Jade::Math::Vector2 Jade::Math::Vector2::Zero(0.0f, 0.0f);
 
 float Jade::Math::Vector2::Dot(Vector2 vector) const
 {

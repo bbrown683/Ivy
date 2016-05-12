@@ -24,6 +24,7 @@ SOFTWARE.
 
 #include "Graphics/Shader/DXShader.h"
 
+#ifdef JADE_PLATFORM_WINDOWS
 bool Jade::Graphics::DXShader::Create(std::string filename, ShaderType type)
 {
 	HRESULT hr;
@@ -118,3 +119,4 @@ bool Jade::Graphics::DXShader::CopyToBlob(ShaderType type, ComPtr<ID3DBlob> blob
 
 	return FAILED(hr) ? false : true;
 }
+#endif

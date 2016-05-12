@@ -34,15 +34,10 @@ namespace Jade
 	{
 		class GLIndexBuffer : public IIndexBuffer
 		{
-		private:
-
 			GLuint indexBuffer;
-
 			std::vector<unsigned short> indices;
 
 		public:
-
-			GLIndexBuffer() { }
 
 			std::vector<unsigned short> GetIndices() override;
 			void SetIndices(std::vector<unsigned short> indices) override;

@@ -28,6 +28,9 @@ namespace Jade
 {
 	namespace Graphics
 	{
+		// OpenGL will be using a left-handed coordinate system, 
+		// so we will flip the cull modes to achieve a similar
+		// result to DirectX.
 		enum class CullMode
 		{
 			None,

@@ -32,16 +32,21 @@ bool Jade::Graphics::GLRasterizer::SetRasterizerState(CullMode cullMode, FillMod
 	this->fillMode = fillMode;
 	this->windMode = windMode;
 
+	if (disabled && cullMode != CullMode::None)
+	{
+		glEnable(GL_CULL_FACE);
+		disabled = false;
+	}
+
 	// OpenGL modifications.
 	switch(cullMode)
 	{
-	case CullMode::None: glCullFace(GL_BACK); break;
+	case CullMode::None: glDisable(GL_CULL_FACE); disabled = true; break;
 	case CullMode::Front: glCullFace(GL_FRONT);	break;
 	case CullMode::Back: glCullFace(GL_BACK); break;
 	}
 	
 	glPolygonMode(GL_FRONT_AND_BACK, fillMode == FillMode::Solid ? GL_FILL : GL_LINE);
-
 	glFrontFace(windMode == WindMode::CounterClockwise ? GL_CCW : GL_CW);
 
 	return true;

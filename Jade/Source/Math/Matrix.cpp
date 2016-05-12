@@ -40,9 +40,18 @@ Jade::Math::Matrix Jade::Math::Matrix::Add(Matrix other) const
 	return *this + other;
 }
 
-Jade::Math::Matrix Jade::Math::Matrix::CreateLookAt(Vector3 eye, Vector3 at, Vector3 up)
+Jade::Math::Matrix Jade::Math::Matrix::CreateLookAtLH(Vector3 eye, Vector3 at, Vector3 up)
 {
-	glm::mat4 lookAt = glm::lookAt(eye.GetRawData(), at.GetRawData(), up.GetRawData());
+	glm::mat4 lookAt = lookAtLH(eye.GetRawData(), at.GetRawData(), up.GetRawData());
+	return Matrix(lookAt[0][0], lookAt[0][1], lookAt[0][2], lookAt[0][3],
+		lookAt[1][0], lookAt[1][1], lookAt[1][2], lookAt[1][3],
+		lookAt[2][0], lookAt[2][1], lookAt[2][2], lookAt[2][3],
+		lookAt[3][0], lookAt[3][1], lookAt[3][2], lookAt[3][3]);
+}
+
+Jade::Math::Matrix Jade::Math::Matrix::CreateLookAtRH(Vector3 eye, Vector3 at, Vector3 up)
+{
+	glm::mat4 lookAt = lookAtRH(eye.GetRawData(), at.GetRawData(), up.GetRawData());
 	return Matrix(lookAt[0][0], lookAt[0][1], lookAt[0][2], lookAt[0][3],
 		lookAt[1][0], lookAt[1][1], lookAt[1][2], lookAt[1][3],
 		lookAt[2][0], lookAt[2][1], lookAt[2][2], lookAt[2][3],
@@ -55,10 +64,18 @@ Jade::Math::Matrix Jade::Math::Matrix::CreateOrthographicView(float width, float
 	return Matrix();
 }
 
-
-Jade::Math::Matrix Jade::Math::Matrix::CreatePerspectiveView(float fieldOfView, float aspectRatio, float nearPlaneDistance, float farPlaneDistance)
+Jade::Math::Matrix Jade::Math::Matrix::CreatePerspectiveViewLH(float fieldOfView, float width, float height, float nearPlaneDistance, float farPlaneDistance)
 {
-	glm::mat4 perspective = glm::perspective(fieldOfView, aspectRatio, nearPlaneDistance, farPlaneDistance);
+	glm::mat4 perspective = glm::perspectiveFovLH(fieldOfView, width, height, nearPlaneDistance, farPlaneDistance);
+	return Matrix(perspective[0][0], perspective[0][1], perspective[0][2], perspective[0][3],
+		perspective[1][0], perspective[1][1], perspective[1][2], perspective[1][3],
+		perspective[2][0], perspective[2][1], perspective[2][2], perspective[2][3],
+		perspective[3][0], perspective[3][1], perspective[3][2], perspective[3][3]);
+}
+
+Jade::Math::Matrix Jade::Math::Matrix::CreatePerspectiveViewRH(float fieldOfView, float width, float height, float nearPlaneDistance, float farPlaneDistance)
+{
+	glm::mat4 perspective = glm::perspectiveFovRH(fieldOfView, width, height, nearPlaneDistance, farPlaneDistance);
 	return Matrix(perspective[0][0], perspective[0][1], perspective[0][2], perspective[0][3],
 		perspective[1][0], perspective[1][1], perspective[1][2], perspective[1][3],
 		perspective[2][0], perspective[2][1], perspective[2][2], perspective[2][3],

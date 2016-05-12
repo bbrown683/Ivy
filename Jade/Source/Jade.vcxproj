@@ -221,6 +221,7 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClCompile Include="Graphics\GL\glad\gl\src\glad.c" />
     <ClCompile Include="Graphics\GL\glad\wgl\src\glad_wgl.c" />
     <ClCompile Include="Graphics\Mesh\TestMesh.cpp" />
+    <ClCompile Include="Graphics\Model\Importer\Importer.cpp" />
     <ClCompile Include="Graphics\Rasterizer\DXRasterizer.cpp" />
     <ClCompile Include="Graphics\Rasterizer\GLRasterizer.cpp" />
     <ClCompile Include="Graphics\Shader\GLShader.cpp" />
@@ -292,7 +293,10 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClInclude Include="Graphics\GL\glad\gl\include\KHR\khrplatform.h" />
     <ClInclude Include="Graphics\GL\glad\wgl\include\glad\glad_wgl.h" />
     <ClInclude Include="Graphics\GL\glad\wgl\include\KHR\khrplatform.h" />
+    <ClInclude Include="Math\Space.h" />
     <ClInclude Include="Graphics\Mesh\TestMesh.h" />
+    <ClInclude Include="Graphics\Model\Importer\Importer.h" />
+    <ClInclude Include="Graphics\Model\Importer\ModelType.h" />
     <ClInclude Include="Graphics\Rasterizer\RasterizerFactory.h" />
     <ClInclude Include="Graphics\Rasterizer\WindMode.h" />
     <ClInclude Include="Graphics\Shader\GLShader.h" />

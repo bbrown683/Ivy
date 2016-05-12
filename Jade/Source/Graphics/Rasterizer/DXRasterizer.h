@@ -27,6 +27,7 @@ SOFTWARE.
 #include <Graphics/Device/DXDevice.h>
 #include <Graphics/Rasterizer/IRasterizer.h>
 
+#ifdef JADE_PLATFORM_WINDOWS
 namespace Jade
 {
 	namespace Graphics
@@ -56,3 +57,4 @@ namespace Jade
 		};
 	}
 }
+#endif

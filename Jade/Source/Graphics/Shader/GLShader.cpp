@@ -107,7 +107,7 @@ bool Jade::Graphics::GLShader::CreateProgram()
 {
 	programID = glCreateProgram();
 	
-	for (int i = 0; i < shaderIDs.size(); i++)
+	for (unsigned int i = 0; i < shaderIDs.size(); i++)
 		glAttachShader(programID, shaderIDs[i]);
 
 	std::cout << "[Program]" << std::endl;
@@ -121,7 +121,7 @@ bool Jade::Graphics::GLShader::CreateProgram()
 	{
 		std::cout << "Program was linked successfully." << std::endl;
 
-		for (int i = 0; i < shaderIDs.size(); i++)
+		for (unsigned int i = 0; i < shaderIDs.size(); i++)
 		{
 			// Detach shaders from program and mark them for deletion.
 			glDetachShader(programID, shaderIDs[i]);

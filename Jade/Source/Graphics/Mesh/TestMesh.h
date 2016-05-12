@@ -28,6 +28,7 @@ SOFTWARE.
 #include "Graphics/Mesh/IMesh.h"
 #include "Graphics/Mesh/DXMesh.h"
 #include "Graphics/Mesh/GLMesh.h"
+#include "Graphics/Shader/Shader.h"
 #include "Graphics/Texture/Texture.h"
 
 // Note: This is a prototype of what I want the mesh class to resemble.
@@ -44,6 +45,8 @@ namespace Jade
 		private:
 
 			Device device;
+			Shader shader;
+
 			std::vector<Math::Vertex> vertices;
 			std::vector<unsigned short> indices;
 			std::vector<std::string> textures;
@@ -56,9 +59,10 @@ namespace Jade
 
 		public:
 
-			TestMesh(Device device, std::vector<Math::Vertex> vertices, std::vector<unsigned short> indices, std::vector<std::string> textures)
+			TestMesh(Device device, Shader shader, std::vector<Math::Vertex> vertices, std::vector<unsigned short> indices, std::vector<std::string> textures)
 			{
 				this->device = device;
+				this->shader = shader;
 				this->vertices = vertices;
 				this->indices = indices;
 				this->textures = textures;
