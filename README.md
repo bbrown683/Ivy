@@ -2,17 +2,17 @@
 An Open Source C++ Game Engine inspired by [Monogame](http://www.monogame.net/). This is compiled using Visual Studio 2015 Community Edition.
 
 # Supported Graphics API's
-* DirectX11 (About to be replaced with OpenGL overhaul. This will ensure the engine is cross platform.)
+* DirectX11
 * OpenGL 3.2+
 
-# Libraries Linked Against
+# Libraries Used
 * Assimp 3.0.0
 * stb_image
 * stb_truetype
-* Glew 1.13.0 (Will write our own OpenGL entry point loader.)
+* Glad
 * OpenAL 1.1
-* SDL 2.0.4 (About to be replaced with Window system overhaul.)
-* Windows 8 SDK (Will be removed along with DirectX11 support.)
+* SDL 2.0.4
+* Windows 8 SDK (DirectX11 Headers)
 
 # Features
 * Should be portable
@@ -51,7 +51,7 @@ int main(int argc, char* argv[])
 	Shader shader(device, shaders);
 
 	// Load our model
-	Model model(device);
+	Model model(device, shader);
 	model.Load(".\\resources\\models\\testcube.obj");
 
 	while (window.IsOpen())
