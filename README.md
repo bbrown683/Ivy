@@ -77,4 +77,4 @@ int main(int argc, char* argv[])
 }
 ```
 
-Progress can be found [here](https://github.com/bbrown683/Jade/edit/master/Progress.md)
+Progress can be found [here](https://github.com/bbrown683/Jade/blob/master/Progress.md).
