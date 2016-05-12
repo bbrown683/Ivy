@@ -9,7 +9,7 @@ An Open Source C++ Game Engine inspired by [Monogame](http://www.monogame.net/).
 * Assimp 3.0.0
 * stb_image
 * stb_truetype
-* Glad
+* [Glad](http://glad.dav1d.de/)
 * OpenAL 1.1
 * SDL 2.0.4
 * Windows 8 SDK (DirectX11 Headers)
