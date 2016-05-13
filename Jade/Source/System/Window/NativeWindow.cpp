@@ -32,6 +32,13 @@ bool Jade::System::NativeWindow::PollWindowEvents()
 		startTime = currentTime;
 	timer.SetElapsedTime(static_cast<float>(currentTime - startTime) / 1000.0f);
 
+#if !defined(_DEBUG) && !defined(DEBUG)
+	// Anti-debugger check every render frame
+	// if not in debug configuration.
+	if (IsDebuggerPresent())
+		Close();
+#endif
+
 	// Basic event loop. Events that involves rendering 
 	// such as Resizing is handled by the graphics device itself.
 	SDL_Event e;

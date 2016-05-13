@@ -37,12 +37,15 @@ namespace Jade
 			GLuint indexBuffer;
 			std::vector<unsigned short> indices;
 
+			bool Bind() override;
+			bool Unbind() override;
+
 		public:
 
 			std::vector<unsigned short> GetIndices() override;
 			void SetIndices(std::vector<unsigned short> indices) override;
-			bool Bind() override;
-			bool Unbind() override;
+			
+			void Update() override;
 		};
 	}
 }

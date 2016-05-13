@@ -24,10 +24,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <Graphics/Buffer/IUniformBuffer.h>
-#include <Graphics/Buffer/DXIndexBuffer.h>
-#include <Graphics/Buffer/GLIndexBuffer.h>
-#include <Graphics/Device/Device.h>
+#include "Graphics/Buffer/IUniformBuffer.h"
+#include "Graphics/Buffer/DXConstantBuffer.h"
+#include "Graphics/Buffer/GLUniformBuffer.h"
+#include "Graphics/Device/Device.h"
 #include "DXConstantBuffer.h"
 
 namespace Jade
@@ -39,8 +39,10 @@ namespace Jade
 		private:
 
 			Device device;
-
 			std::shared_ptr<IUniformBuffer> constantBuffer;
+
+			bool Bind();
+			bool Unbind();
 
 		public:
 
@@ -54,7 +56,6 @@ namespace Jade
 					constantBuffer = std::make_shared<DXConstantBuffer>(std::dynamic_pointer_cast<DXDevice>(device.GetIDevice()));
 					break;
 				case GraphicsAPI::OpenGL:
-					// OpenGL uses a state machine so we dont need to pass a device.
 					constantBuffer = nullptr;
 					break;
 				case GraphicsAPI::Vulkan:
@@ -70,9 +71,8 @@ namespace Jade
 			void SetProjectionMatrix(Math::Matrix matrix);
 			void SetViewMatrix(Math::Matrix matrix);
 			void SetWorldMatrix(Math::Matrix matrix);
-
-			bool Bind();
-			bool Unbind();
+						
+			void Update();
 		};
 	}
 }

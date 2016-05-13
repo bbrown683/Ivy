@@ -33,3 +33,8 @@ bool Jade::Graphics::GLUniformBuffer::Unbind()
 {
 	return false;
 }
+
+void Jade::Graphics::GLUniformBuffer::Update()
+{
+
+}

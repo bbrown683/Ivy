@@ -10,6 +10,11 @@ void Jade::Graphics::DXVertexBuffer::SetVertices(std::vector<Math::Vertex> verti
 	this->vertices = vertices;
 }
 
+void Jade::Graphics::DXVertexBuffer::Update()
+{
+
+}
+
 bool Jade::Graphics::DXVertexBuffer::Bind()
 {
 	D3D11_BUFFER_DESC desc;

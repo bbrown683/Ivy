@@ -34,6 +34,11 @@ void Jade::Graphics::GLIndexBuffer::SetIndices(std::vector<unsigned short> indic
 	this->indices = indices;
 }
 
+void Jade::Graphics::GLIndexBuffer::Update()
+{
+
+}
+
 bool Jade::Graphics::GLIndexBuffer::Bind()
 {
 	// Generate a buffer for the indices;

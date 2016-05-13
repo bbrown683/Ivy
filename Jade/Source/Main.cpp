@@ -55,8 +55,8 @@ int main(int argc, char* argv[])
 	Model model(device, shader);
 	model.Load(".\\resources\\models\\MonoCube.dae");
 
-	Font font(device);
-	font.Load(".\\resources\\fonts\\consola.ttf", 128, 128, 12);
+	Font font(device, shader);
+	font.Load(".\\resources\\fonts\\arial.ttf", 512, 512, 48.0f);
 
 	while (window.IsOpen())
 	{

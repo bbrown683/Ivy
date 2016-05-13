@@ -58,10 +58,13 @@ Jade::Math::Matrix Jade::Math::Matrix::CreateLookAtRH(Vector3 eye, Vector3 at, V
 		lookAt[3][0], lookAt[3][1], lookAt[3][2], lookAt[3][3]);
 }
 
-Jade::Math::Matrix Jade::Math::Matrix::CreateOrthographicView(float width, float height, float nearPlaneDistance, float farPlaneDistance)
+Jade::Math::Matrix Jade::Math::Matrix::CreateOrthographicView(float left, float right, float top, float bottom, float nearPlaneDistance, float farPlaneDistance)
 {
-	// return an empty matrix otherwise.
-	return Matrix();
+	glm::mat4 ortho = glm::ortho(left, right, bottom, top, nearPlaneDistance, farPlaneDistance);
+	return Matrix(ortho[0][0], ortho[0][1], ortho[0][2], ortho[0][3],
+		ortho[1][0], ortho[1][1], ortho[1][2], ortho[1][3],
+		ortho[2][0], ortho[2][1], ortho[2][2], ortho[2][3],
+		ortho[3][0], ortho[3][1], ortho[3][2], ortho[3][3]);
 }
 
 Jade::Math::Matrix Jade::Math::Matrix::CreatePerspectiveViewLH(float fieldOfView, float width, float height, float nearPlaneDistance, float farPlaneDistance)

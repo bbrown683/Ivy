@@ -24,12 +24,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifdef _WIN32
+#include "Graphics/Buffer/IUniformBuffer.h"
+#include "Graphics/Device/DXDevice.h"
+#include "Math/Space.h"
 
-#include <Graphics/Buffer/IUniformBuffer.h>
-#include <Graphics/Device/DXDevice.h>
-#include <Math/Matrix.h>
-
+#ifdef JADE_PLATFORM_WINDOWS
 namespace Jade
 {
 	namespace Graphics
@@ -40,16 +39,12 @@ namespace Jade
 
 			std::shared_ptr<DXDevice> device;
 
-			struct Uniform
-			{
-				Math::Matrix world;
-				Math::Matrix view;
-				Math::Matrix projection;
-			};
-
-			Uniform uniform;
+			Math::Space space;
 
 			ComPtr<ID3D11Buffer> m_pConstantBuffer;
+
+			bool Bind() override;
+			bool Unbind() override;
 
 		public:
 
@@ -66,8 +61,7 @@ namespace Jade
 			void SetViewMatrix(Math::Matrix matrix) override;
 			void SetWorldMatrix(Math::Matrix matrix) override;
 
-			bool Bind() override;
-			bool Unbind() override;
+			void Update() override;
 		};
 	}
 }

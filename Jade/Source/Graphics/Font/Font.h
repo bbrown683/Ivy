@@ -30,6 +30,7 @@ SOFTWARE.
 #include "Core/Exception/Exception.h"
 #include "Graphics/Device/Device.h"
 #include "Graphics/Font/Glyph.h"
+#include "Graphics/Mesh/Mesh.h"
 #include "Graphics/Texture/Texture.h"
 #include "System/File.h"
 
@@ -40,28 +41,28 @@ namespace Jade
 		// Class for font rendering.
 		class Font
 		{
-		private:
-
 			Device device;
-			std::vector<Glyph> glyph;
-
-			std::vector<stbtt_bakedchar> characters;
+			Shader shader;
+			
 			Texture texture;
+			std::vector<stbtt_bakedchar> bakedChar;
 
 		public:
  
-			Font(Device device)
+			Font(Device device, Shader shader)
 			{
 				this->device = device;
 
-				// Will store the 95 printable ASCII characters.
-				characters = std::vector<stbtt_bakedchar>(95);
+				bakedChar = std::vector<stbtt_bakedchar>(95);
 			}
 
 			//! Draws the given text at the specified x and y coordinates at a certain pixel size.
 			void Draw(std::string text, float x, float y);
+			//! Loads the specified font file and creates individual textures for each printable character at a specified pixel size.
+			//void Load(std::string filename, float pixelSize);
+			
 			//! Loads the specified font file and creates a bitmap with the designated width, height, and pixel size.
-			void Load(std::string filename, int width, int height, int pixelSize);
+			void Load(std::string filename, int width, int height, float pixelSize);
 		};
 	}
 }

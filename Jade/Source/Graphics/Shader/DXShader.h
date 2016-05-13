@@ -95,6 +95,13 @@ namespace Jade
 				}
 			}
 
+			void MakeActive() override;
+
+			// Helper methods for other classes that require a DXTexture.
+			const ComPtr<ID3D11InputLayout>& GetID3D11InputLayout() const;
+			const ComPtr<ID3D11PixelShader>& GetID3D11PixelShader() const;
+			const ComPtr<ID3D11VertexShader>& GetID3D11VertexShader() const;
+
 			~DXShader()
 			{
 				DXShader::Release();

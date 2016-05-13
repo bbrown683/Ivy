@@ -43,6 +43,7 @@ namespace Jade
 			std::vector<Math::Vertex> vertices;
 			std::vector<unsigned short> indices;
 			std::vector<Texture> textures;
+			bool textureIsFile;
 
 			std::shared_ptr<IMesh> mesh;
 
@@ -54,11 +55,13 @@ namespace Jade
 				this->vertices = vertices;
 				this->indices = indices;
 				this->textures = textures;
+				this->textureIsFile = textureIsFile;
 
 				switch (device.GetGraphicsAPI())
 				{
 				case GraphicsAPI::DirectX:
-					mesh = std::make_shared<DXMesh>(std::dynamic_pointer_cast<DXDevice>(device.GetIDevice()), vertices, indices, textures);
+					mesh = std::make_shared<DXMesh>(std::dynamic_pointer_cast<DXDevice>(device.GetIDevice()), 
+						std::dynamic_pointer_cast<DXShader>(shader.GetIShader()), vertices, indices, textures);
 					break;
 				case GraphicsAPI::OpenGL:
 					// OpenGL uses a state machine so we dont need to pass a device,

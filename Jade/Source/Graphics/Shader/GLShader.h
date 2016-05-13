@@ -42,7 +42,7 @@ namespace Jade
 			bool Create(std::string filename, ShaderType type) override;
 			bool Compile(std::string filename, ShaderType type) override;
 			bool Release() override;
-			bool CheckForErrors(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMessage);
+			bool Check(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMessage);
 
 		public:
 
@@ -59,7 +59,9 @@ namespace Jade
 				}
 			}
 
+			void MakeActive() override;
 			bool CreateProgram();
+			GLuint GetProgramID();
 
 			~GLShader()
 			{

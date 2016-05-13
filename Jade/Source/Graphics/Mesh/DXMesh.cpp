@@ -122,11 +122,12 @@ void Jade::Graphics::DXMesh::Bind()
 					Math::Math::PiOverTwo, static_cast<float>(device->GetIWindow()->GetWidth()),
 					static_cast<float>(device->GetIWindow()->GetHeight()), 0.01f, 1000.0f).Transpose();
 
+
 				// After buffer is created we can bind the textures.
 				for (unsigned int i = 0; i < textures.size(); i++)
 				{
 					if (textures[i].CreateTextureFromFile())
-						std::cout << "Texture " << textures[i].GetFilename() << " was bound successfully..." << std::endl;
+							std::cout << "Texture " << textures[i].GetFilename() << " was bound successfully..." << std::endl;
 					else
 						std::cout << "Texture " << textures[i].GetFilename() << " failed to bind to mesh..." << std::endl;
 				}
@@ -151,6 +152,12 @@ void Jade::Graphics::DXMesh::Draw()
 	// Ensure that everything was binded correctly before attempting to draw.
 	if (bufferSuccess)
 	{
+		// Set the shaders for this mesh.
+		if(shader->GetID3D11PixelShader().Get())
+			device->GetID3D11DeviceContext()->PSSetShader(shader->GetID3D11PixelShader().Get(), nullptr, 0);
+		if (shader->GetID3D11VertexShader().Get())
+			device->GetID3D11DeviceContext()->VSSetShader(shader->GetID3D11VertexShader().Get(), nullptr, 0);
+
 		// Rotate our cube slightly.
 		space.world = Math::Matrix::RotateAlongY(device->GetIWindow()->GetTimer().GetElaspedTime()).Transpose();
 

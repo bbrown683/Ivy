@@ -41,14 +41,16 @@ namespace Jade
 
 			std::vector<Math::Vertex> vertices;
 
+			bool Bind() override;
+			bool Unbind() override;
+
 		public:
 
 			GLVertexBuffer() { }
 
 			std::vector<Math::Vertex> GetVertices() override;
 			void SetVertices(std::vector<Math::Vertex> vertices) override;
-			bool Bind() override;
-			bool Unbind() override;
+			void Update() override;
 		};
 	}
 }

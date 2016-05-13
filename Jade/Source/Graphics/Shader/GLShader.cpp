@@ -56,7 +56,7 @@ bool Jade::Graphics::GLShader::Create(std::string filename, ShaderType type)
 
 	// Used to print errors if there are any.
 	std::string buffer;
-	if(CheckForErrors(shader, GL_COMPILE_STATUS, false, buffer))
+	if(Check(shader, GL_COMPILE_STATUS, false, buffer))
 	{
 		shaderIDs.push_back(shader);
 
@@ -78,7 +78,7 @@ bool Jade::Graphics::GLShader::Release()
 	return true;
 }
 
-bool Jade::Graphics::GLShader::CheckForErrors(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMessage)
+bool Jade::Graphics::GLShader::Check(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMessage)
 {
 	GLint success = 0;
 	GLchar error[1024] = { 0 };
@@ -103,6 +103,11 @@ bool Jade::Graphics::GLShader::CheckForErrors(GLuint shader, GLuint flag, bool i
 	return true;
 }
 
+void Jade::Graphics::GLShader::MakeActive()
+{
+	glUseProgram(programID);
+}
+
 bool Jade::Graphics::GLShader::CreateProgram()
 {
 	programID = glCreateProgram();
@@ -117,7 +122,7 @@ bool Jade::Graphics::GLShader::CreateProgram()
 	glLinkProgram(programID);
 	
 	std::string buffer;
-	if (CheckForErrors(programID, GL_LINK_STATUS, true, buffer))
+	if (Check(programID, GL_LINK_STATUS, true, buffer))
 	{
 		std::cout << "Program was linked successfully." << std::endl;
 
@@ -131,14 +136,18 @@ bool Jade::Graphics::GLShader::CreateProgram()
 		// Lastly we validate the program can execute.
 		glValidateProgram(programID);
 
-		if (CheckForErrors(programID, GL_VALIDATE_STATUS, true, buffer))
+		if (Check(programID, GL_VALIDATE_STATUS, true, buffer))
 		{
 			std::cout << "Program was validated successfully." << std::endl;
-			glUseProgram(programID);
 
 			return true;
 		}
 	}
 
 	return false;
+}
+
+GLuint Jade::Graphics::GLShader::GetProgramID()
+{
+	return programID;
 }

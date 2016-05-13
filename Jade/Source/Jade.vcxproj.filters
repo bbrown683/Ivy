@@ -58,11 +58,11 @@
     <ClCompile Include="Graphics\Mesh\TestMesh.cpp" />
     <ClCompile Include="Audio\AudioDevice.cpp" />
     <ClCompile Include="Graphics\Widget\Canvas.cpp" />
-    <ClCompile Include="Graphics\SpriteBatch\SpriteBatch.cpp" />
     <ClCompile Include="Graphics\Shader\GLShader.cpp" />
     <ClCompile Include="Graphics\GL\glad\gl\src\glad.c" />
     <ClCompile Include="Graphics\GL\glad\wgl\src\glad_wgl.c" />
     <ClCompile Include="Graphics\Model\Importer\Importer.cpp" />
+    <ClCompile Include="Graphics\Sprite\DXSprite.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\Vector4.h">
@@ -172,7 +172,6 @@
     <ClInclude Include="Core\Exception\BufferCreationException.h" />
     <ClInclude Include="Graphics\Texture\TextureFactory.h" />
     <ClInclude Include="Graphics\Rasterizer\RasterizerFactory.h" />
-    <ClInclude Include="Graphics\SpriteBatch\SpriteBatch.h" />
     <ClInclude Include="Graphics\Font\Glyph.h" />
     <ClInclude Include="Graphics\GL\GladLoader.h" />
     <ClInclude Include="Graphics\Shader\GLShader.h" />
@@ -184,6 +183,10 @@
     <ClInclude Include="Graphics\Model\Importer\Importer.h" />
     <ClInclude Include="Graphics\Model\Importer\ModelType.h" />
     <ClInclude Include="Math\Space.h" />
+    <ClInclude Include="Graphics\Sprite\DXSprite.h" />
+    <ClInclude Include="Graphics\Sprite\ISprite.h" />
+    <ClInclude Include="Graphics\Sprite\Sprite.h" />
+    <ClInclude Include="Graphics\Buffer\IDrawBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">

@@ -24,12 +24,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifdef _WIN32
-
 #include <Graphics/Buffer/IIndexBuffer.h>
 #include <Graphics/Device/DXDevice.h>
 #include <Math/Vertex.h>
 
+#ifdef JADE_PLATFORM_WINDOWS
 namespace Jade
 {
 	namespace Graphics
@@ -42,6 +41,9 @@ namespace Jade
 			std::vector<unsigned short> indices;
 
 			ComPtr<ID3D11Buffer> m_pIndexBuffer;
+
+			bool Bind() override;
+			bool Unbind() override;
 
 		public:
 
@@ -57,10 +59,9 @@ namespace Jade
 
 			std::vector<unsigned short> GetIndices() override;
 			void SetIndices(std::vector<unsigned short> indices) override;
-			bool Bind() override;
-			bool Unbind() override;
+
+			void Update() override;
 		};
 	}
 }
-
-#endif // _WIN32
+#endif

@@ -68,5 +68,6 @@ void Jade::Graphics::GLMesh::Unbind()
 
 void Jade::Graphics::GLMesh::Draw()
 {
+	glUseProgram(shader->GetProgramID());
 	glDrawElements(GL_TRIANGLE_STRIP, static_cast<GLsizei>(indices.size()), GL_UNSIGNED_SHORT, nullptr);
 }

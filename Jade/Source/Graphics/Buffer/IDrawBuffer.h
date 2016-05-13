@@ -24,19 +24,16 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "stb/stb_truetype.h"
+#include "Graphics/Buffer/DrawType.h"
 
 namespace Jade
 {
 	namespace Graphics
 	{
-		class SpriteBatch
+		struct IDrawBuffer
 		{
-		public:
-
-			void Begin();
-			void Draw();
-			void End();
+			//! Draws to the current buffers.
+			virtual void DrawToBuffer(DrawType type);
 		};
 	}
 }

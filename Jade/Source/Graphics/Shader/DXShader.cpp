@@ -33,7 +33,8 @@ bool Jade::Graphics::DXShader::Create(std::string filename, ShaderType type)
 	{
 		case ShaderType::Pixel:
 		{
-			hr = device->GetID3D11Device()->CreatePixelShader(m_pPixelShaderBlob->GetBufferPointer(), m_pPixelShaderBlob->GetBufferSize(), nullptr, m_pPixelShader.GetAddressOf());
+			hr = device->GetID3D11Device()->CreatePixelShader(m_pPixelShaderBlob->GetBufferPointer(), 
+				m_pPixelShaderBlob->GetBufferSize(), nullptr, m_pPixelShader.GetAddressOf());
 
 			if (FAILED(hr))
 			{
@@ -42,14 +43,13 @@ bool Jade::Graphics::DXShader::Create(std::string filename, ShaderType type)
 				return false;
 			}
 
-			device->GetID3D11DeviceContext()->PSSetShader(m_pPixelShader.Get(), nullptr, 0);
-
 			std::cout << "Pixel shader was created successfully..." << std::endl;
 			break;
 		}
 		case ShaderType::Vertex:
 		{
-			hr = device->GetID3D11Device()->CreateVertexShader(m_pVertexShaderBlob->GetBufferPointer(), m_pVertexShaderBlob->GetBufferSize(), nullptr, m_pVertexShader.GetAddressOf());
+			hr = device->GetID3D11Device()->CreateVertexShader(m_pVertexShaderBlob->GetBufferPointer(), 
+				m_pVertexShaderBlob->GetBufferSize(), nullptr, m_pVertexShader.GetAddressOf());
 
 			if (FAILED(hr))
 			{
@@ -67,7 +67,8 @@ bool Jade::Graphics::DXShader::Create(std::string filename, ShaderType type)
 			};
 
 			// Create the input layout.
-			hr = device->GetID3D11Device()->CreateInputLayout(inputLayout, ARRAYSIZE(inputLayout), m_pVertexShaderBlob->GetBufferPointer(), m_pVertexShaderBlob->GetBufferSize(), m_pInputLayout.GetAddressOf());
+			hr = device->GetID3D11Device()->CreateInputLayout(inputLayout, ARRAYSIZE(inputLayout), 
+				m_pVertexShaderBlob->GetBufferPointer(), m_pVertexShaderBlob->GetBufferSize(), m_pInputLayout.GetAddressOf());
 
 			if (FAILED(hr))
 			{
@@ -78,7 +79,6 @@ bool Jade::Graphics::DXShader::Create(std::string filename, ShaderType type)
 
 			// Set the input layout
 			device->GetID3D11DeviceContext()->IASetInputLayout(m_pInputLayout.Get());
-			device->GetID3D11DeviceContext()->VSSetShader(m_pVertexShader.Get(), nullptr, 0);
 
 			std::cout << "Vertex shader was created successfully..." << std::endl;
 			break;
@@ -118,5 +118,26 @@ bool Jade::Graphics::DXShader::CopyToBlob(ShaderType type, ComPtr<ID3DBlob> blob
 	}
 
 	return FAILED(hr) ? false : true;
+}
+void Jade::Graphics::DXShader::MakeActive()
+{
+	// Set the shaders for this mesh if they are not null.
+	if (m_pPixelShader)
+		device->GetID3D11DeviceContext()->PSSetShader(m_pPixelShader.Get(), nullptr, 0);
+	if (m_pVertexShader)
+		device->GetID3D11DeviceContext()->VSSetShader(m_pVertexShader.Get(), nullptr, 0);
+}
+
+const ComPtr<ID3D11InputLayout>& Jade::Graphics::DXShader::GetID3D11InputLayout() const
+{
+	return m_pInputLayout;
+}
+const ComPtr<ID3D11PixelShader>& Jade::Graphics::DXShader::GetID3D11PixelShader() const
+{
+	return m_pPixelShader;
+}
+const ComPtr<ID3D11VertexShader>& Jade::Graphics::DXShader::GetID3D11VertexShader() const
+{
+	return m_pVertexShader;
 }
 #endif

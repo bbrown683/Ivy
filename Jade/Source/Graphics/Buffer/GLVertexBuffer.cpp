@@ -34,6 +34,11 @@ void Jade::Graphics::GLVertexBuffer::SetVertices(std::vector<Math::Vertex> verti
 	this->vertices = vertices;
 }
 
+void Jade::Graphics::GLVertexBuffer::Update()
+{
+
+}
+
 bool Jade::Graphics::GLVertexBuffer::Bind()
 {
 	// Generate our vertices array and Bind it to the first element.

@@ -40,7 +40,7 @@ namespace Jade
 
 		public:
 
-			//virtual bool Compile(std::string filename, ShaderType type) = 0;
+			virtual void MakeActive() = 0;
 		};
 	}
 }

@@ -30,6 +30,7 @@ SOFTWARE.
 #include "Graphics/Buffer/ConstantBuffer.h"
 #include "Graphics/Device/DXDevice.h"
 #include "Graphics/Mesh/IMesh.h"
+#include "Graphics/Shader/DXShader.h"
 #include "Graphics/Texture/Texture.h"
 #include "Math/Space.h"
 #include "Math/Vertex.h"
@@ -44,6 +45,7 @@ namespace Jade
 		private:
 
 			std::shared_ptr<DXDevice> device;
+			std::shared_ptr<DXShader> shader;
 			std::vector<Math::Vertex> vertices;
 			std::vector<unsigned short> indices;
 			std::vector<Texture> textures;
@@ -62,9 +64,10 @@ namespace Jade
 
 		public:
 
-			DXMesh(std::shared_ptr<DXDevice> device, std::vector<Math::Vertex> vertices, std::vector<unsigned short> indices, std::vector<Texture> textures)
+			DXMesh(std::shared_ptr<DXDevice> device, std::shared_ptr<DXShader> shader, std::vector<Math::Vertex> vertices, std::vector<unsigned short> indices, std::vector<Texture> textures)
 			{
 				this->device = device;
+				this->shader = shader;
 				this->vertices = vertices;
 				this->indices = indices;
 				this->textures = textures;

@@ -36,6 +36,11 @@ void Jade::Graphics::DXIndexBuffer::SetIndices(std::vector<unsigned short> indic
 	this->indices = indices;
 }
 
+void Jade::Graphics::DXIndexBuffer::Update()
+{
+
+}
+
 bool Jade::Graphics::DXIndexBuffer::Bind()
 {	
 	if (m_pIndexBuffer)

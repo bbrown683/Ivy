@@ -85,6 +85,8 @@ namespace Jade
 			bool CreateTextureFromMemory() override;
 			//! Updates the texture resources to ensure that they remain the target of the drawing operations.
 			void Update() override;
+
+			const ComPtr<ID3D11ShaderResourceView>& GetID3D11ShaderResourceView() const;
 		};
 	}
 }

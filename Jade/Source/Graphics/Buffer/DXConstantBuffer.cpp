@@ -22,38 +22,43 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifdef _WIN32
 
 #include "DXConstantBuffer.h"
 
+#ifdef JADE_PLATFORM_WINDOWS
 Jade::Math::Matrix Jade::Graphics::DXConstantBuffer::GetProjectionMatrix()
 {
-	return uniform.projection;
+	return space.projection;
 }
 
 Jade::Math::Matrix Jade::Graphics::DXConstantBuffer::GetViewMatrix()
 {
-	return uniform.view;
+	return space.view;
 }
 
 Jade::Math::Matrix Jade::Graphics::DXConstantBuffer::GetWorldMatrix()
 {
-	return uniform.world;
+	return space.world;
 }
 
 void Jade::Graphics::DXConstantBuffer::SetProjectionMatrix(Math::Matrix matrix)
 {
-	uniform.projection = matrix;
+	space.projection = matrix;
 }
 
 void Jade::Graphics::DXConstantBuffer::SetViewMatrix(Math::Matrix matrix)
 {
-	uniform.view = matrix;
+	space.view = matrix;
 }
 
 void Jade::Graphics::DXConstantBuffer::SetWorldMatrix(Math::Matrix matrix)
 {
-	uniform.world = matrix;
+	space.world = matrix;
+}
+
+void Jade::Graphics::DXConstantBuffer::Update()
+{
+	
 }
 
 bool Jade::Graphics::DXConstantBuffer::Bind()
@@ -65,7 +70,7 @@ bool Jade::Graphics::DXConstantBuffer::Bind()
 	D3D11_BUFFER_DESC desc;
 	ZeroMemory(&desc, sizeof(desc));
 	desc.Usage = D3D11_USAGE_DEFAULT;
-	desc.ByteWidth = sizeof(Uniform);
+	desc.ByteWidth = sizeof(Math::Space);
 	desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
 	desc.CPUAccessFlags = 0;
 

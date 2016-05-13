@@ -37,6 +37,7 @@ namespace Jade
 			virtual void SetVertices(std::vector<Math::Vertex> vertices) = 0;
 			virtual bool Bind() = 0;
 			virtual bool Unbind() = 0;
+			virtual void Update() = 0;
 		};
 	}
 }

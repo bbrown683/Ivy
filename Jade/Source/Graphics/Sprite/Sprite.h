@@ -24,34 +24,36 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <Graphics/Buffer/IUniformBuffer.h>
-#include <Graphics/Device/GLDevice.h>
-#include <Math/Vertex.h>
+#include "Graphics/Device/Device.h"
+#include "Graphics/Shader/Shader.h"
+#include "Graphics/Sprite/ISprite.h"
+#include "Graphics/Texture/Texture.h"
 
 namespace Jade
 {
 	namespace Graphics
 	{
-		class GLUniformBuffer : public IUniformBuffer
+		class Sprite
 		{
-		private:
+			Device device;
+			Shader shader;
 
-			bool Bind() override;
-			bool Unbind() override;
+			std::shared_ptr<ISprite> sprite;
 
 		public:
 
-			GLUniformBuffer() { }
+			Sprite(Device device, Shader shader)
+			{				 
+				this->device = device;
+				this->shader = shader;
+			}
 
-			Math::Matrix GetProjectionMatrix() override;
-			Math::Matrix GetViewMatrix() override;
-			Math::Matrix GetWorldMatrix() override;
-
-			void SetProjectionMatrix(Math::Matrix matrix) override;
-			void SetViewMatrix(Math::Matrix matrix) override;
-			void SetWorldMatrix(Math::Matrix matrix) override;
-
-			void Update() override;
+			void Draw(std::string filename, int x, int y, float scale) const
+			{
+				// Generate the texture for the sprite.
+				Texture texture(device, filename, TextureType::Bitmap);
+				sprite->Draw(texture, filename, x, y, scale);
+			}
 		};
 	}
 }

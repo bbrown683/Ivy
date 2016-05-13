@@ -43,6 +43,9 @@ namespace Jade
 
 			ComPtr<ID3D11Buffer> m_pVertexBuffer;
 
+			bool Bind() override;
+			bool Unbind() override;
+
 		public:
 
 			DXVertexBuffer(std::shared_ptr<DXDevice> device)
@@ -57,8 +60,8 @@ namespace Jade
 
 			std::vector<Math::Vertex> GetVertices() override;
 			void SetVertices(std::vector<Math::Vertex> vertices) override;
-			bool Bind() override;
-			bool Unbind() override;
+
+			void Update() override;
 		};
 	}
 }

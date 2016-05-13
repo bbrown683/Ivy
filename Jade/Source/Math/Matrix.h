@@ -134,7 +134,7 @@ namespace Jade
 			//! Returns a right-handed matrix with the camera vectors.
 			static Matrix CreateLookAtRH(Vector3 eye, Vector3 at, Vector3 up);
 			//! Returns a matrix that is of an Orthographic view.
-			static Matrix CreateOrthographicView(float fieldOfView, float aspectRatio, float nearPlaneDistance, float farPlaneDistance);
+			static Matrix CreateOrthographicView(float left, float right, float top, float bottom, float nearPlaneDistance, float farPlaneDistance);
 			//! Returns a left-handed matrix that is of a Perspective view.
 			static Matrix CreatePerspectiveViewLH(float fieldOfView, float width, float height, float nearPlaneDistance, float farPlaneDistance);
 			//! Returns a right-handed matrix that is of a Perspective view.

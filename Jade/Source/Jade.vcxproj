@@ -158,7 +158,8 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
       <SubSystem>Windows</SubSystem>
       <EntryPointSymbol>
       </EntryPointSymbol>
-      <AdditionalOptions>/NODEFAULTLIB:libcmt.lib /NODEFAULTLIB:msvcrt.lib</AdditionalOptions>
+      <AdditionalOptions>
+      </AdditionalOptions>
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
@@ -194,7 +195,8 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
       <SubSystem>Windows</SubSystem>
       <EntryPointSymbol>
       </EntryPointSymbol>
-      <AdditionalOptions>/NODEFAULTLIB:libcmt.lib /NODEFAULTLIB:msvcrt.lib</AdditionalOptions>
+      <AdditionalOptions>
+      </AdditionalOptions>
       <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
@@ -218,6 +220,7 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClCompile Include="Graphics\Blender\DXBlender.cpp" />
     <ClCompile Include="Graphics\Buffer\ConstantBuffer.cpp" />
     <ClCompile Include="Graphics\Buffer\DrawBuffer.cpp" />
+    <ClCompile Include="Graphics\Sprite\DXSprite.cpp" />
     <ClCompile Include="Graphics\GL\glad\gl\src\glad.c" />
     <ClCompile Include="Graphics\GL\glad\wgl\src\glad_wgl.c" />
     <ClCompile Include="Graphics\Mesh\TestMesh.cpp" />
@@ -225,7 +228,6 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClCompile Include="Graphics\Rasterizer\DXRasterizer.cpp" />
     <ClCompile Include="Graphics\Rasterizer\GLRasterizer.cpp" />
     <ClCompile Include="Graphics\Shader\GLShader.cpp" />
-    <ClCompile Include="Graphics\SpriteBatch\SpriteBatch.cpp" />
     <ClCompile Include="Graphics\Texture\DXTexture.cpp" />
     <ClCompile Include="Graphics\Texture\GLTexture.cpp" />
     <ClCompile Include="Graphics\Widget\Canvas.cpp" />
@@ -285,14 +287,17 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClInclude Include="Graphics\Buffer\DrawType.h" />
     <ClInclude Include="Graphics\Buffer\DXDrawBuffer.h" />
     <ClInclude Include="Graphics\Buffer\GLDrawBuffer.h" />
+    <ClInclude Include="Graphics\Buffer\IDrawBuffer.h" />
     <ClInclude Include="Graphics\Buffer\IIndexBuffer.h" />
     <ClInclude Include="Graphics\Buffer\IUniformBuffer.h" />
+    <ClInclude Include="Graphics\Sprite\DXSprite.h" />
     <ClInclude Include="Graphics\Font\Glyph.h" />
     <ClInclude Include="Graphics\GL\GladLoader.h" />
     <ClInclude Include="Graphics\GL\glad\gl\include\glad\glad.h" />
     <ClInclude Include="Graphics\GL\glad\gl\include\KHR\khrplatform.h" />
     <ClInclude Include="Graphics\GL\glad\wgl\include\glad\glad_wgl.h" />
     <ClInclude Include="Graphics\GL\glad\wgl\include\KHR\khrplatform.h" />
+    <ClInclude Include="Graphics\Sprite\ISprite.h" />
     <ClInclude Include="Math\Space.h" />
     <ClInclude Include="Graphics\Mesh\TestMesh.h" />
     <ClInclude Include="Graphics\Model\Importer\Importer.h" />
@@ -300,7 +305,7 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClInclude Include="Graphics\Rasterizer\RasterizerFactory.h" />
     <ClInclude Include="Graphics\Rasterizer\WindMode.h" />
     <ClInclude Include="Graphics\Shader\GLShader.h" />
-    <ClInclude Include="Graphics\SpriteBatch\SpriteBatch.h" />
+    <ClInclude Include="Graphics\Sprite\Sprite.h" />
     <ClInclude Include="Graphics\Texture\TextureFactory.h" />
     <ClInclude Include="Graphics\Widget\Canvas.h" />
     <ClInclude Include="Graphics\Widget\Widget.h" />

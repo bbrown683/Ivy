@@ -41,6 +41,7 @@ namespace Jade
 			virtual void SetWorldMatrix(Math::Matrix matrix) = 0;
 			virtual bool Bind() = 0;
 			virtual bool Unbind() = 0;
+			virtual void Update() = 0;
 		};
 	}
 }

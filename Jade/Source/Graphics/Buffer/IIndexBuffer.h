@@ -36,6 +36,7 @@ namespace Jade
 			virtual void SetIndices(std::vector<unsigned short> indices) = 0;
 			virtual bool Bind() = 0;
 			virtual bool Unbind() = 0;
+			virtual void Update() = 0;
 		};
 	}
 }
