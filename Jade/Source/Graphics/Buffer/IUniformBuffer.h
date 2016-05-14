@@ -33,14 +33,18 @@ namespace Jade
 	{
 		struct IUniformBuffer
 		{
+			virtual void Bind() = 0;
+			virtual bool Create() = 0;
+
 			virtual Math::Matrix GetProjectionMatrix() = 0;
 			virtual Math::Matrix GetViewMatrix() = 0;
 			virtual Math::Matrix GetWorldMatrix() = 0;
+
 			virtual void SetProjectionMatrix(Math::Matrix matrix) = 0;
 			virtual void SetViewMatrix(Math::Matrix matrix) = 0;
 			virtual void SetWorldMatrix(Math::Matrix matrix) = 0;
-			virtual bool Bind() = 0;
-			virtual bool Unbind() = 0;
+
+			virtual void Unbind() = 0;
 			virtual void Update() = 0;
 		};
 	}

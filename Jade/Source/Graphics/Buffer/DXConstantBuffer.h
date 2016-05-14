@@ -43,8 +43,9 @@ namespace Jade
 
 			ComPtr<ID3D11Buffer> m_pConstantBuffer;
 
-			bool Bind() override;
-			bool Unbind() override;
+			bool Create() override;
+			void Bind() override;
+			void Unbind() override;
 
 		public:
 

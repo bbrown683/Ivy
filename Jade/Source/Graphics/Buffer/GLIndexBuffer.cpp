@@ -24,6 +24,22 @@ SOFTWARE.
 
 #include "GLIndexBuffer.h"
 
+void Jade::Graphics::GLIndexBuffer::Bind()
+{
+	glDrawElements(GL_TRIANGLE_STRIP, static_cast<GLsizei>(indices.size()),
+		GL_UNSIGNED_SHORT, nullptr);
+}
+
+bool Jade::Graphics::GLIndexBuffer::Create()
+{
+	// Generate a buffer for the indices;
+	glGenBuffers(1, &indexBuffer);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned short), indices.data(), GL_STATIC_DRAW);
+
+	return true;
+}
+
 std::vector<unsigned short> Jade::Graphics::GLIndexBuffer::GetIndices()
 {
 	return indices;
@@ -34,25 +50,12 @@ void Jade::Graphics::GLIndexBuffer::SetIndices(std::vector<unsigned short> indic
 	this->indices = indices;
 }
 
-void Jade::Graphics::GLIndexBuffer::Update()
-{
-
-}
-
-bool Jade::Graphics::GLIndexBuffer::Bind()
-{
-	// Generate a buffer for the indices;
-	glGenBuffers(1, &indexBuffer);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned short), indices.data(), GL_STATIC_DRAW);
-
-	return true;
-}
-
-bool Jade::Graphics::GLIndexBuffer::Unbind()
+void Jade::Graphics::GLIndexBuffer::Unbind()
 {
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	glDeleteBuffers(1, &indexBuffer);
+}
 
-	return true;
+void Jade::Graphics::GLIndexBuffer::Update()
+{
 }

@@ -45,6 +45,7 @@ namespace Jade
 		{
 			std::shared_ptr<System::IWindow> window;
 			Specification specification;
+			DrawType drawType;
 
 			// Necessary to initialize a Direct3D11 device
 			D3D_DRIVER_TYPE m_DriverType;
@@ -94,6 +95,8 @@ namespace Jade
 			void Present() override;
 			std::shared_ptr<System::IWindow> GetIWindow() const;
 			char* DeviceInformation() override;
+			DrawType GetDrawType() override;
+			void SetDrawType(DrawType type) override;
 
 			// Retrieval functions for DirectX related objects.
 			D3D_DRIVER_TYPE GetD3DDriverType() const;

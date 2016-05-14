@@ -1,25 +1,25 @@
 #pragma once
 
 #include "Core/Utility.h"
-#include "Graphics/Model/Importer/ModelType.h"
+#include "Graphics/Model/Importer/ModelProperties.h"
 
 namespace Jade
 {
 	namespace Graphics
 	{
+		/*! \brief Abstract class for implementing various importers. */
 		class Importer
 		{
-			ModelType type;
+			std::string filename;
+			
+		public:
 
 			Importer(std::string filename)
 			{
-				
+				this->filename = filename;
 			}
 
-			ModelType GetModelTypeFromFilename(std::string filename)
-			{
-				
-			}
+			virtual ModelProperties Parse() = 0;
 		};
 	}
 }

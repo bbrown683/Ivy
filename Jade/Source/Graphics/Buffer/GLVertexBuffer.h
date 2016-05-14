@@ -34,22 +34,22 @@ namespace Jade
 	{
 		class GLVertexBuffer : public IVertexBuffer
 		{
-		private:
-
 			GLuint vertexArray;
 			GLuint vertexBuffer;
 
 			std::vector<Math::Vertex> vertices;
 
-			bool Bind() override;
-			bool Unbind() override;
-
 		public:
 
 			GLVertexBuffer() { }
 
+			void Bind() override;
+			bool Create() override;
+
 			std::vector<Math::Vertex> GetVertices() override;
 			void SetVertices(std::vector<Math::Vertex> vertices) override;
+		
+			void Unbind() override;
 			void Update() override;
 		};
 	}

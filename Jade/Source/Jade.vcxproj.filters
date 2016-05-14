@@ -54,15 +54,14 @@
     <ClCompile Include="Graphics\Rasterizer\GLRasterizer.cpp" />
     <ClCompile Include="Graphics\Buffer\ConstantBuffer.cpp" />
     <ClCompile Include="Graphics\Blender\DXBlender.cpp" />
-    <ClCompile Include="Graphics\Buffer\DrawBuffer.cpp" />
     <ClCompile Include="Graphics\Mesh\TestMesh.cpp" />
     <ClCompile Include="Audio\AudioDevice.cpp" />
     <ClCompile Include="Graphics\Widget\Canvas.cpp" />
     <ClCompile Include="Graphics\Shader\GLShader.cpp" />
     <ClCompile Include="Graphics\GL\glad\gl\src\glad.c" />
     <ClCompile Include="Graphics\GL\glad\wgl\src\glad_wgl.c" />
-    <ClCompile Include="Graphics\Model\Importer\Importer.cpp" />
     <ClCompile Include="Graphics\Sprite\DXSprite.cpp" />
+    <ClCompile Include="Graphics\Model\Importer\OBJImporter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\Vector4.h">
@@ -151,7 +150,6 @@
     <ClInclude Include="Graphics\Blender\IBlender.h" />
     <ClInclude Include="Graphics\Blender\DXBlender.h" />
     <ClInclude Include="Graphics\Blender\Blender.h" />
-    <ClInclude Include="Graphics\Buffer\DrawBuffer.h" />
     <ClInclude Include="Jade.h" />
     <ClInclude Include="Graphics\Rasterizer\WindMode.h" />
     <ClInclude Include="Core\Exception\ShaderCreationException.h" />
@@ -164,8 +162,6 @@
     <ClInclude Include="Graphics\Buffer\IVertexBuffer.h" />
     <ClInclude Include="Graphics\Buffer\IUniformBuffer.h" />
     <ClInclude Include="Graphics\Buffer\IIndexBuffer.h" />
-    <ClInclude Include="Graphics\Buffer\DXDrawBuffer.h" />
-    <ClInclude Include="Graphics\Buffer\GLDrawBuffer.h" />
     <ClInclude Include="Graphics\Mesh\TestMesh.h" />
     <ClInclude Include="Graphics\Widget\Widget.h" />
     <ClInclude Include="Graphics\Widget\Canvas.h" />
@@ -186,7 +182,10 @@
     <ClInclude Include="Graphics\Sprite\DXSprite.h" />
     <ClInclude Include="Graphics\Sprite\ISprite.h" />
     <ClInclude Include="Graphics\Sprite\Sprite.h" />
-    <ClInclude Include="Graphics\Buffer\IDrawBuffer.h" />
+    <ClInclude Include="Graphics\Model\Importer\ModelProperties.h" />
+    <ClInclude Include="Graphics\Model\Importer\OBJImporter.h" />
+    <ClInclude Include="Graphics\Model\Importer\ModelMesh.h" />
+    <ClInclude Include="Graphics\Model\Importer\MeshMaterial.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">

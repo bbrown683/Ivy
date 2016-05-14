@@ -1,22 +1,24 @@
 #include "DXVertexBuffer.h"
 
-std::vector<Jade::Math::Vertex> Jade::Graphics::DXVertexBuffer::GetVertices()
+#ifdef JADE_PLATFORM_WINDOWS
+void Jade::Graphics::DXVertexBuffer::Bind()
 {
-	return vertices;
+	// Set the memory stride.
+	unsigned int stride = sizeof(Math::Vertex);
+	unsigned int offset = 0;
+
+	// Set the vertices buffer.
+	device->GetID3D11DeviceContext()->IASetVertexBuffers(0, 1, m_pVertexBuffer.GetAddressOf(), &stride, &offset);
+
+	// Set the primitive topology.
+	device->GetID3D11DeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 }
 
-void Jade::Graphics::DXVertexBuffer::SetVertices(std::vector<Math::Vertex> vertices)
+bool Jade::Graphics::DXVertexBuffer::Create()
 {
-	this->vertices = vertices;
-}
+	if (m_pVertexBuffer)
+		m_pVertexBuffer.Reset();
 
-void Jade::Graphics::DXVertexBuffer::Update()
-{
-
-}
-
-bool Jade::Graphics::DXVertexBuffer::Bind()
-{
 	D3D11_BUFFER_DESC desc;
 	ZeroMemory(&desc, sizeof(desc));
 	desc.Usage = D3D11_USAGE_DEFAULT;
@@ -37,23 +39,28 @@ bool Jade::Graphics::DXVertexBuffer::Bind()
 	if (FAILED(hr))
 		return false;
 
-	// Set the memory stride.
-	unsigned int stride = sizeof(Math::Vertex);
-	unsigned int offset = 0;
-
-	// Set the vertices buffer.
-	device->GetID3D11DeviceContext()->IASetVertexBuffers(0, 1, m_pVertexBuffer.GetAddressOf(), &stride, &offset);
-
-	// Set the primitive topology.
-	device->GetID3D11DeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
 	return true;
 }
 
-bool Jade::Graphics::DXVertexBuffer::Unbind()
+std::vector<Jade::Math::Vertex> Jade::Graphics::DXVertexBuffer::GetVertices()
 {
-	// Unbind buffers.
-	device->GetID3D11DeviceContext()->IASetVertexBuffers(0, 0, nullptr, nullptr, nullptr);
-
-	return true;
+	return vertices;
 }
+
+void Jade::Graphics::DXVertexBuffer::SetVertices(std::vector<Math::Vertex> vertices)
+{
+	this->vertices = vertices;
+}
+
+void Jade::Graphics::DXVertexBuffer::Unbind()
+{
+	// Unbind buffer.
+	device->GetID3D11DeviceContext()->IASetVertexBuffers(0, 0, nullptr, nullptr, nullptr);
+}
+
+void Jade::Graphics::DXVertexBuffer::Update()
+{
+	// Non-indexed drawing. Less efficient but simpler to implement if a mesh has no indices.
+	device->GetID3D11DeviceContext()->Draw(static_cast<unsigned>(vertices.size()), 0);
+}
+#endif

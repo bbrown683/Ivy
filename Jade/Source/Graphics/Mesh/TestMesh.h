@@ -42,38 +42,60 @@ namespace Jade
 	{
 		class TestMesh
 		{
-		private:
-
 			Device device;
 			Shader shader;
 
 			std::vector<Math::Vertex> vertices;
 			std::vector<unsigned short> indices;
-			std::vector<std::string> textures;
-
-			std::shared_ptr<IMesh> mesh;
+			std::vector<Texture> textures;
 
 			VertexBuffer vBuffer;
 			IndexBuffer iBuffer;
 			ConstantBuffer cBuffer;
 
+			// manual rotation testing.
+			float rotation;
+
 		public:
 
-			TestMesh(Device device, Shader shader, std::vector<Math::Vertex> vertices, std::vector<unsigned short> indices, std::vector<std::string> textures)
+			TestMesh(Device device, Shader shader, std::vector<Math::Vertex> vertices, std::vector<unsigned short> indices, std::vector<Texture> textures)
 			{
 				this->device = device;
 				this->shader = shader;
 				this->vertices = vertices;
 				this->indices = indices;
 				this->textures = textures;
+
+				vBuffer = VertexBuffer(device);
+				iBuffer = IndexBuffer(device);
+				cBuffer = ConstantBuffer(device);
+
+				// These wont change.
+				vBuffer.SetVertices(vertices);
+				iBuffer.SetIndices(indices);
+
+				// Create the buffers.
+				// vBuffer and iBuffer require data to be passed in before creation.
+				vBuffer.Create();
+				iBuffer.Create();
+
+				// cBuffer can have alternating data due to how its formatted.
+				cBuffer.Create();
+
+				// Create the textures.
+				for (unsigned int i = 0; i < textures.size(); i++)
+				{
+					if (textures[i].CreateTextureFromFile())
+						std::cout << "Texture " << textures[i].GetFilename() << " was bound successfully..." << std::endl;
+					else
+						std::cout << "Texture " << textures[i].GetFilename() << " failed to bind to mesh..." << std::endl;
+				}
+
+				rotation = 0.0f;
 			}
 
-			void Initialize();
-
-			void Draw()	const
-			{
-				mesh->Draw();
-			}
+			void Draw();
+			void SetPosition(Math::Vector3 position);
 
 			std::vector<Math::Vertex> GetVertices()	const
 			{
@@ -85,7 +107,7 @@ namespace Jade
 				return indices;
 			}
 
-			std::vector<std::string> GetTextures() const
+			std::vector<Texture> GetTextures() const
 			{
 				return textures;
 			}

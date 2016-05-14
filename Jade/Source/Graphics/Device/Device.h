@@ -38,13 +38,11 @@ namespace Jade
 	{
 		class Device
 		{
-		private:
-
 			System::Window window;
 			GraphicsAPI api;
 			Specification specification;
+			DrawType type;
 
-			// Enumerates through the available devices and selects the best one available for rendering.
 			std::shared_ptr<IDevice> device;
 			std::shared_ptr<IDevice> Initialize();
 
@@ -115,6 +113,16 @@ namespace Jade
 			GraphicsAPI GetGraphicsAPI() const
 			{
 				return api;
+			}
+
+			DrawType GetDrawType() const
+			{
+				return device->GetDrawType();
+			}
+
+			void SetDrawType(DrawType type)
+			{
+				device->SetDrawType(type);
 			}
 		};
 	}

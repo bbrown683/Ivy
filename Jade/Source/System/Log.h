@@ -1,8 +1,5 @@
 #pragma once
 
-#include <stdio.h>
-#include <iostream>
-
 #include "System/File.h"
 
 namespace Jade

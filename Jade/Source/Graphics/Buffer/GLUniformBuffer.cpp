@@ -24,14 +24,46 @@ SOFTWARE.
 
 #include "GLUniformBuffer.h"
 
-bool Jade::Graphics::GLUniformBuffer::Bind()
+void Jade::Graphics::GLUniformBuffer::Bind()
+{
+
+}
+
+bool Jade::Graphics::GLUniformBuffer::Create()
 {
 	return false;
 }
 
-bool Jade::Graphics::GLUniformBuffer::Unbind()
+Jade::Math::Matrix Jade::Graphics::GLUniformBuffer::GetProjectionMatrix()
 {
-	return false;
+	return Math::Matrix();
+}
+
+Jade::Math::Matrix Jade::Graphics::GLUniformBuffer::GetViewMatrix()
+{
+	return Math::Matrix();
+}
+
+Jade::Math::Matrix Jade::Graphics::GLUniformBuffer::GetWorldMatrix()
+{
+	return Math::Matrix();
+}
+
+void Jade::Graphics::GLUniformBuffer::SetProjectionMatrix(Math::Matrix matrix)
+{
+}
+
+void Jade::Graphics::GLUniformBuffer::SetViewMatrix(Math::Matrix matrix)
+{
+}
+
+void Jade::Graphics::GLUniformBuffer::SetWorldMatrix(Math::Matrix matrix)
+{
+}
+
+void Jade::Graphics::GLUniformBuffer::Unbind()
+{
+
 }
 
 void Jade::Graphics::GLUniformBuffer::Update()

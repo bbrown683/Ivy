@@ -28,7 +28,6 @@ SOFTWARE.
 #include "Graphics/Buffer/DXConstantBuffer.h"
 #include "Graphics/Buffer/GLUniformBuffer.h"
 #include "Graphics/Device/Device.h"
-#include "DXConstantBuffer.h"
 
 namespace Jade
 {
@@ -36,13 +35,8 @@ namespace Jade
 	{
 		class ConstantBuffer
 		{
-		private:
-
 			Device device;
 			std::shared_ptr<IUniformBuffer> constantBuffer;
-
-			bool Bind();
-			bool Unbind();
 
 		public:
 
@@ -64,6 +58,9 @@ namespace Jade
 				}
 			}
 
+			void Bind();
+			bool Create();
+			
 			Math::Matrix GetProjectionMatrix();
 			Math::Matrix GetViewMatrix();
 			Math::Matrix GetWorldMatrix();
@@ -71,7 +68,8 @@ namespace Jade
 			void SetProjectionMatrix(Math::Matrix matrix);
 			void SetViewMatrix(Math::Matrix matrix);
 			void SetWorldMatrix(Math::Matrix matrix);
-						
+			
+			void Unbind();
 			void Update();
 		};
 	}

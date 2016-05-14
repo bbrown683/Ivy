@@ -50,7 +50,6 @@ namespace Jade
 			{
 				this->device = device;
 
-				//std::make_shared<DXRasterizer>(std::dynamic_pointer_cast<DXDevice>(device.GetIDevice()));
 				rasterizer = RasterizerFactory::Generate<IRasterizer>(device);
 			}
 
@@ -63,16 +62,19 @@ namespace Jade
 				return rasterizer->SetRasterizerState(cullMode, fillMode, windMode);
 			}
 
+			/*! \brief Returns the current cull mode. Return values can only be None, Front, or Back. */
 			CullMode GetCullMode() const
 			{
 				return rasterizer->GetCullMode();
 			}
 
+			/*! \brief Returns the current fill mode. Return values can only be Wireframe or Solid. */
 			FillMode GetFillMode() const
 			{
 				return rasterizer->GetFillMode();
 			}
 
+			/*! \brief Returns the current wind mode. Return value can only be Clockwise or CounterClockwise */
 			WindMode GetWindMode() const
 			{
 				return rasterizer->GetWindMode();

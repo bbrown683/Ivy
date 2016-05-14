@@ -157,6 +157,8 @@ namespace Jade
 			static Matrix RotateAlongY(float radians);
 			//! Rotates the matrix along the z - axis by a specified amount in radians.
 			static Matrix RotateAlongZ(float radians);
+			//! Scales a matrix.
+			Matrix Scale(Vector3 scale);
 			//! Subtracts two matrices and returns a matrix as a result.
 			Matrix Subtract(Matrix other) const;
 			//! Returns a matrix that is translated by the specified offsets.

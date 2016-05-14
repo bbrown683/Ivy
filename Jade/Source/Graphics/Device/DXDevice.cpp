@@ -83,10 +83,10 @@ bool Jade::Graphics::DXDevice::Create()
 		hr = D3D11CreateDeviceAndSwapChain(nullptr, driverTypes[i], nullptr, createDeviceFlags, featureLevels,
 				numFeatureLevels, D3D11_SDK_VERSION, &sd, m_pSwapChain.GetAddressOf(), m_pDevice.GetAddressOf(), &m_FeatureLevel, m_pImmediateContext.GetAddressOf());
 
-		if (FAILED(hr))
-			return false;
 		if (SUCCEEDED(hr))
 			break;
+		if (FAILED(hr))
+			return false;
 	}
 
 	ComPtr<ID3D11Texture2D> m_pBackBuffer = nullptr;
@@ -206,6 +206,16 @@ void Jade::Graphics::DXDevice::Present()
 char* Jade::Graphics::DXDevice::DeviceInformation()
 {
 	return nullptr;
+}
+
+Jade::Graphics::DrawType Jade::Graphics::DXDevice::GetDrawType()
+{
+	return drawType;
+}
+
+void Jade::Graphics::DXDevice::SetDrawType(DrawType type)
+{
+	drawType = type;
 }
 
 std::shared_ptr<Jade::System::IWindow> Jade::Graphics::DXDevice::GetIWindow() const

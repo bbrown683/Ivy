@@ -24,32 +24,8 @@ SOFTWARE.
 
 #include "GLVertexBuffer.h"
 
-std::vector<Jade::Math::Vertex> Jade::Graphics::GLVertexBuffer::GetVertices()
+void Jade::Graphics::GLVertexBuffer::Bind()
 {
-	return vertices;
-}
-
-void Jade::Graphics::GLVertexBuffer::SetVertices(std::vector<Math::Vertex> vertices)
-{
-	this->vertices = vertices;
-}
-
-void Jade::Graphics::GLVertexBuffer::Update()
-{
-
-}
-
-bool Jade::Graphics::GLVertexBuffer::Bind()
-{
-	// Generate our vertices array and Bind it to the first element.
-	glGenVertexArrays(1, &vertexArray);
-	glBindVertexArray(vertexArray);
-
-	// Generate our vertices buffer and bind it.
-	glGenBuffers(1, &vertexBuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
-	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Math::Vertex), vertices.data(), GL_STATIC_DRAW);
-
 	// Positions.
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, false, sizeof(Math::Vertex),
@@ -64,16 +40,42 @@ bool Jade::Graphics::GLVertexBuffer::Bind()
 	glEnableVertexAttribArray(2);
 	glVertexAttribPointer(2, 3, GL_FLOAT, false, sizeof(Math::Vertex),
 		reinterpret_cast<GLvoid*>offsetof(struct Math::Vertex, normal));
+}
+
+bool Jade::Graphics::GLVertexBuffer::Create()
+{
+	// Generate our vertices array and Bind it to the first element.
+	glGenVertexArrays(1, &vertexArray);
+	glBindVertexArray(vertexArray);
+
+	// Generate our vertices buffer and bind it.
+	glGenBuffers(1, &vertexBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
+	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Math::Vertex), vertices.data(), GL_STATIC_DRAW);
 
 	return true;
 }
 
-bool Jade::Graphics::GLVertexBuffer::Unbind()
+
+std::vector<Jade::Math::Vertex> Jade::Graphics::GLVertexBuffer::GetVertices()
+{
+	return vertices;
+}
+
+void Jade::Graphics::GLVertexBuffer::SetVertices(std::vector<Math::Vertex> vertices)
+{
+	this->vertices = vertices;
+}
+
+void Jade::Graphics::GLVertexBuffer::Unbind()
 {
 	// Unbind and delete the vertex buffer.
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glDeleteBuffers(1, &vertexBuffer);
 	glDeleteVertexArrays(1, &vertexArray);
+}
 
-	return true;
+void Jade::Graphics::GLVertexBuffer::Update()
+{
+
 }

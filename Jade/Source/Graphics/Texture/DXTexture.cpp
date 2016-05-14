@@ -210,8 +210,9 @@ bool Jade::Graphics::DXTexture::CreateTextureFromMemory()
 void Jade::Graphics::DXTexture::Update()
 {
 	// Set the sampler and resource view.
-	device->GetID3D11DeviceContext()->PSSetShaderResources(0, 1, m_pShaderResourceView.GetAddressOf());
-	device->GetID3D11DeviceContext()->PSSetSamplers(0, 1, m_pSamplerState.GetAddressOf());
+	if(m_pShaderResourceView)
+		device->GetID3D11DeviceContext()->PSSetShaderResources(0, 1, m_pShaderResourceView.GetAddressOf());
+	if(m_pSamplerState)
+		device->GetID3D11DeviceContext()->PSSetSamplers(0, 1, m_pSamplerState.GetAddressOf());
 }
-
-#endif // _WIN32
+#endif

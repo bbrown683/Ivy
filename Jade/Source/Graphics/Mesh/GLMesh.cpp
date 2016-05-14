@@ -24,6 +24,11 @@ SOFTWARE.
 
 #include "Graphics/Mesh/GLMesh.h"
 
+void Jade::Graphics::GLMesh::SetPosition(Math::Vector3 position)
+{
+
+}
+
 void Jade::Graphics::GLMesh::Bind()
 {
 	// Generate our vertices array and Bind it to the first element.

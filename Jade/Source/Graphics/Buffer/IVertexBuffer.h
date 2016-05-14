@@ -33,10 +33,13 @@ namespace Jade
 	{
 		struct IVertexBuffer
 		{
+			virtual void Bind() = 0;
+			virtual bool Create() = 0;
+
 			virtual std::vector<Math::Vertex> GetVertices() = 0;
 			virtual void SetVertices(std::vector<Math::Vertex> vertices) = 0;
-			virtual bool Bind() = 0;
-			virtual bool Unbind() = 0;
+			
+			virtual void Unbind() = 0;
 			virtual void Update() = 0;
 		};
 	}

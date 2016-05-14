@@ -139,7 +139,7 @@ void Jade::Graphics::Model::Load(std::string filename)
 			}
 		}
 
-		meshes.push_back(Mesh(device, shader, vertices, indices, textures));
+		meshes.push_back(TestMesh(device, shader, vertices, indices, textures));
 	}
 }
 
@@ -150,7 +150,18 @@ void Jade::Graphics::Model::Draw()
 		meshes[i].Draw();
 }
 
-std::vector<Jade::Graphics::Mesh> Jade::Graphics::Model::GetMeshes() const
+std::vector<Jade::Graphics::TestMesh> Jade::Graphics::Model::GetMeshes() const
 {
 	return meshes;
+}
+
+Jade::Math::Vector3 Jade::Graphics::Model::GetPosition() const
+{
+	return position;
+}
+
+void Jade::Graphics::Model::SetPosition(Math::Vector3 position)
+{
+	//for (unsigned int i = 0; i < meshes.size(); i++)
+	//	meshes[i].SetPosition(position);
 }

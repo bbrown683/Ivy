@@ -36,14 +36,11 @@ namespace Jade
 	{
 		class VKDevice : public IDevice
 		{
-		private:
-
 			// Window object contains some data on our window such as size, 
 			// and the handle of it in memory which we need to create a device.
 			std::shared_ptr<System::IWindow> window;
 
 			bool Create() override;
-
 			bool Release() override;
 
 		public:
@@ -56,13 +53,13 @@ namespace Jade
 				this->window = window;
 
 				// Create our device.
-				Create();
+				VKDevice::Create();
 			}
 
 			~VKDevice()
 			{
 				// Cleanup resources.
-				Release();
+				VKDevice::Release();
 			}
 
 			void Clear(Math::Color color) override;

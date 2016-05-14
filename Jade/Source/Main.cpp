@@ -36,6 +36,7 @@ int main(int argc, char* argv[])
 
 	// Creates a graphics device.
 	Device device(window, GraphicsAPI::DirectX);
+	device.SetDrawType(DrawType::Indexed);
 
 	// Used to enable culling or wireframe modes.
 	Rasterizer rasterizer(device);

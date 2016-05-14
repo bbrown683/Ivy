@@ -26,6 +26,32 @@ SOFTWARE.
 #include "DXConstantBuffer.h"
 
 #ifdef JADE_PLATFORM_WINDOWS
+void Jade::Graphics::DXConstantBuffer::Bind()
+{
+
+}
+
+bool Jade::Graphics::DXConstantBuffer::Create()
+{
+	if (m_pConstantBuffer)
+		m_pConstantBuffer.Reset();
+
+	// Create the constant buffer
+	D3D11_BUFFER_DESC desc;
+	ZeroMemory(&desc, sizeof(desc));
+	desc.Usage = D3D11_USAGE_DEFAULT;
+	desc.ByteWidth = sizeof(Math::Space);
+	desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+	desc.CPUAccessFlags = 0;
+
+	HRESULT hr = device->GetID3D11Device()->CreateBuffer(&desc, nullptr, m_pConstantBuffer.GetAddressOf());
+
+	if (FAILED(hr))
+		return false;
+
+	return true;
+}
+
 Jade::Math::Matrix Jade::Graphics::DXConstantBuffer::GetProjectionMatrix()
 {
 	return space.projection;
@@ -56,35 +82,16 @@ void Jade::Graphics::DXConstantBuffer::SetWorldMatrix(Math::Matrix matrix)
 	space.world = matrix;
 }
 
+void Jade::Graphics::DXConstantBuffer::Unbind()
+{
+
+}
+
 void Jade::Graphics::DXConstantBuffer::Update()
 {
-	
+	device->GetID3D11DeviceContext()->UpdateSubresource(m_pConstantBuffer.Get(), 0, nullptr, &space, 0, 0);
+	device->GetID3D11DeviceContext()->VSSetConstantBuffers(0, 1, m_pConstantBuffer.GetAddressOf());
 }
 
-bool Jade::Graphics::DXConstantBuffer::Bind()
-{
-	if (m_pConstantBuffer)
-		m_pConstantBuffer.Reset();
-	
-	// Create the constant buffer
-	D3D11_BUFFER_DESC desc;
-	ZeroMemory(&desc, sizeof(desc));
-	desc.Usage = D3D11_USAGE_DEFAULT;
-	desc.ByteWidth = sizeof(Math::Space);
-	desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
-	desc.CPUAccessFlags = 0;
-
-	HRESULT hr = device->GetID3D11Device()->CreateBuffer(&desc, nullptr, m_pConstantBuffer.GetAddressOf());
-
-	if (FAILED(hr))
-		return false;
-
-	return true;
-}
-
-bool Jade::Graphics::DXConstantBuffer::Unbind()
-{
-	return false;
-}
 
 #endif // _WIN32

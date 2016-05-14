@@ -76,7 +76,7 @@ namespace Jade
 			// Makes the shader current.
 			void MakeActive() const
 			{
-				
+				shader->MakeActive();
 			}
 
 			std::shared_ptr<IShader> GetIShader() const

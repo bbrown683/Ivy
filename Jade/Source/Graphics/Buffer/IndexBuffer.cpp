@@ -24,6 +24,16 @@ SOFTWARE.
 
 #include <Graphics/Buffer/IndexBuffer.h>
 
+void Jade::Graphics::IndexBuffer::Bind()
+{
+	indexBuffer->Bind();
+}
+
+bool Jade::Graphics::IndexBuffer::Create()
+{
+	return indexBuffer->Create();
+}
+
 std::vector<unsigned short> Jade::Graphics::IndexBuffer::GetIndices()
 {
 	return indexBuffer->GetIndices();
@@ -34,12 +44,12 @@ void Jade::Graphics::IndexBuffer::SetIndices(std::vector<unsigned short> indices
 	indexBuffer->SetIndices(indices);
 }
 
-bool Jade::Graphics::IndexBuffer::Bind()
+void Jade::Graphics::IndexBuffer::Unbind()
 {
-	return indexBuffer->Bind();
+	indexBuffer->Unbind();
 }
 
-bool Jade::Graphics::IndexBuffer::Unbind()
+void Jade::Graphics::IndexBuffer::Update()
 {
-	return indexBuffer->Unbind();
+	indexBuffer->Update();
 }

@@ -25,6 +25,10 @@ SOFTWARE.
 #include "Graphics/Mesh/DXMesh.h"
 
 #ifdef JADE_PLATFORM_WINDOWS
+void Jade::Graphics::DXMesh::SetPosition(Math::Vector3 position)
+{
+	
+}
 void Jade::Graphics::DXMesh::Bind()
 {
 	HRESULT hr;
@@ -93,7 +97,6 @@ void Jade::Graphics::DXMesh::Bind()
 			// Create the constant buffer
 			desc.Usage = D3D11_USAGE_DEFAULT;
 			desc.ByteWidth = sizeof(Math::Space);
-			//desc.ByteWidth = sizeof(Matrices);
 			desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
 			desc.CPUAccessFlags = 0;
 			
@@ -159,7 +162,8 @@ void Jade::Graphics::DXMesh::Draw()
 			device->GetID3D11DeviceContext()->VSSetShader(shader->GetID3D11VertexShader().Get(), nullptr, 0);
 
 		// Rotate our cube slightly.
-		space.world = Math::Matrix::RotateAlongY(device->GetIWindow()->GetTimer().GetElaspedTime()).Transpose();
+		space.world = (Math::Matrix::RotateAlongY(device->GetIWindow()->GetTimer().GetElaspedTime()) * 
+			Math::Matrix::RotateAlongX(device->GetIWindow()->GetTimer().GetElaspedTime())).Transpose();
 
 		device->GetID3D11DeviceContext()->UpdateSubresource(m_pConstantBuffer.Get(), 0, nullptr, &space, 0, 0);
 		device->GetID3D11DeviceContext()->VSSetConstantBuffers(0, 1, m_pConstantBuffer.GetAddressOf());

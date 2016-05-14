@@ -30,12 +30,22 @@ void Jade::Graphics::ConstantBuffer::SetWorldMatrix(Math::Matrix matrix)
 	constantBuffer->SetWorldMatrix(matrix);
 }
 
-bool Jade::Graphics::ConstantBuffer::Bind()
+void Jade::Graphics::ConstantBuffer::Update()
 {
-	return constantBuffer->Bind();
+	constantBuffer->Update();
 }
 
-bool Jade::Graphics::ConstantBuffer::Unbind()
+bool Jade::Graphics::ConstantBuffer::Create()
 {
-	return constantBuffer->Unbind();
+	return constantBuffer->Create();
+}
+
+void Jade::Graphics::ConstantBuffer::Bind()
+{
+	constantBuffer->Bind();
+}
+
+void Jade::Graphics::ConstantBuffer::Unbind()
+{
+	constantBuffer->Unbind();
 }

@@ -35,8 +35,6 @@ namespace Jade
 	{
 		class IndexBuffer
 		{
-		private:
-
 			std::shared_ptr<IIndexBuffer> indexBuffer;
 
 		public:
@@ -60,10 +58,14 @@ namespace Jade
 				}
 			}
 
+			void Bind();
+			bool Create();
+
 			std::vector<unsigned short> GetIndices();
 			void SetIndices(std::vector<unsigned short> indices);
-			bool Bind();
-			bool Unbind();
+		
+			void Unbind();
+			void Update();
 		};
 	}
 }

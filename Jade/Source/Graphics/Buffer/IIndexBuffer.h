@@ -24,7 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <Core/Utility.h>
+#include "Core/Utility.h"
 
 namespace Jade
 {
@@ -32,10 +32,13 @@ namespace Jade
 	{
 		struct IIndexBuffer
 		{
+			virtual void Bind() = 0;
+			virtual bool Create() = 0;
+
 			virtual std::vector<unsigned short> GetIndices() = 0;
 			virtual void SetIndices(std::vector<unsigned short> indices) = 0;
-			virtual bool Bind() = 0;
-			virtual bool Unbind() = 0;
+
+			virtual void Unbind() = 0;
 			virtual void Update() = 0;
 		};
 	}

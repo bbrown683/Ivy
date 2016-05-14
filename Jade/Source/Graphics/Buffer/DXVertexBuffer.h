@@ -26,25 +26,25 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <Graphics/Buffer/IVertexBuffer.h>
-#include <Graphics/Device/DXDevice.h>
-#include <Math/Vertex.h>
+#include "Graphics/Buffer/IVertexBuffer.h"
+#include "Graphics/Device/DXDevice.h"
+#include "Math/Vertex.h"
 
+#ifdef JADE_PLATFORM_WINDOWS
 namespace Jade
 {
 	namespace Graphics
 	{
 		class DXVertexBuffer : public IVertexBuffer
 		{
-		private:
-
 			std::shared_ptr<DXDevice> device;
 			std::vector<Math::Vertex> vertices;
 
 			ComPtr<ID3D11Buffer> m_pVertexBuffer;
 
-			bool Bind() override;
-			bool Unbind() override;
+			bool Create() override;
+			void Bind() override;
+			void Unbind() override;
 
 		public:
 
@@ -65,3 +65,4 @@ namespace Jade
 		};
 	}
 }
+#endif

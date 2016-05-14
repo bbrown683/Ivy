@@ -36,8 +36,6 @@ namespace Jade
 	{
 		class GLMesh : public IMesh
 		{
-		private:
-
 			std::shared_ptr<GLShader> shader;
 			std::vector<Math::Vertex> vertices;
 			std::vector<unsigned short> indices;
@@ -66,6 +64,7 @@ namespace Jade
 			}
 
 			void Draw() override;
+			void SetPosition(Math::Vector3 position) override;
 		};
 	}
 }

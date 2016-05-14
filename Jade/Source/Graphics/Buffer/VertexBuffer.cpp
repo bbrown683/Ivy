@@ -24,6 +24,16 @@ SOFTWARE.
 
 #include <Graphics/Buffer/VertexBuffer.h>
 
+void Jade::Graphics::VertexBuffer::Bind()
+{
+	vertexBuffer->Bind();
+}
+
+bool Jade::Graphics::VertexBuffer::Create()
+{
+	return vertexBuffer->Create();
+}
+
 std::vector<Jade::Math::Vertex> Jade::Graphics::VertexBuffer::GetVertices()
 {
 	return vertexBuffer->GetVertices();
@@ -34,12 +44,12 @@ void Jade::Graphics::VertexBuffer::SetVertices(std::vector<Math::Vertex> vertice
 	vertexBuffer->SetVertices(vertices);
 }
 
-bool Jade::Graphics::VertexBuffer::Bind()
+void Jade::Graphics::VertexBuffer::Unbind()
 {
-	return vertexBuffer->Bind();
+	vertexBuffer->Unbind();
 }
 
-bool Jade::Graphics::VertexBuffer::Unbind()
+void Jade::Graphics::VertexBuffer::Update()
 {
-	return vertexBuffer->Unbind();
+	vertexBuffer->Update();
 }

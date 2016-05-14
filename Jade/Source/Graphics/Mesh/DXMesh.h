@@ -42,8 +42,6 @@ namespace Jade
 	{
 		class DXMesh : public IMesh
 		{
-		private:
-
 			std::shared_ptr<DXDevice> device;
 			std::shared_ptr<DXShader> shader;
 			std::vector<Math::Vertex> vertices;
@@ -81,6 +79,7 @@ namespace Jade
 			}
 
 			void Draw() override;
+			void SetPosition(Math::Vector3 position) override; // only to prevent compile time errors.
 		};
 	}
 }

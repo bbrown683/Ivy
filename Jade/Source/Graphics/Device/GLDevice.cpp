@@ -138,7 +138,6 @@ bool Jade::Graphics::GLDevice::Create()
 	return true;
 }
 
-
 bool Jade::Graphics::GLDevice::Release()
 {
 #ifdef JADE_PLATFORM_WINDOWS
@@ -175,4 +174,14 @@ void Jade::Graphics::GLDevice::Present()
 char * Jade::Graphics::GLDevice::DeviceInformation()
 {
 	return nullptr;
+}
+
+Jade::Graphics::DrawType Jade::Graphics::GLDevice::GetDrawType()
+{
+	return drawType;
+}
+
+void Jade::Graphics::GLDevice::SetDrawType(DrawType type)
+{
+	drawType = type;
 }

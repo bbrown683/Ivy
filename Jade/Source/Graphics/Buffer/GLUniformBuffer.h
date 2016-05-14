@@ -34,14 +34,12 @@ namespace Jade
 	{
 		class GLUniformBuffer : public IUniformBuffer
 		{
-		private:
-
-			bool Bind() override;
-			bool Unbind() override;
-
 		public:
 
 			GLUniformBuffer() { }
+
+			void Bind() override;
+			bool Create() override;
 
 			Math::Matrix GetProjectionMatrix() override;
 			Math::Matrix GetViewMatrix() override;
@@ -51,6 +49,7 @@ namespace Jade
 			void SetViewMatrix(Math::Matrix matrix) override;
 			void SetWorldMatrix(Math::Matrix matrix) override;
 
+			void Unbind() override;
 			void Update() override;
 		};
 	}

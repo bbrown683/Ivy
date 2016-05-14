@@ -24,10 +24,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <Graphics/Buffer/IVertexBuffer.h>
-#include <Graphics/Buffer/DXVertexBuffer.h>
-#include <Graphics/Buffer/GLVertexBuffer.h>
-#include <Graphics/Device/Device.h>
+#include "Graphics/Buffer/IVertexBuffer.h"
+#include "Graphics/Buffer/DXVertexBuffer.h"
+#include "Graphics/Buffer/GLVertexBuffer.h"
+#include "Graphics/Device/Device.h"
 
 namespace Jade
 {
@@ -35,10 +35,7 @@ namespace Jade
 	{
 		class VertexBuffer
 		{
-		private:
-
 			Device device;
-
 			std::shared_ptr<IVertexBuffer> vertexBuffer;
 
 		public:
@@ -53,7 +50,6 @@ namespace Jade
 					vertexBuffer = std::make_shared<DXVertexBuffer>(std::dynamic_pointer_cast<DXDevice>(device.GetIDevice()));
 					break;
 				case GraphicsAPI::OpenGL:
-					// OpenGL uses a state machine so we dont need to pass a device.
 					vertexBuffer = std::make_shared<GLVertexBuffer>();
 					break;
 				case GraphicsAPI::Vulkan:
@@ -62,10 +58,14 @@ namespace Jade
 				}
 			}
 
+			void Bind();
+			bool Create();	
+
 			std::vector<Math::Vertex> GetVertices();
-			void SetVertices(std::vector<Math::Vertex> vertices);
-			bool Bind();
-			bool Unbind();
+			void SetVertices(std::vector<Math::Vertex> vertices);		
+			
+			void Unbind();
+			void Update();
 		};
 	}
 }

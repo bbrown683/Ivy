@@ -24,6 +24,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include "Math/Vector3.h"
+
 namespace Jade
 {
 	namespace Graphics
@@ -36,7 +38,9 @@ namespace Jade
 			virtual void Unbind() = 0;
 
 		public:
+
 			virtual void Draw() = 0;
+			virtual void SetPosition(Math::Vector3 position) = 0;
 		};
 	}
 }

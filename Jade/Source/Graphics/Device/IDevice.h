@@ -24,6 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include "Graphics/Buffer/DrawType.h"
 #include "Math/Color.h"
 
 namespace Jade
@@ -43,6 +44,8 @@ namespace Jade
 			virtual void Clear(Math::Color color) = 0;
 			virtual void Present() = 0;
 			virtual char* DeviceInformation() = 0;
+			virtual DrawType GetDrawType() = 0;
+			virtual void SetDrawType(DrawType type) = 0;
 		};
 	}
 }

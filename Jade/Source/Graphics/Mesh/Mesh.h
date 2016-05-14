@@ -37,8 +37,6 @@ namespace Jade
 	{
 		class Mesh
 		{
-		private:
-
 			Device device;
 			std::vector<Math::Vertex> vertices;
 			std::vector<unsigned short> indices;
@@ -46,6 +44,8 @@ namespace Jade
 			bool textureIsFile;
 
 			std::shared_ptr<IMesh> mesh;
+			
+			Math::Vector3 position;
 
 		public:
 

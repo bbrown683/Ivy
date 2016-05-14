@@ -129,7 +129,7 @@ Jade::Math::Matrix Jade::Math::Matrix::Subtract(Matrix other) const
 
 Jade::Math::Matrix Jade::Math::Matrix::Translate(float xOffset, float yOffset, float zOffset)
 {
-	glm::mat4 translated = glm::translate(values, glm::vec3(xOffset, yOffset, zOffset));
+	glm::mat4 translated = translate(values, glm::vec3(xOffset, yOffset, zOffset));
 	return Matrix(translated[0][0], translated[0][1], translated[0][2], translated[0][3],
 		translated[1][0], translated[1][1], translated[1][2], translated[1][3],
 		translated[2][0], translated[2][1], translated[2][2], translated[2][3],
@@ -158,6 +158,15 @@ Jade::Math::Matrix Jade::Math::Matrix::RotateAlongZ(float radians)
 		Math::Sin(radians), Math::Cos(radians), 0, 0,
 		0, 0, 1, 0,
 		0, 0, 0, 1);
+}
+
+Jade::Math::Matrix Jade::Math::Matrix::Scale(Vector3 scale)
+{
+	glm::mat4 scaled = glm::scale(values, scale.GetRawData());
+	return Matrix(scaled[0][0], scaled[0][1], scaled[0][2], scaled[0][3],
+		scaled[1][0], scaled[1][1], scaled[1][2], scaled[1][3],
+		scaled[2][0], scaled[2][1], scaled[2][2], scaled[2][3],
+		scaled[3][0], scaled[3][1], scaled[3][2], scaled[3][3]);
 }
 
 Jade::Math::Matrix Jade::Math::Matrix::Transpose()

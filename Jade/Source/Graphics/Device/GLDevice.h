@@ -48,6 +48,7 @@ namespace Jade
 			// and the handle of it in memory which we need to create a device.
 			std::shared_ptr<System::IWindow> window;
 			Specification specification;
+			DrawType drawType;
 
 			bool Create() override;
 			bool Release() override;
@@ -72,12 +73,14 @@ namespace Jade
 			~GLDevice()
 			{
 				// Cleanup resources.
-				Release();
+				GLDevice::Release();
 			}
 
 			void Clear(Math::Color color) override;
 			void Present() override;
 			char* DeviceInformation() override;
+			DrawType GetDrawType() override;
+			void SetDrawType(DrawType type) override;
 		};
 	}
 }
