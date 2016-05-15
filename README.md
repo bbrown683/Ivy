@@ -7,7 +7,7 @@ An Open Source C++ Game Engine inspired by [Monogame](http://www.monogame.net/).
 
 # Libraries Used
 * Assimp 3.0.0
-* stb_image
+* FreeImage
 * stb_truetype
 * [Glad](http://glad.dav1d.de/)
 * OpenAL 1.1
