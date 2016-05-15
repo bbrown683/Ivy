@@ -30,8 +30,6 @@ namespace Jade
 	{
 		struct Quaternion
 		{
-		private:
-
 		public:
 
 			Quaternion()

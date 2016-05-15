@@ -38,8 +38,6 @@ namespace Jade
 	{
 		class DXShader : public IShader
 		{
-		private:
-
 			std::shared_ptr<DXDevice> device;
 			std::map<std::string, ShaderType> shaders;
 

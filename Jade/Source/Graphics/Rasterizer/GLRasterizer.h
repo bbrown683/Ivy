@@ -35,8 +35,6 @@ namespace Jade
 
 		class GLRasterizer : public IRasterizer
 		{
-		private:
-
 			// OpenGL requires us to disable culling and enable it on reuse.
 			bool disabled;
 			CullMode cullMode;

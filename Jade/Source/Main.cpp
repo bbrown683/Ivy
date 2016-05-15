@@ -51,29 +51,66 @@ int main(int argc, char* argv[])
 	// Create our shaders.
 	Shader shader(device, shaders);
 
+	// Camera with initial position and target.
+	Camera camera(device, Vector3(0.0f, 1.0f, -7.0f), Vector3(0.0f, 1.0f, 0.0f));
+
 	// Dynamic model and font loading.
 	// This allows us to load a new instance with the same object.
 	Model model(device, shader);
 	model.Load(".\\resources\\models\\MonoCube.dae");
+	//model.SetScale(Vector3(0.25f, 0.25f, 0.25f));
 
 	Font font(device, shader);
 	font.Load(".\\resources\\fonts\\arial.ttf", 512, 512, 48.0f);
+
+	float rotation = 0.0f;
 
 	while (window.IsOpen())
 	{
 		// Rendering
 		device.Clear(Color::CornflowerBlue);
 
-		// Draw the model.
+		// Rotate and draw the models.
+		rotation += 0.025f;
+		model.SetRotation(Vector3(0.0f, rotation, 0.0f));
 		model.Draw();
+
+		// Camera movement.
+		// Setting a camera with no orbiting requires us to update
+		// not only the camera position, but also the target.
+		if (window.GetInput().keyboard.IsKeyDown(Key::W))
+		{
+			camera.SetCameraPosition(camera.GetCameraPosition() + Vector3(0.0f, 0.0f, 0.25f));
+			camera.SetTargetPosition(camera.GetTargetPosition() + Vector3(0.0f, 0.0f, 0.25f));
+		}
+		if (window.GetInput().keyboard.IsKeyDown(Key::A))
+		{
+			camera.SetCameraPosition(camera.GetCameraPosition() + Vector3(-0.25f, 0.0f, 0.0f));
+			camera.SetTargetPosition(camera.GetTargetPosition() + Vector3(-0.25f, 0.0f, 0.0f));
+		}
+		if (window.GetInput().keyboard.IsKeyDown(Key::S))
+		{
+			camera.SetCameraPosition(camera.GetCameraPosition() + Vector3(0.0f, 0.0f, -0.25f));
+			camera.SetTargetPosition(camera.GetTargetPosition() + Vector3(0.0f, 0.0f, -0.25f));
+		}
+		if (window.GetInput().keyboard.IsKeyDown(Key::D))
+		{
+			camera.SetCameraPosition(camera.GetCameraPosition() + Vector3(0.25f, 0.0f, 0.0f));
+			camera.SetTargetPosition(camera.GetTargetPosition() + Vector3(0.25f, 0.0f, 0.0f));
+		}
+		if (window.GetInput().keyboard.IsKeyDown(Key::Space))
+		{
+			camera.SetCameraPosition(camera.GetCameraPosition() + Vector3(0.0f, 0.25f, 0.0f));
+			camera.SetTargetPosition(camera.GetTargetPosition() + Vector3(0.0f, 0.25f, 0.0f));
+		}
+		if (window.GetInput().keyboard.IsKeyDown(Key::Tab))
+		{
+			camera.SetCameraPosition(camera.GetCameraPosition() + Vector3(0.0f, -0.25f, 0.0f));
+			camera.SetTargetPosition(camera.GetTargetPosition() + Vector3(0.0f, -0.25f, 0.0f));
+		}
 
 		font.Draw("Hello World", 10, 10);
 
-		// Gets the keys pressed and prints their enumerication value that is stored as an integer.
-		std::vector<Key> keysPressed = window.GetInput().keyboard.GetKeysPressed();
-		for (unsigned int i = 0; i < keysPressed.size(); i++)
-			std::cout << static_cast<int>(keysPressed[i]) << std::endl;
-		
 		// Example rasterizer mode swapping while rendering.
 		if (window.GetInput().keyboard.IsKeyDown(Key::R))
 			rasterizer.SetRasterizerState(CullMode::Back, FillMode::Wireframe, WindMode::Clockwise);

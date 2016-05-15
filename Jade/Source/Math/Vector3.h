@@ -37,8 +37,6 @@ namespace Jade
 	{
 		struct Vector3
 		{
-		private:
-
 			glm::vec3 values;
 
 		public:

@@ -24,8 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "Graphics/Device/Device.h"
-#include "Graphics/Camera/DXCamera.h"
+#include "Graphics/Buffer/ConstantBuffer.h"
 
 namespace Jade
 {
@@ -33,29 +32,36 @@ namespace Jade
 	{
 		class Camera
 		{
-		private:
-
-			std::shared_ptr<ICamera> camera;
 			Device device;
-			float nearPlaneDistance; 
-			float farPlaneDistance;
+			ConstantBuffer cBuffer;
 
-			std::shared_ptr<ICamera> CreateCamera() const;
+			Math::Vector3 position;
+			Math::Vector3 target;
 
 		public:
 
-			Camera(float nearPlaneDistance, float farPlaneDistance, Device device)
+			Camera(Device device, Math::Vector3 position, Math::Vector3 target)
 			{
-				this->nearPlaneDistance = nearPlaneDistance;
-				this->farPlaneDistance = farPlaneDistance;
 				this->device = device;
-				camera = CreateCamera();
+				this->position = position;
+				this->target = target;
+
+				// Create 
+				cBuffer = ConstantBuffer(device);
+				cBuffer.Create(false, true, true);
+				
+				cBuffer.SetViewMatrix(Math::Matrix::CreateLookAtLH(position, target, Math::Vector3::Up).Transpose());
+				cBuffer.SetProjectionMatrix(Math::Matrix::CreatePerspectiveViewLH(
+					Math::Math::PiOverTwo, static_cast<float>(device.GetWindow().GetWidth()),
+					static_cast<float>(device.GetWindow().GetHeight()), 0.1f, 1000.0f).Transpose());
+
+				cBuffer.Update();
 			}
 
-			void LookAt(Math::Vector3 position, Math::Vector3 target, Math::Vector3 direction)
-			{
-				camera->LookAt(position, target, direction);
-			}
+			Math::Vector3 GetCameraPosition();
+			void SetCameraPosition(Math::Vector3 position);
+			Math::Vector3 GetTargetPosition();
+			void SetTargetPosition(Math::Vector3 position);
 		};
 	}
 }

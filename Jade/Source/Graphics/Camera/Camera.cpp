@@ -1,23 +1,29 @@
 #include "Camera.h"
 
-std::shared_ptr<Jade::Graphics::ICamera> Jade::Graphics::Camera::CreateCamera() const
+Jade::Math::Vector3 Jade::Graphics::Camera::GetCameraPosition()
 {
-	switch (device.GetGraphicsAPI())
-	{
-		case GraphicsAPI::DirectX:
-		{
-			return std::make_shared<DXCamera>(nearPlaneDistance, farPlaneDistance, std::dynamic_pointer_cast<DXDevice>(device.GetIDevice()));
-		}
-		case GraphicsAPI::OpenGL:
-		{
-			// OpenGL uses a state machine so we dont need to pass a device.
-			break;
-		}
-		case GraphicsAPI::Vulkan:
-		{
-			break;
-		}
-	}
+	return position;
+}
 
-	return nullptr;
+void Jade::Graphics::Camera::SetCameraPosition(Math::Vector3 position)
+{
+	this->position = position;
+	std::cout << "Camera Position: " << position.ToString() << std::endl;
+	// Update constant buffer.
+	cBuffer.SetViewMatrix(Math::Matrix::CreateLookAtLH(this->position, target, Math::Vector3::Up).Transpose());
+	cBuffer.Update();
+}
+
+Jade::Math::Vector3 Jade::Graphics::Camera::GetTargetPosition()
+{
+	return target;
+}
+
+void Jade::Graphics::Camera::SetTargetPosition(Math::Vector3 position)
+{
+	this->target = position;
+
+	// Update constant buffer.
+	cBuffer.SetViewMatrix(Math::Matrix::CreateLookAtLH(this->position, target, Math::Vector3::Up).Transpose());
+	cBuffer.Update();
 }

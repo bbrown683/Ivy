@@ -33,8 +33,6 @@ namespace Jade
 	{
 		struct Vector4
 		{
-		private:
-
 			float x;
 			float y;
 			float z;

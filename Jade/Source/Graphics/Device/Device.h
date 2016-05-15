@@ -105,9 +105,16 @@ namespace Jade
 				device->Present();
 			}
 
+			// Returns the interface that contains the device data.
 			std::shared_ptr<IDevice> GetIDevice() const
 			{
 				return device;
+			}
+
+			// Returns the window that the device is attached to.
+			System::Window GetWindow() const
+			{
+				return window;
 			}
 
 			GraphicsAPI GetGraphicsAPI() const

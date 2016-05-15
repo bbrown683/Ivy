@@ -39,13 +39,22 @@ namespace Jade
 
 			std::shared_ptr<DXDevice> device;
 
-			Math::Space space;
+			bool world;
+			bool projection;
+			bool view;
 
-			ComPtr<ID3D11Buffer> m_pConstantBuffer;
+			Math::PerObject perObject;			// world.
+			Math::OnResize onResize;			// projection
+			Math::NeverChanges neverChanges;	// view
 
-			bool Create() override;
-			void Bind() override;
-			void Unbind() override;
+			Math::Matrix scale;
+
+			//ComPtr<ID3D11Buffer> m_pConstantBuffer;
+			//Math::Space space;
+
+			ComPtr<ID3D11Buffer> m_pPerObject;
+			ComPtr<ID3D11Buffer> m_pOnResize;
+			ComPtr<ID3D11Buffer> m_pNeverChanges;
 
 		public:
 
@@ -53,6 +62,9 @@ namespace Jade
 			{
 				this->device = device;
 			}
+
+			void Bind() override;
+			bool Create(bool model, bool view, bool projection) override;
 
 			Math::Matrix GetProjectionMatrix() override;
 			Math::Matrix GetViewMatrix() override;
@@ -62,6 +74,7 @@ namespace Jade
 			void SetViewMatrix(Math::Matrix matrix) override;
 			void SetWorldMatrix(Math::Matrix matrix) override;
 
+			void Unbind() override;
 			void Update() override;
 		};
 	}

@@ -1,4 +1,4 @@
-Texture2D txDiffuse;
+Texture2D txDiffuse : register(t0);
 SamplerState samLinear;
 
 struct PS_INPUT

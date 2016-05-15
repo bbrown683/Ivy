@@ -65,14 +65,6 @@ void Jade::Graphics::Model::Load(std::string filename)
 			else
 				vertex.position = Math::Vector3();
 
-			if (aMesh->HasNormals())
-			{
-				aiVector3D aNormal = aMesh->mNormals[j];
-				vertex.normal = Math::Vector3(aNormal.x, aNormal.y, aNormal.z);
-			}
-			else
-				vertex.normal = Math::Vector3();
-
 			if (aMesh->HasTextureCoords(0))
 			{
 				aiVector3D aTexture = aMesh->mTextureCoords[0][j];
@@ -80,6 +72,14 @@ void Jade::Graphics::Model::Load(std::string filename)
 			}
 			else
 				vertex.texture = Math::Vector2();
+
+			if (aMesh->HasNormals())
+			{
+				aiVector3D aNormal = aMesh->mNormals[j];
+				vertex.normal = Math::Vector3(aNormal.x, aNormal.y, aNormal.z);
+			}
+			else
+				vertex.normal = Math::Vector3();
 
 			vertices.push_back(vertex);
 		}
@@ -107,10 +107,24 @@ void Jade::Graphics::Model::Load(std::string filename)
 				// Get the texture for the material.
 				aiString string;
 				aMaterial->GetTexture(aiTextureType_DIFFUSE, j, &string);
-				std::cout << "Diffuse texture " << string.C_Str() << " was found..." << std::endl;
-				textures.push_back(Texture(device, string.C_Str(), TextureType::Diffuse));
+				
+				bool test = false;
+				for(unsigned int k = 0; k < textures.size(); k++)
+				{
+					if (textures[k].GetFilename() == string.C_Str())
+					{
+						test = true;
+						std::cout << "Duplicate texture found for " << string.C_Str() << std::endl;
+					}
+				}
+				
+				if (!test)
+				{
+					std::cout << "Diffuse texture " << string.C_Str() << " was found..." << std::endl;
+					textures.push_back(Texture(device, string.C_Str(), TextureType::Diffuse));
+				}
 			}
-
+			/*
 			for (unsigned int j = 0; j < aMaterial->GetTextureCount(aiTextureType_SPECULAR); j++)
 			{
 				// Get the texture for the material.
@@ -137,8 +151,8 @@ void Jade::Graphics::Model::Load(std::string filename)
 				std::cout << "Diffuse texture " << string.C_Str() << " was found..." << std::endl;
 				textures.push_back(Texture(device, string.C_Str(), TextureType::Ambient));
 			}
+			*/
 		}
-
 		meshes.push_back(TestMesh(device, shader, vertices, indices, textures));
 	}
 }
@@ -155,13 +169,20 @@ std::vector<Jade::Graphics::TestMesh> Jade::Graphics::Model::GetMeshes() const
 	return meshes;
 }
 
-Jade::Math::Vector3 Jade::Graphics::Model::GetPosition() const
-{
-	return position;
-}
-
 void Jade::Graphics::Model::SetPosition(Math::Vector3 position)
 {
-	//for (unsigned int i = 0; i < meshes.size(); i++)
-	//	meshes[i].SetPosition(position);
+	for (unsigned int i = 0; i < meshes.size(); i++)
+		meshes[i].SetPosition(position);
+}
+
+void Jade::Graphics::Model::SetScale(Math::Vector3 scale)
+{
+	for (unsigned int i = 0; i < meshes.size(); i++)
+		meshes[i].SetScale(scale);
+}
+
+void Jade::Graphics::Model::SetRotation(Math::Vector3 rotation)
+{
+	for (unsigned int i = 0; i < meshes.size(); i++)
+		meshes[i].SetRotation(rotation);
 }

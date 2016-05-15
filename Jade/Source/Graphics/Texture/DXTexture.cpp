@@ -33,18 +33,48 @@ bool Jade::Graphics::DXTexture::CreateTextureFromFile()
 	std::string filepath = ".\\resources\\models\\";
 	filepath.append(filename.c_str());
 
-	// Load bitmap and get the specified information about it.
-	int width, height, bpp;
-	unsigned char* aBitmap = stbi_load(filepath.c_str(), &width, &height, &bpp, STBI_rgb_alpha);
+	// Use free image to get load the image and retrieve its bits.
+	FREE_IMAGE_FORMAT fif = FreeImage_GetFIFFromFilename(filename.c_str());
+
+	if (!FreeImage_FIFSupportsReading(fif))
+		return false;
+
+	FIBITMAP* aBitmap = FreeImage_Load(fif, filepath.c_str());
+
+	// Null check.
+	if (!aBitmap)
+	{
+		std::cout << "Failed to load material " << filename << " successfully..." << std::endl;
+		return false;
+	}
+
+	// Needs to be a 32 bit bitmap.
+	if(FreeImage_GetBPP(aBitmap) != 32)
+	{
+		FIBITMAP* temp = aBitmap;
+		aBitmap = FreeImage_ConvertTo32Bits(aBitmap);
+		FreeImage_Unload(temp);
+	}
+
+	// We have to flip the bitmap for it to appear properly.
+	FreeImage_FlipVertical(aBitmap);
+
+	// Get bitmap attributes.
+	unsigned int aWidth = FreeImage_GetWidth(aBitmap);
+	unsigned int aHeight = FreeImage_GetHeight(aBitmap);
+	unsigned int aPitch = FreeImage_GetPitch(aBitmap);
+
+	// Retrieve the bits of the bitmap.
+	BYTE* bits = FreeImage_GetBits(aBitmap);
 
 	// Create our texture description.
 	D3D11_TEXTURE2D_DESC texDesc;
 	ZeroMemory(&texDesc, sizeof(texDesc));
-	texDesc.Width = width;
-	texDesc.Height = height;
+	texDesc.Width = aWidth;
+	texDesc.Height = aHeight;
 	texDesc.MipLevels = 1;
 	texDesc.ArraySize = 1;
-	texDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
+	texDesc.Format = DXGI_FORMAT_B8G8R8A8_UNORM;
 	texDesc.SampleDesc.Count = 1;
 	texDesc.SampleDesc.Quality = 0;
 	texDesc.Usage = D3D11_USAGE_DEFAULT;
@@ -55,8 +85,8 @@ bool Jade::Graphics::DXTexture::CreateTextureFromFile()
 	// Pass our bitmap data.
 	D3D11_SUBRESOURCE_DATA subData;
 	ZeroMemory(&subData, sizeof(subData));
-	subData.pSysMem = aBitmap;
-	subData.SysMemPitch = width * bpp;
+	subData.pSysMem = bits;
+	subData.SysMemPitch = aPitch;
 
 	// Create the texture;
 	HRESULT hr = device->GetID3D11Device()->CreateTexture2D(&texDesc, &subData, m_pTexture.GetAddressOf());
@@ -106,8 +136,8 @@ bool Jade::Graphics::DXTexture::CreateTextureFromFile()
 		return false;
 	}
 
-	// We are now done with stb_image, unload to prevent leaks.
-	stbi_image_free(aBitmap);
+	// We are now done with bitmap, unload to prevent leaks.
+	FreeImage_Unload(aBitmap);
 
 	std::cout << "Texture " << filename << " was created successfully..." << std::endl;
 
@@ -131,8 +161,6 @@ bool Jade::Graphics::DXTexture::CreateTextureFromMemory()
 			texDesc.Format = DXGI_FORMAT_R8_UNORM;
 		else if (bits == 16)
 			texDesc.Format = DXGI_FORMAT_R8G8_UNORM;
-		else if (bits == 24)
-			texDesc.Format = DXGI_FORMAT_R16_UNORM;
 		else if (bits == 32)
 			texDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
 		else
@@ -210,9 +238,9 @@ bool Jade::Graphics::DXTexture::CreateTextureFromMemory()
 void Jade::Graphics::DXTexture::Update()
 {
 	// Set the sampler and resource view.
-	if(m_pShaderResourceView)
+	if(m_pShaderResourceView.Get())
 		device->GetID3D11DeviceContext()->PSSetShaderResources(0, 1, m_pShaderResourceView.GetAddressOf());
-	if(m_pSamplerState)
+	if(m_pSamplerState.Get())
 		device->GetID3D11DeviceContext()->PSSetSamplers(0, 1, m_pSamplerState.GetAddressOf());
 }
 #endif

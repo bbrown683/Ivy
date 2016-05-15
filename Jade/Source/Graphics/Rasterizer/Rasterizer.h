@@ -39,8 +39,6 @@ namespace Jade
 		 */
 		class Rasterizer
 		{
-		private:
-
 			Device device;
 			std::shared_ptr<IRasterizer> rasterizer;
 

@@ -60,11 +60,13 @@ namespace Jade
 
 			void Load(std::string filename);
 			void Draw();
+
 			//std::vector<Mesh> GetMeshes() const;
 			std::vector<TestMesh> GetMeshes() const;
 
-			Math::Vector3 GetPosition() const;
 			void SetPosition(Math::Vector3 position);
+			void SetScale(Math::Vector3 scale);
+			void SetRotation(Math::Vector3 rotation);
 		};
 	}
 }

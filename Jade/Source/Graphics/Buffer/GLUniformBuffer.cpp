@@ -29,7 +29,7 @@ void Jade::Graphics::GLUniformBuffer::Bind()
 
 }
 
-bool Jade::Graphics::GLUniformBuffer::Create()
+bool Jade::Graphics::GLUniformBuffer::Create(bool model, bool view, bool projection)
 {
 	return false;
 }

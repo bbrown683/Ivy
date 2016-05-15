@@ -40,8 +40,6 @@ namespace Jade
 	{
 		class Shader
 		{
-		private:
-
 			Device device;
 			std::map<std::string, ShaderType> shaders;
 			std::string filename;

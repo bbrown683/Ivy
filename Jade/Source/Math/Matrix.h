@@ -38,8 +38,6 @@ namespace Jade
 		// A 4x4 structure for storing data.
 		struct Matrix
 		{
-		private:
-
 			glm::mat4 values;
 
 		public:

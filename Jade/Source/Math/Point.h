@@ -30,8 +30,6 @@ namespace Jade
 	{
 		class Point
 		{
-		private:
-
 			float x;
 			float y;
 

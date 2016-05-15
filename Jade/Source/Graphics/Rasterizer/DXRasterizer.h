@@ -34,8 +34,6 @@ namespace Jade
 	{
 		class DXRasterizer : public IRasterizer
 		{
-		private:
-
 			std::shared_ptr<DXDevice> device;
 			ComPtr<ID3D11RasterizerState> m_pRasterizerState;
 

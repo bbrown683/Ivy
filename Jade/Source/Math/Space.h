@@ -9,8 +9,23 @@ namespace Jade
 		struct Space
 		{
 			Matrix world;
-			Matrix view;
 			Matrix projection;
+			Matrix view;
+		};
+
+		struct PerObject
+		{
+			Matrix world;
+		};
+
+		struct OnResize
+		{
+			Matrix projection;
+		};
+
+		struct NeverChanges
+		{
+			Matrix view;
 		};
 	}
 }

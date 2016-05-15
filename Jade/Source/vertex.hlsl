@@ -1,12 +1,28 @@
 //--------------------------------------------------------------------------------------
 // Constant Buffer Variables
 //--------------------------------------------------------------------------------------
-cbuffer ConstantBuffer
+cbuffer PerObject : register(b0)
 {
 	matrix world;
-	matrix view;
+}
+
+cbuffer OnResize : register(b1)
+{
 	matrix projection;
 }
+
+cbuffer NeverChanges : register(b2)
+{
+	matrix view;
+}
+/*
+cbuffer ConstantBuffer : register(b0)
+{
+	matrix world;
+	matrix projection;
+	matrix view;
+}
+*/
 
 Texture2D txDiffuse;
 SamplerState samLinear;

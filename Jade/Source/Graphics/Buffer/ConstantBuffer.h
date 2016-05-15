@@ -59,7 +59,7 @@ namespace Jade
 			}
 
 			void Bind();
-			bool Create();
+			bool Create(bool model, bool view, bool projection);
 			
 			Math::Matrix GetProjectionMatrix();
 			Math::Matrix GetViewMatrix();

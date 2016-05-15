@@ -39,7 +39,7 @@ namespace Jade
 			GLUniformBuffer() { }
 
 			void Bind() override;
-			bool Create() override;
+			bool Create(bool model, bool view, bool projection) override;
 
 			Math::Matrix GetProjectionMatrix() override;
 			Math::Matrix GetViewMatrix() override;

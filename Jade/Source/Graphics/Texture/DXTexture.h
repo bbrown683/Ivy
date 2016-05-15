@@ -24,22 +24,22 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifdef _WIN32
-
 #include "stb/stb_image.h"
 
 #include <Graphics/Device/DXDevice.h>
 #include <Graphics/Texture/ITexture.h>
 #include <Graphics/Texture/TextureType.h>
 
+// Include after other headers.
+#include "FreeImage.h"
+
+#ifdef JADE_PLATFORM_WINDOWS
 namespace Jade
 {
 	namespace Graphics
 	{
 		class DXTexture : public ITexture
 		{
-		private:
-
 			std::shared_ptr<DXDevice> device;
 			std::string filename;
 			TextureType type;

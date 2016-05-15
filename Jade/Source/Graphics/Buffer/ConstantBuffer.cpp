@@ -35,9 +35,9 @@ void Jade::Graphics::ConstantBuffer::Update()
 	constantBuffer->Update();
 }
 
-bool Jade::Graphics::ConstantBuffer::Create()
+bool Jade::Graphics::ConstantBuffer::Create(bool model, bool view, bool projection)
 {
-	return constantBuffer->Create();
+	return constantBuffer->Create(model, view, projection);
 }
 
 void Jade::Graphics::ConstantBuffer::Bind()

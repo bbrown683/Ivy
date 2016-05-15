@@ -34,7 +34,7 @@ namespace Jade
 		struct IUniformBuffer
 		{
 			virtual void Bind() = 0;
-			virtual bool Create() = 0;
+			virtual bool Create(bool model, bool view, bool projection) = 0;
 
 			virtual Math::Matrix GetProjectionMatrix() = 0;
 			virtual Math::Matrix GetViewMatrix() = 0;

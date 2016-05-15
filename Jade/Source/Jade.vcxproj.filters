@@ -33,7 +33,6 @@
     <ClCompile Include="System\Window\NativeWindow.cpp" />
     <ClCompile Include="System\Log.cpp" />
     <ClCompile Include="Graphics\Camera\Camera.cpp" />
-    <ClCompile Include="Graphics\Camera\DXCamera.cpp" />
     <ClCompile Include="Math\Matrix.cpp" />
     <ClCompile Include="Graphics\Buffer\IndexBuffer.cpp" />
     <ClCompile Include="Graphics\Buffer\VertexBuffer.cpp" />
@@ -112,11 +111,8 @@
     <ClInclude Include="System\Window\Window.h" />
     <ClInclude Include="System\Log.h" />
     <ClInclude Include="Graphics\Camera\Camera.h" />
-    <ClInclude Include="Graphics\Camera\ICamera.h" />
-    <ClInclude Include="Graphics\Camera\DXCamera.h" />
     <ClInclude Include="Math\Matrix.h" />
     <ClInclude Include="Math\Math.h" />
-    <ClInclude Include="Graphics\Camera\Scene.h" />
     <ClInclude Include="System\Configuration.h" />
     <ClInclude Include="Graphics\Device\Specification.h" />
     <ClInclude Include="Graphics\Buffer\VertexBuffer.h" />

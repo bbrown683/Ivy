@@ -36,8 +36,6 @@ namespace Jade
 	{
 		class Texture
 		{
-		private:
-
 			Device device;
 			std::string filename;
 			TextureType type;

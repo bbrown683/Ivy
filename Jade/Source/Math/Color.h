@@ -31,8 +31,6 @@ namespace Jade
 		// Wrapper class for using Colors in both OpenGL and DirectX without having API dependencies.
 		struct Color
 		{
-		private:
-
 			float red;
 			float green;
 			float blue;

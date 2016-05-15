@@ -53,8 +53,9 @@ namespace Jade
 			IndexBuffer iBuffer;
 			ConstantBuffer cBuffer;
 
-			// manual rotation testing.
-			float rotation;
+			Math::Matrix rotation;
+			Math::Matrix scale;
+			Math::Matrix translation;
 
 		public:
 
@@ -75,12 +76,13 @@ namespace Jade
 				iBuffer.SetIndices(indices);
 
 				// Create the buffers.
-				// vBuffer and iBuffer require data to be passed in before creation.
+				// NOTE: vBuffer and iBuffer require data to be passed into their 
+				// respective set method before creation.
 				vBuffer.Create();
 				iBuffer.Create();
 
-				// cBuffer can have alternating data due to how its formatted.
-				cBuffer.Create();
+				// Meshes should only have a world matrix.
+				cBuffer.Create(true, false, false);
 
 				// Create the textures.
 				for (unsigned int i = 0; i < textures.size(); i++)
@@ -91,11 +93,16 @@ namespace Jade
 						std::cout << "Texture " << textures[i].GetFilename() << " failed to bind to mesh..." << std::endl;
 				}
 
-				rotation = 0.0f;
+				// Set to identity matrix by default.
+				rotation = Math::Matrix::Identity;
+				translation = Math::Matrix::Identity;
+				scale = Math::Matrix::Identity;
 			}
 
 			void Draw();
 			void SetPosition(Math::Vector3 position);
+			void SetScale(Math::Vector3 scale);
+			void SetRotation(Math::Vector3 rotation);
 
 			std::vector<Math::Vertex> GetVertices()	const
 			{

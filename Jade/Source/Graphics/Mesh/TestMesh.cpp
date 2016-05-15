@@ -2,25 +2,10 @@
 
 void Jade::Graphics::TestMesh::Draw()
 {	
-	// Mock rotation.
-	rotation += 0.015f;
-
-	Math::Vector3 eye = Math::Vector3(0.0f, 1.0f, -5.0f);
-	Math::Vector3 at = Math::Vector3(0.0, 1.0f, 0.0);
-	Math::Vector3 up = Math::Vector3::Up;
-
-	cBuffer.SetViewMatrix(Math::Matrix::CreateLookAtLH(eye, at, up).Transpose());
-
-	cBuffer.SetProjectionMatrix(Math::Matrix::CreatePerspectiveViewLH(
-		Math::Math::PiOverTwo, static_cast<float>(1080),
-		static_cast<float>(720), 0.01f, 1000.0f).Transpose());
-
 	shader.MakeActive();
-
-	// Test the rotation.
-	Math::Matrix rotated;
-	rotated = rotated.RotateAlongY(rotation) * rotated.RotateAlongX(rotation);
-	cBuffer.SetWorldMatrix(rotated);
+	
+	// Set the world matrix for the object.
+	cBuffer.SetWorldMatrix(translation * rotation * scale);
 
 	// Bind the vertex and index buffers.
 	vBuffer.Bind();
@@ -33,7 +18,7 @@ void Jade::Graphics::TestMesh::Draw()
 	// Update the textures.
 	for (unsigned int i = 0; i < textures.size(); i++)
 		textures[i].Update();
-	
+
 	// Draw either based on vertices or indices.
 	if (device.GetDrawType() == DrawType::Default)
 		vBuffer.Update();
@@ -48,5 +33,17 @@ void Jade::Graphics::TestMesh::Draw()
 
 void Jade::Graphics::TestMesh::SetPosition(Math::Vector3 position)
 {
-	
+	translation = translation.Translate(position.GetX(), position.GetY(), position.GetZ()).Transpose();
+}
+
+void Jade::Graphics::TestMesh::SetScale(Math::Vector3 scale)
+{
+	this->scale = this->scale.Scale(scale).Transpose();
+}
+
+void Jade::Graphics::TestMesh::SetRotation(Math::Vector3 rotation)
+{
+	this->rotation = this->rotation.RotateAlongX(rotation.GetX()) * 
+		this->rotation.RotateAlongY(rotation.GetY()) * 
+		this->rotation.RotateAlongZ(rotation.GetZ()).Transpose();
 }
