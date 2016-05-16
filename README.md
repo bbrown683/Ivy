@@ -1,5 +1,5 @@
 # Jade
-An Open Source C++ Game Engine inspired by [Monogame](http://www.monogame.net/). This is compiled using Visual Studio 2015 Community Edition.
+An Open Source C++ Game Development Framework inspired by [Monogame](http://www.monogame.net/).
 
 # Supported Graphics API's
 * DirectX11
@@ -12,7 +12,9 @@ An Open Source C++ Game Engine inspired by [Monogame](http://www.monogame.net/).
 * [Glad](http://glad.dav1d.de/)
 * OpenAL 1.1
 * SDL 2.0.4
-* Windows 8 SDK (DirectX11 Headers)
+* [Windows 8 SDK](https://developer.microsoft.com/en-us/windows/downloads/windows-8-sdk) (DirectX11 and OpenGL Headers for Windows Development)
+
+The following except the Windows 8 SDK is provided for out of the box compilation on x86 and x84 machines using Visual Studio 2015 Community Edition.
 
 # Features
 * Should be portable
