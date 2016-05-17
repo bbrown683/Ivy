@@ -28,8 +28,6 @@
     <ClCompile Include="Graphics\Device\GLDevice.cpp" />
     <ClCompile Include="Graphics\Device\VKDevice.cpp" />
     <ClCompile Include="Graphics\Model\Model.cpp" />
-    <ClCompile Include="Graphics\Mesh\GLMesh.cpp" />
-    <ClCompile Include="Graphics\Mesh\DXMesh.cpp" />
     <ClCompile Include="System\Window\NativeWindow.cpp" />
     <ClCompile Include="System\Log.cpp" />
     <ClCompile Include="Graphics\Camera\Camera.cpp" />
@@ -40,7 +38,6 @@
     <ClCompile Include="Graphics\Buffer\DXConstantBuffer.cpp" />
     <ClCompile Include="System\Thread.cpp" />
     <ClCompile Include="Graphics\Font\Font.cpp" />
-    <ClCompile Include="Graphics\Buffer\GLUniformBuffer.cpp" />
     <ClCompile Include="Graphics\Buffer\DXIndexBuffer.cpp" />
     <ClCompile Include="Graphics\Buffer\GLIndexBuffer.cpp" />
     <ClCompile Include="Graphics\Buffer\DXVertexBuffer.cpp" />
@@ -53,7 +50,6 @@
     <ClCompile Include="Graphics\Rasterizer\GLRasterizer.cpp" />
     <ClCompile Include="Graphics\Buffer\ConstantBuffer.cpp" />
     <ClCompile Include="Graphics\Blender\DXBlender.cpp" />
-    <ClCompile Include="Graphics\Mesh\TestMesh.cpp" />
     <ClCompile Include="Audio\AudioDevice.cpp" />
     <ClCompile Include="Graphics\Widget\Canvas.cpp" />
     <ClCompile Include="Graphics\Shader\GLShader.cpp" />
@@ -61,6 +57,8 @@
     <ClCompile Include="Graphics\GL\glad\wgl\src\glad_wgl.c" />
     <ClCompile Include="Graphics\Sprite\DXSprite.cpp" />
     <ClCompile Include="Graphics\Model\Importer\OBJImporter.cpp" />
+    <ClCompile Include="Graphics\Buffer\GLConstantBuffer.cpp" />
+    <ClCompile Include="Graphics\Mesh\Mesh.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\Vector4.h">
@@ -102,10 +100,6 @@
     <ClInclude Include="Math\Vertex.h" />
     <ClInclude Include="Graphics\Model\Model.h" />
     <ClInclude Include="Graphics\Texture\TextureType.h" />
-    <ClInclude Include="Graphics\Mesh\IMesh.h" />
-    <ClInclude Include="Graphics\Mesh\GLMesh.h" />
-    <ClInclude Include="Graphics\Mesh\Mesh.h" />
-    <ClInclude Include="Graphics\Mesh\DXMesh.h" />
     <ClInclude Include="System\Window\IWindow.h" />
     <ClInclude Include="System\Window\NativeWindow.h" />
     <ClInclude Include="System\Window\Window.h" />
@@ -120,7 +114,6 @@
     <ClInclude Include="Graphics\Buffer\DXConstantBuffer.h" />
     <ClInclude Include="System\Thread.h" />
     <ClInclude Include="Graphics\Font\Font.h" />
-    <ClInclude Include="Graphics\Buffer\GLUniformBuffer.h" />
     <ClInclude Include="Graphics\Buffer\DXIndexBuffer.h" />
     <ClInclude Include="Graphics\Buffer\GLIndexBuffer.h" />
     <ClInclude Include="Graphics\Buffer\DXVertexBuffer.h" />
@@ -156,9 +149,7 @@
     <ClInclude Include="Core\Exception\FileNotFoundException.h" />
     <ClInclude Include="Core\Exception\InitializationException.h" />
     <ClInclude Include="Graphics\Buffer\IVertexBuffer.h" />
-    <ClInclude Include="Graphics\Buffer\IUniformBuffer.h" />
     <ClInclude Include="Graphics\Buffer\IIndexBuffer.h" />
-    <ClInclude Include="Graphics\Mesh\TestMesh.h" />
     <ClInclude Include="Graphics\Widget\Widget.h" />
     <ClInclude Include="Graphics\Widget\Canvas.h" />
     <ClInclude Include="Core\Exception\BufferCreationException.h" />
@@ -184,6 +175,9 @@
     <ClInclude Include="Graphics\Model\Importer\MeshMaterial.h" />
     <ClInclude Include="Core\Script\Script.h" />
     <ClInclude Include="Graphics\Buffer\PrimitiveType.h" />
+    <ClInclude Include="Graphics\Buffer\IConstantBuffer.h" />
+    <ClInclude Include="Graphics\Buffer\GLConstantBuffer.h" />
+    <ClInclude Include="Graphics\Mesh\Mesh.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">
@@ -210,6 +204,9 @@
     <FxCompile Include="pixel.hlsl" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="teapot.obj" />
+    <Image Include="MonoCubeTexture.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="MonoCube.dae" />
   </ItemGroup>
 </Project>

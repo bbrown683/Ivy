@@ -1,5 +1,20 @@
 #include "ConstantBuffer.h"
 
+bool Jade::Graphics::ConstantBuffer::CreateProjectionMatrix()
+{
+	return constantBuffer->CreateProjectionMatrix();
+}
+
+bool Jade::Graphics::ConstantBuffer::CreateViewMatrix()
+{
+	return constantBuffer->CreateViewMatrix();
+}
+
+bool Jade::Graphics::ConstantBuffer::CreateWorldMatrix()
+{
+	return constantBuffer->CreateWorldMatrix();
+}
+
 Jade::Math::Matrix Jade::Graphics::ConstantBuffer::GetProjectionMatrix()
 {
 	return constantBuffer->GetProjectionMatrix();
@@ -33,19 +48,4 @@ void Jade::Graphics::ConstantBuffer::SetWorldMatrix(Math::Matrix matrix)
 void Jade::Graphics::ConstantBuffer::Update()
 {
 	constantBuffer->Update();
-}
-
-bool Jade::Graphics::ConstantBuffer::Create(bool model, bool view, bool projection)
-{
-	return constantBuffer->Create(model, view, projection);
-}
-
-void Jade::Graphics::ConstantBuffer::Bind()
-{
-	constantBuffer->Bind();
-}
-
-void Jade::Graphics::ConstantBuffer::Unbind()
-{
-	constantBuffer->Unbind();
 }

@@ -99,15 +99,37 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a59de955b57a5db4845792cef4c9959d9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a59de955b57a5db4845792cef4c9959d9"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>Texture</b> (<a class="el" href="class_jade_1_1_graphics_1_1_device.html">Device</a> device, std::string filename, TextureType type)</td></tr>
 <tr class="separator:a59de955b57a5db4845792cef4c9959d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c83a491d69caebc7f8c4bcfb9c36e73"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3c83a491d69caebc7f8c4bcfb9c36e73"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Texture</b> (<a class="el" href="class_jade_1_1_graphics_1_1_device.html">Device</a> device, unsigned char *bitmap, int width, int height, int pitch, unsigned int bits, TextureType type)</td></tr>
+<tr class="separator:a3c83a491d69caebc7f8c4bcfb9c36e73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a15e2e2508977986498e05d6d80a5b29b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a15e2e2508977986498e05d6d80a5b29b"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_jade_1_1_graphics_1_1_texture.html#a15e2e2508977986498e05d6d80a5b29b">CreateEmptyTexture</a> () const </td></tr>
+<tr class="memdesc:a15e2e2508977986498e05d6d80a5b29b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an empty texture which must be dynamically filled in using the Fill method. <br /></td></tr>
+<tr class="separator:a15e2e2508977986498e05d6d80a5b29b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba04918ff5aff35169ebfe6fdeac6727"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aba04918ff5aff35169ebfe6fdeac6727"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>CreateTextureFromFile</b> () const </td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_jade_1_1_graphics_1_1_texture.html#aba04918ff5aff35169ebfe6fdeac6727">CreateTextureFromFile</a> () const </td></tr>
+<tr class="memdesc:aba04918ff5aff35169ebfe6fdeac6727"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a texture from the file specified in the constructor and returns a bool determining if it was successful. <br /></td></tr>
 <tr class="separator:aba04918ff5aff35169ebfe6fdeac6727"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5330c4e0ace59056884388cf8be3c9ee"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5330c4e0ace59056884388cf8be3c9ee"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>GetFilename</b> ()</td></tr>
-<tr class="separator:a5330c4e0ace59056884388cf8be3c9ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a164bec6f93fe2c905b7b962cee5682"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2a164bec6f93fe2c905b7b962cee5682"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_jade_1_1_graphics_1_1_texture.html#a2a164bec6f93fe2c905b7b962cee5682">CreateTextureFromMemory</a> () const </td></tr>
+<tr class="memdesc:a2a164bec6f93fe2c905b7b962cee5682"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a texture from the bits specified in the constructor and returns a bool determining if it was successful. <br /></td></tr>
+<tr class="separator:a2a164bec6f93fe2c905b7b962cee5682"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90db27e5df529af06ad97b6cecf31d4e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a90db27e5df529af06ad97b6cecf31d4e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_jade_1_1_graphics_1_1_texture.html#a90db27e5df529af06ad97b6cecf31d4e">Fill</a> (unsigned char *bitmap, unsigned pitch, <a class="el" href="class_jade_1_1_math_1_1_rectangle.html">Math::Rectangle</a> rect) const </td></tr>
+<tr class="memdesc:a90db27e5df529af06ad97b6cecf31d4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates a dynamic texture by filling in the bitmap at the specified position. <br /></td></tr>
+<tr class="separator:a90db27e5df529af06ad97b6cecf31d4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a74f8004ebcb57fc0eb3f13feccdb1d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7a74f8004ebcb57fc0eb3f13feccdb1d"></a>
+std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_jade_1_1_graphics_1_1_texture.html#a7a74f8004ebcb57fc0eb3f13feccdb1d">GetFilename</a> () const </td></tr>
+<tr class="memdesc:a7a74f8004ebcb57fc0eb3f13feccdb1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the filename of a texture if it exists. <br /></td></tr>
+<tr class="separator:a7a74f8004ebcb57fc0eb3f13feccdb1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:accc5f797f7d2f9cf4c2b4f3b65dc8839"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="accc5f797f7d2f9cf4c2b4f3b65dc8839"></a>
-std::shared_ptr&lt; <a class="el" href="struct_jade_1_1_graphics_1_1_i_texture.html">ITexture</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GetITexture</b> () const </td></tr>
+std::shared_ptr&lt; <a class="el" href="struct_jade_1_1_graphics_1_1_i_texture.html">ITexture</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_jade_1_1_graphics_1_1_texture.html#accc5f797f7d2f9cf4c2b4f3b65dc8839">GetITexture</a> () const </td></tr>
+<tr class="memdesc:accc5f797f7d2f9cf4c2b4f3b65dc8839"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the interface object that is a lower level abstraction. <br /></td></tr>
 <tr class="separator:accc5f797f7d2f9cf4c2b4f3b65dc8839"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0ae4ca545b4428522d2db35b4be7ec2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac0ae4ca545b4428522d2db35b4be7ec2"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_jade_1_1_graphics_1_1_texture.html#ac0ae4ca545b4428522d2db35b4be7ec2">Set</a> () const </td></tr>
+<tr class="memdesc:ac0ae4ca545b4428522d2db35b4be7ec2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the texture resources to ensure that they remain the target of the drawing operations. <br /></td></tr>
+<tr class="separator:ac0ae4ca545b4428522d2db35b4be7ec2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>C:/Users/Ben/Documents/GitHub/Jade/Jade/Source/Graphics/Texture/<a class="el" href="_texture_8h_source.html">Texture.h</a></li>

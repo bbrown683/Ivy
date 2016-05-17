@@ -99,15 +99,24 @@ Inheritance diagram for Jade::Graphics::IRasterizer:</div>
  <div class="center">
   <img src="struct_jade_1_1_graphics_1_1_i_rasterizer.png" usemap="#Jade::Graphics::IRasterizer_map" alt=""/>
   <map id="Jade::Graphics::IRasterizer_map" name="Jade::Graphics::IRasterizer_map">
-<area href="class_jade_1_1_graphics_1_1_d_x_rasterizer.html" alt="Jade::Graphics::DXRasterizer" shape="rect" coords="0,56,178,80"/>
+<area href="class_jade_1_1_graphics_1_1_g_l_rasterizer.html" alt="Jade::Graphics::GLRasterizer" shape="rect" coords="0,56,176,80"/>
 </map>
  </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a4063c858e345ceaca3ce995af411c4d0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4063c858e345ceaca3ce995af411c4d0"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>SetRasterizerState</b> (CullMode cullMode, FillMode fillMode)=0</td></tr>
-<tr class="separator:a4063c858e345ceaca3ce995af411c4d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4468a86259269268a355c22d264a321"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad4468a86259269268a355c22d264a321"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>SetRasterizerState</b> (CullMode cullMode, FillMode fillMode, WindMode windMode)=0</td></tr>
+<tr class="separator:ad4468a86259269268a355c22d264a321"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ddb923d5483ce8a828ac52c9e973fd6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5ddb923d5483ce8a828ac52c9e973fd6"></a>
+virtual CullMode&#160;</td><td class="memItemRight" valign="bottom"><b>GetCullMode</b> ()=0</td></tr>
+<tr class="separator:a5ddb923d5483ce8a828ac52c9e973fd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a021a3c1e717233a8b3d14544a8ac0292"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a021a3c1e717233a8b3d14544a8ac0292"></a>
+virtual FillMode&#160;</td><td class="memItemRight" valign="bottom"><b>GetFillMode</b> ()=0</td></tr>
+<tr class="separator:a021a3c1e717233a8b3d14544a8ac0292"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5476593dede64f5fd1b03ed61c2d58dd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5476593dede64f5fd1b03ed61c2d58dd"></a>
+virtual WindMode&#160;</td><td class="memItemRight" valign="bottom"><b>GetWindMode</b> ()=0</td></tr>
+<tr class="separator:a5476593dede64f5fd1b03ed61c2d58dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this struct was generated from the following file:<ul>
 <li>C:/Users/Ben/Documents/GitHub/Jade/Jade/Source/Graphics/Rasterizer/<a class="el" href="_i_rasterizer_8h_source.html">IRasterizer.h</a></li>

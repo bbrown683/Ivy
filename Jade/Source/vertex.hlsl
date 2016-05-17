@@ -15,14 +15,6 @@ cbuffer NeverChanges : register(b2)
 {
 	matrix view;
 }
-/*
-cbuffer ConstantBuffer : register(b0)
-{
-	matrix world;
-	matrix projection;
-	matrix view;
-}
-*/
 
 Texture2D txDiffuse;
 SamplerState samLinear;
@@ -35,6 +27,7 @@ struct VS_INPUT
 	float4 Pos : POSITION;
 	float2 Tex : TEXCOORD0;
 	float3 Nor : NORMAL;
+	float4 Col : COLOR;
 };
 
 struct PS_INPUT
@@ -42,6 +35,7 @@ struct PS_INPUT
 	float4 Pos : SV_POSITION;
 	float2 Tex : TEXCOORD0;
 	float3 Nor : NORMAL;
+	float4 Col : COLOR;
 };
 
 //--------------------------------------------------------------------------------------
@@ -58,8 +52,8 @@ PS_INPUT Main(VS_INPUT input)
 	output.Pos = mul(output.Pos, projection);
 
 	output.Tex = input.Tex;
-
 	output.Nor = input.Nor;
+	output.Col = input.Col;
 
 	return output;
 }

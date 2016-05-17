@@ -93,21 +93,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;{</div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;    <span class="keyword">namespace </span>Graphics</div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    {</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;        <span class="comment">// Contains the data of our character</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;        <span class="comment">// Information that is specific to a single character in a font face.</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="struct_jade_1_1_graphics_1_1_glyph.html">    8</a></span>&#160;        <span class="keyword">struct </span><a class="code" href="struct_jade_1_1_graphics_1_1_glyph.html">Glyph</a></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;        {</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">short</span> code;  <span class="comment">// unicode value</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">short</span> index; <span class="comment">// freetype glyph index</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> width;  <span class="comment">// width of the glyph in pixels</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> height; <span class="comment">// height of the glyph in pixels</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> advance; <span class="comment">// number of pixels to advance on x axis</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;            <span class="keywordtype">char</span> bearingX; <span class="comment">// x offset of top-left corner from x axis</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;            <span class="keywordtype">char</span> bearingY; <span class="comment">// y offset of top-left corner from y axis</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> textureX; <span class="comment">// x pixel coord of the bitmap&#39;s bottom-left corner</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">short</span> textureY;<span class="comment">// y pixel coord of the bitmap&#39;s bottom-left corner</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        };</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    }</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;}</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;            <span class="keywordtype">char</span> character;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;            <span class="keywordtype">int</span> width, height;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;            <span class="keywordtype">int</span> xOffset, yOffset;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;            <span class="keywordtype">int</span> advance;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;            <span class="keywordtype">float</span> u, v;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        };</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    }</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;}</div>
 <div class="ttc" id="struct_jade_1_1_graphics_1_1_glyph_html"><div class="ttname"><a href="struct_jade_1_1_graphics_1_1_glyph.html">Jade::Graphics::Glyph</a></div><div class="ttdef"><b>Definition:</b> Glyph.h:8</div></div>
 <div class="ttc" id="namespace_jade_html"><div class="ttname"><a href="namespace_jade.html">Jade</a></div><div class="ttdef"><b>Definition:</b> AudioDevice.h:29</div></div>
 </div><!-- fragment --></div><!-- contents -->

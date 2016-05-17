@@ -113,45 +113,56 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">SOFTWARE.</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">*/</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &quot;Graphics/Device/Device.h&quot;</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &quot;Graphics/Camera/DXCamera.h&quot;</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_jade.html">Jade</a></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;{</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keyword">namespace </span>Graphics</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    {</div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="class_jade_1_1_graphics_1_1_camera.html">   34</a></span>&#160;        <span class="keyword">class </span><a class="code" href="class_jade_1_1_graphics_1_1_camera.html">Camera</a></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        {</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &quot;Graphics/Buffer/ConstantBuffer.h&quot;</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_jade.html">Jade</a></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;{</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keyword">namespace </span>Graphics</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    {</div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="class_jade_1_1_graphics_1_1_camera.html">   33</a></span>&#160;        <span class="keyword">class </span><a class="code" href="class_jade_1_1_graphics_1_1_camera.html">Camera</a></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        {</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            <a class="code" href="class_jade_1_1_graphics_1_1_device.html">Device</a> device;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            <a class="code" href="class_jade_1_1_graphics_1_1_constant_buffer.html">ConstantBuffer</a> cBuffer;</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            std::shared_ptr&lt;ICamera&gt; camera;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            <a class="code" href="class_jade_1_1_graphics_1_1_device.html">Device</a> device;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            <span class="keywordtype">float</span> nearPlaneDistance; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            <span class="keywordtype">float</span> farPlaneDistance;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            <a class="code" href="struct_jade_1_1_math_1_1_vector3.html">Math::Vector3</a> position;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            <a class="code" href="struct_jade_1_1_math_1_1_vector3.html">Math::Vector3</a> target;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            std::shared_ptr&lt;ICamera&gt; CreateCamera() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            <a class="code" href="class_jade_1_1_graphics_1_1_camera.html">Camera</a>(<span class="keywordtype">float</span> nearPlaneDistance, <span class="keywordtype">float</span> farPlaneDistance, <a class="code" href="class_jade_1_1_graphics_1_1_device.html">Device</a> device)</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            {</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                this-&gt;nearPlaneDistance = nearPlaneDistance;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                this-&gt;farPlaneDistance = farPlaneDistance;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                this-&gt;device = device;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                camera = CreateCamera();</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            }</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            <span class="keywordtype">void</span> LookAt(<a class="code" href="struct_jade_1_1_math_1_1_vector3.html">Math::Vector3</a> position, <a class="code" href="struct_jade_1_1_math_1_1_vector3.html">Math::Vector3</a> target, <a class="code" href="struct_jade_1_1_math_1_1_vector3.html">Math::Vector3</a> direction)</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            {</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                camera-&gt;LookAt(position, target, direction);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            }</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        };</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    }</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;}</div>
-<div class="ttc" id="class_jade_1_1_graphics_1_1_device_html"><div class="ttname"><a href="class_jade_1_1_graphics_1_1_device.html">Jade::Graphics::Device</a></div><div class="ttdef"><b>Definition:</b> Device.h:37</div></div>
-<div class="ttc" id="class_jade_1_1_graphics_1_1_camera_html"><div class="ttname"><a href="class_jade_1_1_graphics_1_1_camera.html">Jade::Graphics::Camera</a></div><div class="ttdef"><b>Definition:</b> Camera.h:34</div></div>
-<div class="ttc" id="struct_jade_1_1_math_1_1_vector3_html"><div class="ttname"><a href="struct_jade_1_1_math_1_1_vector3.html">Jade::Math::Vector3</a></div><div class="ttdef"><b>Definition:</b> Vector3.h:34</div></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            <a class="code" href="class_jade_1_1_graphics_1_1_camera.html">Camera</a>(<a class="code" href="class_jade_1_1_graphics_1_1_device.html">Device</a> device, <a class="code" href="struct_jade_1_1_math_1_1_vector3.html">Math::Vector3</a> position, <a class="code" href="struct_jade_1_1_math_1_1_vector3.html">Math::Vector3</a> target)</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            {</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                this-&gt;device = device;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                this-&gt;position = position;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                this-&gt;target = target;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                <span class="comment">// Create View and Projection.</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                cBuffer = <a class="code" href="class_jade_1_1_graphics_1_1_constant_buffer.html">ConstantBuffer</a>(device);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                cBuffer.CreateProjectionMatrix();</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                cBuffer.CreateViewMatrix();</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                cBuffer.SetViewMatrix(<a class="code" href="struct_jade_1_1_math_1_1_matrix.html#ad97b1a3bfacaa82ccaab538f29b46004">Math::Matrix::CreateLookAtLH</a>(position, target, Math::Vector3::Up).Transpose());</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                cBuffer.SetProjectionMatrix(<a class="code" href="struct_jade_1_1_math_1_1_matrix.html#ad114ea0e0700ef91f40ed7d40bcb5a9a">Math::Matrix::CreatePerspectiveViewLH</a>(</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                    Math::Math::PiOverTwo, static_cast&lt;float&gt;(device.GetWindow().GetWidth()),</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                    static_cast&lt;float&gt;(device.GetWindow().GetHeight()), 0.1f, 1000.0f).<a class="code" href="struct_jade_1_1_math_1_1_matrix.html#ac235e6add4163f779f1a3b007ee0f6d7">Transpose</a>());</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                cBuffer.Update();</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            }</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            <a class="code" href="struct_jade_1_1_math_1_1_vector3.html">Math::Vector3</a> GetCameraPosition();</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            <span class="keywordtype">void</span> SetCameraPosition(<a class="code" href="struct_jade_1_1_math_1_1_vector3.html">Math::Vector3</a> position);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            <a class="code" href="struct_jade_1_1_math_1_1_vector3.html">Math::Vector3</a> GetTargetPosition();</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            <span class="keywordtype">void</span> SetTargetPosition(<a class="code" href="struct_jade_1_1_math_1_1_vector3.html">Math::Vector3</a> position);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        };</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    }</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;}</div>
+<div class="ttc" id="class_jade_1_1_graphics_1_1_device_html"><div class="ttname"><a href="class_jade_1_1_graphics_1_1_device.html">Jade::Graphics::Device</a></div><div class="ttdef"><b>Definition:</b> Device.h:39</div></div>
+<div class="ttc" id="class_jade_1_1_graphics_1_1_constant_buffer_html"><div class="ttname"><a href="class_jade_1_1_graphics_1_1_constant_buffer.html">Jade::Graphics::ConstantBuffer</a></div><div class="ttdef"><b>Definition:</b> ConstantBuffer.h:36</div></div>
+<div class="ttc" id="struct_jade_1_1_math_1_1_matrix_html_ad97b1a3bfacaa82ccaab538f29b46004"><div class="ttname"><a href="struct_jade_1_1_math_1_1_matrix.html#ad97b1a3bfacaa82ccaab538f29b46004">Jade::Math::Matrix::CreateLookAtLH</a></div><div class="ttdeci">static Matrix CreateLookAtLH(Vector3 eye, Vector3 at, Vector3 up)</div><div class="ttdoc">Returns a left-handed matrix with the camera vectors. </div><div class="ttdef"><b>Definition:</b> Matrix.cpp:43</div></div>
+<div class="ttc" id="class_jade_1_1_graphics_1_1_camera_html"><div class="ttname"><a href="class_jade_1_1_graphics_1_1_camera.html">Jade::Graphics::Camera</a></div><div class="ttdef"><b>Definition:</b> Camera.h:33</div></div>
+<div class="ttc" id="struct_jade_1_1_math_1_1_vector3_html"><div class="ttname"><a href="struct_jade_1_1_math_1_1_vector3.html">Jade::Math::Vector3</a></div><div class="ttdef"><b>Definition:</b> Vector3.h:38</div></div>
 <div class="ttc" id="namespace_jade_html"><div class="ttname"><a href="namespace_jade.html">Jade</a></div><div class="ttdef"><b>Definition:</b> AudioDevice.h:29</div></div>
+<div class="ttc" id="struct_jade_1_1_math_1_1_matrix_html_ac235e6add4163f779f1a3b007ee0f6d7"><div class="ttname"><a href="struct_jade_1_1_math_1_1_matrix.html#ac235e6add4163f779f1a3b007ee0f6d7">Jade::Math::Matrix::Transpose</a></div><div class="ttdeci">Matrix Transpose()</div><div class="ttdoc">Returns a matrix where the rows are columns and the columns are rows. </div><div class="ttdef"><b>Definition:</b> Matrix.cpp:172</div></div>
+<div class="ttc" id="struct_jade_1_1_math_1_1_matrix_html_ad114ea0e0700ef91f40ed7d40bcb5a9a"><div class="ttname"><a href="struct_jade_1_1_math_1_1_matrix.html#ad114ea0e0700ef91f40ed7d40bcb5a9a">Jade::Math::Matrix::CreatePerspectiveViewLH</a></div><div class="ttdeci">static Matrix CreatePerspectiveViewLH(float fieldOfView, float width, float height, float nearPlaneDistance, float farPlaneDistance)</div><div class="ttdoc">Returns a left-handed matrix that is of a Perspective view. </div><div class="ttdef"><b>Definition:</b> Matrix.cpp:70</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

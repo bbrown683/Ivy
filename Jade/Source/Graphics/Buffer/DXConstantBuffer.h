@@ -24,7 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "Graphics/Buffer/IUniformBuffer.h"
+#include "Graphics/Buffer/IConstantBuffer.h"
 #include "Graphics/Device/DXDevice.h"
 #include "Math/Space.h"
 
@@ -33,28 +33,19 @@ namespace Jade
 {
 	namespace Graphics
 	{
-		class DXConstantBuffer : public IUniformBuffer
+		class DXConstantBuffer : public IConstantBuffer
 		{
-		private:
-
 			std::shared_ptr<DXDevice> device;
 
-			bool world;
-			bool projection;
-			bool view;
+			ComPtr<ID3D11Buffer> m_pNeverChanges;
+			ComPtr<ID3D11Buffer> m_pOnResize;
+			ComPtr<ID3D11Buffer> m_pPerObject;
 
-			Math::PerObject perObject;			// world.
-			Math::OnResize onResize;			// projection
-			Math::NeverChanges neverChanges;	// view
+			Math::NeverChanges neverChanges;
+			Math::OnResize onResize;			
+			Math::PerObject perObject;		
 
 			Math::Matrix scale;
-
-			//ComPtr<ID3D11Buffer> m_pConstantBuffer;
-			//Math::Space space;
-
-			ComPtr<ID3D11Buffer> m_pPerObject;
-			ComPtr<ID3D11Buffer> m_pOnResize;
-			ComPtr<ID3D11Buffer> m_pNeverChanges;
 
 		public:
 
@@ -63,8 +54,9 @@ namespace Jade
 				this->device = device;
 			}
 
-			void Bind() override;
-			bool Create(bool model, bool view, bool projection) override;
+			bool CreateProjectionMatrix() override;
+			bool CreateViewMatrix() override;
+			bool CreateWorldMatrix() override;
 
 			Math::Matrix GetProjectionMatrix() override;
 			Math::Matrix GetViewMatrix() override;
@@ -74,7 +66,6 @@ namespace Jade
 			void SetViewMatrix(Math::Matrix matrix) override;
 			void SetWorldMatrix(Math::Matrix matrix) override;
 
-			void Unbind() override;
 			void Update() override;
 		};
 	}

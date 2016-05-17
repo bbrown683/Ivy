@@ -55,9 +55,6 @@ SOFTWARE.
 // Exception system.
 #include <exception>
 
-// Used to export symbols.
-#define JADEAPI					__declspec(dllexport)
-
 namespace Jade
 {
 	namespace Core

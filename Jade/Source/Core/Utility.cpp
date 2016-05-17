@@ -23,21 +23,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-// Initialize nuklear.
-#define NK_IMPLEMENTATION
-#define NK_INCLUDE_FIXED_TYPES
-#define NK_INCLUDE_DEFAULT_ALLOCATOR
-#define NK_INCLUDE_VERTEX_BUFFER_OUTPUT
-#define NK_INCLUDE_FONT_BAKING
-#include "nuklear/nuklear.h"
-
-// Initialize stb libraries.
-#define STB_RECT_PACK_IMPLEMENTATION
-#include "stb/stb_rect_pack.h"
-#define STB_TRUETYPE_IMPLEMENTATION
-#include "stb/stb_truetype.h"
-
-
 #include "Utility.h"
 
 std::string Jade::Core::Utility::GetFilePath()

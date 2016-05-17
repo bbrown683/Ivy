@@ -113,66 +113,73 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">SOFTWARE.</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">*/</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#ifdef _WIN32</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#include &lt;Graphics/Device/DXDevice.h&gt;</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &lt;Graphics/Texture/ITexture.h&gt;</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#include &lt;Graphics/Texture/TextureType.h&gt;</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">// include freeimage after directx headers to remove any naming conflicts.</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#include &quot;freeimage/freeimage.h&quot;</span></div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_jade.html">Jade</a></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;{</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keyword">namespace </span>Graphics</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    {</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="keyword">class </span>DXTexture : <span class="keyword">public</span> ITexture</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        {</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            std::shared_ptr&lt;DXDevice&gt; device;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            std::string filename;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            TextureType type;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>* bits;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            <span class="keywordtype">int</span> width;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            <span class="keywordtype">int</span> height;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            <span class="keywordtype">int</span> bpp;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            ComPtr&lt;ID3D11Texture2D&gt; m_pTexture = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            ComPtr&lt;ID3D11ShaderResourceView&gt; m_pShaderResourceView = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            ComPtr&lt;ID3D11SamplerState&gt; m_pSamplerState = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &quot;Graphics/Device/DXDevice.h&quot;</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &quot;Graphics/Texture/ITexture.h&quot;</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#include &quot;Graphics/Texture/TextureType.h&quot;</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">// Include after other headers.</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#include &quot;FreeImage.h&quot;</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#ifdef JADE_PLATFORM_WINDOWS</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_jade.html">Jade</a></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;{</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keyword">namespace </span>Graphics</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    {</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keyword">class </span>DXTexture : <span class="keyword">public</span> ITexture</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        {</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            std::shared_ptr&lt;DXDevice&gt; device;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            std::string filename;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            TextureType type;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>* bitmap;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            <span class="keywordtype">int</span> width;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            <span class="keywordtype">int</span> height;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            <span class="keywordtype">int</span> pitch;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> bits;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            ComPtr&lt;ID3D11Texture2D&gt; m_pTexture = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            ComPtr&lt;ID3D11ShaderResourceView&gt; m_pShaderResourceView = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            ComPtr&lt;ID3D11SamplerState&gt; m_pSamplerState = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            DXTexture(std::shared_ptr&lt;DXDevice&gt; device, std::string filename, TextureType type)</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            {</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                this-&gt;device = device;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                this-&gt;filename = filename;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                this-&gt;type = type;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            }</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            DXTexture(std::shared_ptr&lt;DXDevice&gt; device, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>* bits, <span class="keywordtype">int</span> width, <span class="keywordtype">int</span> height, <span class="keywordtype">int</span> bpp)</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            {</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                this-&gt;device = device;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                this-&gt;bits = bits;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                this-&gt;width = width;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                this-&gt;height = height;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                this-&gt;bpp = bpp;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            DXTexture(std::shared_ptr&lt;DXDevice&gt; device, std::string filename, TextureType type)</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            {</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                this-&gt;device = device;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                this-&gt;filename = filename;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                this-&gt;type = type;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            }</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            DXTexture(std::shared_ptr&lt;DXDevice&gt; device, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>* bitmap, <span class="keywordtype">int</span> width, <span class="keywordtype">int</span> height, <span class="keywordtype">int</span> pitch, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> bits, TextureType type)</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            {</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                this-&gt;device = device;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                this-&gt;bitmap = bitmap;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                this-&gt;width = width;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                this-&gt;height = height;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                this-&gt;pitch = pitch;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                this-&gt;bits = bits;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                this-&gt;type = type;</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            }</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            ~DXTexture()</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            {</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                std::cout &lt;&lt; <span class="stringliteral">&quot;Texture &quot;</span> &lt;&lt; filename &lt;&lt; <span class="stringliteral">&quot; was released successfully...&quot;</span> &lt;&lt; std::endl;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                std::cout &lt;&lt; <span class="stringliteral">&quot;Texture was released successfully...&quot;</span> &lt;&lt; std::endl;</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            }</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            <span class="keywordtype">bool</span> CreateTextureFromFile() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            <span class="keywordtype">bool</span> CreateTextureFromMemory() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        };</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    }</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;}</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="preprocessor">#endif // _WIN32</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            <span class="keywordtype">bool</span> CreateEmptyTexture() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;            <span class="keywordtype">bool</span> CreateTextureFromFile() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            <span class="keywordtype">bool</span> CreateTextureFromMemory() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            <span class="comment">// Updates a dynamic texture.</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;            <span class="keywordtype">void</span> Fill(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>* bitmap, <span class="keywordtype">unsigned</span> pitch, Math::Rectangle rect) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            <span class="keywordtype">void</span> Set() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            DXGI_FORMAT DetermineTextureFormat();</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;            <span class="keyword">const</span> ComPtr&lt;ID3D11ShaderResourceView&gt;&amp; GetID3D11ShaderResourceView() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        };</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    }</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;}</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="preprocessor">#endif // _WIN32</span></div>
 <div class="ttc" id="namespace_jade_html"><div class="ttname"><a href="namespace_jade.html">Jade</a></div><div class="ttdef"><b>Definition:</b> AudioDevice.h:29</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

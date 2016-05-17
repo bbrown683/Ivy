@@ -24,7 +24,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-
 #include "Math/Vector2.h"
 #include "Math/Vector3.h"
 #include "Math/Color.h"
@@ -38,6 +37,7 @@ namespace Jade
 			Vector3 position;
 			Vector2 texture;
 			Vector3 normal;
+			Color color;
 		};
 	}
 }

@@ -46,9 +46,10 @@ namespace Jade
 				this->position = position;
 				this->target = target;
 
-				// Create 
+				// Create View and Projection.
 				cBuffer = ConstantBuffer(device);
-				cBuffer.Create(false, true, true);
+				cBuffer.CreateProjectionMatrix();
+				cBuffer.CreateViewMatrix();
 				
 				cBuffer.SetViewMatrix(Math::Matrix::CreateLookAtLH(position, target, Math::Vector3::Up).Transpose());
 				cBuffer.SetProjectionMatrix(Math::Matrix::CreatePerspectiveViewLH(

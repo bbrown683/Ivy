@@ -24,12 +24,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include "Graphics/Buffer/ConstantBuffer.h"
+#include "Graphics/Buffer/IndexBuffer.h"
+#include "Graphics/Buffer/VertexBuffer.h"
+#include "Graphics/Buffer/PrimitiveType.h"
 #include "Graphics/Device/Device.h"
-#include "Graphics/Mesh/IMesh.h"
-#include "Graphics/Mesh/DXMesh.h"
-#include "Graphics/Mesh/GLMesh.h"
 #include "Graphics/Shader/Shader.h"
 #include "Graphics/Texture/Texture.h"
+#include "Math/Vertex.h"
 
 namespace Jade
 {
@@ -38,46 +40,81 @@ namespace Jade
 		class Mesh
 		{
 			Device device;
+			Shader shader;
+			PrimitiveType primitiveType;
+
 			std::vector<Math::Vertex> vertices;
 			std::vector<unsigned short> indices;
 			std::vector<Texture> textures;
-			bool textureIsFile;
 
-			std::shared_ptr<IMesh> mesh;
-			
-			Math::Vector3 position;
+			VertexBuffer vBuffer;
+			IndexBuffer iBuffer;
+			ConstantBuffer cBuffer;
+
+			Math::Matrix rotation;
+			Math::Matrix scale;
+			Math::Matrix translation;
 
 		public:
 
-			Mesh(Device device, Shader shader, std::vector<Math::Vertex> vertices, std::vector<unsigned short> indices, std::vector<Texture> textures)
+			Mesh(Device device, Shader shader, std::vector<Math::Vertex> vertices, PrimitiveType primitiveType)
 			{
 				this->device = device;
+				this->shader = shader;
+				this->vertices = vertices;
+				this->primitiveType = primitiveType;
+			}
+
+			Mesh(Device device, Shader shader, std::vector<Math::Vertex> vertices, std::vector<unsigned short> indices, PrimitiveType primitiveType)
+			{
+				this->device = device;
+				this->shader = shader;
+				this->vertices = vertices;
+				this->indices = indices;
+				this->primitiveType = primitiveType;
+			}
+
+			Mesh(Device device, Shader shader, std::vector<Math::Vertex> vertices, std::vector<unsigned short> indices, std::vector<Texture> textures, PrimitiveType primitiveType)
+			{
+				this->device = device;
+				this->shader = shader;
 				this->vertices = vertices;
 				this->indices = indices;
 				this->textures = textures;
-				this->textureIsFile = textureIsFile;
+				this->primitiveType = primitiveType;
 
-				switch (device.GetGraphicsAPI())
+				vBuffer = VertexBuffer(device, primitiveType);
+				iBuffer = IndexBuffer(device);
+				cBuffer = ConstantBuffer(device);
+
+				// These wont change.
+				vBuffer.SetVertices(vertices);
+				iBuffer.SetIndices(indices);
+
+				// Create the buffers.
+				// NOTE: vBuffer and iBuffer require data to be passed into their 
+				// respective set method before creation.
+				vBuffer.Create();
+				iBuffer.Create();
+
+				// Meshes should only have a world matrix.
+				cBuffer.CreateWorldMatrix();
+
+				// Create the textures.
+				for (unsigned int i = 0; i < textures.size(); i++)
 				{
-				case GraphicsAPI::DirectX:
-					mesh = std::make_shared<DXMesh>(std::dynamic_pointer_cast<DXDevice>(device.GetIDevice()), 
-						std::dynamic_pointer_cast<DXShader>(shader.GetIShader()), vertices, indices, textures);
-					break;
-				case GraphicsAPI::OpenGL:
-					// OpenGL uses a state machine so we dont need to pass a device,
-					// but it needs the current shader object to do binding.
-					mesh = std::make_shared<GLMesh>(std::dynamic_pointer_cast<GLShader>(shader.GetIShader()), vertices, indices);
-					break;
-				case GraphicsAPI::Vulkan:
-					mesh = nullptr;
-					break;
+					if (textures[i].CreateTextureFromFile())
+						std::cout << "Texture " << textures[i].GetFilename() << " was bound successfully..." << std::endl;
+					else
+						std::cout << "Texture " << textures[i].GetFilename() << " failed to bind to mesh..." << std::endl;
 				}
 			}
 
-			void Draw()	const
-			{
-				mesh->Draw();
-			}
+			void Draw();
+			
+			void SetPosition(Math::Vector3 position);
+			void SetScale(Math::Vector3 scale);
+			void SetRotation(Math::Vector3 rotation);
 
 			std::vector<Math::Vertex> GetVertices()	const
 			{

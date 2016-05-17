@@ -24,8 +24,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "stb/stb_truetype.h"
-
 #include "ft2build.h"
 #include FT_FREETYPE_H
 
@@ -35,7 +33,6 @@ SOFTWARE.
 #include "Graphics/Font/Glyph.h"
 #include "Graphics/Mesh/Mesh.h"
 #include "Graphics/Texture/Texture.h"
-#include "System/File.h"
 
 namespace Jade
 {
@@ -46,16 +43,14 @@ namespace Jade
 		{
 			Device device;
 			Shader shader;
-			
 			Texture texture;
-			std::vector<stbtt_packedchar> packedChar;
 
 		public:
  
 			Font(Device device, Shader shader)
 			{
 				this->device = device;
-				packedChar = std::vector<stbtt_packedchar>(95);
+				this->shader = shader;
 			}
 
 			//! Draws the given text at the specified x and y coordinates at a certain pixel size.

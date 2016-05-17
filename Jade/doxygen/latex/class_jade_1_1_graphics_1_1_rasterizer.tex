@@ -6,22 +6,32 @@
 \hypertarget{class_jade_1_1_graphics_1_1_rasterizer_a4aa26ad8f6501e4adfcde35d351fc176}{}{\bfseries Rasterizer} (\hyperlink{class_jade_1_1_graphics_1_1_device}{Device} device)\label{class_jade_1_1_graphics_1_1_rasterizer_a4aa26ad8f6501e4adfcde35d351fc176}
 
 \item 
-bool \hyperlink{class_jade_1_1_graphics_1_1_rasterizer_ad0dcd9b34e97b9f09b07365822d9ce7e}{Set\+Rasterizer\+State} (Cull\+Mode cull\+Mode, Fill\+Mode fill\+Mode) const 
-\begin{DoxyCompactList}\small\item\em Sets the rasterizer state to the specified cull mode and fill mode. \end{DoxyCompactList}\end{DoxyCompactItemize}
+bool \hyperlink{class_jade_1_1_graphics_1_1_rasterizer_aa4dfe961881a063f3e7e0b3e2a03500a}{Set\+Rasterizer\+State} (Cull\+Mode cull\+Mode, Fill\+Mode fill\+Mode, Wind\+Mode wind\+Mode) const 
+\begin{DoxyCompactList}\small\item\em Sets the rasterizer state to the specified cull and fill mode. \end{DoxyCompactList}\item 
+\hypertarget{class_jade_1_1_graphics_1_1_rasterizer_a6b64516bb21e19638f6e9b1d5d600d97}{}Cull\+Mode \hyperlink{class_jade_1_1_graphics_1_1_rasterizer_a6b64516bb21e19638f6e9b1d5d600d97}{Get\+Cull\+Mode} () const \label{class_jade_1_1_graphics_1_1_rasterizer_a6b64516bb21e19638f6e9b1d5d600d97}
+
+\begin{DoxyCompactList}\small\item\em Returns the current cull mode. Return values can only be None, Front, or Back. \end{DoxyCompactList}\item 
+\hypertarget{class_jade_1_1_graphics_1_1_rasterizer_aec61b803aa6bb26e9f7002eca858e1b6}{}Fill\+Mode \hyperlink{class_jade_1_1_graphics_1_1_rasterizer_aec61b803aa6bb26e9f7002eca858e1b6}{Get\+Fill\+Mode} () const \label{class_jade_1_1_graphics_1_1_rasterizer_aec61b803aa6bb26e9f7002eca858e1b6}
+
+\begin{DoxyCompactList}\small\item\em Returns the current fill mode. Return values can only be Wireframe or Solid. \end{DoxyCompactList}\item 
+\hypertarget{class_jade_1_1_graphics_1_1_rasterizer_a67934284de71de2de67a6183fcb94734}{}Wind\+Mode \hyperlink{class_jade_1_1_graphics_1_1_rasterizer_a67934284de71de2de67a6183fcb94734}{Get\+Wind\+Mode} () const \label{class_jade_1_1_graphics_1_1_rasterizer_a67934284de71de2de67a6183fcb94734}
+
+\begin{DoxyCompactList}\small\item\em Returns the current wind mode. Return value can only be Clockwise or Counter\+Clockwise. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Member Function Documentation}
-\hypertarget{class_jade_1_1_graphics_1_1_rasterizer_ad0dcd9b34e97b9f09b07365822d9ce7e}{}\index{Jade\+::\+Graphics\+::\+Rasterizer@{Jade\+::\+Graphics\+::\+Rasterizer}!Set\+Rasterizer\+State@{Set\+Rasterizer\+State}}
+\hypertarget{class_jade_1_1_graphics_1_1_rasterizer_aa4dfe961881a063f3e7e0b3e2a03500a}{}\index{Jade\+::\+Graphics\+::\+Rasterizer@{Jade\+::\+Graphics\+::\+Rasterizer}!Set\+Rasterizer\+State@{Set\+Rasterizer\+State}}
 \index{Set\+Rasterizer\+State@{Set\+Rasterizer\+State}!Jade\+::\+Graphics\+::\+Rasterizer@{Jade\+::\+Graphics\+::\+Rasterizer}}
-\subsubsection[{Set\+Rasterizer\+State(\+Cull\+Mode cull\+Mode, Fill\+Mode fill\+Mode) const }]{\setlength{\rightskip}{0pt plus 5cm}bool Jade\+::\+Graphics\+::\+Rasterizer\+::\+Set\+Rasterizer\+State (
+\subsubsection[{Set\+Rasterizer\+State(\+Cull\+Mode cull\+Mode, Fill\+Mode fill\+Mode, Wind\+Mode wind\+Mode) const }]{\setlength{\rightskip}{0pt plus 5cm}bool Jade\+::\+Graphics\+::\+Rasterizer\+::\+Set\+Rasterizer\+State (
 \begin{DoxyParamCaption}
 \item[{Cull\+Mode}]{cull\+Mode, }
-\item[{Fill\+Mode}]{fill\+Mode}
+\item[{Fill\+Mode}]{fill\+Mode, }
+\item[{Wind\+Mode}]{wind\+Mode}
 \end{DoxyParamCaption}
-) const\hspace{0.3cm}{\ttfamily [inline]}}\label{class_jade_1_1_graphics_1_1_rasterizer_ad0dcd9b34e97b9f09b07365822d9ce7e}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\label{class_jade_1_1_graphics_1_1_rasterizer_aa4dfe961881a063f3e7e0b3e2a03500a}
 
 
-Sets the rasterizer state to the specified cull mode and fill mode. 
+Sets the rasterizer state to the specified cull and fill mode. 
 
 
 \begin{DoxyParams}[1]{Parameters}

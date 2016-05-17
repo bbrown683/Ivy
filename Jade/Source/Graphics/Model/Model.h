@@ -31,7 +31,6 @@ SOFTWARE.
 
 #include "Core/Utility.h"
 #include "Graphics/Mesh/Mesh.h"
-#include "Graphics/Mesh/TestMesh.h"
 #include "Math/Helper.h"
 
 namespace Jade
@@ -47,9 +46,7 @@ namespace Jade
 			Shader shader;
 
 			// Mesh(s) used to draw our shape.
-			//std::vector<Mesh> meshes;
-			std::vector<TestMesh> meshes;
-
+			std::vector<Mesh> meshes;
 			Math::Vector3 position;
 			Math::Vector3 rotation;
 			Math::Vector3 scale;
@@ -65,9 +62,7 @@ namespace Jade
 			void Draw();
 			void Load(std::string filename);
 
-			//std::vector<Mesh> GetMeshes() const;
-			std::vector<TestMesh> GetMeshes() const;
-
+			std::vector<Mesh> GetMeshes() const;
 			Math::Vector3 GetPosition();
 			Math::Vector3 GetRotation();
 			Math::Vector3 GetScale();

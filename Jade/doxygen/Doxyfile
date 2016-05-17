@@ -767,6 +767,8 @@ WARN_LOGFILE           =
 
 INPUT		       += ../Source/Audio/
 INPUT		       += ../Source/Core/
+INPUT		       += ../Source/Core/Exception/
+INPUT		       += ../Source/Core/Script/
 INPUT		       += ../Source/Input/ 
 INPUT		       += ../Source/Graphics/ 
 INPUT		       += ../Source/Graphics/Blender/
@@ -779,6 +781,7 @@ INPUT		       += ../Source/Graphics/Model/
 INPUT		       += ../Source/Graphics/Rasterizer/
 INPUT		       += ../Source/Graphics/Shader/
 INPUT		       += ../Source/Graphics/Texture/
+INPUT		       += ../Source/Graphics/Widget/
 INPUT 		       += ../Source/Math/
 INPUT 		       += ../Source/System/
 INPUT 		       += ../Source/System/Window/

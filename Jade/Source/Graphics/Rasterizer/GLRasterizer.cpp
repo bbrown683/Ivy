@@ -22,7 +22,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-
 #include "GLRasterizer.h"
 
 bool Jade::Graphics::GLRasterizer::SetRasterizerState(CullMode cullMode, FillMode fillMode, WindMode windMode)

@@ -81,25 +81,10 @@ namespace Jade
 			static const Matrix Identity;
 			static const Matrix Zero;
 
-			// Sets all values to 0.0f by default.
+			// Creates an identity matrix.
 			Matrix()
 			{
-				values[0][0] = 0.0f;
-				values[0][1] = 0.0f;
-				values[0][2] = 0.0f;
-				values[0][3] = 0.0f;
-				values[1][0] = 0.0f;
-				values[1][1] = 0.0f;
-				values[1][2] = 0.0f;
-				values[1][3] = 0.0f;
-				values[2][0] = 0.0f;
-				values[2][1] = 0.0f;
-				values[2][2] = 0.0f;
-				values[2][3] = 0.0f;
-				values[3][0] = 0.0f;
-				values[3][1] = 0.0f;
-				values[3][2] = 0.0f;
-				values[3][3] = 0.0f;
+				values = Identity.values;
 			}
 
 			Matrix(float m00, float m01, float m02, float m03,

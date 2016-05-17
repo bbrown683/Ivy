@@ -113,95 +113,95 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">SOFTWARE.</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">*/</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &lt;wrl/client.h&gt;</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &lt;d3d11.h&gt;</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &quot;Core/Utility.h&quot;</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#include &quot;Graphics/Device/IDevice.h&quot;</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#include &quot;Graphics/Device/Specification.h&quot;</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#include &quot;System/Window/Window.h&quot;</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="comment">// Declare to create cleaner code below.</span></div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">using namespace </span><a class="code" href="namespace_microsoft_1_1_w_r_l.html">Microsoft::WRL</a>;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_jade.html">Jade</a></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;{</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keyword">namespace </span>Graphics</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    {</div>
-<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="class_jade_1_1_graphics_1_1_d_x_device.html">   42</a></span>&#160;        <span class="keyword">class </span><a class="code" href="class_jade_1_1_graphics_1_1_d_x_device.html">DXDevice</a> : <span class="keyword">public</span> <a class="code" href="struct_jade_1_1_graphics_1_1_i_device.html">IDevice</a></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        {</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &quot;Core/Exception/Exception.h&quot;</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include &quot;Core/Utility.h&quot;</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#include &quot;Graphics/Device/IDevice.h&quot;</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &quot;Graphics/Device/Specification.h&quot;</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#include &quot;System/Window/Window.h&quot;</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#ifdef JADE_PLATFORM_WINDOWS</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#include &lt;wrl/client.h&gt;</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#include &lt;d3d11.h&gt;</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">// Declare to create cleaner code below.</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">using namespace </span>Microsoft::WRL;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_jade.html">Jade</a></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;{</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keyword">namespace </span>Graphics</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    {</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keyword">class </span>DXDevice : <span class="keyword">public</span> IDevice</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        {</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            std::shared_ptr&lt;System::IWindow&gt; window;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            <a class="code" href="struct_jade_1_1_graphics_1_1_specification.html">Specification</a> specification;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            <span class="comment">// Necessary to initialize a Direct3D11 device</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            D3D_DRIVER_TYPE m_DriverType;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            D3D_FEATURE_LEVEL m_FeatureLevel;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            D3D11_VIEWPORT m_Viewport;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            ComPtr&lt;ID3D11Device&gt; m_pDevice = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            ComPtr&lt;ID3D11DeviceContext&gt; m_pImmediateContext = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            ComPtr&lt;IDXGISwapChain&gt; m_pSwapChain = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            ComPtr&lt;ID3D11RenderTargetView&gt; m_pRenderTargetView = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            ComPtr&lt;ID3D11Texture2D&gt; m_pDepthStencil = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            ComPtr&lt;ID3D11DepthStencilView&gt; m_pDepthStencilView = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            ComPtr&lt;ID3D11DepthStencilState&gt; m_pDepthStencilState = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            ComPtr&lt;ID3D11SamplerState&gt; m_pSamplerState = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            <span class="keywordtype">bool</span> Create() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            <span class="keywordtype">bool</span> Release() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            Specification specification;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            DrawType drawType;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            <span class="comment">// Necessary to initialize a Direct3D11 device</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            D3D_DRIVER_TYPE m_DriverType;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            D3D_FEATURE_LEVEL m_FeatureLevel;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            D3D11_VIEWPORT m_Viewport;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            ComPtr&lt;ID3D11Device&gt; m_pDevice = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            ComPtr&lt;ID3D11DeviceContext&gt; m_pImmediateContext = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            ComPtr&lt;IDXGISwapChain&gt; m_pSwapChain = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            ComPtr&lt;ID3D11RenderTargetView&gt; m_pRenderTargetView = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            ComPtr&lt;ID3D11Texture2D&gt; m_pDepthStencil = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            ComPtr&lt;ID3D11DepthStencilView&gt; m_pDepthStencilView = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            ComPtr&lt;ID3D11DepthStencilState&gt; m_pDepthStencilState = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            ComPtr&lt;ID3D11SamplerState&gt; m_pSamplerState = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            <span class="keywordtype">bool</span> Create() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            <span class="keywordtype">bool</span> Release() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            <span class="keywordtype">void</span> OnWindowResize() <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            <a class="code" href="class_jade_1_1_graphics_1_1_d_x_device.html">DXDevice</a>() : window(<span class="keyword">nullptr</span>) { }</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            <span class="comment">// We have a window handle.</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            <a class="code" href="class_jade_1_1_graphics_1_1_d_x_device.html">DXDevice</a>(std::shared_ptr&lt;System::IWindow&gt; window, <a class="code" href="struct_jade_1_1_graphics_1_1_specification.html">Specification</a> specification)</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            {</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                this-&gt;window = window;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                this-&gt;specification = specification;</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                <span class="comment">// Create our device.</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                <span class="keywordflow">if</span> (!DXDevice::Create())</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                {</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                    <span class="comment">// Dispose of any allocated memory and close the window.</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                    DXDevice::Release();</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                }</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            }</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            ~<a class="code" href="class_jade_1_1_graphics_1_1_d_x_device.html">DXDevice</a>()</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            {</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                <span class="comment">// Cleanup resources.</span></div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                DXDevice::Release();</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;            }</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;            <span class="comment">// Main functions inherited by Device class.</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            <span class="keywordtype">void</span> Clear(<a class="code" href="struct_jade_1_1_math_1_1_color.html">Math::Color</a> color) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;            <span class="keywordtype">void</span> Present() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            std::shared_ptr&lt;System::IWindow&gt; GetIWindow() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            <span class="keywordtype">char</span>* DeviceInformation() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;            <span class="comment">// Retrieval functions for DirectX related objects.</span></div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;            D3D_DRIVER_TYPE GetD3DDriverType() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            D3D_FEATURE_LEVEL GetD3DFeatureLevel() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            D3D11_VIEWPORT GetD3D11Viewport() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            <span class="keyword">const</span> ComPtr&lt;ID3D11Device&gt;&amp; GetID3D11Device() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            <span class="keyword">const</span> ComPtr&lt;ID3D11DeviceContext&gt;&amp; GetID3D11DeviceContext() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;            <span class="keyword">const</span> ComPtr&lt;IDXGISwapChain&gt;&amp; GetIDXGISwapChain() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;            <span class="keyword">const</span> ComPtr&lt;ID3D11RenderTargetView&gt;&amp; GetID3D11RenderTargetView() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;            <span class="keyword">const</span> ComPtr&lt;ID3D11Texture2D&gt;&amp; GetID3D11DepthStencil() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;            <span class="keyword">const</span> ComPtr&lt;ID3D11DepthStencilView&gt;&amp; GetID3D11DepthStencilView() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;        };</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    }</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;}</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;</div>
-<div class="ttc" id="class_jade_1_1_graphics_1_1_d_x_device_html"><div class="ttname"><a href="class_jade_1_1_graphics_1_1_d_x_device.html">Jade::Graphics::DXDevice</a></div><div class="ttdef"><b>Definition:</b> DXDevice.h:42</div></div>
-<div class="ttc" id="namespace_microsoft_1_1_w_r_l_html"><div class="ttname"><a href="namespace_microsoft_1_1_w_r_l.html">WRL</a></div></div>
-<div class="ttc" id="struct_jade_1_1_math_1_1_color_html"><div class="ttname"><a href="struct_jade_1_1_math_1_1_color.html">Jade::Math::Color</a></div><div class="ttdef"><b>Definition:</b> Color.h:32</div></div>
-<div class="ttc" id="struct_jade_1_1_graphics_1_1_i_device_html"><div class="ttname"><a href="struct_jade_1_1_graphics_1_1_i_device.html">Jade::Graphics::IDevice</a></div><div class="ttdef"><b>Definition:</b> IDevice.h:33</div></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            DXDevice() : window(nullptr) { }</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            <span class="comment">// We have a window handle.</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            DXDevice(std::shared_ptr&lt;System::IWindow&gt; window, Specification specification)</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            {</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                this-&gt;window = window;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                this-&gt;specification = specification;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                <span class="comment">// Create our device.</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                <span class="keywordflow">if</span> (!DXDevice::Create())</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                {</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                    <span class="comment">// If device fails we need to throw an exception </span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                    <span class="comment">// as it can get nasty otherwise.</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                    <span class="keywordflow">throw</span> Core::DeviceCreationException();</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                }</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            }</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;            ~DXDevice()</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;            {</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                <span class="comment">// Cleanup resources.</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                DXDevice::Release();</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            }</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            <span class="comment">// Main functions inherited by Device class.</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            <span class="keywordtype">void</span> Clear(Math::Color color) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            <span class="keywordtype">void</span> Present() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;            std::shared_ptr&lt;System::IWindow&gt; GetIWindow() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;            <span class="keywordtype">char</span>* DeviceInformation() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            DrawType GetDrawType() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            <span class="keywordtype">void</span> SetDrawType(DrawType type) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            <span class="comment">// Retrieval functions for DirectX related objects.</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;            D3D_DRIVER_TYPE GetD3DDriverType() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;            D3D_FEATURE_LEVEL GetD3DFeatureLevel() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;            D3D11_VIEWPORT GetD3D11Viewport() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;            <span class="keyword">const</span> ComPtr&lt;ID3D11Device&gt;&amp; GetID3D11Device() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;            <span class="keyword">const</span> ComPtr&lt;ID3D11DeviceContext&gt;&amp; GetID3D11DeviceContext() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;            <span class="keyword">const</span> ComPtr&lt;IDXGISwapChain&gt;&amp; GetIDXGISwapChain() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;            <span class="keyword">const</span> ComPtr&lt;ID3D11RenderTargetView&gt;&amp; GetID3D11RenderTargetView() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;            <span class="keyword">const</span> ComPtr&lt;ID3D11Texture2D&gt;&amp; GetID3D11DepthStencil() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;            <span class="keyword">const</span> ComPtr&lt;ID3D11DepthStencilView&gt;&amp; GetID3D11DepthStencilView() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        };</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    }</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;}</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="namespace_jade_html"><div class="ttname"><a href="namespace_jade.html">Jade</a></div><div class="ttdef"><b>Definition:</b> AudioDevice.h:29</div></div>
-<div class="ttc" id="struct_jade_1_1_graphics_1_1_specification_html"><div class="ttname"><a href="struct_jade_1_1_graphics_1_1_specification.html">Jade::Graphics::Specification</a></div><div class="ttdef"><b>Definition:</b> Specification.h:8</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

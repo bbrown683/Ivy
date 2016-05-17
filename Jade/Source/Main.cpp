@@ -32,7 +32,7 @@ SOFTWARE.
 int main(int argc, char* argv[])
 {
 	// Creates a basic window that can be rendered with either graphics API.
-	Window window(1080, 720, 100, 100, "Hello World", false);
+	Window window(1080, 720, 100, 100, "Jade Game Engine Framework", false);
 
 	// Creates a graphics device.
 	Device device(window, GraphicsAPI::DirectX);
@@ -52,13 +52,12 @@ int main(int argc, char* argv[])
 	Shader shader(device, shaders);
 
 	// Camera with initial position and target.
-	Camera camera(device, Vector3(0.0f, 1.0f, -7.0f), Vector3(0.0f, 1.0f, 0.0f));
+	Camera camera(device, Vector3(0.0f, 1.0f, -5.0f), Vector3(0.0f, 1.0f, 0.0f));
 
 	// Dynamic model and font loading.
 	// This allows us to load a new instance with the same object.
 	Model model(device, shader);
 	model.Load(".\\resources\\models\\MonoCube.dae");
-	model.SetScale(Vector3(0.25f, 0.25f, 0.25f));
 
 	Font font(device, shader);
 	font.Load(".\\resources\\fonts\\times.ttf", 48);
@@ -69,14 +68,15 @@ int main(int argc, char* argv[])
 		device.Clear(Color::CornflowerBlue);
 
 		// Rotate and draw the models.
-		if(window.GetInput().keyboard.IsKeyDown(Key::Shift))
-			model.SetRotation(Vector3(0.0f, 0.025f, 0.0f));
-		
+		if (window.GetInput().keyboard.IsKeyDown(Key::Shift))
+			model.SetRotation(Vector3(0.0f, -0.025f, 0.0f));
+
 		model.Draw();
 
 		// Camera movement.
 		// Setting a camera with no orbiting requires us to update
 		// not only the camera position, but also the target.
+		// This could be moved into a lua script at a future date.
 		if (window.GetInput().keyboard.IsKeyDown(Key::W))
 		{
 			camera.SetCameraPosition(camera.GetCameraPosition() + Vector3(0.0f, 0.0f, 0.25f));

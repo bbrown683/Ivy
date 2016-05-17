@@ -61,9 +61,10 @@ bool Jade::Graphics::DXShader::Create(std::string filename, ShaderType type)
 			// Define the input layout
 			D3D11_INPUT_ELEMENT_DESC inputLayout[] =
 			{
-				{ "POSITION",	0, DXGI_FORMAT_R32G32B32_FLOAT	,	0,	0,	D3D11_INPUT_PER_VERTEX_DATA,	0 },
-				{ "TEXCOORD",	0, DXGI_FORMAT_R32G32_FLOAT		,	0, 12,	D3D11_INPUT_PER_VERTEX_DATA,	0 },
-				{ "NORMAL"  ,	0, DXGI_FORMAT_R32G32B32_FLOAT	,	0, 12,  D3D11_INPUT_PER_VERTEX_DATA,	0 },	
+				{ "POSITION",	0, DXGI_FORMAT_R32G32B32_FLOAT		,	0,	0,	D3D11_INPUT_PER_VERTEX_DATA,	0 },
+				{ "TEXCOORD",	0, DXGI_FORMAT_R32G32_FLOAT			,	0, 12,	D3D11_INPUT_PER_VERTEX_DATA,	0 },
+				{ "NORMAL"  ,	0, DXGI_FORMAT_R32G32B32_FLOAT		,	0, 12,  D3D11_INPUT_PER_VERTEX_DATA,	0 },
+				{ "COLOR"	,	0, DXGI_FORMAT_R32G32B32A32_FLOAT	,	0, 12,	D3D11_INPUT_PER_VERTEX_DATA,	0 },
 			};
 
 			// Create the input layout.
@@ -122,9 +123,9 @@ bool Jade::Graphics::DXShader::CopyToBlob(ShaderType type, ComPtr<ID3DBlob> blob
 void Jade::Graphics::DXShader::MakeActive()
 {
 	// Set the shaders for this mesh if they are not null.
-	if (m_pPixelShader)
+	if (m_pPixelShader.Get() != nullptr)
 		device->GetID3D11DeviceContext()->PSSetShader(m_pPixelShader.Get(), nullptr, 0);
-	if (m_pVertexShader)
+	if (m_pVertexShader.Get() != nullptr)
 		device->GetID3D11DeviceContext()->VSSetShader(m_pVertexShader.Get(), nullptr, 0);
 }
 

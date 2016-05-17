@@ -24,11 +24,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <Graphics/Device/Device.h>
-#include <Graphics/Rasterizer/DXRasterizer.h>
-#include <Graphics/Rasterizer/GLRasterizer.h>
-#include <Graphics/Rasterizer/IRasterizer.h>
-#include <Graphics/Rasterizer/RasterizerFactory.h>
+#include "Graphics/Device/Device.h"
+#include "Graphics/Rasterizer/DXRasterizer.h"
+#include "Graphics/Rasterizer/GLRasterizer.h"
+#include "Graphics/Rasterizer/IRasterizer.h"
+#include "Graphics/Rasterizer/RasterizerFactory.h"
 
 namespace Jade
 {

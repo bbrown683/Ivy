@@ -116,42 +116,44 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#include &quot;ft2build.h&quot;</span></div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#include FT_FREETYPE_H</span></div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &lt;Core/Utility.h&gt;</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#include &lt;Graphics/Device/Device.h&gt;</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_jade.html">Jade</a></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;{</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keyword">namespace </span>Graphics</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    {</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="comment">// Class for font rendering.</span></div>
-<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="class_jade_1_1_graphics_1_1_font.html">   38</a></span>&#160;        <span class="keyword">class </span><a class="code" href="class_jade_1_1_graphics_1_1_font.html">Font</a></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        {</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            <a class="code" href="class_jade_1_1_graphics_1_1_device.html">Device</a> device;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            std::string filename;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            <span class="keywordtype">int</span> pixelSize;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            <a class="code" href="class_jade_1_1_graphics_1_1_font.html">Font</a>(<a class="code" href="class_jade_1_1_graphics_1_1_device.html">Device</a> device, std::string filename, <span class="keywordtype">int</span> pixelSize)</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            {</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                this-&gt;device = device;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                this-&gt;filename = filename;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                this-&gt;pixelSize = pixelSize;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                Load();</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            }</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            <span class="comment">// Draws the given text at the specified x and y coordinates at a certain pixel size.</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <span class="keywordtype">bool</span> Draw(std::string text, <span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            <span class="keywordtype">void</span> Load();</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#include &quot;Core/Utility.h&quot;</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#include &quot;Core/Exception/Exception.h&quot;</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#include &quot;Graphics/Device/Device.h&quot;</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#include &quot;Graphics/Font/Glyph.h&quot;</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#include &quot;Graphics/Mesh/Mesh.h&quot;</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#include &quot;Graphics/Texture/Texture.h&quot;</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_jade.html">Jade</a></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;{</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keyword">namespace </span>Graphics</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    {</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="comment">// Class for font rendering.</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="class_jade_1_1_graphics_1_1_font.html">   42</a></span>&#160;        <span class="keyword">class </span><a class="code" href="class_jade_1_1_graphics_1_1_font.html">Font</a></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        {</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            <a class="code" href="class_jade_1_1_graphics_1_1_device.html">Device</a> device;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            <a class="code" href="class_jade_1_1_graphics_1_1_shader.html">Shader</a> shader;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            <a class="code" href="class_jade_1_1_graphics_1_1_texture.html">Texture</a> texture;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            <a class="code" href="class_jade_1_1_graphics_1_1_font.html">Font</a>(<a class="code" href="class_jade_1_1_graphics_1_1_device.html">Device</a> device, <a class="code" href="class_jade_1_1_graphics_1_1_shader.html">Shader</a> shader)</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            {</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                this-&gt;device = device;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                this-&gt;shader = shader;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            }</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            <span class="keywordtype">void</span> <a class="code" href="class_jade_1_1_graphics_1_1_font.html#ac1943d12d863c841fbcdc15d7a09c101">Draw</a>(std::string text, <span class="keywordtype">float</span> x, <span class="keywordtype">float</span> y);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            <span class="keywordtype">void</span> <a class="code" href="class_jade_1_1_graphics_1_1_font.html#abfb005d92619b01dc10b2a94693adffe">Load</a>(std::string filename, <span class="keywordtype">int</span> pixelSize);</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        };</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    }</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;}</div>
-<div class="ttc" id="class_jade_1_1_graphics_1_1_device_html"><div class="ttname"><a href="class_jade_1_1_graphics_1_1_device.html">Jade::Graphics::Device</a></div><div class="ttdef"><b>Definition:</b> Device.h:37</div></div>
-<div class="ttc" id="class_jade_1_1_graphics_1_1_font_html"><div class="ttname"><a href="class_jade_1_1_graphics_1_1_font.html">Jade::Graphics::Font</a></div><div class="ttdef"><b>Definition:</b> Font.h:38</div></div>
+<div class="ttc" id="class_jade_1_1_graphics_1_1_device_html"><div class="ttname"><a href="class_jade_1_1_graphics_1_1_device.html">Jade::Graphics::Device</a></div><div class="ttdef"><b>Definition:</b> Device.h:39</div></div>
+<div class="ttc" id="class_jade_1_1_graphics_1_1_font_html"><div class="ttname"><a href="class_jade_1_1_graphics_1_1_font.html">Jade::Graphics::Font</a></div><div class="ttdef"><b>Definition:</b> Font.h:42</div></div>
+<div class="ttc" id="class_jade_1_1_graphics_1_1_texture_html"><div class="ttname"><a href="class_jade_1_1_graphics_1_1_texture.html">Jade::Graphics::Texture</a></div><div class="ttdef"><b>Definition:</b> Texture.h:37</div></div>
+<div class="ttc" id="class_jade_1_1_graphics_1_1_font_html_abfb005d92619b01dc10b2a94693adffe"><div class="ttname"><a href="class_jade_1_1_graphics_1_1_font.html#abfb005d92619b01dc10b2a94693adffe">Jade::Graphics::Font::Load</a></div><div class="ttdeci">void Load(std::string filename, int pixelSize)</div><div class="ttdoc">Loads the specified font file and creates individual textures for each printable character at a speci...</div><div class="ttdef"><b>Definition:</b> Font.cpp:33</div></div>
 <div class="ttc" id="namespace_jade_html"><div class="ttname"><a href="namespace_jade.html">Jade</a></div><div class="ttdef"><b>Definition:</b> AudioDevice.h:29</div></div>
+<div class="ttc" id="class_jade_1_1_graphics_1_1_font_html_ac1943d12d863c841fbcdc15d7a09c101"><div class="ttname"><a href="class_jade_1_1_graphics_1_1_font.html#ac1943d12d863c841fbcdc15d7a09c101">Jade::Graphics::Font::Draw</a></div><div class="ttdeci">void Draw(std::string text, float x, float y)</div><div class="ttdoc">Draws the given text at the specified x and y coordinates at a certain pixel size. </div><div class="ttdef"><b>Definition:</b> Font.cpp:27</div></div>
+<div class="ttc" id="class_jade_1_1_graphics_1_1_shader_html"><div class="ttname"><a href="class_jade_1_1_graphics_1_1_shader.html">Jade::Graphics::Shader</a></div><div class="ttdef"><b>Definition:</b> Shader.h:41</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -42,29 +42,29 @@ float Jade::Math::Helper::WrapAngle(float angle)
 
 	// How many rotations an angle has can be determined by the times 
 	// in which it divides by 360 Degrees.
-	float timesToDivide = angle / (Math::TwoPi);
+	float timesToDivide = angle / Math::TwoPi;
 
 	// Positive Angle > 360
 	if (timesToDivide > 1)
 	{
 		for (int i = 0; i < timesToDivide; i++)
 		{
-			reducedAngle = angle - (Math::TwoPi);
+			reducedAngle = angle - Math::TwoPi;
 		}
 
 		return reducedAngle;
 	}
 	// Negative Angle < -360
-	else if (timesToDivide < -1)
+	if (timesToDivide < -1)
 	{
 		for (int i = 0; i > timesToDivide; i--)
 		{
-			reducedAngle = angle + (Math::TwoPi);
+			reducedAngle = angle + Math::TwoPi;
 		}
 
 		return reducedAngle;
 	}
-	
+
 	// Already reduced if it does not meet above conditions.
 	return angle;
 }

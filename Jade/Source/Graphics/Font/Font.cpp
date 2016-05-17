@@ -26,6 +26,7 @@ SOFTWARE.
 
 void Jade::Graphics::Font::Draw(std::string text, float x, float y)
 {
+	shader.MakeActive();
 	texture.Set();
 }
 

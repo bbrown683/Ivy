@@ -99,12 +99,24 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a4aa26ad8f6501e4adfcde35d351fc176"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4aa26ad8f6501e4adfcde35d351fc176"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>Rasterizer</b> (<a class="el" href="class_jade_1_1_graphics_1_1_device.html">Device</a> device)</td></tr>
 <tr class="separator:a4aa26ad8f6501e4adfcde35d351fc176"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad0dcd9b34e97b9f09b07365822d9ce7e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_jade_1_1_graphics_1_1_rasterizer.html#ad0dcd9b34e97b9f09b07365822d9ce7e">SetRasterizerState</a> (CullMode cullMode, FillMode fillMode) const </td></tr>
-<tr class="memdesc:ad0dcd9b34e97b9f09b07365822d9ce7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the rasterizer state to the specified cull mode and fill mode.  <a href="#ad0dcd9b34e97b9f09b07365822d9ce7e">More...</a><br /></td></tr>
-<tr class="separator:ad0dcd9b34e97b9f09b07365822d9ce7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4dfe961881a063f3e7e0b3e2a03500a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_jade_1_1_graphics_1_1_rasterizer.html#aa4dfe961881a063f3e7e0b3e2a03500a">SetRasterizerState</a> (CullMode cullMode, FillMode fillMode, WindMode windMode) const </td></tr>
+<tr class="memdesc:aa4dfe961881a063f3e7e0b3e2a03500a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the rasterizer state to the specified cull and fill mode.  <a href="#aa4dfe961881a063f3e7e0b3e2a03500a">More...</a><br /></td></tr>
+<tr class="separator:aa4dfe961881a063f3e7e0b3e2a03500a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b64516bb21e19638f6e9b1d5d600d97"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6b64516bb21e19638f6e9b1d5d600d97"></a>
+CullMode&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_jade_1_1_graphics_1_1_rasterizer.html#a6b64516bb21e19638f6e9b1d5d600d97">GetCullMode</a> () const </td></tr>
+<tr class="memdesc:a6b64516bb21e19638f6e9b1d5d600d97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current cull mode. Return values can only be None, Front, or Back. <br /></td></tr>
+<tr class="separator:a6b64516bb21e19638f6e9b1d5d600d97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec61b803aa6bb26e9f7002eca858e1b6"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aec61b803aa6bb26e9f7002eca858e1b6"></a>
+FillMode&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_jade_1_1_graphics_1_1_rasterizer.html#aec61b803aa6bb26e9f7002eca858e1b6">GetFillMode</a> () const </td></tr>
+<tr class="memdesc:aec61b803aa6bb26e9f7002eca858e1b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current fill mode. Return values can only be Wireframe or Solid. <br /></td></tr>
+<tr class="separator:aec61b803aa6bb26e9f7002eca858e1b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67934284de71de2de67a6183fcb94734"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a67934284de71de2de67a6183fcb94734"></a>
+WindMode&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_jade_1_1_graphics_1_1_rasterizer.html#a67934284de71de2de67a6183fcb94734">GetWindMode</a> () const </td></tr>
+<tr class="memdesc:a67934284de71de2de67a6183fcb94734"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current wind mode. Return value can only be Clockwise or CounterClockwise. <br /></td></tr>
+<tr class="separator:a67934284de71de2de67a6183fcb94734"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="ad0dcd9b34e97b9f09b07365822d9ce7e"></a>
+<a class="anchor" id="aa4dfe961881a063f3e7e0b3e2a03500a"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -121,7 +133,13 @@ Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">FillMode&#160;</td>
-          <td class="paramname"><em>fillMode</em>&#160;</td>
+          <td class="paramname"><em>fillMode</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">WindMode&#160;</td>
+          <td class="paramname"><em>windMode</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -136,7 +154,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Sets the rasterizer state to the specified cull mode and fill mode. </p>
+<p>Sets the rasterizer state to the specified cull and fill mode. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">cullMode</td><td>Represents the faces that will be hidden from view when rendering. Front, Back, and None are accepted values here. </td></tr>

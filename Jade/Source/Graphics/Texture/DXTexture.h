@@ -24,9 +24,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <Graphics/Device/DXDevice.h>
-#include <Graphics/Texture/ITexture.h>
-#include <Graphics/Texture/TextureType.h>
+#include "Graphics/Device/DXDevice.h"
+#include "Graphics/Texture/ITexture.h"
+#include "Graphics/Texture/TextureType.h"
 
 // Include after other headers.
 #include "FreeImage.h"

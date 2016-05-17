@@ -125,43 +125,40 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    {</div>
 <div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="class_jade_1_1_graphics_1_1_v_k_device.html">   37</a></span>&#160;        <span class="keyword">class </span><a class="code" href="class_jade_1_1_graphics_1_1_v_k_device.html">VKDevice</a> : <span class="keyword">public</span> <a class="code" href="struct_jade_1_1_graphics_1_1_i_device.html">IDevice</a></div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        {</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            <span class="comment">// Window object contains some data on our window such as size, </span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            <span class="comment">// and the handle of it in memory which we need to create a device.</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            std::shared_ptr&lt;System::IWindow&gt; window;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;            <span class="keywordtype">bool</span> Create() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            <span class="keywordtype">bool</span> Release() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            <span class="comment">// Window object contains some data on our window such as size, </span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            <span class="comment">// and the handle of it in memory which we need to create a device.</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            std::shared_ptr&lt;System::IWindow&gt; window;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            <span class="keywordtype">bool</span> Create() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            <span class="keywordtype">bool</span> Release() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            <span class="comment">// Empty Device.</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            <a class="code" href="class_jade_1_1_graphics_1_1_v_k_device.html">VKDevice</a>() : window(<span class="keyword">nullptr</span>) { }</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            <span class="comment">// Empty Device.</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            <a class="code" href="class_jade_1_1_graphics_1_1_v_k_device.html">VKDevice</a>() : window(<span class="keyword">nullptr</span>) { }</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            <a class="code" href="class_jade_1_1_graphics_1_1_v_k_device.html">VKDevice</a>(std::shared_ptr&lt;System::IWindow&gt; window)</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            {</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                this-&gt;window = window;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                <span class="comment">// Create our device.</span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                Create();</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            }</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            ~<a class="code" href="class_jade_1_1_graphics_1_1_v_k_device.html">VKDevice</a>()</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            {</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                <span class="comment">// Cleanup resources.</span></div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                Release();</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            }</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            <span class="keywordtype">void</span> Clear(<a class="code" href="struct_jade_1_1_math_1_1_color.html">Math::Color</a> color) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            <span class="keywordtype">void</span> Present() <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        };</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    }</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;}</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            <a class="code" href="class_jade_1_1_graphics_1_1_v_k_device.html">VKDevice</a>(std::shared_ptr&lt;System::IWindow&gt; window)</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            {</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                this-&gt;window = window;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                <span class="comment">// Create our device.</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                VKDevice::Create();</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            }</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            ~<a class="code" href="class_jade_1_1_graphics_1_1_v_k_device.html">VKDevice</a>()</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            {</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                <span class="comment">// Cleanup resources.</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                VKDevice::Release();</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            }</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            <span class="keywordtype">void</span> Clear(<a class="code" href="struct_jade_1_1_math_1_1_color.html">Math::Color</a> color) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            <span class="keywordtype">void</span> Present() <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        };</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    }</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;}</div>
 <div class="ttc" id="class_jade_1_1_graphics_1_1_v_k_device_html"><div class="ttname"><a href="class_jade_1_1_graphics_1_1_v_k_device.html">Jade::Graphics::VKDevice</a></div><div class="ttdef"><b>Definition:</b> VKDevice.h:37</div></div>
 <div class="ttc" id="struct_jade_1_1_math_1_1_color_html"><div class="ttname"><a href="struct_jade_1_1_math_1_1_color.html">Jade::Math::Color</a></div><div class="ttdef"><b>Definition:</b> Color.h:32</div></div>
-<div class="ttc" id="struct_jade_1_1_graphics_1_1_i_device_html"><div class="ttname"><a href="struct_jade_1_1_graphics_1_1_i_device.html">Jade::Graphics::IDevice</a></div><div class="ttdef"><b>Definition:</b> IDevice.h:33</div></div>
+<div class="ttc" id="struct_jade_1_1_graphics_1_1_i_device_html"><div class="ttname"><a href="struct_jade_1_1_graphics_1_1_i_device.html">Jade::Graphics::IDevice</a></div><div class="ttdef"><b>Definition:</b> IDevice.h:34</div></div>
 <div class="ttc" id="namespace_jade_html"><div class="ttname"><a href="namespace_jade.html">Jade</a></div><div class="ttdef"><b>Definition:</b> AudioDevice.h:29</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

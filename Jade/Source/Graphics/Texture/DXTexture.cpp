@@ -320,9 +320,9 @@ void Jade::Graphics::DXTexture::Fill(unsigned char * bitmap, unsigned pitch, Mat
 void Jade::Graphics::DXTexture::Set()
 {
 	// Set the sampler and resource view.
-	if(m_pShaderResourceView.Get())
+	if(m_pShaderResourceView.Get() != nullptr)
 		device->GetID3D11DeviceContext()->PSSetShaderResources(0, 1, m_pShaderResourceView.GetAddressOf());
-	if(m_pSamplerState.Get())
+	if(m_pSamplerState.Get() != nullptr)
 		device->GetID3D11DeviceContext()->PSSetSamplers(0, 1, m_pSamplerState.GetAddressOf());
 }
 #endif

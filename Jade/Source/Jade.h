@@ -80,6 +80,7 @@ SOFTWARE.
 // Math
 #ifdef JADE_INCLUDE_MATH
 #include "Math/Math.h"
+#include "Math/Rectangle.h"
 #include "Math/Matrix.h"
 #include "Math/Vector2.h"
 #include "Math/Vector3.h"

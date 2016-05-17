@@ -6,13 +6,6 @@ namespace Jade
 {
 	namespace Math
 	{
-		struct Space
-		{
-			Matrix world;
-			Matrix projection;
-			Matrix view;
-		};
-
 		struct PerObject
 		{
 			Matrix world;

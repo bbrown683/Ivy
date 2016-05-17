@@ -88,6 +88,14 @@ void Jade::Graphics::Model::Load(std::string filename)
 			else
 				vertex.normal = Math::Vector3();
 
+			if (aMesh->HasVertexColors(0))
+			{
+				aiColor4D aColor = aMesh->mColors[0][j];
+				vertex.color = Math::Color(aColor.r, aColor.g, aColor.b, aColor.a);
+			}
+			else
+				vertex.color = Math::Color::White;
+
 			vertices.push_back(vertex);
 		}
 
@@ -160,11 +168,11 @@ void Jade::Graphics::Model::Load(std::string filename)
 			}
 			*/
 		}
-		meshes.push_back(TestMesh(device, shader, vertices, indices, textures, PrimitiveType::TriangleList));
+		meshes.push_back(Mesh(device, shader, vertices, indices, textures, PrimitiveType::TriangleList));
 	}
 }
 
-std::vector<Jade::Graphics::TestMesh> Jade::Graphics::Model::GetMeshes() const
+std::vector<Jade::Graphics::Mesh> Jade::Graphics::Model::GetMeshes() const
 {
 	return meshes;
 }
@@ -195,10 +203,14 @@ void Jade::Graphics::Model::SetRotation(Math::Vector3 rotation)
 {
 	this->rotation = this->rotation + rotation;
 	
-	// Ensure rotation values does not exceed 2 Pi.
-	this->rotation.SetX(Math::Helper::WrapAngle(this->rotation.GetX()));
-	this->rotation.SetY(Math::Helper::WrapAngle(this->rotation.GetY()));
-	this->rotation.SetZ(Math::Helper::WrapAngle(this->rotation.GetZ()));
+	// Ensure rotation values does not exceed + or - 2 Pi.
+	// If this is not moderated, an overflow could eventually occur.
+	if (this->rotation.GetX() > Math::Math::TwoPi || this->rotation.GetX() < -Math::Math::TwoPi)
+		this->rotation.SetX(Math::Helper::WrapAngle(this->rotation.GetX()));
+	if (this->rotation.GetY() > Math::Math::TwoPi || this->rotation.GetY() < -Math::Math::TwoPi)
+		this->rotation.SetY(Math::Helper::WrapAngle(this->rotation.GetY()));
+	if (this->rotation.GetZ() > Math::Math::TwoPi || this->rotation.GetZ() < -Math::Math::TwoPi)
+		this->rotation.SetZ(Math::Helper::WrapAngle(this->rotation.GetZ()));
 	
 	for (unsigned int i = 0; i < meshes.size(); i++)
 		meshes[i].SetRotation(this->rotation);

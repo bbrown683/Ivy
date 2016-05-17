@@ -24,9 +24,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "Graphics/Buffer/IUniformBuffer.h"
+#include "Graphics/Buffer/IConstantBuffer.h"
 #include "Graphics/Buffer/DXConstantBuffer.h"
-#include "Graphics/Buffer/GLUniformBuffer.h"
+#include "Graphics/Buffer/GLConstantBuffer.h"
 #include "Graphics/Device/Device.h"
 
 namespace Jade
@@ -36,7 +36,7 @@ namespace Jade
 		class ConstantBuffer
 		{
 			Device device;
-			std::shared_ptr<IUniformBuffer> constantBuffer;
+			std::shared_ptr<IConstantBuffer> constantBuffer;
 
 		public:
 
@@ -58,9 +58,10 @@ namespace Jade
 				}
 			}
 
-			void Bind();
-			bool Create(bool model, bool view, bool projection);
-			
+			bool CreateProjectionMatrix();
+			bool CreateViewMatrix();
+			bool CreateWorldMatrix();
+
 			Math::Matrix GetProjectionMatrix();
 			Math::Matrix GetViewMatrix();
 			Math::Matrix GetWorldMatrix();
@@ -69,7 +70,6 @@ namespace Jade
 			void SetViewMatrix(Math::Matrix matrix);
 			void SetWorldMatrix(Math::Matrix matrix);
 			
-			void Unbind();
 			void Update();
 		};
 	}
