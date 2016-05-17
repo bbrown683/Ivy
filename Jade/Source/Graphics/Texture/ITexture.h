@@ -24,16 +24,20 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include "Math/Rectangle.h"
+
 namespace Jade
 {
 	namespace Graphics
 	{
 		struct ITexture
 		{
-		public:
 			virtual bool CreateTextureFromFile() = 0;
 			virtual bool CreateTextureFromMemory() = 0;
-			virtual void Update() = 0;
+			virtual bool CreateEmptyTexture() = 0;
+			virtual void Set() = 0;
+			//virtual void Fill(unsigned char* bitmap, unsigned left, unsigned right, unsigned top, unsigned bottom, unsigned pitch) = 0;
+			virtual void Fill(unsigned char* bitmap, unsigned pitch, Math::Rectangle rect) = 0;
 		};
 	}
 }

@@ -30,11 +30,37 @@ namespace Jade
 	{
 		class Rectangle
 		{
+			int x, y;
+			int width, height;
+
 		public:
 
-			Rectangle(float x, float y, float width, float height)
+			Rectangle(int x, int y, int width, int height)
 			{
+				this->x = x;
+				this->y = y;
+				this->width = width;
+				this->height = height;
+			}
 
+			int GetX() const
+			{
+				return x;
+			}
+
+			int GetY() const
+			{
+				return y;
+			}
+
+			int GetWidth() const
+			{
+				return width;
+			}
+
+			int GetHeight() const
+			{
+				return height;
 			}
 		};
 	}

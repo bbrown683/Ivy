@@ -24,13 +24,15 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+// Assimp headers.
 #include "assimp/Importer.hpp"
 #include "assimp/Scene.h"
 #include "assimp/postprocess.h"
 
 #include "Core/Utility.h"
 #include "Graphics/Mesh/Mesh.h"
-#include <Graphics/Mesh/TestMesh.h>
+#include "Graphics/Mesh/TestMesh.h"
+#include "Math/Helper.h"
 
 namespace Jade
 {
@@ -49,6 +51,8 @@ namespace Jade
 			std::vector<TestMesh> meshes;
 
 			Math::Vector3 position;
+			Math::Vector3 rotation;
+			Math::Vector3 scale;
 
 		public:
 
@@ -58,15 +62,19 @@ namespace Jade
 				this->shader = shader;
 			}
 
-			void Load(std::string filename);
 			void Draw();
+			void Load(std::string filename);
 
 			//std::vector<Mesh> GetMeshes() const;
 			std::vector<TestMesh> GetMeshes() const;
 
+			Math::Vector3 GetPosition();
+			Math::Vector3 GetRotation();
+			Math::Vector3 GetScale();
+
 			void SetPosition(Math::Vector3 position);
-			void SetScale(Math::Vector3 scale);
 			void SetRotation(Math::Vector3 rotation);
+			void SetScale(Math::Vector3 scale);
 		};
 	}
 }

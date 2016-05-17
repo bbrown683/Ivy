@@ -24,11 +24,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <Graphics/Device/Device.h>
-#include <Graphics/Texture/DXTexture.h>
+#include "Graphics/Device/Device.h"
+#include "Graphics/Texture/DXTexture.h"
 #include "Graphics/Texture/GLTexture.h"
-#include <Graphics/Texture/ITexture.h>
-#include "TextureFactory.h"
+#include "Graphics/Texture/ITexture.h"
+#include "Graphics/Texture/TextureFactory.h"
 
 namespace Jade
 {
@@ -73,29 +73,46 @@ namespace Jade
 				texture = TextureFactory::Generate<ITexture>(device, bitmap, width, height, pitch, bits, type);
 			}
 
+			//! Creates an empty texture which must be dynamically filled in using the Fill method.
+			bool CreateEmptyTexture() const
+			{
+				return texture->CreateEmptyTexture();
+			}
+
+			//! Creates a texture from the file specified in the constructor and returns a bool determining if it was successful.
 			bool CreateTextureFromFile() const
 			{
 				return texture->CreateTextureFromFile();
 			}
 
+			//! Creates a texture from the bits specified in the constructor and returns a bool determining if it was successful.
 			bool CreateTextureFromMemory() const
 			{
 				return texture->CreateTextureFromMemory();
 			}
 
-			void Update() const
+			//! Updates a dynamic texture by filling in the bitmap at the specified position.
+			void Fill(unsigned char* bitmap, unsigned pitch, Math::Rectangle rect) const
 			{
-				return texture->Update();
+				texture->Fill(bitmap, pitch, rect);
 			}
 
+			//! Returns the filename of a texture if it exists. 
 			std::string GetFilename() const
 			{
 				return filename;
 			}
 
+			//! Returns the interface object that is a lower level abstraction.
 			std::shared_ptr<ITexture> GetITexture() const
 			{
 				return texture;
+			}
+
+			//! Updates the texture resources to ensure that they remain the target of the drawing operations.
+			void Set() const
+			{
+				texture->Set();
 			}
 		};
 	}

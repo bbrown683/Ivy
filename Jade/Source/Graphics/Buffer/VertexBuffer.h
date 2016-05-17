@@ -42,12 +42,12 @@ namespace Jade
 
 			VertexBuffer() { }
 
-			VertexBuffer(Device device)
+			VertexBuffer(Device device, PrimitiveType primitiveType)
 			{
 				switch (device.GetGraphicsAPI())
 				{
 				case GraphicsAPI::DirectX:
-					vertexBuffer = std::make_shared<DXVertexBuffer>(std::dynamic_pointer_cast<DXDevice>(device.GetIDevice()));
+					vertexBuffer = std::make_shared<DXVertexBuffer>(std::dynamic_pointer_cast<DXDevice>(device.GetIDevice()), primitiveType);
 					break;
 				case GraphicsAPI::OpenGL:
 					vertexBuffer = std::make_shared<GLVertexBuffer>();

@@ -37,7 +37,7 @@ bool Jade::Graphics::GLDevice::Create()
 	{
 		sizeof(dummyPixelFormatDescriptor), 1, PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER,
 		PFD_TYPE_RGBA, static_cast<BYTE>(specification.colorBits), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-		static_cast<BYTE>(specification.depthBits), static_cast<BYTE>(specification.stencilBits), 0, PFD_MAIN_PLANE,
+		24, 8, 0, PFD_MAIN_PLANE,
 		0, 0, 0, 0
 	};
 
@@ -78,8 +78,8 @@ bool Jade::Graphics::GLDevice::Create()
 		WGL_DOUBLE_BUFFER_ARB, GL_TRUE,
 		WGL_PIXEL_TYPE_ARB, WGL_TYPE_RGBA_ARB,
 		WGL_COLOR_BITS_ARB, specification.colorBits,
-		WGL_DEPTH_BITS_ARB, specification.depthBits,
-		WGL_STENCIL_BITS_ARB, specification.stencilBits,
+		WGL_DEPTH_BITS_ARB, 24,
+		WGL_STENCIL_BITS_ARB, 8,
 		WGL_SAMPLE_BUFFERS_ARB, (specification.samples > 1) ? GL_TRUE : GL_FALSE,
 		WGL_SAMPLES_ARB, (specification.samples > 1) ? specification.samples : 0,
 		0

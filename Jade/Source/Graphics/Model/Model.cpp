@@ -24,6 +24,13 @@ SOFTWARE.
 
 #include "Model.h"
 
+void Jade::Graphics::Model::Draw()
+{
+	// Loop through and draw each mesh.
+	for (unsigned int i = 0; i < meshes.size(); i++)
+		meshes[i].Draw();
+}
+
 void Jade::Graphics::Model::Load(std::string filename)
 {
 	Assimp::Importer importer;
@@ -153,15 +160,8 @@ void Jade::Graphics::Model::Load(std::string filename)
 			}
 			*/
 		}
-		meshes.push_back(TestMesh(device, shader, vertices, indices, textures));
+		meshes.push_back(TestMesh(device, shader, vertices, indices, textures, PrimitiveType::TriangleList));
 	}
-}
-
-void Jade::Graphics::Model::Draw()
-{
-	// Loop through and draw each mesh.
-	for (unsigned int i = 0; i < meshes.size(); i++)
-		meshes[i].Draw();
 }
 
 std::vector<Jade::Graphics::TestMesh> Jade::Graphics::Model::GetMeshes() const
@@ -169,20 +169,44 @@ std::vector<Jade::Graphics::TestMesh> Jade::Graphics::Model::GetMeshes() const
 	return meshes;
 }
 
-void Jade::Graphics::Model::SetPosition(Math::Vector3 position)
+Jade::Math::Vector3 Jade::Graphics::Model::GetPosition()
 {
-	for (unsigned int i = 0; i < meshes.size(); i++)
-		meshes[i].SetPosition(position);
+	return position;
 }
 
-void Jade::Graphics::Model::SetScale(Math::Vector3 scale)
+Jade::Math::Vector3 Jade::Graphics::Model::GetRotation()
 {
+	return rotation;
+}
+
+Jade::Math::Vector3 Jade::Graphics::Model::GetScale()
+{
+	return scale;
+}
+
+void Jade::Graphics::Model::SetPosition(Math::Vector3 position)
+{
+	this->position = this->position + position;
 	for (unsigned int i = 0; i < meshes.size(); i++)
-		meshes[i].SetScale(scale);
+		meshes[i].SetPosition(this->position);
 }
 
 void Jade::Graphics::Model::SetRotation(Math::Vector3 rotation)
 {
+	this->rotation = this->rotation + rotation;
+	
+	// Ensure rotation values does not exceed 2 Pi.
+	this->rotation.SetX(Math::Helper::WrapAngle(this->rotation.GetX()));
+	this->rotation.SetY(Math::Helper::WrapAngle(this->rotation.GetY()));
+	this->rotation.SetZ(Math::Helper::WrapAngle(this->rotation.GetZ()));
+	
 	for (unsigned int i = 0; i < meshes.size(); i++)
-		meshes[i].SetRotation(rotation);
+		meshes[i].SetRotation(this->rotation);
+}
+
+void Jade::Graphics::Model::SetScale(Math::Vector3 scale)
+{
+	this->scale = this->scale + scale;
+	for (unsigned int i = 0; i < meshes.size(); i++)
+		meshes[i].SetScale(this->scale);
 }

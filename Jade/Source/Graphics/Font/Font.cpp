@@ -26,64 +26,111 @@ SOFTWARE.
 
 void Jade::Graphics::Font::Draw(std::string text, float x, float y)
 {
-	texture.Update();
+	texture.Set();
 }
 
-/*
-void Jade::Graphics::Font::Load(std::string filename, float pixelSize)
+void Jade::Graphics::Font::Load(std::string filename, int pixelSize)
 {
 	if (filename.empty())
 		throw Core::ArgumentNullException("filename", __FILE__, __LINE__);
 
 	std::cout << "[Font Data]" << std::endl;
 
-	System::File file(filename);
-	std::string source = file.Read();
-	const unsigned char* data = reinterpret_cast<const unsigned char*>(source.c_str());
+	FT_Library library;
 
-	stbtt_fontinfo fontInfo;
-	if (stbtt_InitFont(&fontInfo, data, 0))
+	FT_Error error = FT_Init_FreeType(&library);
+	if (error)
 	{
-		for (int i = 33; i < 127; i++)
-		{
-			Glyph glyph;
-			auto bitmap = stbtt_GetCodepointBitmap(&fontInfo, 0.0f, stbtt_ScaleForPixelHeight(&fontInfo, pixelSize),
-				(glyph.character = i), &glyph.width, &glyph.height, &glyph.xOffset, &glyph.yOffset);
-			glyphs.push_back(glyph);
-			Texture texture = Texture(device, bitmap, glyph.width, glyph.height, glyph.width, 8, TextureType::Bitmap);
-			texture.CreateTextureFromMemory();
-			textures.push_back(texture);
-			stbtt_FreeBitmap(bitmap, nullptr);
-		}
+		std::cout << "Failed to initialize FreeType..." << std::endl;
+		return;
 	}
-}
-*/
 
-void Jade::Graphics::Font::Load(std::string filename, int width, int height, float pixelSize)
-{
-	if (filename.empty())
-		throw Core::ArgumentNullException("filename", __FILE__, __LINE__);
+	FT_Face face;
+	error = FT_New_Face(library, filename.c_str(), 0, &face);
 
-	std::cout << "[Font Data]" << std::endl;
-
-	// Create a bitmap of our printable characters.
-	std::vector<unsigned char> temp_bitmap(width * height);
-
-	System::File file(filename);
-	std::string source = file.Read();
-	const unsigned char* data = reinterpret_cast<const unsigned char*>(source.c_str());
-
-	// Process space character even though it wont be embedded into the bitmap.
-	// It should be inserted into the stbtt_bakedchar struct.
-	if (stbtt_BakeFontBitmap(data, 0, pixelSize, temp_bitmap.data(), 
-		width, height, 32, 95, bakedChar.data()))
+	if (error)
 	{
-		// Apparently pitch is the image width.
-		// stb_truetype creates a 2 bit channel bitmap, so it is only 8 bits in width.
-		texture = Texture(device, temp_bitmap.data(), width, height, width, 8, TextureType::Bitmap);
-		if (texture.CreateTextureFromMemory())
+		std::cout << "Failed to load face from font file " << filename << "..." << std::endl;
+		return;
+	}
+
+	error = FT_Set_Pixel_Sizes(face, 0, pixelSize);
+
+	if (error)
+	{
+		std::cout << "Failed to load face from font file " << filename << "..." << std::endl;
+		return;
+	}
+
+	std::cout << "Font " << filename << " was loaded..." << std::endl;
+
+	// The following code below uses a portion of the following:
+	// https://en.wikibooks.org/wiki/OpenGL_Programming/Modern_OpenGL_Tutorial_Text_Rendering_02
+	// It was converted into Direct3D11's form of inserting a bitmap into an existing texture.
+
+	FT_GlyphSlot glyph = face->glyph;
+
+	// Determine the width of the bitmap we need.
+	unsigned int roww = 0;
+	unsigned int rowh = 0;
+	unsigned int w = 0;
+	unsigned int h = 0;
+
+	// Load only the printable ASCII characters.
+	for (int i = 32; i < 127; i++)
+	{
+		if (FT_Load_Char(face, i, FT_LOAD_RENDER)) 
 		{
-			std::cout << "Font bitmap was successfully created." << std::endl;
+			printf("Loading character %c failed!\n", i);
+			continue;
 		}
+		
+		// Set max width to 512 for simplicity.
+		if (roww + glyph->bitmap.width + 1 >= 512) 
+		{
+			w = std::max(w, roww);
+			h += rowh;
+			roww = 0;
+			rowh = 0;
+		}
+
+		roww += glyph->bitmap.width + 1;
+		rowh = std::max(rowh, glyph->bitmap.rows);
+	}
+
+	w = std::max(w, roww);
+	h += rowh;
+
+	texture = Texture(device, nullptr, w, h, 0, 8, TextureType::Bitmap);
+	texture.CreateEmptyTexture(); // Create an empty texture and fill it in with the individual bitmaps.
+
+	// Offsets in the bitmap.
+	int ox = 0;
+	int oy = 0;
+
+	rowh = 0;
+
+	// Generate font atlas, excluding space character.
+	// We only included it above to grab its data.
+	for(int i = 33; i < 127; i++)
+	{
+		if (FT_Load_Char(face, i, FT_LOAD_RENDER))
+		{
+			printf("Loading character %c failed!\n", i);
+			continue;
+		}
+
+		if (ox + glyph->bitmap.width + 1 >= 512) 
+		{
+			oy += rowh;
+			rowh = 0;
+			ox = 0;
+		}
+		
+		Math::Rectangle rect(ox, oy, ox + glyph->bitmap.width, oy + glyph->bitmap.rows);
+		texture.Fill(glyph->bitmap.buffer, glyph->bitmap.pitch, rect);
+
+		rowh = std::max(rowh, glyph->bitmap.rows);
+		ox += glyph->bitmap.width + 1;
 	}
 }

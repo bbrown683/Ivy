@@ -27,6 +27,7 @@ SOFTWARE.
 */
 
 #include "Graphics/Buffer/IVertexBuffer.h"
+#include "Graphics/Buffer/PrimitiveType.h"
 #include "Graphics/Device/DXDevice.h"
 #include "Math/Vertex.h"
 
@@ -40,6 +41,8 @@ namespace Jade
 			std::shared_ptr<DXDevice> device;
 			std::vector<Math::Vertex> vertices;
 
+			PrimitiveType primitiveType;
+
 			ComPtr<ID3D11Buffer> m_pVertexBuffer;
 
 			bool Create() override;
@@ -48,7 +51,7 @@ namespace Jade
 
 		public:
 
-			DXVertexBuffer(std::shared_ptr<DXDevice> device)
+			DXVertexBuffer(std::shared_ptr<DXDevice> device, PrimitiveType primitiveType)
 			{
 				this->device = device;
 			}

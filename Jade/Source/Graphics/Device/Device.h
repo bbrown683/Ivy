@@ -62,8 +62,6 @@ namespace Jade
 				specification.backBufferHeight = window.GetHeight();
 				specification.backBufferWidth = window.GetWidth();
 				specification.colorBits = 32;
-				specification.depthBits = 24;
-				specification.stencilBits = 8;
 				specification.samples = 1;
 				specification.vsync = true;
 

@@ -15,9 +15,9 @@ void Jade::Graphics::TestMesh::Draw()
 	// Assign the matrix data to the buffer.
 	cBuffer.Update();
 
-	// Update the textures.
+	// Set the textures.
 	for (unsigned int i = 0; i < textures.size(); i++)
-		textures[i].Update();
+		textures[i].Set();
 
 	// Draw either based on vertices or indices.
 	if (device.GetDrawType() == DrawType::Default)

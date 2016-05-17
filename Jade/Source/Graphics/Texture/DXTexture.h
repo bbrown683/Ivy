@@ -24,8 +24,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "stb/stb_image.h"
-
 #include <Graphics/Device/DXDevice.h>
 #include <Graphics/Texture/ITexture.h>
 #include <Graphics/Texture/TextureType.h>
@@ -79,13 +77,18 @@ namespace Jade
 				std::cout << "Texture was released successfully..." << std::endl;
 			}
 
+			//! Creates an empty texture which must be dynamically filled in using the Fill method.
+			bool CreateEmptyTexture() override;
 			//! Creates a texture from the file specified in the constructor and returns a bool determining if it was successful.
 			bool CreateTextureFromFile() override;
 			//! Creates a texture from the bits specified in the constructor and returns a bool determining if it was successful.
 			bool CreateTextureFromMemory() override;
+			// Updates a dynamic texture.
+			void Fill(unsigned char* bitmap, unsigned pitch, Math::Rectangle rect) override;
 			//! Updates the texture resources to ensure that they remain the target of the drawing operations.
-			void Update() override;
+			void Set() override;
 
+			DXGI_FORMAT DetermineTextureFormat();
 			const ComPtr<ID3D11ShaderResourceView>& GetID3D11ShaderResourceView() const;
 		};
 	}

@@ -26,6 +26,9 @@ SOFTWARE.
 
 #include "stb/stb_truetype.h"
 
+#include "ft2build.h"
+#include FT_FREETYPE_H
+
 #include "Core/Utility.h"
 #include "Core/Exception/Exception.h"
 #include "Graphics/Device/Device.h"
@@ -45,24 +48,20 @@ namespace Jade
 			Shader shader;
 			
 			Texture texture;
-			std::vector<stbtt_bakedchar> bakedChar;
+			std::vector<stbtt_packedchar> packedChar;
 
 		public:
  
 			Font(Device device, Shader shader)
 			{
 				this->device = device;
-
-				bakedChar = std::vector<stbtt_bakedchar>(95);
+				packedChar = std::vector<stbtt_packedchar>(95);
 			}
 
 			//! Draws the given text at the specified x and y coordinates at a certain pixel size.
 			void Draw(std::string text, float x, float y);
 			//! Loads the specified font file and creates individual textures for each printable character at a specified pixel size.
-			//void Load(std::string filename, float pixelSize);
-			
-			//! Loads the specified font file and creates a bitmap with the designated width, height, and pixel size.
-			void Load(std::string filename, int width, int height, float pixelSize);
+			void Load(std::string filename, int pixelSize);
 		};
 	}
 }

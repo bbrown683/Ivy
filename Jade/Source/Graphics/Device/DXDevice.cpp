@@ -73,8 +73,8 @@ bool Jade::Graphics::DXDevice::Create()
 	sd.OutputWindow = static_cast<HWND>(window->Handle());
 	sd.Windowed = true;
 	sd.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
-	sd.SampleDesc.Count = 1;
-	sd.SampleDesc.Quality = 0;
+	sd.SampleDesc.Count = specification.samples;
+	sd.SampleDesc.Quality = D3D11_STANDARD_MULTISAMPLE_PATTERN;
 	sd.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
 	
 	// Iterate through the drivers.
@@ -104,8 +104,8 @@ bool Jade::Graphics::DXDevice::Create()
 	depthDesc.MipLevels = 1;
 	depthDesc.ArraySize = 1;
 	depthDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
-	depthDesc.SampleDesc.Count = 1;
-	depthDesc.SampleDesc.Quality = 0;
+	depthDesc.SampleDesc.Count = specification.samples;
+	depthDesc.SampleDesc.Quality = D3D11_STANDARD_MULTISAMPLE_PATTERN;
 	depthDesc.Usage = D3D11_USAGE_DEFAULT;
 	depthDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
 	depthDesc.CPUAccessFlags = 0;
@@ -152,7 +152,10 @@ bool Jade::Graphics::DXDevice::Create()
 	D3D11_DEPTH_STENCIL_VIEW_DESC stencilDesc;
 	ZeroMemory(&stencilDesc, sizeof(stencilDesc));
 	stencilDesc.Format = depthDesc.Format;
-	stencilDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
+	if (specification.samples > 1)
+		stencilDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2DMS;
+	else
+		stencilDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
 	stencilDesc.Texture2D.MipSlice = 0;
 	hr = m_pDevice->CreateDepthStencilView(m_pDepthStencil.Get(), &stencilDesc, m_pDepthStencilView.GetAddressOf());
 

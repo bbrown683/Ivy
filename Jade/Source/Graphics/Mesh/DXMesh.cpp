@@ -168,9 +168,9 @@ void Jade::Graphics::DXMesh::Draw()
 		device->GetID3D11DeviceContext()->UpdateSubresource(m_pConstantBuffer.Get(), 0, nullptr, &space, 0, 0);
 		device->GetID3D11DeviceContext()->VSSetConstantBuffers(0, 1, m_pConstantBuffer.GetAddressOf());
 
-		// Update textures for each mesh.
+		// Set textures for each mesh.
 		for (unsigned int i = 0; i < textures.size(); i++)
-			textures[i].Update();
+			textures[i].Set();
 
 		device->GetID3D11DeviceContext()->DrawIndexed(static_cast<unsigned int>(indices.size()), 0, 0);
 	}

@@ -182,6 +182,8 @@
     <ClInclude Include="Graphics\Model\Importer\OBJImporter.h" />
     <ClInclude Include="Graphics\Model\Importer\ModelMesh.h" />
     <ClInclude Include="Graphics\Model\Importer\MeshMaterial.h" />
+    <ClInclude Include="Core\Script\Script.h" />
+    <ClInclude Include="Graphics\Buffer\PrimitiveType.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">

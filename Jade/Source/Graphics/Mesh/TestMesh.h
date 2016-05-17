@@ -24,6 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include "Graphics/Buffer/PrimitiveType.h"
 #include "Graphics/Device/Device.h"
 #include "Graphics/Mesh/IMesh.h"
 #include "Graphics/Mesh/DXMesh.h"
@@ -44,6 +45,7 @@ namespace Jade
 		{
 			Device device;
 			Shader shader;
+			PrimitiveType primitiveType;
 
 			std::vector<Math::Vertex> vertices;
 			std::vector<unsigned short> indices;
@@ -59,15 +61,26 @@ namespace Jade
 
 		public:
 
-			TestMesh(Device device, Shader shader, std::vector<Math::Vertex> vertices, std::vector<unsigned short> indices, std::vector<Texture> textures)
+			TestMesh(Device device, Shader shader, std::vector<Math::Vertex> vertices, PrimitiveType primitiveType)
+			{
+				
+			}
+
+			TestMesh(Device device, Shader shader, std::vector<Math::Vertex> vertices, std::vector<unsigned short> indices, PrimitiveType primitiveType)
+			{
+
+			}
+
+			TestMesh(Device device, Shader shader, std::vector<Math::Vertex> vertices, std::vector<unsigned short> indices, std::vector<Texture> textures, PrimitiveType primitiveType)
 			{
 				this->device = device;
 				this->shader = shader;
 				this->vertices = vertices;
 				this->indices = indices;
 				this->textures = textures;
+				this->primitiveType = primitiveType;
 
-				vBuffer = VertexBuffer(device);
+				vBuffer = VertexBuffer(device, primitiveType);
 				iBuffer = IndexBuffer(device);
 				cBuffer = ConstantBuffer(device);
 
@@ -100,6 +113,7 @@ namespace Jade
 			}
 
 			void Draw();
+			
 			void SetPosition(Math::Vector3 position);
 			void SetScale(Math::Vector3 scale);
 			void SetRotation(Math::Vector3 rotation);

@@ -1,7 +1,5 @@
 #pragma once
 
-#include "stb/stb_image.h"
-
 #include "Graphics/Device/DXDevice.h"
 #include "Graphics/Sprite/ISprite.h"
 #include "Graphics/Texture/Texture.h"
