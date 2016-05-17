@@ -8,8 +8,9 @@ An Open Source C++ Game Development Framework inspired by [Monogame](http://www.
 # Libraries Used
 * Assimp 3.0.0
 * FreeImage
-* stb_truetype
+* FreeType
 * [Glad](http://glad.dav1d.de/)
+* GLM (OpenGL Mathematics)
 * OpenAL 1.1
 * SDL 2.0.4
 * [Windows 8 SDK](https://developer.microsoft.com/en-us/windows/downloads/windows-8-sdk) (DirectX11 and OpenGL Headers for Windows Development)
@@ -17,10 +18,10 @@ An Open Source C++ Game Development Framework inspired by [Monogame](http://www.
 The following except the Windows 8 SDK is provided for out of the box compilation on x86 and x64 machines using Visual Studio 2015 Community Edition.
 
 # Features
-* Should be portable
-* Very simple API
-* Graphics backends
-* Planned multithreading support
+* Will eventually be portable.
+* Very simple API.
+* Graphics backends.
+* Planned multithreading support for asset loading.
 
 # Example Application
 ```c++
