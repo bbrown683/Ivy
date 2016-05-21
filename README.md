@@ -18,9 +18,9 @@ An Open Source C++ Game Development Framework inspired by [Monogame](http://www.
 The following except the Windows 8 SDK is provided for out of the box compilation on x86 and x64 machines using Visual Studio 2015 Community Edition.
 
 # Features
-* Will eventually be portable.
+* Written for portability. 
 * Very simple API.
-* Graphics backends.
+* Graphics backends for OpenGL and DirectX. Vulkan is possible as well, but my card currently does not have support by AMD.
 * Planned multithreading support for asset loading.
 
 # Example Application
