@@ -24,9 +24,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <Core/Utility.h>
-#include <Math/Math.h>
-#include <Math/Vector3.h>
+#include "Core/Utility.h"
+#include "Math/Math.h"
+#include "Math/Vector2.h"
+#include "Math/Vector3.h"
 
 #include <glm/matrix.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -38,10 +39,6 @@ namespace Jade
 		// A 4x4 structure for storing data.
 		struct Matrix
 		{
-			glm::mat4 values;
-
-		public:
-
 			Matrix operator+(Matrix matrix) const
 			{
 				glm::mat4 add = values + matrix.values;
@@ -141,6 +138,7 @@ namespace Jade
 			//! Rotates the matrix along the z - axis by a specified amount in radians.
 			static Matrix RotateAlongZ(float radians);
 			//! Scales a matrix.
+			Matrix Scale(Vector2 scale);
 			Matrix Scale(Vector3 scale);
 			//! Subtracts two matrices and returns a matrix as a result.
 			Matrix Subtract(Matrix other) const;
@@ -150,6 +148,10 @@ namespace Jade
 			Matrix Transpose();
 			//! Returns a string representation of the matrix.
 			std::string ToString();
+
+		private:
+
+			glm::mat4 values;
 		};
 	}
 }

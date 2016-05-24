@@ -53,7 +53,7 @@ bool Jade::Graphics::DXTexture::CreateEmptyTexture()
 	// We now need the resource description for our texture.
 	D3D11_SHADER_RESOURCE_VIEW_DESC resDesc;
 	ZeroMemory(&resDesc, sizeof(resDesc));
-	resDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
+	resDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D; // TODO: Add multisampling support for textures.
 	resDesc.Format = texDesc.Format;
 	resDesc.Texture2D.MipLevels = texDesc.MipLevels;
 	resDesc.Texture2D.MostDetailedMip = texDesc.MipLevels - 1;
@@ -103,7 +103,7 @@ bool Jade::Graphics::DXTexture::CreateTextureFromFile()
 	filepath.append(filename.c_str());
 
 	// Use free image to get load the image and retrieve its bits.
-	FREE_IMAGE_FORMAT fif = FreeImage_GetFIFFromFilename(filename.c_str());
+	FREE_IMAGE_FORMAT fif = FreeImage_GetFIFFromFilename(filepath.c_str());
 
 	if (!FreeImage_FIFSupportsReading(fif))
 		return false;
@@ -113,7 +113,7 @@ bool Jade::Graphics::DXTexture::CreateTextureFromFile()
 	// Null check.
 	if (!aBitmap)
 	{
-		std::cout << "Failed to load material " << filename << " successfully..." << std::endl;
+		std::cout << "Failed to load file " << filename << " successfully..." << std::endl;
 		return false;
 	}
 
@@ -134,7 +134,7 @@ bool Jade::Graphics::DXTexture::CreateTextureFromFile()
 	unsigned int aPitch = FreeImage_GetPitch(aBitmap);
 
 	// Retrieve the bits of the bitmap.
-	BYTE* bits = FreeImage_GetBits(aBitmap);
+	BYTE* aBits = FreeImage_GetBits(aBitmap);
 
 	// Create our texture description.
 	D3D11_TEXTURE2D_DESC texDesc;
@@ -143,7 +143,7 @@ bool Jade::Graphics::DXTexture::CreateTextureFromFile()
 	texDesc.Height = aHeight;
 	texDesc.MipLevels = 1;
 	texDesc.ArraySize = 1;
-	texDesc.Format = DXGI_FORMAT_B8G8R8A8_UNORM; 
+	texDesc.Format = DXGI_FORMAT_B8G8R8A8_UNORM; // FreeType uses this format.
 	texDesc.SampleDesc.Count = 1;
 	texDesc.SampleDesc.Quality = 0;
 	texDesc.Usage = D3D11_USAGE_DEFAULT;
@@ -154,7 +154,7 @@ bool Jade::Graphics::DXTexture::CreateTextureFromFile()
 	// Pass our bitmap data.
 	D3D11_SUBRESOURCE_DATA subData;
 	ZeroMemory(&subData, sizeof(subData));
-	subData.pSysMem = bits;
+	subData.pSysMem = aBits;
 	subData.SysMemPitch = aPitch;
 
 	// Create the texture;
@@ -172,6 +172,7 @@ bool Jade::Graphics::DXTexture::CreateTextureFromFile()
 	resDesc.ViewDimension = D3D11_SRV_DIMENSION_TEXTURE2D;
 	resDesc.Format = texDesc.Format;
 	resDesc.Texture2D.MipLevels = texDesc.MipLevels;
+	resDesc.Texture2D.MostDetailedMip = texDesc.MipLevels - 1;
 
 	// Create a resource view.
 	hr = device->GetID3D11Device()->CreateShaderResourceView(m_pTexture.Get(), &resDesc, m_pShaderResourceView.GetAddressOf());
@@ -300,7 +301,6 @@ DXGI_FORMAT Jade::Graphics::DXTexture::DetermineTextureFormat()
 		return DXGI_FORMAT_R8G8B8A8_UNORM;
 
 	// Need to throw an exception here...
-	// or an assertion.
 	return DXGI_FORMAT_UNKNOWN;
 }
 
@@ -317,9 +317,9 @@ void Jade::Graphics::DXTexture::Fill(unsigned char * bitmap, unsigned pitch, Mat
 	device->GetID3D11DeviceContext()->UpdateSubresource(m_pTexture.Get(), 0, &box, bitmap, pitch, 0);
 }
 
-void Jade::Graphics::DXTexture::Set()
+void Jade::Graphics::DXTexture::MakeActive()
 {
-	// Set the sampler and resource view.
+	// MakeActive the sampler and resource view.
 	if(m_pShaderResourceView.Get() != nullptr)
 		device->GetID3D11DeviceContext()->PSSetShaderResources(0, 1, m_pShaderResourceView.GetAddressOf());
 	if(m_pSamplerState.Get() != nullptr)

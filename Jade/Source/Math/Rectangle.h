@@ -28,12 +28,9 @@ namespace Jade
 {
 	namespace Math
 	{
-		class Rectangle
+		struct Rectangle
 		{
-			int x, y;
-			int width, height;
-
-		public:
+			Rectangle() : x(0), y(0), width(0), height(0) { }
 
 			Rectangle(int x, int y, int width, int height)
 			{
@@ -62,6 +59,11 @@ namespace Jade
 			{
 				return height;
 			}
+
+		private:
+
+			int x, y;
+			int width, height;
 		};
 	}
 }

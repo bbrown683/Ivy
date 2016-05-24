@@ -45,7 +45,7 @@ void Jade::Graphics::ConstantBuffer::SetWorldMatrix(Math::Matrix matrix)
 	constantBuffer->SetWorldMatrix(matrix);
 }
 
-void Jade::Graphics::ConstantBuffer::Update()
+void Jade::Graphics::ConstantBuffer::UpdateMatrices()
 {
-	constantBuffer->Update();
+	constantBuffer->UpdateMatrices();
 }

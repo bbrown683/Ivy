@@ -48,7 +48,7 @@ bool Jade::Graphics::GLDevice::Create()
 	HGLRC dummyGLRC = wglCreateContext(dummyDC);
 	wglMakeCurrent(dummyDC, dummyGLRC);
 
-	// Initialize OpenGL entry points.
+	// Initialize OpenGL entry points for dummy context.
 	if (!gladLoadGL())
 		return false;
 
@@ -120,7 +120,11 @@ bool Jade::Graphics::GLDevice::Create()
 	// Bind main context and destroy dummy window.
 	wglMakeCurrent(dc, context);
 
-	// Refresh rate.
+	// Initialize OpenGL pointers for new context.
+	if (!gladLoadGL())
+		return false;
+
+	// MakeActive Refresh rate.
 	wglSwapIntervalEXT(specification.vsync);
 
 #else
@@ -184,4 +188,9 @@ Jade::Graphics::DrawType Jade::Graphics::GLDevice::GetDrawType()
 void Jade::Graphics::GLDevice::SetDrawType(DrawType type)
 {
 	drawType = type;
+}
+
+void Jade::Graphics::GLDevice::TakeScreenshot()
+{
+
 }

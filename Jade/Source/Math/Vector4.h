@@ -24,6 +24,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include <glm/vec4.hpp>
+
 #include "Core/Utility.h"
 #include "Math/Math.h"
 
@@ -33,59 +35,71 @@ namespace Jade
 	{
 		struct Vector4
 		{
-			float x;
-			float y;
-			float z;
-			float w;
-			float magnitude;
-
-		public:
-
 			// Vector4 operator overloads.
 
-			bool operator==(const Vector4 vector)
+			bool operator==(Vector4 vector) const
 			{
-				return (this->x - vector.x < Math::Epsilon) && (this->y - vector.y < Math::Epsilon) && (this->z - vector.z < Math::Epsilon) && (this->w - vector.w < Math::Epsilon) ? true : false;
+				return (this->values.x - vector.values.x < Math::Epsilon) &&
+					(this->values.y - vector.values.y < Math::Epsilon) &&
+					(this->values.z - vector.values.z < Math::Epsilon) &&
+					(this->values.w - vector.values.w < Math::Epsilon) ? true : false;
 			}
 
-			bool operator!=(const Vector4 vector)
+			bool operator!=(Vector4 vector) const
 			{
-				return !(this == &vector);
+				return !(*this == vector);
 			}
 
-			Vector4 operator+(const Vector4 vector)
+			Vector4 operator+(Vector4 vector) const
 			{
-				return Vector4(this->x + vector.x, this->y + vector.y, this->z + vector.z, this->w + vector.w);
+				glm::vec4 add = values + vector.values;
+				return Vector4(add.x, add.y, add.z, add.w);
 			}
 
-			Vector4 operator-(const Vector4 vector)
+			Vector4 operator+(float scalar) const
 			{
-				return Vector4(this->x - vector.x, this->y - vector.y, this->z - vector.z, this->w - vector.w);
+				glm::vec4 add = values + scalar;
+				return Vector4(add.x, add.y, add.z, add.w);
 			}
 
-			Vector4 operator*(const float scalar)
+			Vector4 operator-(Vector4 vector) const
 			{
-				return Vector4(this->x * scalar, this->y * scalar, this->z * scalar, this->w * scalar);
+				glm::vec4 sub = values - vector.values;
+				return Vector4(sub.x, sub.y, sub.z, sub.w);
 			}
 
-			Vector4 operator/(const float scalar)
+			Vector4 operator-(float scalar) const
 			{
-				return Vector4(this->x / scalar, this->y - scalar, this->z / scalar, this->w / scalar);
+				glm::vec4 sub = values - scalar;
+				return Vector4(sub.x, sub.y, sub.z, sub.z);
+			}
+
+			Vector4 operator*(float scalar) const
+			{
+				glm::vec4 mul = values * scalar;
+				return Vector4(mul.x, mul.y, mul.z, mul.w);
+			}
+
+			Vector4 operator/(float scalar) const
+			{
+				glm::vec4 div = values / scalar;
+				return Vector4(div.x, div.y, div.z, div.w);
+			}
+
+			Vector4()
+			{
+				values = glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
+			}
+
+			Vector4(float x, float y, float z)
+			{
+				values = glm::vec4(x, y, z, 1.0f);
 			}
 
 			Vector4(float x, float y, float z, float w)
 			{
-				this->x = x;
-				this->y = y;
-				this->z = z;
-				this->w = w;
-
-				magnitude = Math::Sqrt(x * x + y * y + z * z + w * w);
+				values = glm::vec4(x, y, z, w);
 			}
-
-			float Distance(Vector4 target);
-
-			void Normalize();
 
 			void SetX(float value);
 			float GetX();
@@ -99,7 +113,11 @@ namespace Jade
 			void SetW(float value);
 			float GetW();
 
-			float GetMagnitude();
+			std::string ToString() const;
+
+		private:
+
+			glm::vec4 values;
 		};
 	}
 }

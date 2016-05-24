@@ -52,11 +52,6 @@ namespace Jade
 			ComPtr<ID3D11PixelShader>		m_pPixelShader = nullptr;
 			ComPtr<ID3D11VertexShader>		m_pVertexShader = nullptr;
 
-			bool Create(std::string filename, ShaderType type) override;
-			bool Compile(std::string filename, ShaderType type) override;
-			bool Release() override;
-			bool CopyToBlob(ShaderType type, ComPtr<ID3DBlob> blob);
-
 		public:
 
 			DXShader(std::shared_ptr<DXDevice> device, std::map<std::string, ShaderType> shaders)
@@ -64,38 +59,23 @@ namespace Jade
 				this->device = device;
 				this->shaders = shaders;
 
-				for (auto iterator = shaders.begin(); iterator != shaders.end(); ++iterator)
-				{
-					std::string iString = iterator->first;
-					ShaderType iType = iterator->second;
-
-					// Temporary blob for getting blob data.
-					ComPtr<ID3DBlob> m_pTemporaryBlob = nullptr;
-
-					long shaderResult = D3DReadFileToBlob(Core::Utility::StringToWString(iString).c_str(), m_pTemporaryBlob.GetAddressOf());
-						
-					if (shaderResult < 0)
-					{
-						// Output compilation errors to console.
-						std::cout << "ERROR: Failed to read compiled shader bytecode..." << std::endl;
-
-						exit(EXIT_FAILURE);
-					}
-					// Copys the reference of the temporary blob to the specified shader blob.
-					// If it succeeds we can create the shader.
-					if (CopyToBlob(iType, m_pTemporaryBlob))
-					{
-						if (!DXShader::Create("", iType))
-							DXShader::Release();
-					}
-					else
-						DXShader::Release();
-				}
+				Initialize(shaders);
 			}
 
+			// Overrides.
+			bool Create(std::string filename, ShaderType type) override;
+			bool Compile(std::string filename, ShaderType type) override;
 			void MakeActive() override;
+			void MakeInactive() override;
+			bool Release() override;
+			
+			// Internal methods.
+			bool CreateVertexInputLayout() const;
+			std::string GetCompilerTarget(D3D_FEATURE_LEVEL level, ShaderType type);
+			const ComPtr<ID3DBlob>& GetShaderBlob(ShaderType type);
+			void Initialize(std::map<std::string, ShaderType> shaders);
 
-			// Helper methods for other classes that require a DXTexture.
+			// Possibly used in the DXTexture class.
 			const ComPtr<ID3D11InputLayout>& GetID3D11InputLayout() const;
 			const ComPtr<ID3D11PixelShader>& GetID3D11PixelShader() const;
 			const ComPtr<ID3D11VertexShader>& GetID3D11VertexShader() const;

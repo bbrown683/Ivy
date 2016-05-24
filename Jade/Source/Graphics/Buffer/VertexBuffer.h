@@ -60,12 +60,12 @@ namespace Jade
 
 			void Bind();
 			bool Create();	
+			void Draw();
 
 			std::vector<Math::Vertex> GetVertices();
 			void SetVertices(std::vector<Math::Vertex> vertices);		
 			
 			void Unbind();
-			void Update();
 		};
 	}
 }

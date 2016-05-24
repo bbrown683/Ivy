@@ -41,6 +41,7 @@ namespace Jade
 		public:
 
 			virtual void MakeActive() = 0;
+			virtual void MakeInactive() = 0;
 		};
 	}
 }

@@ -26,6 +26,7 @@ SOFTWARE.
 
 #include "Math/Vector2.h"
 #include "Math/Vector3.h"
+#include "Math/Vector4.h"
 #include "Math/Color.h"
 
 namespace Jade
@@ -34,7 +35,7 @@ namespace Jade
 	{
 		struct Vertex
 		{
-			Vector3 position;
+			Vector4 position;
 			Vector2 texture;
 			Vector3 normal;
 			Color color;

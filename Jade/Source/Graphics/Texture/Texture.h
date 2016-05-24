@@ -110,9 +110,9 @@ namespace Jade
 			}
 
 			//! Updates the texture resources to ensure that they remain the target of the drawing operations.
-			void Set() const
+			void MakeActive() const
 			{
-				texture->Set();
+				texture->MakeActive();
 			}
 		};
 	}

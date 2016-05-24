@@ -40,9 +40,7 @@ namespace Jade
 		{
 			std::shared_ptr<DXDevice> device;
 			std::vector<Math::Vertex> vertices;
-
 			PrimitiveType primitiveType;
-
 			ComPtr<ID3D11Buffer> m_pVertexBuffer;
 
 			bool Create() override;
@@ -64,7 +62,7 @@ namespace Jade
 			std::vector<Math::Vertex> GetVertices() override;
 			void SetVertices(std::vector<Math::Vertex> vertices) override;
 
-			void Update() override;
+			void Draw() override;
 		};
 	}
 }

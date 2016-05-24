@@ -67,10 +67,10 @@ void Jade::Graphics::Model::Load(std::string filename)
 			if (aMesh->HasPositions())
 			{
 				aiVector3D aPosition = aMesh->mVertices[j];
-				vertex.position = Math::Vector3(aPosition.x, aPosition.y, aPosition.z);
+				vertex.position = Math::Vector4(aPosition.x, aPosition.y, aPosition.z);
 			}
 			else
-				vertex.position = Math::Vector3();
+				vertex.position = Math::Vector4();
 
 			if (aMesh->HasTextureCoords(0))
 			{
@@ -96,6 +96,16 @@ void Jade::Graphics::Model::Load(std::string filename)
 			else
 				vertex.color = Math::Color::White;
 
+			if (aMesh->mMaterialIndex >= 0)
+			{
+				// Check to see if a diffuse color exists for this mesh.
+				aiMaterial* aMaterial = scene->mMaterials[aMesh->mMaterialIndex];
+
+				aiColor4D diffuse;
+				aMaterial->Get(AI_MATKEY_COLOR_DIFFUSE, diffuse);
+				vertex.color = Math::Color(diffuse.r, diffuse.g, diffuse.b, diffuse.a);
+			}
+
 			vertices.push_back(vertex);
 		}
 
@@ -115,7 +125,7 @@ void Jade::Graphics::Model::Load(std::string filename)
 		if (aMesh->mMaterialIndex >= 0)
 		{
 			aiMaterial* aMaterial = scene->mMaterials[aMesh->mMaterialIndex];
-
+			
 			// Iterate though each texture type if they exist.
 			for (unsigned int j = 0; j < aMaterial->GetTextureCount(aiTextureType_DIFFUSE); j++)
 			{
@@ -139,35 +149,8 @@ void Jade::Graphics::Model::Load(std::string filename)
 					textures.push_back(Texture(device, string.C_Str(), TextureType::Diffuse));
 				}
 			}
-			/*
-			for (unsigned int j = 0; j < aMaterial->GetTextureCount(aiTextureType_SPECULAR); j++)
-			{
-				// Get the texture for the material.
-				aiString string;
-				aMaterial->GetTexture(aiTextureType_SPECULAR, j, &string);
-				std::cout << "Specular texture " << string.C_Str() << " was found..." << std::endl;
-				textures.push_back(Texture(device, string.C_Str(), TextureType::Specular));
-			}
-
-			for (unsigned int j = 0; j < aMaterial->GetTextureCount(aiTextureType_NORMALS); j++)
-			{
-				// Get the texture for the material.
-				aiString string;
-				aMaterial->GetTexture(aiTextureType_NORMALS, j, &string);
-				std::cout << "Normal texture " << string.C_Str() << " was found..." << std::endl;
-				textures.push_back(Texture(device, string.C_Str(), TextureType::Normal));
-			}
-
-			for (unsigned int j = 0; j < aMaterial->GetTextureCount(aiTextureType_AMBIENT); j++)
-			{
-				// Get the texture for the material.
-				aiString string;
-				aMaterial->GetTexture(aiTextureType_DIFFUSE, j, &string);
-				std::cout << "Diffuse texture " << string.C_Str() << " was found..." << std::endl;
-				textures.push_back(Texture(device, string.C_Str(), TextureType::Ambient));
-			}
-			*/
 		}
+
 		meshes.push_back(Mesh(device, shader, vertices, indices, textures, PrimitiveType::TriangleList));
 	}
 }

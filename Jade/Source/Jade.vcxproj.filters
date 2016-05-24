@@ -55,10 +55,11 @@
     <ClCompile Include="Graphics\Shader\GLShader.cpp" />
     <ClCompile Include="Graphics\GL\glad\gl\src\glad.c" />
     <ClCompile Include="Graphics\GL\glad\wgl\src\glad_wgl.c" />
-    <ClCompile Include="Graphics\Sprite\DXSprite.cpp" />
     <ClCompile Include="Graphics\Model\Importer\OBJImporter.cpp" />
     <ClCompile Include="Graphics\Buffer\GLConstantBuffer.cpp" />
     <ClCompile Include="Graphics\Mesh\Mesh.cpp" />
+    <ClCompile Include="Core\Script\Script.cpp" />
+    <ClCompile Include="Graphics\Sprite\Sprite.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\Vector4.h">
@@ -166,8 +167,6 @@
     <ClInclude Include="Graphics\Model\Importer\Importer.h" />
     <ClInclude Include="Graphics\Model\Importer\ModelType.h" />
     <ClInclude Include="Math\Space.h" />
-    <ClInclude Include="Graphics\Sprite\DXSprite.h" />
-    <ClInclude Include="Graphics\Sprite\ISprite.h" />
     <ClInclude Include="Graphics\Sprite\Sprite.h" />
     <ClInclude Include="Graphics\Model\Importer\ModelProperties.h" />
     <ClInclude Include="Graphics\Model\Importer\OBJImporter.h" />
@@ -178,6 +177,7 @@
     <ClInclude Include="Graphics\Buffer\IConstantBuffer.h" />
     <ClInclude Include="Graphics\Buffer\GLConstantBuffer.h" />
     <ClInclude Include="Graphics\Mesh\Mesh.h" />
+    <ClInclude Include="Graphics\Shader\Transcompiler\Transcompiler.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">
@@ -200,8 +200,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="vertex.hlsl" />
-    <FxCompile Include="pixel.hlsl" />
+    <FxCompile Include="ModelVertex.hlsl" />
+    <FxCompile Include="ModelPixel.hlsl" />
+    <FxCompile Include="FontPixel.hlsl" />
+    <FxCompile Include="FontVertex.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="MonoCubeTexture.png" />

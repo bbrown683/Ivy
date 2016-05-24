@@ -38,29 +38,40 @@ int main(int argc, char* argv[])
 	Device device(window, GraphicsAPI::DirectX);
 	device.SetDrawType(DrawType::Indexed);
 
+	// Enable alpha blending.
+	Blender blender(device);
+	blender.SetBlendState(0xFFFFFFFF);
+
 	// Used to enable culling or wireframe modes.
 	Rasterizer rasterizer(device);
 
-	// Map for holding our shaders. 
-	std::map<std::string, ShaderType> shaders =
-	{
-		{ ".\\resources\\shaders\\pixel.cso", ShaderType::Pixel },
-		{ ".\\resources\\shaders\\vertex.cso", ShaderType::Vertex },
-	};
+	// Maps for holding our shaders. 
+	std::map<std::string, ShaderType> modelShaders =
+	{{ ".\\resources\\shaders\\ModelPixel.hlsl", ShaderType::Pixel },
+	{ ".\\resources\\shaders\\ModelVertex.hlsl", ShaderType::Vertex }};
+
+	std::map<std::string, ShaderType> fontShaders =
+	{{ ".\\resources\\shaders\\FontPixel.hlsl", ShaderType::Pixel },
+	{ ".\\resources\\shaders\\FontVertex.hlsl", ShaderType::Vertex }};
 
 	// Create our shaders.
-	Shader shader(device, shaders);
+	Shader modelShader(device, modelShaders);
+	Shader fontShader(device, fontShaders);
 
 	// Camera with initial position and target.
-	Camera camera(device, Vector3(0.0f, 1.0f, -5.0f), Vector3(0.0f, 1.0f, 0.0f));
+	Camera camera(device, Vector3(0.0f, 1.0f, -1.0f), Vector3(0.0f, 1.0f, 0.0f));
 
 	// Dynamic model and font loading.
 	// This allows us to load a new instance with the same object.
-	Model model(device, shader);
-	model.Load(".\\resources\\models\\MonoCube.dae");
+	Model model(device, modelShader);
+	model.Load(".\\resources\\models\\Lilith.obj");
+	model.SetScale(Vector3(0.25f, 0.25f, 0.25f));
 
-	Font font(device, shader);
-	font.Load(".\\resources\\fonts\\times.ttf", 48);
+	Sprite sprite(device, modelShader);
+	sprite.Load("osky.png");
+
+	Script script;
+	script.Execute(".\\resources\\scripts\\test.lua");
 
 	while (window.IsOpen())
 	{
@@ -69,9 +80,10 @@ int main(int argc, char* argv[])
 
 		// Rotate and draw the models.
 		if (window.GetInput().keyboard.IsKeyDown(Key::Shift))
-			model.SetRotation(Vector3(0.0f, -0.025f, 0.0f));
+			model.SetRotation(Vector3(0.0f, 0.025f, 0.0f));
 
 		model.Draw();
+		sprite.Draw();
 
 		// Camera movement.
 		// Setting a camera with no orbiting requires us to update
@@ -107,8 +119,6 @@ int main(int argc, char* argv[])
 			camera.SetCameraPosition(camera.GetCameraPosition() + Vector3(0.0f, -0.25f, 0.0f));
 			camera.SetTargetPosition(camera.GetTargetPosition() + Vector3(0.0f, -0.25f, 0.0f));
 		}
-
-		font.Draw("Hello World", 10, 10);
 
 		// Example rasterizer mode swapping while rendering.
 		if (window.GetInput().keyboard.IsKeyDown(Key::R))

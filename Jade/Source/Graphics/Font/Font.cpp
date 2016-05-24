@@ -24,10 +24,85 @@ SOFTWARE.
 
 #include "Font.h"
 
-void Jade::Graphics::Font::Draw(std::string text, float x, float y)
+void Jade::Graphics::Font::Draw(std::string text, int x, int y)
 {
 	shader.MakeActive();
-	texture.Set();
+
+	std::vector<Math::Vertex> vertices;
+
+	for(char c : text)
+	{
+		// Calculate width and height.
+		float x2 = static_cast<float>(x) + glyphs[c - 32].dimensions.GetX();
+		float y2 = static_cast<float>(-y) - glyphs[c - 32].dimensions.GetY(); // flip y
+		float w = static_cast<float>(glyphs[c - 32].dimensions.GetWidth());
+		float h = static_cast<float>(glyphs[c - 32].dimensions.GetHeight());
+
+		// Calculate cursor position.
+		x += glyphs[c - 32].advanceX;
+		y += glyphs[c - 32].advanceY;
+
+		// Skip characters with no dimensions.
+		if (glyphs[c - 32].dimensions.GetWidth() != 0 &&
+			glyphs[c - 32].dimensions.GetHeight() != 0)
+		{
+			// Calculate texture coordinates and positions.
+			// Lots of hard coding involved unfortunately.
+			// Since quads are no longer supported, we need 6
+			// vertices per character.
+			Math::Vertex vertex0;
+			vertex0.position = Math::Vector4(x2, -y2, 0.0f, 1.0f);
+			vertex0.texture = Math::Vector2(glyphs[c - 32].texture.GetX(), glyphs[c - 32].texture.GetY());
+			vertices.push_back(vertex0);
+
+			Math::Vertex vertex1;
+			vertex1.position = Math::Vector4(x2 + w, -y2, 0.0f, 1.0f);
+			vertex1.texture = Math::Vector2(glyphs[c - 32].texture.GetX() +
+				glyphs[c - 32].dimensions.GetWidth() / atlasWidth, glyphs[c - 32].texture.GetY());
+			vertices.push_back(vertex1);
+
+			Math::Vertex vertex2;
+			vertex2.position = Math::Vector4(x2, -y2 - h, 0.0f, 1.0f);
+			vertex2.texture = Math::Vector2(glyphs[c - 32].texture.GetX(), 
+				glyphs[c - 32].texture.GetY() + glyphs[c - 32].dimensions.GetHeight() / atlasHeight);
+			vertices.push_back(vertex2);
+
+			Math::Vertex vertex3;
+			vertex3.position = Math::Vector4(x2 + w, -y2, 0.0f, 1.0f);
+			vertex3.texture = Math::Vector2(glyphs[c - 32].texture.GetX() +
+				glyphs[c - 32].dimensions.GetWidth() / atlasWidth, glyphs[c - 32].texture.GetY());
+			vertices.push_back(vertex3);
+
+			Math::Vertex vertex4;
+			vertex4.position = Math::Vector4(x2, -y2 - h, 0.0f, 1.0f);
+			vertex4.texture = Math::Vector2(glyphs[c - 32].texture.GetX(), 
+				glyphs[c - 32].texture.GetY() + glyphs[c - 32].dimensions.GetHeight() / atlasHeight);
+			vertices.push_back(vertex4);
+
+			Math::Vertex vertex5;
+			vertex5.position = Math::Vector4(x2 + w, -y2 - h, 0.0f, 1.0f);
+			vertex5.texture = Math::Vector2(glyphs[c - 32].texture.GetX() +
+				glyphs[c - 32].dimensions.GetWidth() / atlasWidth,
+				glyphs[c - 32].texture.GetY() + glyphs[c - 32].dimensions.GetHeight() 
+				/ atlasHeight);
+
+			vertices.push_back(vertex5);
+		}
+	}
+
+	// Initialize vertex buffer and draw.
+	vBuffer.SetVertices(vertices);
+	
+	if (vBuffer.Create())	// Eventually we should map these.
+	{
+		vBuffer.Bind();
+
+		texture.MakeActive();
+		vBuffer.Draw();
+		vBuffer.Unbind();
+	}
+
+	shader.MakeInactive();
 }
 
 void Jade::Graphics::Font::Load(std::string filename, int pixelSize)
@@ -59,7 +134,7 @@ void Jade::Graphics::Font::Load(std::string filename, int pixelSize)
 
 	if (error)
 	{
-		std::cout << "Failed to load face from font file " << filename << "..." << std::endl;
+		std::cout << "Failed to set pixel size for " << filename << "..." << std::endl;
 		return;
 	}
 
@@ -86,7 +161,7 @@ void Jade::Graphics::Font::Load(std::string filename, int pixelSize)
 			continue;
 		}
 		
-		// Set max width to 512 for simplicity.
+		// MakeActive max width to 512 for simplicity.
 		if (roww + glyph->bitmap.width + 1 >= 512) 
 		{
 			w = std::max(w, roww);
@@ -102,6 +177,9 @@ void Jade::Graphics::Font::Load(std::string filename, int pixelSize)
 	w = std::max(w, roww);
 	h += rowh;
 
+	atlasWidth = w;
+	atlasHeight = h;
+
 	texture = Texture(device, nullptr, w, h, 0, 8, TextureType::Bitmap);
 	texture.CreateEmptyTexture(); // Create an empty texture and fill it in with the individual bitmaps.
 
@@ -113,7 +191,7 @@ void Jade::Graphics::Font::Load(std::string filename, int pixelSize)
 
 	// Generate font atlas, excluding space character.
 	// We only included it above to grab its data.
-	for(int i = 33; i < 127; i++)
+	for(int i = 32; i < 127; i++)
 	{
 		if (FT_Load_Char(face, i, FT_LOAD_RENDER))
 		{
@@ -128,10 +206,29 @@ void Jade::Graphics::Font::Load(std::string filename, int pixelSize)
 			ox = 0;
 		}
 		
+		Glyph aGlyph;
+		aGlyph.advanceX = glyph->advance.x >> 6;
+		aGlyph.advanceY = glyph->advance.y >> 6;
+		aGlyph.character = i;
+
+		// DirectX needs the offsets.
 		Math::Rectangle rect(ox, oy, ox + glyph->bitmap.width, oy + glyph->bitmap.rows);
-		texture.Fill(glyph->bitmap.buffer, glyph->bitmap.pitch, rect);
+		aGlyph.dimensions = rect;
+		aGlyph.texture.SetX(static_cast<float>(ox / w));
+		aGlyph.texture.SetY(static_cast<float>(oy / h));
+
+		// Space character has no data to fill in so it is omitted.
+		if (i != 32)
+		{
+			texture.Fill(glyph->bitmap.buffer, glyph->bitmap.pitch, rect);
+		}
+
+		glyphs.push_back(aGlyph);
 
 		rowh = std::max(rowh, glyph->bitmap.rows);
 		ox += glyph->bitmap.width + 1;
 	}
+
+	FT_Done_Face(face);
+	FT_Done_FreeType(library);
 }

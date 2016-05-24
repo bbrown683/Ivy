@@ -24,13 +24,34 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include "Graphics/Blender/DXBlender.h"
+#include "Graphics/Blender/IBlender.h"
+#include "Graphics/Device/Device.h"
+
 namespace Jade
 {
 	namespace Graphics
 	{
 		class Blender
 		{
-			
+			Device device;
+			std::shared_ptr<IBlender> blender;
+
+		public:
+
+			Blender() { }
+
+			Blender(Device device)
+			{
+				this->device = device;
+
+				blender = std::make_shared<DXBlender>(std::dynamic_pointer_cast<DXDevice>(device.GetIDevice()));
+			}
+
+			bool SetBlendState(unsigned int mask) const
+			{
+				return blender->SetBlendState(mask);
+			}
 		};
 	}
 }

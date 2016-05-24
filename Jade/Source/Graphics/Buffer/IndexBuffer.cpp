@@ -22,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <Graphics/Buffer/IndexBuffer.h>
+#include "Graphics/Buffer/IndexBuffer.h"
 
 void Jade::Graphics::IndexBuffer::Bind()
 {
@@ -32,6 +32,11 @@ void Jade::Graphics::IndexBuffer::Bind()
 bool Jade::Graphics::IndexBuffer::Create()
 {
 	return indexBuffer->Create();
+}
+
+void Jade::Graphics::IndexBuffer::Draw()
+{
+	indexBuffer->Draw();
 }
 
 std::vector<unsigned short> Jade::Graphics::IndexBuffer::GetIndices()
@@ -47,9 +52,4 @@ void Jade::Graphics::IndexBuffer::SetIndices(std::vector<unsigned short> indices
 void Jade::Graphics::IndexBuffer::Unbind()
 {
 	indexBuffer->Unbind();
-}
-
-void Jade::Graphics::IndexBuffer::Update()
-{
-	indexBuffer->Update();
 }

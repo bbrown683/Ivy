@@ -1,8 +1,5 @@
 #pragma once
 
-#include <Math/Math.h>
-#include <Math/Matrix.h>
-
 /*
 The MIT License (MIT)
 
@@ -27,6 +24,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include "Math/Matrix.h"
+
 namespace Jade
 {
 	namespace Graphics
@@ -45,7 +44,7 @@ namespace Jade
 			virtual void SetViewMatrix(Math::Matrix matrix) = 0;
 			virtual void SetWorldMatrix(Math::Matrix matrix) = 0;
 
-			virtual void Update() = 0;
+			virtual void UpdateMatrices() = 0;
 		};
 	}
 }

@@ -103,6 +103,11 @@ namespace Jade
 				device->Present();
 			}
 
+			bool Multisampling() const
+			{
+				return specification.samples > 1;
+			}
+
 			// Returns the interface that contains the device data.
 			std::shared_ptr<IDevice> GetIDevice() const
 			{
@@ -128,6 +133,11 @@ namespace Jade
 			void SetDrawType(DrawType type)
 			{
 				device->SetDrawType(type);
+			}
+
+			void TakeScreenshot()
+			{
+				device->TakeScreenshot();
 			}
 		};
 	}

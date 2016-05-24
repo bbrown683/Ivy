@@ -92,13 +92,15 @@ namespace Jade
 
 			// Main functions inherited by Device class.
 			void Clear(Math::Color color) override;
-			void Present() override;
-			std::shared_ptr<System::IWindow> GetIWindow() const;
 			char* DeviceInformation() override;
 			DrawType GetDrawType() override;
+			std::shared_ptr<System::IWindow> GetIWindow() const;
+			void Present() override;
 			void SetDrawType(DrawType type) override;
+			void TakeScreenshot() override;
 
 			// Retrieval functions for DirectX related objects.
+			ComPtr<ID3D11Texture2D> GetBackBuffer() const;
 			D3D_DRIVER_TYPE GetD3DDriverType() const;
 			D3D_FEATURE_LEVEL GetD3DFeatureLevel() const;
 			D3D11_VIEWPORT GetD3D11Viewport() const;

@@ -3,19 +3,19 @@
 #ifdef JADE_PLATFORM_WINDOWS
 void Jade::Graphics::DXVertexBuffer::Bind()
 {
-	// Set the memory stride.
+	// MakeActive the memory stride.
 	unsigned int stride = sizeof(Math::Vertex);
 	unsigned int offset = 0;
 
-	// Set the vertices buffer.
+	// MakeActive the vertices buffer.
 	device->GetID3D11DeviceContext()->IASetVertexBuffers(0, 1, m_pVertexBuffer.GetAddressOf(), &stride, &offset);
 
-	// Set the primitive topology.
 	device->GetID3D11DeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 }
 
 bool Jade::Graphics::DXVertexBuffer::Create()
 {
+	// Reset the state each frame.
 	if (m_pVertexBuffer)
 		m_pVertexBuffer.Reset();
 
@@ -58,7 +58,7 @@ void Jade::Graphics::DXVertexBuffer::Unbind()
 	device->GetID3D11DeviceContext()->IASetVertexBuffers(0, 0, nullptr, nullptr, nullptr);
 }
 
-void Jade::Graphics::DXVertexBuffer::Update()
+void Jade::Graphics::DXVertexBuffer::Draw()
 {
 	// Non-indexed drawing. Less efficient but simpler to implement if a mesh has no indices.
 	device->GetID3D11DeviceContext()->Draw(static_cast<unsigned>(vertices.size()), 0);

@@ -4,7 +4,7 @@ void Jade::Graphics::Mesh::Draw()
 {	
 	shader.MakeActive();
 	
-	// Set the world matrix for the object.
+	// MakeActive the world matrix for the object.
 	cBuffer.SetWorldMatrix(translation * rotation * scale);
 
 	// Bind the vertex and index buffers.
@@ -12,21 +12,38 @@ void Jade::Graphics::Mesh::Draw()
 	iBuffer.Bind();
 
 	// Assign the matrix data to the buffer.
-	cBuffer.Update();
+	cBuffer.UpdateMatrices();
 
-	// Set the textures.
+	// MakeActive the textures.
 	for (unsigned int i = 0; i < textures.size(); i++)
-		textures[i].Set();
+			textures[i].MakeActive();
 
 	// Draw either based on vertices or indices.
 	if (device.GetDrawType() == DrawType::Default)
-		vBuffer.Update();
+		vBuffer.Draw();
 	else
-		iBuffer.Update();
+		iBuffer.Draw();
 
 	// After we are done drawing, reset the buffers for the next bind.
 	iBuffer.Unbind();
 	vBuffer.Unbind();
+
+	shader.MakeInactive();
+}
+
+std::vector<Jade::Math::Vertex> Jade::Graphics::Mesh::GetVertices() const
+{
+	return vertices;
+}
+
+std::vector<unsigned short> Jade::Graphics::Mesh::GetIndices() const
+{
+	return indices;
+}
+
+std::vector<Jade::Graphics::Texture> Jade::Graphics::Mesh::GetTextures() const
+{
+	return textures;
 }
 
 void Jade::Graphics::Mesh::SetPosition(Math::Vector3 position)

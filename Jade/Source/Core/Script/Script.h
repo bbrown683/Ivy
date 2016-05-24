@@ -24,6 +24,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include "lua.hpp"
+
 #include "Core/Utility.h"
 
 namespace Jade
@@ -32,7 +34,22 @@ namespace Jade
 	{
 		class Script
 		{
-			
+			lua_State* lua;
+
+		public:
+
+			Script()
+			{
+				lua = luaL_newstate();
+				luaL_openlibs(lua);
+			}
+
+			void Execute(std::string filename);
+
+			~Script()
+			{
+				lua_close(lua);
+			}
 		};
 	}
 }

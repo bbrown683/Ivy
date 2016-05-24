@@ -1,4 +1,4 @@
-Texture2D txDiffuse : register(t0);
+Texture2D txDiffuse;
 SamplerState samLinear;
 
 struct PS_INPUT
@@ -12,7 +12,7 @@ struct PS_INPUT
 //--------------------------------------------------------------------------------------
 // Pixel Shader Program
 //--------------------------------------------------------------------------------------
-float4 Main(PS_INPUT input) : SV_TARGET
+float4 main(PS_INPUT input) : SV_TARGET
 {
 	return txDiffuse.Sample(samLinear, input.Tex);
 }

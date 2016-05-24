@@ -89,9 +89,7 @@ bool Jade::Graphics::DXDevice::Create()
 			return false;
 	}
 
-	ComPtr<ID3D11Texture2D> m_pBackBuffer = nullptr;
-	m_pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), reinterpret_cast<void**>(m_pBackBuffer.GetAddressOf()));
-	hr = m_pDevice->CreateRenderTargetView(m_pBackBuffer.Get(), nullptr, m_pRenderTargetView.GetAddressOf());
+	hr = m_pDevice->CreateRenderTargetView(GetBackBuffer().Get(), nullptr, m_pRenderTargetView.GetAddressOf());
 
 	if (FAILED(hr))
 		return false;
@@ -119,7 +117,7 @@ bool Jade::Graphics::DXDevice::Create()
 	D3D11_DEPTH_STENCIL_DESC depthStencilDesc;
 	ZeroMemory(&depthStencilDesc, sizeof(depthStencilDesc));
 
-	// Set up the description of the stencil state.
+	// MakeActive up the description of the stencil state.
 	depthStencilDesc.DepthEnable = true;
 	depthStencilDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
 	depthStencilDesc.DepthFunc = D3D11_COMPARISON_LESS;
@@ -145,7 +143,7 @@ bool Jade::Graphics::DXDevice::Create()
 	if (FAILED(hr))
 		return false;
 
-	// Set the depth stencil state.
+	// MakeActive the depth stencil state.
 	m_pImmediateContext->OMSetDepthStencilState(m_pDepthStencilState.Get(), 1);
 
 	// Create the depth stencil view
@@ -221,9 +219,21 @@ void Jade::Graphics::DXDevice::SetDrawType(DrawType type)
 	drawType = type;
 }
 
+void Jade::Graphics::DXDevice::TakeScreenshot()
+{
+	
+}
+
 std::shared_ptr<Jade::System::IWindow> Jade::Graphics::DXDevice::GetIWindow() const
 {
 	return window;
+}
+
+ComPtr<ID3D11Texture2D> Jade::Graphics::DXDevice::GetBackBuffer() const
+{
+	ComPtr<ID3D11Texture2D> l_pBackBuffer = nullptr;
+	m_pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), reinterpret_cast<void**>(l_pBackBuffer.GetAddressOf()));
+	return l_pBackBuffer;
 }
 
 D3D_DRIVER_TYPE Jade::Graphics::DXDevice::GetD3DDriverType() const

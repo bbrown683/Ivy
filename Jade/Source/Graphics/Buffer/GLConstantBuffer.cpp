@@ -67,7 +67,7 @@ void Jade::Graphics::GLConstantBuffer::SetWorldMatrix(Math::Matrix matrix)
 
 }
 
-void Jade::Graphics::GLConstantBuffer::Update()
+void Jade::Graphics::GLConstantBuffer::UpdateMatrices()
 {
 
 }

@@ -81,6 +81,7 @@ namespace Jade
 			char* DeviceInformation() override;
 			DrawType GetDrawType() override;
 			void SetDrawType(DrawType type) override;
+			void TakeScreenshot() override;
 		};
 	}
 }

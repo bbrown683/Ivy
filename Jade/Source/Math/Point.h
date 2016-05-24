@@ -28,18 +28,18 @@ namespace Jade
 {
 	namespace Math
 	{
-		class Point
+		struct Point
 		{
-			float x;
-			float y;
-
-		public:
-
 			Point(float x, float y)
 			{
 				this->x = x;
 				this->y = y;
 			}
+
+		private:
+
+			float x;
+			float y;
 		};
 	}
 }

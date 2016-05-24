@@ -109,7 +109,7 @@ void Jade::Graphics::DXConstantBuffer::SetWorldMatrix(Math::Matrix matrix)
 	perObject.world = matrix;
 }
 
-void Jade::Graphics::DXConstantBuffer::Update()
+void Jade::Graphics::DXConstantBuffer::UpdateMatrices()
 {
 	if (m_pPerObject.Get() != nullptr)
 	{

@@ -56,7 +56,7 @@ namespace Jade
 					Math::Math::PiOverTwo, static_cast<float>(device.GetWindow().GetWidth()),
 					static_cast<float>(device.GetWindow().GetHeight()), 0.1f, 1000.0f).Transpose());
 
-				cBuffer.Update();
+				cBuffer.UpdateMatrices();
 			}
 
 			Math::Vector3 GetCameraPosition();

@@ -43,9 +43,9 @@ namespace Jade
 			TextureType type;
 
 			unsigned char* bitmap;
-			int width;
-			int height;
-			int pitch;
+			unsigned int width;
+			unsigned int height;
+			unsigned int pitch;
 			unsigned int bits;
 
 			ComPtr<ID3D11Texture2D> m_pTexture = nullptr;
@@ -54,6 +54,7 @@ namespace Jade
 
 		public:
 
+			// Creating a bitmap and transferring it to D3D.
 			DXTexture(std::shared_ptr<DXDevice> device, std::string filename, TextureType type)
 			{
 				this->device = device;
@@ -61,6 +62,7 @@ namespace Jade
 				this->type = type;
 			}
 
+			// Bitmap is already created, but must be transferred to D3D.
 			DXTexture(std::shared_ptr<DXDevice> device, unsigned char* bitmap, int width, int height, int pitch, unsigned int bits, TextureType type)
 			{
 				this->device = device;
@@ -86,7 +88,7 @@ namespace Jade
 			// Updates a dynamic texture.
 			void Fill(unsigned char* bitmap, unsigned pitch, Math::Rectangle rect) override;
 			//! Updates the texture resources to ensure that they remain the target of the drawing operations.
-			void Set() override;
+			void MakeActive() override;
 
 			DXGI_FORMAT DetermineTextureFormat();
 			const ComPtr<ID3D11ShaderResourceView>& GetID3D11ShaderResourceView() const;

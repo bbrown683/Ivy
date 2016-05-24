@@ -24,10 +24,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <Graphics/Buffer/IIndexBuffer.h>
-#include <Graphics/Buffer/DXIndexBuffer.h>
-#include <Graphics/Buffer/GLIndexBuffer.h>
-#include <Graphics/Device/Device.h>
+#include "Graphics/Buffer/IIndexBuffer.h"
+#include "Graphics/Buffer/DXIndexBuffer.h"
+#include "Graphics/Buffer/GLIndexBuffer.h"
+#include "Graphics/Device/Device.h"
 
 namespace Jade
 {
@@ -60,12 +60,12 @@ namespace Jade
 
 			void Bind();
 			bool Create();
+			void Draw();
 
 			std::vector<unsigned short> GetIndices();
 			void SetIndices(std::vector<unsigned short> indices);
 		
 			void Unbind();
-			void Update();
 		};
 	}
 }

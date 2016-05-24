@@ -34,12 +34,12 @@ namespace Jade
 		{
 			virtual void Bind() = 0;
 			virtual bool Create() = 0;
+			virtual void Draw() = 0;
 
 			virtual std::vector<unsigned short> GetIndices() = 0;
 			virtual void SetIndices(std::vector<unsigned short> indices) = 0;
 
 			virtual void Unbind() = 0;
-			virtual void Update() = 0;
 		};
 	}
 }

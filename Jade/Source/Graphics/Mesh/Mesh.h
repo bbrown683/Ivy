@@ -57,24 +57,9 @@ namespace Jade
 
 		public:
 
-			Mesh(Device device, Shader shader, std::vector<Math::Vertex> vertices, PrimitiveType primitiveType)
-			{
-				this->device = device;
-				this->shader = shader;
-				this->vertices = vertices;
-				this->primitiveType = primitiveType;
-			}
-
-			Mesh(Device device, Shader shader, std::vector<Math::Vertex> vertices, std::vector<unsigned short> indices, PrimitiveType primitiveType)
-			{
-				this->device = device;
-				this->shader = shader;
-				this->vertices = vertices;
-				this->indices = indices;
-				this->primitiveType = primitiveType;
-			}
-
-			Mesh(Device device, Shader shader, std::vector<Math::Vertex> vertices, std::vector<unsigned short> indices, std::vector<Texture> textures, PrimitiveType primitiveType)
+			Mesh(Device device, Shader shader, std::vector<Math::Vertex> vertices, 
+				std::vector<unsigned short> indices, std::vector<Texture> textures,
+				PrimitiveType primitiveType)
 			{
 				this->device = device;
 				this->shader = shader;
@@ -112,24 +97,13 @@ namespace Jade
 
 			void Draw();
 			
+			std::vector<Math::Vertex> GetVertices()	const;
+			std::vector<unsigned short> GetIndices() const;
+			std::vector<Texture> GetTextures() const;
+
 			void SetPosition(Math::Vector3 position);
 			void SetScale(Math::Vector3 scale);
 			void SetRotation(Math::Vector3 rotation);
-
-			std::vector<Math::Vertex> GetVertices()	const
-			{
-				return vertices;
-			}
-
-			std::vector<unsigned short> GetIndices() const
-			{
-				return indices;
-			}
-
-			std::vector<Texture> GetTextures() const
-			{
-				return textures;
-			}
 		};
 	}
 }

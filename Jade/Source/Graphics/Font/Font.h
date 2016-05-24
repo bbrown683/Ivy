@@ -29,9 +29,11 @@ SOFTWARE.
 
 #include "Core/Utility.h"
 #include "Core/Exception/Exception.h"
+#include "Graphics/Blender/Blender.h"
+#include "Graphics/Buffer/VertexBuffer.h"
 #include "Graphics/Device/Device.h"
 #include "Graphics/Font/Glyph.h"
-#include "Graphics/Mesh/Mesh.h"
+#include "Graphics/Shader/Shader.h"
 #include "Graphics/Texture/Texture.h"
 
 namespace Jade
@@ -41,9 +43,16 @@ namespace Jade
 		// Class for font rendering.
 		class Font
 		{
+			Blender blender;
 			Device device;
 			Shader shader;
 			Texture texture;
+
+			std::vector<Glyph> glyphs;
+			VertexBuffer vBuffer;
+
+			unsigned int atlasWidth;
+			unsigned int atlasHeight;
 
 		public:
  
@@ -51,10 +60,15 @@ namespace Jade
 			{
 				this->device = device;
 				this->shader = shader;
+
+				blender = Blender(device);
+
+				// Create the vertex buffer.
+				vBuffer = VertexBuffer(device, PrimitiveType::TriangleList);
 			}
 
 			//! Draws the given text at the specified x and y coordinates at a certain pixel size.
-			void Draw(std::string text, float x, float y);
+			void Draw(std::string text, int x, int y);
 			//! Loads the specified font file and creates individual textures for each printable character at a specified pixel size.
 			void Load(std::string filename, int pixelSize);
 		};

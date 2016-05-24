@@ -160,6 +160,16 @@ Jade::Math::Matrix Jade::Math::Matrix::RotateAlongZ(float radians)
 		0, 0, 0, 1);
 }
 
+Jade::Math::Matrix Jade::Math::Matrix::Scale(Vector2 scale)
+{
+	glm::mat4 scaled = glm::scale(values, Vector3(scale.GetX(), scale.GetY(), 
+		0.0f).GetRawData());
+	return Matrix(scaled[0][0], scaled[0][1], scaled[0][2], scaled[0][3],
+		scaled[1][0], scaled[1][1], scaled[1][2], scaled[1][3],
+		scaled[2][0], scaled[2][1], scaled[2][2], scaled[2][3],
+		scaled[3][0], scaled[3][1], scaled[3][2], scaled[3][3]);
+}
+
 Jade::Math::Matrix Jade::Math::Matrix::Scale(Vector3 scale)
 {
 	glm::mat4 scaled = glm::scale(values, scale.GetRawData());

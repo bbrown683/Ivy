@@ -103,9 +103,24 @@ bool Jade::Graphics::GLShader::Check(GLuint shader, GLuint flag, bool isProgram,
 	return true;
 }
 
+bool Jade::Graphics::GLShader::CheckShader(GLuint shader)
+{
+	return false;
+}
+
+bool Jade::Graphics::GLShader::CheckProgram(GLuint program)
+{
+	return false;
+}
+
 void Jade::Graphics::GLShader::MakeActive()
 {
 	glUseProgram(programID);
+}
+
+void Jade::Graphics::GLShader::MakeInactive()
+{
+
 }
 
 bool Jade::Graphics::GLShader::CreateProgram()

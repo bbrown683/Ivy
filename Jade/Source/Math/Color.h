@@ -31,13 +31,6 @@ namespace Jade
 		// Wrapper class for using Colors in both OpenGL and DirectX without having API dependencies.
 		struct Color
 		{
-			float red;
-			float green;
-			float blue;
-			float alpha;
-
-		public:
-
 			// List of some common .NET Colors translated into their respective values for OpenGL and DirectX.
 			static const Color CornflowerBlue;
 			static const Color Red;
@@ -49,9 +42,9 @@ namespace Jade
 			static const Color White;
 			static const Color Yellow;
 
-			Color(): red(0), green(0), blue(0), alpha(1)
+			Color()
 			{
-				
+				*this = White;
 			}
 
 			Color(float red, float green, float blue, float alpha)
@@ -81,6 +74,13 @@ namespace Jade
 			{
 				return alpha;
 			}
+
+		private:
+
+			float red;
+			float green;
+			float blue;
+			float alpha;
 		};
 	}
 }

@@ -28,7 +28,7 @@ namespace Jade
 {
 	namespace Math
 	{
-		class Ray
+		struct Ray
 		{
 
 		};

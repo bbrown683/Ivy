@@ -309,7 +309,7 @@ void Jade::System::NativeWindow::SetIcon(std::string filename)
 			// Close the buffer and memory since it is no longer needed.
 			SDL_RWclose(buffer);
 
-			// Set the surface as an icon.
+			// MakeActive the surface as an icon.
 			SDL_SetWindowIcon(m_pWindow, icon);
 
 			// Release the surface object after setting icon.

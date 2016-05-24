@@ -37,7 +37,7 @@ namespace Jade
 			// Loses slight accuracy for increased performance of an inverse square root.
 			static float FastInvSqrt(float x);
 
-			// Reduces a given angle to a value between ? and -?.
+			// Reduces a given angle to a value between Pi and -Pi.
 			static float WrapAngle(float angle);
 		};
 	}

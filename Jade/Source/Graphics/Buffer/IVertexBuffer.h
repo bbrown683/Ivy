@@ -1,8 +1,5 @@
 #pragma once
 
-#include <Math/Math.h>
-#include <Math/Vertex.h>
-
 /*
 The MIT License (MIT)
 
@@ -27,6 +24,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include "Math/Vertex.h"
+
 namespace Jade
 {
 	namespace Graphics
@@ -35,12 +34,12 @@ namespace Jade
 		{
 			virtual void Bind() = 0;
 			virtual bool Create() = 0;
+			virtual void Draw() = 0;
 
 			virtual std::vector<Math::Vertex> GetVertices() = 0;
 			virtual void SetVertices(std::vector<Math::Vertex> vertices) = 0;
 			
 			virtual void Unbind() = 0;
-			virtual void Update() = 0;
 		};
 	}
 }

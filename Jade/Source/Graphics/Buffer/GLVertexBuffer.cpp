@@ -75,7 +75,7 @@ void Jade::Graphics::GLVertexBuffer::Unbind()
 	glDeleteVertexArrays(1, &vertexArray);
 }
 
-void Jade::Graphics::GLVertexBuffer::Update()
+void Jade::Graphics::GLVertexBuffer::Draw()
 {
 
 }

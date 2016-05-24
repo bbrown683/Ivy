@@ -26,7 +26,6 @@ SOFTWARE.
 
 #include "Graphics/Buffer/IConstantBuffer.h"
 #include "Graphics/Device/GLDevice.h"
-#include "Math/Vertex.h"
 
 namespace Jade
 {
@@ -50,7 +49,7 @@ namespace Jade
 			void SetViewMatrix(Math::Matrix matrix) override;
 			void SetWorldMatrix(Math::Matrix matrix) override;
 
-			void Update() override;
+			void UpdateMatrices() override;
 		};
 	}
 }

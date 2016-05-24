@@ -24,9 +24,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <Graphics/Buffer/IVertexBuffer.h>
-#include <Graphics/Device/GLDevice.h>
-#include <Math/Vertex.h>
+#include "Graphics/Buffer/IVertexBuffer.h"
+#include "Graphics/Device/GLDevice.h"
+#include "Math/Vertex.h"
 
 namespace Jade
 {
@@ -50,7 +50,7 @@ namespace Jade
 			void SetVertices(std::vector<Math::Vertex> vertices) override;
 		
 			void Unbind() override;
-			void Update() override;
+			void Draw() override;
 		};
 	}
 }

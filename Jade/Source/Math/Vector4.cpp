@@ -24,5 +24,53 @@ SOFTWARE.
 
 #include "Vector4.h"
 
-static const Jade::Math::Vector4 One		= Jade::Math::Vector4(1.0f, 1.0f, 1.0f, 1.0f);
-static const Jade::Math::Vector4 Zero		= Jade::Math::Vector4(0.0f, 0.0f, 0.0f, 0.0f);
+static const Jade::Math::Vector4 One(1.0f, 1.0f, 1.0f, 1.0f);
+static const Jade::Math::Vector4 Zero(0.0f, 0.0f, 0.0f, 0.0f);
+
+void Jade::Math::Vector4::SetX(float value)
+{
+	values.x = value;
+}
+
+float Jade::Math::Vector4::GetX()
+{
+	return values.x;
+}
+
+void Jade::Math::Vector4::SetY(float value)
+{
+	values.y = value;
+}
+
+float Jade::Math::Vector4::GetY()
+{
+	return values.y;
+}
+
+void Jade::Math::Vector4::SetZ(float value)
+{
+	values.z = value;
+}
+
+float Jade::Math::Vector4::GetZ()
+{
+	return values.z;
+}
+
+void Jade::Math::Vector4::SetW(float value)
+{
+	values.w = value;
+}
+
+float Jade::Math::Vector4::GetW()
+{
+	return values.w;
+}
+
+std::string Jade::Math::Vector4::ToString() const
+{
+	return "(" + std::to_string(values.x) + ", " +
+		std::to_string(values.y) + ", " +
+		std::to_string(values.z) + ", " +
+		std::to_string(values.w) + ")";
+}

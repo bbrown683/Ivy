@@ -70,7 +70,7 @@ namespace Jade
 			void SetViewMatrix(Math::Matrix matrix);
 			void SetWorldMatrix(Math::Matrix matrix);
 			
-			void Update();
+			void UpdateMatrices();
 		};
 	}
 }

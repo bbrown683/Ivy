@@ -42,10 +42,11 @@ namespace Jade
 		public:
 
 			virtual void Clear(Math::Color color) = 0;
-			virtual void Present() = 0;
 			virtual char* DeviceInformation() = 0;
 			virtual DrawType GetDrawType() = 0;
+			virtual void Present() = 0;
 			virtual void SetDrawType(DrawType type) = 0;
+			virtual void TakeScreenshot() = 0;
 		};
 	}
 }

@@ -16,9 +16,6 @@ cbuffer NeverChanges : register(b2)
 	matrix view;
 }
 
-Texture2D txDiffuse;
-SamplerState samLinear;
-
 //--------------------------------------------------------------------------------------
 // Vertex Shader Variables
 //--------------------------------------------------------------------------------------
@@ -41,11 +38,9 @@ struct PS_INPUT
 //--------------------------------------------------------------------------------------
 // Vertex Shader Program
 //--------------------------------------------------------------------------------------
-PS_INPUT Main(VS_INPUT input)
+PS_INPUT main(VS_INPUT input)
 {
 	PS_INPUT output = (PS_INPUT)0;
-
-	input.Pos.w = 1.0f;
 
 	output.Pos = mul(input.Pos, world);
 	output.Pos = mul(output.Pos, view);

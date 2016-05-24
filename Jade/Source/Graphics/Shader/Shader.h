@@ -77,6 +77,11 @@ namespace Jade
 				shader->MakeActive();
 			}
 
+			void MakeInactive() const
+			{
+				shader->MakeInactive();
+			}
+
 			std::shared_ptr<IShader> GetIShader() const
 			{
 				return shader;

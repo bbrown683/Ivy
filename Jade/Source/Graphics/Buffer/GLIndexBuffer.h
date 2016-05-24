@@ -24,9 +24,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <Graphics/Buffer/IIndexBuffer.h>
-#include <Graphics/Device/GLDevice.h>
-#include <Math/Vertex.h>
+#include "Graphics/Buffer/IIndexBuffer.h"
+#include "Graphics/Device/GLDevice.h"
 
 namespace Jade
 {
@@ -46,7 +45,7 @@ namespace Jade
 			void SetIndices(std::vector<unsigned short> indices) override;
 			
 			void Unbind() override;
-			void Update() override;
+			void Draw() override;
 		};
 	}
 }

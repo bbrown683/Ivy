@@ -39,14 +39,14 @@ namespace Jade
 	{
 		class Model
 		{
-		private:
-
 			// Needed the device for DirectX to create our mesh.
 			Device device;
 			Shader shader;
 
 			// Mesh(s) used to draw our shape.
 			std::vector<Mesh> meshes;
+
+			// Transformations on the model.
 			Math::Vector3 position;
 			Math::Vector3 rotation;
 			Math::Vector3 scale;
@@ -63,6 +63,7 @@ namespace Jade
 			void Load(std::string filename);
 
 			std::vector<Mesh> GetMeshes() const;
+
 			Math::Vector3 GetPosition();
 			Math::Vector3 GetRotation();
 			Math::Vector3 GetScale();

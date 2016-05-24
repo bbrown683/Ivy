@@ -56,6 +56,6 @@ void Jade::Graphics::GLIndexBuffer::Unbind()
 	glDeleteBuffers(1, &indexBuffer);
 }
 
-void Jade::Graphics::GLIndexBuffer::Update()
+void Jade::Graphics::GLIndexBuffer::Draw()
 {
 }

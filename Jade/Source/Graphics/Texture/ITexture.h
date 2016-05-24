@@ -35,8 +35,7 @@ namespace Jade
 			virtual bool CreateTextureFromFile() = 0;
 			virtual bool CreateTextureFromMemory() = 0;
 			virtual bool CreateEmptyTexture() = 0;
-			virtual void Set() = 0;
-			//virtual void Fill(unsigned char* bitmap, unsigned left, unsigned right, unsigned top, unsigned bottom, unsigned pitch) = 0;
+			virtual void MakeActive() = 0;
 			virtual void Fill(unsigned char* bitmap, unsigned pitch, Math::Rectangle rect) = 0;
 		};
 	}

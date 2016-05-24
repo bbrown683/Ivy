@@ -93,11 +93,11 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>false</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty/assimp/include/;$(SolutionDir)ThirdParty/FreeImage/include/;$(SolutionDir)ThirdParty/FreeType/include/;$(SolutionDir)ThirdParty/glm/include/;$(SolutionDir)ThirdParty/OpenAL/include/;$(SolutionDir)ThirdParty/SDL/include/</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty/assimp/include/;$(SolutionDir)ThirdParty/FreeImage/include/;$(SolutionDir)ThirdParty/FreeType/include/;$(SolutionDir)ThirdParty/glm/include/;$(SolutionDir)ThirdParty/OpenAL/include/;$(SolutionDir)ThirdParty/SDL/include/;$(SolutionDir)ThirdParty/Lua/include/;$(SolutionDir)ThirdParty/hlslcc/include/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>sdl2main.lib;sdl2.lib;opengl32.lib;d3d11.lib;d3dcompiler.lib;assimp.lib;gdi32.lib;user32.lib;openal32.lib;freeimage.lib;freetype.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeImage/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeType/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/OpenAL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/SDL/lib/$(PlatformTarget)/</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sdl2main.lib;sdl2.lib;lua53.lib;opengl32.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;assimp.lib;gdi32.lib;user32.lib;openal32.lib;freeimage.lib;freetype.lib;libHLSLcc.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeImage/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeType/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/OpenAL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/SDL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/Lua/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/hlslcc/lib/</AdditionalLibraryDirectories>
       <SubSystem>Console</SubSystem>
       <EntryPointSymbol>
       </EntryPointSymbol>
@@ -106,14 +106,17 @@
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /f /s /y "$(ProjectDir)vertex.hlsl" "$(OutputPath)resources\shaders\"
-xcopy /f /s /y "$(ProjectDir)pixel.hlsl" "$(OutputPath)resources\shaders\"
+      <Command>xcopy /f /s /y "$(ProjectDir)ModelVertex.hlsl" "$(OutputPath)resources\shaders\"
+xcopy /f /s /y "$(ProjectDir)ModelPixel.hlsl" "$(OutputPath)resources\shaders\"
+xcopy /f /s /y "$(ProjectDir)FontVertex.hlsl" "$(OutputPath)resources\shaders\"
+xcopy /f /s /y "$(ProjectDir)FontPixel.hlsl" "$(OutputPath)resources\shaders\"
 xcopy /f /s /y "$(ProjectDir)MonoCube.dae" "$(OutputPath)resources\models\"
 xcopy /f /s /y "$(ProjectDir)MonoCubeTexture.png" "$(OutputPath)resources\models\"
 xcopy /f /s /y "$(SolutionDir)ThirdParty\FreeImage\bin\$(PlatformTarget)\FreeImage.dll" "$(OutputPath)"
 xcopy /f /s /y "$(SolutionDir)ThirdParty\SDL\bin\$(PlatformTarget)\SDL2.dll" "$(OutputPath)"
-if $(PlatformTarget) == x86 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp32.dll" "$(OutputPath)" 
-if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp64.dll" "$(OutputPath)" </Command>
+xcopy /f /s /y "$(SolutionDir)ThirdParty\Lua\bin\$(PlatformTarget)\lua53.dll" "$(OutputPath)"
+if $(PlatformTarget) == x86 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp32.dll" "$(OutputPath)"
+if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp64.dll" "$(OutputPath)"</Command>
     </PostBuildEvent>
     <FxCompile>
       <ShaderModel>5.0</ShaderModel>
@@ -125,11 +128,11 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>false</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty/assimp/include/;$(SolutionDir)ThirdParty/FreeImage/include/;$(SolutionDir)ThirdParty/FreeType/include/;$(SolutionDir)ThirdParty/glm/include/;$(SolutionDir)ThirdParty/OpenAL/include/;$(SolutionDir)ThirdParty/SDL/include/</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty/assimp/include/;$(SolutionDir)ThirdParty/FreeImage/include/;$(SolutionDir)ThirdParty/FreeType/include/;$(SolutionDir)ThirdParty/glm/include/;$(SolutionDir)ThirdParty/OpenAL/include/;$(SolutionDir)ThirdParty/SDL/include/;$(SolutionDir)ThirdParty/Lua/include/;$(SolutionDir)ThirdParty/hlslcc/include/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>sdl2main.lib;sdl2.lib;opengl32.lib;d3d11.lib;d3dcompiler.lib;assimp.lib;gdi32.lib;user32.lib;openal32.lib;freeimage.lib;freetype.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeImage/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeType/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/OpenAL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/SDL/lib/$(PlatformTarget)/</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sdl2main.lib;sdl2.lib;lua53.lib;opengl32.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;assimp.lib;gdi32.lib;user32.lib;openal32.lib;freeimage.lib;freetype.lib;libHLSLcc.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeImage/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeType/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/OpenAL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/SDL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/Lua/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/hlslcc/lib/</AdditionalLibraryDirectories>
       <SubSystem>Console</SubSystem>
       <EntryPointSymbol>
       </EntryPointSymbol>
@@ -138,14 +141,17 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /f /s /y "$(ProjectDir)vertex.hlsl" "$(OutputPath)resources\shaders\"
-xcopy /f /s /y "$(ProjectDir)pixel.hlsl" "$(OutputPath)resources\shaders\"
+      <Command>xcopy /f /s /y "$(ProjectDir)ModelVertex.hlsl" "$(OutputPath)resources\shaders\"
+xcopy /f /s /y "$(ProjectDir)ModelPixel.hlsl" "$(OutputPath)resources\shaders\"
+xcopy /f /s /y "$(ProjectDir)FontVertex.hlsl" "$(OutputPath)resources\shaders\"
+xcopy /f /s /y "$(ProjectDir)FontPixel.hlsl" "$(OutputPath)resources\shaders\"
 xcopy /f /s /y "$(ProjectDir)MonoCube.dae" "$(OutputPath)resources\models\"
 xcopy /f /s /y "$(ProjectDir)MonoCubeTexture.png" "$(OutputPath)resources\models\"
 xcopy /f /s /y "$(SolutionDir)ThirdParty\FreeImage\bin\$(PlatformTarget)\FreeImage.dll" "$(OutputPath)"
 xcopy /f /s /y "$(SolutionDir)ThirdParty\SDL\bin\$(PlatformTarget)\SDL2.dll" "$(OutputPath)"
-if $(PlatformTarget) == x86 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp32.dll" "$(OutputPath)" 
-if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp64.dll" "$(OutputPath)" </Command>
+xcopy /f /s /y "$(SolutionDir)ThirdParty\Lua\bin\$(PlatformTarget)\lua53.dll" "$(OutputPath)"
+if $(PlatformTarget) == x86 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp32.dll" "$(OutputPath)"
+if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp64.dll" "$(OutputPath)"</Command>
     </PostBuildEvent>
     <FxCompile>
       <ShaderModel>5.0</ShaderModel>
@@ -161,12 +167,12 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>false</SDLCheck>
       <AssemblerOutput>NoListing</AssemblerOutput>
-      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty/assimp/include/;$(SolutionDir)ThirdParty/FreeImage/include/;$(SolutionDir)ThirdParty/FreeType/include/;$(SolutionDir)ThirdParty/glm/include/;$(SolutionDir)ThirdParty/OpenAL/include/;$(SolutionDir)ThirdParty/SDL/include/</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty/assimp/include/;$(SolutionDir)ThirdParty/FreeImage/include/;$(SolutionDir)ThirdParty/FreeType/include/;$(SolutionDir)ThirdParty/glm/include/;$(SolutionDir)ThirdParty/OpenAL/include/;$(SolutionDir)ThirdParty/SDL/include/;$(SolutionDir)ThirdParty/Lua/include/;$(SolutionDir)ThirdParty/hlslcc/include/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>sdl2main.lib;sdl2.lib;opengl32.lib;d3d11.lib;d3dcompiler.lib;assimp.lib;gdi32.lib;user32.lib;openal32.lib;freeimage.lib;freetype.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeImage/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeType/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/OpenAL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/SDL/lib/$(PlatformTarget)/</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sdl2main.lib;sdl2.lib;lua53.lib;opengl32.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;assimp.lib;gdi32.lib;user32.lib;openal32.lib;freeimage.lib;freetype.lib;libHLSLcc.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeImage/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeType/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/OpenAL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/SDL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/Lua/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/hlslcc/lib/</AdditionalLibraryDirectories>
       <SubSystem>Windows</SubSystem>
       <EntryPointSymbol>
       </EntryPointSymbol>
@@ -177,14 +183,17 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /f /s /y "$(ProjectDir)vertex.hlsl" "$(OutputPath)resources\shaders\"
-xcopy /f /s /y "$(ProjectDir)pixel.hlsl" "$(OutputPath)resources\shaders\"
+      <Command>xcopy /f /s /y "$(ProjectDir)ModelVertex.hlsl" "$(OutputPath)resources\shaders\"
+xcopy /f /s /y "$(ProjectDir)ModelPixel.hlsl" "$(OutputPath)resources\shaders\"
+xcopy /f /s /y "$(ProjectDir)FontVertex.hlsl" "$(OutputPath)resources\shaders\"
+xcopy /f /s /y "$(ProjectDir)FontPixel.hlsl" "$(OutputPath)resources\shaders\"
 xcopy /f /s /y "$(ProjectDir)MonoCube.dae" "$(OutputPath)resources\models\"
 xcopy /f /s /y "$(ProjectDir)MonoCubeTexture.png" "$(OutputPath)resources\models\"
 xcopy /f /s /y "$(SolutionDir)ThirdParty\FreeImage\bin\$(PlatformTarget)\FreeImage.dll" "$(OutputPath)"
 xcopy /f /s /y "$(SolutionDir)ThirdParty\SDL\bin\$(PlatformTarget)\SDL2.dll" "$(OutputPath)"
-if $(PlatformTarget) == x86 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp32.dll" "$(OutputPath)" 
-if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp64.dll" "$(OutputPath)" </Command>
+xcopy /f /s /y "$(SolutionDir)ThirdParty\Lua\bin\$(PlatformTarget)\lua53.dll" "$(OutputPath)"
+if $(PlatformTarget) == x86 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp32.dll" "$(OutputPath)"
+if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp64.dll" "$(OutputPath)"</Command>
     </PostBuildEvent>
     <FxCompile>
       <ShaderModel>5.0</ShaderModel>
@@ -200,12 +209,12 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>false</SDLCheck>
       <AssemblerOutput>NoListing</AssemblerOutput>
-      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty/assimp/include/;$(SolutionDir)ThirdParty/FreeImage/include/;$(SolutionDir)ThirdParty/FreeType/include/;$(SolutionDir)ThirdParty/glm/include/;$(SolutionDir)ThirdParty/OpenAL/include/;$(SolutionDir)ThirdParty/SDL/include/</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty/assimp/include/;$(SolutionDir)ThirdParty/FreeImage/include/;$(SolutionDir)ThirdParty/FreeType/include/;$(SolutionDir)ThirdParty/glm/include/;$(SolutionDir)ThirdParty/OpenAL/include/;$(SolutionDir)ThirdParty/SDL/include/;$(SolutionDir)ThirdParty/Lua/include/;$(SolutionDir)ThirdParty/hlslcc/include/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>sdl2main.lib;sdl2.lib;opengl32.lib;d3d11.lib;d3dcompiler.lib;assimp.lib;gdi32.lib;user32.lib;openal32.lib;freeimage.lib;freetype.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeImage/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeType/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/OpenAL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/SDL/lib/$(PlatformTarget)/</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sdl2main.lib;sdl2.lib;lua53.lib;opengl32.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;assimp.lib;gdi32.lib;user32.lib;openal32.lib;freeimage.lib;freetype.lib;libHLSLcc.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeImage/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeType/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/OpenAL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/SDL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/Lua/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/hlslcc/lib/</AdditionalLibraryDirectories>
       <SubSystem>Windows</SubSystem>
       <EntryPointSymbol>
       </EntryPointSymbol>
@@ -216,14 +225,17 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /f /s /y "$(ProjectDir)vertex.hlsl" "$(OutputPath)resources\shaders\"
-xcopy /f /s /y "$(ProjectDir)pixel.hlsl" "$(OutputPath)resources\shaders\"
+      <Command>xcopy /f /s /y "$(ProjectDir)ModelVertex.hlsl" "$(OutputPath)resources\shaders\"
+xcopy /f /s /y "$(ProjectDir)ModelPixel.hlsl" "$(OutputPath)resources\shaders\"
+xcopy /f /s /y "$(ProjectDir)FontVertex.hlsl" "$(OutputPath)resources\shaders\"
+xcopy /f /s /y "$(ProjectDir)FontPixel.hlsl" "$(OutputPath)resources\shaders\"
 xcopy /f /s /y "$(ProjectDir)MonoCube.dae" "$(OutputPath)resources\models\"
 xcopy /f /s /y "$(ProjectDir)MonoCubeTexture.png" "$(OutputPath)resources\models\"
 xcopy /f /s /y "$(SolutionDir)ThirdParty\FreeImage\bin\$(PlatformTarget)\FreeImage.dll" "$(OutputPath)"
 xcopy /f /s /y "$(SolutionDir)ThirdParty\SDL\bin\$(PlatformTarget)\SDL2.dll" "$(OutputPath)"
-if $(PlatformTarget) == x86 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp32.dll" "$(OutputPath)" 
-if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp64.dll" "$(OutputPath)" </Command>
+xcopy /f /s /y "$(SolutionDir)ThirdParty\Lua\bin\$(PlatformTarget)\lua53.dll" "$(OutputPath)"
+if $(PlatformTarget) == x86 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp32.dll" "$(OutputPath)"
+if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp64.dll" "$(OutputPath)"</Command>
     </PostBuildEvent>
     <FxCompile>
       <ShaderModel>5.0</ShaderModel>
@@ -233,16 +245,17 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Audio\AudioDevice.cpp" />
+    <ClCompile Include="Core\Script\Script.cpp" />
     <ClCompile Include="Graphics\Blender\DXBlender.cpp" />
     <ClCompile Include="Graphics\Buffer\ConstantBuffer.cpp" />
     <ClCompile Include="Graphics\Model\Importer\OBJImporter.cpp" />
-    <ClCompile Include="Graphics\Sprite\DXSprite.cpp" />
     <ClCompile Include="Graphics\GL\glad\gl\src\glad.c" />
     <ClCompile Include="Graphics\GL\glad\wgl\src\glad_wgl.c" />
     <ClCompile Include="Graphics\Mesh\Mesh.cpp" />
     <ClCompile Include="Graphics\Rasterizer\DXRasterizer.cpp" />
     <ClCompile Include="Graphics\Rasterizer\GLRasterizer.cpp" />
     <ClCompile Include="Graphics\Shader\GLShader.cpp" />
+    <ClCompile Include="Graphics\Sprite\Sprite.cpp" />
     <ClCompile Include="Graphics\Texture\DXTexture.cpp" />
     <ClCompile Include="Graphics\Texture\GLTexture.cpp" />
     <ClCompile Include="Graphics\Widget\Canvas.cpp" />
@@ -304,14 +317,13 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClInclude Include="Graphics\Model\Importer\ModelMesh.h" />
     <ClInclude Include="Graphics\Model\Importer\ModelProperties.h" />
     <ClInclude Include="Graphics\Model\Importer\OBJImporter.h" />
-    <ClInclude Include="Graphics\Sprite\DXSprite.h" />
+    <ClInclude Include="Graphics\Shader\Transcompiler\Transcompiler.h" />
     <ClInclude Include="Graphics\Font\Glyph.h" />
     <ClInclude Include="Graphics\GL\GladLoader.h" />
     <ClInclude Include="Graphics\GL\glad\gl\include\glad\glad.h" />
     <ClInclude Include="Graphics\GL\glad\gl\include\KHR\khrplatform.h" />
     <ClInclude Include="Graphics\GL\glad\wgl\include\glad\glad_wgl.h" />
     <ClInclude Include="Graphics\GL\glad\wgl\include\KHR\khrplatform.h" />
-    <ClInclude Include="Graphics\Sprite\ISprite.h" />
     <ClInclude Include="Math\Space.h" />
     <ClInclude Include="Graphics\Mesh\Mesh.h" />
     <ClInclude Include="Graphics\Model\Importer\Importer.h" />
@@ -387,7 +399,27 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClInclude Include="Core\Utility.h" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="pixel.hlsl">
+    <FxCompile Include="FontPixel.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="FontVertex.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="ModelPixel.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
@@ -396,8 +428,12 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">5.0</ShaderModel>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </FxCompile>
-    <FxCompile Include="vertex.hlsl">
+    <FxCompile Include="ModelVertex.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
@@ -406,6 +442,10 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">5.0</ShaderModel>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </FxCompile>
   </ItemGroup>
   <ItemGroup>

@@ -39,11 +39,6 @@ namespace Jade
 			std::vector<GLuint> shaderIDs;
 			GLuint programID;
 
-			bool Create(std::string filename, ShaderType type) override;
-			bool Compile(std::string filename, ShaderType type) override;
-			bool Release() override;
-			bool Check(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMessage);
-
 		public:
 
 			GLShader(std::map<std::string, ShaderType> shaders)
@@ -55,13 +50,24 @@ namespace Jade
 					std::string iString = iterator->first;
 					ShaderType iType = iterator->second;
 
-					GLShader::Create(iString, iType);
+					if(GLShader::Compile(iString, iType))
+						GLShader::Create(iString, iType);
 				}
 			}
 
+			// Overrides.
+			bool Create(std::string filename, ShaderType type) override;
+			bool Compile(std::string filename, ShaderType type) override;
 			void MakeActive() override;
+			void MakeInactive() override;
+			bool Release() override;
+
+			// Internal methods.
 			bool CreateProgram();
 			GLuint GetProgramID();
+			bool Check(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMessage);
+			bool CheckShader(GLuint shader);
+			bool CheckProgram(GLuint program);
 
 			~GLShader()
 			{

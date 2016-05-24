@@ -11,7 +11,7 @@ void Jade::Graphics::Camera::SetCameraPosition(Math::Vector3 position)
 	std::cout << "Camera Position: " << position.ToString() << std::endl;
 	// Update constant buffer.
 	cBuffer.SetViewMatrix(Math::Matrix::CreateLookAtLH(this->position, target, Math::Vector3::Up).Transpose());
-	cBuffer.Update();
+	cBuffer.UpdateMatrices();
 }
 
 Jade::Math::Vector3 Jade::Graphics::Camera::GetTargetPosition()
@@ -25,5 +25,5 @@ void Jade::Graphics::Camera::SetTargetPosition(Math::Vector3 position)
 
 	// Update constant buffer.
 	cBuffer.SetViewMatrix(Math::Matrix::CreateLookAtLH(this->position, target, Math::Vector3::Up).Transpose());
-	cBuffer.Update();
+	cBuffer.UpdateMatrices();
 }

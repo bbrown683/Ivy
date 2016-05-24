@@ -42,6 +42,7 @@ namespace Jade
 			Opacity,
 			Reflection,
 			Specular,
+			Sprite // Sprite rendering.
 		};
 	}
 }

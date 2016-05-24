@@ -75,7 +75,7 @@ void Jade::Graphics::DXIndexBuffer::Unbind()
 	device->GetID3D11DeviceContext()->IASetIndexBuffer(nullptr, DXGI_FORMAT_R16_UINT, 0);
 }
 
-void Jade::Graphics::DXIndexBuffer::Update()
+void Jade::Graphics::DXIndexBuffer::Draw()
 {
 	// Indexed rendering.
 	device->GetID3D11DeviceContext()->DrawIndexed(static_cast<unsigned>(indices.size()), 0, 0);

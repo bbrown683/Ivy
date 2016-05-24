@@ -26,7 +26,7 @@ SOFTWARE.
 
 bool Jade::Graphics::GLRasterizer::SetRasterizerState(CullMode cullMode, FillMode fillMode, WindMode windMode)
 {	
-	// Set variables.
+	// MakeActive variables.
 	this->cullMode = cullMode;
 	this->fillMode = fillMode;
 	this->windMode = windMode;

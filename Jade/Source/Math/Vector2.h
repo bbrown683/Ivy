@@ -37,10 +37,6 @@ namespace Jade
 	{
 		struct Vector2
 		{
-			glm::vec2 values;
-
-		public:
-
 			// Vector2 operator overloads.
 
 			bool operator==(Vector2 vector) const
@@ -117,6 +113,10 @@ namespace Jade
 			void SetY(float value);
 			float GetY() const;
 			std::string ToString() const;
+
+		private:
+
+			glm::vec2 values;
 		};
 	}
 }

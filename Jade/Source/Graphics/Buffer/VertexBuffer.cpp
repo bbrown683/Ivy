@@ -22,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <Graphics/Buffer/VertexBuffer.h>
+#include "Graphics/Buffer/VertexBuffer.h"
 
 void Jade::Graphics::VertexBuffer::Bind()
 {
@@ -32,6 +32,11 @@ void Jade::Graphics::VertexBuffer::Bind()
 bool Jade::Graphics::VertexBuffer::Create()
 {
 	return vertexBuffer->Create();
+}
+
+void Jade::Graphics::VertexBuffer::Draw()
+{
+	vertexBuffer->Draw();
 }
 
 std::vector<Jade::Math::Vertex> Jade::Graphics::VertexBuffer::GetVertices()
@@ -47,9 +52,4 @@ void Jade::Graphics::VertexBuffer::SetVertices(std::vector<Math::Vertex> vertice
 void Jade::Graphics::VertexBuffer::Unbind()
 {
 	vertexBuffer->Unbind();
-}
-
-void Jade::Graphics::VertexBuffer::Update()
-{
-	vertexBuffer->Update();
 }

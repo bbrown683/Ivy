@@ -24,9 +24,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include "Graphics/Buffer/ConstantBuffer.h"
+#include "Graphics/Buffer/VertexBuffer.h"
 #include "Graphics/Device/Device.h"
 #include "Graphics/Shader/Shader.h"
-#include "Graphics/Sprite/ISprite.h"
 #include "Graphics/Texture/Texture.h"
 
 namespace Jade
@@ -37,8 +38,18 @@ namespace Jade
 		{
 			Device device;
 			Shader shader;
+			Texture texture;
 
-			std::shared_ptr<ISprite> sprite;
+			ConstantBuffer cBuffer;
+			VertexBuffer vBuffer;
+
+			Math::Matrix mRotation;
+			Math::Matrix mScale;
+			Math::Matrix mTranslation;
+
+			Math::Vector2 vPosition;
+			Math::Vector2 vRotation;
+			Math::Vector2 vScale;
 
 		public:
 
@@ -46,14 +57,53 @@ namespace Jade
 			{				 
 				this->device = device;
 				this->shader = shader;
+			
+				vBuffer = VertexBuffer(device, PrimitiveType::TriangleList);
+				cBuffer = ConstantBuffer(device);
+
+				// All quads when in triangular form have 6 vertices.
+				// For a single sprite, these should be the positions and
+				// texture coordinates.
+				std::vector<Math::Vertex> vertices;
+
+				// DirectX requires us to flip the texture coordinates.
+				if (device.GetGraphicsAPI() == GraphicsAPI::DirectX)
+				{
+					vertices.push_back({ Math::Vector4(0.0f, 1.0f, 0.0f), Math::Vector2(1.0f, 0.0f) });
+					vertices.push_back({ Math::Vector4(1.0f, 0.0f, 0.0f), Math::Vector2(0.0f, 1.0f) });
+					vertices.push_back({ Math::Vector4(0.0f, 0.0f, 0.0f), Math::Vector2(1.0f, 1.0f) });
+					vertices.push_back({ Math::Vector4(0.0f, 1.0f, 0.0f), Math::Vector2(1.0f, 0.0f) });
+					vertices.push_back({ Math::Vector4(1.0f, 1.0f, 0.0f), Math::Vector2(0.0f, 0.0f) });
+					vertices.push_back({ Math::Vector4(1.0f, 0.0f, 0.0f), Math::Vector2(0.0f, 1.0f) });
+				}
+				else
+				{
+					vertices.push_back({ Math::Vector4(0.0f, 1.0f, 0.0f), Math::Vector2(0.0f, 1.0f) });
+					vertices.push_back({ Math::Vector4(1.0f, 0.0f, 0.0f), Math::Vector2(1.0f, 0.0f) });
+					vertices.push_back({ Math::Vector4(0.0f, 0.0f, 0.0f), Math::Vector2(0.0f, 0.0f) });
+					vertices.push_back({ Math::Vector4(0.0f, 1.0f, 0.0f), Math::Vector2(0.0f, 1.0f) });
+					vertices.push_back({ Math::Vector4(1.0f, 1.0f, 0.0f), Math::Vector2(1.0f, 1.0f) });
+					vertices.push_back({ Math::Vector4(1.0f, 0.0f, 0.0f), Math::Vector2(1.0f, 0.0f) });
+				}
+
+				// Create Vertex Buffer for sprite.
+				vBuffer.SetVertices(vertices);
+				vBuffer.Create();
+
+				// Create world matrix for sprite.
+				cBuffer.CreateWorldMatrix();
 			}
 
-			void Draw(std::string filename, int x, int y, float scale) const
-			{
-				// Generate the texture for the sprite.
-				Texture texture(device, filename, TextureType::Bitmap);
-				sprite->Draw(texture, filename, x, y, scale);
-			}
+			void Draw();
+			bool Load(std::string filename);
+
+			Math::Vector2 GetPosition();
+			Math::Vector2 GetRotation();
+			Math::Vector2 GetScale();
+
+			void SetPosition(Math::Vector2 position);
+			void SetRotation(Math::Vector2 rotation);
+			void SetScale(Math::Vector2 scale);
 		};
 	}
 }
