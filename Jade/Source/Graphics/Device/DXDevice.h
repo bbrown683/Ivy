@@ -43,8 +43,9 @@ namespace Jade
 	{
 		class DXDevice : public IDevice
 		{
-			std::shared_ptr<System::IWindow> window;
-			Specification specification;
+			//std::shared_ptr<System::IWindow> window;
+            System::Window window;
+            Specification specification;
 			DrawType drawType;
 
 			// Necessary to initialize a Direct3D11 device
@@ -67,10 +68,10 @@ namespace Jade
 
 		public:
 
-			DXDevice() : window(nullptr) { }
+			//DXDevice() : window(nullptr) { }
 
 			// We have a window handle.
-			DXDevice(std::shared_ptr<System::IWindow> window, Specification specification)
+			DXDevice(System::Window window, Specification specification) //std::shared_ptr<System::IWindow> window, Specification specification)
 			{
 				this->window = window;
 				this->specification = specification;
@@ -94,7 +95,6 @@ namespace Jade
 			void Clear(Math::Color color) override;
 			char* DeviceInformation() override;
 			DrawType GetDrawType() override;
-			std::shared_ptr<System::IWindow> GetIWindow() const;
 			void Present() override;
 			void SetDrawType(DrawType type) override;
 			void TakeScreenshot() override;

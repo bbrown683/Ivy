@@ -58,7 +58,7 @@ bool Jade::Graphics::DXDevice::Create()
 	unsigned int numFeatureLevels = ARRAYSIZE(featureLevels);
 
 	// This should not be null.
-	if (window->Handle() == nullptr)
+	if (window.Handle() == nullptr)
 		return false;
 
 	DXGI_SWAP_CHAIN_DESC sd;
@@ -70,7 +70,7 @@ bool Jade::Graphics::DXDevice::Create()
 	sd.BufferDesc.RefreshRate.Numerator = 60;
 	sd.BufferDesc.RefreshRate.Denominator = 1;
 	sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-	sd.OutputWindow = static_cast<HWND>(window->Handle());
+    sd.OutputWindow = static_cast<HWND>(window.Handle());//window->Handle());
 	sd.Windowed = true;
 	sd.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
 	sd.SampleDesc.Count = specification.samples;
@@ -97,8 +97,8 @@ bool Jade::Graphics::DXDevice::Create()
 	// Create depth stencil texture
 	D3D11_TEXTURE2D_DESC depthDesc;
 	ZeroMemory(&depthDesc, sizeof(depthDesc));
-	depthDesc.Width = window->GetWidth();
-	depthDesc.Height = window->GetHeight();
+    depthDesc.Width = window.GetWidth();
+    depthDesc.Height = window.GetHeight();
 	depthDesc.MipLevels = 1;
 	depthDesc.ArraySize = 1;
 	depthDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
@@ -163,8 +163,8 @@ bool Jade::Graphics::DXDevice::Create()
 	m_pImmediateContext->OMSetRenderTargets(1, m_pRenderTargetView.GetAddressOf(), m_pDepthStencilView.Get());
 
 	ZeroMemory(&m_Viewport, sizeof(D3D11_VIEWPORT));
-	m_Viewport.Width = static_cast<float>(window->GetWidth());
-	m_Viewport.Height = static_cast<float>(window->GetHeight());
+    m_Viewport.Width = static_cast<float>(window.GetWidth());//window->GetWidth());
+    m_Viewport.Height = static_cast<float>(window.GetHeight());//window->GetHeight());
 	m_Viewport.MinDepth = 0.0f;
 	m_Viewport.MaxDepth = 1.0f;
 	m_Viewport.TopLeftX = 0;
@@ -187,8 +187,8 @@ bool Jade::Graphics::DXDevice::Release()
 void Jade::Graphics::DXDevice::OnWindowResize()
 {
 	// Update width and height.
-	m_Viewport.Width = static_cast<float>(window->GetWidth());
-	m_Viewport.Height = static_cast<float>(window->GetHeight());
+    m_Viewport.Width = static_cast<float>(window.GetWidth());
+    m_Viewport.Height = static_cast<float>(window.GetHeight());
 }
 
 void Jade::Graphics::DXDevice::Clear(Math::Color color)
@@ -222,11 +222,6 @@ void Jade::Graphics::DXDevice::SetDrawType(DrawType type)
 void Jade::Graphics::DXDevice::TakeScreenshot()
 {
 	
-}
-
-std::shared_ptr<Jade::System::IWindow> Jade::Graphics::DXDevice::GetIWindow() const
-{
-	return window;
 }
 
 ComPtr<ID3D11Texture2D> Jade::Graphics::DXDevice::GetBackBuffer() const

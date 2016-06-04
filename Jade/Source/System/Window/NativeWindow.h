@@ -27,6 +27,8 @@ SOFTWARE.
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_syswm.h"
 
+#include "freeimage.h"
+
 #include <Core/Utility.h>
 #include <Input/Input.h>
 #include <System/Window/IWindow.h>
@@ -38,9 +40,7 @@ namespace Jade
 	{
 		class NativeWindow : public IWindow
 		{
-		private:
-
-			SDL_Window* m_pWindow; // SDLs window object.
+            SDL_Window* m_pWindow; // SDLs window object.
 			SDL_SysWMinfo m_WindowInfo; // Contains information of our window.
 
 			// Window parameters.
@@ -99,9 +99,9 @@ namespace Jade
 			void Hide() override;
 			void Restore() override;
 			void Maximize() override;
-			bool IsMinimized() override;
+			bool Minimized() override;
 			void Minimize() override;
-			bool IsMaximized() override;
+			bool Maximized() override;
 			bool IsVisible() override;
 			bool IsOpen() override;
 			bool IsFullscreen() override;
@@ -109,7 +109,7 @@ namespace Jade
 			System::Timer GetTimer() override;
 			Input::Input GetInput() override;
 
-			NativeWindow(int width, int height, int x, int y, std::string title, bool fullscreen) : m_pWindow(nullptr)
+			NativeWindow(int width, int height, int x, int y, std::string title, bool fullscreen) //: m_pWindow(nullptr)
 			{
 				this->width = width;
 				this->height = height;

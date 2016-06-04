@@ -58,9 +58,9 @@ namespace Jade
 			virtual void Hide() = 0;
 			virtual void Restore() = 0;
 			virtual void Maximize() = 0;
-			virtual bool IsMinimized() = 0;
+			virtual bool Minimized() = 0;
 			virtual void Minimize() = 0;
-			virtual bool IsMaximized() = 0;
+			virtual bool Maximized() = 0;
 			virtual bool IsVisible() = 0;
 			virtual bool IsOpen() = 0;
 			virtual bool IsFullscreen() = 0;

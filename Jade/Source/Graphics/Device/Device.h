@@ -48,11 +48,9 @@ namespace Jade
 
 		public:						
 
-			// Note: Do not use this constructor as everything is set to null.
 			Device() : device(nullptr) {} 
 
 			// Default device constructor.
-
 			Device(System::Window window, GraphicsAPI api)
 			{
 				this->window = window;

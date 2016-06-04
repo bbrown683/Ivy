@@ -25,10 +25,9 @@ SOFTWARE.
 */
 
 #include "Core/Utility.h"
+#include "Graphics/Device/IDevice.h"
 #include "Math/Color.h"
-
-#include "IDevice.h"
-#include "System/Window/IWindow.h"
+#include "System/Window/Window.h"
 
 namespace Jade
 {
@@ -38,17 +37,14 @@ namespace Jade
 		{
 			// Window object contains some data on our window such as size, 
 			// and the handle of it in memory which we need to create a device.
-			std::shared_ptr<System::IWindow> window;
+			System::Window window;
 
 			bool Create() override;
 			bool Release() override;
 
 		public:
 
-			// Empty Device.
-			VKDevice() : window(nullptr) { }
-
-			VKDevice(std::shared_ptr<System::IWindow> window)
+			VKDevice(System::Window window)
 			{
 				this->window = window;
 

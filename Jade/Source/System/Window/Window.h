@@ -33,8 +33,6 @@ namespace Jade
 		// Multi-platform window implementation.
 		class Window
 		{
-		private:
-
 			int width;
 			int height;
 			int x;

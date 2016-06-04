@@ -86,7 +86,7 @@ bool Jade::Graphics::GLDevice::Create()
 	};
 
 	// Get the device context for the SDL window.
-	dc = GetDC(reinterpret_cast<HWND>(window->Handle()));
+	dc = GetDC(reinterpret_cast<HWND>(window.Handle()));
 
 	int pixelFormat;
 	unsigned int formatCount;
@@ -148,7 +148,7 @@ bool Jade::Graphics::GLDevice::Release()
 	// Unbind OpenGL context.
 	wglMakeCurrent(dc, nullptr);
 	wglDeleteContext(context);
-	ReleaseDC(reinterpret_cast<HWND>(window->Handle()), dc);
+	ReleaseDC(reinterpret_cast<HWND>(window.Handle()), dc);
 #elif JADE_PLATFORM_LINUX
 
 #endif
@@ -157,7 +157,7 @@ bool Jade::Graphics::GLDevice::Release()
 
 void Jade::Graphics::GLDevice::OnWindowResize()
 {
-	glViewport(0, 0, window->GetWidth(), window->GetHeight());
+	glViewport(0, 0, window.GetWidth(), window.GetHeight());
 }
 
 void Jade::Graphics::GLDevice::Clear(Math::Color color)

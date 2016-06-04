@@ -33,8 +33,6 @@ namespace Jade
 	{
 		class DXBlender : public IBlender
 		{
-		private:
-
 			std::shared_ptr<DXDevice> device;
 			unsigned int mask;
 

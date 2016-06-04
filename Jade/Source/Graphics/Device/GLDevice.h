@@ -31,7 +31,7 @@ SOFTWARE.
 #include "Math/Color.h"
 #include "Graphics/Device/IDevice.h"
 #include "Graphics/Device/Specification.h"
-#include "System/Window/IWindow.h"
+#include "System/Window/Window.h"
 
 namespace Jade
 {
@@ -46,7 +46,7 @@ namespace Jade
 
 			// Window object contains some data on our window such as size, 
 			// and the handle of it in memory which we need to create a device.
-			std::shared_ptr<System::IWindow> window;
+			System::Window window;
 			Specification specification;
 			DrawType drawType;
 
@@ -56,10 +56,7 @@ namespace Jade
 
 		public:
 
-			// Empty Device.
-			GLDevice() : window(nullptr) { }
-
-			GLDevice(std::shared_ptr<System::IWindow> window, Specification specification)
+			GLDevice(System::Window window, Specification specification)
 			{
 				this->window = window;
 

@@ -29,7 +29,7 @@ SOFTWARE.
 // Include the header.
 #include "Jade.h"
 
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
 	// Creates a basic window that can be rendered with either graphics API.
 	Window window(1080, 720, 100, 100, "Jade Game Engine Framework", false);

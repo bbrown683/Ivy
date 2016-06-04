@@ -24,6 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include "Graphics/Blender/Blender.h"
 #include "Graphics/Buffer/ConstantBuffer.h"
 #include "Graphics/Buffer/IndexBuffer.h"
 #include "Graphics/Buffer/VertexBuffer.h"
@@ -41,6 +42,7 @@ namespace Jade
 		{
 			Device device;
 			Shader shader;
+            Blender blender;
 			PrimitiveType primitiveType;
 
 			std::vector<Math::Vertex> vertices;

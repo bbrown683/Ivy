@@ -255,8 +255,8 @@ Jade::Input::Key Jade::System::NativeWindow::ConvertKeycode(SDL_Keycode keycode)
 
 void Jade::System::NativeWindow::SetIcon(std::string filename)
 {
-	// Deprecating this due to attempting to reduce library clutter.
-#ifdef USE_FREEIMAGE
+    /*
+
 	// SDL is picky about icons, therefore we will use
 	// FreeImage to load the icon and retrieve the bits 
 	// from the image and pass it to SDL.
@@ -287,8 +287,7 @@ void Jade::System::NativeWindow::SetIcon(std::string filename)
 		unsigned char* bits = nullptr;
 		unsigned long size = 0;
 		FreeImage_AcquireMemory(hMemory, &bits, &size);
-#endif
-	/*
+
 	// Load image without grabbing irrelevant information.
 	int width, height, bpp;
 	unsigned char* bits = stbi_load(filename.c_str(), &width, &height, &bpp, STBI_rgb_alpha);
@@ -319,13 +318,14 @@ void Jade::System::NativeWindow::SetIcon(std::string filename)
 		// Release the resized image.
 		free(resizedBits);
 	}
-	*/
+
+    */
 }
 
 void Jade::System::NativeWindow::Close()
 {	
 	open = false;
-	
+
 	SDL_DestroyWindow(m_pWindow);
 	SDL_Quit();
 }
@@ -362,7 +362,7 @@ int Jade::System::NativeWindow::GetHeight()
 void Jade::System::NativeWindow::SetHeight(int value)
 {
 	SDL_SetWindowSize(m_pWindow, width, value);
-	this->height = value;
+    this->height = value;
 }
 
 float Jade::System::NativeWindow::GetAspectRatio()
@@ -377,8 +377,8 @@ int Jade::System::NativeWindow::GetX()
 
 void Jade::System::NativeWindow::SetX(int value)
 {
-	SDL_SetWindowPosition(m_pWindow, value, x);
-	this->x = value;
+    SDL_SetWindowPosition(m_pWindow, value, x);
+    this->x = value;
 }
 
 int Jade::System::NativeWindow::GetY()
@@ -389,7 +389,7 @@ int Jade::System::NativeWindow::GetY()
 void Jade::System::NativeWindow::SetY(int value)
 {
 	SDL_SetWindowPosition(m_pWindow, x, value);
-	this->y = value;
+    this->y = value;
 }
 
 std::string Jade::System::NativeWindow::GetTitle()
@@ -400,7 +400,7 @@ std::string Jade::System::NativeWindow::GetTitle()
 void Jade::System::NativeWindow::SetTitle(std::string value)
 {
 	SDL_SetWindowTitle(m_pWindow, value.c_str());
-	this->title = value;
+    this->title = value;
 }
 
 Jade::Math::Point Jade::System::NativeWindow::GetPosition()
@@ -443,19 +443,19 @@ bool Jade::System::NativeWindow::Create()
 		}
 	}
 
-	return false;
+    return false;
 }
 
 void Jade::System::NativeWindow::Show()
 {
 	SDL_ShowWindow(m_pWindow);
-	hidden = false;
+    hidden = false;
 }
 
 void Jade::System::NativeWindow::Hide()
 {
 	SDL_HideWindow(m_pWindow);
-	hidden = true;
+    hidden = true;
 }
 
 void Jade::System::NativeWindow::Restore()
@@ -475,7 +475,7 @@ void Jade::System::NativeWindow::Maximize()
 	maximized = true;
 }
 
-bool Jade::System::NativeWindow::IsMaximized()
+bool Jade::System::NativeWindow::Maximized()
 {
 	return maximized;
 }
@@ -486,7 +486,7 @@ void Jade::System::NativeWindow::Minimize()
 	minimized = true;
 }
 
-bool Jade::System::NativeWindow::IsMinimized()
+bool Jade::System::NativeWindow::Minimized()
 {
 	return minimized;
 }
