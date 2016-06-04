@@ -13,7 +13,7 @@ An Open Source C++ Game Development Framework inspired by [Monogame](http://www.
 * GLM (OpenGL Mathematics)
 * OpenAL 1.1
 * SDL 2.0.4
-* [Windows 8 SDK](https://developer.microsoft.com/en-us/windows/downloads/windows-8-sdk) (DirectX11 and OpenGL Headers for Windows Development)
+* Windows 7 or 8.1 SDK (DirectX11 and OpenGL Headers for Windows Development)
 
 The following except the Windows 8 SDK is provided for out of the box compilation on x86 and x64 machines using Visual Studio 2015 Community Edition.
 
