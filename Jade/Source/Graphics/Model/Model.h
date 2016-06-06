@@ -37,9 +37,9 @@ namespace Jade
 {
 	namespace Graphics
 	{
+        /* \brief A model is a collection of triangular meshes. */ 
 		class Model
 		{
-			// Needed the device for DirectX to create our mesh.
 			Device device;
 			Shader shader;
 
@@ -64,9 +64,9 @@ namespace Jade
 
 			std::vector<Mesh> GetMeshes() const;
 
-			Math::Vector3 GetPosition();
-			Math::Vector3 GetRotation();
-			Math::Vector3 GetScale();
+			Math::Vector3 GetPosition() const;
+			Math::Vector3 GetRotation() const;
+			Math::Vector3 GetScale() const;
 
 			void SetPosition(Math::Vector3 position);
 			void SetRotation(Math::Vector3 rotation);

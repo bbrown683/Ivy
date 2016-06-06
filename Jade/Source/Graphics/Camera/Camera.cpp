@@ -1,6 +1,6 @@
 #include "Camera.h"
 
-Jade::Math::Vector3 Jade::Graphics::Camera::GetCameraPosition()
+Jade::Math::Vector3 Jade::Graphics::Camera::GetCameraPosition() const
 {
 	return position;
 }
@@ -14,7 +14,7 @@ void Jade::Graphics::Camera::SetCameraPosition(Math::Vector3 position)
 	cBuffer.UpdateMatrices();
 }
 
-Jade::Math::Vector3 Jade::Graphics::Camera::GetTargetPosition()
+Jade::Math::Vector3 Jade::Graphics::Camera::GetTargetPosition() const
 {
 	return target;
 }

@@ -40,7 +40,9 @@ namespace Jade
 
 		public:
 
-			Camera(Device device, Math::Vector3 position, Math::Vector3 target)
+            Camera() { }
+
+            Camera(Device device, Math::Vector3 position, Math::Vector3 target)
 			{
 				this->device = device;
 				this->position = position;
@@ -52,6 +54,7 @@ namespace Jade
 				cBuffer.CreateViewMatrix();
 				
 				cBuffer.SetViewMatrix(Math::Matrix::CreateLookAtLH(position, target, Math::Vector3::Up).Transpose());
+                // Note: On resizing it will still use the old aspect ratio. Need to create a workaround for this to update it.
 				cBuffer.SetProjectionMatrix(Math::Matrix::CreatePerspectiveViewLH(
 					Math::Math::PiOverTwo, static_cast<float>(device.GetWindow().GetWidth()),
 					static_cast<float>(device.GetWindow().GetHeight()), 0.1f, 1000.0f).Transpose());
@@ -59,9 +62,9 @@ namespace Jade
 				cBuffer.UpdateMatrices();
 			}
 
-			Math::Vector3 GetCameraPosition();
+			Math::Vector3 GetCameraPosition() const;
 			void SetCameraPosition(Math::Vector3 position);
-			Math::Vector3 GetTargetPosition();
+			Math::Vector3 GetTargetPosition() const;
 			void SetTargetPosition(Math::Vector3 position);
 		};
 	}

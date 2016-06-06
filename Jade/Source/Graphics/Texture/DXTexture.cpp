@@ -27,7 +27,7 @@ SOFTWARE.
 #ifdef JADE_PLATFORM_WINDOWS
 bool Jade::Graphics::DXTexture::CreateEmptyTexture()
 {
-	D3D11_TEXTURE2D_DESC texDesc;
+    D3D11_TEXTURE2D_DESC texDesc;
 	ZeroMemory(&texDesc, sizeof(texDesc));
 	texDesc.Width = width;
 	texDesc.Height = height;

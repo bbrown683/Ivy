@@ -70,7 +70,7 @@ bool Jade::Graphics::DXDevice::Create()
 	sd.BufferDesc.RefreshRate.Numerator = 60;
 	sd.BufferDesc.RefreshRate.Denominator = 1;
 	sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-    sd.OutputWindow = static_cast<HWND>(window.Handle());//window->Handle());
+    sd.OutputWindow = static_cast<HWND>(window.Handle());
 	sd.Windowed = true;
 	sd.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
 	sd.SampleDesc.Count = specification.samples;
@@ -163,8 +163,8 @@ bool Jade::Graphics::DXDevice::Create()
 	m_pImmediateContext->OMSetRenderTargets(1, m_pRenderTargetView.GetAddressOf(), m_pDepthStencilView.Get());
 
 	ZeroMemory(&m_Viewport, sizeof(D3D11_VIEWPORT));
-    m_Viewport.Width = static_cast<float>(window.GetWidth());//window->GetWidth());
-    m_Viewport.Height = static_cast<float>(window.GetHeight());//window->GetHeight());
+    m_Viewport.Width = static_cast<float>(window.GetWidth());
+    m_Viewport.Height = static_cast<float>(window.GetHeight());
 	m_Viewport.MinDepth = 0.0f;
 	m_Viewport.MaxDepth = 1.0f;
 	m_Viewport.TopLeftX = 0;
@@ -186,14 +186,77 @@ bool Jade::Graphics::DXDevice::Release()
 
 void Jade::Graphics::DXDevice::OnWindowResize()
 {
-	// Update width and height.
+    m_pImmediateContext->OMSetRenderTargets(0, nullptr, nullptr);
+    m_pRenderTargetView.Reset();
+
+    HRESULT hr = m_pSwapChain->ResizeBuffers(0, 0, 0, DXGI_FORMAT_UNKNOWN, DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH);
+   
+    if (FAILED(hr))
+        return;
+
+    hr =  m_pDevice->CreateRenderTargetView(GetBackBuffer().Get(), nullptr, m_pRenderTargetView.GetAddressOf());
+    
+    if (FAILED(hr))
+        return; 
+
+    // Reset pointer before using again to prevent leaks.
+    m_pDepthStencil.Reset();
+
+    // Create depth stencil texture
+    D3D11_TEXTURE2D_DESC depthDesc;
+    ZeroMemory(&depthDesc, sizeof(depthDesc));
+    depthDesc.Width = window.GetWidth();
+    depthDesc.Height = window.GetHeight();
+    depthDesc.MipLevels = 1;
+    depthDesc.ArraySize = 1;
+    depthDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+    depthDesc.SampleDesc.Count = specification.samples;
+    depthDesc.SampleDesc.Quality = D3D11_STANDARD_MULTISAMPLE_PATTERN;
+    depthDesc.Usage = D3D11_USAGE_DEFAULT;
+    depthDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
+    depthDesc.CPUAccessFlags = 0;
+    depthDesc.MiscFlags = 0;
+    hr = m_pDevice->CreateTexture2D(&depthDesc, nullptr, m_pDepthStencil.GetAddressOf());
+
+    if (FAILED(hr))
+        return;
+
+    // Reset pointer before using again to prevent leaks.
+    m_pDepthStencilView.Reset();
+
+    // Create the depth stencil view
+    D3D11_DEPTH_STENCIL_VIEW_DESC stencilDesc;
+    ZeroMemory(&stencilDesc, sizeof(stencilDesc));
+    stencilDesc.Format = depthDesc.Format;
+    if (specification.samples > 1)
+        stencilDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2DMS;
+    else
+        stencilDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
+    stencilDesc.Texture2D.MipSlice = 0;
+    hr = m_pDevice->CreateDepthStencilView(m_pDepthStencil.Get(), &stencilDesc, m_pDepthStencilView.GetAddressOf());
+
+    if (FAILED(hr))
+        return;
+
+    m_pImmediateContext->OMSetRenderTargets(1, m_pRenderTargetView.GetAddressOf(), m_pDepthStencilView.Get());
+
+    // Update width and height.
     m_Viewport.Width = static_cast<float>(window.GetWidth());
     m_Viewport.Height = static_cast<float>(window.GetHeight());
+    m_pImmediateContext->RSSetViewports(1, &m_Viewport);
 }
 
 void Jade::Graphics::DXDevice::Clear(Math::Color color)
 {	
-	float colorRGBA[] = { color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() };
+	// Handles the resizing of the viewport each render frame.
+    if(window.GetRenderViewportNeedsResize())
+	{
+        OnWindowResize();
+        window.SetRenderViewportNeedsResize(false);
+        std::cout << "Viewport resized" << std::endl;
+	}
+    
+    float colorRGBA[] = { color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() };
 	m_pImmediateContext->ClearRenderTargetView(m_pRenderTargetView.Get(), colorRGBA);
 	m_pImmediateContext->ClearDepthStencilView(m_pDepthStencilView.Get(), D3D11_CLEAR_DEPTH, 1.0f, 0);
 }
@@ -221,7 +284,7 @@ void Jade::Graphics::DXDevice::SetDrawType(DrawType type)
 
 void Jade::Graphics::DXDevice::TakeScreenshot()
 {
-	
+
 }
 
 ComPtr<ID3D11Texture2D> Jade::Graphics::DXDevice::GetBackBuffer() const

@@ -68,8 +68,6 @@ namespace Jade
 
 		public:
 
-			//DXDevice() : window(nullptr) { }
-
 			// We have a window handle.
 			DXDevice(System::Window window, Specification specification) //std::shared_ptr<System::IWindow> window, Specification specification)
 			{
@@ -110,6 +108,14 @@ namespace Jade
 			const ComPtr<ID3D11RenderTargetView>& GetID3D11RenderTargetView() const;
 			const ComPtr<ID3D11Texture2D>& GetID3D11DepthStencil() const;
 			const ComPtr<ID3D11DepthStencilView>& GetID3D11DepthStencilView() const;
+
+            // Local functions.
+            bool CreateDeviceAndSwapChain();
+            bool CreateDepthStencil();
+            bool CreateDepthStencilState();
+            bool CreateStencil();
+            bool CreateRenderTargetView();
+            bool SetRenderViewport();
 		};
 	}
 }

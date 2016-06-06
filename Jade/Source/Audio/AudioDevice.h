@@ -25,6 +25,7 @@ SOFTWARE.
 */
 
 #include "OpenAL/al.h"
+#include "OpenAL/alc.h"
 
 namespace Jade
 {

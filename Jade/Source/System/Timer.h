@@ -6,8 +6,6 @@ namespace Jade
 	{
 		class Timer
 		{
-		private:
-
 			float deltaTime;
 			float elapsedTime;
 

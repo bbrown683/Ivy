@@ -32,8 +32,6 @@ namespace Jade
 	{
 		class File
 		{
-		private:
-
 			FILE* file;
 			std::string filename;
 			std::string content; // This allows us to reaccess the content of a file without having to read again.

@@ -64,7 +64,8 @@ namespace Jade
 
 		public:
 
-			static std::string GetFilePath();
+			static std::string GetExecutablePath();
+            static std::string RemoveFilenameFromPath(std::string path);
 			static std::wstring StringToWString(std::string string);
 		};
 	};

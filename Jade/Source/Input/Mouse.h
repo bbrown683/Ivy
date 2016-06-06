@@ -24,7 +24,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <Input/InputState.h>
+#include "Input/InputState.h"
+#include "Math/Point.h"
 
 namespace Jade
 {
@@ -33,9 +34,12 @@ namespace Jade
 		class Mouse
 		{
 			InputState mouseState;
-			
-			int x;
-			int y;
+            Math::Point position;
+
+        public:
+
+            void SetCursorPosition(Math::Point position);
+            Math::Point GetCursorPosition();
 		};
 	}
 }

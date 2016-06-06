@@ -38,7 +38,8 @@ namespace Jade
 {
 	namespace Graphics
 	{
-		class Shader
+		//! Class that holds the vertex and pixel/fragment shader information.
+        class Shader
 		{
 			Device device;
 			std::map<std::string, ShaderType> shaders;
@@ -49,8 +50,12 @@ namespace Jade
 
 		public:
 
-			// Note: Do not use this constructor as everything is set to null.
 			Shader() : shader(nullptr) { }
+
+            Shader(Device device, std::string pixelShader, std::string vertexShader)
+			{
+                this->device = device;
+			}
 
 			Shader(Device device, std::map<std::string, ShaderType> shaders)
 			{

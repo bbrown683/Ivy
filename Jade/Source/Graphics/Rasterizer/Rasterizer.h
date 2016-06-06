@@ -34,8 +34,7 @@ namespace Jade
 {
 	namespace Graphics
 	{
-		/* \brief 
-		 *  
+		/* \brief A rasterizer allows us to modify how something is presented to the render surface.  
 		 */
 		class Rasterizer
 		{
@@ -43,6 +42,8 @@ namespace Jade
 			std::shared_ptr<IRasterizer> rasterizer;
 
 		public:
+
+            Rasterizer() { }
 
 			Rasterizer(Device device)
 			{

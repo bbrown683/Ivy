@@ -1,5 +1,3 @@
-#pragma once
-
 /*
 The MIT License (MIT)
 
@@ -24,30 +22,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "Core/Utility.h"
+#include "Mouse.h"
 
-namespace Jade
+void Jade::Input::Mouse::SetCursorPosition(Math::Point position)
 {
-	namespace Math
-	{
-		struct Point
-		{
-            Point() : x(0.0f), y(0.0f) { }
+    this->position = position;
+}
 
-			Point(float x, float y)
-			{
-				this->x = x;
-				this->y = y;
-			}
-
-            float GetX() const;
-            float GetY() const;
-            std::string ToString() const;
-
-		private:
-
-			float x;
-			float y;
-		};
-	}
+Jade::Math::Point Jade::Input::Mouse::GetCursorPosition()
+{
+    return position;
 }

@@ -8,8 +8,6 @@ namespace Jade
 	{
 		class Log
 		{
-		private:
-
 			File file;
 
 		public:

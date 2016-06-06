@@ -160,17 +160,17 @@ std::vector<Jade::Graphics::Mesh> Jade::Graphics::Model::GetMeshes() const
 	return meshes;
 }
 
-Jade::Math::Vector3 Jade::Graphics::Model::GetPosition()
+Jade::Math::Vector3 Jade::Graphics::Model::GetPosition() const
 {
 	return position;
 }
 
-Jade::Math::Vector3 Jade::Graphics::Model::GetRotation()
+Jade::Math::Vector3 Jade::Graphics::Model::GetRotation() const
 {
 	return rotation;
 }
 
-Jade::Math::Vector3 Jade::Graphics::Model::GetScale()
+Jade::Math::Vector3 Jade::Graphics::Model::GetScale() const
 {
 	return scale;
 }

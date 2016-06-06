@@ -25,9 +25,28 @@ SOFTWARE.
 
 #include "Utility.h"
 
-std::string Jade::Core::Utility::GetFilePath()
+#ifdef JADE_PLATFORM_WINDOWS
+#include <windows.h>
+#include <Shlwapi.h> // Requires linking of shlwapi.lib
+#endif
+
+std::string Jade::Core::Utility::GetExecutablePath()
 {
-	return std::string();
+#ifdef JADE_PLATFORM_WINDOWS
+    char path[MAX_PATH];
+    GetModuleFileNameA(GetModuleHandle(nullptr), path, sizeof path); // Returns path of executable.
+    std::string filePath = RemoveFilenameFromPath(std::string(path));
+    return filePath.append("\\");
+#endif
+}
+
+std::string Jade::Core::Utility::RemoveFilenameFromPath(std::string path)
+{
+#ifdef JADE_PLATFORM_WINDOWS
+    char* data = const_cast<char*>(path.data()); // Convert the string into a char array.
+    PathRemoveFileSpecA(data);  // Removes the name.
+    return std::string(data);
+#endif
 }
 
 std::wstring Jade::Core::Utility::StringToWString(std::string string)

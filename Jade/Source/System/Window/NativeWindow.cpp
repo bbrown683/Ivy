@@ -47,10 +47,6 @@ bool Jade::System::NativeWindow::PollWindowEvents()
 	{
 		switch (e.type)
 		{
-		// Close application.
-		case SDL_QUIT:
-			Close();
-			break;
 		// Key press.
 		case SDL_KEYDOWN:
 			input.keyboard.SetKeyState(ConvertKeycode(e.key.keysym.sym), Input::InputState::Pressed);
@@ -59,6 +55,60 @@ bool Jade::System::NativeWindow::PollWindowEvents()
 		case SDL_KEYUP:
 			input.keyboard.SetKeyState(ConvertKeycode(e.key.keysym.sym), Input::InputState::Released);
 			break;
+        // Mouse button press.
+        case SDL_MOUSEBUTTONDOWN:
+            break;
+        // Mouse button release.
+        case SDL_MOUSEBUTTONUP:
+            break;
+        // Cursor movement.
+        case SDL_MOUSEMOTION:
+            input.mouse.SetCursorPosition(Math::Point(static_cast<float>(e.motion.x), static_cast<float>(e.motion.y)));
+            break;
+        // Close application.
+        case SDL_QUIT:
+            Close();
+            break;
+        // Window related changes.
+        case SDL_WINDOWEVENT:
+            switch(e.window.event)
+            {
+            case SDL_WINDOWEVENT_ENTER:
+                mouseFocus = true;
+                break;
+            case SDL_WINDOWEVENT_FOCUS_GAINED:
+                keyboardFocus = true;
+                break;
+            case SDL_WINDOWEVENT_FOCUS_LOST:
+                keyboardFocus = false;
+                break;
+            case SDL_WINDOWEVENT_LEAVE:
+                mouseFocus = false;
+                break;
+            case SDL_WINDOWEVENT_MAXIMIZED:
+                maximized = true;
+                break;
+            case SDL_WINDOWEVENT_MINIMIZED:
+                minimized = true;
+                break;
+            case SDL_WINDOWEVENT_MOVED:
+                SDL_GetWindowPosition(m_pWindow, &x, &y);
+                std::cout << "Window was moved to " << x << ", " << y << std::endl;
+                break;
+            case SDL_WINDOWEVENT_RESIZED:
+                SDL_GetWindowSize(m_pWindow, &width, &height);
+                std::cout << "Window was resized to " << width << ", " << height << std::endl;
+                viewportNeedsResize = true;
+                break;
+            case SDL_WINDOWEVENT_RESTORED:
+                if (maximized)
+                    maximized = false;
+                if (minimized)
+                    minimized = false;
+                break;
+            }
+
+            break;
 		}
 	}
 
@@ -370,6 +420,16 @@ float Jade::System::NativeWindow::GetAspectRatio()
 	return static_cast<float>(GetWidth()) / static_cast<float>(GetHeight());
 }
 
+bool Jade::System::NativeWindow::GetRenderViewportNeedsResize()
+{
+    return viewportNeedsResize;
+}
+
+void Jade::System::NativeWindow::SetRenderViewportNeedsResize(bool value)
+{
+    viewportNeedsResize = value;
+}
+
 int Jade::System::NativeWindow::GetX()
 {
 	return x;
@@ -424,7 +484,7 @@ bool Jade::System::NativeWindow::Create()
 	}
 	else
 	{
-		m_pWindow = SDL_CreateWindow(title.c_str(), x, y, width, height, SDL_WINDOW_SHOWN);
+		m_pWindow = SDL_CreateWindow(title.c_str(), x, y, width, height, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
 		
 		if (m_pWindow)
 		{

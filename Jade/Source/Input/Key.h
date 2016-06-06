@@ -30,11 +30,7 @@ namespace Jade
 	{
 		enum class Key
 		{
-			// Default key.
 			Unknown,
-
-			// Main Keys.
-
 			Digit1,
 			Digit2,
 			Digit3,

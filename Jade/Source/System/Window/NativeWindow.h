@@ -29,18 +29,18 @@ SOFTWARE.
 
 #include "freeimage.h"
 
-#include <Core/Utility.h>
-#include <Input/Input.h>
-#include <System/Window/IWindow.h>
-#include <System/Timer.h>
+#include "Core/Utility.h"
+#include "Input/Input.h"
+#include "System/Window/IWindow.h"
+#include "System/Timer.h"
 
 namespace Jade
 {
 	namespace System
 	{
 		class NativeWindow : public IWindow
-		{
-            SDL_Window* m_pWindow; // SDLs window object.
+        {
+		    SDL_Window* m_pWindow; // SDLs window object.
 			SDL_SysWMinfo m_WindowInfo; // Contains information of our window.
 
 			// Window parameters.
@@ -57,7 +57,10 @@ namespace Jade
 			bool hidden = false;
 			bool maximized = false;
 			bool minimized = false;
+            bool viewportNeedsResize = false;
 			bool active = false;
+            bool keyboardFocus = false;
+            bool mouseFocus = false;
 
 			// Input
 			Input::Input input;
@@ -65,9 +68,6 @@ namespace Jade
 			// Keeps track of our time per frames.
 			Timer timer;
 			int startTime = 0;
-
-			// Test keys.
-			bool escape = false;
 
 			bool Create() override;
 			bool PollWindowEvents() override;
@@ -84,6 +84,8 @@ namespace Jade
 			int GetHeight() override;
 			void SetHeight(int value) override;
 			float GetAspectRatio() override;
+            bool GetRenderViewportNeedsResize() override;
+            void SetRenderViewportNeedsResize(bool value) override;
 			int GetX() override;
 			void SetX(int value) override;
 			int GetY() override;
@@ -109,7 +111,7 @@ namespace Jade
 			System::Timer GetTimer() override;
 			Input::Input GetInput() override;
 
-			NativeWindow(int width, int height, int x, int y, std::string title, bool fullscreen) //: m_pWindow(nullptr)
+			NativeWindow(int width, int height, int x, int y, std::string title, bool fullscreen)
 			{
 				this->width = width;
 				this->height = height;

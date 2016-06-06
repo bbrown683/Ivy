@@ -60,6 +60,7 @@
     <ClCompile Include="Graphics\Mesh\Mesh.cpp" />
     <ClCompile Include="Core\Script\Script.cpp" />
     <ClCompile Include="Graphics\Sprite\Sprite.cpp" />
+    <ClCompile Include="Input\Mouse.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\Vector4.h">

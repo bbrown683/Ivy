@@ -58,7 +58,7 @@ namespace Jade
 					return PlatformID::Unknown;
 				#endif // _WIN32
 			}
-		};
+		}; 
 	}
 }
 

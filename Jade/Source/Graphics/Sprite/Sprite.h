@@ -69,12 +69,12 @@ namespace Jade
 				// DirectX requires us to flip the texture coordinates.
 				if (device.GetGraphicsAPI() == GraphicsAPI::DirectX)
 				{
-					vertices.push_back({ Math::Vector4(0.0f, 1.0f, 0.0f), Math::Vector2(1.0f, 0.0f) });
-					vertices.push_back({ Math::Vector4(1.0f, 0.0f, 0.0f), Math::Vector2(0.0f, 1.0f) });
-					vertices.push_back({ Math::Vector4(0.0f, 0.0f, 0.0f), Math::Vector2(1.0f, 1.0f) });
-					vertices.push_back({ Math::Vector4(0.0f, 1.0f, 0.0f), Math::Vector2(1.0f, 0.0f) });
-					vertices.push_back({ Math::Vector4(1.0f, 1.0f, 0.0f), Math::Vector2(0.0f, 0.0f) });
-					vertices.push_back({ Math::Vector4(1.0f, 0.0f, 0.0f), Math::Vector2(0.0f, 1.0f) });
+                    vertices.push_back({ Math::Vector4(0.0f, 1.0f, 0.0f), Math::Vector2(0.0f, 0.0f) });
+                    vertices.push_back({ Math::Vector4(1.0f, 0.0f, 0.0f), Math::Vector2(1.0f, 1.0f) });
+                    vertices.push_back({ Math::Vector4(0.0f, 0.0f, 0.0f), Math::Vector2(0.0f, 1.0f) });
+                    vertices.push_back({ Math::Vector4(0.0f, 1.0f, 0.0f), Math::Vector2(0.0f, 0.0f) });
+                    vertices.push_back({ Math::Vector4(1.0f, 1.0f, 0.0f), Math::Vector2(1.0f, 0.0f) });
+                    vertices.push_back({ Math::Vector4(1.0f, 0.0f, 0.0f), Math::Vector2(1.0f, 1.0f) });
 				}
 				else
 				{

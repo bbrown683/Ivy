@@ -138,7 +138,8 @@ void Jade::Graphics::DXShader::MakeInactive()
 // The following code below is from:
 // https://takinginitiative.wordpress.com/2011/12/11/directx-1011-basic-shader-reflection-automatic-input-layout-creation/ 
 // I wrapped the code with ComPtr's to ensure no leaks occur.
-// This creates the input layout associated with a vertex shader at runtime.
+// This creates the input layout associated with a vertex shader at runtime
+// through shader reflection.
 bool Jade::Graphics::DXShader::CreateVertexInputLayout() const
 {
 	// Reflect shader info

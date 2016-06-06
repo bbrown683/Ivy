@@ -24,7 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <System/Window/NativeWindow.h>
+#include "System/Window/NativeWindow.h"
 
 namespace Jade
 {
@@ -82,6 +82,16 @@ namespace Jade
 				return window->GetAspectRatio();
 			}
 
+            bool GetRenderViewportNeedsResize() const
+			{
+                return window->GetRenderViewportNeedsResize();
+			}
+
+            void SetRenderViewportNeedsResize(bool value) const
+			{
+                window->SetRenderViewportNeedsResize(value);
+			}
+
 			// Retrieves the handle of the window.
 			void* Handle() const
 			{
@@ -136,7 +146,6 @@ namespace Jade
 				return window->GetInput();
 			}
 
-			// Do not use.
 			Window() : window(nullptr) { }
 
 			// Use this constructor.

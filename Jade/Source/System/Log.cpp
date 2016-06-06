@@ -8,6 +8,5 @@ void Jade::System::Log::Write(std::string text)
 #else
 // Otherwise we write to a file stream.
 	File file(__TIMESTAMP__);
-	
 #endif
 }

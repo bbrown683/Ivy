@@ -67,11 +67,14 @@ int main(int argc, char *argv[])
 	model.Load(".\\resources\\models\\Lilith.obj");
 	model.SetScale(Vector3(0.25f, 0.25f, 0.25f));
 
+    // Create and load a sprite.
 	Sprite sprite(device, modelShader);
-	sprite.Load("osky.png");
+	sprite.Load("empty.png");
 
 	Script script;
 	script.Execute(".\\resources\\scripts\\test.lua");
+
+    std::cout << Utility::GetExecutablePath() << std::endl;
 
 	while (window.IsOpen())
 	{
