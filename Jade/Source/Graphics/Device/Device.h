@@ -34,110 +34,116 @@ SOFTWARE.
 
 namespace Jade
 {
-	namespace Graphics
-	{
-		class Device
-		{
-			System::Window window;
-			GraphicsAPI api;
-			Specification specification;
-			DrawType type;
+    namespace Graphics
+    {
+        class Device
+        {
+            System::Window window;
+            GraphicsAPI api;
+            Specification specification;
+            DrawType type;
 
-			std::shared_ptr<IDevice> device;
-			std::shared_ptr<IDevice> Initialize();
+            std::shared_ptr<IDevice> device;
+            std::shared_ptr<IDevice> Initialize();
 
-		public:						
+        public:						
 
-			Device() : device(nullptr) {} 
+            Device() : device(nullptr) {} 
 
-			// Default device constructor.
-			Device(System::Window window, GraphicsAPI api)
-			{
-				this->window = window;
-				this->api = api;
+            // Default device constructor.
+            Device(System::Window window, GraphicsAPI api)
+            {
+                this->window = window;
+                this->api = api;
 
-				// Fill some default values.
-				specification.backBufferHeight = window.GetHeight();
-				specification.backBufferWidth = window.GetWidth();
-				specification.colorBits = 32;
-				specification.samples = 1;
-				specification.vsync = true;
+                // Fill some default values.
+                specification.backBufferHeight = window.GetHeight();
+                specification.backBufferWidth = window.GetWidth();
+                specification.colorBits = 32;
+                specification.samples = 1;
+                specification.vsync = true;
 
-				device = Initialize();
-			}
+                device = Initialize();
+            }
 
-			Device(System::Window window, Specification specification)
-			{
-				this->window = window;
-				this->specification = specification;
+            Device(System::Window window, Specification specification)
+            {
+                this->window = window;
+                this->specification = specification;
 
-				device = Initialize();
-			}
+                device = Initialize();
+            }
 
-			Device(System::Window window, GraphicsAPI api, Specification specification)
-			{
-				this->window = window;
-				this->api = api;
-				this->specification = specification;
+            Device(System::Window window, GraphicsAPI api, Specification specification)
+            {
+                this->window = window;
+                this->api = api;
+                this->specification = specification;
 
-				device = Initialize();
-			}
+                device = Initialize();
+            }
 
-			// Clears the buffer to the specified color.
-			void Clear(Math::Color color) const
-			{
-				device->Clear(color);
-			}
+            // Adjusts the window viewport.
+            void AdjustViewport() const
+            {
+                device->AdjustViewport();
+            }
 
-			// Hides the cursor when inside the window boundaries.
-			void HideCursor(bool toggle)
-			{
-				SDL_ShowCursor(!toggle);
-			}
+            // Clears the buffer to the specified color.
+            void Clear(Math::Color color) const
+            {
+                device->Clear(color);
+            }
 
-			// Presents the back buffer to the front for display.
-			void Present() const
-			{
-				device->Present();
-			}
+            // Hides the cursor when inside the window boundaries.
+            void HideCursor(bool toggle)
+            {
+                SDL_ShowCursor(!toggle);
+            }
 
-			bool Multisampling() const
-			{
-				return specification.samples > 1;
-			}
+            // Presents the back buffer to the front for display.
+            void Present() const
+            {
+                device->Present();
+            }
 
-			// Returns the interface that contains the device data.
-			std::shared_ptr<IDevice> GetIDevice() const
-			{
-				return device;
-			}
+            bool Multisampling() const
+            {
+                return specification.samples > 1;
+            }
 
-			// Returns the window that the device is attached to.
-			System::Window GetWindow() const
-			{
-				return window;
-			}
+            // Returns the interface that contains the device data.
+            std::shared_ptr<IDevice> GetIDevice() const
+            {
+                return device;
+            }
 
-			GraphicsAPI GetGraphicsAPI() const
-			{
-				return api;
-			}
+            // Returns the window that the device is attached to.
+            System::Window GetWindow() const
+            {
+                return window;
+            }
 
-			DrawType GetDrawType() const
-			{
-				return device->GetDrawType();
-			}
+            GraphicsAPI GetGraphicsAPI() const
+            {
+                return api;
+            }
 
-			void SetDrawType(DrawType type)
-			{
-				device->SetDrawType(type);
-			}
+            DrawType GetDrawType() const
+            {
+                return device->GetDrawType();
+            }
 
-			void TakeScreenshot()
-			{
-				device->TakeScreenshot();
-			}
-		};
-	}
+            void SetDrawType(DrawType type)
+            {
+                device->SetDrawType(type);
+            }
+
+            void TakeScreenshot()
+            {
+                device->TakeScreenshot();
+            }
+        };
+    }
 }
 

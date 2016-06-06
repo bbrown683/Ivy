@@ -39,75 +39,75 @@ using namespace Microsoft::WRL;
 
 namespace Jade
 {
-	namespace Graphics
-	{
-		class DXDevice : public IDevice
-		{
-			//std::shared_ptr<System::IWindow> window;
+    namespace Graphics
+    {
+        class DXDevice : public IDevice
+        {
+            //std::shared_ptr<System::IWindow> window;
             System::Window window;
             Specification specification;
-			DrawType drawType;
+            DrawType drawType;
 
-			// Necessary to initialize a Direct3D11 device
-			D3D_DRIVER_TYPE m_DriverType;
-			D3D_FEATURE_LEVEL m_FeatureLevel;
-			D3D11_VIEWPORT m_Viewport;
+            // Necessary to initialize a Direct3D11 device
+            D3D_DRIVER_TYPE m_DriverType;
+            D3D_FEATURE_LEVEL m_FeatureLevel;
+            D3D11_VIEWPORT m_Viewport;
 
-			ComPtr<ID3D11Device> m_pDevice = nullptr;
-			ComPtr<ID3D11DeviceContext> m_pImmediateContext = nullptr;
-			ComPtr<IDXGISwapChain> m_pSwapChain = nullptr;
-			ComPtr<ID3D11RenderTargetView> m_pRenderTargetView = nullptr;
-			ComPtr<ID3D11Texture2D> m_pDepthStencil = nullptr;
-			ComPtr<ID3D11DepthStencilView> m_pDepthStencilView = nullptr;
-			ComPtr<ID3D11DepthStencilState> m_pDepthStencilState = nullptr;
-			ComPtr<ID3D11SamplerState> m_pSamplerState = nullptr;
+            ComPtr<ID3D11Device> m_pDevice = nullptr;
+            ComPtr<ID3D11DeviceContext> m_pImmediateContext = nullptr;
+            ComPtr<IDXGISwapChain> m_pSwapChain = nullptr;
+            ComPtr<ID3D11RenderTargetView> m_pRenderTargetView = nullptr;
+            ComPtr<ID3D11Texture2D> m_pDepthStencil = nullptr;
+            ComPtr<ID3D11DepthStencilView> m_pDepthStencilView = nullptr;
+            ComPtr<ID3D11DepthStencilState> m_pDepthStencilState = nullptr;
+            ComPtr<ID3D11SamplerState> m_pSamplerState = nullptr;
 
-			bool Create() override;
-			bool Release() override;
-			void OnWindowResize() override;
+            bool Create() override;
+            bool Release() override;
 
-		public:
+        public:
 
-			// We have a window handle.
-			DXDevice(System::Window window, Specification specification) //std::shared_ptr<System::IWindow> window, Specification specification)
-			{
-				this->window = window;
-				this->specification = specification;
+            // We have a window handle.
+            DXDevice(System::Window window, Specification specification) //std::shared_ptr<System::IWindow> window, Specification specification)
+            {
+                this->window = window;
+                this->specification = specification;
 
-				// Create our device.
-				if (!DXDevice::Create())
-				{
-					// If device fails we need to throw an exception 
-					// as it can get nasty otherwise.
-					throw Core::DeviceCreationException();
-				}
-			}
+                // Create our device.
+                if (!DXDevice::Create())
+                {
+                    // If device fails we need to throw an exception 
+                    // as it can get nasty otherwise.
+                    throw Core::DeviceCreationException();
+                }
+            }
 
-			~DXDevice()
-			{
-				// Cleanup resources.
-				DXDevice::Release();
-			}
+            ~DXDevice()
+            {
+                // Cleanup resources.
+                DXDevice::Release();
+            }
 
-			// Main functions inherited by Device class.
-			void Clear(Math::Color color) override;
-			char* DeviceInformation() override;
-			DrawType GetDrawType() override;
-			void Present() override;
-			void SetDrawType(DrawType type) override;
-			void TakeScreenshot() override;
+            // Main functions inherited by Device class.
+            void AdjustViewport() override;
+            void Clear(Math::Color color) override;
+            char* DeviceInformation() override;
+            DrawType GetDrawType() override;
+            void Present() override;
+            void SetDrawType(DrawType type) override;
+            void TakeScreenshot() override;
 
-			// Retrieval functions for DirectX related objects.
-			ComPtr<ID3D11Texture2D> GetBackBuffer() const;
-			D3D_DRIVER_TYPE GetD3DDriverType() const;
-			D3D_FEATURE_LEVEL GetD3DFeatureLevel() const;
-			D3D11_VIEWPORT GetD3D11Viewport() const;
-			const ComPtr<ID3D11Device>& GetID3D11Device() const;
-			const ComPtr<ID3D11DeviceContext>& GetID3D11DeviceContext() const;
-			const ComPtr<IDXGISwapChain>& GetIDXGISwapChain() const;
-			const ComPtr<ID3D11RenderTargetView>& GetID3D11RenderTargetView() const;
-			const ComPtr<ID3D11Texture2D>& GetID3D11DepthStencil() const;
-			const ComPtr<ID3D11DepthStencilView>& GetID3D11DepthStencilView() const;
+            // Retrieval functions for DirectX related objects.
+            ComPtr<ID3D11Texture2D> GetBackBuffer() const;
+            D3D_DRIVER_TYPE GetD3DDriverType() const;
+            D3D_FEATURE_LEVEL GetD3DFeatureLevel() const;
+            D3D11_VIEWPORT GetD3D11Viewport() const;
+            const ComPtr<ID3D11Device>& GetID3D11Device() const;
+            const ComPtr<ID3D11DeviceContext>& GetID3D11DeviceContext() const;
+            const ComPtr<IDXGISwapChain>& GetIDXGISwapChain() const;
+            const ComPtr<ID3D11RenderTargetView>& GetID3D11RenderTargetView() const;
+            const ComPtr<ID3D11Texture2D>& GetID3D11DepthStencil() const;
+            const ComPtr<ID3D11DepthStencilView>& GetID3D11DepthStencilView() const;
 
             // Local functions.
             bool CreateDeviceAndSwapChain();
@@ -116,7 +116,7 @@ namespace Jade
             bool CreateStencil();
             bool CreateRenderTargetView();
             bool SetRenderViewport();
-		};
-	}
+        };
+    }
 }
 #endif

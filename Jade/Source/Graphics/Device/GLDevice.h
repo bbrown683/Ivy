@@ -35,50 +35,50 @@ SOFTWARE.
 
 namespace Jade
 {
-	namespace Graphics
-	{
-		class GLDevice : public IDevice
-		{
+    namespace Graphics
+    {
+        class GLDevice : public IDevice
+        {
 #ifdef JADE_PLATFORM_WINDOWS
-			HDC dc;
-			HGLRC context;
+            HDC dc;
+            HGLRC context;
 #endif
 
-			// Window object contains some data on our window such as size, 
-			// and the handle of it in memory which we need to create a device.
-			System::Window window;
-			Specification specification;
-			DrawType drawType;
+            // Window object contains some data on our window such as size, 
+            // and the handle of it in memory which we need to create a device.
+            System::Window window;
+            Specification specification;
+            DrawType drawType;
 
-			bool Create() override;
-			bool Release() override;
-			void OnWindowResize() override;
+            bool Create() override;
+            bool Release() override;
 
-		public:
+        public:
 
-			GLDevice(System::Window window, Specification specification)
-			{
-				this->window = window;
+            GLDevice(System::Window window, Specification specification)
+            {
+                this->window = window;
 
-				// Create our device.
-				if (!Create())
-				{
-					throw Core::DeviceCreationException();
-				}
-			}
+                // Create our device.
+                if (!Create())
+                {
+                    throw Core::DeviceCreationException();
+                }
+            }
 
-			~GLDevice()
-			{
-				// Cleanup resources.
-				GLDevice::Release();
-			}
+            ~GLDevice()
+            {
+                // Cleanup resources.
+                GLDevice::Release();
+            }
 
-			void Clear(Math::Color color) override;
-			void Present() override;
-			char* DeviceInformation() override;
-			DrawType GetDrawType() override;
-			void SetDrawType(DrawType type) override;
-			void TakeScreenshot() override;
-		};
-	}
+            void AdjustViewport() override;
+            void Clear(Math::Color color) override;
+            void Present() override;
+            char* DeviceInformation() override;
+            DrawType GetDrawType() override;
+            void SetDrawType(DrawType type) override;
+            void TakeScreenshot() override;
+        };
+    }
 }

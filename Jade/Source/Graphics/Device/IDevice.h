@@ -29,25 +29,25 @@ SOFTWARE.
 
 namespace Jade
 {
-	namespace Graphics
-	{
-		struct IDevice
-		{
-		private:
+    namespace Graphics
+    {
+        struct IDevice
+        {
+        private:
 
-			virtual bool Create() = 0;
-			virtual bool Release() = 0;
-			virtual void OnWindowResize() = 0;
+            virtual bool Create() = 0;
+            virtual bool Release() = 0;
 
-		public:
+        public:
 
-			virtual void Clear(Math::Color color) = 0;
-			virtual char* DeviceInformation() = 0;
-			virtual DrawType GetDrawType() = 0;
-			virtual void Present() = 0;
-			virtual void SetDrawType(DrawType type) = 0;
-			virtual void TakeScreenshot() = 0;
-		};
-	}
+            virtual void Clear(Math::Color color) = 0;
+            virtual char* DeviceInformation() = 0;
+            virtual DrawType GetDrawType() = 0;
+            virtual void Present() = 0;
+            virtual void SetDrawType(DrawType type) = 0;
+            virtual void TakeScreenshot() = 0;
+            virtual void AdjustViewport() = 0;
+        };
+    }
 }
 

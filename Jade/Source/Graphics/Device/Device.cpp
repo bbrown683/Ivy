@@ -26,17 +26,17 @@ SOFTWARE.
 
 std::shared_ptr<Jade::Graphics::IDevice> Jade::Graphics::Device::Initialize()
 {
-	// Ensuring window interface is not null before attempting to attach a context.
-	if (window.GetIWindow() != nullptr)
-	{
-		// Check what API is being requested.
+    // Ensuring window interface is not null before attempting to attach a context.
+    if (window.GetIWindow() != nullptr)
+    {
+        // Check what API is being requested.
         if (api == GraphicsAPI::DirectX)
             return std::make_shared<DXDevice>(window, specification);
-		if (api == GraphicsAPI::OpenGL)
-			return std::make_shared<GLDevice>(window, specification);
-		if (api == GraphicsAPI::Vulkan)
-			return nullptr;
-	}
+        if (api == GraphicsAPI::OpenGL)
+            return std::make_shared<GLDevice>(window, specification);
+        if (api == GraphicsAPI::Vulkan)
+            return nullptr;
+    }
 
-	return nullptr;
+    return nullptr;
 }

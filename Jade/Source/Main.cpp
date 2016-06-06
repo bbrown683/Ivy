@@ -80,7 +80,7 @@ int main(int argc, char *argv[])
 	{
 		// Rendering
 		device.Clear(Color::CornflowerBlue);
-
+        
 		// Rotate and draw the models.
 		if (window.GetInput().keyboard.IsKeyDown(Key::Shift))
 			model.SetRotation(Vector3(0.0f, 0.025f, 0.0f));
@@ -133,8 +133,11 @@ int main(int argc, char *argv[])
 		if (window.GetInput().keyboard.IsKeyDown(Key::Escape))
 			window.Close();
 
+        // This will update the viewport and camera projection in the event of a window resize.
+        camera.Update();
 		// Swap buffers and perform system event loop.
 		device.Present();
+
 		window.PollEvents();
 	}
 

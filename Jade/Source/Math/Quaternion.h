@@ -26,16 +26,14 @@ SOFTWARE.
 
 namespace Jade
 {
-	namespace Math
-	{
-		struct Quaternion
-		{
-		public:
+    namespace Math
+    {
+        struct Quaternion
+        {
+            Quaternion()
+            {
 
-			Quaternion()
-			{
-
-			}
-		};
-	}
+            }
+        };
+    }
 }

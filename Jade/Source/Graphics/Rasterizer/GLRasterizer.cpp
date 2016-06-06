@@ -26,42 +26,42 @@ SOFTWARE.
 
 bool Jade::Graphics::GLRasterizer::SetRasterizerState(CullMode cullMode, FillMode fillMode, WindMode windMode)
 {	
-	// MakeActive variables.
-	this->cullMode = cullMode;
-	this->fillMode = fillMode;
-	this->windMode = windMode;
+    // MakeActive variables.
+    this->cullMode = cullMode;
+    this->fillMode = fillMode;
+    this->windMode = windMode;
 
-	if (disabled && cullMode != CullMode::None)
-	{
-		glEnable(GL_CULL_FACE);
-		disabled = false;
-	}
+    if (disabled && cullMode != CullMode::None)
+    {
+        glEnable(GL_CULL_FACE);
+        disabled = false;
+    }
 
-	// OpenGL modifications.
-	switch(cullMode)
-	{
-	case CullMode::None: glDisable(GL_CULL_FACE); disabled = true; break;
-	case CullMode::Front: glCullFace(GL_FRONT);	break;
-	case CullMode::Back: glCullFace(GL_BACK); break;
-	}
-	
-	glPolygonMode(GL_FRONT_AND_BACK, fillMode == FillMode::Solid ? GL_FILL : GL_LINE);
-	glFrontFace(windMode == WindMode::CounterClockwise ? GL_CCW : GL_CW);
+    // OpenGL modifications.
+    switch(cullMode)
+    {
+    case CullMode::None: glDisable(GL_CULL_FACE); disabled = true; break;
+    case CullMode::Front: glCullFace(GL_FRONT);	break;
+    case CullMode::Back: glCullFace(GL_BACK); break;
+    }
+    
+    glPolygonMode(GL_FRONT_AND_BACK, fillMode == FillMode::Solid ? GL_FILL : GL_LINE);
+    glFrontFace(windMode == WindMode::CounterClockwise ? GL_CCW : GL_CW);
 
-	return true;
+    return true;
 }
 
 Jade::Graphics::CullMode Jade::Graphics::GLRasterizer::GetCullMode()
 {
-	return cullMode;
+    return cullMode;
 }
 
 Jade::Graphics::FillMode Jade::Graphics::GLRasterizer::GetFillMode()
 {
-	return fillMode;
+    return fillMode;
 }
 
 Jade::Graphics::WindMode Jade::Graphics::GLRasterizer::GetWindMode()
 {
-	return windMode;
+    return windMode;
 }

@@ -38,39 +38,39 @@ SOFTWARE.
 
 namespace Jade
 {
-	namespace Graphics
-	{
-		// Class for font rendering.
-		class Font
-		{
-			Blender blender;
-			Device device;
-			Shader shader;
-			Texture texture;
+    namespace Graphics
+    {
+        // Class for font rendering.
+        class Font
+        {
+            Blender blender;
+            Device device;
+            Shader shader;
+            Texture texture;
 
-			std::vector<Glyph> glyphs;
-			VertexBuffer vBuffer;
+            std::vector<Glyph> glyphs;
+            VertexBuffer vBuffer;
 
-			unsigned int atlasWidth;
-			unsigned int atlasHeight;
+            unsigned int atlasWidth;
+            unsigned int atlasHeight;
 
-		public:
+        public:
  
-			Font(Device device, Shader shader)
-			{
-				this->device = device;
-				this->shader = shader;
+            Font(Device device, Shader shader)
+            {
+                this->device = device;
+                this->shader = shader;
 
-				blender = Blender(device);
+                blender = Blender(device);
 
-				// Create the vertex buffer.
-				vBuffer = VertexBuffer(device, PrimitiveType::TriangleList);
-			}
+                // Create the vertex buffer.
+                vBuffer = VertexBuffer(device, PrimitiveType::TriangleList);
+            }
 
-			//! Draws the given text at the specified x and y coordinates at a certain pixel size.
-			void Draw(std::string text, int x, int y);
-			//! Loads the specified font file and creates individual textures for each printable character at a specified pixel size.
-			void Load(std::string filename, int pixelSize);
-		};
-	}
+            //! Draws the given text at the specified x and y coordinates at a certain pixel size.
+            void Draw(std::string text, int x, int y);
+            //! Loads the specified font file and creates individual textures for each printable character at a specified pixel size.
+            void Load(std::string filename, int pixelSize);
+        };
+    }
 }

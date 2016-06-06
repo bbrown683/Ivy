@@ -28,44 +28,47 @@ SOFTWARE.
 
 namespace Jade
 {
-	namespace Graphics
-	{
-		class Camera
-		{
-			Device device;
-			ConstantBuffer cBuffer;
+    namespace Graphics
+    {
+        class Camera
+        {
+            Device device;
+            ConstantBuffer cBuffer;
 
-			Math::Vector3 position;
-			Math::Vector3 target;
+            Math::Vector3 position;
+            Math::Vector3 target;
 
-		public:
+        public:
 
             Camera() { }
 
             Camera(Device device, Math::Vector3 position, Math::Vector3 target)
-			{
-				this->device = device;
-				this->position = position;
-				this->target = target;
+            {
+                this->device = device;
+                this->position = position;
+                this->target = target;
 
-				// Create View and Projection.
-				cBuffer = ConstantBuffer(device);
-				cBuffer.CreateProjectionMatrix();
-				cBuffer.CreateViewMatrix();
-				
-				cBuffer.SetViewMatrix(Math::Matrix::CreateLookAtLH(position, target, Math::Vector3::Up).Transpose());
+                // Create View and Projection.
+                cBuffer = ConstantBuffer(device);
+                cBuffer.CreateProjectionMatrix();
+                cBuffer.CreateViewMatrix();
+                
+                cBuffer.SetViewMatrix(Math::Matrix::CreateLookAtLH(position, target, Math::Vector3::Up).Transpose());
                 // Note: On resizing it will still use the old aspect ratio. Need to create a workaround for this to update it.
-				cBuffer.SetProjectionMatrix(Math::Matrix::CreatePerspectiveViewLH(
-					Math::Math::PiOverTwo, static_cast<float>(device.GetWindow().GetWidth()),
-					static_cast<float>(device.GetWindow().GetHeight()), 0.1f, 1000.0f).Transpose());
+                cBuffer.SetProjectionMatrix(Math::Matrix::CreatePerspectiveViewLH(
+                    Math::Math::PiOverTwo, static_cast<float>(device.GetWindow().GetWidth()),
+                    static_cast<float>(device.GetWindow().GetHeight()), 0.1f, 1000.0f).Transpose());
 
-				cBuffer.UpdateMatrices();
-			}
+                cBuffer.UpdateMatrices();
+            }
 
-			Math::Vector3 GetCameraPosition() const;
-			void SetCameraPosition(Math::Vector3 position);
-			Math::Vector3 GetTargetPosition() const;
-			void SetTargetPosition(Math::Vector3 position);
-		};
-	}
+            Math::Vector3 GetCameraPosition() const;
+            void SetCameraPosition(Math::Vector3 position);
+            Math::Vector3 GetTargetPosition() const;
+            void SetTargetPosition(Math::Vector3 position);
+
+            // Check to see if camera needs to be refreshed in the case of a window resize.
+            void Update();
+        };
+    }
 }

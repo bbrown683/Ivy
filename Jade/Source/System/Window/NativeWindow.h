@@ -36,100 +36,100 @@ SOFTWARE.
 
 namespace Jade
 {
-	namespace System
-	{
-		class NativeWindow : public IWindow
+    namespace System
+    {
+        class NativeWindow : public IWindow
         {
-		    SDL_Window* m_pWindow; // SDLs window object.
-			SDL_SysWMinfo m_WindowInfo; // Contains information of our window.
+            SDL_Window* m_pWindow; // SDLs window object.
+            SDL_SysWMinfo m_WindowInfo; // Contains information of our window.
 
-			// Window parameters.
-			int width;
-			int height;
-			int x;
-			int y;
-			std::string title;
-			bool fullscreen;
+            // Window parameters.
+            int width;
+            int height;
+            int x;
+            int y;
+            std::string title;
+            bool fullscreen;
 
-			// Window checks.
-			bool open = false;
-			bool disposed = false;
-			bool hidden = false;
-			bool maximized = false;
-			bool minimized = false;
+            // Window checks.
+            bool open = false;
+            bool disposed = false;
+            bool hidden = false;
+            bool maximized = false;
+            bool minimized = false;
             bool viewportNeedsResize = false;
-			bool active = false;
+            bool active = false;
             bool keyboardFocus = false;
             bool mouseFocus = false;
 
-			// Input
-			Input::Input input;
+            // Input
+            Input::Input input;
 
-			// Keeps track of our time per frames.
-			Timer timer;
-			int startTime = 0;
+            // Keeps track of our time per frames.
+            Timer timer;
+            int startTime = 0;
 
-			bool Create() override;
-			bool PollWindowEvents() override;
+            bool Create() override;
+            bool PollWindowEvents() override;
 
-			// Helper class for reducing code clutter.
-			Input::Key ConvertKeycode(SDL_Keycode keycode);
+            // Helper class for reducing code clutter.
+            Input::Key ConvertKeycode(SDL_Keycode keycode);
 
-		public:
+        public:
 
-			// IWindow overrides.
+            // IWindow overrides.
 
-			int GetWidth() override;
-			void SetWidth(int value) override;
-			int GetHeight() override;
-			void SetHeight(int value) override;
-			float GetAspectRatio() override;
+            int GetWidth() override;
+            void SetWidth(int value) override;
+            int GetHeight() override;
+            void SetHeight(int value) override;
+            float GetAspectRatio() override;
             bool GetRenderViewportNeedsResize() override;
             void SetRenderViewportNeedsResize(bool value) override;
-			int GetX() override;
-			void SetX(int value) override;
-			int GetY() override;
-			void SetY(int value) override;
-			std::string GetTitle() override;
-			void SetTitle(std::string value) override;
-			Math::Point GetPosition() override;
-			void SetPosition(int x, int y) override;
-			void SetIcon(std::string filename) override;
-			void Close() override;
-			void* Handle() override;
-			void Show() override;
-			void Hide() override;
-			void Restore() override;
-			void Maximize() override;
-			bool Minimized() override;
-			void Minimize() override;
-			bool Maximized() override;
-			bool IsVisible() override;
-			bool IsOpen() override;
-			bool IsFullscreen() override;
-			bool IsActive() override;
-			System::Timer GetTimer() override;
-			Input::Input GetInput() override;
+            int GetX() override;
+            void SetX(int value) override;
+            int GetY() override;
+            void SetY(int value) override;
+            std::string GetTitle() override;
+            void SetTitle(std::string value) override;
+            Math::Point GetPosition() override;
+            void SetPosition(int x, int y) override;
+            void SetIcon(std::string filename) override;
+            void Close() override;
+            void* Handle() override;
+            void Show() override;
+            void Hide() override;
+            void Restore() override;
+            void Maximize() override;
+            bool Minimized() override;
+            void Minimize() override;
+            bool Maximized() override;
+            bool IsVisible() override;
+            bool IsOpen() override;
+            bool IsFullscreen() override;
+            bool IsActive() override;
+            System::Timer GetTimer() override;
+            Input::Input GetInput() override;
 
-			NativeWindow(int width, int height, int x, int y, std::string title, bool fullscreen)
-			{
-				this->width = width;
-				this->height = height;
-				this->x = x;
-				this->y = y;
-				this->title = title;
-				this->fullscreen = fullscreen;
+            NativeWindow(int width, int height, int x, int y, std::string title, bool fullscreen)
+            {
+                this->width = width;
+                this->height = height;
+                this->x = x;
+                this->y = y;
+                this->title = title;
+                this->fullscreen = fullscreen;
 
-				if (!NativeWindow::Create())
-					NativeWindow::Close();
-			}
+                if (!NativeWindow::Create())
+                    NativeWindow::Close();
+            }
 
-			~NativeWindow()
-			{
-				NativeWindow::Close();
+            ~NativeWindow()
+            {
+                NativeWindow::Close();
 
-				std::cout << "Window closing..." << std::endl;
-			}
-		};
-	}
+                std::cout << "Window closing..." << std::endl;
+            }
+        };
+    }
 }

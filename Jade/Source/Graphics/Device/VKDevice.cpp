@@ -26,17 +26,17 @@ SOFTWARE.
 
 bool Jade::Graphics::VKDevice::Create()
 {
-	return false;
+    return false;
 }
 
 bool Jade::Graphics::VKDevice::Release()
 {
-	return false;
+    return false;
 }
 
 void Jade::Graphics::VKDevice::Clear(Math::Color color)
 {
-	
+    
 }
 
 void Jade::Graphics::VKDevice::Present()

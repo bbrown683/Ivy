@@ -31,7 +31,6 @@ SOFTWARE.
 // locations.
 
 #include "System/Platform.h"
-
 #include "glad/gl/include/glad/glad.h"
 
 #ifdef JADE_PLATFORM_WINDOWS

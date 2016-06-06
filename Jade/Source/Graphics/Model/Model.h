@@ -35,42 +35,42 @@ SOFTWARE.
 
 namespace Jade
 {
-	namespace Graphics
-	{
+    namespace Graphics
+    {
         /* \brief A model is a collection of triangular meshes. */ 
-		class Model
-		{
-			Device device;
-			Shader shader;
+        class Model
+        {
+            Device device;
+            Shader shader;
 
-			// Mesh(s) used to draw our shape.
-			std::vector<Mesh> meshes;
+            // Mesh(s) used to draw our shape.
+            std::vector<Mesh> meshes;
 
-			// Transformations on the model.
-			Math::Vector3 position;
-			Math::Vector3 rotation;
-			Math::Vector3 scale;
+            // Transformations on the model.
+            Math::Vector3 position;
+            Math::Vector3 rotation;
+            Math::Vector3 scale;
 
-		public:
+        public:
 
-			Model(Device device, Shader shader)
-			{
-				this->device = device;
-				this->shader = shader;
-			}
+            Model(Device device, Shader shader)
+            {
+                this->device = device;
+                this->shader = shader;
+            }
 
-			void Draw();
-			void Load(std::string filename);
+            void Draw();
+            void Load(std::string filename);
 
-			std::vector<Mesh> GetMeshes() const;
+            std::vector<Mesh> GetMeshes() const;
 
-			Math::Vector3 GetPosition() const;
-			Math::Vector3 GetRotation() const;
-			Math::Vector3 GetScale() const;
+            Math::Vector3 GetPosition() const;
+            Math::Vector3 GetRotation() const;
+            Math::Vector3 GetScale() const;
 
-			void SetPosition(Math::Vector3 position);
-			void SetRotation(Math::Vector3 rotation);
-			void SetScale(Math::Vector3 scale);
-		};
-	}
+            void SetPosition(Math::Vector3 position);
+            void SetRotation(Math::Vector3 rotation);
+            void SetScale(Math::Vector3 scale);
+        };
+    }
 }

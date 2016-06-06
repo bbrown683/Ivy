@@ -31,35 +31,35 @@ SOFTWARE.
 
 namespace Jade
 {
-	namespace Graphics
-	{
-		class VKDevice : public IDevice
-		{
-			// Window object contains some data on our window such as size, 
-			// and the handle of it in memory which we need to create a device.
-			System::Window window;
+    namespace Graphics
+    {
+        class VKDevice : public IDevice
+        {
+            // Window object contains some data on our window such as size, 
+            // and the handle of it in memory which we need to create a device.
+            System::Window window;
 
-			bool Create() override;
-			bool Release() override;
+            bool Create() override;
+            bool Release() override;
 
-		public:
+        public:
 
-			VKDevice(System::Window window)
-			{
-				this->window = window;
+            VKDevice(System::Window window)
+            {
+                this->window = window;
 
-				// Create our device.
-				VKDevice::Create();
-			}
+                // Create our device.
+                VKDevice::Create();
+            }
 
-			~VKDevice()
-			{
-				// Cleanup resources.
-				VKDevice::Release();
-			}
+            ~VKDevice()
+            {
+                // Cleanup resources.
+                VKDevice::Release();
+            }
 
-			void Clear(Math::Color color) override;
-			void Present() override;
-		};
-	}
+            void Clear(Math::Color color) override;
+            void Present() override;
+        };
+    }
 }

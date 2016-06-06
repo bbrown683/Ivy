@@ -29,24 +29,24 @@ SOFTWARE.
 
 namespace Jade
 {
-	namespace Graphics
-	{
-		enum class WindMode;
+    namespace Graphics
+    {
+        enum class WindMode;
 
-		class GLRasterizer : public IRasterizer
-		{
-			// OpenGL requires us to disable culling and enable it on reuse.
-			bool disabled;
-			CullMode cullMode;
-			FillMode fillMode;
-			WindMode windMode;
+        class GLRasterizer : public IRasterizer
+        {
+            // OpenGL requires us to disable culling and enable it on reuse.
+            bool disabled;
+            CullMode cullMode;
+            FillMode fillMode;
+            WindMode windMode;
 
-		public:
+        public:
 
-			bool SetRasterizerState(CullMode cullMode, FillMode fillMode, WindMode windMode) override;
-			CullMode GetCullMode() override;
-			FillMode GetFillMode() override;
-			WindMode GetWindMode() override;
-		};
-	}
+            bool SetRasterizerState(CullMode cullMode, FillMode fillMode, WindMode windMode) override;
+            CullMode GetCullMode() override;
+            FillMode GetFillMode() override;
+            WindMode GetWindMode() override;
+        };
+    }
 }

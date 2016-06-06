@@ -24,51 +24,51 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <Input/Input.h>
-#include <Core/Utility.h>
-#include <Math/Point.h>
-#include <System/Timer.h>
+#include "Input/Input.h"
+#include "Core/Utility.h"
+#include "Math/Point.h"
+#include "System/Timer.h"
 
 namespace Jade
 {
-	namespace System
-	{
-		// Contains some methods that we can implement across multiple platforms to perform a task on a window.
-		struct IWindow
-		{
-			virtual int GetWidth() = 0;
-			virtual void SetWidth(int value) = 0;
-			virtual int GetHeight() = 0;
-			virtual void SetHeight(int value) = 0;
-			virtual float GetAspectRatio() = 0;
+    namespace System
+    {
+        // Contains some methods that we can implement across multiple platforms to perform a task on a window.
+        struct IWindow
+        {
+            virtual int GetWidth() = 0;
+            virtual void SetWidth(int value) = 0;
+            virtual int GetHeight() = 0;
+            virtual void SetHeight(int value) = 0;
+            virtual float GetAspectRatio() = 0;
             virtual bool GetRenderViewportNeedsResize() = 0;
             virtual void SetRenderViewportNeedsResize(bool value) = 0;
-			virtual int GetX() = 0;
-			virtual void SetX(int value) = 0;
-			virtual int GetY() = 0;
-			virtual void SetY(int value) = 0;
-			virtual std::string GetTitle() = 0;
-			virtual void SetTitle(std::string value) = 0;
-			virtual Math::Point GetPosition() = 0;
-			virtual void SetPosition(int x, int y) = 0;
-			virtual void SetIcon(std::string filename) = 0;
-			virtual bool PollWindowEvents() = 0;
-			virtual void Close() = 0;
-			virtual void* Handle() = 0;
-			virtual bool Create() = 0;
-			virtual void Show() = 0;
-			virtual void Hide() = 0;
-			virtual void Restore() = 0;
-			virtual void Maximize() = 0;
-			virtual bool Minimized() = 0;
-			virtual void Minimize() = 0;
-			virtual bool Maximized() = 0;
-			virtual bool IsVisible() = 0;
-			virtual bool IsOpen() = 0;
-			virtual bool IsFullscreen() = 0;
-			virtual bool IsActive() = 0;
-			virtual Timer GetTimer() = 0;
-			virtual Input::Input GetInput() = 0;
-		};
-	}
+            virtual int GetX() = 0;
+            virtual void SetX(int value) = 0;
+            virtual int GetY() = 0;
+            virtual void SetY(int value) = 0;
+            virtual std::string GetTitle() = 0;
+            virtual void SetTitle(std::string value) = 0;
+            virtual Math::Point GetPosition() = 0;
+            virtual void SetPosition(int x, int y) = 0;
+            virtual void SetIcon(std::string filename) = 0;
+            virtual bool PollWindowEvents() = 0;
+            virtual void Close() = 0;
+            virtual void* Handle() = 0;
+            virtual bool Create() = 0;
+            virtual void Show() = 0;
+            virtual void Hide() = 0;
+            virtual void Restore() = 0;
+            virtual void Maximize() = 0;
+            virtual bool Minimized() = 0;
+            virtual void Minimize() = 0;
+            virtual bool Maximized() = 0;
+            virtual bool IsVisible() = 0;
+            virtual bool IsOpen() = 0;
+            virtual bool IsFullscreen() = 0;
+            virtual bool IsActive() = 0;
+            virtual Timer GetTimer() = 0;
+            virtual Input::Input GetInput() = 0;
+        };
+    }
 }

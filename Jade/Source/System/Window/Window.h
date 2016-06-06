@@ -28,153 +28,153 @@ SOFTWARE.
 
 namespace Jade
 {
-	namespace System
-	{
-		// Multi-platform window implementation.
-		class Window
-		{
-			int width;
-			int height;
-			int x;
-			int y;
-			std::string title;
-			bool fullscreen;
+    namespace System
+    {
+        // Multi-platform window implementation.
+        class Window
+        {
+            int width;
+            int height;
+            int x;
+            int y;
+            std::string title;
+            bool fullscreen;
 
-			// All of our windows use this interface for their general implementations 
-			// to create interoperability for multiple operating systems.
-			std::shared_ptr<IWindow> window;
+            // All of our windows use this interface for their general implementations 
+            // to create interoperability for multiple operating systems.
+            std::shared_ptr<IWindow> window;
 
-		public:
+        public:
 
-			// Returns a boolean determining if the window is still active.
-			bool IsOpen() const
-			{
-				return window->IsOpen();
-			}
+            // Returns a boolean determining if the window is still active.
+            bool IsOpen() const
+            {
+                return window->IsOpen();
+            }
 
-			// Returns the width of the window.
-			int GetWidth() const
-			{
-				return window->GetWidth();
-			}
+            // Returns the width of the window.
+            int GetWidth() const
+            {
+                return window->GetWidth();
+            }
 
-			// Sets the width of the window.
-			void SetWidth(int width) const
-			{
-				window->SetWidth(width);
-			}
+            // Sets the width of the window.
+            void SetWidth(int width) const
+            {
+                window->SetWidth(width);
+            }
 
-			// Returns the height of the window.
-			int GetHeight() const
-			{
-				return window->GetHeight();
-			}
+            // Returns the height of the window.
+            int GetHeight() const
+            {
+                return window->GetHeight();
+            }
 
-			// Sets the height of the window.
-			void SetHeight(int height) const
-			{
-				window->SetHeight(height);
-			}
+            // Sets the height of the window.
+            void SetHeight(int height) const
+            {
+                window->SetHeight(height);
+            }
 
-			// Returns the aspect ratio of the window.
-			float GetAspectRatio() const
-			{
-				return window->GetAspectRatio();
-			}
+            // Returns the aspect ratio of the window.
+            float GetAspectRatio() const
+            {
+                return window->GetAspectRatio();
+            }
 
             bool GetRenderViewportNeedsResize() const
-			{
+            {
                 return window->GetRenderViewportNeedsResize();
-			}
+            }
 
             void SetRenderViewportNeedsResize(bool value) const
-			{
+            {
                 window->SetRenderViewportNeedsResize(value);
-			}
+            }
 
-			// Retrieves the handle of the window.
-			void* Handle() const
-			{
-				return window->Handle();
-			}
+            // Retrieves the handle of the window.
+            void* Handle() const
+            {
+                return window->Handle();
+            }
 
-			// Returns the title of the window.
-			std::string GetTitle() const
-			{
-				return window->GetTitle();
-			}
+            // Returns the title of the window.
+            std::string GetTitle() const
+            {
+                return window->GetTitle();
+            }
 
-			// Sets the title of the window.
-			void SetTitle(std::string title) const
-			{
-				window->SetTitle(title);
-			}
+            // Sets the title of the window.
+            void SetTitle(std::string title) const
+            {
+                window->SetTitle(title);
+            }
 
-			// Sets the icon of the window.
-			void SetIcon(std::string filename) const
-			{
-				window->SetIcon(filename);
-			}
+            // Sets the icon of the window.
+            void SetIcon(std::string filename) const
+            {
+                window->SetIcon(filename);
+            }
 
-			// Returns a boolean determining if the window is in fullscreen mode.
-			bool IsFullscreen() const
-			{
-				return window->IsFullscreen();
-			}
+            // Returns a boolean determining if the window is in fullscreen mode.
+            bool IsFullscreen() const
+            {
+                return window->IsFullscreen();
+            }
 
-			// Returns a boolean determining if the window has focus.
-			bool IsActive() const
-			{
-				return window->IsActive();
-			}
+            // Returns a boolean determining if the window has focus.
+            bool IsActive() const
+            {
+                return window->IsActive();
+            }
 
-			// Returns the underlying interface object of the window.
-			std::shared_ptr<IWindow> GetIWindow() const
-			{
-				return window;
-			}
+            // Returns the underlying interface object of the window.
+            std::shared_ptr<IWindow> GetIWindow() const
+            {
+                return window;
+            }
 
-			// Returns an object that manages timers related to the window.
-			Timer GetTime() const
-			{
-				return window->GetTimer();
-			}
+            // Returns an object that manages timers related to the window.
+            Timer GetTime() const
+            {
+                return window->GetTimer();
+            }
 
-			// Returns an object that handles window input.
-			Input::Input GetInput() const
-			{
-				return window->GetInput();
-			}
+            // Returns an object that handles window input.
+            Input::Input GetInput() const
+            {
+                return window->GetInput();
+            }
 
-			Window() : window(nullptr) { }
+            Window() : window(nullptr) { }
 
-			// Use this constructor.
-			Window(int width, int height, int x, int y, std::string title, bool fullscreen)
-			{
-				this->width = width;
-				this->height = height;
-				this->x = x;
-				this->y = y;
-				this->title = title;
-				this->fullscreen = fullscreen;
+            // Use this constructor.
+            Window(int width, int height, int x, int y, std::string title, bool fullscreen)
+            {
+                this->width = width;
+                this->height = height;
+                this->x = x;
+                this->y = y;
+                this->title = title;
+                this->fullscreen = fullscreen;
 
-				// Create our window.
-				window = std::make_shared<NativeWindow>(width, height, x, y, title, fullscreen);
-			}
+                // Create our window.
+                window = std::make_shared<NativeWindow>(width, height, x, y, title, fullscreen);
+            }
 
-			// Runs through the main window messaging loop handling events.
-			bool PollEvents() const
-			{
-				return window->PollWindowEvents();
-			}
+            // Runs through the main window messaging loop handling events.
+            bool PollEvents() const
+            {
+                return window->PollWindowEvents();
+            }
 
-			// Closes the window and exits the application.
-			void Close() const
-			{
-				window->Close();
-			}
-		};
-	}
+            // Closes the window and exits the application.
+            void Close() const
+            {
+                window->Close();
+            }
+        };
+    }
 }
 
 
