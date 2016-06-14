@@ -26,7 +26,7 @@ SOFTWARE.
 
 #include "lua.hpp"
 
-#include "Core/Utility.h"
+#include "Core/Include.h"
 
 namespace Jade
 {

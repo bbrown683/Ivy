@@ -31,7 +31,7 @@ namespace Jade
 {
     namespace System
     {
-#ifdef JADE_PLATFORM_UNIX
+#ifdef JADE_API_X11
         class X11Window : public IWindow
         {
             Display* display;

@@ -24,7 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <Graphics/Shader/ShaderType.h>
+#include "Graphics/Shader/ShaderType.h"
 
 namespace Jade
 {

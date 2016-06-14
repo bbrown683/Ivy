@@ -1,3 +1,5 @@
+#pragma once
+
 /*
 The MIT License (MIT)
 
@@ -22,5 +24,22 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "Point.h"
+#include "Graphics/Model/Importer/Importer.h"
 
+namespace Jade
+{
+    namespace Graphics
+    {
+        class FBXImporter : public Importer
+        {
+            std::string filename;
+
+        public:
+
+            FBXImporter(std::string filename) : Importer(filename)
+            { }
+
+            ModelProperties Parse() override;
+        };
+    }
+}

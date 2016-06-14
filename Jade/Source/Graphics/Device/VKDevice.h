@@ -24,7 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "Core/Utility.h"
+#include "Core/Include.h"
 #include "Graphics/Device/IDevice.h"
 #include "Math/Color.h"
 #include "System/Window/Window.h"

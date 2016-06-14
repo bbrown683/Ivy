@@ -24,12 +24,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-//#include "System/Window/NativeWindow.h"
-#ifdef JADE_PLATFORM_WINDOWS
 #include "System/Window/Win32Window.h"
-#else 
 #include "System/Window/X11Window.h"
-#endif
 
 namespace Jade
 {
@@ -99,10 +95,16 @@ namespace Jade
                 window->SetRenderViewportNeedsResize(value);
             }
 
-            // Retrieves the handle of the window.
-            void* Handle() const
+            //! \brief Returns the platform display for the window.
+            PlatformDisplay GetPlatformDisplay() const
             {
-                return window->Handle();
+                return window->GetPlatformDisplay();
+            }
+
+            //! \brief Returns the platform handle for the window.
+            PlatformWindow GetPlatformWindow() const
+            {
+                return window->GetPlatformWindow();
             }
 
             // Returns the title of the window.

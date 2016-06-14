@@ -27,7 +27,7 @@ SOFTWARE.
 #include "Graphics/GL/GladLoader.h"
 
 #include "Core/Exception/Exception.h"
-#include "Core/Utility.h"
+#include "Core/Include.h"
 #include "Graphics/Device/IDevice.h"
 #include "Graphics/Device/Specification.h"
 #include "Math/Color.h"

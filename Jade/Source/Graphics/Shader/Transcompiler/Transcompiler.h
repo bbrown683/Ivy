@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Core/Utility.h"
+#include "Core/Include.h"
 
 // HLSL->GLSL
 // Macro defines based off the following documentation:

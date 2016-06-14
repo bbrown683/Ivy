@@ -24,9 +24,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <Graphics/Buffer/IIndexBuffer.h>
-#include <Graphics/Device/DXDevice.h>
-#include <Math/Vertex.h>
+#include "Graphics/Buffer/IIndexBuffer.h"
+#include "Graphics/Device/DXDevice.h"
+#include "Math/Vertex.h"
 
 #ifdef JADE_PLATFORM_WINDOWS
 namespace Jade

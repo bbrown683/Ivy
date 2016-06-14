@@ -1,7 +1,7 @@
 #pragma once
 
-#include <Core/Utility.h>
-#include <Graphics/Widget/Widget.h>
+#include "Core/Include.h"
+#include "Graphics/Widget/Widget.h"
 
 namespace Jade
 {

@@ -24,38 +24,48 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-namespace Jade
-{
-	namespace System
-	{
-		// Class for platform detection. 
-		class Platform
-		{
-		public:
+// Platform defines and inclusions.
+#if defined(WIN32) || defined(_WIN32)
+#	define JADE_PLATFORM_WINDOWS
+#	ifndef WIN32_LEAN_AND_MEAN
+#		define WIN32_LEAN_AND_MEAN
+#	endif
+#	include <Windows.h>
+#	include <Windowsx.h>
+typedef HDC PlatformDisplay;
+typedef HWND PlatformWindow;
+#elif defined(__unix__)
+#	define JADE_PLATFORM_UNIX
+#	include <X11/Xlib.h>
+#	include <X11/Xutil.h>
+#   include <X11/keysymdef.h>
+#   include <X11/XKBlib.h>
+typedef Display* PlatformDisplay;
+typedef Window PlatformWindow;
+#else
+#	error Unsupported System.
+#endif
 
-			enum class PlatformID
-			{
-				Unknown, // Unsupported platform.
-				Windows, // All general Windows distributions.
-				Unix, // All general Linux (not Unix) distributions.
-			};
+// Checking for Unicode define.
+#if defined(UNICODE) || defined(_UNICODE)
+#	define JADE_UNICODE
+#endif
 
-			static PlatformID GetPlatformID()
-			{
-				// _WIN32 is defined for both 32bit and 64bit compilations on Windows machines.
-				#if defined(_WIN32) || defined(WIN32)
-					#define JADE_PLATFORM_WINDOWS
-					return PlatformID::Windows;
-				#elif defined(__unix__) 
-					#define JADE_PLATFORM_UNIX
-					return PlatformID::Unix;
-				// Unknown Operating System not supported by Jade.
-				#else
-					return PlatformID::Unknown;
-				#endif // _WIN32
-			}
-		}; 
-	}
-}
+#include <iostream>
+#include <string>
+#include <vector>
+#include <list>
+#include <map>
+#include <unordered_map>
+#include <queue>
+#include <thread>
+#include <memory>
+#include <cassert>
+#include <exception>
 
-
+// Independent character set string typedef.
+#ifdef JADE_UNICODE
+typedef std::wstring istring;
+#else
+typedef std::string istring;
+#endif

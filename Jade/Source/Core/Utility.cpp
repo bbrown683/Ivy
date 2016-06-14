@@ -25,11 +25,6 @@ SOFTWARE.
 
 #include "Utility.h"
 
-#ifdef JADE_PLATFORM_WINDOWS
-#include <windows.h>
-#include <Shlwapi.h> // Requires linking of shlwapi.lib
-#endif
-
 std::string Jade::Core::Utility::GetExecutablePath()
 {
 #ifdef JADE_PLATFORM_WINDOWS

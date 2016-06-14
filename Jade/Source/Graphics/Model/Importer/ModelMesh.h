@@ -35,10 +35,6 @@ namespace Jade
 	{
 		struct ModelMesh
 		{
-			// Vectors are very cache friendly, as all of its data
-			// is stored contiguously. This is why we will be using
-			// them instead of a standard list type.
-
 			std::vector<Math::Vector3> positions;
 			std::vector<Math::Color> colors;
 			std::vector<Math::Vector2> uvs;

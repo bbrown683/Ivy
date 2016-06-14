@@ -22,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-// Main engine defintions.
+// Main engine definitions.
 #define JADE_USING_NAMESPACE 
 #define JADE_INCLUDE_ALL
 
@@ -34,7 +34,6 @@ int main(int argc, char *argv[])
 	// Creates a basic window that can be rendered with either graphics API.
 	Window window(1080, 720, 100, 100, "Jade Game Engine Framework", false);
 
-    /*
 	// Creates a graphics device.
 	Device device(window, GraphicsAPI::DirectX);
 	device.SetDrawType(DrawType::Indexed);
@@ -66,17 +65,13 @@ int main(int argc, char *argv[])
     // Create and load a sprite.
 	Sprite sprite(device, modelShader);
 	sprite.Load("empty.png");
-    sprite.SetRotation(Vector2(0.0f, Math::PiOverTwo));
+    sprite.SetPosition(Vector2(10.0f, 10.0f));
 
-	Script script;
-	script.Execute(".\\resources\\scripts\\test.lua");
-
-    std::cout << Utility::GetExecutablePath() << std::endl;
-    */
+	//Script script;
+	//script.Execute(".\\resources\\scripts\\test.lua");
 
 	while (window.IsOpen())
 	{
-        /*
 		// Rendering
 		device.Clear(Color::CornflowerBlue);
         
@@ -127,15 +122,15 @@ int main(int argc, char *argv[])
 			rasterizer.SetRasterizerState(CullMode::Back, FillMode::Wireframe, WindMode::Clockwise);
 		else
 			rasterizer.SetRasterizerState(CullMode::Back, FillMode::Solid, WindMode::Clockwise);
-        */
+
 		// Submit close request if we detect user is exiting application.
 		if (window.GetInput().keyboard.IsKeyDown(Key::Escape))
 			window.Close();
 
         // This will update the viewport and camera projection in the event of a window resize.
-        //camera.Update();
+        camera.Update();
 		// Swap buffers and perform system event loop.
-		//device.Present();
+		device.Present();
         
 		window.PollEvents();
 	}

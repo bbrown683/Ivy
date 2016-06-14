@@ -24,50 +24,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-//==============================================
-// Include some common headers.
-//==============================================
-
-// Platform define.
-#include "System/Platform.h"
-
-// I/O
-#include <iostream>
-
-// Strings.
-#include <string>
-
-// Common data structures.
-#include <vector>
-#include <list>
-#include <map>
-#include <unordered_map>
-#include <queue>
-
-// Multithreading.
-#include <thread>
-
-// Pointer handling
-#include <memory>
-
-// Asserting conditions.
-#include <cassert>
-
-// Exception system.
-#include <exception>
+#include "Core/Include.h"
 
 #ifdef JADE_PLATFORM_WINDOWS
-#include <Windows.h>
-#include <Windowsx.h>
-typedef HDC PlatformDisplay;
-typedef HWND PlatformWindow;
-#elif defined(JADE_PLATFORM_UNIX)
-#include <X11/Xlib.h>
-#include <X11/Xutil.h>
-#include <X11/keysymdef.h>
-#include <X11/XKBlib.h>
-typedef Display* PlatformDisplay;
-typedef Window PlatformWindow;
+#include <Shlwapi.h> // Requires linking of shlwapi.lib
 #endif
 
 namespace Jade

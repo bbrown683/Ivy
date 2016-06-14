@@ -26,7 +26,7 @@ SOFTWARE.
 
 #include <glm/vec4.hpp>
 
-#include "Core/Utility.h"
+#include "Core/Include.h"
 #include "Math/Math.h"
 
 namespace Jade

@@ -24,8 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "Core/Utility.h"
-
+#include "Core/Include.h"
 #include "Graphics/Device/Device.h"
 #include "Graphics/Device/GraphicsAPI.h"
 #include "Graphics/Shader/DXShader.h"

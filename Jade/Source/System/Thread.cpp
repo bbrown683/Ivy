@@ -22,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <System/Thread.h>
+#include "Thread.h"
 
 // Initialize our counter.
 unsigned int Jade::System::Thread::threadCount = 0;

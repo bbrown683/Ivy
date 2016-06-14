@@ -29,7 +29,7 @@ SOFTWARE.
 #include "assimp/Scene.h"
 #include "assimp/postprocess.h"
 
-#include "Core/Utility.h"
+#include "Core/Include.h"
 #include "Graphics/Mesh/Mesh.h"
 #include "Math/Helper.h"
 

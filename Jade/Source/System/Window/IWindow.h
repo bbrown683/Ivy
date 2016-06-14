@@ -25,7 +25,7 @@ SOFTWARE.
 */
 
 #include "Input/Input.h"
-#include "Core/Utility.h"
+#include "Core/Include.h"
 #include "Math/Point.h"
 #include "System/Timer.h"
 
@@ -54,7 +54,8 @@ namespace Jade
             virtual void SetIcon(std::string filename) = 0;
             virtual bool PollWindowEvents() = 0;
             virtual void Close() = 0;
-            virtual void* Handle() = 0;
+            virtual PlatformDisplay GetPlatformDisplay() = 0;
+            virtual PlatformWindow GetPlatformWindow() = 0;
             virtual bool Create() = 0;
             virtual void Show() = 0;
             virtual void Hide() = 0;

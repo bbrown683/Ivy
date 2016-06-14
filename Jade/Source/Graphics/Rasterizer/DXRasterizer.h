@@ -24,8 +24,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include <Graphics/Device/DXDevice.h>
-#include <Graphics/Rasterizer/IRasterizer.h>
+#include "Graphics/Device/DXDevice.h"
+#include "Graphics/Rasterizer/IRasterizer.h"
 
 #ifdef JADE_PLATFORM_WINDOWS
 namespace Jade

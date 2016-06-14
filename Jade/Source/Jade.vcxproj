@@ -93,11 +93,11 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>false</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty/assimp/include/;$(SolutionDir)ThirdParty/FreeImage/include/;$(SolutionDir)ThirdParty/FreeType/include/;$(SolutionDir)ThirdParty/glm/include/;$(SolutionDir)ThirdParty/OpenAL/include/;$(SolutionDir)ThirdParty/SDL/include/;$(SolutionDir)ThirdParty/Lua/include/;$(SolutionDir)ThirdParty/hlslcc/include/</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty/assimp/include/;$(SolutionDir)ThirdParty/FreeImage/include/;$(SolutionDir)ThirdParty/FreeType/include/;$(SolutionDir)ThirdParty/glm/include/;$(SolutionDir)ThirdParty/OpenAL/include/;$(SolutionDir)ThirdParty/Lua/include/;$(SolutionDir)ThirdParty/hlslcc/include/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>sdl2main.lib;sdl2.lib;lua53.lib;opengl32.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;assimp.lib;gdi32.lib;user32.lib;shlwapi.lib;openal32.lib;freeimage.lib;freetype.lib;libHLSLcc.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeImage/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeType/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/OpenAL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/SDL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/Lua/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/hlslcc/lib/</AdditionalLibraryDirectories>
+      <AdditionalDependencies>lua53.lib;opengl32.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;assimp.lib;gdi32.lib;user32.lib;shlwapi.lib;openal32.lib;freeimage.lib;freetype.lib;libHLSLcc.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeImage/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeType/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/OpenAL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/Lua/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/hlslcc/lib/</AdditionalLibraryDirectories>
       <EntryPointSymbol>
       </EntryPointSymbol>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
@@ -113,7 +113,6 @@ xcopy /f /s /y "$(ProjectDir)FontPixel.hlsl" "$(OutputPath)resources\shaders\"
 xcopy /f /s /y "$(ProjectDir)MonoCube.dae" "$(OutputPath)resources\models\"
 xcopy /f /s /y "$(ProjectDir)MonoCubeTexture.png" "$(OutputPath)resources\models\"
 xcopy /f /s /y "$(SolutionDir)ThirdParty\FreeImage\bin\$(PlatformTarget)\FreeImage.dll" "$(OutputPath)"
-xcopy /f /s /y "$(SolutionDir)ThirdParty\SDL\bin\$(PlatformTarget)\SDL2.dll" "$(OutputPath)"
 xcopy /f /s /y "$(SolutionDir)ThirdParty\Lua\bin\$(PlatformTarget)\lua53.dll" "$(OutputPath)"
 if $(PlatformTarget) == x86 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp32.dll" "$(OutputPath)"
 if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp64.dll" "$(OutputPath)"</Command>
@@ -128,11 +127,11 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>false</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty/assimp/include/;$(SolutionDir)ThirdParty/FreeImage/include/;$(SolutionDir)ThirdParty/FreeType/include/;$(SolutionDir)ThirdParty/glm/include/;$(SolutionDir)ThirdParty/OpenAL/include/;$(SolutionDir)ThirdParty/SDL/include/;$(SolutionDir)ThirdParty/Lua/include/;$(SolutionDir)ThirdParty/hlslcc/include/</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty/assimp/include/;$(SolutionDir)ThirdParty/FreeImage/include/;$(SolutionDir)ThirdParty/FreeType/include/;$(SolutionDir)ThirdParty/glm/include/;$(SolutionDir)ThirdParty/OpenAL/include/;$(SolutionDir)ThirdParty/Lua/include/;$(SolutionDir)ThirdParty/hlslcc/include/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>sdl2main.lib;sdl2.lib;lua53.lib;opengl32.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;assimp.lib;gdi32.lib;user32.lib;shlwapi.lib;openal32.lib;freeimage.lib;freetype.lib;libHLSLcc.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeImage/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeType/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/OpenAL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/SDL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/Lua/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/hlslcc/lib/</AdditionalLibraryDirectories>
+      <AdditionalDependencies>lua53.lib;opengl32.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;assimp.lib;gdi32.lib;user32.lib;shlwapi.lib;openal32.lib;freeimage.lib;freetype.lib;libHLSLcc.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeImage/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeType/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/OpenAL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/Lua/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/hlslcc/lib/</AdditionalLibraryDirectories>
       <EntryPointSymbol>
       </EntryPointSymbol>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
@@ -148,7 +147,6 @@ xcopy /f /s /y "$(ProjectDir)FontPixel.hlsl" "$(OutputPath)resources\shaders\"
 xcopy /f /s /y "$(ProjectDir)MonoCube.dae" "$(OutputPath)resources\models\"
 xcopy /f /s /y "$(ProjectDir)MonoCubeTexture.png" "$(OutputPath)resources\models\"
 xcopy /f /s /y "$(SolutionDir)ThirdParty\FreeImage\bin\$(PlatformTarget)\FreeImage.dll" "$(OutputPath)"
-xcopy /f /s /y "$(SolutionDir)ThirdParty\SDL\bin\$(PlatformTarget)\SDL2.dll" "$(OutputPath)"
 xcopy /f /s /y "$(SolutionDir)ThirdParty\Lua\bin\$(PlatformTarget)\lua53.dll" "$(OutputPath)"
 if $(PlatformTarget) == x86 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp32.dll" "$(OutputPath)"
 if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp64.dll" "$(OutputPath)"</Command>
@@ -248,6 +246,7 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClCompile Include="Core\Script\Script.cpp" />
     <ClCompile Include="Graphics\Blender\DXBlender.cpp" />
     <ClCompile Include="Graphics\Buffer\ConstantBuffer.cpp" />
+    <ClCompile Include="Graphics\Model\Importer\FBXImporter.cpp" />
     <ClCompile Include="Graphics\Model\Importer\OBJImporter.cpp" />
     <ClCompile Include="Graphics\GL\glad\gl\src\glad.c" />
     <ClCompile Include="Graphics\GL\glad\wgl\src\glad_wgl.c" />
@@ -279,13 +278,11 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClCompile Include="Graphics\Shader\DXShader.cpp" />
     <ClCompile Include="Input\Mouse.cpp" />
     <ClCompile Include="System\Thread.cpp" />
-    <ClCompile Include="System\Window\NativeWindow.cpp" />
     <ClCompile Include="Math\Color.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Math\Helper.cpp" />
     <ClCompile Include="Math\Math.cpp" />
     <ClCompile Include="Math\Matrix.cpp" />
-    <ClCompile Include="Math\Point.cpp" />
     <ClCompile Include="Math\Quaternion.cpp" />
     <ClCompile Include="Math\Ray.cpp" />
     <ClCompile Include="Math\Rectangle.cpp" />
@@ -298,7 +295,6 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Audio\AudioDevice.h" />
-    <ClInclude Include="Core\Defines.h" />
     <ClInclude Include="Core\Exception\BufferCreationException.h" />
     <ClInclude Include="Core\Exception\DeviceCreationException.h" />
     <ClInclude Include="Core\Exception\ArgumentNullException.h" />
@@ -307,6 +303,7 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClInclude Include="Core\Exception\InitializationException.h" />
     <ClInclude Include="Core\Exception\ShaderCompilationException.h" />
     <ClInclude Include="Core\Exception\ShaderCreationException.h" />
+    <ClInclude Include="Core\Include.h" />
     <ClInclude Include="Core\Script\Script.h" />
     <ClInclude Include="Graphics\Blender\Blender.h" />
     <ClInclude Include="Graphics\Blender\DXBlender.h" />
@@ -316,6 +313,7 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClInclude Include="Graphics\Buffer\IIndexBuffer.h" />
     <ClInclude Include="Graphics\Buffer\IConstantBuffer.h" />
     <ClInclude Include="Graphics\Buffer\PrimitiveType.h" />
+    <ClInclude Include="Graphics\Model\Importer\FBXImporter.h" />
     <ClInclude Include="Graphics\Model\Importer\MeshMaterial.h" />
     <ClInclude Include="Graphics\Model\Importer\ModelMesh.h" />
     <ClInclude Include="Graphics\Model\Importer\ModelProperties.h" />
@@ -383,7 +381,6 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClInclude Include="System\Thread.h" />
     <ClInclude Include="System\Window\Event.h" />
     <ClInclude Include="System\Window\IWindow.h" />
-    <ClInclude Include="System\Window\NativeWindow.h" />
     <ClInclude Include="System\Window\Win32Window.h" />
     <ClInclude Include="System\Window\Window.h" />
     <ClInclude Include="Math\Color.h" />
@@ -400,7 +397,6 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClInclude Include="Math\Vertex.h" />
     <ClInclude Include="System\File.h" />
     <ClInclude Include="System\Log.h" />
-    <ClInclude Include="System\Platform.h" />
     <ClInclude Include="Core\Utility.h" />
     <ClInclude Include="System\Window\X11Window.h" />
   </ItemGroup>

@@ -24,7 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "Core/Utility.h"
+#include "Core/Include.h"
 #include "Graphics/Device/GraphicsAPI.h"
 #include "Graphics/Device/IDevice.h"
 #include "Graphics/Device/DXDevice.h"
@@ -93,12 +93,6 @@ namespace Jade
             void Clear(Math::Color color) const
             {
                 device->Clear(color);
-            }
-
-            // Hides the cursor when inside the window boundaries.
-            void HideCursor(bool toggle)
-            {
-                //SDL_ShowCursor(!toggle);
             }
 
             // Presents the back buffer to the front for display.

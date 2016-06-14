@@ -109,6 +109,8 @@ void Jade::System::Win32Window::Close()
     UnregisterWindowClass();
     DestroyWindow(hWnd);
     open = false;
+
+    std::cout << "Window closing..." << std::endl;
 }
 
 PlatformDisplay Jade::System::Win32Window::GetPlatformDisplay()
@@ -119,11 +121,6 @@ PlatformDisplay Jade::System::Win32Window::GetPlatformDisplay()
 PlatformWindow Jade::System::Win32Window::GetPlatformWindow()
 {
     return hWnd;
-}
-
-void* Jade::System::Win32Window::Handle()
-{
-    return nullptr;
 }
 
 bool Jade::System::Win32Window::Create()
@@ -158,6 +155,8 @@ bool Jade::System::Win32Window::Create()
 
         // This will allow us to store the reference inside the Window Procedure.
         SetProp(hWnd, TEXT("WINDOW"), this);
+
+        std::cout << "Window created..." << std::endl;
 
         return open = true;
     }
@@ -234,6 +233,8 @@ Jade::Input::Key Jade::System::Win32Window::ConvertVirtualKey(WPARAM key)
 {
     switch (key)
     {
+    case VK_BACK: return Input::Key::Backspace;
+    case VK_TAB: return Input::Key::Tab;
     case VK_SHIFT: return Input::Key::Shift;
     case VK_CONTROL: return Input::Key::Control;
     case VK_MENU: return Input::Key::Alt;

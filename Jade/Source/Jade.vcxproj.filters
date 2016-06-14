@@ -17,7 +17,6 @@
     <ClCompile Include="Math\Rectangle.cpp" />
     <ClCompile Include="Math\Ray.cpp" />
     <ClCompile Include="Math\Math.cpp" />
-    <ClCompile Include="Math\Point.cpp" />
     <ClCompile Include="Math\Helper.cpp" />
     <ClCompile Include="Math\Color.cpp">
       <Filter>Graphics</Filter>
@@ -28,7 +27,6 @@
     <ClCompile Include="Graphics\Device\GLDevice.cpp" />
     <ClCompile Include="Graphics\Device\VKDevice.cpp" />
     <ClCompile Include="Graphics\Model\Model.cpp" />
-    <ClCompile Include="System\Window\NativeWindow.cpp" />
     <ClCompile Include="System\Log.cpp" />
     <ClCompile Include="Graphics\Camera\Camera.cpp" />
     <ClCompile Include="Math\Matrix.cpp" />
@@ -62,6 +60,7 @@
     <ClCompile Include="Graphics\Sprite\Sprite.cpp" />
     <ClCompile Include="Input\Mouse.cpp" />
     <ClCompile Include="System\Window\Win32Window.cpp" />
+    <ClCompile Include="Graphics\Model\Importer\FBXImporter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\Vector4.h">
@@ -75,9 +74,6 @@
     </ClInclude>
     <ClInclude Include="Math\Quaternion.h">
       <Filter>Math</Filter>
-    </ClInclude>
-    <ClInclude Include="System\Platform.h">
-      <Filter>System</Filter>
     </ClInclude>
     <ClInclude Include="Core\Utility.h" />
     <ClInclude Include="Math\Rectangle.h" />
@@ -104,7 +100,6 @@
     <ClInclude Include="Graphics\Model\Model.h" />
     <ClInclude Include="Graphics\Texture\TextureType.h" />
     <ClInclude Include="System\Window\IWindow.h" />
-    <ClInclude Include="System\Window\NativeWindow.h" />
     <ClInclude Include="System\Window\Window.h" />
     <ClInclude Include="System\Log.h" />
     <ClInclude Include="Graphics\Camera\Camera.h" />
@@ -183,7 +178,8 @@
     <ClInclude Include="System\Window\Win32Window.h" />
     <ClInclude Include="System\Window\Event.h" />
     <ClInclude Include="System\Window\X11Window.h" />
-    <ClInclude Include="Core\Defines.h" />
+    <ClInclude Include="Core\Include.h" />
+    <ClInclude Include="Graphics\Model\Importer\FBXImporter.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">

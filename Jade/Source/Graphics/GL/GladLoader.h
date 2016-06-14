@@ -30,12 +30,12 @@ SOFTWARE.
 // for headers to point to the correct
 // locations.
 
-#include "System/Platform.h"
+#include "Core/Include.h"
 #include "glad/gl/include/glad/glad.h"
 
 #ifdef JADE_PLATFORM_WINDOWS
 	// Includes WGL extensions for creating a context.
 	#include "glad/wgl/include/glad/glad_wgl.h"
-#elif JADE_PLATFORM_LINUX
+#elif JADE_PLATFORM_UNIX
 	
 #endif

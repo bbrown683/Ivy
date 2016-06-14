@@ -24,6 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include "Core/Utility.h"
 #include "System/Window/Event.h"
 #include "System/Window/IWindow.h"
 
@@ -71,9 +72,8 @@ namespace Jade
             void SetIcon(std::string filename) override;
             bool PollWindowEvents() override;
             void Close() override;
-            PlatformDisplay GetPlatformDisplay();
-            PlatformWindow GetPlatformWindow();
-            void* Handle() override;
+            PlatformDisplay GetPlatformDisplay() override;
+            PlatformWindow GetPlatformWindow() override;
             bool Create() override;
             void Show() override;
             void Hide() override;
@@ -101,6 +101,11 @@ namespace Jade
 
                 if (!Win32Window::Create())
                     Win32Window::Close();
+            }
+
+            ~Win32Window()
+            {
+                Win32Window::Close();
             }
 
             Input::Key ConvertVirtualKey(WPARAM key);

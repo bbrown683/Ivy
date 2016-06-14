@@ -58,7 +58,7 @@ bool Jade::Graphics::DXDevice::Create()
     unsigned int numFeatureLevels = ARRAYSIZE(featureLevels);
 
     // This should not be null.
-    if (window.Handle() == nullptr)
+    if (!window.GetPlatformWindow())
         return false;
 
     DXGI_SWAP_CHAIN_DESC sd;
@@ -70,7 +70,7 @@ bool Jade::Graphics::DXDevice::Create()
     sd.BufferDesc.RefreshRate.Numerator = 60;
     sd.BufferDesc.RefreshRate.Denominator = 1;
     sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-    sd.OutputWindow = static_cast<HWND>(window.Handle());
+    sd.OutputWindow = window.GetPlatformWindow();
     sd.Windowed = true;
     sd.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
     sd.SampleDesc.Count = specification.samples;
@@ -247,15 +247,7 @@ void Jade::Graphics::DXDevice::AdjustViewport()
 }
 
 void Jade::Graphics::DXDevice::Clear(Math::Color color)
-{	
-    // Handles the resizing of the viewport each render frame.
-    //if(window.GetRenderViewportNeedsResize())
-    //{
-    //    OnWindowResize();
-    //    window.SetRenderViewportNeedsResize(false);
-    //    std::cout << "Viewport resized" << std::endl;
-    //}
-    
+{	    
     float colorRGBA[] = { color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() };
     m_pImmediateContext->ClearRenderTargetView(m_pRenderTargetView.Get(), colorRGBA);
     m_pImmediateContext->ClearDepthStencilView(m_pDepthStencilView.Get(), D3D11_CLEAR_DEPTH, 1.0f, 0);

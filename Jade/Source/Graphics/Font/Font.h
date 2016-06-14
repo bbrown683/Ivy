@@ -27,7 +27,7 @@ SOFTWARE.
 #include "ft2build.h"
 #include FT_FREETYPE_H
 
-#include "Core/Utility.h"
+#include "Core/Include.h"
 #include "Core/Exception/Exception.h"
 #include "Graphics/Blender/Blender.h"
 #include "Graphics/Buffer/VertexBuffer.h"
