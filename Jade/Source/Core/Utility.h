@@ -36,7 +36,6 @@ namespace Jade
 	{
 		class Utility
 		{
-
 		public:
 
 			static std::string GetExecutablePath();

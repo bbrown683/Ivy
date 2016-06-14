@@ -55,18 +55,14 @@ void Jade::System::Win32Window::SetY(int value)
 
 }
 
-std::string Jade::System::Win32Window::GetTitle()
+istring Jade::System::Win32Window::GetTitle()
 {
     return title;
 }
 
-void Jade::System::Win32Window::SetTitle(std::string value)
+void Jade::System::Win32Window::SetTitle(istring value)
 {
-#if defined(UNICODE) || defined(_UNICODE)
-    SetWindowText(hWnd, Core::Utility::StringToWString(value).c_str());
-#else
     SetWindowText(hWnd, value.c_str());
-#endif
     this->title = title;
 }
 
@@ -131,13 +127,8 @@ bool Jade::System::Win32Window::Create()
     {
         DWORD dwStyle = WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX | WS_OVERLAPPED;
 
-#if defined(UNICODE) || defined(_UNICODE)
-        HWND hWnd = CreateWindow(TEXT("JADE_APP"), Core::Utility::StringToWString(title).c_str(), dwStyle,
-            x, y, width, height, nullptr, nullptr, hInstance, nullptr);
-#else
         HWND hWnd = CreateWindow(TEXT("JADE_APP"), title.c_str(), dwStyle,
             x, y, width, height, nullptr, nullptr, hInstance, nullptr);
-#endif
     
         if (!hWnd)
             return false;
