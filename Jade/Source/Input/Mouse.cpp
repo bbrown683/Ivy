@@ -24,12 +24,12 @@ SOFTWARE.
 
 #include "Mouse.h"
 
-void Jade::Input::Mouse::SetCursorPosition(Math::Point position)
+void Jade::Input::Mouse::SetCursorPosition(Math::Point<int> position)
 {
     this->position = position;
 }
 
-Jade::Math::Point Jade::Input::Mouse::GetCursorPosition()
+Jade::Math::Point<int> Jade::Input::Mouse::GetCursorPosition()
 {
     return position;
 }

@@ -29,11 +29,11 @@ SOFTWARE.
 
 namespace Jade
 {
-	namespace Audio
-	{
-		class AudioDevice
-		{
-			void Create();
-		};
-	}
+    namespace Audio
+    {
+        class AudioDevice
+        {
+            void Create();
+        };
+    }
 }

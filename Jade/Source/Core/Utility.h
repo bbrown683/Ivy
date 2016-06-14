@@ -42,6 +42,7 @@ SOFTWARE.
 #include <list>
 #include <map>
 #include <unordered_map>
+#include <queue>
 
 // Multithreading.
 #include <thread>
@@ -54,6 +55,20 @@ SOFTWARE.
 
 // Exception system.
 #include <exception>
+
+#ifdef JADE_PLATFORM_WINDOWS
+#include <Windows.h>
+#include <Windowsx.h>
+typedef HDC PlatformDisplay;
+typedef HWND PlatformWindow;
+#elif defined(JADE_PLATFORM_UNIX)
+#include <X11/Xlib.h>
+#include <X11/Xutil.h>
+#include <X11/keysymdef.h>
+#include <X11/XKBlib.h>
+typedef Display* PlatformDisplay;
+typedef Window PlatformWindow;
+#endif
 
 namespace Jade
 {

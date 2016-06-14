@@ -30,24 +30,36 @@ namespace Jade
 {
 	namespace Math
 	{
+        template<typename T>
 		struct Point
 		{
-            Point() : x(0.0f), y(0.0f) { }
+            Point() { }
 
-			Point(float x, float y)
+			Point(T x, T y)
 			{
 				this->x = x;
 				this->y = y;
 			}
 
-            float GetX() const;
-            float GetY() const;
-            std::string ToString() const;
+            T GetX() const;
+            T GetY() const;
 
 		private:
 
-			float x;
-			float y;
+			T x;
+			T y;
 		};
+
+        template <typename T>
+        T Point<T>::GetX() const
+        {
+            return x;
+        }
+
+        template <typename T>
+        T Point<T>::GetY() const
+        {
+            return y;
+        }
 	}
 }

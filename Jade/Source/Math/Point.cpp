@@ -24,17 +24,3 @@ SOFTWARE.
 
 #include "Point.h"
 
-float Jade::Math::Point::GetX() const
-{
-    return x;
-}
-
-float Jade::Math::Point::GetY() const
-{
-    return y;
-}
-
-std::string Jade::Math::Point::ToString() const
-{
-    return "(" + std::to_string(x) + ", " + std::to_string(y) + ")";
-}

@@ -23,3 +23,28 @@ SOFTWARE.
 */
 
 #include "GLTexture.h"
+
+bool Jade::Graphics::GLTexture::CreateEmptyTexture()
+{
+    return false;
+}
+
+bool Jade::Graphics::GLTexture::CreateTextureFromFile()
+{
+    return false;
+}
+
+bool Jade::Graphics::GLTexture::CreateTextureFromMemory()
+{
+    return false;
+}
+
+void Jade::Graphics::GLTexture::Fill(unsigned char * bitmap, unsigned pitch, Math::Rectangle rect)
+{
+
+}
+
+void Jade::Graphics::GLTexture::MakeActive()
+{
+
+}

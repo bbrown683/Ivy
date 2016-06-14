@@ -26,23 +26,23 @@ SOFTWARE.
 
 namespace Jade
 {
-	namespace Graphics
-	{
-		enum class TextureType
-		{
-			Unknown,
-			Ambient,
-			Bitmap, // Font rendering.
-			Diffuse,
-			Displacement,
-			Emmisive,
-			Height,
-			Lightmap,
-			Normal,
-			Opacity,
-			Reflection,
-			Specular,
-			Sprite // Sprite rendering.
-		};
-	}
+    namespace Graphics
+    {
+        enum class TextureType
+        {
+            Unknown,
+            Ambient,
+            Bitmap, // Font rendering.
+            Diffuse,
+            Displacement,
+            Emmisive,
+            Height,
+            Lightmap,
+            Normal,
+            Opacity,
+            Reflection,
+            Specular,
+            Sprite // Sprite rendering.
+        };
+    }
 }

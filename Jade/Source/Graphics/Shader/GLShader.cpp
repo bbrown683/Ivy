@@ -27,95 +27,95 @@ SOFTWARE.
 
 bool Jade::Graphics::GLShader::Create(std::string filename, ShaderType type)
 {	
-	GLuint shader;
-	
-	switch (type)
-	{
-	case ShaderType::Pixel:
-		std::cout << "[Fragment Shader]" << std::endl;
-		shader = glCreateShader(GL_FRAGMENT_SHADER);
-		break;
-	case ShaderType::Vertex:
-		std::cout << "[Vertex Shader]" << std::endl;
-		shader = glCreateShader(GL_VERTEX_SHADER);
-		break;
-	default: return false;
-	}
+    GLuint shader;
+    
+    switch (type)
+    {
+    case ShaderType::Pixel:
+        std::cout << "[Fragment Shader]" << std::endl;
+        shader = glCreateShader(GL_FRAGMENT_SHADER);
+        break;
+    case ShaderType::Vertex:
+        std::cout << "[Vertex Shader]" << std::endl;
+        shader = glCreateShader(GL_VERTEX_SHADER);
+        break;
+    default: return false;
+    }
 
-	// Read the file into a string.
-	System::File file(filename);
-	std::string data = file.Read();
+    // Read the file into a string.
+    System::File file(filename);
+    std::string data = file.Read();
 
-	// Print out shader code for debugging purposes.
-	std::cout << data << std::endl;
+    // Print out shader code for debugging purposes.
+    std::cout << data << std::endl;
 
-	// glShaderSource needs a const char* of our file data.
-	const char* source = data.c_str();
-	glShaderSource(shader, 1, &source, nullptr);
-	glCompileShader(shader);
+    // glShaderSource needs a const char* of our file data.
+    const char* source = data.c_str();
+    glShaderSource(shader, 1, &source, nullptr);
+    glCompileShader(shader);
 
-	// Used to print errors if there are any.
-	std::string buffer;
-	if(Check(shader, GL_COMPILE_STATUS, false, buffer))
-	{
-		shaderIDs.push_back(shader);
+    // Used to print errors if there are any.
+    std::string buffer;
+    if(Check(shader, GL_COMPILE_STATUS, false, buffer))
+    {
+        shaderIDs.push_back(shader);
 
-		return true;
-	}
+        return true;
+    }
 
-	return false;
+    return false;
 }
 
 bool Jade::Graphics::GLShader::Compile(std::string filename, ShaderType type)
 {
-	return false;
+    return false;
 }
 
 bool Jade::Graphics::GLShader::Release()
 {
-	glDeleteProgram(programID);
+    glDeleteProgram(programID);
    
-	return true;
+    return true;
 }
 
 bool Jade::Graphics::GLShader::Check(GLuint shader, GLuint flag, bool isProgram, const std::string& errorMessage)
 {
-	GLint success = 0;
-	GLchar error[1024] = { 0 };
+    GLint success = 0;
+    GLchar error[1024] = { 0 };
 
-	if (isProgram)
-		glGetProgramiv(shader, flag, &success);
-	else
-		glGetShaderiv(shader, flag, &success);
+    if (isProgram)
+        glGetProgramiv(shader, flag, &success);
+    else
+        glGetShaderiv(shader, flag, &success);
 
-	if (success == GL_FALSE)
-	{
-		if (isProgram)
-			glGetProgramInfoLog(shader, sizeof error, nullptr, error);
-		else
-			glGetShaderInfoLog(shader, sizeof error, nullptr, error);
+    if (success == GL_FALSE)
+    {
+        if (isProgram)
+            glGetProgramInfoLog(shader, sizeof error, nullptr, error);
+        else
+            glGetShaderInfoLog(shader, sizeof error, nullptr, error);
 
-		std::cerr << errorMessage << ": '" << error << "'" << std::endl;
+        std::cerr << errorMessage << ": '" << error << "'" << std::endl;
 
-		return false;
-	}
+        return false;
+    }
 
-	return true;
+    return true;
 }
 
 bool Jade::Graphics::GLShader::CheckShader(GLuint shader)
 {
-	return false;
+    return false;
 }
 
 bool Jade::Graphics::GLShader::CheckProgram(GLuint program)
 {
-	return false;
+    return false;
 }
 
 void Jade::Graphics::GLShader::MakeActive()
 {
-	glUseProgram(programID);
+    glUseProgram(programID);
 }
 
 void Jade::Graphics::GLShader::MakeInactive()
@@ -125,44 +125,44 @@ void Jade::Graphics::GLShader::MakeInactive()
 
 bool Jade::Graphics::GLShader::CreateProgram()
 {
-	programID = glCreateProgram();
-	
-	for (unsigned int i = 0; i < shaderIDs.size(); i++)
-		glAttachShader(programID, shaderIDs[i]);
+    programID = glCreateProgram();
+    
+    for (unsigned int i = 0; i < shaderIDs.size(); i++)
+        glAttachShader(programID, shaderIDs[i]);
 
-	std::cout << "[Program]" << std::endl;
+    std::cout << "[Program]" << std::endl;
 
-	// After all shaders are attached, 
-	// we can now link them to a single program.
-	glLinkProgram(programID);
-	
-	std::string buffer;
-	if (Check(programID, GL_LINK_STATUS, true, buffer))
-	{
-		std::cout << "Program was linked successfully." << std::endl;
+    // After all shaders are attached, 
+    // we can now link them to a single program.
+    glLinkProgram(programID);
+    
+    std::string buffer;
+    if (Check(programID, GL_LINK_STATUS, true, buffer))
+    {
+        std::cout << "Program was linked successfully." << std::endl;
 
-		for (unsigned int i = 0; i < shaderIDs.size(); i++)
-		{
-			// Detach shaders from program and mark them for deletion.
-			glDetachShader(programID, shaderIDs[i]);
-			glDeleteShader(shaderIDs[i]);
-		}
+        for (unsigned int i = 0; i < shaderIDs.size(); i++)
+        {
+            // Detach shaders from program and mark them for deletion.
+            glDetachShader(programID, shaderIDs[i]);
+            glDeleteShader(shaderIDs[i]);
+        }
 
-		// Lastly we validate the program can execute.
-		glValidateProgram(programID);
+        // Lastly we validate the program can execute.
+        glValidateProgram(programID);
 
-		if (Check(programID, GL_VALIDATE_STATUS, true, buffer))
-		{
-			std::cout << "Program was validated successfully." << std::endl;
+        if (Check(programID, GL_VALIDATE_STATUS, true, buffer))
+        {
+            std::cout << "Program was validated successfully." << std::endl;
 
-			return true;
-		}
-	}
+            return true;
+        }
+    }
 
-	return false;
+    return false;
 }
 
 GLuint Jade::Graphics::GLShader::GetProgramID()
 {
-	return programID;
+    return programID;
 }

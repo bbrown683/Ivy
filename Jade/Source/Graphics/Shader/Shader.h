@@ -36,61 +36,61 @@ SOFTWARE.
 
 namespace Jade
 {
-	namespace Graphics
-	{
-		//! Class that holds the vertex and pixel/fragment shader information.
+    namespace Graphics
+    {
+        //! Class that holds the vertex and pixel/fragment shader information.
         class Shader
-		{
-			Device device;
-			std::map<std::string, ShaderType> shaders;
-			std::string filename;
-			ShaderType type;
+        {
+            Device device;
+            std::map<std::string, ShaderType> shaders;
+            std::string filename;
+            ShaderType type;
 
-			std::shared_ptr<IShader> shader;
+            std::shared_ptr<IShader> shader;
 
-		public:
+        public:
 
-			Shader() : shader(nullptr) { }
+            Shader() : shader(nullptr) { }
 
             Shader(Device device, std::string pixelShader, std::string vertexShader)
-			{
+            {
                 this->device = device;
-			}
+            }
 
-			Shader(Device device, std::map<std::string, ShaderType> shaders)
-			{
-				this->device = device;
-				this->shaders = shaders;
+            Shader(Device device, std::map<std::string, ShaderType> shaders)
+            {
+                this->device = device;
+                this->shaders = shaders;
 
-				switch (device.GetGraphicsAPI())
-				{
-				case GraphicsAPI::DirectX:
-					shader = std::make_shared<DXShader>(std::dynamic_pointer_cast<DXDevice>(device.GetIDevice()), shaders);
-					break;
-				case GraphicsAPI::OpenGL:
-					shader = std::make_shared<GLShader>(shaders);
-					break;
-				case GraphicsAPI::Vulkan:
-					shader = nullptr;
-					break;
-				}
-			}
+                switch (device.GetGraphicsAPI())
+                {
+                case GraphicsAPI::DirectX:
+                    shader = std::make_shared<DXShader>(std::dynamic_pointer_cast<DXDevice>(device.GetIDevice()), shaders);
+                    break;
+                case GraphicsAPI::OpenGL:
+                    shader = std::make_shared<GLShader>(shaders);
+                    break;
+                case GraphicsAPI::Vulkan:
+                    shader = nullptr;
+                    break;
+                }
+            }
 
-			// Makes the shader current.
-			void MakeActive() const
-			{
-				shader->MakeActive();
-			}
+            // Makes the shader current.
+            void MakeActive() const
+            {
+                shader->MakeActive();
+            }
 
-			void MakeInactive() const
-			{
-				shader->MakeInactive();
-			}
+            void MakeInactive() const
+            {
+                shader->MakeInactive();
+            }
 
-			std::shared_ptr<IShader> GetIShader() const
-			{
-				return shader;
-			}
-		};
-	}
+            std::shared_ptr<IShader> GetIShader() const
+            {
+                return shader;
+            }
+        };
+    }
 }

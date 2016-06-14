@@ -27,61 +27,61 @@ SOFTWARE.
 #ifdef JADE_PLATFORM_WINDOWS
 bool Jade::Graphics::DXRasterizer::SetRasterizerState(CullMode cullMode, FillMode fillMode, WindMode windMode)
 {
-	// MakeActive variables.
-	this->cullMode = cullMode;
-	this->fillMode = fillMode;
-	this->windMode = windMode;
+    // MakeActive variables.
+    this->cullMode = cullMode;
+    this->fillMode = fillMode;
+    this->windMode = windMode;
 
-	// Reset the rasterizer if it is currently in use before creating a new one.
-	if (m_pRasterizerState)
-		m_pRasterizerState.Reset();
+    // Reset the rasterizer if it is currently in use before creating a new one.
+    if (m_pRasterizerState)
+        m_pRasterizerState.Reset();
 
-	D3D11_RASTERIZER_DESC rasterDesc;
-	ZeroMemory(&rasterDesc, sizeof(rasterDesc));
-	
-	// MakeActive culling mode.
-	switch(cullMode)
-	{
-	case CullMode::Front: rasterDesc.CullMode = D3D11_CULL_FRONT; break; 
-	case CullMode::Back: rasterDesc.CullMode = D3D11_CULL_BACK; break;
-	default: rasterDesc.CullMode = D3D11_CULL_NONE; break;
-	}
+    D3D11_RASTERIZER_DESC rasterDesc;
+    ZeroMemory(&rasterDesc, sizeof(rasterDesc));
+    
+    // MakeActive culling mode.
+    switch(cullMode)
+    {
+    case CullMode::Front: rasterDesc.CullMode = D3D11_CULL_FRONT; break; 
+    case CullMode::Back: rasterDesc.CullMode = D3D11_CULL_BACK; break;
+    default: rasterDesc.CullMode = D3D11_CULL_NONE; break;
+    }
 
-	// MakeActive everything else.
-	rasterDesc.AntialiasedLineEnable = false;
-	rasterDesc.DepthBias = 0;
-	rasterDesc.DepthBiasClamp = 0.0f;
-	rasterDesc.DepthClipEnable = true;
-	rasterDesc.FillMode = (fillMode == FillMode::Solid) ? D3D11_FILL_SOLID : D3D11_FILL_WIREFRAME;	// Render as solid or wireframe.
-	rasterDesc.FrontCounterClockwise = (windMode == WindMode::CounterClockwise) ? true : false; // ClockWise or CounterClockWise is front
-	rasterDesc.MultisampleEnable = false;
-	rasterDesc.ScissorEnable = false;
-	rasterDesc.SlopeScaledDepthBias = 0.0f;
+    // MakeActive everything else.
+    rasterDesc.AntialiasedLineEnable = false;
+    rasterDesc.DepthBias = 0;
+    rasterDesc.DepthBiasClamp = 0.0f;
+    rasterDesc.DepthClipEnable = true;
+    rasterDesc.FillMode = (fillMode == FillMode::Solid) ? D3D11_FILL_SOLID : D3D11_FILL_WIREFRAME;	// Render as solid or wireframe.
+    rasterDesc.FrontCounterClockwise = (windMode == WindMode::CounterClockwise) ? true : false; // ClockWise or CounterClockWise is front
+    rasterDesc.MultisampleEnable = false;
+    rasterDesc.ScissorEnable = false;
+    rasterDesc.SlopeScaledDepthBias = 0.0f;
 
-	// Create the state.
-	HRESULT hr = device->GetID3D11Device()->CreateRasterizerState(&rasterDesc, m_pRasterizerState.GetAddressOf());
+    // Create the state.
+    HRESULT hr = device->GetID3D11Device()->CreateRasterizerState(&rasterDesc, m_pRasterizerState.GetAddressOf());
 
-	if (FAILED(hr))
-		return false;
+    if (FAILED(hr))
+        return false;
 
-	// If state creation succeeds we can set the state.
-	device->GetID3D11DeviceContext()->RSSetState(m_pRasterizerState.Get());
+    // If state creation succeeds we can set the state.
+    device->GetID3D11DeviceContext()->RSSetState(m_pRasterizerState.Get());
 
-	return true;
+    return true;
 }
 
 Jade::Graphics::CullMode Jade::Graphics::DXRasterizer::GetCullMode()
 {
-	return cullMode;
+    return cullMode;
 }
 
 Jade::Graphics::FillMode Jade::Graphics::DXRasterizer::GetFillMode()
 {
-	return fillMode;
+    return fillMode;
 }
 
 Jade::Graphics::WindMode Jade::Graphics::DXRasterizer::GetWindMode()
 {
-	return windMode;
+    return windMode;
 }
 #endif

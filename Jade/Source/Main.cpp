@@ -34,6 +34,7 @@ int main(int argc, char *argv[])
 	// Creates a basic window that can be rendered with either graphics API.
 	Window window(1080, 720, 100, 100, "Jade Game Engine Framework", false);
 
+    /*
 	// Creates a graphics device.
 	Device device(window, GraphicsAPI::DirectX);
 	device.SetDrawType(DrawType::Indexed);
@@ -50,13 +51,8 @@ int main(int argc, char *argv[])
 	{{ ".\\resources\\shaders\\ModelPixel.hlsl", ShaderType::Pixel },
 	{ ".\\resources\\shaders\\ModelVertex.hlsl", ShaderType::Vertex }};
 
-	std::map<std::string, ShaderType> fontShaders =
-	{{ ".\\resources\\shaders\\FontPixel.hlsl", ShaderType::Pixel },
-	{ ".\\resources\\shaders\\FontVertex.hlsl", ShaderType::Vertex }};
-
 	// Create our shaders.
 	Shader modelShader(device, modelShaders);
-	Shader fontShader(device, fontShaders);
 
 	// Camera with initial position and target.
 	Camera camera(device, Vector3(0.0f, 1.0f, -1.0f), Vector3(0.0f, 1.0f, 0.0f));
@@ -64,20 +60,23 @@ int main(int argc, char *argv[])
 	// Dynamic model and font loading.
 	// This allows us to load a new instance with the same object.
 	Model model(device, modelShader);
-	model.Load(".\\resources\\models\\Lilith.obj");
+	model.Load(".\\resources\\models\\monocube.dae");
 	model.SetScale(Vector3(0.25f, 0.25f, 0.25f));
 
     // Create and load a sprite.
 	Sprite sprite(device, modelShader);
 	sprite.Load("empty.png");
+    sprite.SetRotation(Vector2(0.0f, Math::PiOverTwo));
 
 	Script script;
 	script.Execute(".\\resources\\scripts\\test.lua");
 
     std::cout << Utility::GetExecutablePath() << std::endl;
+    */
 
 	while (window.IsOpen())
 	{
+        /*
 		// Rendering
 		device.Clear(Color::CornflowerBlue);
         
@@ -128,16 +127,16 @@ int main(int argc, char *argv[])
 			rasterizer.SetRasterizerState(CullMode::Back, FillMode::Wireframe, WindMode::Clockwise);
 		else
 			rasterizer.SetRasterizerState(CullMode::Back, FillMode::Solid, WindMode::Clockwise);
-
+        */
 		// Submit close request if we detect user is exiting application.
 		if (window.GetInput().keyboard.IsKeyDown(Key::Escape))
 			window.Close();
 
         // This will update the viewport and camera projection in the event of a window resize.
-        camera.Update();
+        //camera.Update();
 		// Swap buffers and perform system event loop.
-		device.Present();
-
+		//device.Present();
+        
 		window.PollEvents();
 	}
 

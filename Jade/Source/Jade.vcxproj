@@ -294,9 +294,11 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClCompile Include="Math\Vector4.cpp" />
     <ClCompile Include="System\File.cpp" />
     <ClCompile Include="System\Log.cpp" />
+    <ClCompile Include="System\Window\Win32Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Audio\AudioDevice.h" />
+    <ClInclude Include="Core\Defines.h" />
     <ClInclude Include="Core\Exception\BufferCreationException.h" />
     <ClInclude Include="Core\Exception\DeviceCreationException.h" />
     <ClInclude Include="Core\Exception\ArgumentNullException.h" />
@@ -379,8 +381,10 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClInclude Include="System\Configuration.h" />
     <ClInclude Include="Input\Key.h" />
     <ClInclude Include="System\Thread.h" />
+    <ClInclude Include="System\Window\Event.h" />
     <ClInclude Include="System\Window\IWindow.h" />
     <ClInclude Include="System\Window\NativeWindow.h" />
+    <ClInclude Include="System\Window\Win32Window.h" />
     <ClInclude Include="System\Window\Window.h" />
     <ClInclude Include="Math\Color.h" />
     <ClInclude Include="Graphics\Device\IDevice.h" />
@@ -398,6 +402,7 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClInclude Include="System\Log.h" />
     <ClInclude Include="System\Platform.h" />
     <ClInclude Include="Core\Utility.h" />
+    <ClInclude Include="System\Window\X11Window.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="FontPixel.hlsl">

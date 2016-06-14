@@ -61,6 +61,7 @@
     <ClCompile Include="Core\Script\Script.cpp" />
     <ClCompile Include="Graphics\Sprite\Sprite.cpp" />
     <ClCompile Include="Input\Mouse.cpp" />
+    <ClCompile Include="System\Window\Win32Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\Vector4.h">
@@ -179,6 +180,10 @@
     <ClInclude Include="Graphics\Buffer\GLConstantBuffer.h" />
     <ClInclude Include="Graphics\Mesh\Mesh.h" />
     <ClInclude Include="Graphics\Shader\Transcompiler\Transcompiler.h" />
+    <ClInclude Include="System\Window\Win32Window.h" />
+    <ClInclude Include="System\Window\Event.h" />
+    <ClInclude Include="System\Window\X11Window.h" />
+    <ClInclude Include="Core\Defines.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">

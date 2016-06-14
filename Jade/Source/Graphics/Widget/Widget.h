@@ -11,7 +11,7 @@ namespace Jade
 		{
 		public:
 
-			virtual Math::Point GetPosition() = 0;
+			virtual Math::Point<float> GetPosition() = 0;
 			virtual void SetPosition(int x, int y) = 0;
 			virtual void Show() = 0;
 			virtual void Hide() = 0;

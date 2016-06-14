@@ -6,6 +6,8 @@
 // Macro defines based off the following documentation:
 // https://msdn.microsoft.com/en-us/library/windows/apps/mt187142.aspx
 
+std::map<std::string, std::string> keywordMapping;
+
 // Vector Types.
 #define int2 "int2"
 #define int3 "int3"
@@ -41,14 +43,14 @@
 
 namespace Jade
 {
-	namespace Graphics
-	{
-		class Transcompiler
-		{
-			std::string HLSL2GLSL(std::string filename)
-			{
+    namespace Graphics
+    {
+        class Transcompiler
+        {
+            std::string HLSL2GLSL(std::string filename)
+            {
 
-			}
-		};
-	}
+            }
+        };
+    }
 }

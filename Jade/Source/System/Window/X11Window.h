@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 /*
 The MIT License (MIT)
@@ -24,60 +24,34 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "SDL2/SDL.h"
-#include "SDL2/SDL_syswm.h"
-
-#include "freeimage.h"
-
-#include "Core/Utility.h"
-#include "Input/Input.h"
+#include "System/Window/Event.h"
 #include "System/Window/IWindow.h"
-#include "System/Timer.h"
 
 namespace Jade
 {
     namespace System
     {
-        class NativeWindow : public IWindow
+#ifdef JADE_PLATFORM_UNIX
+        class X11Window : public IWindow
         {
-            SDL_Window* m_pWindow; // SDLs window object.
-            SDL_SysWMinfo m_WindowInfo; // Contains information of our window.
+            Display* display;
+            Window window;
 
-            // Window parameters.
-            int width;
-            int height;
+            std::queue<Event> events;
+
+            unsigned int width;
+            unsigned int height;
             int x;
             int y;
             std::string title;
             bool fullscreen;
 
-            // Window checks.
-            bool open = false;
-            bool disposed = false;
-            bool hidden = false;
-            bool maximized = false;
-            bool minimized = false;
-            bool viewportNeedsResize = false;
-            bool active = false;
-            bool keyboardFocus = false;
-            bool mouseFocus = false;
+            bool open;
 
-            // Input
+            Timer timer;
             Input::Input input;
 
-            // Keeps track of our time per frames.
-            Timer timer;
-            int startTime = 0;
-
-            bool Create() override;
-            bool PollWindowEvents() override;
-
-            // Helper class for reducing code clutter.
-            Input::Key ConvertKeycode(SDL_Keycode keycode);
-
         public:
-
-            // IWindow overrides.
 
             int GetWidth() override;
             void SetWidth(int value) override;
@@ -95,8 +69,12 @@ namespace Jade
             Math::Point<int> GetPosition() override;
             void SetPosition(int x, int y) override;
             void SetIcon(std::string filename) override;
+            bool PollWindowEvents() override;
             void Close() override;
+            PlatformDisplay GetPlatformDisplay();
+            PlatformWindow GetPlatformWindow();
             void* Handle() override;
+            bool Create() override;
             void Show() override;
             void Hide() override;
             void Restore() override;
@@ -108,10 +86,11 @@ namespace Jade
             bool IsOpen() override;
             bool IsFullscreen() override;
             bool IsActive() override;
-            System::Timer GetTimer() override;
+            Timer GetTimer() override;
             Input::Input GetInput() override;
 
-            NativeWindow(int width, int height, int x, int y, std::string title, bool fullscreen)
+            X11Window(unsigned int width, unsigned int height, int x, int y,
+                std::string title, bool fullscreen)
             {
                 this->width = width;
                 this->height = height;
@@ -119,17 +98,10 @@ namespace Jade
                 this->y = y;
                 this->title = title;
                 this->fullscreen = fullscreen;
-
-                if (!NativeWindow::Create())
-                    NativeWindow::Close();
-            }
-
-            ~NativeWindow()
-            {
-                NativeWindow::Close();
-
-                std::cout << "Window closing..." << std::endl;
             }
         };
+
+        typedef X11Window NativeWindow;
+#endif
     }
 }

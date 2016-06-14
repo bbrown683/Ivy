@@ -32,88 +32,87 @@ SOFTWARE.
 
 namespace Jade
 {
-	namespace Graphics
-	{
-		class Texture
-		{
-			Device device;
-			std::string filename;
-			TextureType type;
+    namespace Graphics
+    {
+        class Texture
+        {
+            Device device;
+            std::string filename;
+            TextureType type;
 
-			unsigned char* bitmap; 
-			int width;
-			int height; 
-			unsigned int bits;
+            unsigned char* bitmap; 
+            int width;
+            int height; 
+            unsigned int bits;
 
-			std::shared_ptr<ITexture> texture;
+            std::shared_ptr<ITexture> texture;
 
-		public:
+        public:
 
-			Texture() : texture(nullptr) { }
+            Texture() : texture(nullptr) { }
 
-			Texture(Device device, std::string filename, TextureType type)
-			{
-				this->device = device;
-				this->filename = filename;
-				this->type = type;
+            Texture(Device device, std::string filename, TextureType type)
+            {
+                this->device = device;
+                this->filename = filename;
+                this->type = type;
 
-				texture = TextureFactory::Generate<ITexture>(device, filename, type);
-			
-			}
+                texture = TextureFactory::Generate<ITexture>(device, filename, type);
+            }
 
-			Texture(Device device, unsigned char* bitmap, int width, int height, int pitch, unsigned int bits, TextureType type)
-			{
-				this->device = device;
-				this->bitmap = bitmap;
-				this->width = width;
-				this->height = height;
-				this->bits = bits;
-				this->type = type;
-				
-				texture = TextureFactory::Generate<ITexture>(device, bitmap, width, height, pitch, bits, type);
-			}
+            Texture(Device device, unsigned char* bitmap, int width, int height, int pitch, unsigned int bits, TextureType type)
+            {
+                this->device = device;
+                this->bitmap = bitmap;
+                this->width = width;
+                this->height = height;
+                this->bits = bits;
+                this->type = type;
+                
+                texture = TextureFactory::Generate<ITexture>(device, bitmap, width, height, pitch, bits, type);
+            }
 
-			//! Creates an empty texture which must be dynamically filled in using the Fill method.
-			bool CreateEmptyTexture() const
-			{
-				return texture->CreateEmptyTexture();
-			}
+            //! Creates an empty texture which must be dynamically filled in using the Fill method.
+            bool CreateEmptyTexture() const
+            {
+                return texture->CreateEmptyTexture();
+            }
 
-			//! Creates a texture from the file specified in the constructor and returns a bool determining if it was successful.
-			bool CreateTextureFromFile() const
-			{
-				return texture->CreateTextureFromFile();
-			}
+            //! Creates a texture from the file specified in the constructor and returns a bool determining if it was successful.
+            bool CreateTextureFromFile() const
+            {
+                return texture->CreateTextureFromFile();
+            }
 
-			//! Creates a texture from the bits specified in the constructor and returns a bool determining if it was successful.
-			bool CreateTextureFromMemory() const
-			{
-				return texture->CreateTextureFromMemory();
-			}
+            //! Creates a texture from the bits specified in the constructor and returns a bool determining if it was successful.
+            bool CreateTextureFromMemory() const
+            {
+                return texture->CreateTextureFromMemory();
+            }
 
-			//! Updates a dynamic texture by filling in the bitmap at the specified position.
-			void Fill(unsigned char* bitmap, unsigned pitch, Math::Rectangle rect) const
-			{
-				texture->Fill(bitmap, pitch, rect);
-			}
+            //! Updates a dynamic texture by filling in the bitmap at the specified position.
+            void Fill(unsigned char* bitmap, unsigned pitch, Math::Rectangle rect) const
+            {
+                texture->Fill(bitmap, pitch, rect);
+            }
 
-			//! Returns the filename of a texture if it exists. 
-			std::string GetFilename() const
-			{
-				return filename;
-			}
+            //! Returns the filename of a texture if it exists. 
+            std::string GetFilename() const
+            {
+                return filename;
+            }
 
-			//! Returns the interface object that is a lower level abstraction.
-			std::shared_ptr<ITexture> GetITexture() const
-			{
-				return texture;
-			}
+            //! Returns the interface object that is a lower level abstraction.
+            std::shared_ptr<ITexture> GetITexture() const
+            {
+                return texture;
+            }
 
-			//! Updates the texture resources to ensure that they remain the target of the drawing operations.
-			void MakeActive() const
-			{
-				texture->MakeActive();
-			}
-		};
-	}
+            //! Updates the texture resources to ensure that they remain the target of the drawing operations.
+            void MakeActive() const
+            {
+                texture->MakeActive();
+            }
+        };
+    }
 }

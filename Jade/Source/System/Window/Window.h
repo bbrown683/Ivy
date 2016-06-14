@@ -24,15 +24,20 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "System/Window/NativeWindow.h"
+//#include "System/Window/NativeWindow.h"
+#ifdef JADE_PLATFORM_WINDOWS
+#include "System/Window/Win32Window.h"
+#else 
+#include "System/Window/X11Window.h"
+#endif
 
 namespace Jade
 {
     namespace System
     {
-        // Multi-platform window implementation.
+        //! \brief Multi-platform window implementation.
         class Window
-        {
+        {            
             int width;
             int height;
             int x;
@@ -40,7 +45,7 @@ namespace Jade
             std::string title;
             bool fullscreen;
 
-            // All of our windows use this interface for their general implementations 
+            //! \brief All of our windows use this interface for their general implementations 
             // to create interoperability for multiple operating systems.
             std::shared_ptr<IWindow> window;
 
@@ -82,11 +87,13 @@ namespace Jade
                 return window->GetAspectRatio();
             }
 
+            //! \brief Determines if the rendering viewport needs to be resized.
             bool GetRenderViewportNeedsResize() const
             {
                 return window->GetRenderViewportNeedsResize();
             }
 
+            //! \brief Sets the value if the viewport needs to be resized;
             void SetRenderViewportNeedsResize(bool value) const
             {
                 window->SetRenderViewportNeedsResize(value);

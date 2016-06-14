@@ -35,7 +35,7 @@ namespace Jade
     {
         // Contains some methods that we can implement across multiple platforms to perform a task on a window.
         struct IWindow
-        {
+        {   
             virtual int GetWidth() = 0;
             virtual void SetWidth(int value) = 0;
             virtual int GetHeight() = 0;
@@ -49,7 +49,7 @@ namespace Jade
             virtual void SetY(int value) = 0;
             virtual std::string GetTitle() = 0;
             virtual void SetTitle(std::string value) = 0;
-            virtual Math::Point GetPosition() = 0;
+            virtual Math::Point<int> GetPosition() = 0;
             virtual void SetPosition(int x, int y) = 0;
             virtual void SetIcon(std::string filename) = 0;
             virtual bool PollWindowEvents() = 0;

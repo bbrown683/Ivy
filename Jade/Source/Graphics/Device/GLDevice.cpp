@@ -121,6 +121,9 @@ bool Jade::Graphics::GLDevice::Create()
     wglMakeCurrent(dc, context);
 
     // Initialize OpenGL pointers for new context.
+    // While the methods would still "seemingly"
+    // function correctly, this could lead to 
+    // unusual and unintended behavior.
     if (!gladLoadGL())
         return false;
 

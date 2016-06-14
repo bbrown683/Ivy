@@ -24,38 +24,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-namespace Jade
-{
-	namespace System
-	{
-		// Class for platform detection. 
-		class Platform
-		{
-		public:
+#include "System/Platform.h"
 
-			enum class PlatformID
-			{
-				Unknown, // Unsupported platform.
-				Windows, // All general Windows distributions.
-				Unix, // All general Linux (not Unix) distributions.
-			};
-
-			static PlatformID GetPlatformID()
-			{
-				// _WIN32 is defined for both 32bit and 64bit compilations on Windows machines.
-				#if defined(_WIN32) || defined(WIN32)
-					#define JADE_PLATFORM_WINDOWS
-					return PlatformID::Windows;
-				#elif defined(__unix__) 
-					#define JADE_PLATFORM_UNIX
-					return PlatformID::Unix;
-				// Unknown Operating System not supported by Jade.
-				#else
-					return PlatformID::Unknown;
-				#endif // _WIN32
-			}
-		}; 
-	}
-}
-
-
+#ifndef JADE_CONSOLE
+#ifdef JADE_PLATFORM_WINDOWS
+#define main jade_main
+extern int jade_main(int argc, int argv);
+#endif
+#endif

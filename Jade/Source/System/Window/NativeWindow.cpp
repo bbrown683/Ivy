@@ -63,7 +63,7 @@ bool Jade::System::NativeWindow::PollWindowEvents()
             break;
         // Cursor movement.
         case SDL_MOUSEMOTION:
-            input.mouse.SetCursorPosition(Math::Point(static_cast<float>(e.motion.x), static_cast<float>(e.motion.y)));
+            input.mouse.SetCursorPosition(Math::Point<int>(e.motion.x, e.motion.y));
             break;
         // Close application.
         case SDL_QUIT:
@@ -463,9 +463,9 @@ void Jade::System::NativeWindow::SetTitle(std::string value)
     this->title = value;
 }
 
-Jade::Math::Point Jade::System::NativeWindow::GetPosition()
+Jade::Math::Point<int> Jade::System::NativeWindow::GetPosition()
 {
-    return Math::Point(static_cast<float>(x), static_cast<float>(y));
+    return Math::Point<int>(x, y);
 }
 
 void Jade::System::NativeWindow::SetPosition(int x, int y)

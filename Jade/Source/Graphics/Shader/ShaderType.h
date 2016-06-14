@@ -27,15 +27,15 @@ SOFTWARE.
 // Enum for classifying the type of shader to create.
 namespace Jade
 {
-	namespace Graphics
-	{
-		enum class ShaderType
-		{
-			// Pixel Shader (DirectX), also known as a
-			// Fragment Shader (OpenGL).
-			Pixel,
-			// Vertex Shader.
-			Vertex,
-		};
-	}
+    namespace Graphics
+    {
+        enum class ShaderType
+        {
+            // Pixel Shader (DirectX), also known as a
+            // Fragment Shader (OpenGL).
+            Pixel,
+            // Vertex Shader.
+            Vertex,
+        };
+    }
 }

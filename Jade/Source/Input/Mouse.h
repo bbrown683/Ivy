@@ -34,12 +34,12 @@ namespace Jade
 		class Mouse
 		{
 			InputState mouseState;
-            Math::Point position;
+            Math::Point<int> position;
 
         public:
 
-            void SetCursorPosition(Math::Point position);
-            Math::Point GetCursorPosition();
+            void SetCursorPosition(Math::Point<int> position);
+            Math::Point<int> GetCursorPosition();
 		};
 	}
 }

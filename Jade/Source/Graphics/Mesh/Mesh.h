@@ -36,76 +36,76 @@ SOFTWARE.
 
 namespace Jade
 {
-	namespace Graphics
-	{
-		class Mesh
-		{
-			Device device;
-			Shader shader;
+    namespace Graphics
+    {
+        class Mesh
+        {
+            Device device;
+            Shader shader;
             Blender blender;
-			PrimitiveType primitiveType;
+            PrimitiveType primitiveType;
 
-			std::vector<Math::Vertex> vertices;
-			std::vector<unsigned short> indices;
-			std::vector<Texture> textures;
+            std::vector<Math::Vertex> vertices;
+            std::vector<unsigned short> indices;
+            std::vector<Texture> textures;
 
-			VertexBuffer vBuffer;
-			IndexBuffer iBuffer;
-			ConstantBuffer cBuffer;
+            VertexBuffer vBuffer;
+            IndexBuffer iBuffer;
+            ConstantBuffer cBuffer;
 
-			Math::Matrix rotation;
-			Math::Matrix scale;
-			Math::Matrix translation;
+            Math::Matrix rotation;
+            Math::Matrix scale;
+            Math::Matrix translation;
 
-		public:
+        public:
 
-			Mesh(Device device, Shader shader, std::vector<Math::Vertex> vertices, 
-				std::vector<unsigned short> indices, std::vector<Texture> textures,
-				PrimitiveType primitiveType)
-			{
-				this->device = device;
-				this->shader = shader;
-				this->vertices = vertices;
-				this->indices = indices;
-				this->textures = textures;
-				this->primitiveType = primitiveType;
+            Mesh(Device device, Shader shader, std::vector<Math::Vertex> vertices, 
+                std::vector<unsigned short> indices, std::vector<Texture> textures,
+                PrimitiveType primitiveType)
+            {
+                this->device = device;
+                this->shader = shader;
+                this->vertices = vertices;
+                this->indices = indices;
+                this->textures = textures;
+                this->primitiveType = primitiveType;
 
-				vBuffer = VertexBuffer(device, primitiveType);
-				iBuffer = IndexBuffer(device);
-				cBuffer = ConstantBuffer(device);
+                vBuffer = VertexBuffer(device, primitiveType);
+                iBuffer = IndexBuffer(device);
+                cBuffer = ConstantBuffer(device);
 
-				// These wont change.
-				vBuffer.SetVertices(vertices);
-				iBuffer.SetIndices(indices);
+                // These wont change.
+                vBuffer.SetVertices(vertices);
+                iBuffer.SetIndices(indices);
 
-				// Create the buffers.
-				// NOTE: vBuffer and iBuffer require data to be passed into their 
-				// respective set method before creation.
-				vBuffer.Create();
-				iBuffer.Create();
+                // Create the buffers.
+                // NOTE: vBuffer and iBuffer require data to be passed into their 
+                // respective set method before creation.
+                vBuffer.Create();
+                iBuffer.Create();
 
-				// Meshes should only have a world matrix.
-				cBuffer.CreateWorldMatrix();
+                // Meshes should only have a world matrix.
+                cBuffer.CreateWorldMatrix();
 
-				// Create the textures.
-				for (unsigned int i = 0; i < textures.size(); i++)
-				{
-					if (textures[i].CreateTextureFromFile())
-						std::cout << "Texture " << textures[i].GetFilename() << " was bound successfully..." << std::endl;
-					else
-						std::cout << "Texture " << textures[i].GetFilename() << " failed to bind to mesh..." << std::endl;
-				}
-			}
+                // Create the textures.
+                for (unsigned int i = 0; i < textures.size(); i++)
+                {
+                    if (textures[i].CreateTextureFromFile())
+                        std::cout << "Texture " << textures[i].GetFilename() << " was bound successfully..." << std::endl;
+                    else
+                        std::cout << "Texture " << textures[i].GetFilename() << " failed to bind to mesh..." << std::endl;
+                }
+            }
 
-			void Draw();
-			
-			std::vector<Math::Vertex> GetVertices()	const;
-			std::vector<unsigned short> GetIndices() const;
-			std::vector<Texture> GetTextures() const;
+            void Draw();
+            
+            std::vector<Math::Vertex> GetVertices()	const;
+            std::vector<unsigned short> GetIndices() const;
+            std::vector<Texture> GetTextures() const;
 
-			void SetPosition(Math::Vector3 position);
-			void SetScale(Math::Vector3 scale);
-			void SetRotation(Math::Vector3 rotation);
-		};
-	}
+            void SetPosition(Math::Vector3 position);
+            void SetScale(Math::Vector3 scale);
+            void SetRotation(Math::Vector3 rotation);
+        };
+    }
 }

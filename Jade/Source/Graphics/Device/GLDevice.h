@@ -28,9 +28,9 @@ SOFTWARE.
 
 #include "Core/Exception/Exception.h"
 #include "Core/Utility.h"
-#include "Math/Color.h"
 #include "Graphics/Device/IDevice.h"
 #include "Graphics/Device/Specification.h"
+#include "Math/Color.h"
 #include "System/Window/Window.h"
 
 namespace Jade

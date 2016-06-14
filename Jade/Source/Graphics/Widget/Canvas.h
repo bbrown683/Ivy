@@ -12,7 +12,7 @@ namespace Jade
 		{
 		public:
 
-			Math::Point GetPosition() override;
+			Math::Point<float> GetPosition() override;
 			void SetPosition(int x, int y) override;
 			void Show() override;
 			void Hide() override;

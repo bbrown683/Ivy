@@ -30,29 +30,29 @@ SOFTWARE.
 #ifdef JADE_PLATFORM_WINDOWS
 namespace Jade
 {
-	namespace Graphics
-	{
-		class DXRasterizer : public IRasterizer
-		{
-			std::shared_ptr<DXDevice> device;
-			ComPtr<ID3D11RasterizerState> m_pRasterizerState;
+    namespace Graphics
+    {
+        class DXRasterizer : public IRasterizer
+        {
+            std::shared_ptr<DXDevice> device;
+            ComPtr<ID3D11RasterizerState> m_pRasterizerState;
 
-			CullMode cullMode;
-			FillMode fillMode;
-			WindMode windMode;
+            CullMode cullMode;
+            FillMode fillMode;
+            WindMode windMode;
 
-		public:
+        public:
 
-			DXRasterizer(std::shared_ptr<DXDevice> device)
-			{
-				this->device = device;
-			}
+            DXRasterizer(std::shared_ptr<DXDevice> device)
+            {
+                this->device = device;
+            }
 
-			bool SetRasterizerState(CullMode cullMode, FillMode fillMode, WindMode windMode) override;
-			CullMode GetCullMode() override;
-			FillMode GetFillMode() override;
-			WindMode GetWindMode() override;
-		};
-	}
+            bool SetRasterizerState(CullMode cullMode, FillMode fillMode, WindMode windMode) override;
+            CullMode GetCullMode() override;
+            FillMode GetFillMode() override;
+            WindMode GetWindMode() override;
+        };
+    }
 }
 #endif

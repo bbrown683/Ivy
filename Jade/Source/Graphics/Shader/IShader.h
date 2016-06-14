@@ -28,20 +28,20 @@ SOFTWARE.
 
 namespace Jade
 {
-	namespace Graphics
-	{
-		struct IShader
-		{
-		private:
+    namespace Graphics
+    {
+        struct IShader
+        {
+        private:
 
-			virtual bool Create(std::string filename, ShaderType type) = 0;
-			virtual bool Compile(std::string filename, ShaderType type) = 0;
-			virtual bool Release() = 0;
+            virtual bool Create(std::string filename, ShaderType type) = 0;
+            virtual bool Compile(std::string filename, ShaderType type) = 0;
+            virtual bool Release() = 0;
 
-		public:
+        public:
 
-			virtual void MakeActive() = 0;
-			virtual void MakeInactive() = 0;
-		};
-	}
+            virtual void MakeActive() = 0;
+            virtual void MakeInactive() = 0;
+        };
+    }
 }
