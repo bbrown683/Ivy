@@ -167,7 +167,7 @@ void Jade::System::Win32Window::Hide()
 
 void Jade::System::Win32Window::Restore()
 {
-
+    ShowWindow(hWnd, SW_RESTORE);
 }
 
 void Jade::System::Win32Window::Maximize()

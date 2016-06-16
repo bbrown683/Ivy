@@ -60,7 +60,7 @@ namespace Jade
                 this->window = window;
 
                 // Create our device.
-                if (!Create())
+                if (!GLDevice::Create())
                 {
                     throw Core::DeviceCreationException();
                 }

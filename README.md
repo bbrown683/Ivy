@@ -3,7 +3,7 @@ An Open Source C++ Game Development Framework inspired by [Monogame](http://www.
 
 # Supported Graphics API's
 * DirectX11
-* OpenGL 3.2+
+* OpenGL 3.2
 
 # Libraries Used
 * Assimp 3.0.0
@@ -12,7 +12,6 @@ An Open Source C++ Game Development Framework inspired by [Monogame](http://www.
 * [Glad](http://glad.dav1d.de/)
 * GLM (OpenGL Mathematics)
 * OpenAL 1.1
-* SDL 2.0.4
 * Windows 7 or 8.1 SDK (DirectX11 and OpenGL Headers for Windows Development)
 
 The following except the Windows 8 SDK is provided for out of the box compilation on x86 and x64 machines using Visual Studio 2015 Community Edition.

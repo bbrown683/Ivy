@@ -42,14 +42,14 @@
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -103,7 +103,7 @@
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <AdditionalOptions>/NODEFAULTLIB:libcmt.lib /NODEFAULTLIB:msvcrt.lib</AdditionalOptions>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>NotSet</SubSystem>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /f /s /y "$(ProjectDir)ModelVertex.hlsl" "$(OutputPath)resources\shaders\"
@@ -137,7 +137,7 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <AdditionalOptions>/NODEFAULTLIB:libcmt.lib /NODEFAULTLIB:msvcrt.lib</AdditionalOptions>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>NotSet</SubSystem>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /f /s /y "$(ProjectDir)ModelVertex.hlsl" "$(OutputPath)resources\shaders\"
@@ -169,9 +169,9 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>lua53.lib;opengl32.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;assimp.lib;gdi32.lib;user32.lib;openal32.lib;freeimage.lib;freetype.lib;libHLSLcc.lib</AdditionalDependencies>
+      <AdditionalDependencies>lua53.lib;opengl32.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;assimp.lib;gdi32.lib;user32.lib;shlwapi.lib;openal32.lib;freeimage.lib;freetype.lib;libHLSLcc.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeImage/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeType/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/OpenAL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/SDL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/Lua/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/hlslcc/lib/</AdditionalLibraryDirectories>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>NotSet</SubSystem>
       <EntryPointSymbol>
       </EntryPointSymbol>
       <AdditionalOptions>
@@ -188,7 +188,6 @@ xcopy /f /s /y "$(ProjectDir)FontPixel.hlsl" "$(OutputPath)resources\shaders\"
 xcopy /f /s /y "$(ProjectDir)MonoCube.dae" "$(OutputPath)resources\models\"
 xcopy /f /s /y "$(ProjectDir)MonoCubeTexture.png" "$(OutputPath)resources\models\"
 xcopy /f /s /y "$(SolutionDir)ThirdParty\FreeImage\bin\$(PlatformTarget)\FreeImage.dll" "$(OutputPath)"
-xcopy /f /s /y "$(SolutionDir)ThirdParty\SDL\bin\$(PlatformTarget)\SDL2.dll" "$(OutputPath)"
 xcopy /f /s /y "$(SolutionDir)ThirdParty\Lua\bin\$(PlatformTarget)\lua53.dll" "$(OutputPath)"
 if $(PlatformTarget) == x86 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp32.dll" "$(OutputPath)"
 if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp64.dll" "$(OutputPath)"</Command>
@@ -211,9 +210,9 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>lua53.lib;opengl32.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;assimp.lib;gdi32.lib;user32.lib;openal32.lib;freeimage.lib;freetype.lib;libHLSLcc.lib</AdditionalDependencies>
+      <AdditionalDependencies>lua53.lib;opengl32.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;assimp.lib;gdi32.lib;user32.lib;shlwapi.lib;openal32.lib;freeimage.lib;freetype.lib;libHLSLcc.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeImage/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeType/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/OpenAL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/SDL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/Lua/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/hlslcc/lib/</AdditionalLibraryDirectories>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>NotSet</SubSystem>
       <EntryPointSymbol>
       </EntryPointSymbol>
       <AdditionalOptions>
@@ -230,7 +229,6 @@ xcopy /f /s /y "$(ProjectDir)FontPixel.hlsl" "$(OutputPath)resources\shaders\"
 xcopy /f /s /y "$(ProjectDir)MonoCube.dae" "$(OutputPath)resources\models\"
 xcopy /f /s /y "$(ProjectDir)MonoCubeTexture.png" "$(OutputPath)resources\models\"
 xcopy /f /s /y "$(SolutionDir)ThirdParty\FreeImage\bin\$(PlatformTarget)\FreeImage.dll" "$(OutputPath)"
-xcopy /f /s /y "$(SolutionDir)ThirdParty\SDL\bin\$(PlatformTarget)\SDL2.dll" "$(OutputPath)"
 xcopy /f /s /y "$(SolutionDir)ThirdParty\Lua\bin\$(PlatformTarget)\lua53.dll" "$(OutputPath)"
 if $(PlatformTarget) == x86 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp32.dll" "$(OutputPath)"
 if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp64.dll" "$(OutputPath)"</Command>
@@ -398,6 +396,7 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClInclude Include="System\File.h" />
     <ClInclude Include="System\Log.h" />
     <ClInclude Include="Core\Utility.h" />
+    <ClInclude Include="System\Window\WinMain.h" />
     <ClInclude Include="System\Window\X11Window.h" />
   </ItemGroup>
   <ItemGroup>

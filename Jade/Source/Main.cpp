@@ -29,15 +29,16 @@ SOFTWARE.
 // Include the header.
 #include "Jade.h"
 
-int main(int argc, char *argv[])
+int main()
 {
     // Creates a basic window that can be rendered with either graphics API.
     Window window(1080, 720, 100, 100, L"Jade Game Engine Framework", false);
 
     // Creates a graphics device.
-    Device device(window, GraphicsAPI::DirectX);
+    Device device(window, GraphicsAPI::OpenGL);
     device.SetDrawType(DrawType::Indexed);
 
+    /*
     // Enable alpha blending.
     Blender blender(device);
     blender.SetBlendState(0xFFFFFFFF);
@@ -69,12 +70,14 @@ int main(int argc, char *argv[])
 
     //Script script;
     //script.Execute(".\\resources\\scripts\\test.lua");
+    */
 
     while (window.IsOpen())
     {
         // Rendering
         device.Clear(Color::CornflowerBlue);
         
+        /*
         // Rotate and draw the models.
         if (window.GetInput().keyboard.IsKeyDown(Key::Shift))
             model.SetRotation(Vector3(0.0f, 0.025f, 0.0f));
@@ -130,7 +133,7 @@ int main(int argc, char *argv[])
         // This will update the viewport and camera projection in the event of a window resize.
         // TODO: Push this under an resize event.
         // camera.Update();
-        
+        */
         // Swap buffers and perform system event loop.
         device.Present();
         window.PollEvents();

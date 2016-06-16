@@ -105,7 +105,8 @@ namespace Jade
 
             ~Win32Window()
             {
-                Win32Window::Close();
+                if(open)
+                    Win32Window::Close();
             }
 
             Input::Key ConvertVirtualKey(WPARAM key);

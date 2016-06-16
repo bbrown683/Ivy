@@ -82,8 +82,8 @@ SOFTWARE.
 // Math
 #ifdef JADE_INCLUDE_MATH
 #include "Math/Math.h"
-#include "Math/Rectangle.h"
 #include "Math/Matrix.h"
+#include "Math/Rectangle.h"
 #include "Math/Vector2.h"
 #include "Math/Vector3.h"
 #include "Math/Vector4.h"
@@ -96,6 +96,7 @@ SOFTWARE.
 #include "System/File.h"
 #include "System/Log.h"
 #include "System/Window/Window.h"
+#include "System/Window/WinMain.h"
 #endif // JADE_INCLUDE_SYSTEM
 
 // Retains the namespace style of declaration but

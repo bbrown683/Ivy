@@ -180,6 +180,7 @@
     <ClInclude Include="System\Window\X11Window.h" />
     <ClInclude Include="Core\Include.h" />
     <ClInclude Include="Graphics\Model\Importer\FBXImporter.h" />
+    <ClInclude Include="System\Window\WinMain.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">

@@ -24,25 +24,27 @@ SOFTWARE.
 
 #include "GLDevice.h"
 
-bool Jade::Graphics::GLDevice::Create()
-{
 #ifdef JADE_PLATFORM_WINDOWS
-    
+bool Jade::Graphics::GLDevice::Create()
+{   
     std::cout << "[Device Context]" << std::endl;
 
-    HWND dummyWND = CreateWindowW(L"NULL", L"NULL", WS_DISABLED, 0, 0, 0, 0, nullptr, nullptr, GetModuleHandle(nullptr), nullptr);
+    // Apparently the class has to be titled "STATIC" for this to be a valid window handle.
+    HWND dummyWND = CreateWindowA("STATIC", "", WS_DISABLED, 0, 0, 0, 0, nullptr, nullptr, GetModuleHandle(nullptr), nullptr);
     HDC dummyDC = GetDC(dummyWND);
 
     PIXELFORMATDESCRIPTOR dummyPixelFormatDescriptor =
     {
-        sizeof(dummyPixelFormatDescriptor), 1, PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER,
+        sizeof dummyPixelFormatDescriptor, 1, PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER,
         PFD_TYPE_RGBA, static_cast<BYTE>(specification.colorBits), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
         24, 8, 0, PFD_MAIN_PLANE,
         0, 0, 0, 0
     };
 
     int dummyPixelFormat = ChoosePixelFormat(dummyDC, &dummyPixelFormatDescriptor);
-    SetPixelFormat(dummyDC, dummyPixelFormat, &dummyPixelFormatDescriptor);
+    
+    if (!SetPixelFormat(dummyDC, dummyPixelFormat, &dummyPixelFormatDescriptor))
+        return false;
 
     // Create dummy context
     HGLRC dummyGLRC = wglCreateContext(dummyDC);
@@ -67,7 +69,7 @@ bool Jade::Graphics::GLDevice::Create()
     && defined(WGL_ARB_multisample) && defined(WGL_EXT_swap_control)
 
     // Initialize WGL extensions.
-    if (!gladLoadWGL(dummyDC))
+    if (!gladLoadWGL(dc))
         return false;
 
     // Choose final pixel format
@@ -85,8 +87,8 @@ bool Jade::Graphics::GLDevice::Create()
         0
     };
 
-    // Get the device context for the SDL window.
-    dc = GetDC(window.GetPlatformWindow());
+    // Get the device context for the window.
+    dc = window.GetPlatformDisplay();
 
     int pixelFormat;
     unsigned int formatCount;
@@ -99,8 +101,8 @@ bool Jade::Graphics::GLDevice::Create()
 
     int contextAttribs[] =
     {
-        WGL_CONTEXT_MAJOR_VERSION_ARB, major,
-        WGL_CONTEXT_MINOR_VERSION_ARB, minor,
+        WGL_CONTEXT_MAJOR_VERSION_ARB, 3,
+        WGL_CONTEXT_MINOR_VERSION_ARB, 2,
         0, 0
     };
     
@@ -108,17 +110,17 @@ bool Jade::Graphics::GLDevice::Create()
     context = wglCreateContextAttribsARB(dc, nullptr, contextAttribs);
 
     // Failed to be created.
-    if (context == nullptr)
+    if (!context)
         return false;
 
     // Unbind dummy context and delete.
     wglMakeCurrent(dc, nullptr);
     wglDeleteContext(dummyGLRC);
     ReleaseDC(dummyWND, dummyDC);
-    DestroyWindow(dummyWND);
 
     // Bind main context and destroy dummy window.
     wglMakeCurrent(dc, context);
+    DestroyWindow(dummyWND);
 
     // Initialize OpenGL pointers for new context.
     // While the methods would still "seemingly"
@@ -131,19 +133,14 @@ bool Jade::Graphics::GLDevice::Create()
     wglSwapIntervalEXT(specification.vsync);
 
 #else
+    // Unsupported extensions.
     return false;
 #endif // Extensions 
-#elif JADE_PLATFORM_LINUX
-    if (!gladLoadGL())
-        return false;
 
-
-#endif // JADE_PLATFORM
-
-    std::cout << "Renderer: OpenGL " << std::endl << glGetString(GL_VERSION) << std::endl;
-
+    std::cout << "Renderer: OpenGL " << glGetString(GL_VERSION) << std::endl;
     return true;
 }
+#endif
 
 bool Jade::Graphics::GLDevice::Release()
 {
@@ -152,7 +149,7 @@ bool Jade::Graphics::GLDevice::Release()
     wglMakeCurrent(dc, nullptr);
     wglDeleteContext(context);
     ReleaseDC(window.GetPlatformWindow(), dc);
-#elif JADE_PLATFORM_LINUX
+#elif JADE_PLATFORM_UNIX
 
 #endif
     return context == nullptr ? true : false;
@@ -178,7 +175,7 @@ void Jade::Graphics::GLDevice::Present()
 #endif
 }
 
-char * Jade::Graphics::GLDevice::DeviceInformation()
+char* Jade::Graphics::GLDevice::DeviceInformation()
 {
     return nullptr;
 }
