@@ -25,7 +25,7 @@ SOFTWARE.
 #include "Graphics/Shader/GLShader.h"
 #include "System/File.h"
 
-bool Jade::Graphics::GLShader::Create(std::string filename, ShaderType type)
+bool Jade::Graphics::GLShader::Create(istring filename, ShaderType type)
 {	
     GLuint shader;
     
@@ -43,6 +43,7 @@ bool Jade::Graphics::GLShader::Create(std::string filename, ShaderType type)
     }
 
     // Read the file into a string.
+    /*
     System::File file(filename);
     std::string data = file.Read();
 
@@ -63,10 +64,11 @@ bool Jade::Graphics::GLShader::Create(std::string filename, ShaderType type)
         return true;
     }
 
+    */
     return false;
 }
 
-bool Jade::Graphics::GLShader::Compile(std::string filename, ShaderType type)
+bool Jade::Graphics::GLShader::Compile(istring filename, ShaderType type)
 {
     return false;
 }

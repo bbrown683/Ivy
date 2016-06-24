@@ -2,9 +2,10 @@
 
 void Jade::Graphics::Mesh::Draw()
 {	
+    // Enable shaders.
 	shader.MakeActive();
 	
-	// MakeActive the world matrix for the object.
+	// Set the world matrix for the object.
 	cBuffer.SetWorldMatrix(translation * rotation * scale);
 
 	// Bind the vertex and index buffers.
@@ -14,7 +15,7 @@ void Jade::Graphics::Mesh::Draw()
 	// Assign the matrix data to the buffer.
 	cBuffer.UpdateMatrices();
 
-	// MakeActive the textures.
+	// Set the textures.
 	for (unsigned int i = 0; i < textures.size(); i++)
 			textures[i].MakeActive();
 
@@ -28,6 +29,7 @@ void Jade::Graphics::Mesh::Draw()
 	iBuffer.Unbind();
 	vBuffer.Unbind();
 
+    // Disable shaders.
 	shader.MakeInactive();
 }
 
@@ -58,7 +60,7 @@ void Jade::Graphics::Mesh::SetScale(Math::Vector3 scale)
 
 void Jade::Graphics::Mesh::SetRotation(Math::Vector3 rotation)
 {
-	this->rotation = this->rotation.RotateAlongX(rotation.GetX()) * 
+	this->rotation = (this->rotation.RotateAlongX(rotation.GetX()) * 
 		this->rotation.RotateAlongY(rotation.GetY()) * 
-		this->rotation.RotateAlongZ(rotation.GetZ()).Transpose();
+		this->rotation.RotateAlongZ(rotation.GetZ())).Transpose();
 }

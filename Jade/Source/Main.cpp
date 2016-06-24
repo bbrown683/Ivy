@@ -35,10 +35,9 @@ int main()
     Window window(1080, 720, 100, 100, L"Jade Game Engine Framework", false);
 
     // Creates a graphics device.
-    Device device(window, GraphicsAPI::OpenGL);
+    Device device(window, GraphicsAPI::DirectX);
     device.SetDrawType(DrawType::Indexed);
 
-    /*
     // Enable alpha blending.
     Blender blender(device);
     blender.SetBlendState(0xFFFFFFFF);
@@ -46,44 +45,37 @@ int main()
     // Used to enable culling or wireframe modes.
     Rasterizer rasterizer(device);
 
-    // Maps for holding our shaders. 
-    std::map<std::string, ShaderType> modelShaders =
-    {{ ".\\resources\\shaders\\ModelPixel.hlsl", ShaderType::Pixel },
-    { ".\\resources\\shaders\\ModelVertex.hlsl", ShaderType::Vertex }};
-
     // Create our shaders.
-    Shader modelShader(device, modelShaders);
+    Shader modelShader(device, L".\\resources\\shaders\\ModelPixel.hlsl", 
+        L".\\resources\\shaders\\ModelVertex.hlsl");
 
     // Camera with initial position and target.
-    Camera camera(device, Vector3(0.0f, 1.0f, -1.0f), Vector3(0.0f, 1.0f, 0.0f));
+    Camera camera(device, Vector3(0.0f, 1.0f, -10.0f), Vector3(0.0f, 1.0f, 0.0f));
 
     // Dynamic model and font loading.
     // This allows us to load a new instance with the same object.
     Model model(device, modelShader);
     model.Load(".\\resources\\models\\monocube.dae");
-    model.SetScale(Vector3(0.25f, 0.25f, 0.25f));
 
     // Create and load a sprite.
-    Sprite sprite(device, modelShader);
-    sprite.Load("empty.png");
-    sprite.SetPosition(Vector2(10.0f, 10.0f));
+    //Sprite sprite(device, modelShader);
+    //sprite.Load("empty.png");
+    //sprite.SetPosition(Vector2(10.0f, 10.0f));
 
     //Script script;
     //script.Execute(".\\resources\\scripts\\test.lua");
-    */
 
     while (window.IsOpen())
     {
         // Rendering
         device.Clear(Color::CornflowerBlue);
         
-        /*
         // Rotate and draw the models.
         if (window.GetInput().keyboard.IsKeyDown(Key::Shift))
             model.SetRotation(Vector3(0.0f, 0.025f, 0.0f));
 
         model.Draw();
-        sprite.Draw();
+        //sprite.Draw();
 
         // Camera movement.
         // Setting a camera with no orbiting requires us to update
@@ -126,17 +118,17 @@ int main()
         else
             rasterizer.SetRasterizerState(CullMode::Back, FillMode::Solid, WindMode::Clockwise);
 
-        // Submit close request if we detect user is exiting application.
-        if (window.GetInput().keyboard.IsKeyDown(Key::Escape))
-            window.Close();
-
         // This will update the viewport and camera projection in the event of a window resize.
         // TODO: Push this under an resize event.
         // camera.Update();
-        */
+
         // Swap buffers and perform system event loop.
         device.Present();
         window.PollEvents();
+
+        // Submit close request if we detect user is exiting application.
+        if (window.GetInput().keyboard.IsKeyDown(Key::Escape))
+            window.Close();
     }
 
     return 0;

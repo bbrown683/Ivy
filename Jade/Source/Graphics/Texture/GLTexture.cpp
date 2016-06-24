@@ -39,7 +39,7 @@ bool Jade::Graphics::GLTexture::CreateTextureFromMemory()
     return false;
 }
 
-void Jade::Graphics::GLTexture::Fill(unsigned char * bitmap, unsigned pitch, Math::Rectangle rect)
+void Jade::Graphics::GLTexture::Fill(unsigned char* bitmap, unsigned pitch, Math::Rectangle rect)
 {
 
 }

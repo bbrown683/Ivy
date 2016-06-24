@@ -33,7 +33,19 @@ namespace Jade
 		// Shader creation failed
 		class ShaderCreationException : public std::runtime_error
 		{
+            std::string message;
 
+        public:
+
+            ShaderCreationException(std::string message): runtime_error(message)
+            {
+                this->message = message;
+            }
+
+            const char* what() const throw() override
+            {
+                return message.c_str();
+            }
 		};
 	}
 }

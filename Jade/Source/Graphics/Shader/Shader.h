@@ -41,33 +41,28 @@ namespace Jade
         class Shader
         {
             Device device;
-            std::map<std::string, ShaderType> shaders;
-            std::string filename;
-            ShaderType type;
-
+            istring pixelShader;
+            istring vertexShader;
+            
             std::shared_ptr<IShader> shader;
 
         public:
 
             Shader() : shader(nullptr) { }
 
-            Shader(Device device, std::string pixelShader, std::string vertexShader)
+            Shader(Device device, istring pixelShader, istring vertexShader)
             {
                 this->device = device;
-            }
-
-            Shader(Device device, std::map<std::string, ShaderType> shaders)
-            {
-                this->device = device;
-                this->shaders = shaders;
+                this->pixelShader = pixelShader;
+                this->vertexShader = vertexShader;
 
                 switch (device.GetGraphicsAPI())
                 {
                 case GraphicsAPI::DirectX:
-                    shader = std::make_shared<DXShader>(std::dynamic_pointer_cast<DXDevice>(device.GetIDevice()), shaders);
+                    shader = std::make_shared<DXShader>(std::dynamic_pointer_cast<DXDevice>(device.GetIDevice()), pixelShader, vertexShader);
                     break;
                 case GraphicsAPI::OpenGL:
-                    shader = std::make_shared<GLShader>(shaders);
+                    shader = std::make_shared<GLShader>(pixelShader, vertexShader);
                     break;
                 case GraphicsAPI::Vulkan:
                     shader = nullptr;

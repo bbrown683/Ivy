@@ -39,7 +39,8 @@ namespace Jade
 		class DXShader : public IShader
 		{
 			std::shared_ptr<DXDevice> device;
-			std::map<std::string, ShaderType> shaders;
+            istring pixelShader;
+            istring vertexShader;
 
 			// Holds our shader compilation information.
 			ComPtr<ID3DBlob>				m_pPixelShaderBlob = nullptr;
@@ -54,17 +55,25 @@ namespace Jade
 
 		public:
 
-			DXShader(std::shared_ptr<DXDevice> device, std::map<std::string, ShaderType> shaders)
-			{
-				this->device = device;
-				this->shaders = shaders;
+            DXShader(std::shared_ptr<DXDevice> device, istring pixelShader, istring vertexShader)
+            {
+                this->device = device;
+                this->pixelShader = pixelShader;
+                this->vertexShader = vertexShader;
 
-				Initialize(shaders);
-			}
+                // Both most correctly compile.                
+                // Under normal circumstances this code would throw an exception on failure.
+                if(DXShader::Compile(pixelShader, ShaderType::Pixel) && DXShader::Compile(vertexShader, ShaderType::Vertex))
+                {
+                    // Both must be created or there will be nasty issues.
+                    if (DXShader::Create(pixelShader, ShaderType::Pixel) && DXShader::Create(vertexShader, ShaderType::Vertex))
+                        std::cout << "Shaders created" << std::endl; 
+                }
+            }
 
 			// Overrides.
-			bool Create(std::string filename, ShaderType type) override;
-			bool Compile(std::string filename, ShaderType type) override;
+			bool Create(istring filename, ShaderType type) override;
+			bool Compile(istring filename, ShaderType type) override;
 			void MakeActive() override;
 			void MakeInactive() override;
 			bool Release() override;
@@ -73,7 +82,6 @@ namespace Jade
 			bool CreateVertexInputLayout() const;
 			std::string GetCompilerTarget(D3D_FEATURE_LEVEL level, ShaderType type);
 			const ComPtr<ID3DBlob>& GetShaderBlob(ShaderType type);
-			void Initialize(std::map<std::string, ShaderType> shaders);
 
 			// Possibly used in the DXTexture class.
 			const ComPtr<ID3D11InputLayout>& GetID3D11InputLayout() const;

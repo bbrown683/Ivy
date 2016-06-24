@@ -35,29 +35,23 @@ namespace Jade
     {
         class GLShader : public IShader
         {
-            std::map<std::string, ShaderType> shaders;
+            istring pixelShader;
+            istring vertexShader;
+
             std::vector<GLuint> shaderIDs;
             GLuint programID;
 
         public:
 
-            GLShader(std::map<std::string, ShaderType> shaders)
+            GLShader(istring pixelShader, istring vertexShader)
             {
-                this->shaders = shaders;
-                
-                for(auto iterator = shaders.begin(); iterator != shaders.end(); ++iterator)
-                {
-                    std::string iString = iterator->first;
-                    ShaderType iType = iterator->second;
-
-                    if(GLShader::Compile(iString, iType))
-                        GLShader::Create(iString, iType);
-                }
+                this->pixelShader = pixelShader;
+                this->vertexShader = vertexShader;
             }
 
             // Overrides.
-            bool Create(std::string filename, ShaderType type) override;
-            bool Compile(std::string filename, ShaderType type) override;
+            bool Create(istring filename, ShaderType type) override;
+            bool Compile(istring filename, ShaderType type) override;
             void MakeActive() override;
             void MakeInactive() override;
             bool Release() override;
