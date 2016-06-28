@@ -16,6 +16,9 @@ An Open Source C++ Game Development Framework inspired by [Monogame](http://www.
 
 The following except the Windows 8 SDK is provided for out of the box compilation on x86 and x64 machines using Visual Studio 2015 Community Edition.
 
+# Possible Implementations
+* Shader interoperability with the Cg Shading Language. While its latest release was around 4 years ago, it still has support for both DirectX 11.0 and OpenGL 3. This would make it seamless to integrate into the engine allowing one to write only one set of shader code.
+
 # Features
 * Written for portability. 
 * Very simple API.
