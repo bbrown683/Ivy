@@ -55,6 +55,7 @@ namespace Jade
                 
                 cBuffer.SetViewMatrix(Math::Matrix::CreateLookAtLH(position, target, Math::Vector3::Up).Transpose());
                 // Note: On resizing it will still use the old aspect ratio. Need to create a workaround for this to update it.
+                // Update: Call camera.Update() on a resize event.
                 cBuffer.SetProjectionMatrix(Math::Matrix::CreatePerspectiveViewLH(
                     Math::Math::PiOverTwo, static_cast<float>(device.GetWindow().GetWidth()),
                     static_cast<float>(device.GetWindow().GetHeight()), 0.1f, 1000.0f).Transpose());

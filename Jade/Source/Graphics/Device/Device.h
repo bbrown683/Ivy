@@ -62,16 +62,12 @@ namespace Jade
                 specification.colorBits = 32;
                 specification.samples = 1;
                 specification.vsync = true;
-
-                device = Initialize();
             }
 
             Device(System::Window window, Specification specification)
             {
                 this->window = window;
                 this->specification = specification;
-
-                device = Initialize();
             }
 
             Device(System::Window window, GraphicsAPI api, Specification specification)
@@ -79,8 +75,6 @@ namespace Jade
                 this->window = window;
                 this->api = api;
                 this->specification = specification;
-
-                device = Initialize();
             }
 
             // Adjusts the window viewport.
@@ -93,6 +87,13 @@ namespace Jade
             void Clear(Math::Color color) const
             {
                 device->Clear(color);
+            }
+
+            // Creates the device and returns a boolean if it was successful.
+            bool Create()
+            {
+                device = Initialize();
+                return device != nullptr;
             }
 
             // Presents the back buffer to the front for display.

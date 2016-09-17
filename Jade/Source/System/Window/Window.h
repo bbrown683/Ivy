@@ -166,9 +166,14 @@ namespace Jade
                 this->y = y;
                 this->title = title;
                 this->fullscreen = fullscreen;
+            }
 
+            // Creates the window and returns a boolean if it was successful.
+            bool Create()
+            {
                 // Create our window.
                 window = std::make_shared<NativeWindow>(width, height, x, y, title, fullscreen);
+                return window != nullptr;
             }
 
             // Runs through the main window messaging loop handling events.

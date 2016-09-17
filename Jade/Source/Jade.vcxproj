@@ -252,6 +252,7 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClCompile Include="Graphics\Rasterizer\DXRasterizer.cpp" />
     <ClCompile Include="Graphics\Rasterizer\GLRasterizer.cpp" />
     <ClCompile Include="Graphics\Shader\GLShader.cpp" />
+    <ClCompile Include="Graphics\Shader\ShaderPrefab.cpp" />
     <ClCompile Include="Graphics\Sprite\Sprite.cpp" />
     <ClCompile Include="Graphics\Texture\DXTexture.cpp" />
     <ClCompile Include="Graphics\Texture\GLTexture.cpp" />
@@ -316,6 +317,7 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClInclude Include="Graphics\Model\Importer\ModelMesh.h" />
     <ClInclude Include="Graphics\Model\Importer\ModelProperties.h" />
     <ClInclude Include="Graphics\Model\Importer\OBJImporter.h" />
+    <ClInclude Include="Graphics\Shader\ShaderPrefab.h" />
     <ClInclude Include="Graphics\Shader\Transcompiler\Transcompiler.h" />
     <ClInclude Include="Graphics\Font\Glyph.h" />
     <ClInclude Include="Graphics\GL\GladLoader.h" />

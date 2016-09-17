@@ -102,16 +102,42 @@ bool Jade::Graphics::DXShader::Compile(istring filename, ShaderType type)
 
 	if (FAILED(hr))
 	{
+        // Notify of shader error if one exists.
 		if(l_pErrorBlob.Get() != nullptr)
 			std::cout << reinterpret_cast<const char*>(l_pErrorBlob->GetBufferPointer()) << std::endl;
-		return false;
-	}
+		
+        // Use error shader in the event of failure.
+        if (type == ShaderType::Pixel)
+        {
+            std::cout << "Trying prefab Pixel Shader..." << std::endl;
+            std::cout << Ivy::ShaderPrefab::HLSLErrorPixelShader << std::endl;
+            hr = D3DCompile(Ivy::ShaderPrefab::HLSLErrorPixelShader.c_str(), Ivy::ShaderPrefab::HLSLErrorPixelShader.size(),
+                nullptr, nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE, "main", GetCompilerTarget(featureLevel, type).c_str(), flags, 0,
+                const_cast<ID3DBlob**>(GetShaderBlob(type).GetAddressOf()), l_pErrorBlob.GetAddressOf());
+            if (FAILED(hr))
+                return false;
+        }
+        else
+        {
+            std::cout << "Trying prefab Vertex Shader..." << std::endl;
+            std::cout << Ivy::ShaderPrefab::HLSLErrorVertexShader << std::endl;
+            hr = D3DCompile(Ivy::ShaderPrefab::HLSLErrorVertexShader.c_str(), Ivy::ShaderPrefab::HLSLErrorVertexShader.size(),
+                nullptr, nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE, "main", GetCompilerTarget(featureLevel, type).c_str(), flags, 0,
+                const_cast<ID3DBlob**>(GetShaderBlob(type).GetAddressOf()), l_pErrorBlob.GetAddressOf());
+            if (FAILED(hr))
+                return false;
+        }
+        
+        std::cout << "Prefab shader was compiled successfully..." << std::endl;
+        return true;
+    }
 
 #ifdef JADE_UNICODE
-	std::wcout << "Shader " << filename << " was compiled successfully..." << std::endl;
+    std::wcout << "Shader " << filename << " was compiled successfully..." << std::endl;
 #else
     std::cout << "Shader " << filename << " was compiled successfully..." << std::endl;
 #endif
+
 
 	return true;
 }
@@ -125,13 +151,13 @@ bool Jade::Graphics::DXShader::Release()
 
 void Jade::Graphics::DXShader::MakeActive()
 {
-	// MakeActive the shaders for this mesh if they are not null.
+	// Set the shaders for this mesh if they are not null.
 	if (m_pPixelShader.Get() != nullptr)
 		device->GetID3D11DeviceContext()->PSSetShader(m_pPixelShader.Get(), nullptr, 0);
 	if (m_pVertexShader.Get() != nullptr)
 	{
 		device->GetID3D11DeviceContext()->VSSetShader(m_pVertexShader.Get(), nullptr, 0);
-		// MakeActive the input layout. This is required since multiple shaders may have a different layout.
+		// Set the input layout. This is required since multiple shaders may have a different layout.
 		device->GetID3D11DeviceContext()->IASetInputLayout(m_pInputLayout.Get());
 	}
 }
