@@ -68,7 +68,7 @@ namespace Jade
         public:
 
             // We have a window handle.
-            DXDevice(System::Window window, Specification specification) //std::shared_ptr<System::IWindow> window, Specification specification)
+            DXDevice(System::Window window, Specification specification)
             {
                 this->window = window;
                 this->specification = specification;

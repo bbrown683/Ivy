@@ -61,6 +61,7 @@
     <ClCompile Include="Input\Mouse.cpp" />
     <ClCompile Include="System\Window\Win32Window.cpp" />
     <ClCompile Include="Graphics\Model\Importer\FBXImporter.cpp" />
+    <ClCompile Include="Graphics\Shader\ShaderPrefab.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\Vector4.h">
@@ -181,6 +182,7 @@
     <ClInclude Include="Core\Include.h" />
     <ClInclude Include="Graphics\Model\Importer\FBXImporter.h" />
     <ClInclude Include="System\Window\WinMain.h" />
+    <ClInclude Include="Graphics\Shader\ShaderPrefab.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">

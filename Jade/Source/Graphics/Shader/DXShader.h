@@ -27,6 +27,7 @@ SOFTWARE.
 #include "Core/Include.h"
 #include "Graphics/Shader/IShader.h"
 #include "Graphics/Shader/ShaderType.h"
+#include "Graphics/SHader/ShaderPrefab.h"
 #include "Graphics/Device/DXDevice.h"
 
 #ifdef JADE_PLATFORM_WINDOWS
@@ -67,7 +68,7 @@ namespace Jade
                 {
                     // Both must be created or there will be nasty issues.
                     if (DXShader::Create(pixelShader, ShaderType::Pixel) && DXShader::Create(vertexShader, ShaderType::Vertex))
-                        std::cout << "Shaders created" << std::endl; 
+                        std::cout << "Shaders were created successfully..." << std::endl; 
                 }
             }
 

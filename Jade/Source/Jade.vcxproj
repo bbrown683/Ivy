@@ -93,11 +93,11 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>false</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty/assimp/include/;$(SolutionDir)ThirdParty/FreeImage/include/;$(SolutionDir)ThirdParty/FreeType/include/;$(SolutionDir)ThirdParty/glm/include/;$(SolutionDir)ThirdParty/OpenAL/include/;$(SolutionDir)ThirdParty/Lua/include/;$(SolutionDir)ThirdParty/hlslcc/include/</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty/assimp/include/;$(SolutionDir)ThirdParty/FreeImage/include/;$(SolutionDir)ThirdParty/FreeType/include/;$(SolutionDir)ThirdParty/glm/include/;$(SolutionDir)ThirdParty/OpenAL/include/;$(SolutionDir)ThirdParty/Lua/include/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>lua53.lib;opengl32.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;assimp.lib;gdi32.lib;user32.lib;shlwapi.lib;openal32.lib;freeimage.lib;freetype.lib;libHLSLcc.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeImage/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeType/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/OpenAL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/Lua/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/hlslcc/lib/</AdditionalLibraryDirectories>
+      <AdditionalDependencies>lua53.lib;opengl32.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;assimp.lib;gdi32.lib;user32.lib;shlwapi.lib;openal32.lib;freeimage.lib;freetype.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeImage/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeType/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/OpenAL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/Lua/lib/$(PlatformTarget)/</AdditionalLibraryDirectories>
       <EntryPointSymbol>
       </EntryPointSymbol>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
@@ -127,11 +127,11 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>false</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty/assimp/include/;$(SolutionDir)ThirdParty/FreeImage/include/;$(SolutionDir)ThirdParty/FreeType/include/;$(SolutionDir)ThirdParty/glm/include/;$(SolutionDir)ThirdParty/OpenAL/include/;$(SolutionDir)ThirdParty/Lua/include/;$(SolutionDir)ThirdParty/hlslcc/include/</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty/assimp/include/;$(SolutionDir)ThirdParty/FreeImage/include/;$(SolutionDir)ThirdParty/FreeType/include/;$(SolutionDir)ThirdParty/glm/include/;$(SolutionDir)ThirdParty/OpenAL/include/;$(SolutionDir)ThirdParty/Lua/include/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>lua53.lib;opengl32.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;assimp.lib;gdi32.lib;user32.lib;shlwapi.lib;openal32.lib;freeimage.lib;freetype.lib;libHLSLcc.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeImage/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeType/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/OpenAL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/Lua/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/hlslcc/lib/</AdditionalLibraryDirectories>
+      <AdditionalDependencies>lua53.lib;opengl32.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;assimp.lib;gdi32.lib;user32.lib;shlwapi.lib;openal32.lib;freeimage.lib;freetype.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeImage/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeType/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/OpenAL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/Lua/lib/$(PlatformTarget)/</AdditionalLibraryDirectories>
       <EntryPointSymbol>
       </EntryPointSymbol>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
@@ -165,12 +165,12 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>false</SDLCheck>
       <AssemblerOutput>NoListing</AssemblerOutput>
-      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty/assimp/include/;$(SolutionDir)ThirdParty/FreeImage/include/;$(SolutionDir)ThirdParty/FreeType/include/;$(SolutionDir)ThirdParty/glm/include/;$(SolutionDir)ThirdParty/OpenAL/include/;$(SolutionDir)ThirdParty/SDL/include/;$(SolutionDir)ThirdParty/Lua/include/;$(SolutionDir)ThirdParty/hlslcc/include/;$(SolutionDir)ThirdParty/SANGUI/</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty/assimp/include/;$(SolutionDir)ThirdParty/FreeImage/include/;$(SolutionDir)ThirdParty/FreeType/include/;$(SolutionDir)ThirdParty/glm/include/;$(SolutionDir)ThirdParty/OpenAL/include/;$(SolutionDir)ThirdParty/Lua/include/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>lua53.lib;opengl32.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;assimp.lib;gdi32.lib;user32.lib;shlwapi.lib;openal32.lib;freeimage.lib;freetype.lib;libHLSLcc.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeImage/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeType/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/OpenAL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/SDL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/Lua/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/hlslcc/lib/</AdditionalLibraryDirectories>
+      <AdditionalDependencies>lua53.lib;opengl32.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;assimp.lib;gdi32.lib;user32.lib;shlwapi.lib;openal32.lib;freeimage.lib;freetype.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeImage/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeType/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/OpenAL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/Lua/lib/$(PlatformTarget)/</AdditionalLibraryDirectories>
       <SubSystem>NotSet</SubSystem>
       <EntryPointSymbol>
       </EntryPointSymbol>
@@ -206,12 +206,12 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>false</SDLCheck>
       <AssemblerOutput>NoListing</AssemblerOutput>
-      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty/assimp/include/;$(SolutionDir)ThirdParty/FreeImage/include/;$(SolutionDir)ThirdParty/FreeType/include/;$(SolutionDir)ThirdParty/glm/include/;$(SolutionDir)ThirdParty/OpenAL/include/;$(SolutionDir)ThirdParty/SDL/include/;$(SolutionDir)ThirdParty/Lua/include/;$(SolutionDir)ThirdParty/hlslcc/include/;$(SolutionDir)ThirdParty/SANGUI/</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty/assimp/include/;$(SolutionDir)ThirdParty/FreeImage/include/;$(SolutionDir)ThirdParty/FreeType/include/;$(SolutionDir)ThirdParty/glm/include/;$(SolutionDir)ThirdParty/OpenAL/include/;$(SolutionDir)ThirdParty/Lua/include/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>lua53.lib;opengl32.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;assimp.lib;gdi32.lib;user32.lib;shlwapi.lib;openal32.lib;freeimage.lib;freetype.lib;libHLSLcc.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeImage/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeType/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/OpenAL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/SDL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/Lua/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/hlslcc/lib/</AdditionalLibraryDirectories>
+      <AdditionalDependencies>lua53.lib;opengl32.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;assimp.lib;gdi32.lib;user32.lib;shlwapi.lib;openal32.lib;freeimage.lib;freetype.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeImage/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeType/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/OpenAL/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/Lua/lib/$(PlatformTarget)/</AdditionalLibraryDirectories>
       <SubSystem>NotSet</SubSystem>
       <EntryPointSymbol>
       </EntryPointSymbol>
@@ -252,6 +252,7 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClCompile Include="Graphics\Rasterizer\DXRasterizer.cpp" />
     <ClCompile Include="Graphics\Rasterizer\GLRasterizer.cpp" />
     <ClCompile Include="Graphics\Shader\GLShader.cpp" />
+    <ClCompile Include="Graphics\Shader\ShaderPrefab.cpp" />
     <ClCompile Include="Graphics\Sprite\Sprite.cpp" />
     <ClCompile Include="Graphics\Texture\DXTexture.cpp" />
     <ClCompile Include="Graphics\Texture\GLTexture.cpp" />
@@ -316,6 +317,7 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClInclude Include="Graphics\Model\Importer\ModelMesh.h" />
     <ClInclude Include="Graphics\Model\Importer\ModelProperties.h" />
     <ClInclude Include="Graphics\Model\Importer\OBJImporter.h" />
+    <ClInclude Include="Graphics\Shader\ShaderPrefab.h" />
     <ClInclude Include="Graphics\Shader\Transcompiler\Transcompiler.h" />
     <ClInclude Include="Graphics\Font\Glyph.h" />
     <ClInclude Include="Graphics\GL\GladLoader.h" />

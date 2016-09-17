@@ -33,103 +33,108 @@ int main()
 {
     // Creates a basic window that can be rendered with either graphics API.
     Window window(1080, 720, 100, 100, L"Jade Game Engine Framework", false);
-
-    // Creates a graphics device.
-    Device device(window, GraphicsAPI::DirectX);
-    device.SetDrawType(DrawType::Indexed);
-
-    // Enable alpha blending.
-    Blender blender(device);
-    blender.SetBlendState(0xFFFFFFFF);
-
-    // Used to enable culling or wireframe modes.
-    Rasterizer rasterizer(device);
-
-    // Create our shaders.
-    Shader modelShader(device, L".\\resources\\shaders\\ModelPixel.hlsl", 
-        L".\\resources\\shaders\\ModelVertex.hlsl");
-
-    // Camera with initial position and target.
-    Camera camera(device, Vector3(0.0f, 1.0f, -10.0f), Vector3(0.0f, 1.0f, 0.0f));
-
-    // Dynamic model and font loading.
-    // This allows us to load a new instance with the same object.
-    Model model(device, modelShader);
-    model.Load(".\\resources\\models\\monocube.dae");
-
-    // Create and load a sprite.
-    //Sprite sprite(device, modelShader);
-    //sprite.Load("empty.png");
-    //sprite.SetPosition(Vector2(10.0f, 10.0f));
-
-    //Script script;
-    //script.Execute(".\\resources\\scripts\\test.lua");
-
-    while (window.IsOpen())
+    if(window.Create())
     {
-        // Rendering
-        device.Clear(Color::CornflowerBlue);
-        
-        // Rotate and draw the models.
-        if (window.GetInput().keyboard.IsKeyDown(Key::Shift))
-            model.SetRotation(Vector3(0.0f, 0.025f, 0.0f));
-
-        model.Draw();
-        //sprite.Draw();
-
-        // Camera movement.
-        // Setting a camera with no orbiting requires us to update
-        // not only the camera position, but also the target.
-        // This could be moved into a lua script at a future date.
-        if (window.GetInput().keyboard.IsKeyDown(Key::W))
+        // Creates a graphics device.
+        Device device(window, GraphicsAPI::DirectX);
+        if (device.Create())
         {
-            camera.SetCameraPosition(camera.GetCameraPosition() + Vector3(0.0f, 0.0f, 0.25f));
-            camera.SetTargetPosition(camera.GetTargetPosition() + Vector3(0.0f, 0.0f, 0.25f));
-        }
-        if (window.GetInput().keyboard.IsKeyDown(Key::A))
-        {
-            camera.SetCameraPosition(camera.GetCameraPosition() + Vector3(-0.25f, 0.0f, 0.0f));
-            camera.SetTargetPosition(camera.GetTargetPosition() + Vector3(-0.25f, 0.0f, 0.0f));
-        }
-        if (window.GetInput().keyboard.IsKeyDown(Key::S))
-        {
-            camera.SetCameraPosition(camera.GetCameraPosition() + Vector3(0.0f, 0.0f, -0.25f));
-            camera.SetTargetPosition(camera.GetTargetPosition() + Vector3(0.0f, 0.0f, -0.25f));
-        }
-        if (window.GetInput().keyboard.IsKeyDown(Key::D))
-        {
-            camera.SetCameraPosition(camera.GetCameraPosition() + Vector3(0.25f, 0.0f, 0.0f));
-            camera.SetTargetPosition(camera.GetTargetPosition() + Vector3(0.25f, 0.0f, 0.0f));
-        }
-        if (window.GetInput().keyboard.IsKeyDown(Key::Space))
-        {
-            camera.SetCameraPosition(camera.GetCameraPosition() + Vector3(0.0f, 0.25f, 0.0f));
-            camera.SetTargetPosition(camera.GetTargetPosition() + Vector3(0.0f, 0.25f, 0.0f));
-        }
-        if (window.GetInput().keyboard.IsKeyDown(Key::Tab))
-        {
-            camera.SetCameraPosition(camera.GetCameraPosition() + Vector3(0.0f, -0.25f, 0.0f));
-            camera.SetTargetPosition(camera.GetTargetPosition() + Vector3(0.0f, -0.25f, 0.0f));
-        }
+            device.SetDrawType(DrawType::Indexed);
 
-        // Example rasterizer mode swapping while rendering.
-        if (window.GetInput().keyboard.IsKeyDown(Key::R))
-            rasterizer.SetRasterizerState(CullMode::Back, FillMode::Wireframe, WindMode::Clockwise);
-        else
-            rasterizer.SetRasterizerState(CullMode::Back, FillMode::Solid, WindMode::Clockwise);
+            // Enable alpha blending.
+            Blender blender(device);
+            blender.SetBlendState(0xFFFFFFFF);
 
-        // This will update the viewport and camera projection in the event of a window resize.
-        // TODO: Push this under an resize event.
-        // camera.Update();
+            // Used to enable culling or wireframe modes.
+            Rasterizer rasterizer(device);
 
-        // Swap buffers and perform system event loop.
-        device.Present();
-        window.PollEvents();
+            // Create our shaders.
+            Shader modelShader(device, L".\\resources\\shaders\\ModelPixel.hlsl",
+                L".\\resources\\shaders\\ModelVertex.hlsl");
 
-        // Submit close request if we detect user is exiting application.
-        if (window.GetInput().keyboard.IsKeyDown(Key::Escape))
-            window.Close();
+            // Camera with initial position and target.
+            Camera camera(device, Vector3(0.0f, 1.0f, -10.0f), Vector3(0.0f, 1.0f, 0.0f));
+
+            // Dynamic model and font loading.
+            // This allows us to load a new instance with the same object.
+            Model model(device, modelShader);
+            model.Load(".\\resources\\models\\MonoCube.dae");
+
+            // Create and load a sprite.
+            Sprite sprite(device, modelShader);
+            sprite.Load("empty.jpg");
+            sprite.SetPosition(Vector2(10.0f, 10.0f));
+
+            //Script script;
+            //script.Execute(".\\resources\\scripts\\test.lua");
+
+            while (window.IsOpen())
+            {
+                // Rendering
+                device.Clear(Color::CornflowerBlue);
+
+                // Rotate and draw the models.
+                if (window.GetInput().keyboard.IsKeyDown(Key::Shift))
+                    model.SetRotation(Vector3(0.0f, 0.025f, 0.0f));
+
+                model.Draw();
+                sprite.Draw();
+
+                // Camera movement.
+                // Setting a camera with no orbiting requires us to update
+                // not only the camera position, but also the target.
+                // This could be moved into a lua script at a future date.
+                if (window.GetInput().keyboard.IsKeyDown(Key::W))
+                {
+                    camera.SetCameraPosition(camera.GetCameraPosition() + Vector3(0.0f, 0.0f, 0.25f));
+                    camera.SetTargetPosition(camera.GetTargetPosition() + Vector3(0.0f, 0.0f, 0.25f));
+                }
+                if (window.GetInput().keyboard.IsKeyDown(Key::A))
+                {
+                    camera.SetCameraPosition(camera.GetCameraPosition() + Vector3(-0.25f, 0.0f, 0.0f));
+                    camera.SetTargetPosition(camera.GetTargetPosition() + Vector3(-0.25f, 0.0f, 0.0f));
+                }
+                if (window.GetInput().keyboard.IsKeyDown(Key::S))
+                {
+                    camera.SetCameraPosition(camera.GetCameraPosition() + Vector3(0.0f, 0.0f, -0.25f));
+                    camera.SetTargetPosition(camera.GetTargetPosition() + Vector3(0.0f, 0.0f, -0.25f));
+                }
+                if (window.GetInput().keyboard.IsKeyDown(Key::D))
+                {
+                    camera.SetCameraPosition(camera.GetCameraPosition() + Vector3(0.25f, 0.0f, 0.0f));
+                    camera.SetTargetPosition(camera.GetTargetPosition() + Vector3(0.25f, 0.0f, 0.0f));
+                }
+                if (window.GetInput().keyboard.IsKeyDown(Key::Space))
+                {
+                    camera.SetCameraPosition(camera.GetCameraPosition() + Vector3(0.0f, 0.25f, 0.0f));
+                    camera.SetTargetPosition(camera.GetTargetPosition() + Vector3(0.0f, 0.25f, 0.0f));
+                }
+                if (window.GetInput().keyboard.IsKeyDown(Key::Tab))
+                {
+                    camera.SetCameraPosition(camera.GetCameraPosition() + Vector3(0.0f, -0.25f, 0.0f));
+                    camera.SetTargetPosition(camera.GetTargetPosition() + Vector3(0.0f, -0.25f, 0.0f));
+                }
+
+                // Example rasterizer mode swapping while rendering.
+                if (window.GetInput().keyboard.IsKeyDown(Key::R))
+                    rasterizer.SetRasterizerState(CullMode::Back, FillMode::Wireframe, WindMode::Clockwise);
+                else
+                    rasterizer.SetRasterizerState(CullMode::Back, FillMode::Solid, WindMode::Clockwise);
+
+                // This will update the viewport and camera projection in the event of a window resize.
+                // TODO: Push this under an resize event.
+                // camera.Update();
+
+                // Swap buffers and perform system event loop.
+                device.Present();
+                window.PollEvents();
+
+                // Submit close request if we detect user is exiting application.
+                if (window.GetInput().keyboard.IsKeyDown(Key::Escape))
+                    window.Close();
+            }
+        }
     }
-
+    
     return 0;
 }
