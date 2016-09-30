@@ -65,9 +65,6 @@ int main()
             sprite.Load("empty.jpg");
             sprite.SetPosition(Vector2(10.0f, 10.0f));
 
-            //Script script;
-            //script.Execute(".\\resources\\scripts\\test.lua");
-
             while (window.IsOpen())
             {
                 // Rendering

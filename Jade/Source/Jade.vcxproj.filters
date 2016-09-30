@@ -53,14 +53,11 @@
     <ClCompile Include="Graphics\Shader\GLShader.cpp" />
     <ClCompile Include="Graphics\GL\glad\gl\src\glad.c" />
     <ClCompile Include="Graphics\GL\glad\wgl\src\glad_wgl.c" />
-    <ClCompile Include="Graphics\Model\Importer\OBJImporter.cpp" />
     <ClCompile Include="Graphics\Buffer\GLConstantBuffer.cpp" />
     <ClCompile Include="Graphics\Mesh\Mesh.cpp" />
-    <ClCompile Include="Core\Script\Script.cpp" />
     <ClCompile Include="Graphics\Sprite\Sprite.cpp" />
     <ClCompile Include="Input\Mouse.cpp" />
     <ClCompile Include="System\Window\Win32Window.cpp" />
-    <ClCompile Include="Graphics\Model\Importer\FBXImporter.cpp" />
     <ClCompile Include="Graphics\Shader\ShaderPrefab.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -162,25 +159,16 @@
     <ClInclude Include="Graphics\GL\glad\wgl\include\glad\glad_wgl.h" />
     <ClInclude Include="Graphics\GL\glad\wgl\include\KHR\khrplatform.h" />
     <ClInclude Include="Graphics\Buffer\DrawType.h" />
-    <ClInclude Include="Graphics\Model\Importer\Importer.h" />
-    <ClInclude Include="Graphics\Model\Importer\ModelType.h" />
     <ClInclude Include="Math\Space.h" />
     <ClInclude Include="Graphics\Sprite\Sprite.h" />
-    <ClInclude Include="Graphics\Model\Importer\ModelProperties.h" />
-    <ClInclude Include="Graphics\Model\Importer\OBJImporter.h" />
-    <ClInclude Include="Graphics\Model\Importer\ModelMesh.h" />
-    <ClInclude Include="Graphics\Model\Importer\MeshMaterial.h" />
-    <ClInclude Include="Core\Script\Script.h" />
     <ClInclude Include="Graphics\Buffer\PrimitiveType.h" />
     <ClInclude Include="Graphics\Buffer\IConstantBuffer.h" />
     <ClInclude Include="Graphics\Buffer\GLConstantBuffer.h" />
     <ClInclude Include="Graphics\Mesh\Mesh.h" />
-    <ClInclude Include="Graphics\Shader\Transcompiler\Transcompiler.h" />
     <ClInclude Include="System\Window\Win32Window.h" />
     <ClInclude Include="System\Window\Event.h" />
     <ClInclude Include="System\Window\X11Window.h" />
     <ClInclude Include="Core\Include.h" />
-    <ClInclude Include="Graphics\Model\Importer\FBXImporter.h" />
     <ClInclude Include="System\Window\WinMain.h" />
     <ClInclude Include="Graphics\Shader\ShaderPrefab.h" />
   </ItemGroup>

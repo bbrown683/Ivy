@@ -138,7 +138,6 @@ bool Jade::Graphics::DXShader::Compile(istring filename, ShaderType type)
     std::cout << "Shader " << filename << " was compiled successfully..." << std::endl;
 #endif
 
-
 	return true;
 }
 

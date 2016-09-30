@@ -54,7 +54,6 @@ SOFTWARE.
 #ifdef JADE_INCLUDE_CORE
 #include "Core/Utility.h"
 #include "Core/Exception/Exception.h"
-#include "Core/Script/Script.h"
 #endif // JADE_INCLUDE_CORE
 
 // Graphics
