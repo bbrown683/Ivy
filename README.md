@@ -1,4 +1,4 @@
-# Jade
+# Ivy
 An Open Source C++ Game Development Framework inspired by [Monogame](http://www.monogame.net/).
 
 # Supported Graphics API's
