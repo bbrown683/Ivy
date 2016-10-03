@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Math\Vector2.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Vector3.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Vector4.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Quaternion.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Rectangle.cpp" />
+    <ClCompile Include="Math\Ray.cpp" />
+    <ClCompile Include="Math\Math.cpp" />
+    <ClCompile Include="Math\Helper.cpp" />
+    <ClCompile Include="Math\Color.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="System\File.cpp" />
+    <ClCompile Include="Graphics\Device\Device.cpp" />
+    <ClCompile Include="Graphics\Device\DXDevice.cpp" />
+    <ClCompile Include="Graphics\Device\GLDevice.cpp" />
+    <ClCompile Include="Graphics\Device\VKDevice.cpp" />
+    <ClCompile Include="Graphics\Model\Model.cpp" />
+    <ClCompile Include="System\Log.cpp" />
+    <ClCompile Include="Graphics\Camera\Camera.cpp" />
+    <ClCompile Include="Math\Matrix.cpp" />
+    <ClCompile Include="Graphics\Buffer\IndexBuffer.cpp" />
+    <ClCompile Include="Graphics\Buffer\VertexBuffer.cpp" />
+    <ClCompile Include="Core\Utility.cpp" />
+    <ClCompile Include="Graphics\Buffer\DXConstantBuffer.cpp" />
+    <ClCompile Include="System\Thread.cpp" />
+    <ClCompile Include="Graphics\Font\Font.cpp" />
+    <ClCompile Include="Graphics\Buffer\DXIndexBuffer.cpp" />
+    <ClCompile Include="Graphics\Buffer\GLIndexBuffer.cpp" />
+    <ClCompile Include="Graphics\Buffer\DXVertexBuffer.cpp" />
+    <ClCompile Include="Graphics\Buffer\GLVertexBuffer.cpp" />
+    <ClCompile Include="Input\Keyboard.cpp" />
+    <ClCompile Include="Graphics\Texture\DXTexture.cpp" />
+    <ClCompile Include="Graphics\Texture\GLTexture.cpp" />
+    <ClCompile Include="Graphics\Shader\DXShader.cpp" />
+    <ClCompile Include="Graphics\Rasterizer\DXRasterizer.cpp" />
+    <ClCompile Include="Graphics\Rasterizer\GLRasterizer.cpp" />
+    <ClCompile Include="Graphics\Buffer\ConstantBuffer.cpp" />
+    <ClCompile Include="Graphics\Blender\DXBlender.cpp" />
+    <ClCompile Include="Audio\AudioDevice.cpp" />
+    <ClCompile Include="Graphics\Widget\Canvas.cpp" />
+    <ClCompile Include="Graphics\Shader\GLShader.cpp" />
+    <ClCompile Include="Graphics\GL\glad\gl\src\glad.c" />
+    <ClCompile Include="Graphics\GL\glad\wgl\src\glad_wgl.c" />
+    <ClCompile Include="Graphics\Buffer\GLConstantBuffer.cpp" />
+    <ClCompile Include="Graphics\Mesh\Mesh.cpp" />
+    <ClCompile Include="Graphics\Sprite\Sprite.cpp" />
+    <ClCompile Include="Input\Mouse.cpp" />
+    <ClCompile Include="System\Window\Win32Window.cpp" />
+    <ClCompile Include="Graphics\Shader\ShaderPrefab.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Math\Vector4.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Vector2.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Vector3.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Quaternion.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Utility.h" />
+    <ClInclude Include="Math\Rectangle.h" />
+    <ClInclude Include="Math\Ray.h" />
+    <ClInclude Include="Math\Helper.h" />
+    <ClInclude Include="Math\Point.h" />
+    <ClInclude Include="Math\Color.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="System\File.h" />
+    <ClInclude Include="Graphics\Device\IDevice.h">
+      <Filter>Graphics\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Device\Device.h" />
+    <ClInclude Include="Graphics\Device\DXDevice.h" />
+    <ClInclude Include="Graphics\Shader\IShader.h" />
+    <ClInclude Include="Graphics\Texture\Texture.h" />
+    <ClInclude Include="Graphics\Shader\ShaderType.h" />
+    <ClInclude Include="Graphics\Device\GLDevice.h" />
+    <ClInclude Include="Graphics\Shader\Shader.h" />
+    <ClInclude Include="Graphics\Device\VKDevice.h" />
+    <ClInclude Include="Graphics\Device\GraphicsAPI.h" />
+    <ClInclude Include="Math\Vertex.h" />
+    <ClInclude Include="Graphics\Model\Model.h" />
+    <ClInclude Include="Graphics\Texture\TextureType.h" />
+    <ClInclude Include="System\Window\IWindow.h" />
+    <ClInclude Include="System\Window\Window.h" />
+    <ClInclude Include="System\Log.h" />
+    <ClInclude Include="Graphics\Camera\Camera.h" />
+    <ClInclude Include="Math\Matrix.h" />
+    <ClInclude Include="Math\Math.h" />
+    <ClInclude Include="System\Configuration.h" />
+    <ClInclude Include="Graphics\Device\Specification.h" />
+    <ClInclude Include="Graphics\Buffer\VertexBuffer.h" />
+    <ClInclude Include="Graphics\Buffer\IndexBuffer.h" />
+    <ClInclude Include="Graphics\Buffer\DXConstantBuffer.h" />
+    <ClInclude Include="System\Thread.h" />
+    <ClInclude Include="Graphics\Font\Font.h" />
+    <ClInclude Include="Graphics\Buffer\DXIndexBuffer.h" />
+    <ClInclude Include="Graphics\Buffer\GLIndexBuffer.h" />
+    <ClInclude Include="Graphics\Buffer\DXVertexBuffer.h" />
+    <ClInclude Include="Graphics\Buffer\GLVertexBuffer.h" />
+    <ClInclude Include="Input\Input.h" />
+    <ClInclude Include="Input\InputState.h" />
+    <ClInclude Include="Input\Key.h" />
+    <ClInclude Include="Input\Keyboard.h" />
+    <ClInclude Include="Input\Mouse.h" />
+    <ClInclude Include="System\Timer.h" />
+    <ClInclude Include="Graphics\Texture\ITexture.h" />
+    <ClInclude Include="Graphics\Texture\DXTexture.h" />
+    <ClInclude Include="Graphics\Texture\GLTexture.h" />
+    <ClInclude Include="Graphics\Shader\DXShader.h" />
+    <ClInclude Include="Graphics\Rasterizer\Rasterizer.h" />
+    <ClInclude Include="Graphics\Rasterizer\IRasterizer.h" />
+    <ClInclude Include="Graphics\Rasterizer\DXRasterizer.h" />
+    <ClInclude Include="Graphics\Rasterizer\CullMode.h" />
+    <ClInclude Include="Audio\AudioDevice.h" />
+    <ClInclude Include="Graphics\Rasterizer\FillMode.h" />
+    <ClInclude Include="Graphics\Rasterizer\GLRasterizer.h" />
+    <ClInclude Include="Graphics\Buffer\ConstantBuffer.h" />
+    <ClInclude Include="Graphics\Blender\IBlender.h" />
+    <ClInclude Include="Graphics\Blender\DXBlender.h" />
+    <ClInclude Include="Graphics\Blender\Blender.h" />
+    <ClInclude Include="Graphics\Rasterizer\WindMode.h" />
+    <ClInclude Include="Core\Exception\ShaderCreationException.h" />
+    <ClInclude Include="Core\Exception\DeviceCreationException.h" />
+    <ClInclude Include="Core\Exception\ShaderCompilationException.h" />
+    <ClInclude Include="Core\Exception\Exception.h" />
+    <ClInclude Include="Core\Exception\ArgumentNullException.h" />
+    <ClInclude Include="Core\Exception\FileNotFoundException.h" />
+    <ClInclude Include="Core\Exception\InitializationException.h" />
+    <ClInclude Include="Graphics\Buffer\IVertexBuffer.h" />
+    <ClInclude Include="Graphics\Buffer\IIndexBuffer.h" />
+    <ClInclude Include="Graphics\Widget\Widget.h" />
+    <ClInclude Include="Graphics\Widget\Canvas.h" />
+    <ClInclude Include="Core\Exception\BufferCreationException.h" />
+    <ClInclude Include="Graphics\Texture\TextureFactory.h" />
+    <ClInclude Include="Graphics\Rasterizer\RasterizerFactory.h" />
+    <ClInclude Include="Graphics\Font\Glyph.h" />
+    <ClInclude Include="Graphics\GL\GladLoader.h" />
+    <ClInclude Include="Graphics\Shader\GLShader.h" />
+    <ClInclude Include="Graphics\GL\glad\gl\include\glad\glad.h" />
+    <ClInclude Include="Graphics\GL\glad\gl\include\KHR\khrplatform.h" />
+    <ClInclude Include="Graphics\GL\glad\wgl\include\glad\glad_wgl.h" />
+    <ClInclude Include="Graphics\GL\glad\wgl\include\KHR\khrplatform.h" />
+    <ClInclude Include="Graphics\Buffer\DrawType.h" />
+    <ClInclude Include="Math\Space.h" />
+    <ClInclude Include="Graphics\Sprite\Sprite.h" />
+    <ClInclude Include="Graphics\Buffer\PrimitiveType.h" />
+    <ClInclude Include="Graphics\Buffer\IConstantBuffer.h" />
+    <ClInclude Include="Graphics\Buffer\GLConstantBuffer.h" />
+    <ClInclude Include="Graphics\Mesh\Mesh.h" />
+    <ClInclude Include="System\Window\Win32Window.h" />
+    <ClInclude Include="System\Window\Event.h" />
+    <ClInclude Include="System\Window\X11Window.h" />
+    <ClInclude Include="Core\Include.h" />
+    <ClInclude Include="System\Window\WinMain.h" />
+    <ClInclude Include="Graphics\Shader\ShaderPrefab.h" />
+    <ClInclude Include="Ivy.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Graphics">
+      <UniqueIdentifier>{e3637a27-4741-4002-bf9b-77fe6109256e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Device">
+      <UniqueIdentifier>{d3e696e1-b6fa-46ae-8f05-15677d6928ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Window">
+      <UniqueIdentifier>{c66e558a-e377-418f-9f56-3b71f11693d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{1c345125-5524-42c7-8111-0d3d1a886763}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System">
+      <UniqueIdentifier>{30ac5f45-b6c1-40d7-be30-0e25910bc689}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Renderer">
+      <UniqueIdentifier>{3d307a1d-7c82-445f-8c9c-bedbe0ff7502}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="ModelVertex.hlsl" />
+    <FxCompile Include="ModelPixel.hlsl" />
+    <FxCompile Include="FontPixel.hlsl" />
+    <FxCompile Include="FontVertex.hlsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="MonoCubeTexture.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="MonoCube.dae" />
+  </ItemGroup>
+</Project>
