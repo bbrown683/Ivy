@@ -70,6 +70,7 @@ namespace Ivy
             //! Draws the given text at the specified x and y coordinates at a certain pixel size.
             void Draw(std::string text, int x, int y);
             //! Loads the specified font file and creates individual textures for each printable character at a specified pixel size.
+            // TODO: Make this return a boolean if it was successful.
             void Load(std::string filename, int pixelSize);
         };
     }

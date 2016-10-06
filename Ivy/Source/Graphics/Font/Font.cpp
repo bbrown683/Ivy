@@ -33,16 +33,16 @@ void Ivy::Graphics::Font::Draw(std::string text, int x, int y)
     for(char c : text)
     {
         // Calculate width and height.
-        float x2 = static_cast<float>(x) + glyphs[c - 32].dimensions.GetX();
-        float y2 = static_cast<float>(-y) - glyphs[c - 32].dimensions.GetY(); // flip y
-        float w = static_cast<float>(glyphs[c - 32].dimensions.GetWidth());
-        float h = static_cast<float>(glyphs[c - 32].dimensions.GetHeight());
+        float xLeft = static_cast<float>(x) + glyphs[c - 32].dimensions.GetX();
+        float yTop = static_cast<float>(y) - glyphs[c - 32].dimensions.GetY();
+        float xRight = static_cast<float>(glyphs[c - 32].dimensions.GetWidth());
+        float yBottom = static_cast<float>(glyphs[c - 32].dimensions.GetHeight());
 
-        // Calculate cursor position.
+        // Calculate next characters position.
         x += glyphs[c - 32].advanceX;
         y += glyphs[c - 32].advanceY;
 
-        // Skip characters with no dimensions.
+        // Skip characters with no dimensions (AKA space character).
         if (glyphs[c - 32].dimensions.GetWidth() != 0 &&
             glyphs[c - 32].dimensions.GetHeight() != 0)
         {
@@ -50,6 +50,43 @@ void Ivy::Graphics::Font::Draw(std::string text, int x, int y)
             // Lots of hard coding involved unfortunately.
             // Since quads are no longer supported, we need 6
             // vertices per character.
+            
+            Math::Vertex vertex0;
+            vertex0.position = Math::Vector4(xLeft, yTop, 0.0f, 1.0f);
+            vertex0.texture = Math::Vector2(glyphs[c - 32].texture.GetX(), glyphs[c - 32].texture.GetY());
+            vertices.push_back(vertex0);
+
+            Math::Vertex vertex1;
+            vertex1.position = Math::Vector4(xRight, yTop, 0.0f, 1.0f);
+            vertex1.texture = Math::Vector2((glyphs[c - 32].texture.GetX() + glyphs[c - 32].dimensions.GetWidth()) / atlasWidth, 
+                glyphs[c - 32].texture.GetY());
+            vertices.push_back(vertex1);
+
+            Math::Vertex vertex2;
+            vertex2.position = Math::Vector4(xLeft, yBottom, 0.0f, 1.0f);
+            vertex2.texture = Math::Vector2(glyphs[c - 32].texture.GetX(), 
+                (glyphs[c - 32].texture.GetY() + glyphs[c - 32].dimensions.GetHeight()) / atlasHeight);
+            vertices.push_back(vertex2);
+            
+            Math::Vertex vertex3;
+            vertex3.position = Math::Vector4(xRight, -yTop, 0.0f, 1.0f);
+            vertex3.texture = Math::Vector2((glyphs[c - 32].texture.GetX() + glyphs[c - 32].dimensions.GetWidth()) / atlasWidth, 
+                glyphs[c - 32].texture.GetY());
+            vertices.push_back(vertex3);
+
+            Math::Vertex vertex4;
+            vertex4.position = Math::Vector4(xLeft, yBottom, 0.0f, 1.0f);
+            vertex4.texture = Math::Vector2(glyphs[c - 32].texture.GetX(), 
+                (glyphs[c - 32].texture.GetY() + glyphs[c - 32].dimensions.GetHeight()) / atlasHeight);
+            vertices.push_back(vertex4);
+
+            Math::Vertex vertex5;
+            vertex5.position = Math::Vector4(xRight, yBottom, 0.0f, 1.0f);
+            vertex5.texture = Math::Vector2((glyphs[c - 32].texture.GetX() + glyphs[c - 32].dimensions.GetWidth()) / atlasWidth,
+                (glyphs[c - 32].texture.GetY() + glyphs[c - 32].dimensions.GetHeight()) / atlasHeight);
+            vertices.push_back(vertex5);
+
+            /*
             Math::Vertex vertex0;
             vertex0.position = Math::Vector4(x2, -y2, 0.0f, 1.0f);
             vertex0.texture = Math::Vector2(glyphs[c - 32].texture.GetX(), glyphs[c - 32].texture.GetY());
@@ -87,6 +124,7 @@ void Ivy::Graphics::Font::Draw(std::string text, int x, int y)
                 / atlasHeight);
 
             vertices.push_back(vertex5);
+            */
         }
     }
 
@@ -229,6 +267,16 @@ void Ivy::Graphics::Font::Load(std::string filename, int pixelSize)
         ox += glyph->bitmap.width + 1;
     }
 
+    for (int i = 65; i < 127; i++)
+    {
+        std::cout << "Character " << char(i) << " data:\n";
+        std::cout << "x - " << glyphs[i - 32].dimensions.GetX() << std::endl;
+        std::cout << "y - " << glyphs[i - 32].dimensions.GetY() << std::endl;
+        std::cout << "w - " << glyphs[i - 32].dimensions.GetWidth() << std::endl;
+        std::cout << "h - " << glyphs[i - 32].dimensions.GetHeight() << std::endl;
+        std::cout << "tx - " << glyphs[i - 32].texture.GetX() << std::endl;
+        std::cout << "ty - " << glyphs[i - 32].texture.GetY() << std::endl;
+    }
     FT_Done_Face(face);
     FT_Done_FreeType(library);
 }

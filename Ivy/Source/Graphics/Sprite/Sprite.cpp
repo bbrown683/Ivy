@@ -29,7 +29,7 @@ void Ivy::Graphics::Sprite::Draw()
     // Make the shader active for this object.
     shader.MakeActive();
 
-    // MakeActive the world matrix for the object.
+    // Set the world matrix for the object.
     cBuffer.SetWorldMatrix(mTranslation * mRotation * mScale);
 
     // Bind the vertex buffer.
@@ -38,7 +38,7 @@ void Ivy::Graphics::Sprite::Draw()
     // Assign the matrix data to the buffer.
     cBuffer.UpdateMatrices();
 
-    // MakeActive current texture.
+    // Set the current texture.
     texture.MakeActive();
 
     // Draw the sprite with the vertex buffer.

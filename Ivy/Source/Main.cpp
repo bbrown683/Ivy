@@ -32,7 +32,7 @@ SOFTWARE.
 int main()
 {
     // Creates a basic window that can be rendered with either graphics API.
-    Window window(1080, 720, 100, 100, L"Ivy Game Engine Framework", false);
+    Window window(1080, 720, 100, 100, L"Ivy Game Framework", false);
     if(window.Create())
     {
         // Creates a graphics device.
@@ -42,8 +42,9 @@ int main()
             device.SetDrawType(DrawType::Indexed);
 
             // Enable alpha blending.
+            // This should probably be pushed underneath sprite and model drawing that can be toggleable.
             Blender blender(device);
-            blender.SetBlendState(0xFFFFFFFF);
+            blender.SetBlendState(0xFF0000FF);
 
             // Used to enable culling or wireframe modes.
             Rasterizer rasterizer(device);
@@ -53,17 +54,15 @@ int main()
                 L".\\resources\\shaders\\ModelVertex.hlsl");
 
             // Camera with initial position and target.
-            Camera camera(device, Vector3(0.0f, 1.0f, -10.0f), Vector3(0.0f, 1.0f, 0.0f));
+            Camera camera(device, Vector3(0.0f, 5.0f, -10.0f), Vector3(0.0f, 1.0f, 0.0f));
 
             // Dynamic model and font loading.
             // This allows us to load a new instance with the same object.
             Model model(device, modelShader);
             model.Load(".\\resources\\models\\MonoCube.dae");
 
-            // Create and load a sprite.
-            //Sprite sprite(device, modelShader);
-            //sprite.Load("empty.jpg");
-            //sprite.SetPosition(Vector2(10.0f, 10.0f));
+            Font font(device, modelShader);
+            font.Load(".\\resources\\fonts\\consolab.ttf", 30);
 
             while (window.IsOpen())
             {
@@ -76,6 +75,7 @@ int main()
 
                 model.Draw();
                 //sprite.Draw();
+                font.Draw("A", 0, -10);
 
                 // Camera movement.
                 // Setting a camera with no orbiting requires us to update
