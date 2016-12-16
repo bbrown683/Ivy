@@ -30,6 +30,8 @@ SOFTWARE.
 #include "Core/Include.h"
 #include "Core/Exception/Exception.h"
 #include "Graphics/Blender/Blender.h"
+#include "Graphics/Buffer/ConstantBuffer.h"
+#include "Graphics/Buffer/IndexBuffer.h"
 #include "Graphics/Buffer/VertexBuffer.h"
 #include "Graphics/Device/Device.h"
 #include "Graphics/Font/Glyph.h"
@@ -50,6 +52,12 @@ namespace Ivy
 
             std::vector<Glyph> glyphs;
             VertexBuffer vBuffer;
+            IndexBuffer iBuffer;
+            ConstantBuffer cBuffer;
+
+            Math::Matrix rotation;
+            Math::Matrix scale;
+            Math::Matrix translation;
 
             unsigned int atlasWidth;
             unsigned int atlasHeight;
@@ -64,7 +72,10 @@ namespace Ivy
                 blender = Blender(device);
 
                 // Create the vertex buffer.
-                vBuffer = VertexBuffer(device, PrimitiveType::TriangleList);
+                vBuffer = VertexBuffer(device, PrimitiveType::Triangle);
+
+                cBuffer = ConstantBuffer(device);
+                cBuffer.CreateWorldMatrix();
             }
 
             //! Draws the given text at the specified x and y coordinates at a certain pixel size.
@@ -72,6 +83,10 @@ namespace Ivy
             //! Loads the specified font file and creates individual textures for each printable character at a specified pixel size.
             // TODO: Make this return a boolean if it was successful.
             void Load(std::string filename, int pixelSize);
+
+            void SetPosition(Math::Vector3 position);
+            void SetScale(Math::Vector3 scale);
+            void SetRotation(Math::Vector3 rotation);
         };
     }
 }

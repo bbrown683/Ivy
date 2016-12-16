@@ -24,6 +24,11 @@ SOFTWARE.
 
 #include "AudioDevice.h"
 
+int Ivy::Audio::AudioDevice::PaStreamCallback(const void * input, void * output, unsigned long frameCount, const PaStreamCallbackTimeInfo * timeInfo, PaStreamCallbackFlags statusFlags, void * userData)
+{
+    return 0;
+}
+
 void Ivy::Audio::AudioDevice::Create()
 {
 

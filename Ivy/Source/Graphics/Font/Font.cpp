@@ -26,8 +26,6 @@ SOFTWARE.
 
 void Ivy::Graphics::Font::Draw(std::string text, int x, int y)
 {
-    shader.MakeActive();
-
     std::vector<Math::Vertex> vertices;
 
     for(char c : text)
@@ -43,8 +41,7 @@ void Ivy::Graphics::Font::Draw(std::string text, int x, int y)
         y += glyphs[c - 32].advanceY;
 
         // Skip characters with no dimensions (AKA space character).
-        if (glyphs[c - 32].dimensions.GetWidth() != 0 &&
-            glyphs[c - 32].dimensions.GetHeight() != 0)
+        if (xRight != 0 && yBottom != 0)
         {
             // Calculate texture coordinates and positions.
             // Lots of hard coding involved unfortunately.
@@ -52,7 +49,7 @@ void Ivy::Graphics::Font::Draw(std::string text, int x, int y)
             // vertices per character.
             
             Math::Vertex vertex0;
-            vertex0.position = Math::Vector4(xLeft, yTop, 0.0f, 1.0f);
+            vertex0.position = Math::Vector4(x + xLeft, -y - yTop, 0.0f, 1.0f);
             vertex0.texture = Math::Vector2(glyphs[c - 32].texture.GetX(), glyphs[c - 32].texture.GetY());
             vertices.push_back(vertex0);
 
@@ -69,7 +66,7 @@ void Ivy::Graphics::Font::Draw(std::string text, int x, int y)
             vertices.push_back(vertex2);
             
             Math::Vertex vertex3;
-            vertex3.position = Math::Vector4(xRight, -yTop, 0.0f, 1.0f);
+            vertex3.position = Math::Vector4(xRight, yTop, 0.0f, 1.0f);
             vertex3.texture = Math::Vector2((glyphs[c - 32].texture.GetX() + glyphs[c - 32].dimensions.GetWidth()) / atlasWidth, 
                 glyphs[c - 32].texture.GetY());
             vertices.push_back(vertex3);
@@ -128,10 +125,18 @@ void Ivy::Graphics::Font::Draw(std::string text, int x, int y)
         }
     }
 
+    shader.MakeActive();
+
+    // Set the world matrix for the vertices.
+    cBuffer.SetWorldMatrix(translation * rotation * scale);
+
     // Initialize vertex buffer and draw.
     vBuffer.SetVertices(vertices);
     
-    if (vBuffer.Create())	// Eventually we should map these.
+    // Assign the matrix data to the buffer.
+    cBuffer.UpdateMatrices();
+
+    if (vBuffer.Create())
     {
         vBuffer.Bind();
 
@@ -267,16 +272,23 @@ void Ivy::Graphics::Font::Load(std::string filename, int pixelSize)
         ox += glyph->bitmap.width + 1;
     }
 
-    for (int i = 65; i < 127; i++)
-    {
-        std::cout << "Character " << char(i) << " data:\n";
-        std::cout << "x - " << glyphs[i - 32].dimensions.GetX() << std::endl;
-        std::cout << "y - " << glyphs[i - 32].dimensions.GetY() << std::endl;
-        std::cout << "w - " << glyphs[i - 32].dimensions.GetWidth() << std::endl;
-        std::cout << "h - " << glyphs[i - 32].dimensions.GetHeight() << std::endl;
-        std::cout << "tx - " << glyphs[i - 32].texture.GetX() << std::endl;
-        std::cout << "ty - " << glyphs[i - 32].texture.GetY() << std::endl;
-    }
     FT_Done_Face(face);
     FT_Done_FreeType(library);
+}
+
+void Ivy::Graphics::Font::SetPosition(Math::Vector3 position)
+{
+    translation = translation.Translate(position.GetX(), position.GetY(), position.GetZ()).Transpose();
+}
+
+void Ivy::Graphics::Font::SetScale(Math::Vector3 scale)
+{
+    this->scale = this->scale.Scale(scale).Transpose();
+}
+
+void Ivy::Graphics::Font::SetRotation(Math::Vector3 rotation)
+{
+    this->rotation = (this->rotation.RotateAlongX(rotation.GetX()) *
+        this->rotation.RotateAlongY(rotation.GetY()) *
+        this->rotation.RotateAlongZ(rotation.GetZ())).Transpose();
 }

@@ -26,8 +26,7 @@ SOFTWARE.
 
 void Ivy::Graphics::GLIndexBuffer::Bind()
 {
-	glDrawElements(GL_TRIANGLE_STRIP, static_cast<GLsizei>(indices.size()),
-		GL_UNSIGNED_SHORT, nullptr);
+
 }
 
 bool Ivy::Graphics::GLIndexBuffer::Create()
@@ -58,4 +57,6 @@ void Ivy::Graphics::GLIndexBuffer::Unbind()
 
 void Ivy::Graphics::GLIndexBuffer::Draw()
 {
+    glDrawElements(GL_TRIANGLE_STRIP, static_cast<GLsizei>(indices.size()),
+        GL_UNSIGNED_SHORT, nullptr);
 }

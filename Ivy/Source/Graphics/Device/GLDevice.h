@@ -24,7 +24,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "Graphics/GL/GladLoader.h"
+#include "glad/gl/include/glad/glad.h"
+
+#ifdef IVY_PLATFORM_WINDOWS
+// Includes WGL extensions for creating a context.
+#include "glad/wgl/include/glad/glad_wgl.h"
+#elif IVY_PLATFORM_UNIX
+
+#endif
 
 #include "Core/Exception/Exception.h"
 #include "Core/Include.h"

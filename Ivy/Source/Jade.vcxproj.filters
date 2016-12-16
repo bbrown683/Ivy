@@ -51,14 +51,14 @@
     <ClCompile Include="Audio\AudioDevice.cpp" />
     <ClCompile Include="Graphics\Widget\Canvas.cpp" />
     <ClCompile Include="Graphics\Shader\GLShader.cpp" />
-    <ClCompile Include="Graphics\GL\glad\gl\src\glad.c" />
-    <ClCompile Include="Graphics\GL\glad\wgl\src\glad_wgl.c" />
     <ClCompile Include="Graphics\Buffer\GLConstantBuffer.cpp" />
     <ClCompile Include="Graphics\Mesh\Mesh.cpp" />
     <ClCompile Include="Graphics\Sprite\Sprite.cpp" />
     <ClCompile Include="Input\Mouse.cpp" />
     <ClCompile Include="System\Window\Win32Window.cpp" />
     <ClCompile Include="Graphics\Shader\ShaderPrefab.cpp" />
+    <ClCompile Include="Graphics\Device\glad\gl\src\glad.c" />
+    <ClCompile Include="Graphics\Device\glad\wgl\src\glad_wgl.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\Vector4.h">
@@ -151,12 +151,7 @@
     <ClInclude Include="Graphics\Texture\TextureFactory.h" />
     <ClInclude Include="Graphics\Rasterizer\RasterizerFactory.h" />
     <ClInclude Include="Graphics\Font\Glyph.h" />
-    <ClInclude Include="Graphics\GL\GladLoader.h" />
     <ClInclude Include="Graphics\Shader\GLShader.h" />
-    <ClInclude Include="Graphics\GL\glad\gl\include\glad\glad.h" />
-    <ClInclude Include="Graphics\GL\glad\gl\include\KHR\khrplatform.h" />
-    <ClInclude Include="Graphics\GL\glad\wgl\include\glad\glad_wgl.h" />
-    <ClInclude Include="Graphics\GL\glad\wgl\include\KHR\khrplatform.h" />
     <ClInclude Include="Graphics\Buffer\DrawType.h" />
     <ClInclude Include="Math\Space.h" />
     <ClInclude Include="Graphics\Sprite\Sprite.h" />
@@ -171,6 +166,11 @@
     <ClInclude Include="System\Window\WinMain.h" />
     <ClInclude Include="Graphics\Shader\ShaderPrefab.h" />
     <ClInclude Include="Ivy.h" />
+    <ClInclude Include="Graphics\Device\glad\gl\include\glad\glad.h" />
+    <ClInclude Include="Graphics\Device\glad\gl\include\KHR\khrplatform.h" />
+    <ClInclude Include="Graphics\Device\glad\wgl\include\glad\glad_wgl.h" />
+    <ClInclude Include="Graphics\Device\glad\wgl\include\KHR\khrplatform.h" />
+    <ClInclude Include="Network\Socket.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">

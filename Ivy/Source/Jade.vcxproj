@@ -127,11 +127,11 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>false</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty/assimp/include/;$(SolutionDir)ThirdParty/FreeImage/include/;$(SolutionDir)ThirdParty/FreeType/include/;$(SolutionDir)ThirdParty/glm/include/</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty/assimp/include/;$(SolutionDir)ThirdParty/FreeImage/include/;$(SolutionDir)ThirdParty/FreeType/include/;$(SolutionDir)ThirdParty/glm/include/;$(SolutionDir)ThirdParty/PortAudio/include/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>opengl32.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;assimp.lib;gdi32.lib;user32.lib;shlwapi.lib;freeimage.lib;freetype.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeImage/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeType/lib/$(PlatformTarget)/</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;assimp.lib;gdi32.lib;user32.lib;shlwapi.lib;freeimage.lib;freetype.lib;portaudio.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeImage/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeType/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/PortAudio/lib/$(PlatformTarget)/</AdditionalLibraryDirectories>
       <EntryPointSymbol>
       </EntryPointSymbol>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
@@ -205,12 +205,12 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>false</SDLCheck>
       <AssemblerOutput>NoListing</AssemblerOutput>
-      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty/assimp/include/;$(SolutionDir)ThirdParty/FreeImage/include/;$(SolutionDir)ThirdParty/FreeType/include/;$(SolutionDir)ThirdParty/glm/include/</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty/assimp/include/;$(SolutionDir)ThirdParty/FreeImage/include/;$(SolutionDir)ThirdParty/FreeType/include/;$(SolutionDir)ThirdParty/glm/include/;$(SolutionDir)ThirdParty/PortAudio/include/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;assimp.lib;gdi32.lib;user32.lib;shlwapi.lib;freeimage.lib;freetype.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeImage/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeType/lib/$(PlatformTarget)/</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;assimp.lib;gdi32.lib;user32.lib;shlwapi.lib;freeimage.lib;freetype.lib;portaudio.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeImage/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeType/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/PortAudio/lib/$(PlatformTarget)/</AdditionalLibraryDirectories>
       <SubSystem>NotSet</SubSystem>
       <EntryPointSymbol>
       </EntryPointSymbol>
@@ -242,8 +242,8 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClCompile Include="Audio\AudioDevice.cpp" />
     <ClCompile Include="Graphics\Blender\DXBlender.cpp" />
     <ClCompile Include="Graphics\Buffer\ConstantBuffer.cpp" />
-    <ClCompile Include="Graphics\GL\glad\gl\src\glad.c" />
-    <ClCompile Include="Graphics\GL\glad\wgl\src\glad_wgl.c" />
+    <ClCompile Include="Graphics\Device\glad\gl\src\glad.c" />
+    <ClCompile Include="Graphics\Device\glad\wgl\src\glad_wgl.c" />
     <ClCompile Include="Graphics\Mesh\Mesh.cpp" />
     <ClCompile Include="Graphics\Rasterizer\DXRasterizer.cpp" />
     <ClCompile Include="Graphics\Rasterizer\GLRasterizer.cpp" />
@@ -309,11 +309,10 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClInclude Include="Graphics\Buffer\PrimitiveType.h" />
     <ClInclude Include="Graphics\Shader\ShaderPrefab.h" />
     <ClInclude Include="Graphics\Font\Glyph.h" />
-    <ClInclude Include="Graphics\GL\GladLoader.h" />
-    <ClInclude Include="Graphics\GL\glad\gl\include\glad\glad.h" />
-    <ClInclude Include="Graphics\GL\glad\gl\include\KHR\khrplatform.h" />
-    <ClInclude Include="Graphics\GL\glad\wgl\include\glad\glad_wgl.h" />
-    <ClInclude Include="Graphics\GL\glad\wgl\include\KHR\khrplatform.h" />
+    <ClInclude Include="Graphics\Device\glad\gl\include\glad\glad.h" />
+    <ClInclude Include="Graphics\Device\glad\gl\include\KHR\khrplatform.h" />
+    <ClInclude Include="Graphics\Device\glad\wgl\include\glad\glad_wgl.h" />
+    <ClInclude Include="Graphics\Device\glad\wgl\include\KHR\khrplatform.h" />
     <ClInclude Include="Math\Space.h" />
     <ClInclude Include="Graphics\Mesh\Mesh.h" />
     <ClInclude Include="Graphics\Rasterizer\RasterizerFactory.h" />
@@ -337,6 +336,7 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClInclude Include="Input\InputState.h" />
     <ClInclude Include="Input\Keyboard.h" />
     <ClInclude Include="Input\Mouse.h" />
+    <ClInclude Include="Network\Socket.h" />
     <ClInclude Include="System\Timer.h" />
     <ClInclude Include="Graphics\Buffer\DXConstantBuffer.h" />
     <ClInclude Include="Graphics\Buffer\GLConstantBuffer.h" />

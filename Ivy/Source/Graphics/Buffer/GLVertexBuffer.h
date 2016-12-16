@@ -38,6 +38,7 @@ namespace Ivy
 			GLuint vertexBuffer;
 
 			std::vector<Math::Vertex> vertices;
+            short items;
 
 		public:
 

@@ -24,6 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include "portaudio.h"
 
 namespace Ivy
 {
@@ -31,6 +32,14 @@ namespace Ivy
     {
         class AudioDevice
         {
+            int PaStreamCallback(const void *input,
+                void *output,
+                unsigned long frameCount,
+                const PaStreamCallbackTimeInfo* timeInfo,
+                PaStreamCallbackFlags statusFlags,
+                void *userData);
+
+        public:
             void Create();
         };
     }
