@@ -26,9 +26,20 @@ SOFTWARE.
 
 void Ivy::Graphics::Model::Draw()
 {
+    if(blending)
+        blender.SetBlendState(0x000000FF);
+
     // Loop through and draw each mesh.
     for (unsigned int i = 0; i < meshes.size(); i++)
         meshes[i].Draw();
+
+    if (blending)
+        blender.DisableBlendState();
+}
+
+void Ivy::Graphics::Model::Blending(bool blending)
+{
+    this->blending = blending;
 }
 
 void Ivy::Graphics::Model::Load(std::string filename)

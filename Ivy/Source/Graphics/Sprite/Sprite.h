@@ -24,11 +24,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+#include "Graphics/Blender/Blender.h"
 #include "Graphics/Buffer/ConstantBuffer.h"
 #include "Graphics/Buffer/VertexBuffer.h"
 #include "Graphics/Device/Device.h"
 #include "Graphics/Shader/Shader.h"
 #include "Graphics/Texture/Texture.h"
+#include "Math/Helper.h"
 
 namespace Ivy
 {
@@ -39,6 +41,9 @@ namespace Ivy
 			Device device;
 			Shader shader;
 			Texture texture;
+            Blender blender;
+
+            bool blending;
 
 			ConstantBuffer cBuffer;
 			VertexBuffer vBuffer;
@@ -47,9 +52,9 @@ namespace Ivy
 			Math::Matrix mScale;
 			Math::Matrix mTranslation;
 
-			Math::Vector2 vPosition;
-			Math::Vector2 vRotation;
-			Math::Vector2 vScale;
+			Math::Vector3 vPosition;
+			Math::Vector3 vRotation;
+			Math::Vector3 vScale;
 
 		public:
 
@@ -58,6 +63,8 @@ namespace Ivy
 				this->device = device;
 				this->shader = shader;
 			
+                blender = Blender(device);
+
 				vBuffer = VertexBuffer(device, PrimitiveType::TriangleList);
 				cBuffer = ConstantBuffer(device);
 
@@ -95,15 +102,16 @@ namespace Ivy
 			}
 
 			void Draw();
+            void Blending(bool blending);
 			bool Load(std::string filename);
 
-			Math::Vector2 GetPosition();
-			Math::Vector2 GetRotation();
-			Math::Vector2 GetScale();
+			Math::Vector3 GetPosition();
+			Math::Vector3 GetRotation();
+			Math::Vector3 GetScale();
 
-			void SetPosition(Math::Vector2 position);
-			void SetRotation(Math::Vector2 rotation);
-			void SetScale(Math::Vector2 scale);
+			void SetPosition(Math::Vector3 position);
+			void SetRotation(Math::Vector3 rotation);
+			void SetScale(Math::Vector3 scale);
 		};
 	}
 }

@@ -52,6 +52,16 @@ namespace Ivy
 			{
 				return blender->SetBlendState(mask);
 			}
+
+            bool DisableBlendState() const
+            {
+                return blender->DisableBlendState();
+            }
+
+            bool Enabled() const
+            {
+                return blender->Enabled();
+            }
 		};
 	}
 }

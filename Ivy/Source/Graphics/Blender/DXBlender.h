@@ -38,6 +38,8 @@ namespace Ivy
 
 			ComPtr<ID3D11BlendState> m_pBlendState;
 
+            bool enabled;
+
 		public:
 
 			DXBlender(std::shared_ptr<DXDevice> device)
@@ -48,6 +50,10 @@ namespace Ivy
 			//! \brief Sets the blend state for the specified mask value in hexadecimal.
 			//! Example: 0xffffffff is the mask for enabling alpha blending.
 			bool SetBlendState(unsigned int mask) override;
+
+            bool DisableBlendState() override;
+
+            bool Enabled() override;
 		};
 	}
 }

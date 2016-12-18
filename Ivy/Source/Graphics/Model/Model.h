@@ -30,6 +30,7 @@ SOFTWARE.
 #include "assimp/postprocess.h"
 
 #include "Core/Include.h"
+#include "Graphics/Blender/Blender.h"
 #include "Graphics/Mesh/Mesh.h"
 #include "Math/Helper.h"
 
@@ -42,6 +43,7 @@ namespace Ivy
         {
             Device device;
             Shader shader;
+            Blender blender;
 
             // Mesh(s) used to draw our shape.
             std::vector<Mesh> meshes;
@@ -51,15 +53,20 @@ namespace Ivy
             Math::Vector3 rotation;
             Math::Vector3 scale;
 
+            bool blending;
+
         public:
 
             Model(Device device, Shader shader)
             {
                 this->device = device;
                 this->shader = shader;
+
+                blender = Blender(device);
             }
 
             void Draw();
+            void Blending(bool blending);
             void Load(std::string filename);
 
             std::vector<Mesh> GetMeshes() const;
@@ -71,6 +78,7 @@ namespace Ivy
             void SetPosition(Math::Vector3 position);
             void SetRotation(Math::Vector3 rotation);
             void SetScale(Math::Vector3 scale);
+
         };
     }
 }

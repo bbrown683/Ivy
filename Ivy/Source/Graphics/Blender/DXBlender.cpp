@@ -28,6 +28,20 @@ bool Ivy::Graphics::DXBlender::SetBlendState(unsigned int mask)
 	}
 
 	device->GetID3D11DeviceContext()->OMSetBlendState(m_pBlendState.Get(), blendFactor, mask);
+    enabled = true;
 
 	return true;
+}
+
+bool Ivy::Graphics::DXBlender::DisableBlendState()
+{
+    // Set default blend state.
+    device->GetID3D11DeviceContext()->OMSetBlendState(nullptr, nullptr, 0xFFFFFFFF);
+    enabled = false;
+    return true;
+}
+
+bool Ivy::Graphics::DXBlender::Enabled()
+{
+    return enabled;
 }

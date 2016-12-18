@@ -26,6 +26,9 @@ SOFTWARE.
 
 void Ivy::Graphics::Sprite::Draw()
 {
+    if (blending)
+        blender.SetBlendState(0x000000FF);
+
     // Make the shader active for this object.
     shader.MakeActive();
 
@@ -49,6 +52,14 @@ void Ivy::Graphics::Sprite::Draw()
 
     // Unbind shader for next object.
     shader.MakeInactive();
+
+    if (blending)
+        blender.DisableBlendState();
+}
+
+void Ivy::Graphics::Sprite::Blending(bool blending)
+{
+    this->blending = blending;
 }
 
 bool Ivy::Graphics::Sprite::Load(std::string filename)
@@ -61,36 +72,47 @@ bool Ivy::Graphics::Sprite::Load(std::string filename)
     return false;
 }
 
-Ivy::Math::Vector2 Ivy::Graphics::Sprite::GetPosition()
+Ivy::Math::Vector3 Ivy::Graphics::Sprite::GetPosition()
 {
     return vPosition;
 }
 
-Ivy::Math::Vector2 Ivy::Graphics::Sprite::GetRotation()
+Ivy::Math::Vector3 Ivy::Graphics::Sprite::GetRotation()
 {
     return vRotation;
 }
 
-Ivy::Math::Vector2 Ivy::Graphics::Sprite::GetScale()
+Ivy::Math::Vector3 Ivy::Graphics::Sprite::GetScale()
 {
     return vScale;
 }
 
-void Ivy::Graphics::Sprite::SetPosition(Math::Vector2 position)
+void Ivy::Graphics::Sprite::SetPosition(Math::Vector3 position)
 {
     vPosition = vPosition + position;
     mTranslation = mTranslation.Translate(vPosition.GetX(), 
-        vPosition.GetY(), 0.0f).Transpose();
+        vPosition.GetY(), vPosition.GetZ()).Transpose();
 }
 
-void Ivy::Graphics::Sprite::SetRotation(Math::Vector2 rotation)
+void Ivy::Graphics::Sprite::SetRotation(Math::Vector3 rotation)
 {
-    vRotation = vRotation = rotation;
-    mRotation = mRotation.RotateAlongX(vRotation.GetX()) *
-        mRotation.RotateAlongY(vRotation.GetY()).Transpose();
+    vRotation = vRotation + rotation;
+
+    // Ensure rotation values does not exceed + or - 2 Pi.
+    // If this is not moderated, an overflow could eventually occur.
+    if (this->vRotation.GetX() > Math::Math::TwoPi || this->vRotation.GetX() < -Math::Math::TwoPi)
+        this->vRotation.SetX(Math::Helper::WrapAngle(this->vRotation.GetX()));
+    if (this->vRotation.GetY() > Math::Math::TwoPi || this->vRotation.GetY() < -Math::Math::TwoPi)
+        this->vRotation.SetY(Math::Helper::WrapAngle(this->vRotation.GetY()));
+    if (this->vRotation.GetZ() > Math::Math::TwoPi || this->vRotation.GetZ() < -Math::Math::TwoPi)
+        this->vRotation.SetZ(Math::Helper::WrapAngle(this->vRotation.GetZ()));
+
+    mRotation = (mRotation.RotateAlongX(vRotation.GetX()) *
+        mRotation.RotateAlongY(vRotation.GetY()) * 
+        mRotation.RotateAlongZ(vRotation.GetZ())).Transpose();
 }
 
-void Ivy::Graphics::Sprite::SetScale(Math::Vector2 scale)
+void Ivy::Graphics::Sprite::SetScale(Math::Vector3 scale)
 {
     vScale = vScale + scale;
     mScale = mScale.Scale(vScale).Transpose();

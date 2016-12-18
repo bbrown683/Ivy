@@ -31,6 +31,8 @@ namespace Ivy
 		struct IBlender
 		{
 			virtual bool SetBlendState(unsigned int mask) = 0;
+            virtual bool DisableBlendState() = 0;
+            virtual bool Enabled() = 0;
 		};
 	}
 }
