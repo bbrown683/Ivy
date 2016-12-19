@@ -26,11 +26,13 @@ SOFTWARE.
 
 #include "portaudio.h"
 
+#include "Core/Include.h"
+
 namespace Ivy
 {
     namespace Audio
     {
-        class AudioDevice
+        class Audio
         {
             int PaStreamCallback(const void *input,
                 void *output,
@@ -39,8 +41,20 @@ namespace Ivy
                 PaStreamCallbackFlags statusFlags,
                 void *userData);
 
+            bool Create();
+
         public:
-            void Create();
+
+            Audio()
+            {
+                if(Create())
+                    std::cout << "PortAudio was initialized successfully..." << std::endl;
+            }
+
+            ~Audio()
+            {
+                Pa_Terminate();
+            }
         };
     }
 }

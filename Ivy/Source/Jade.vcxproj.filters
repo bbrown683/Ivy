@@ -48,7 +48,6 @@
     <ClCompile Include="Graphics\Rasterizer\GLRasterizer.cpp" />
     <ClCompile Include="Graphics\Buffer\ConstantBuffer.cpp" />
     <ClCompile Include="Graphics\Blender\DXBlender.cpp" />
-    <ClCompile Include="Audio\AudioDevice.cpp" />
     <ClCompile Include="Graphics\Widget\Canvas.cpp" />
     <ClCompile Include="Graphics\Shader\GLShader.cpp" />
     <ClCompile Include="Graphics\Buffer\GLConstantBuffer.cpp" />
@@ -59,6 +58,8 @@
     <ClCompile Include="Graphics\Shader\ShaderPrefab.cpp" />
     <ClCompile Include="Graphics\Device\glad\gl\src\glad.c" />
     <ClCompile Include="Graphics\Device\glad\wgl\src\glad_wgl.c" />
+    <ClCompile Include="Audio\Audio.cpp" />
+    <ClCompile Include="Audio\PADevice.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Math\Vector4.h">
@@ -128,7 +129,6 @@
     <ClInclude Include="Graphics\Rasterizer\IRasterizer.h" />
     <ClInclude Include="Graphics\Rasterizer\DXRasterizer.h" />
     <ClInclude Include="Graphics\Rasterizer\CullMode.h" />
-    <ClInclude Include="Audio\AudioDevice.h" />
     <ClInclude Include="Graphics\Rasterizer\FillMode.h" />
     <ClInclude Include="Graphics\Rasterizer\GLRasterizer.h" />
     <ClInclude Include="Graphics\Buffer\ConstantBuffer.h" />
@@ -171,6 +171,8 @@
     <ClInclude Include="Graphics\Device\glad\wgl\include\glad\glad_wgl.h" />
     <ClInclude Include="Graphics\Device\glad\wgl\include\KHR\khrplatform.h" />
     <ClInclude Include="Network\Socket.h" />
+    <ClInclude Include="Audio\Audio.h" />
+    <ClInclude Include="Audio\PADevice.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Graphics">

@@ -40,7 +40,7 @@ SOFTWARE.
 
 // Audio
 #ifdef IVY_INCLUDE_AUDIO
-#include "Audio/AudioDevice.h"
+#include "Audio/Audio.h"
 #endif // IVY_INCLUDE_AUDIO
 
 // Core

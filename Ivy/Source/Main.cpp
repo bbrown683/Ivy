@@ -37,6 +37,9 @@ int main()
     {
         // Creates a graphics device.
         Device device(window, GraphicsAPI::DirectX);
+
+        Audio audio;
+
         if (device.Create())
         {
             device.SetDrawType(DrawType::Indexed);

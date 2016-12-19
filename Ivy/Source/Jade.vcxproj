@@ -73,21 +73,25 @@
     <IncludePath>$(ProjectDir);$(IncludePath)</IncludePath>
     <IntDir>$(SolutionDir)$(Configuration)\$(PlatformTarget)\Linker\</IntDir>
     <OutDir>$(SolutionDir)$(Configuration)\$(PlatformTarget)\</OutDir>
+    <LibraryPath>C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\Lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(ProjectDir);$(IncludePath)</IncludePath>
     <IntDir>$(SolutionDir)$(Configuration)\$(PlatformTarget)\Linker\</IntDir>
     <OutDir>$(SolutionDir)$(Configuration)\$(PlatformTarget)\</OutDir>
+    <LibraryPath>C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\Lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>$(ProjectDir);$(IncludePath)</IncludePath>
     <IntDir>$(SolutionDir)$(Configuration)\$(PlatformTarget)\Linker\</IntDir>
     <OutDir>$(SolutionDir)$(Configuration)\$(PlatformTarget)\</OutDir>
+    <LibraryPath>C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\Lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(ProjectDir);$(IncludePath)</IncludePath>
     <IntDir>$(SolutionDir)$(Configuration)\$(PlatformTarget)\Linker\</IntDir>
     <OutDir>$(SolutionDir)$(Configuration)\$(PlatformTarget)\</OutDir>
+    <LibraryPath>C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\Lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -96,41 +100,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty/assimp/include/;$(SolutionDir)ThirdParty/FreeImage/include/;$(SolutionDir)ThirdParty/FreeType/include/;$(SolutionDir)ThirdParty/glm/include/;$(SolutionDir)ThirdParty/Lua/include/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>lua53.lib;opengl32.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;assimp.lib;gdi32.lib;user32.lib;shlwapi.lib;freeimage.lib;freetype.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeImage/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeType/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/Lua/lib/$(PlatformTarget)/</AdditionalLibraryDirectories>
-      <EntryPointSymbol>
-      </EntryPointSymbol>
-      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
-      <AdditionalOptions>/NODEFAULTLIB:libcmt.lib /NODEFAULTLIB:msvcrt.lib</AdditionalOptions>
-      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <SubSystem>NotSet</SubSystem>
-    </Link>
-    <PostBuildEvent>
-      <Command>xcopy /f /s /y "$(ProjectDir)ModelVertex.hlsl" "$(OutputPath)resources\shaders\"
-xcopy /f /s /y "$(ProjectDir)ModelPixel.hlsl" "$(OutputPath)resources\shaders\"
-xcopy /f /s /y "$(ProjectDir)FontVertex.hlsl" "$(OutputPath)resources\shaders\"
-xcopy /f /s /y "$(ProjectDir)FontPixel.hlsl" "$(OutputPath)resources\shaders\"
-xcopy /f /s /y "$(ProjectDir)MonoCube.dae" "$(OutputPath)resources\models\"
-xcopy /f /s /y "$(ProjectDir)MonoCubeTexture.png" "$(OutputPath)resources\models\"
-xcopy /f /s /y "$(SolutionDir)ThirdParty\FreeImage\bin\$(PlatformTarget)\FreeImage.dll" "$(OutputPath)"
-xcopy /f /s /y "$(SolutionDir)ThirdParty\Lua\bin\$(PlatformTarget)\lua53.dll" "$(OutputPath)"
-if $(PlatformTarget) == x86 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp32.dll" "$(OutputPath)"
-if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp64.dll" "$(OutputPath)"</Command>
-    </PostBuildEvent>
-    <FxCompile>
-      <ShaderModel>5.0</ShaderModel>
-      <EntryPointName>Main</EntryPointName>
-      <ObjectFileOutput>$(OutDir)resources/shaders/%(Filename).cso</ObjectFileOutput>
-    </FxCompile>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <SDLCheck>false</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty/assimp/include/;$(SolutionDir)ThirdParty/FreeImage/include/;$(SolutionDir)ThirdParty/FreeType/include/;$(SolutionDir)ThirdParty/glm/include/;$(SolutionDir)ThirdParty/PortAudio/include/</AdditionalIncludeDirectories>
-    </ClCompile>
-    <Link>
-      <AdditionalDependencies>opengl32.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;assimp.lib;gdi32.lib;user32.lib;shlwapi.lib;freeimage.lib;freetype.lib;portaudio.lib</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;assimp.lib;gdi32.lib;user32.lib;shlwapi.lib;freeimage.lib;freetype.lib;portaudio_$(PlatformTarget).lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeImage/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeType/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/PortAudio/lib/$(PlatformTarget)/</AdditionalLibraryDirectories>
       <EntryPointSymbol>
       </EntryPointSymbol>
@@ -147,6 +117,41 @@ xcopy /f /s /y "$(ProjectDir)FontPixel.hlsl" "$(OutputPath)resources\shaders\"
 xcopy /f /s /y "$(ProjectDir)MonoCube.dae" "$(OutputPath)resources\models\"
 xcopy /f /s /y "$(ProjectDir)MonoCubeTexture.png" "$(OutputPath)resources\models\"
 xcopy /f /s /y "$(SolutionDir)ThirdParty\FreeImage\bin\$(PlatformTarget)\FreeImage.dll" "$(OutputPath)"
+xcopy /f /s /y "$(SolutionDir)ThirdParty\PortAudio\bin\$(PlatformTarget)\portaudio_$(PlatformTarget).dll" "$(OutputPath)"
+if $(PlatformTarget) == x86 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp32.dll" "$(OutputPath)"
+if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp64.dll" "$(OutputPath)"</Command>
+    </PostBuildEvent>
+    <FxCompile>
+      <ShaderModel>5.0</ShaderModel>
+      <EntryPointName>Main</EntryPointName>
+      <ObjectFileOutput>$(OutDir)resources/shaders/%(Filename).cso</ObjectFileOutput>
+    </FxCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>false</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)ThirdParty/assimp/include/;$(SolutionDir)ThirdParty/FreeImage/include/;$(SolutionDir)ThirdParty/FreeType/include/;$(SolutionDir)ThirdParty/glm/include/;$(SolutionDir)ThirdParty/PortAudio/include/</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>opengl32.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;assimp.lib;gdi32.lib;user32.lib;shlwapi.lib;freeimage.lib;freetype.lib;portaudio_$(PlatformTarget).lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeImage/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeType/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/PortAudio/lib/$(PlatformTarget)/</AdditionalLibraryDirectories>
+      <EntryPointSymbol>
+      </EntryPointSymbol>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <AdditionalOptions>/NODEFAULTLIB:libcmt.lib /NODEFAULTLIB:msvcrt.lib</AdditionalOptions>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <SubSystem>NotSet</SubSystem>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy /f /s /y "$(ProjectDir)ModelVertex.hlsl" "$(OutputPath)resources\shaders\"
+xcopy /f /s /y "$(ProjectDir)ModelPixel.hlsl" "$(OutputPath)resources\shaders\"
+xcopy /f /s /y "$(ProjectDir)FontVertex.hlsl" "$(OutputPath)resources\shaders\"
+xcopy /f /s /y "$(ProjectDir)FontPixel.hlsl" "$(OutputPath)resources\shaders\"
+xcopy /f /s /y "$(ProjectDir)MonoCube.dae" "$(OutputPath)resources\models\"
+xcopy /f /s /y "$(ProjectDir)MonoCubeTexture.png" "$(OutputPath)resources\models\"
+xcopy /f /s /y "$(SolutionDir)ThirdParty\FreeImage\bin\$(PlatformTarget)\FreeImage.dll" "$(OutputPath)"
+xcopy /f /s /y "$(SolutionDir)ThirdParty\PortAudio\bin\$(PlatformTarget)\portaudio_$(PlatformTarget).dll" "$(OutputPath)"
 if $(PlatformTarget) == x86 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp32.dll" "$(OutputPath)"
 if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp64.dll" "$(OutputPath)"</Command>
     </PostBuildEvent>
@@ -168,8 +173,8 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>lua53.lib;opengl32.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;assimp.lib;gdi32.lib;user32.lib;shlwapi.lib;freeimage.lib;freetype.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeImage/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeType/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/Lua/lib/$(PlatformTarget)/</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;assimp.lib;gdi32.lib;user32.lib;shlwapi.lib;freeimage.lib;freetype.lib;portaudio_$(PlatformTarget).lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeImage/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeType/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/PortAudio/lib/$(PlatformTarget)/</AdditionalLibraryDirectories>
       <SubSystem>NotSet</SubSystem>
       <EntryPointSymbol>
       </EntryPointSymbol>
@@ -187,7 +192,7 @@ xcopy /f /s /y "$(ProjectDir)FontPixel.hlsl" "$(OutputPath)resources\shaders\"
 xcopy /f /s /y "$(ProjectDir)MonoCube.dae" "$(OutputPath)resources\models\"
 xcopy /f /s /y "$(ProjectDir)MonoCubeTexture.png" "$(OutputPath)resources\models\"
 xcopy /f /s /y "$(SolutionDir)ThirdParty\FreeImage\bin\$(PlatformTarget)\FreeImage.dll" "$(OutputPath)"
-xcopy /f /s /y "$(SolutionDir)ThirdParty\Lua\bin\$(PlatformTarget)\lua53.dll" "$(OutputPath)"
+xcopy /f /s /y "$(SolutionDir)ThirdParty\PortAudio\bin\$(PlatformTarget)\portaudio_$(PlatformTarget).dll" "$(OutputPath)"
 if $(PlatformTarget) == x86 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp32.dll" "$(OutputPath)"
 if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp64.dll" "$(OutputPath)"</Command>
     </PostBuildEvent>
@@ -209,7 +214,7 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;assimp.lib;gdi32.lib;user32.lib;shlwapi.lib;freeimage.lib;freetype.lib;portaudio.lib</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;d3d11.lib;d3dcompiler.lib;dxguid.lib;assimp.lib;gdi32.lib;user32.lib;shlwapi.lib;freeimage.lib;freetype.lib;portaudio_$(PlatformTarget).lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)ThirdParty/assimp/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeImage/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/FreeType/lib/$(PlatformTarget)/;$(SolutionDir)ThirdParty/PortAudio/lib/$(PlatformTarget)/</AdditionalLibraryDirectories>
       <SubSystem>NotSet</SubSystem>
       <EntryPointSymbol>
@@ -228,7 +233,7 @@ xcopy /f /s /y "$(ProjectDir)FontPixel.hlsl" "$(OutputPath)resources\shaders\"
 xcopy /f /s /y "$(ProjectDir)MonoCube.dae" "$(OutputPath)resources\models\"
 xcopy /f /s /y "$(ProjectDir)MonoCubeTexture.png" "$(OutputPath)resources\models\"
 xcopy /f /s /y "$(SolutionDir)ThirdParty\FreeImage\bin\$(PlatformTarget)\FreeImage.dll" "$(OutputPath)"
-xcopy /f /s /y "$(SolutionDir)ThirdParty\Lua\bin\$(PlatformTarget)\lua53.dll" "$(OutputPath)"
+xcopy /f /s /y "$(SolutionDir)ThirdParty\PortAudio\bin\$(PlatformTarget)\portaudio_$(PlatformTarget).dll" "$(OutputPath)"
 if $(PlatformTarget) == x86 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp32.dll" "$(OutputPath)"
 if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\$(PlatformTarget)\Assimp64.dll" "$(OutputPath)"</Command>
     </PostBuildEvent>
@@ -239,7 +244,8 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Audio\AudioDevice.cpp" />
+    <ClCompile Include="Audio\Audio.cpp" />
+    <ClCompile Include="Audio\PADevice.cpp" />
     <ClCompile Include="Graphics\Blender\DXBlender.cpp" />
     <ClCompile Include="Graphics\Buffer\ConstantBuffer.cpp" />
     <ClCompile Include="Graphics\Device\glad\gl\src\glad.c" />
@@ -289,7 +295,8 @@ if $(PlatformTarget) == x64 xcopy /f /y /s "$(SolutionDir)ThirdParty\assimp\bin\
     <ClCompile Include="System\Window\Win32Window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Audio\AudioDevice.h" />
+    <ClInclude Include="Audio\Audio.h" />
+    <ClInclude Include="Audio\PADevice.h" />
     <ClInclude Include="Core\Exception\BufferCreationException.h" />
     <ClInclude Include="Core\Exception\DeviceCreationException.h" />
     <ClInclude Include="Core\Exception\ArgumentNullException.h" />

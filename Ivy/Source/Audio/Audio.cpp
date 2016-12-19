@@ -22,14 +22,20 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "AudioDevice.h"
+#include "Audio.h"
 
-int Ivy::Audio::AudioDevice::PaStreamCallback(const void * input, void * output, unsigned long frameCount, const PaStreamCallbackTimeInfo * timeInfo, PaStreamCallbackFlags statusFlags, void * userData)
+int Ivy::Audio::Audio::PaStreamCallback(const void * input, void * output, unsigned long frameCount, const PaStreamCallbackTimeInfo * timeInfo, PaStreamCallbackFlags statusFlags, void * userData)
 {
     return 0;
 }
 
-void Ivy::Audio::AudioDevice::Create()
+bool Ivy::Audio::Audio::Create()
 {
-
+    PaError error = Pa_Initialize();
+    if (error != paNoError)
+    {
+        std::cout << "PortAudio error: " << Pa_GetErrorText(error) << std::endl;
+        return false;
+    }
+    return true;
 }
