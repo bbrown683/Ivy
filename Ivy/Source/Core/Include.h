@@ -62,10 +62,3 @@ typedef Window PlatformWindow;
 #include <memory>
 #include <cassert>
 #include <exception>
-
-// Independent character set string typedef.
-#ifdef IVY_UNICODE
-typedef std::wstring istring;
-#else
-typedef std::string istring;
-#endif

@@ -35,23 +35,23 @@ namespace Ivy
     {
         class GLShader : public IShader
         {
-            istring pixelShader;
-            istring vertexShader;
+            std::string pixelShader;
+            std::string vertexShader;
 
             std::vector<GLuint> shaderIDs;
             GLuint programID;
 
         public:
 
-            GLShader(istring pixelShader, istring vertexShader)
+            GLShader(std::string pixelShader, std::string vertexShader)
             {
                 this->pixelShader = pixelShader;
                 this->vertexShader = vertexShader;
             }
 
             // Overrides.
-            bool Create(istring filename, ShaderType type) override;
-            bool Compile(istring filename, ShaderType type) override;
+            bool Create(std::string filename, ShaderType type) override;
+            bool Compile(std::string filename, ShaderType type) override;
             void MakeActive() override;
             void MakeInactive() override;
             bool Release() override;

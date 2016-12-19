@@ -55,14 +55,14 @@ void Ivy::System::Win32Window::SetY(int value)
 
 }
 
-istring Ivy::System::Win32Window::GetTitle()
+std::string Ivy::System::Win32Window::GetTitle()
 {
     return title;
 }
 
-void Ivy::System::Win32Window::SetTitle(istring value)
+void Ivy::System::Win32Window::SetTitle(std::string value)
 {
-    SetWindowText(hWnd, value.c_str());
+    SetWindowTextW(hWnd, Core::Utility::StringToWString(value).c_str());
     this->title = title;
 }
 
@@ -127,7 +127,7 @@ bool Ivy::System::Win32Window::Create()
     {
         DWORD dwStyle = WS_OVERLAPPEDWINDOW;
 
-        HWND hWnd = CreateWindow(TEXT("IVY_APP"), title.c_str(), dwStyle,
+        HWND hWnd = CreateWindowW(TEXT("IVY_APP"), Core::Utility::StringToWString(title).c_str(), dwStyle,
             x, y, width, height, nullptr, nullptr, hInstance, nullptr);
     
         if (!hWnd)

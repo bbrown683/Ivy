@@ -44,7 +44,7 @@ namespace Ivy
             unsigned int height;
             int x;
             int y;
-            istring title;
+            std::string title;
             bool fullscreen;
 
             bool open = false;
@@ -66,8 +66,8 @@ namespace Ivy
             void SetX(int value) override;
             int GetY() override;
             void SetY(int value) override;
-            istring GetTitle() override;
-            void SetTitle(istring value) override;
+            std::string GetTitle() override;
+            void SetTitle(std::string value) override;
             Math::Point<int> GetPosition() override;
             void SetPosition(int x, int y) override;
             void SetIcon(std::string filename) override;
@@ -91,7 +91,7 @@ namespace Ivy
             Input::Input GetInput() override;
 
             Win32Window(unsigned int width, unsigned int height, int x, int y, 
-                istring title, bool fullscreen)
+                std::string title, bool fullscreen)
             {
                 this->width = width;
                 this->height = height;

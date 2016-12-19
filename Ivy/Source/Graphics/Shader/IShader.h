@@ -34,8 +34,8 @@ namespace Ivy
         {
         private:
 
-            virtual bool Compile(istring filename, ShaderType type) = 0;
-            virtual bool Create(istring filename, ShaderType type) = 0;
+            virtual bool Compile(std::string filename, ShaderType type) = 0;
+            virtual bool Create(std::string filename, ShaderType type) = 0;
             virtual bool Release() = 0;
 
         public:

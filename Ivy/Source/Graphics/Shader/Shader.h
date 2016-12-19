@@ -41,8 +41,8 @@ namespace Ivy
         class Shader
         {
             Device device;
-            istring pixelShader;
-            istring vertexShader;
+            std::string pixelShader;
+            std::string vertexShader;
             
             std::shared_ptr<IShader> shader;
 
@@ -50,7 +50,7 @@ namespace Ivy
 
             Shader() : shader(nullptr) { }
 
-            Shader(Device device, istring pixelShader, istring vertexShader)
+            Shader(Device device, std::string pixelShader, std::string vertexShader)
             {
                 this->device = device;
                 this->pixelShader = pixelShader;

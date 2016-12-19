@@ -65,6 +65,7 @@ namespace Ivy
             GLDevice(System::Window window, Specification specification)
             {
                 this->window = window;
+                this->specification = specification;
 
                 // Create our device.
                 if (!GLDevice::Create())

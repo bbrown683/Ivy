@@ -25,7 +25,7 @@ SOFTWARE.
 #include "Graphics/Shader/DXShader.h"
 
 #ifdef IVY_PLATFORM_WINDOWS
-bool Ivy::Graphics::DXShader::Create(istring filename, ShaderType type)
+bool Ivy::Graphics::DXShader::Create(std::string filename, ShaderType type)
 {
 	// Note: Doesnt actually use the filename, but for consistency 
 	// across multiple graphics API's, the interface requires it.
@@ -72,7 +72,7 @@ bool Ivy::Graphics::DXShader::Create(istring filename, ShaderType type)
 	return true;
 }
 
-bool Ivy::Graphics::DXShader::Compile(istring filename, ShaderType type)
+bool Ivy::Graphics::DXShader::Compile(std::string filename, ShaderType type)
 {
 	unsigned int flags = D3DCOMPILE_ENABLE_STRICTNESS | D3DCOMPILE_PACK_MATRIX_COLUMN_MAJOR;
 
@@ -90,15 +90,9 @@ bool Ivy::Graphics::DXShader::Compile(istring filename, ShaderType type)
 
 	ComPtr<ID3DBlob> l_pErrorBlob = nullptr;
 
-#ifdef IVY_UNICODE
-	HRESULT hr = D3DCompileFromFile(filename.c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE,
+	HRESULT hr = D3DCompileFromFile(Core::Utility::StringToWString(filename).c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE,
 		"main", GetCompilerTarget(featureLevel, type).c_str(), flags, 0, const_cast<ID3DBlob**>(GetShaderBlob(type).GetAddressOf()), 
 		l_pErrorBlob.GetAddressOf());
-#else
-    HRESULT hr = D3DCompileFromFile(Core::StringToWString(filename).c_str(), nullptr, D3D_COMPILE_STANDARD_FILE_INCLUDE,
-        "main", GetCompilerTarget(featureLevel, type).c_str(), flags, 0, const_cast<ID3DBlob**>(GetShaderBlob(type).GetAddressOf()),
-        l_pErrorBlob.GetAddressOf());
-#endif
 
 	if (FAILED(hr))
 	{
@@ -132,12 +126,7 @@ bool Ivy::Graphics::DXShader::Compile(istring filename, ShaderType type)
         return true;
     }
 
-#ifdef IVY_UNICODE
-    std::wcout << "Shader " << filename << " was compiled successfully..." << std::endl;
-#else
     std::cout << "Shader " << filename << " was compiled successfully..." << std::endl;
-#endif
-
 	return true;
 }
 

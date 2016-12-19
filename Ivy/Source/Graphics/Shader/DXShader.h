@@ -40,8 +40,8 @@ namespace Ivy
 		class DXShader : public IShader
 		{
 			std::shared_ptr<DXDevice> device;
-            istring pixelShader;
-            istring vertexShader;
+            std::string pixelShader;
+            std::string vertexShader;
 
 			// Holds our shader compilation information.
 			ComPtr<ID3DBlob>				m_pPixelShaderBlob = nullptr;
@@ -56,7 +56,7 @@ namespace Ivy
 
 		public:
 
-            DXShader(std::shared_ptr<DXDevice> device, istring pixelShader, istring vertexShader)
+            DXShader(std::shared_ptr<DXDevice> device, std::string pixelShader, std::string vertexShader)
             {
                 this->device = device;
                 this->pixelShader = pixelShader;
@@ -73,8 +73,8 @@ namespace Ivy
             }
 
 			// Overrides.
-			bool Create(istring filename, ShaderType type) override;
-			bool Compile(istring filename, ShaderType type) override;
+			bool Create(std::string filename, ShaderType type) override;
+			bool Compile(std::string filename, ShaderType type) override;
 			void MakeActive() override;
 			void MakeInactive() override;
 			bool Release() override;

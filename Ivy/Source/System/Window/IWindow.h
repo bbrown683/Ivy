@@ -47,8 +47,8 @@ namespace Ivy
             virtual void SetX(int value) = 0;
             virtual int GetY() = 0;
             virtual void SetY(int value) = 0;
-            virtual istring GetTitle() = 0;
-            virtual void SetTitle(istring value) = 0;
+            virtual std::string GetTitle() = 0;
+            virtual void SetTitle(std::string value) = 0;
             virtual Math::Point<int> GetPosition() = 0;
             virtual void SetPosition(int x, int y) = 0;
             virtual void SetIcon(std::string filename) = 0;

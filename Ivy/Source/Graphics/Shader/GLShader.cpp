@@ -25,7 +25,7 @@ SOFTWARE.
 #include "Graphics/Shader/GLShader.h"
 #include "System/File.h"
 
-bool Ivy::Graphics::GLShader::Create(istring filename, ShaderType type)
+bool Ivy::Graphics::GLShader::Create(std::string filename, ShaderType type)
 {	
     GLuint shader;
     
@@ -68,7 +68,7 @@ bool Ivy::Graphics::GLShader::Create(istring filename, ShaderType type)
     return false;
 }
 
-bool Ivy::Graphics::GLShader::Compile(istring filename, ShaderType type)
+bool Ivy::Graphics::GLShader::Compile(std::string filename, ShaderType type)
 {
     return false;
 }

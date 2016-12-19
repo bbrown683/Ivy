@@ -38,7 +38,7 @@ namespace Ivy
             int height;
             int x;
             int y;
-            istring title;
+            std::string title;
             bool fullscreen;
 
             //! \brief All of our windows use this interface for their general implementations 
@@ -108,13 +108,13 @@ namespace Ivy
             }
 
             // Returns the title of the window.
-            istring GetTitle() const
+            std::string GetTitle() const
             {
                 return window->GetTitle();
             }
 
             // Sets the title of the window.
-            void SetTitle(istring title) const
+            void SetTitle(std::string title) const
             {
                 window->SetTitle(title);
             }
@@ -158,7 +158,7 @@ namespace Ivy
             Window() : window(nullptr) { }
 
             // Use this constructor.
-            Window(int width, int height, int x, int y, istring title, bool fullscreen)
+            Window(int width, int height, int x, int y, std::string title, bool fullscreen)
             {
                 this->width = width;
                 this->height = height;
